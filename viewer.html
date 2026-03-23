@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長照資源導航站 — 載入中</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:100vh;color:#1e293b}
+.loader{text-align:center;padding:40px}
+.spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader h2{font-size:1.2em;margin-bottom:8px;color:#2563eb}
+.loader p{color:#64748b;font-size:.9em}
+.error{text-align:center;padding:40px}
+.error h2{color:#ef4444;font-size:1.3em;margin-bottom:12px}
+.error p{color:#64748b;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="loader" class="loader">
+  <div class="spinner"></div>
+  <h2>正在載入查詢結果...</h2>
+  <p>請稍候</p>
+</div>
+<div id="error" class="error" style="display:none">
+  <h2>⚠️ 無法載入頁面</h2>
+  <p id="error-msg">頁面可能已過期或不存在。</p>
+  <p style="margin-top:16px;font-size:.85em;color:#94a3b8">如果剛剛才產生連結，請稍等幾秒後重新整理。</p>
+</div>
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var pageId = params.get("id");
+  if (!pageId || !/^[a-f0-9]{6,20}$/.test(pageId)) {
+    showError("無效的頁面 ID。");
+    return;
+  }
+  var rawUrl = "https://raw.githubusercontent.com/chord410-svg/product-share/main/pages/" + pageId + ".html";
+  var retries = 0;
+  var maxRetries = 3;
+
+  function load() {
+    fetch(rawUrl)
+      .then(function(r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
+      .then(function(html) {
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(function(e) {
+        retries++;
+        if (retries <= maxRetries) {
+          setTimeout(load, 2000);
+        } else {
+          showError("頁面不存在或已過期（錯誤：" + e.message + "）");
+        }
+      });
+  }
+
+  function showError(msg) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("error").style.display = "block";
+    document.getElementById("error-msg").textContent = msg;
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長照資源導航站 — 查詢結果</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.meta-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;font-size:.82em;color:var(--muted)}
+.meta-bar .tag{background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:20px;font-weight:600}
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px}
+.query-box .label{font-size:.8em;color:var(--muted);margin-bottom:4px}
+.query-box .question{font-size:1.05em;font-weight:600}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-card .card-header{background:var(--primary-light);padding:12px 16px;font-weight:700;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px}
+.product-card .card-header .num{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.product-card .card-body{padding:16px}
+.product-card .card-body img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:#f1f5f9}
+.product-card .desc{font-size:.92em;line-height:1.8;white-space:pre-wrap}
+.answer-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.answer-section h2{font-size:1.1em;margin-bottom:12px;color:var(--primary)}
+.answer-section .content{font-size:.93em;line-height:1.9;white-space:pre-wrap}
+.actions{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;border:none;font-size:.9em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.expired-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.expired-overlay h1{font-size:1.6em;color:var(--danger);margin-bottom:12px}
+.expired-overlay p{color:var(--muted);font-size:1em}
+.hidden{display:none}
+@media print{
+  body{background:#fff}
+  .actions,.meta-bar{display:none!important}
+  .product-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  header{background:#1e40af!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border:none}
+}
+</style>
+</head>
+<body>
+<div id="expired-overlay" class="expired-overlay hidden">
+  <h1>⏰ 此頁面已過期</h1>
+  <p>查詢結果已超過 14 天有效期，請重新搜尋。</p>
+</div>
+
+<div id="main-content" class="container">
+  <header>
+    <h1>長照資源導航站</h1>
+    <div class="subtitle">產品查詢結果分享</div>
+  </header>
+
+  <div class="meta-bar">
+    <span>🕐 建立時間：2026-03-23 16:45</span>
+    <span>📅 有效期至：2026-04-06 16:45</span>
+    <span class="tag">輪椅推車</span>
+  </div>
+
+  <div class="query-box">
+    <div class="label">🔍 查詢問題</div>
+    <div class="question">推薦輪椅</div>
+  </div>
+
+  <div class="answer-section">
+    <h2>💡 AI 回覆摘要</h2>
+    <div class="content">### 1. 測試產品A
+這是測試用的產品說明。
+### 2. 測試產品B
+這是第二個測試產品。</div>
+  </div>
+
+  
+  <div class="product-card">
+    <div class="card-header">
+      <span class="num">1</span>
+      <span>測試產品A</span>
+    </div>
+    <div class="card-body">
+      
+      
+      <div class="desc">這是測試用的產品說明。</div>
+      
+    </div>
+  </div>
+  
+  <div class="product-card">
+    <div class="card-header">
+      <span class="num">2</span>
+      <span>測試產品B</span>
+    </div>
+    <div class="card-body">
+      
+      
+      <div class="desc">這是第二個測試產品。</div>
+      
+    </div>
+  </div>
+  
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">📥 下載 PDF</button>
+    <button class="btn btn-outline" onclick="copyLink()">🔗 複製連結</button>
+  </div>
+
+  <footer>
+    <p>長照資源導航站 · 本頁面由 AI 助手自動生成 · 有效期 14 天</p>
+    <p>頁面 ID：42d595a782</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var created = new Date("2026-03-23T16:45:41.002318+08:00");
+  var expiryMs = 14 * 86400000;
+  if (Date.now() - created.getTime() > expiryMs) {
+    document.getElementById("expired-overlay").classList.remove("hidden");
+    document.getElementById("main-content").style.display = "none";
+  }
+})();
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    alert("已複製連結！");
+  });
+}
+</script>
+</body>
+</html>

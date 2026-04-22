@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>選擇補助代碼 — 長照智慧諮詢</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--success:#16a34a;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:16px 16px 120px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:20px 24px;border-radius:var(--radius);margin-bottom:16px;text-align:center}
+header h1{font-size:1.3em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.toolbar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.toolbar .counter{font-size:.9em;color:var(--muted)}
+.toolbar .counter strong{color:var(--primary);font-size:1.05em}
+.toolbar button{padding:7px 14px;font-size:.82em;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:6px;cursor:pointer;font-family:inherit}
+.toolbar button:hover{background:var(--primary-light);border-color:var(--primary)}
+.sections-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:24px}
+@media (max-width:1024px){.sections-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:768px){.sections-grid{grid-template-columns:1fr}.container{padding-bottom:100px}}
+.sec{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;display:flex;flex-direction:column}
+.sec-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px;gap:8px}
+.sec-header h2{font-size:.95em;color:var(--primary-dark);font-weight:700;flex:1;min-width:0}
+.sec-header .sec-actions{display:flex;gap:4px}
+.sec-header .sec-actions button{font-size:.72em;padding:3px 8px;border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:4px;cursor:pointer;font-family:inherit}
+.sec-header .sec-actions button:hover{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
+.sec-header .sec-count{font-size:.75em;color:var(--muted);white-space:nowrap}
+.sec-header .sec-count.has{color:var(--success);font-weight:700}
+.items{display:flex;flex-direction:column;gap:2px;max-height:260px;overflow-y:auto}
+.itm{display:flex;align-items:flex-start;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;transition:background .12s}
+.itm:last-child{border-bottom:none}
+.itm:hover{background:var(--primary-light)}
+.itm input[type="checkbox"]{margin-top:3px;cursor:pointer;accent-color:var(--primary);flex-shrink:0}
+.itm .i-body{flex:1;min-width:0}
+.itm .i-code{font-size:.72em;color:var(--muted);font-family:"SF Mono",Menlo,Monaco,monospace;letter-spacing:.5px}
+.itm .i-name{font-size:.85em;line-height:1.4}
+.itm.checked{background:var(--primary-light)}
+.itm.checked .i-name{font-weight:600;color:var(--primary-dark)}
+.footer-bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--border);padding:12px 16px;display:flex;justify-content:center;box-shadow:0 -2px 12px rgba(0,0,0,.06);z-index:20}
+.footer-bar-inner{max-width:1200px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.footer-bar .sum{font-size:.9em;color:var(--muted)}
+.footer-bar .sum strong{color:var(--primary);font-size:1.05em}
+.next-btn{padding:12px 28px;border-radius:10px;border:none;font-size:.98em;font-weight:700;cursor:pointer;background:var(--success);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2);transition:all .15s;font-family:inherit}
+.next-btn:hover:not(:disabled){background:#15803d;transform:translateY(-1px)}
+.next-btn:disabled{background:#cbd5e1;cursor:not-allowed;box-shadow:none}
+footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🔍 選擇補助代碼</h1>
+    <div class="subtitle">請勾選要查詢的補助項目，可跨族多選</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="counter">已選 <strong id="counter">0</strong> 項</div>
+    <div>
+      <button type="button" id="btn-expand-all">全部展開</button>
+      <button type="button" id="btn-collapse-all">全部收合</button>
+      <button type="button" id="btn-clear-all">全部清除</button>
+    </div>
+  </div>
+
+  <div class="sections-grid" id="sections"></div>
+</div>
+
+<div class="footer-bar">
+  <div class="footer-bar-inner">
+    <div class="sum">已選 <strong id="counter-bottom">0</strong> 項補助</div>
+    <button id="next-btn" class="next-btn" type="button" disabled>下一步 →</button>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <p>長照智慧諮詢 · 補助代碼選擇 · POC 版本</p>
+</footer>
+
+<script id="query-base-url" type="application/json">"https://chord410-svg.github.io/product-share/viewer.html?id=0d07491488"</script>
+<script>
+const CATS=[
+{id:"EA",name:"🚿 如廁及沐浴輔具",items:[
+{c:"EA01-1",n:"馬桶增高器"},{c:"EA01-2",n:"便盆椅"},{c:"EA01-3",n:"沐浴椅"}]},
+{id:"EB",name:"🚶 行動輔具",items:[
+{c:"EB01",n:"單支枴杖-不銹鋼製"},{c:"EB02",n:"單支枴杖-鋁製"},
+{c:"EB03",n:"助行器"},{c:"EB04",n:"帶輪型助步車(助行椅)"}]},
+{id:"EC",name:"♿ 輪椅及配件",items:[
+{c:"EC01",n:"輪椅-A款(非輕量化量產型)"},{c:"EC02",n:"輪椅-B款(輕量化量產型)"},
+{c:"EC03",n:"輪椅-C款(量身訂製型)"},
+{c:"EC04",n:"輪椅附加功能-A款(利於移位)"},{c:"EC05",n:"輪椅附加功能-B款(仰躺)"},
+{c:"EC06",n:"輪椅附加功能-C款(空中傾倒)"},
+{c:"EC07",n:"擺位系統-A款(平面型背靠)"},{c:"EC08",n:"擺位系統-B款(曲面適形背靠)"},
+{c:"EC09",n:"擺位系統-C款(軀幹側支撐架)"},{c:"EC10",n:"擺位系統-D款(頭靠系統)"},
+{c:"EC11",n:"電動輪椅"},{c:"EC12",n:"電動代步車"}]},
+{id:"ED",name:"🏋️ 移位輔具",items:[
+{c:"ED01",n:"移位腰帶"},{c:"ED02",n:"移位板"},{c:"ED03",n:"人力移位吊帶"},
+{c:"ED04",n:"移位滑墊-A款"},{c:"ED05",n:"移位滑墊-B款"},
+{c:"ED06",n:"移位轉盤"},{c:"ED07",n:"移位機"},{c:"ED08",n:"移位機吊帶"}]},
+{id:"EE",name:"📢 溝通及訊號輔具",items:[
+{c:"EE01",n:"電話擴音器"},{c:"EE02",n:"電話閃光震動器"},
+{c:"EE03",n:"火警閃光警示器"},{c:"EE04",n:"門鈴閃光器"},{c:"EE05",n:"無線震動警示器"}]},
+{id:"EF",name:"🏠 生活輔具",items:[
+{c:"EF01",n:"衣著用輔具"},{c:"EF02",n:"居家用生活輔具"},{c:"EF03",n:"飲食用輔具"}]},
+{id:"EG",name:"🛏️ 壓瘡預防輔具",items:[
+{c:"EG01",n:"氣墊床-A款"},{c:"EG02",n:"氣墊床-B款"},
+{c:"EG03",n:"輪椅座墊-A款(塑膠氣囊)"},{c:"EG04",n:"輪椅座墊-B款(橡膠氣囊)"},
+{c:"EG05",n:"輪椅座墊-C款(液態凝膠)"},{c:"EG06",n:"輪椅座墊-D款(固態凝膠)"},
+{c:"EG07",n:"輪椅座墊-E款(填充氣囊)"},{c:"EG08",n:"輪椅座墊-F款(交替充氣)"},
+{c:"EG09",n:"輪椅座墊-G款(量製型)"}]},
+{id:"EH",name:"🛌 居家照顧床及爬梯機",items:[
+{c:"EH01",n:"居家用照顧床"},{c:"EH02",n:"照顧床附加-A款(床面升降)"},
+{c:"EH03",n:"照顧床附加-B款(電動升降)"},
+{c:"EH04",n:"爬梯機(單趟)"},{c:"EH05",n:"爬梯機(月)"}]},
+{id:"FA",name:"🏗️ 居家無障礙設施",items:[
+{c:"FA01",n:"扶手"},{c:"FA02",n:"可動式扶手"},
+{c:"FA03",n:"非固定式斜坡板A款"},{c:"FA04",n:"非固定式斜坡板B款"},
+{c:"FA05",n:"非固定式斜坡板C款"},{c:"FA06",n:"固定式斜坡道"},
+{c:"FA07",n:"架高式和式地板拆除"},{c:"FA08",n:"反光貼條或消光"},
+{c:"FA09",n:"隔間"},{c:"FA10",n:"防滑措施"},
+{c:"FA11",n:"門A款"},{c:"FA12",n:"門B款"},
+{c:"FA13",n:"水龍頭"},{c:"FA14",n:"改善浴缸"},
+{c:"FA15",n:"改善洗臉台"},{c:"FA16",n:"改善馬桶"},
+{c:"FA17",n:"壁掛式淋浴椅(床)"},{c:"FA18",n:"改善流理台"},
+{c:"FA19",n:"改善抽油煙機"},{c:"FA20",n:"特殊簡易洗槽"},
+{c:"FA21",n:"特殊簡易浴槽"}]}
+];
+
+const state=new Set();// codes
+let P={};
+
+function parseParams(){
+  const u=new URLSearchParams(location.search);
+  P={
+    user_id:u.get("user_id")||"",
+    session:u.get("session")||"",
+    channel:u.get("channel")||"",
+    guild:u.get("guild")||""
+  };
+}
+
+function getQueryBaseUrl(){
+  try {
+    var el = document.getElementById("query-base-url");
+    if (!el) return "";
+    return JSON.parse(el.textContent || '""');
+  } catch(e) { return ""; }
+}
+
+function render(){
+  const root=document.getElementById("sections");
+  CATS.forEach(cat=>{
+    const sec=document.createElement("div");sec.className="sec";sec.setAttribute("data-fam",cat.id);
+    const secHdr=document.createElement("div");secHdr.className="sec-header";
+    const h2=document.createElement("h2");h2.textContent=cat.name;
+    const secActions=document.createElement("div");secActions.className="sec-actions";
+    const btnAll=document.createElement("button");btnAll.type="button";btnAll.textContent="全選";
+    const btnNone=document.createElement("button");btnNone.type="button";btnNone.textContent="清除";
+    secActions.appendChild(btnAll);secActions.appendChild(btnNone);
+    const secCount=document.createElement("span");secCount.className="sec-count";secCount.textContent="0 / "+cat.items.length;
+    secHdr.appendChild(h2);secHdr.appendChild(secActions);secHdr.appendChild(secCount);
+    sec.appendChild(secHdr);
+    const items=document.createElement("div");items.className="items";
+    cat.items.forEach(it=>{
+      const label=document.createElement("label");label.className="itm";label.setAttribute("data-code",it.c);
+      const cb=document.createElement("input");cb.type="checkbox";cb.value=it.c;
+      const body=document.createElement("div");body.className="i-body";
+      const name=document.createElement("div");name.className="i-name";name.textContent=it.n;
+      const code=document.createElement("div");code.className="i-code";code.textContent=it.c;
+      body.appendChild(name);body.appendChild(code);
+      label.appendChild(cb);label.appendChild(body);
+      cb.addEventListener("change",()=>{
+        if(cb.checked){state.add(it.c);label.classList.add("checked");}
+        else{state.delete(it.c);label.classList.remove("checked");}
+        updateCounter();updateSectionCounts();
+      });
+      items.appendChild(label);
+    });
+    sec.appendChild(items);
+    btnAll.addEventListener("click",()=>{
+      items.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+        if(!cb.checked){cb.checked=true;cb.dispatchEvent(new Event("change"));}
+      });
+    });
+    btnNone.addEventListener("click",()=>{
+      items.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+        if(cb.checked){cb.checked=false;cb.dispatchEvent(new Event("change"));}
+      });
+    });
+    root.appendChild(sec);
+  });
+}
+
+function updateCounter(){
+  const n=state.size;
+  document.getElementById("counter").textContent=String(n);
+  document.getElementById("counter-bottom").textContent=String(n);
+  document.getElementById("next-btn").disabled=(n===0);
+}
+
+function updateSectionCounts(){
+  CATS.forEach(cat=>{
+    const sec=document.querySelector('.sec[data-fam="'+cat.id+'"]');
+    if(!sec)return;
+    const count=cat.items.filter(it=>state.has(it.c)).length;
+    const el=sec.querySelector(".sec-count");
+    el.textContent=count+" / "+cat.items.length;
+    el.classList.toggle("has",count>0);
+  });
+}
+
+function buildQueryUrl(){
+  const base=getQueryBaseUrl();
+  if(!base)return "";
+  const codes=Array.from(state).join(",");
+  const qs=new URLSearchParams();
+  qs.set("codes",codes);
+  if(P.user_id)qs.set("user_id",P.user_id);
+  if(P.session)qs.set("session",P.session);
+  if(P.channel)qs.set("channel",P.channel);
+  if(P.guild)qs.set("guild",P.guild);
+  const sep=base.indexOf("?")>=0?"&":"?";
+  return base+sep+qs.toString();
+}
+
+// expose for unit test hook（test 環境無 window 仍可 import）
+window.__CARD034_buildQueryUrl=buildQueryUrl;
+window.__CARD034_state=state;
+window.__CARD034_CATS=CATS;
+
+document.getElementById("btn-expand-all").addEventListener("click",()=>{
+  document.querySelectorAll(".items").forEach(el=>el.style.maxHeight="none");
+});
+document.getElementById("btn-collapse-all").addEventListener("click",()=>{
+  document.querySelectorAll(".items").forEach(el=>el.style.maxHeight="260px");
+});
+document.getElementById("btn-clear-all").addEventListener("click",()=>{
+  document.querySelectorAll('.itm input[type="checkbox"]').forEach(cb=>{
+    if(cb.checked){cb.checked=false;cb.dispatchEvent(new Event("change"));}
+  });
+});
+document.getElementById("next-btn").addEventListener("click",()=>{
+  const url=buildQueryUrl();
+  if(!url){alert("尚未設定 Web B 目標 URL");return;}
+  window.location.href=url;
+});
+
+parseParams();render();updateCounter();updateSectionCounts();
+</script>
+</body>
+</html>

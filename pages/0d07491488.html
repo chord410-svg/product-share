@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>補助代碼提問 — 長照智慧諮詢</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--success:#16a34a;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}
+@media (max-width:1024px){.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:768px){.cards-grid{grid-template-columns:1fr}}
+.query-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s;display:flex;flex-direction:column}
+.query-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.query-card .card-header{background:var(--primary-light);padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.query-card .code-badge{background:var(--primary);color:#fff;font-size:.78em;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.5px;flex-shrink:0}
+.query-card .code-badge.unknown{background:var(--muted)}
+.query-card .code-name{font-size:.92em;font-weight:600;color:var(--text);line-height:1.4;flex:1;min-width:0;word-break:break-all}
+.query-card .card-body{padding:12px 14px;flex:1;display:flex;flex-direction:column}
+.query-card textarea{width:100%;min-height:120px;padding:10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.88em;line-height:1.6;resize:vertical;background:#f8fafc;transition:border-color .15s,background .15s}
+.query-card textarea:focus{outline:none;border-color:var(--primary);background:#fff}
+.query-card textarea::placeholder{color:var(--muted);font-size:.88em}
+.query-card .char-count{font-size:.75em;color:var(--muted);margin-top:6px;text-align:right;font-variant-numeric:tabular-nums}
+.actions{display:flex;justify-content:center;padding:16px 0 24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;border:none;font-size:1em;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s;font-family:inherit}
+.btn-primary{background:var(--success);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2)}
+.btn-primary:hover:not(:disabled){background:#15803d;transform:translateY(-1px)}
+.btn-primary:disabled{background:#cbd5e1;cursor:not-allowed;box-shadow:none}
+.status-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:40px 24px;margin:24px auto;max-width:600px;text-align:center;display:none}
+.status-box.active{display:block}
+.status-box.success{border-color:var(--success)}
+.status-box.error{border-color:var(--danger)}
+.status-box h2{font-size:1.3em;margin-bottom:12px}
+.status-box.success h2{color:var(--success)}
+.status-box.error h2{color:var(--danger)}
+.status-box p{color:var(--muted);margin-bottom:16px}
+.status-box .retry-btn{background:var(--primary);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit}
+.status-box .retry-btn:hover{background:var(--primary-dark)}
+.empty-state{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:40px 24px;text-align:center;color:var(--muted)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+</style>
+</head>
+<body>
+<div id="main-content" class="container">
+  <header>
+    <h1>🔍 補助代碼提問</h1>
+    <div class="subtitle">共 <strong>0</strong> 項補助・請為每項描述家屬需求</div>
+  </header>
+
+  
+  <div class="empty-state">
+    <p>⚠️ 未帶入任何代碼，請從 Discord 重新選擇。</p>
+  </div>
+  
+
+  <div id="status-success" class="status-box success">
+    <h2>✅ 已送出</h2>
+    <p>請回 Discord 查看結果頻道。</p>
+  </div>
+
+  <div id="status-error" class="status-box error">
+    <h2>❌ 送出失敗</h2>
+    <p id="error-detail">網路錯誤，請稍後再試。</p>
+    <button class="retry-btn" onclick="retrySubmit()">🔁 再試一次</button>
+  </div>
+
+  <footer>
+    <p>長照智慧諮詢 · 本頁面由系統自動生成 · POC 版本</p>
+  </footer>
+</div>
+
+<script id="code-name-map" type="application/json">{"EA01-1": "馬桶增高器", "EA01-2": "便盆椅", "EA01-3": "沐浴椅", "EB01": "單支枴杖-不銹鋼製", "EB02": "單支枴杖-鋁製", "EB03": "助行器", "EB04": "帶輪型助步車(助行椅)", "EC01": "輪椅-A款(非輕量化量產型)", "EC02": "輪椅-B款(輕量化量產型)", "EC03": "輪椅-C款(量身訂製型)", "EC04": "輪椅附加功能-A款(具利於移位功能)", "EC05": "輪椅附加功能-B款(具仰躺功能)", "EC06": "輪椅附加功能-C款(具空中傾倒功能)", "EC07": "擺位系統-A款(平面型輪椅背靠)", "EC08": "擺位系統-B款(曲面適形輪椅背靠)", "EC09": "擺位系統-C款(輪椅軀幹側支撐架)", "EC10": "擺位系統-D款(輪椅頭靠系統)", "EC11": "電動輪椅", "EC12": "電動代步車", "ED01": "移位腰帶", "ED02": "移位板", "ED03": "人力移位吊帶", "ED04": "移位滑墊-A款", "ED05": "移位滑墊-B款", "ED06": "移位轉盤", "ED07": "移位機", "ED08": "移位機吊帶", "EE01": "電話擴音器", "EE02": "電話閃光震動器", "EE03": "火警閃光警示器", "EE04": "門鈴閃光器", "EE05": "無線震動警示器", "EF01": "衣著用輔具", "EF02": "居家用生活輔具", "EF03": "飲食用輔具", "EG01": "氣墊床-A款", "EG02": "氣墊床-B款", "EG03": "輪椅座墊-A款(連通管型氣囊氣墊座-塑膠材質)", "EG04": "輪椅座墊-B款(連通管型氣囊氣墊座-橡膠材質)", "EG05": "輪椅座墊-C款(液態凝膠座墊)", "EG06": "輪椅座墊-D款(固態凝膠座墊)", "EG07": "輪椅座墊-E款(填充式氣囊氣墊座)", "EG08": "輪椅座墊-F款(交替充氣型座墊)", "EG09": "輪椅座墊-G款(量製型座墊)", "EH01": "居家用照顧床", "EH02": "居家用照顧床-附加功能A款(床面升降功能)", "EH03": "居家用照顧床-附加功能B款(電動升降功能)", "EH04": "爬梯機(單趟)", "EH05": "爬梯機(月)", "FA01": "扶手", "FA02": "可動式扶手", "FA03": "非固定式斜坡板A款", "FA04": "非固定式斜坡板B款", "FA05": "非固定式斜坡板C款", "FA06": "固定式斜坡道", "FA07": "架高式和式地板拆除", "FA08": "反光貼條或消光", "FA09": "隔間", "FA10": "防滑措施", "FA11": "門A款", "FA12": "門B款", "FA13": "水龍頭", "FA14": "改善浴缸(新增/改換/移除-含原處填補)", "FA15": "改善洗臉台(新增/改換/移除-含原處填補)", "FA16": "改善馬桶(新增/改換/移除-含原處填補)", "FA17": "壁掛式淋浴椅(床)", "FA18": "改善流理台(新增/改換)", "FA19": "改善抽油煙機(位置調整)", "FA20": "特殊簡易洗槽", "FA21": "特殊簡易浴槽", "FA22": "固定式扶手(每十公分)", "FA23": "可動式扶手(單支)", "FA24": "床邊扶手(單處)", "FA25": "門檻斜角(單側)", "FA26": "非固定式斜坡板A款", "FA27": "非固定式斜坡板B款", "FA28": "非固定式斜坡板C款", "FA29": "非固定式斜坡板D款", "FA30": "改善高低差(10cm以下)(單處)", "FA31": "改善高低差(20cm以下)(單處)", "FA32": "改善高低差(30cm以下)(單處)", "FA33": "改善高低差(超過30cm)(單處)", "FA34": "防滑地磚(單處)", "FA35": "防滑措施", "FA36": "隔間(每m²)(新增)", "FA37": "門簡易型(單處)", "FA38": "門進階型(單處)", "FA39": "截水槽(單處)", "FA40": "改善浴缸(單處)(新增/改換/移除-含原處填補)", "FA41": "改善馬桶(單處)(新增/改換/移除-含原處填補)", "FA42": "馬桶背靠(單處)", "FA43": "移動式身體清洗槽-局部型", "FA44": "移動式身體清洗槽-全身型"}</script>
+<script>
+(function(){
+  "use strict";
+  var USER_ID = "";
+  var WEBHOOK = "";
+  var submitBtn = document.getElementById("submit-btn");
+  var successBox = document.getElementById("status-success");
+  var errorBox = document.getElementById("status-error");
+  var errorDetail = document.getElementById("error-detail");
+  var mainContent = document.getElementById("main-content");
+
+  function getTextareas() {
+    return Array.prototype.slice.call(document.querySelectorAll(".query-card textarea"));
+  }
+
+  function updateSubmitState() {
+    var areas = getTextareas();
+    if (!areas.length) {
+      if (submitBtn) submitBtn.disabled = true;
+      return;
+    }
+    var allFilled = areas.every(function(t){ return t.value.trim().length > 0; });
+    if (submitBtn) submitBtn.disabled = !allFilled;
+  }
+
+  function bindTextareas() {
+    var areas = getTextareas();
+    areas.forEach(function(t){
+      var counter = t.parentElement.querySelector(".char-count .count");
+      t.addEventListener("input", function(){
+        if (counter) counter.textContent = String(t.value.length);
+        updateSubmitState();
+      });
+    });
+  }
+
+  function collectQueries() {
+    var cards = document.querySelectorAll(".query-card");
+    var queries = [];
+    cards.forEach(function(c){
+      var code = c.getAttribute("data-code");
+      var name = c.getAttribute("data-name");
+      var ta = c.querySelector("textarea");
+      var question = ta ? ta.value.trim() : "";
+      queries.push({code: code, name: name, question: question});
+    });
+    return queries;
+  }
+
+  var SESSION = "";
+  var CHANNEL = "";
+
+  function buildPayload() {
+    return {
+      user_id: USER_ID,
+      session: SESSION,
+      channel: CHANNEL,
+      queries: collectQueries()
+    };
+  }
+
+  function showSuccess() {
+    if (mainContent) mainContent.querySelector(".cards-grid") && (mainContent.querySelector(".cards-grid").style.display = "none");
+    if (mainContent) mainContent.querySelector(".actions") && (mainContent.querySelector(".actions").style.display = "none");
+    successBox.classList.add("active");
+    errorBox.classList.remove("active");
+  }
+
+  function showError(msg) {
+    errorDetail.textContent = msg || "網路錯誤，請稍後再試。";
+    errorBox.classList.add("active");
+    successBox.classList.remove("active");
+  }
+
+  function doSubmit() {
+    if (submitBtn.disabled) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "⏳ 送出中…";
+    var payload = buildPayload();
+
+    if (!WEBHOOK) {
+      console.warn("[CARD-032 POC] 未帶 webhook，printing payload：", payload);
+      showSuccess();
+      return;
+    }
+
+    fetch(WEBHOOK, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    })
+    .then(function(res){
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.text();
+    })
+    .then(function(){
+      showSuccess();
+    })
+    .catch(function(err){
+      console.error("[CARD-032] submit failed", err);
+      showError(String(err.message || err));
+      submitBtn.disabled = false;
+      submitBtn.textContent = "🔍 查詢商品";
+    });
+  }
+
+  window.retrySubmit = function() {
+    errorBox.classList.remove("active");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "🔍 查詢商品";
+    updateSubmitState();
+  };
+
+  // URL param 讀取：codes / user_id / session / channel / webhook
+  // （CARD-034：擴 4 個 param；codes 若 SSR items 為空則動態 build cards）
+  function readCodeNameMap() {
+    try {
+      var el = document.getElementById("code-name-map");
+      if (!el) return {};
+      return JSON.parse(el.textContent || "{}");
+    } catch(e) { return {}; }
+  }
+
+  function buildCardFromCode(code, mapping) {
+    var known = Object.prototype.hasOwnProperty.call(mapping, code);
+    var name = known ? mapping[code] : "";
+    var card = document.createElement("div");
+    card.className = "query-card";
+    card.setAttribute("data-code", code);
+    card.setAttribute("data-name", name);
+
+    var header = document.createElement("div");
+    header.className = "card-header";
+    var badge = document.createElement("span");
+    badge.className = known ? "code-badge" : "code-badge unknown";
+    badge.textContent = code;
+    var nameSpan = document.createElement("span");
+    nameSpan.className = "code-name";
+    nameSpan.textContent = known ? name : ("\u4EE3\u78BC " + code + " \uFF08\u672A\u77E5\uFF09");
+    header.appendChild(badge);
+    header.appendChild(nameSpan);
+
+    var body = document.createElement("div");
+    body.className = "card-body";
+    var ta = document.createElement("textarea");
+    ta.name = "q-" + code;
+    ta.placeholder = "例如：80 歲男性，輕微偏癱，住公寓 4 樓無電梯…";
+    ta.maxLength = 200;
+    ta.rows = 5;
+    ta.setAttribute("data-code", code);
+    var cc = document.createElement("div");
+    cc.className = "char-count";
+    var ccInner = document.createElement("span");
+    ccInner.className = "count";
+    ccInner.textContent = "0";
+    cc.appendChild(ccInner);
+    cc.appendChild(document.createTextNode(" / 200"));
+    body.appendChild(ta);
+    body.appendChild(cc);
+
+    card.appendChild(header);
+    card.appendChild(body);
+    return card;
+  }
+
+  function hydrateFromUrlCodes() {
+    var grid = document.getElementById("cards-grid");
+    if (!grid) {
+      // SSR 無 grid（empty state）：根據 URL 代碼建立 grid
+      var hasCards = false;
+    } else {
+      var hasCards = grid.querySelectorAll(".query-card").length > 0;
+    }
+    if (hasCards) return false;
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var codesStr = params.get("codes") || "";
+      var codes = codesStr.split(",").map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+      if (!codes.length) return false;
+      var mapping = readCodeNameMap();
+
+      // 有 empty-state 要移除；無 grid 要新建
+      var empty = document.querySelector(".empty-state");
+      if (empty && empty.parentNode) empty.parentNode.removeChild(empty);
+
+      if (!grid) {
+        grid = document.createElement("div");
+        grid.className = "cards-grid";
+        grid.id = "cards-grid";
+        var header = document.querySelector("header");
+        if (header && header.parentNode) {
+          header.parentNode.insertBefore(grid, header.nextSibling);
+        } else {
+          document.getElementById("main-content").appendChild(grid);
+        }
+      }
+
+      codes.forEach(function(c){ grid.appendChild(buildCardFromCode(c, mapping)); });
+
+      // 補 submit button（若不存在）
+      if (!document.getElementById("submit-btn")) {
+        var actions = document.createElement("div");
+        actions.className = "actions";
+        actions.innerHTML = '<button id="submit-btn" class="btn btn-primary" disabled>🔍 查詢商品</button>';
+        grid.parentNode.insertBefore(actions, grid.nextSibling);
+        submitBtn = document.getElementById("submit-btn");
+      }
+
+      // 更新 header 的「共 N 項」
+      var subtitle = document.querySelector("header .subtitle");
+      if (subtitle) {
+        subtitle.innerHTML = '共 <strong>' + codes.length + '</strong> 項補助・請為每項描述家屬需求';
+      }
+      return true;
+    } catch(e) { return false; }
+  }
+
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has("user_id")) USER_ID = params.get("user_id");
+    if (params.has("session")) SESSION = params.get("session");
+    if (params.has("channel")) CHANNEL = params.get("channel");
+    if (params.has("webhook")) WEBHOOK = params.get("webhook");
+  } catch(e) {}
+
+  hydrateFromUrlCodes();
+  bindTextareas();
+  updateSubmitState();
+  if (submitBtn) submitBtn.addEventListener("click", doSubmit);
+})();
+</script>
+</body>
+</html>

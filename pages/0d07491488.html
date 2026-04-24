@@ -6,7 +6,11 @@
 <title>補助代碼提問 — 長照智慧諮詢</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--success:#16a34a;--radius:12px}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--success:#16a34a;--radius:12px;
+  /* CARD-042 同步 count token：進度條配色 */
+  --b1-color:#3b82f6;--b2-color:#10b981;--b3-color:#f59e0b;--b4-color:#8b5cf6;
+  --warn:#f59e0b;--warn-light:#fef3c7
+}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
 .container{max-width:1200px;margin:0 auto;padding:16px}
 header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
@@ -43,6 +47,20 @@ header .subtitle{font-size:.85em;opacity:.85}
 .status-box .retry-btn:hover{background:var(--primary-dark)}
 .empty-state{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:40px 24px;text-align:center;color:var(--muted)}
 footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+/* === CARD-042：status banner + 迷你進度條（不占版面 — 1 行）=== */
+.status-banner{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.78em}
+.status-banner .sb-tag{background:var(--primary-light);color:var(--primary);padding:2px 9px;border-radius:16px;font-weight:600;white-space:nowrap;font-size:.92em}
+.status-banner .sb-tag.warn{background:var(--warn-light);color:#854d0e}
+.status-banner .sb-label{color:var(--muted);margin-right:3px}
+.mini-quota-bars{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;font-size:.72em}
+.mini-quota-bars .mq-chip{display:inline-flex;align-items:center;gap:5px;padding:2px 6px;border-radius:4px;background:#f1f5f9}
+.mini-quota-bars .mq-dot{width:8px;height:8px;border-radius:50%}
+.mini-quota-bars .mq-dot.b1{background:var(--b1-color)}
+.mini-quota-bars .mq-dot.b2{background:var(--b2-color)}
+.mini-quota-bars .mq-dot.b3{background:var(--b3-color)}
+.mini-quota-bars .mq-dot.b4{background:var(--b4-color)}
+.mini-quota-bars .mq-nums{color:var(--muted);font-variant-numeric:tabular-nums}
+.mini-quota-bars .mq-nums.over{color:var(--danger);font-weight:700}
 </style>
 </head>
 <body>
@@ -51,6 +69,10 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     <h1>🔍 補助代碼提問</h1>
     <div class="subtitle">共 <strong>0</strong> 項補助・請為每項描述家屬需求</div>
   </header>
+
+  <!-- CARD-042：status banner + 迷你進度條（URL query 帶才顯示）-->
+  <div id="status-banner" class="status-banner" style="display:none"></div>
+  <div id="mini-quota-bars" class="mini-quota-bars" style="display:none"></div>
 
   
   <div class="empty-state">
@@ -74,7 +96,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   </footer>
 </div>
 
-<script id="code-name-map" type="application/json">{"EA01-1": "馬桶增高器", "EA01-2": "便盆椅", "EA01-3": "沐浴椅", "EB01": "單支枴杖-不銹鋼製", "EB02": "單支枴杖-鋁製", "EB03": "助行器", "EB04": "帶輪型助步車(助行椅)", "EC01": "輪椅-A款(非輕量化量產型)", "EC02": "輪椅-B款(輕量化量產型)", "EC03": "輪椅-C款(量身訂製型)", "EC04": "輪椅附加功能-A款(具利於移位功能)", "EC05": "輪椅附加功能-B款(具仰躺功能)", "EC06": "輪椅附加功能-C款(具空中傾倒功能)", "EC07": "擺位系統-A款(平面型輪椅背靠)", "EC08": "擺位系統-B款(曲面適形輪椅背靠)", "EC09": "擺位系統-C款(輪椅軀幹側支撐架)", "EC10": "擺位系統-D款(輪椅頭靠系統)", "EC11": "電動輪椅", "EC12": "電動代步車", "ED01": "移位腰帶", "ED02": "移位板", "ED03": "人力移位吊帶", "ED04": "移位滑墊-A款", "ED05": "移位滑墊-B款", "ED06": "移位轉盤", "ED07": "移位機", "ED08": "移位機吊帶", "EE01": "電話擴音器", "EE02": "電話閃光震動器", "EE03": "火警閃光警示器", "EE04": "門鈴閃光器", "EE05": "無線震動警示器", "EF01": "衣著用輔具", "EF02": "居家用生活輔具", "EF03": "飲食用輔具", "EG01": "氣墊床-A款", "EG02": "氣墊床-B款", "EG03": "輪椅座墊-A款(連通管型氣囊氣墊座-塑膠材質)", "EG04": "輪椅座墊-B款(連通管型氣囊氣墊座-橡膠材質)", "EG05": "輪椅座墊-C款(液態凝膠座墊)", "EG06": "輪椅座墊-D款(固態凝膠座墊)", "EG07": "輪椅座墊-E款(填充式氣囊氣墊座)", "EG08": "輪椅座墊-F款(交替充氣型座墊)", "EG09": "輪椅座墊-G款(量製型座墊)", "EH01": "居家用照顧床", "EH02": "居家用照顧床-附加功能A款(床面升降功能)", "EH03": "居家用照顧床-附加功能B款(電動升降功能)", "EH04": "爬梯機(單趟)", "EH05": "爬梯機(月)", "FA01": "扶手", "FA02": "可動式扶手", "FA03": "非固定式斜坡板A款", "FA04": "非固定式斜坡板B款", "FA05": "非固定式斜坡板C款", "FA06": "固定式斜坡道", "FA07": "架高式和式地板拆除", "FA08": "反光貼條或消光", "FA09": "隔間", "FA10": "防滑措施", "FA11": "門A款", "FA12": "門B款", "FA13": "水龍頭", "FA14": "改善浴缸(新增/改換/移除-含原處填補)", "FA15": "改善洗臉台(新增/改換/移除-含原處填補)", "FA16": "改善馬桶(新增/改換/移除-含原處填補)", "FA17": "壁掛式淋浴椅(床)", "FA18": "改善流理台(新增/改換)", "FA19": "改善抽油煙機(位置調整)", "FA20": "特殊簡易洗槽", "FA21": "特殊簡易浴槽", "FA22": "固定式扶手(每十公分)", "FA23": "可動式扶手(單支)", "FA24": "床邊扶手(單處)", "FA25": "門檻斜角(單側)", "FA26": "非固定式斜坡板A款", "FA27": "非固定式斜坡板B款", "FA28": "非固定式斜坡板C款", "FA29": "非固定式斜坡板D款", "FA30": "改善高低差(10cm以下)(單處)", "FA31": "改善高低差(20cm以下)(單處)", "FA32": "改善高低差(30cm以下)(單處)", "FA33": "改善高低差(超過30cm)(單處)", "FA34": "防滑地磚(單處)", "FA35": "防滑措施", "FA36": "隔間(每m²)(新增)", "FA37": "門簡易型(單處)", "FA38": "門進階型(單處)", "FA39": "截水槽(單處)", "FA40": "改善浴缸(單處)(新增/改換/移除-含原處填補)", "FA41": "改善馬桶(單處)(新增/改換/移除-含原處填補)", "FA42": "馬桶背靠(單處)", "FA43": "移動式身體清洗槽-局部型", "FA44": "移動式身體清洗槽-全身型"}</script>
+<script id="code-name-map" type="application/json">{"EA01-1": "馬桶增高器", "EA01-2": "便盆椅", "EA01-3": "沐浴椅", "EB01": "單支枴杖-不銹鋼製", "EB02": "單支枴杖-鋁製", "EB03": "助行器", "EB04": "帶輪型助步車(助行椅)", "EC01": "輪椅-A款(非輕量化量產型)", "EC02": "輪椅-B款(輕量化量產型)", "EC03": "輪椅-C款(量身訂製型)", "EC04": "輪椅附加功能-A款(具利於移位功能)", "EC05": "輪椅附加功能-B款(具仰躺功能)", "EC06": "輪椅附加功能-C款(具空中傾倒功能)", "EC07": "擺位系統-A款(平面型輪椅背靠)", "EC08": "擺位系統-B款(曲面適形輪椅背靠)", "EC09": "擺位系統-C款(輪椅軀幹側支撐架)", "EC10": "擺位系統-D款(輪椅頭靠系統)", "EC11": "電動輪椅", "EC12": "電動代步車", "ED01": "移位腰帶", "ED02": "移位板", "ED03": "人力移位吊帶", "ED04": "移位滑墊-A款", "ED05": "移位滑墊-B款", "ED06": "移位轉盤", "ED07": "移位機", "ED08": "移位機吊帶", "EE01": "電話擴音器", "EE02": "電話閃光震動器", "EE03": "火警閃光警示器", "EE04": "門鈴閃光器", "EE05": "無線震動警示器", "EF01": "衣著用輔具", "EF02": "居家用生活輔具", "EF03": "飲食用輔具", "EG01": "氣墊床-A款", "EG02": "氣墊床-B款", "EG03": "輪椅座墊-A款(連通管型氣囊氣墊座-塑膠材質)", "EG04": "輪椅座墊-B款(連通管型氣囊氣墊座-橡膠材質)", "EG05": "輪椅座墊-C款(液態凝膠座墊)", "EG06": "輪椅座墊-D款(固態凝膠座墊)", "EG07": "輪椅座墊-E款(填充式氣囊氣墊座)", "EG08": "輪椅座墊-F款(交替充氣型座墊)", "EG09": "輪椅座墊-G款(量製型座墊)", "EH01": "居家用照顧床", "EH02": "居家用照顧床-附加功能A款(床面升降功能)", "EH03": "居家用照顧床-附加功能B款(電動升降功能)", "EH04": "爬梯機(單趟)", "EH05": "爬梯機(月)", "FA01": "扶手", "FA02": "可動式扶手", "FA03": "非固定式斜坡板A款", "FA04": "非固定式斜坡板B款", "FA05": "非固定式斜坡板C款", "FA06": "固定式斜坡道", "FA07": "架高式和式地板拆除", "FA08": "反光貼條或消光", "FA09": "隔間", "FA10": "防滑措施", "FA11": "門A款", "FA12": "門B款", "FA13": "水龍頭", "FA14": "改善浴缸(新增/改換/移除-含原處填補)", "FA15": "改善洗臉台(新增/改換/移除-含原處填補)", "FA16": "改善馬桶(新增/改換/移除-含原處填補)", "FA17": "壁掛式淋浴椅(床)", "FA18": "改善流理台(新增/改換)", "FA19": "改善抽油煙機(位置調整)", "FA20": "特殊簡易洗槽", "FA21": "特殊簡易浴槽", "FA22": "固定式扶手(每十公分)", "FA23": "可動式扶手(單支)", "FA24": "床邊扶手(單處)", "FA25": "門檻斜角(單側)", "FA26": "非固定式斜坡板A款", "FA27": "非固定式斜坡板B款", "FA28": "非固定式斜坡板C款", "FA29": "非固定式斜坡板D款", "FA30": "改善高低差(10cm以下)(單處)", "FA31": "改善高低差(20cm以下)(單處)", "FA32": "改善高低差(30cm以下)(單處)", "FA33": "改善高低差(超過30cm)(單處)", "FA34": "防滑地磚(單處)", "FA35": "防滑措施", "FA36": "隔間(每m²)(新增)", "FA37": "門簡易型(單處)", "FA38": "門進階型(單處)", "FA39": "截水槽(單處)", "FA40": "改善浴缸(單處)(新增/改換/移除-含原處填補)", "FA41": "改善馬桶(單處)(新增/改換/移除-含原處填補)", "FA42": "馬桶背靠(單處)", "FA43": "移動式身體清洗槽-局部型", "FA44": "移動式身體清洗槽-全身型", "BB01": "日間照顧（全日）CMS 2-3 級", "BB02": "日間照顧（半日）CMS 2-3 級", "BB03": "日間照顧（全日）CMS 4-5 級", "BB04": "日間照顧（半日）CMS 4-5 級", "BB05": "日間照顧（全日）CMS 6-7 級", "BB06": "日間照顧（半日）CMS 6-7 級", "BB07": "日間照顧（全日）CMS 8 級", "BB08": "日間照顧（半日）CMS 8 級", "BB09": "日間照顧失智專區（全日）CMS 2-3 級", "BB10": "日間照顧失智專區（全日）CMS 4-5 級", "BB11": "日間照顧失智專區（全日）CMS 6-7 級", "BB12": "日間照顧失智專區（全日）CMS 8 級", "BB13": "日間照顧備餐服務（午餐）", "BB14": "日間照顧交通接送（往返）", "BC01": "家庭托顧（全日）CMS 2-3 級", "BC02": "家庭托顧（半日）CMS 2-3 級", "BC03": "家庭托顧（全日）CMS 4-5 級", "BC04": "家庭托顧（半日）CMS 4-5 級", "BC05": "家庭托顧（全日）CMS 6-7 級", "BC06": "家庭托顧（半日）CMS 6-7 級", "BC07": "家庭托顧（全日）CMS 8 級", "BC08": "家庭托顧（半日）CMS 8 級", "BC09": "家庭托顧失智照顧（全日）CMS 2-3 級", "BC10": "家庭托顧失智照顧（全日）CMS 4-5 級", "BC11": "家庭托顧失智照顧（全日）CMS 6-7 級", "BC12": "家庭托顧失智照顧（全日）CMS 8 級", "BC13": "家庭托顧備餐服務", "BC14": "家庭托顧照顧者訓練補貼", "BD01": "社區式身體照顧服務", "BD02": "社區式日常生活照顧服務", "BD03": "社區式失智照顧服務", "CA07": "護理師居家護理服務", "CB01": "物理治療師居家復健（初次評估）", "CB01a": "物理治療師居家復健（後續治療）", "CB02": "職能治療師居家復健（初次評估）", "CB02a": "職能治療師居家復健（後續治療）", "CB03": "語言治療師居家語言治療（初次評估）", "CB03a": "語言治療師居家語言治療（後續治療）", "CC01": "營養師居家營養指導", "CD01": "社會工作師居家社工服務", "GA03": "機構型喘息服務（短期入住護理機構）", "GA04": "機構型喘息服務（短期入住身障機構）", "GA05": "機構型喘息服務（短期入住日照中心）", "GA06": "居家型喘息服務", "GA07": "巷弄站全日喘息服務", "GA09": "居家型強化喘息服務（含舊 GA01/GA02）"}</script>
 <script>
 (function(){
   "use strict";
@@ -126,12 +148,14 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 
   var SESSION = "";
   var CHANNEL = "";
+  var ISSUED_AT = 0;   // CARD-035：session TTL 判斷用
 
   function buildPayload() {
     return {
       user_id: USER_ID,
       session: SESSION,
       channel: CHANNEL,
+      issued_at: ISSUED_AT,   // CARD-035
       queries: collectQueries()
     };
   }
@@ -167,15 +191,27 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       body: JSON.stringify(payload)
     })
     .then(function(res){
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      return res.text();
+      // CARD-035：讀 JSON body 以拿到 error_code/error_msg
+      return res.json().then(function(body){ return {status: res.status, body: body}; });
     })
-    .then(function(){
-      showSuccess();
+    .then(function(r){
+      if (r.body && r.body.ok) { showSuccess(); return; }
+      // 後端 4xx/5xx 結構化錯誤
+      var code = (r.body && r.body.error_code) || ("HTTP_" + r.status);
+      var msg = (r.body && r.body.error_msg) || "未知錯誤";
+      if (code === "session_expired") {
+        showError("⏱ 連線已過期，請回 Discord 重按「🔍 選補助代碼查產品」重新開啟。");
+      } else if (code === "pdpa_blocked") {
+        showError("⚠️ " + msg);
+      } else {
+        showError("[" + code + "] " + msg);
+      }
+      submitBtn.disabled = false;
+      submitBtn.textContent = "🔍 查詢商品";
     })
     .catch(function(err){
-      console.error("[CARD-032] submit failed", err);
-      showError(String(err.message || err));
+      console.error("[CARD-035] submit failed", err);
+      showError("網路錯誤：" + String(err.message || err));
       submitBtn.disabled = false;
       submitBtn.textContent = "🔍 查詢商品";
     });
@@ -298,12 +334,78 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     if (params.has("session")) SESSION = params.get("session");
     if (params.has("channel")) CHANNEL = params.get("channel");
     if (params.has("webhook")) WEBHOOK = params.get("webhook");
+    if (params.has("issued_at")) {
+      var n = parseInt(params.get("issued_at"), 10);
+      ISSUED_AT = isNaN(n) ? 0 : n;
+    }
+    /* CARD-042：status banner + mini quota bars（URL query 帶才顯示）*/
+    renderStatusBanner(params);
+    renderMiniQuotaBars(params);
   } catch(e) {}
 
   hydrateFromUrlCodes();
   bindTextareas();
   updateSubmitState();
   if (submitBtn) submitBtn.addEventListener("click", doSubmit);
+
+  /* CARD-042：Web B status banner（橫幅徽章）*/
+  function renderStatusBanner(params) {
+    var box = document.getElementById("status-banner");
+    if (!box) return;
+    var entries = [];
+    if (params.has("cms")) entries.push({label:"CMS", val:"第 "+params.get("cms")+" 級"});
+    if (params.has("income")) {
+      var m = {low:"低收入戶", mid_low:"中低收入戶", general:"一般戶"};
+      var inc = params.get("income");
+      entries.push({label:"收入別", val: m[inc] || inc});
+    }
+    if (params.has("city")) entries.push({label:"縣市", val:params.get("city")});
+    if (params.has("zone")) entries.push({label:"分區", val:"第 "+params.get("zone")+" 類"});
+    if (params.has("foreign_care")) {
+      var fc = params.get("foreign_care") === "true" || params.get("foreign_care") === "1";
+      entries.push({label:"外看", val: fc ? "有" : "無", warn: fc});
+    }
+    if (!entries.length) { box.style.display = "none"; return; }
+    box.style.display = "flex";
+    box.innerHTML = "";
+    entries.forEach(function(e) {
+      var tag = document.createElement("span");
+      tag.className = "sb-tag" + (e.warn ? " warn" : "");
+      tag.innerHTML = '<span class="sb-label">' + e.label + '</span>' + e.val;
+      box.appendChild(tag);
+    });
+  }
+
+  /* CARD-042：Web B 迷你進度條（單行 chip 式，不占版面）*/
+  function renderMiniQuotaBars(params) {
+    var box = document.getElementById("mini-quota-bars");
+    if (!box) return;
+    var keys = ["b1", "b2", "b3", "b4"];
+    var chips = [];
+    keys.forEach(function(k) {
+      var quota = parseInt(params.get(k + "_quota") || "", 10);
+      var used = parseInt(params.get(k + "_used") || "0", 10);
+      var remaining = parseInt(params.get(k + "_remaining") || "", 10);
+      if (isNaN(quota) || quota <= 0) return;
+      if (isNaN(remaining)) remaining = Math.max(0, quota - used);
+      var over = used > quota;
+      chips.push({k: k, used: used, quota: quota, remaining: remaining, over: over});
+    });
+    if (!chips.length) { box.style.display = "none"; return; }
+    box.style.display = "flex";
+    box.innerHTML = "";
+    chips.forEach(function(c) {
+      var chip = document.createElement("span");
+      chip.className = "mq-chip";
+      chip.innerHTML =
+        '<span class="mq-dot ' + c.k + '"></span>' +
+        '<strong>' + c.k.toUpperCase() + '</strong>' +
+        ' <span class="mq-nums' + (c.over ? ' over' : '') + '">' +
+          c.used.toLocaleString() + '/' + c.quota.toLocaleString() +
+        '</span>';
+      box.appendChild(chip);
+    });
+  }
 })();
 </script>
 </body>

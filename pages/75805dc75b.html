@@ -6,7 +6,14 @@
 <title>選擇補助代碼 — 長照智慧諮詢</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--success:#16a34a;--radius:12px}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--primary-dark:#1d4ed8;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--success:#16a34a;--radius:12px;
+  /* CARD-042：count 美術 token — type chip + 進度條 4 色 */
+  --chip-buy-bg:#dcfce7;--chip-buy-fg:#166534;
+  --chip-rent-bg:#fef3c7;--chip-rent-fg:#854d0e;
+  --chip-both-bg:#dbeafe;--chip-both-fg:#1e40af;
+  --b1-color:#3b82f6;--b2-color:#10b981;--b3-color:#f59e0b;--b4-color:#8b5cf6;
+  --warn:#f59e0b;--warn-light:#fef3c7
+}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
 .container{max-width:1200px;margin:0 auto;padding:16px 16px 120px}
 header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:20px 24px;border-radius:var(--radius);margin-bottom:16px;text-align:center}
@@ -46,6 +53,38 @@ header .subtitle{font-size:.85em;opacity:.85}
 .next-btn:hover:not(:disabled){background:#15803d;transform:translateY(-1px)}
 .next-btn:disabled{background:#cbd5e1;cursor:not-allowed;box-shadow:none}
 footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:var(--muted)}
+/* === CARD-042：status banner + 進度條 + 租賃 UI === */
+.status-banner{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.82em}
+.status-banner .sb-tag{background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:20px;font-weight:600;font-size:.92em;white-space:nowrap}
+.status-banner .sb-tag.warn{background:var(--warn-light);color:#854d0e}
+.status-banner .sb-label{color:var(--muted);margin-right:4px}
+.quota-bars{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:14px;position:sticky;top:6px;z-index:9;box-shadow:0 2px 6px rgba(0,0,0,.03)}
+.quota-bars .qb-title{font-size:.78em;color:var(--muted);margin-bottom:8px;font-weight:600}
+.quota-bars .qb-row{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;margin-bottom:6px;font-size:.75em}
+.quota-bars .qb-row:last-child{margin-bottom:0}
+.quota-bars .qb-label{font-weight:700}
+.quota-bars .qb-label.b1{color:var(--b1-color)}
+.quota-bars .qb-label.b2{color:var(--b2-color)}
+.quota-bars .qb-label.b3{color:var(--b3-color)}
+.quota-bars .qb-label.b4{color:var(--b4-color)}
+.quota-bars .qb-bar{height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;position:relative}
+.quota-bars .qb-fill{height:100%;border-radius:4px;transition:width .3s}
+.quota-bars .qb-fill.b1{background:var(--b1-color)}
+.quota-bars .qb-fill.b2{background:var(--b2-color)}
+.quota-bars .qb-fill.b3{background:var(--b3-color)}
+.quota-bars .qb-fill.b4{background:var(--b4-color)}
+.quota-bars .qb-fill.over{background:var(--danger)!important}
+.quota-bars .qb-nums{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.itm .price-row{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:.72em;flex-wrap:wrap}
+.itm .price-chip{padding:1px 6px;border-radius:4px;font-weight:600;letter-spacing:.3px}
+.itm .price-chip.buy{background:var(--chip-buy-bg);color:var(--chip-buy-fg)}
+.itm .price-chip.rent{background:var(--chip-rent-bg);color:var(--chip-rent-fg)}
+.itm .price-chip.both{background:var(--chip-both-bg);color:var(--chip-both-fg)}
+.itm .rent-switch{display:inline-flex;gap:6px;margin-left:4px}
+.itm .rent-switch label{display:inline-flex;align-items:center;gap:2px;cursor:pointer;font-size:.95em;color:var(--muted)}
+.itm .rent-switch input[type="radio"]{accent-color:var(--primary);cursor:pointer}
+.single-approval-note{text-align:center;margin:12px 0 4px;padding:10px 14px;background:var(--warn-light);color:#854d0e;border:1px dashed #f59e0b;border-radius:8px;font-size:.78em;line-height:1.6}
+.single-approval-note strong{color:#b45309}
 </style>
 </head>
 <body>
@@ -54,6 +93,15 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
     <h1>🔍 選擇補助代碼</h1>
     <div class="subtitle">請勾選要查詢的補助項目，可跨族多選</div>
   </header>
+
+  <!-- CARD-042：status banner（CMS/收入/縣市/zone/外看）-->
+  <div id="status-banner" class="status-banner" style="display:none"></div>
+
+  <!-- CARD-042：sticky 四色進度條（B1-B4 + 總覽）-->
+  <div id="quota-bars" class="quota-bars" style="display:none">
+    <div class="qb-title">💰 額度使用概況</div>
+    <div id="quota-bars-body"></div>
+  </div>
 
   <div class="toolbar">
     <div class="counter">已選 <strong id="counter">0</strong> 項</div>
@@ -65,6 +113,13 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
   </div>
 
   <div class="sections-grid" id="sections"></div>
+
+  <!-- CARD-042：單次核定降級為文字提醒（114 JSON 無 max_per_approval 欄位，CARD-041 確認）-->
+  <div class="single-approval-note">
+    ⚠️ <strong>單次核定上限提醒</strong>：
+    同一勾選批次建議不超過 1 組輔具組合送出（實際核定依照服務項目規定為準）。
+    本介面不做自動限制，請個管師自行判斷。
+  </div>
 </div>
 
 <div class="footer-bar">
@@ -79,6 +134,11 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
 </footer>
 
 <script id="query-base-url" type="application/json">"https://chord410-svg.github.io/product-share/viewer.html?id=0d07491488"</script>
+<script id="item-meta" type="application/json">{"EA01-1": {"type": "buy", "price": 1200, "rent_price": null, "unit": ""}, "EA01-2": {"type": "buy", "price": 1200, "rent_price": null, "unit": ""}, "EA01-3": {"type": "buy", "price": 1200, "rent_price": null, "unit": ""}, "EB01": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "EB02": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EB03": {"type": "buy", "price": 800, "rent_price": null, "unit": ""}, "EB04": {"type": "both", "price": 3000, "rent_price": 300, "unit": ""}, "EC01": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "EC02": {"type": "both", "price": 4000, "rent_price": 450, "unit": ""}, "EC03": {"type": "buy", "price": 9000, "rent_price": null, "unit": ""}, "EC04": {"type": "both", "price": 5000, "rent_price": 150, "unit": ""}, "EC05": {"type": "both", "price": 2000, "rent_price": 150, "unit": ""}, "EC06": {"type": "both", "price": 4000, "rent_price": 150, "unit": ""}, "EC07": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "EC08": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "EC09": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "EC10": {"type": "buy", "price": 2500, "rent_price": null, "unit": ""}, "EC11": {"type": "rent", "price": 2500, "rent_price": 2500, "unit": ""}, "EC12": {"type": "rent", "price": 1200, "rent_price": 1200, "unit": ""}, "ED01": {"type": "buy", "price": 1500, "rent_price": null, "unit": ""}, "ED02": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "ED03": {"type": "buy", "price": 4000, "rent_price": null, "unit": ""}, "ED04": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "ED05": {"type": "buy", "price": 8000, "rent_price": null, "unit": ""}, "ED06": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "ED07": {"type": "both", "price": 40000, "rent_price": 2000, "unit": ""}, "ED08": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "EE01": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE02": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE03": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE04": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE05": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EF01": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EF02": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EF03": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EG01": {"type": "both", "price": 8000, "rent_price": 300, "unit": ""}, "EG02": {"type": "both", "price": 12000, "rent_price": 500, "unit": ""}, "EG03": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "EG04": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "EG05": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "EG06": {"type": "buy", "price": 8000, "rent_price": null, "unit": ""}, "EG07": {"type": "buy", "price": 8000, "rent_price": null, "unit": ""}, "EG08": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "EG09": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "EH01": {"type": "both", "price": 8000, "rent_price": 1000, "unit": ""}, "EH02": {"type": "both", "price": 5000, "rent_price": 200, "unit": ""}, "EH03": {"type": "both", "price": 5000, "rent_price": 500, "unit": ""}, "EH04": {"type": "rent", "price": 700, "rent_price": 700, "unit": ""}, "EH05": {"type": "rent", "price": 4000, "rent_price": 4000, "unit": ""}, "FA01": {"type": "buy", "price": 150, "rent_price": null, "unit": "每10cm"}, "FA02": {"type": "buy", "price": 3600, "rent_price": null, "unit": ""}, "FA03": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "FA04": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA05": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA06": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA07": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA08": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA09": {"type": "buy", "price": 600, "rent_price": null, "unit": ""}, "FA10": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA11": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA12": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA13": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA14": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA15": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA16": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA17": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA18": {"type": "buy", "price": 15000, "rent_price": null, "unit": ""}, "FA19": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "FA20": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA21": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA22": {"type": "buy", "price": 160, "rent_price": null, "unit": ""}, "FA23": {"type": "buy", "price": 3600, "rent_price": null, "unit": ""}, "FA24": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "FA25": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "FA26": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "FA27": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA28": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA29": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA30": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "FA31": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA32": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA33": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA34": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "FA35": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA36": {"type": "buy", "price": 800, "rent_price": null, "unit": ""}, "FA37": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA38": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA39": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "FA40": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA41": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA42": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA43": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA44": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "BB01": {"type": "service", "price": 1000, "rent_price": null, "unit": "日"}, "BB02": {"type": "service", "price": 600, "rent_price": null, "unit": "日"}, "BB03": {"type": "service", "price": 1200, "rent_price": null, "unit": "日"}, "BB04": {"type": "service", "price": 700, "rent_price": null, "unit": "日"}, "BB05": {"type": "service", "price": 1500, "rent_price": null, "unit": "日"}, "BB06": {"type": "service", "price": 900, "rent_price": null, "unit": "日"}, "BB07": {"type": "service", "price": 1800, "rent_price": null, "unit": "日"}, "BB08": {"type": "service", "price": 1100, "rent_price": null, "unit": "日"}, "BB09": {"type": "service", "price": 1100, "rent_price": null, "unit": "日"}, "BB10": {"type": "service", "price": 1300, "rent_price": null, "unit": "日"}, "BB11": {"type": "service", "price": 1600, "rent_price": null, "unit": "日"}, "BB12": {"type": "service", "price": 1900, "rent_price": null, "unit": "日"}, "BB13": {"type": "service", "price": 100, "rent_price": null, "unit": "日"}, "BB14": {"type": "service", "price": 300, "rent_price": null, "unit": "日"}, "BC01": {"type": "service", "price": 800, "rent_price": null, "unit": "日"}, "BC02": {"type": "service", "price": 500, "rent_price": null, "unit": "日"}, "BC03": {"type": "service", "price": 1000, "rent_price": null, "unit": "日"}, "BC04": {"type": "service", "price": 600, "rent_price": null, "unit": "日"}, "BC05": {"type": "service", "price": 1200, "rent_price": null, "unit": "日"}, "BC06": {"type": "service", "price": 720, "rent_price": null, "unit": "日"}, "BC07": {"type": "service", "price": 1500, "rent_price": null, "unit": "日"}, "BC08": {"type": "service", "price": 900, "rent_price": null, "unit": "日"}, "BC09": {"type": "service", "price": 900, "rent_price": null, "unit": "日"}, "BC10": {"type": "service", "price": 1100, "rent_price": null, "unit": "日"}, "BC11": {"type": "service", "price": 1300, "rent_price": null, "unit": "日"}, "BC12": {"type": "service", "price": 1600, "rent_price": null, "unit": "日"}, "BC13": {"type": "service", "price": 100, "rent_price": null, "unit": "日"}, "BC14": {"type": "service", "price": 200, "rent_price": null, "unit": "日"}, "BD01": {"type": "service", "price": 280, "rent_price": null, "unit": "次"}, "BD02": {"type": "service", "price": 280, "rent_price": null, "unit": "次"}, "BD03": {"type": "service", "price": 320, "rent_price": null, "unit": "次"}, "CA07": {"type": "service", "price": 1600, "rent_price": null, "unit": "組"}, "CB01": {"type": "service", "price": 2500, "rent_price": null, "unit": "組"}, "CB01a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組"}, "CB02": {"type": "service", "price": 2500, "rent_price": null, "unit": "組"}, "CB02a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組"}, "CB03": {"type": "service", "price": 2500, "rent_price": null, "unit": "組"}, "CB03a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組"}, "CC01": {"type": "service", "price": 1500, "rent_price": null, "unit": "組"}, "CD01": {"type": "service", "price": 1500, "rent_price": null, "unit": "組"}, "GA03": {"type": "service", "price": 1800, "rent_price": null, "unit": "日"}, "GA04": {"type": "service", "price": 2000, "rent_price": null, "unit": "日"}, "GA05": {"type": "service", "price": 1200, "rent_price": null, "unit": "日"}, "GA06": {"type": "service", "price": 2500, "rent_price": null, "unit": "次"}, "GA07": {"type": "service", "price": null, "rent_price": null, "unit": "日"}, "GA09": {"type": "service", "price": 2000, "rent_price": null, "unit": "支"}}</script>
+<!-- CARD-044：BB/BC/BD/C/G 5 區由 renderer 從 5 檔 JSON 注入；HTML 啟動時 prepend 進 CATS（插在 EA 之前）。
+     實作路徑（卡內二選一的「最小路徑」）：保留 EA-FA 既有 hardcode（CARD-034/042 鎖），只新增 5 區。
+     優點：不動既有 9 族 inline 結構、不改 type=both/rent radio 邏輯；缺點：碼別非單一真實來源（5 區走 JSON、9 族走 HTML）— 待後續 CARD 全部改 JSON 注入再重構。 -->
+<script id="extra-sections" type="application/json">[{"id": "BB", "name": "🏠 B1 居家照顧（日間照顧）", "items": [{"c": "BB01", "n": "日間照顧（全日）CMS 2-3 級"}, {"c": "BB02", "n": "日間照顧（半日）CMS 2-3 級"}, {"c": "BB03", "n": "日間照顧（全日）CMS 4-5 級"}, {"c": "BB04", "n": "日間照顧（半日）CMS 4-5 級"}, {"c": "BB05", "n": "日間照顧（全日）CMS 6-7 級"}, {"c": "BB06", "n": "日間照顧（半日）CMS 6-7 級"}, {"c": "BB07", "n": "日間照顧（全日）CMS 8 級"}, {"c": "BB08", "n": "日間照顧（半日）CMS 8 級"}, {"c": "BB09", "n": "日間照顧失智專區（全日）CMS 2-3 級"}, {"c": "BB10", "n": "日間照顧失智專區（全日）CMS 4-5 級"}, {"c": "BB11", "n": "日間照顧失智專區（全日）CMS 6-7 級"}, {"c": "BB12", "n": "日間照顧失智專區（全日）CMS 8 級"}, {"c": "BB13", "n": "日間照顧備餐服務（午餐）"}, {"c": "BB14", "n": "日間照顧交通接送（往返）"}]}, {"id": "BC", "name": "☀️ B2 日間照顧（家庭托顧）", "items": [{"c": "BC01", "n": "家庭托顧（全日）CMS 2-3 級"}, {"c": "BC02", "n": "家庭托顧（半日）CMS 2-3 級"}, {"c": "BC03", "n": "家庭托顧（全日）CMS 4-5 級"}, {"c": "BC04", "n": "家庭托顧（半日）CMS 4-5 級"}, {"c": "BC05", "n": "家庭托顧（全日）CMS 6-7 級"}, {"c": "BC06", "n": "家庭托顧（半日）CMS 6-7 級"}, {"c": "BC07", "n": "家庭托顧（全日）CMS 8 級"}, {"c": "BC08", "n": "家庭托顧（半日）CMS 8 級"}, {"c": "BC09", "n": "家庭托顧失智照顧（全日）CMS 2-3 級"}, {"c": "BC10", "n": "家庭托顧失智照顧（全日）CMS 4-5 級"}, {"c": "BC11", "n": "家庭托顧失智照顧（全日）CMS 6-7 級"}, {"c": "BC12", "n": "家庭托顧失智照顧（全日）CMS 8 級"}, {"c": "BC13", "n": "家庭托顧備餐服務"}, {"c": "BC14", "n": "家庭托顧照顧者訓練補貼"}]}, {"id": "BD", "name": "🤝 B3 家庭托顧（社區式補充）", "items": [{"c": "BD01", "n": "社區式身體照顧服務"}, {"c": "BD02", "n": "社區式日常生活照顧服務"}, {"c": "BD03", "n": "社區式失智照顧服務"}]}, {"id": "C", "name": "🛌 C 專業服務（喘息相關）", "items": [{"c": "CA07", "n": "護理師居家護理服務"}, {"c": "CB01", "n": "物理治療師居家復健（初次評估）"}, {"c": "CB01a", "n": "物理治療師居家復健（後續治療）"}, {"c": "CB02", "n": "職能治療師居家復健（初次評估）"}, {"c": "CB02a", "n": "職能治療師居家復健（後續治療）"}, {"c": "CB03", "n": "語言治療師居家語言治療（初次評估）"}, {"c": "CB03a", "n": "語言治療師居家語言治療（後續治療）"}, {"c": "CC01", "n": "營養師居家營養指導"}, {"c": "CD01", "n": "社會工作師居家社工服務"}]}, {"id": "G", "name": "💤 G 項喘息服務", "items": [{"c": "GA03", "n": "機構型喘息服務（短期入住護理機構）"}, {"c": "GA04", "n": "機構型喘息服務（短期入住身障機構）"}, {"c": "GA05", "n": "機構型喘息服務（短期入住日照中心）"}, {"c": "GA06", "n": "居家型喘息服務"}, {"c": "GA07", "n": "巷弄站全日喘息服務"}, {"c": "GA09", "n": "居家型強化喘息服務（含舊 GA01/GA02）"}]}]</script>
 <script>
 const CATS=[
 {id:"EA",name:"🚿 如廁及沐浴輔具",items:[
@@ -128,7 +188,33 @@ const CATS=[
 ];
 
 const state=new Set();// codes
+const rentChoice=new Map();// code → "buy"|"rent"（僅 type=both 用；buy 預設）
 let P={};
+let ITEM_META={};
+
+try {
+  const metaEl=document.getElementById("item-meta");
+  if(metaEl) ITEM_META=JSON.parse(metaEl.textContent||"{}")||{};
+}catch(e){ITEM_META={};}
+
+/* CARD-044：把 BB/BC/BD/C/G 5 區 prepend 到 CATS 之前（視覺上 B 系 → C → E 系 → F → G）。
+   注入失敗 / 空陣列 → 不報錯，CATS 保持 9 族原樣。 */
+try {
+  const extraEl=document.getElementById("extra-sections");
+  if(extraEl){
+    const raw=extraEl.textContent||"[]";
+    const extras=JSON.parse(raw);
+    if(Array.isArray(extras)&&extras.length){
+      // 正規化 entry 形狀（兼容 {id,name,items:[{c,n}]}）
+      const normalized=extras.filter(s=>s&&s.id&&Array.isArray(s.items)).map(s=>({
+        id:s.id, name:s.name||s.id,
+        items:s.items.filter(i=>i&&i.c&&i.n).map(i=>({c:i.c,n:i.n}))
+      }));
+      // prepend：5 區放最前面，CATS 既有 EA-FA 接在後
+      CATS.splice(0,0,...normalized);
+    }
+  }
+}catch(e){/* swallow：CARD-044 注入失敗不影響 9 族 */}
 
 function parseParams(){
   const u=new URLSearchParams(location.search);
@@ -136,8 +222,129 @@ function parseParams(){
     user_id:u.get("user_id")||"",
     session:u.get("session")||"",
     channel:u.get("channel")||"",
-    guild:u.get("guild")||""
+    guild:u.get("guild")||"",
+    // CARD-035：webhook（Web B fetch 目標）+ issued_at（session TTL）
+    webhook:u.get("webhook")||"",
+    issued_at:u.get("issued_at")||"",
+    // CARD-042：URL query 帶橫幅 + 進度條資料
+    cms:u.get("cms")||"",
+    income:u.get("income")||"",
+    city:u.get("city")||"",
+    zone:u.get("zone")||"",
+    foreign_care:u.get("foreign_care")||"",
+    b1_quota:u.get("b1_quota")||"",b1_used:u.get("b1_used")||"",b1_remaining:u.get("b1_remaining")||"",
+    b2_quota:u.get("b2_quota")||"",b2_used:u.get("b2_used")||"",b2_remaining:u.get("b2_remaining")||"",
+    b3_quota:u.get("b3_quota")||"",b3_used:u.get("b3_used")||"",b3_remaining:u.get("b3_remaining")||"",
+    b4_quota:u.get("b4_quota")||"",b4_used:u.get("b4_used")||"",b4_remaining:u.get("b4_remaining")||""
   };
+}
+
+/* CARD-042：status banner（URL query → tag 列） */
+function renderStatusBanner(){
+  const box=document.getElementById("status-banner");
+  if(!box)return;
+  const entries=[];
+  if(P.cms)entries.push({label:"CMS",val:"第 "+P.cms+" 級"});
+  if(P.income){
+    const map={low:"低收入戶",mid_low:"中低收入戶",general:"一般戶"};
+    entries.push({label:"收入別",val:map[P.income]||P.income});
+  }
+  if(P.city)entries.push({label:"縣市",val:P.city});
+  if(P.zone)entries.push({label:"分區",val:"第 "+P.zone+" 類"});
+  if(P.foreign_care){
+    const fc=P.foreign_care==="true"||P.foreign_care==="1";
+    entries.push({label:"外看",val:fc?"有":"無",warn:fc});
+  }
+  if(!entries.length){box.style.display="none";return;}
+  box.style.display="flex";
+  box.innerHTML="";
+  entries.forEach(e=>{
+    const tag=document.createElement("span");
+    tag.className="sb-tag"+(e.warn?" warn":"");
+    tag.innerHTML='<span class="sb-label">'+e.label+'</span>'+e.val;
+    box.appendChild(tag);
+  });
+}
+
+/* CARD-042：四色進度條（若 URL 帶 b*_quota 才顯示）*/
+function renderQuotaBars(){
+  const box=document.getElementById("quota-bars");
+  const body=document.getElementById("quota-bars-body");
+  if(!box||!body)return;
+  const rows=[];
+  ["b1","b2","b3","b4"].forEach(k=>{
+    const quota=parseInt(P[k+"_quota"]||"",10);
+    const used=parseInt(P[k+"_used"]||"0",10);
+    const remaining=parseInt(P[k+"_remaining"]||"",10);
+    if(isNaN(quota)||quota<=0)return;
+    const pct=Math.max(0,Math.min(100,Math.round((used/quota)*100)));
+    const over=used>quota;
+    rows.push({k:k,quota:quota,used:used,remaining:isNaN(remaining)?(quota-used):remaining,pct:pct,over:over});
+  });
+  if(!rows.length){box.style.display="none";return;}
+  box.style.display="block";
+  body.innerHTML="";
+  rows.forEach(r=>{
+    const row=document.createElement("div");
+    row.className="qb-row";
+    const lbl=document.createElement("span");lbl.className="qb-label "+r.k;lbl.textContent=r.k.toUpperCase();
+    const bar=document.createElement("span");bar.className="qb-bar";
+    const fill=document.createElement("span");fill.className="qb-fill "+r.k+(r.over?" over":"");
+    fill.style.width=(r.over?100:r.pct)+"%";
+    bar.appendChild(fill);
+    const nums=document.createElement("span");nums.className="qb-nums";
+    nums.textContent=r.used.toLocaleString()+" / "+r.quota.toLocaleString()+"（剩 "+Math.max(0,r.remaining).toLocaleString()+"）";
+    row.appendChild(lbl);row.appendChild(bar);row.appendChild(nums);
+    body.appendChild(row);
+  });
+}
+
+/* CARD-042：對每個 item 建單價 chip + （type=both 時）租賃 radio
+   CARD-044：service 型（BB/BC/BD/C/G）不顯示 price-row（避免「購 $1000」誤導） */
+function buildPriceRow(code){
+  const m=ITEM_META[code];
+  if(!m)return null;
+  if(m.type==="service")return null;
+  const row=document.createElement("div");
+  row.className="price-row";
+  const chip=document.createElement("span");
+  chip.className="price-chip "+(m.type||"buy");
+  chip.dataset.code=code;
+  function chipText(mode){
+    if(mode==="rent"&&m.rent_price!=null)return "租 $"+m.rent_price.toLocaleString()+"/月";
+    if(m.price!=null)return "購 $"+m.price.toLocaleString();
+    return "—";
+  }
+  if(m.type==="rent"){
+    chip.textContent=(m.rent_price!=null)?"租 $"+m.rent_price.toLocaleString()+"/月":"租賃";
+  }else if(m.type==="both"){
+    chip.textContent=chipText("buy");
+    rentChoice.set(code,"buy");
+    const sw=document.createElement("span");
+    sw.className="rent-switch";
+    ["buy","rent"].forEach(mode=>{
+      const lbl=document.createElement("label");
+      const rd=document.createElement("input");
+      rd.type="radio";rd.name="rent-"+code;rd.value=mode;
+      if(mode==="buy")rd.checked=true;
+      rd.addEventListener("change",()=>{
+        if(rd.checked){
+          rentChoice.set(code,mode);
+          chip.textContent=chipText(mode);
+        }
+      });
+      lbl.appendChild(rd);
+      lbl.appendChild(document.createTextNode(mode==="buy"?"購":"租"));
+      sw.appendChild(lbl);
+    });
+    row.appendChild(chip);
+    row.appendChild(sw);
+    return row;
+  }else{
+    chip.textContent=(m.price!=null)?"購 $"+m.price.toLocaleString():"購買";
+  }
+  row.appendChild(chip);
+  return row;
 }
 
 function getQueryBaseUrl(){
@@ -169,6 +376,9 @@ function render(){
       const name=document.createElement("div");name.className="i-name";name.textContent=it.n;
       const code=document.createElement("div");code.className="i-code";code.textContent=it.c;
       body.appendChild(name);body.appendChild(code);
+      /* CARD-042：租賃 / 單價 chip（僅在 ITEM_META 有資料時顯示）*/
+      const pr=buildPriceRow(it.c);
+      if(pr)body.appendChild(pr);
       label.appendChild(cb);label.appendChild(body);
       cb.addEventListener("change",()=>{
         if(cb.checked){state.add(it.c);label.classList.add("checked");}
@@ -220,6 +430,9 @@ function buildQueryUrl(){
   if(P.session)qs.set("session",P.session);
   if(P.channel)qs.set("channel",P.channel);
   if(P.guild)qs.set("guild",P.guild);
+  // CARD-035：把 webhook / issued_at 帶給 Web B
+  if(P.webhook)qs.set("webhook",P.webhook);
+  if(P.issued_at)qs.set("issued_at",P.issued_at);
   const sep=base.indexOf("?")>=0?"&":"?";
   return base+sep+qs.toString();
 }
@@ -246,7 +459,7 @@ document.getElementById("next-btn").addEventListener("click",()=>{
   window.location.href=url;
 });
 
-parseParams();render();updateCounter();updateSectionCounts();
+parseParams();renderStatusBanner();renderQuotaBars();render();updateCounter();updateSectionCounts();
 </script>
 </body>
 </html>

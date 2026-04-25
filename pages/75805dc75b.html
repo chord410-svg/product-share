@@ -36,19 +36,37 @@ header .subtitle{font-size:.85em;opacity:.85}
 .sec-header .sec-count{font-size:.75em;color:var(--muted);white-space:nowrap}
 .sec-header .sec-count.has{color:var(--success);font-weight:700}
 .items{display:flex;flex-direction:column;gap:2px;max-height:260px;overflow-y:auto}
-.itm{display:flex;align-items:flex-start;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;transition:background .12s}
+.itm{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(0,0,0,.04);transition:background .12s}
 .itm:last-child{border-bottom:none}
 .itm:hover{background:var(--primary-light)}
-.itm input[type="checkbox"]{margin-top:3px;cursor:pointer;accent-color:var(--primary);flex-shrink:0}
 .itm .i-body{flex:1;min-width:0}
 .itm .i-code{font-size:.72em;color:var(--muted);font-family:"SF Mono",Menlo,Monaco,monospace;letter-spacing:.5px}
 .itm .i-name{font-size:.85em;line-height:1.4}
 .itm.checked{background:var(--primary-light)}
 .itm.checked .i-name{font-weight:600;color:var(--primary-dark)}
+/* CARD-053a：epizy 風格 stepper（class 名與 epizy DOM 對齊） */
+.div_price_count{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.div_price_count .div_CI_price{font-size:.78em;color:var(--success);font-weight:600;min-width:54px;text-align:right;font-variant-numeric:tabular-nums}
+.div_price_count .div_CI_price .span_CI_price{display:inline-block}
+.div_price_count.no-price .div_CI_price{color:var(--muted)}
+.div_counter{display:inline-flex;align-items:center;background:#f1f5f9;border-radius:6px;padding:2px}
+.div_counter .btn{width:28px;height:28px;border:none;background:#e2e8f0;color:var(--text);font-size:14px;font-weight:700;cursor:pointer;border-radius:4px;font-family:inherit;padding:0;line-height:1}
+.div_counter .btn_minus:hover,.div_counter .btn_plus:hover{background:var(--primary-light);color:var(--primary)}
+.div_counter .btn:active{background:var(--primary);color:#fff}
+.div_counter .txt_CI_qty{width:36px;height:24px;border:1px solid var(--border);background:#fff;text-align:center;font-size:13px;font-weight:600;font-family:inherit;margin:0 4px;padding:0;border-radius:4px;color:var(--text)}
+.div_counter .txt_CI_qty:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-light)}
+.div_price_count .no-price-note{font-size:.68em;color:var(--muted);margin-left:4px}
 .footer-bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--border);padding:12px 16px;display:flex;justify-content:center;box-shadow:0 -2px 12px rgba(0,0,0,.06);z-index:20}
 .footer-bar-inner{max-width:1200px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.footer-bar .footer-bar-stats{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
 .footer-bar .sum{font-size:.9em;color:var(--muted)}
 .footer-bar .sum strong{color:var(--primary);font-size:1.05em}
+/* CARD-053a：footer 兩行估算（並排不混算，前綴必含「估算」字樣） */
+.footer-bar .estimate-row{display:flex;flex-wrap:wrap;gap:14px;font-size:.82em;color:var(--muted)}
+.footer-bar .estimate-row strong{font-variant-numeric:tabular-nums;font-weight:700}
+.footer-bar .estimate-row .estimate-buy strong{color:var(--success)}
+.footer-bar .estimate-row .estimate-rent strong{color:#854d0e}
+@media (max-width:560px){.footer-bar .estimate-row{flex-direction:column;gap:2px}}
 .next-btn{padding:12px 28px;border-radius:10px;border:none;font-size:.98em;font-weight:700;cursor:pointer;background:var(--success);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2);transition:all .15s;font-family:inherit}
 .next-btn:hover:not(:disabled){background:#15803d;transform:translateY(-1px)}
 .next-btn:disabled{background:#cbd5e1;cursor:not-allowed;box-shadow:none}
@@ -126,7 +144,14 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
 
 <div class="footer-bar">
   <div class="footer-bar-inner">
-    <div class="sum">已選 <strong id="counter-bottom">0</strong> 項補助</div>
+    <div class="footer-bar-stats">
+      <div class="sum">已選 <strong id="counter-bottom">0</strong> 項補助</div>
+      <!-- CARD-053a：本頁估算（並排不混算，rent/buy 單位不同；估算 ≠ 真實補助餘額） -->
+      <div class="estimate-row">
+        <span class="estimate-buy">購置估算: <strong id="estimate-buy-total">$0</strong></span>
+        <span class="estimate-rent">租賃估算: <strong id="estimate-rent-total">$0/月</strong></span>
+      </div>
+    </div>
     <button id="next-btn" class="next-btn" type="button" disabled>下一步 →</button>
   </div>
 </div>
@@ -189,7 +214,8 @@ const CATS=[
 {c:"FA21",n:"特殊簡易浴槽"}]}
 ];
 
-const state=new Set();// codes
+// CARD-053a：state 改 Map（code → qty；qty>0 計入，0 自動 delete）
+const state=new Map();// code -> qty (>0 計入)
 const rentChoice=new Map();// code → "buy"|"rent"（僅 type=both 用；buy 預設）
 let P={};
 let ITEM_META={};
@@ -333,6 +359,9 @@ function buildPriceRow(code){
         if(rd.checked){
           rentChoice.set(code,mode);
           chip.textContent=chipText(mode);
+          // CARD-053a：切換 buy/rent 時，該項小計與 footer 估算須即時刷
+          refreshItemRow(code);
+          updateEstimate();
         }
       });
       lbl.appendChild(rd);
@@ -378,8 +407,8 @@ function render(){
     sec.appendChild(secHdr);
     const items=document.createElement("div");items.className="items";
     cat.items.forEach(it=>{
-      const label=document.createElement("label");label.className="itm";label.setAttribute("data-code",it.c);
-      const cb=document.createElement("input");cb.type="checkbox";cb.value=it.c;
+      // CARD-053a：label → div（不再用 label[for=cb] 行為，stepper 自有 click 事件）
+      const row=document.createElement("div");row.className="itm";row.setAttribute("data-code",it.c);
       const body=document.createElement("div");body.className="i-body";
       const name=document.createElement("div");name.className="i-name";name.textContent=it.n;
       const code=document.createElement("div");code.className="i-code";code.textContent=it.c;
@@ -387,27 +416,74 @@ function render(){
       /* CARD-042：租賃 / 單價 chip（僅在 ITEM_META 有資料時顯示）*/
       const pr=buildPriceRow(it.c);
       if(pr)body.appendChild(pr);
-      label.appendChild(cb);label.appendChild(body);
-      cb.addEventListener("change",()=>{
-        if(cb.checked){state.add(it.c);label.classList.add("checked");}
-        else{state.delete(it.c);label.classList.remove("checked");}
-        updateCounter();updateSectionCounts();
-      });
-      items.appendChild(label);
+      row.appendChild(body);
+      // CARD-053a：epizy 風格 stepper —[$小計] [-] [text] [+]
+      const stp=buildStepper(it.c,it.n);
+      row.appendChild(stp);
+      items.appendChild(row);
     });
     sec.appendChild(items);
+    // CARD-053a：btnAll → state.set(code, 1) for all；btnNone → state.delete + qv=0
     btnAll.addEventListener("click",()=>{
-      items.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
-        if(!cb.checked){cb.checked=true;cb.dispatchEvent(new Event("change"));}
+      cat.items.forEach(it=>{
+        const cur=state.get(it.c)||0;
+        if(cur===0){applyQty(it.c,1);}
       });
     });
     btnNone.addEventListener("click",()=>{
-      items.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
-        if(cb.checked){cb.checked=false;cb.dispatchEvent(new Event("change"));}
+      cat.items.forEach(it=>{
+        if(state.has(it.c)){applyQty(it.c,0);}
       });
     });
     root.appendChild(sec);
   });
+}
+
+// CARD-053a：build epizy 風格 stepper（class 與 epizy DOM 對齊；oninput/onclick attr 對齊）
+function buildStepper(code,nm){
+  const wrap=document.createElement("div");
+  wrap.className="div_price_count";
+  wrap.id="prct_"+code;
+  wrap.setAttribute("data-code",code);
+  wrap.setAttribute("role","group");
+  wrap.setAttribute("aria-label",nm+" 數量選擇");
+  // 該項小計
+  const priceBox=document.createElement("div");priceBox.className="div_CI_price";
+  const priceSpan=document.createElement("span");priceSpan.className="span_CI_price";priceSpan.textContent="$0";
+  priceBox.appendChild(priceSpan);
+  // 三節點容器
+  const counter=document.createElement("div");counter.className="div_counter";
+  const minus=document.createElement("input");
+  minus.className="btn_minus btn";minus.type="button";minus.value="-";
+  minus.setAttribute("onclick","DecreaseCount(this)");
+  minus.setAttribute("aria-label","減少 "+nm+" 數量");
+  const txt=document.createElement("input");
+  txt.className="txt_CI_qty";txt.type="text";txt.value="";
+  txt.setAttribute("oninput","onTextInput(this)");
+  txt.setAttribute("inputmode","numeric");
+  txt.setAttribute("aria-label",nm+" 目前數量");
+  txt.setAttribute("maxlength","2");
+  const plus=document.createElement("input");
+  plus.className="btn_plus btn";plus.type="button";plus.value="+";
+  plus.setAttribute("onclick","IncreaseCount(this)");
+  plus.setAttribute("aria-label","增加 "+nm+" 數量");
+  counter.appendChild(minus);counter.appendChild(txt);counter.appendChild(plus);
+  wrap.appendChild(priceBox);wrap.appendChild(counter);
+  // price=None / 0 時，加小字提示
+  const m=ITEM_META[code];
+  const t=(m&&m.type)||"buy";
+  const hasPrice=
+    (t==="rent")?(m&&m.rent_price&&m.rent_price>0):
+    (t==="both")?((m&&m.price&&m.price>0)||(m&&m.rent_price&&m.rent_price>0)):
+    (m&&m.price&&m.price>0);
+  if(!hasPrice){
+    wrap.classList.add("no-price");
+    const note=document.createElement("span");
+    note.className="no-price-note";
+    note.textContent="✱ 無單價";
+    wrap.appendChild(note);
+  }
+  return wrap;
 }
 
 function updateCounter(){
@@ -431,7 +507,8 @@ function updateSectionCounts(){
 function buildQueryUrl(){
   const base=getQueryBaseUrl();
   if(!base)return "";
-  const codes=Array.from(state).join(",");
+  // CARD-053a：state 改 Map 後內部改 keys filter；對外輸出 codes=A,B,C 形狀不變（N 不傳，CARD-055 處理）
+  const codes=Array.from(state.keys()).filter(c=>state.get(c)>0).join(",");
   const qs=new URLSearchParams();
   qs.set("codes",codes);
   if(P.user_id)qs.set("user_id",P.user_id);
@@ -445,10 +522,115 @@ function buildQueryUrl(){
   return base+sep+qs.toString();
 }
 
+// CARD-053a：epizy 全域 stepper handlers（onclick / oninput attr 對齊 epizy DOM）
+function _stepperCode(elem){
+  const wrap=elem&&elem.closest?elem.closest(".div_price_count"):null;
+  return wrap?wrap.getAttribute("data-code"):null;
+}
+window.IncreaseCount=function(btn){
+  const code=_stepperCode(btn);if(!code)return;
+  const cur=state.get(code)||0;
+  applyQty(code,Math.max(0,Math.min(99,cur+1)));
+};
+window.DecreaseCount=function(btn){
+  const code=_stepperCode(btn);if(!code)return;
+  const cur=state.get(code)||0;
+  applyQty(code,Math.max(0,Math.min(99,cur-1)));
+};
+window.onTextInput=function(input){
+  const code=_stepperCode(input);if(!code)return;
+  let raw=(input.value||"").replace(/[^\d]/g,"");
+  if(raw.length>2)raw=raw.slice(0,2);
+  let nv=raw===""?0:parseInt(raw,10);
+  if(isNaN(nv))nv=0;
+  nv=Math.max(0,Math.min(99,nv));
+  // 立刻把 input.value clamp 顯示（避免使用者打 999 還留著）
+  input.value=nv===0?"":String(nv);
+  applyQty(code,nv,/*fromText=*/true);
+};
+
+// CARD-053a：依 type 與 rentChoice 決定本次估算用 price 還是 rent_price（None/0 回 null = 不計入）
+function effectivePrice(code){
+  const m=ITEM_META[code];if(!m)return null;
+  const t=m.type||"buy";
+  if(t==="rent"){return (m.rent_price&&m.rent_price>0)?m.rent_price:null;}
+  if(t==="both"){
+    const mode=rentChoice.get(code)||"buy";
+    if(mode==="rent")return (m.rent_price&&m.rent_price>0)?m.rent_price:null;
+    return (m.price&&m.price>0)?m.price:null;
+  }
+  // buy / service / unknown
+  return (m.price&&m.price>0)?m.price:null;
+}
+function estimateBucket(code){
+  const m=ITEM_META[code]||{};
+  const t=m.type||"buy";
+  if(t==="rent")return "rent";
+  if(t==="both")return (rentChoice.get(code)||"buy")==="rent"?"rent":"buy";
+  return "buy";// buy / service 都歸購置桶
+}
+
+// CARD-053a：刷新單列 stepper 對應的小計 span（不動 input.value，由呼叫端控制）
+function refreshItemRow(code){
+  const wrap=document.getElementById("prct_"+CSSEsc(code));
+  if(!wrap)return;
+  const nv=state.get(code)||0;
+  const sub=wrap.querySelector(".span_CI_price");
+  if(sub){
+    const eff=effectivePrice(code);
+    if(eff==null){sub.textContent=nv>0?"—":"$0";}
+    else{sub.textContent="$"+(eff*nv).toLocaleString();}
+  }
+  // itm 高亮：N>=1 才 .checked
+  const itm=document.querySelector('.itm[data-code="'+CSSEsc(code)+'"]');
+  if(itm)itm.classList.toggle("checked",nv>0);
+}
+
+// 簡化版 CSS.escape fallback（OB 既有 polyfill 與否未知，避免依賴）
+function CSSEsc(s){return String(s).replace(/(["\\])/g,"\\$1");}
+
+// CARD-053a：footer 兩行估算（並排不混算；估算 ≠ 真實補助餘額）
+function updateEstimate(){
+  let buyTotal=0,rentTotal=0;
+  state.forEach((qty,code)=>{
+    if(!(qty>0))return;
+    const eff=effectivePrice(code);
+    if(eff==null)return;// price=None / 0 不計
+    if(estimateBucket(code)==="rent")rentTotal+=eff*qty;
+    else buyTotal+=eff*qty;
+  });
+  const ebuy=document.getElementById("estimate-buy-total");
+  const erent=document.getElementById("estimate-rent-total");
+  if(ebuy)ebuy.textContent="$"+buyTotal.toLocaleString();
+  if(erent)erent.textContent="$"+rentTotal.toLocaleString()+"/月";
+}
+
+// CARD-053a：核心 state 寫入 + DOM 同步入口（從 stepper / btnAll / btnNone 全經由此）
+function applyQty(code,nv,fromText){
+  nv=Math.max(0,Math.min(99,nv|0));
+  if(nv===0)state.delete(code);
+  else state.set(code,nv);
+  const wrap=document.getElementById("prct_"+CSSEsc(code));
+  if(wrap){
+    const txt=wrap.querySelector(".txt_CI_qty");
+    // fromText=true 時呼叫端已自行設過 input.value（避免游標跳）
+    if(txt&&!fromText){txt.value=nv===0?"":String(nv);}
+  }
+  refreshItemRow(code);
+  updateCounter();updateSectionCounts();updateEstimate();
+}
+
 // expose for unit test hook（test 環境無 window 仍可 import）
 window.__CARD034_buildQueryUrl=buildQueryUrl;
 window.__CARD034_state=state;
 window.__CARD034_CATS=CATS;
+// CARD-053a：stepper 用 test hook
+window.__CARD053_qty=function(code){return state.get(code)||0;};
+window.__CARD053_applyQty=applyQty;
+window.__CARD053_estimate=function(){return {
+  buy:Number(((document.getElementById("estimate-buy-total")||{}).textContent||"$0").replace(/[^\d-]/g,""))||0,
+  rent:Number(((document.getElementById("estimate-rent-total")||{}).textContent||"$0").replace(/[^\d-]/g,""))||0
+};};
 
 document.getElementById("btn-expand-all").addEventListener("click",()=>{
   document.querySelectorAll(".items").forEach(el=>el.style.maxHeight="none");
@@ -457,9 +639,23 @@ document.getElementById("btn-collapse-all").addEventListener("click",()=>{
   document.querySelectorAll(".items").forEach(el=>el.style.maxHeight="260px");
 });
 document.getElementById("btn-clear-all").addEventListener("click",()=>{
-  document.querySelectorAll('.itm input[type="checkbox"]').forEach(cb=>{
-    if(cb.checked){cb.checked=false;cb.dispatchEvent(new Event("change"));}
+  // CARD-053a：state.clear + 全 stepper qv 歸零 + 估算刷
+  const codes=Array.from(state.keys());
+  state.clear();
+  codes.forEach(c=>{
+    const wrap=document.getElementById("prct_"+CSSEsc(c));
+    if(wrap){
+      const txt=wrap.querySelector(".txt_CI_qty");if(txt)txt.value="";
+      const sub=wrap.querySelector(".span_CI_price");
+      if(sub){
+        const eff=effectivePrice(c);
+        sub.textContent=eff==null?"$0":"$0";
+      }
+      const itm=document.querySelector('.itm[data-code="'+CSSEsc(c)+'"]');
+      if(itm)itm.classList.remove("checked");
+    }
   });
+  updateCounter();updateSectionCounts();updateEstimate();
 });
 document.getElementById("next-btn").addEventListener("click",()=>{
   const url=buildQueryUrl();
@@ -467,7 +663,7 @@ document.getElementById("next-btn").addEventListener("click",()=>{
   window.location.href=url;
 });
 
-parseParams();renderStatusBanner();renderQuotaBars();render();updateCounter();updateSectionCounts();
+parseParams();renderStatusBanner();renderQuotaBars();render();updateCounter();updateSectionCounts();updateEstimate();
 </script>
 </body>
 </html>

@@ -359,9 +359,6 @@ function buildPriceRow(code){
         if(rd.checked){
           rentChoice.set(code,mode);
           chip.textContent=chipText(mode);
-          // CARD-053a：切換 buy/rent 時，該項小計與 footer 估算須即時刷
-          refreshItemRow(code);
-          updateEstimate();
         }
       });
       lbl.appendChild(rd);
@@ -393,6 +390,10 @@ function getQueryBaseUrl(){
 }
 
 function render(){
+  // CARD-053a-fix：duplicate code detector — 14 區 EXTRA_SECTIONS 與 hardcode CATS 重複會 state 覆蓋 / 雙重 stepper
+  const _seen=new Set(),_dupes=[];
+  CATS.forEach(c=>c.items.forEach(it=>{if(_seen.has(it.c))_dupes.push(it.c);else _seen.add(it.c);}));
+  if(_dupes.length)console.warn("[CARD-053a-fix] duplicate codes detected:",_dupes);
   const root=document.getElementById("sections");
   CATS.forEach(cat=>{
     const sec=document.createElement("div");sec.className="sec";sec.setAttribute("data-fam",cat.id);
@@ -664,6 +665,14 @@ document.getElementById("next-btn").addEventListener("click",()=>{
 });
 
 parseParams();renderStatusBanner();renderQuotaBars();render();updateCounter();updateSectionCounts();updateEstimate();
+// CARD-053a-fix：rent radio change 由 document-level delegate 一次註冊（取代 buildPriceRow 內的 inline callback；只註冊一次避免重複綁定）
+document.addEventListener("change",function(ev){
+  const t=ev.target;
+  if(t&&t.matches&&t.matches('input[type="radio"][name^="rent-"]')){
+    const code=String(t.name||"").replace(/^rent-/,"");
+    if(code){refreshItemRow(code);updateEstimate();}
+  }
+});
 </script>
 </body>
 </html>

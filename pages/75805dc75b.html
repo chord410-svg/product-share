@@ -80,6 +80,8 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
 .itm .price-chip.buy{background:var(--chip-buy-bg);color:var(--chip-buy-fg)}
 .itm .price-chip.rent{background:var(--chip-rent-bg);color:var(--chip-rent-fg)}
 .itm .price-chip.both{background:var(--chip-both-bg);color:var(--chip-both-fg)}
+/* CARD-052：service 型（BA/BB/BC/BD/C/G）chip 樣式——中性灰，與 buy/rent/both 區分但不搶眼 */
+.itm .price-chip.service{background:#f1f5f9;color:#475569}
 .itm .rent-switch{display:inline-flex;gap:6px;margin-left:4px}
 .itm .rent-switch label{display:inline-flex;align-items:center;gap:2px;cursor:pointer;font-size:.95em;color:var(--muted)}
 .itm .rent-switch input[type="radio"]{accent-color:var(--primary);cursor:pointer}
@@ -300,11 +302,11 @@ function renderQuotaBars(){
 }
 
 /* CARD-042：對每個 item 建單價 chip + （type=both 時）租賃 radio
-   CARD-044：service 型（BB/BC/BD/C/G）不顯示 price-row（避免「購 $1000」誤導） */
+   CARD-052：移除 service 型早 return；改為「price 缺/0 才不顯示」。
+             service 型（BA/BB/BC/BD/C/G）顯示「$260/次」；buy 型保留「購 $1,200」；rent/both 既有邏輯不動。 */
 function buildPriceRow(code){
   const m=ITEM_META[code];
   if(!m)return null;
-  if(m.type==="service")return null;
   const row=document.createElement("div");
   row.className="price-row";
   const chip=document.createElement("span");
@@ -340,8 +342,14 @@ function buildPriceRow(code){
     row.appendChild(chip);
     row.appendChild(sw);
     return row;
+  }else if(m.type==="service"){
+    // CARD-052：service 型（BA/BB/BC/BD/C/G）顯示「$260/次」；price 缺/0 → 不顯示（graceful）
+    if(!(m.price&&m.price>0))return null;
+    chip.textContent="$"+m.price.toLocaleString()+(m.unit?"/"+m.unit:"");
   }else{
-    chip.textContent=(m.price!=null)?"購 $"+m.price.toLocaleString():"購買";
+    // type=buy（or fallback）：CARD-052 加 price>0 守門避免顯示「購 $0」
+    if(!(m.price&&m.price>0))return null;
+    chip.textContent="購 $"+m.price.toLocaleString();
   }
   row.appendChild(chip);
   return row;

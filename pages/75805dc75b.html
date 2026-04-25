@@ -38,11 +38,24 @@ header .subtitle{font-size:.85em;opacity:.85}
 .items{display:flex;flex-direction:column;gap:2px;max-height:260px;overflow-y:auto}
 /* CARD-054：D / S / OT 大區暫無資料時顯示佔位字（CARD-056 處理） */
 .items:empty::before{content:"📋 待補資料（CARD-056 處理中）";color:#999;font-size:.85em;display:block;padding:10px;font-style:italic}
+/* CARD-058：每大區 per-section 金額（已用/餘額/自付額），緊湊小字版 */
+.section-summary{display:flex;flex-wrap:wrap;gap:10px;padding:6px 10px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:.74em;color:var(--muted);line-height:1.45}
+.section-summary .ss-cell{white-space:nowrap;font-variant-numeric:tabular-nums}
+.section-summary .ss-cell .ss-label{color:var(--muted)}
+.section-summary .ss-cell .ss-val{font-weight:700;color:var(--text);margin-left:2px}
+.section-summary .ss-cell.coshare .ss-val{color:var(--danger)}
+.section-summary .ss-cell.remaining .ss-val{color:var(--success)}
+.section-summary .ss-cell.remaining .ss-val.zero{color:var(--danger)}
+.section-summary .ss-cell.remaining .ss-val.muted{color:var(--muted);font-weight:600}
+.section-summary.note-only{font-style:italic}
+.section-summary.note-only .ss-note{color:#854d0e;font-weight:600}
+.section-summary.placeholder .ss-note{color:#666;font-weight:600}
+@media (max-width:768px){.section-summary{font-size:.7em;gap:6px;padding:4px 8px}}
 .itm{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(0,0,0,.04);transition:background .12s}
 .itm:last-child{border-bottom:none}
 .itm:hover{background:var(--primary-light)}
 .itm .i-body{flex:1;min-width:0}
-.itm .i-code{font-size:.72em;color:var(--muted);font-family:"SF Mono",Menlo,Monaco,monospace;letter-spacing:.5px}
+.itm .i-code{font-size:1.05em;font-weight:600;color:var(--primary-dark);font-family:"SF Mono",Menlo,Monaco,monospace;letter-spacing:.5px}/* CARD-056b：code 字放大粗體（個管師習慣以碼別溝通） */
 .itm .i-name{font-size:.85em;line-height:1.4}
 .itm.checked{background:var(--primary-light)}
 .itm.checked .i-name{font-weight:600;color:var(--primary-dark)}
@@ -271,11 +284,15 @@ function parseParams(){
     city:u.get("city")||"",
     zone:u.get("zone")||"",
     foreign_care:u.get("foreign_care")||"",
+    // CARD-058：identity canonical flags（comma-list：foreign_caregiver,indigenous,...）
+    identity:u.get("identity")||"",
     b1_quota:u.get("b1_quota")||"",b1_used:u.get("b1_used")||"",b1_remaining:u.get("b1_remaining")||"",
     b2_quota:u.get("b2_quota")||"",b2_used:u.get("b2_used")||"",b2_remaining:u.get("b2_remaining")||"",
     b3_quota:u.get("b3_quota")||"",b3_used:u.get("b3_used")||"",b3_remaining:u.get("b3_remaining")||"",
     b4_quota:u.get("b4_quota")||"",b4_used:u.get("b4_used")||"",b4_remaining:u.get("b4_remaining")||""
   };
+  // CARD-058：URLSearchParams.has() 區分 undefined / 0（未帶入額度 vs 已用完）
+  P._has=function(k){return u.has(k);};
 }
 
 /* CARD-042：status banner（URL query → tag 列） */
@@ -417,6 +434,11 @@ function render(){
     const secCount=document.createElement("span");secCount.className="sec-count";secCount.textContent="0 / "+cat.items.length;
     secHdr.appendChild(h2);secHdr.appendChild(secActions);secHdr.appendChild(secCount);
     sec.appendChild(secHdr);
+    // CARD-058：每大區 per-section 金額區（已用/餘額/自付額）— D 顯佔位、S/OT 顯文案、B1/B3/B4 顯數字
+    const secSummary=document.createElement("div");
+    secSummary.className="section-summary";
+    secSummary.setAttribute("data-summary-fam",cat.id);
+    sec.appendChild(secSummary);
     const items=document.createElement("div");items.className="items";
     cat.items.forEach(it=>{
       // CARD-053a：label → div（不再用 label[for=cb] 行為，stepper 自有 click 事件）
@@ -617,6 +639,147 @@ function updateEstimate(){
   if(erent)erent.textContent="$"+rentTotal.toLocaleString()+"/月";
 }
 
+// CARD-058：補助比規則常數（本地化自 data/calculator-114/subsidy_rates.json；資料來源動更新時請同步）
+// 注意：subsidy_rates.json 真實定義 B1=照顧/B2=交通/B3=輔具/B4=喘息（依 _DATA_DIR/subsidy_rates.json）；
+// URL b1_quota..b4_quota 對應到此真實 B1-B4，而非卡片 §3 表格（卡片把 B3/B4 寫反，本實作以資料層為準）。
+const SUBSIDY={
+  copay_rates:{general:0.16,normal:0.16,mid_low:0.05,low:0.0},
+  B1:{name:"照顧及專業服務",limits_by_cms:{2:10020,3:15460,4:18580,5:24100,6:28070,7:32090,8:36180},foreign_cg_ratio:0.3},
+  B2:{name:"交通接送",zones:{
+    "1":{copay:{general:0.30,normal:0.30,mid_low:0.10,low:0.0}},
+    "2":{copay:{general:0.27,normal:0.27,mid_low:0.09,low:0.0}},
+    "3":{copay:{general:0.25,normal:0.25,mid_low:0.08,low:0.0}},
+    "4":{copay:{general:0.21,normal:0.21,mid_low:0.07,low:0.0}}
+  }},
+  B3:{name:"輔具",total_limit:40000,copay:{general:0.30,normal:0.30,mid_low:0.10,low:0.0}},
+  B4:{name:"喘息",limits_by_cms:{2:32340,3:32340,4:32340,5:32340,6:32340,7:48510,8:48510}}
+};
+// CARD-058：大區 → 補助包對應；S/OT/UNKNOWN 不算（顯文案）；D 顯佔位
+const BUCKET_OF={
+  BA:"B1",BB:"B1",BC:"B1",BD:"B1",C:"B1",
+  D:"B2",
+  EA:"B3",EB:"B3",EC:"B3",ED:"B3",EE:"B3",EF:"B3",EG:"B3",EH:"B3",FA:"B3",
+  G:"B4",
+  S:"NOTE",OT:"NOTE"
+};
+// CARD-058：URL identity canonical flags 解析
+function _identityHas(flag){
+  const raw=String(P.identity||"").toLowerCase();
+  if(!raw)return false;
+  return raw.split(",").map(s=>s.trim()).indexOf(flag)>=0;
+}
+function _income(){
+  const v=String(P.income||"").trim();
+  if(v==="")return "general";// 預設一般戶
+  if(v==="normal")return "general";// 容忍別名
+  return v;
+}
+// CARD-058：本區 spent（已使用額）= Σ N × effectivePrice（沿用 053a effectivePrice 排除 price=null）
+function _sectionSpent(catId){
+  const cat=CATS.find(c=>c.id===catId);
+  if(!cat)return 0;
+  let spent=0;
+  cat.items.forEach(it=>{
+    const qty=state.get(it.c)||0;
+    if(!(qty>0))return;
+    const eff=effectivePrice(it.c);
+    if(eff==null)return;
+    spent+=eff*qty;
+  });
+  return spent;
+}
+// CARD-058：本區 quota（補助上限）— B1/B4 依 cms 表、B3 total_limit、B2 依 zone monthly_limit；URL 帶 b*_quota 優先
+function _bucketQuota(bucket){
+  const cms=parseInt(P.cms,10);
+  const incomeKey=_income();
+  if(bucket==="B1"){
+    if(P._has&&P._has("b1_quota"))return parseInt(P.b1_quota||"0",10);
+    if(!isNaN(cms)&&SUBSIDY.B1.limits_by_cms[cms]!=null){
+      let lim=SUBSIDY.B1.limits_by_cms[cms];
+      if(_identityHas("foreign_caregiver"))lim=Math.round(lim*SUBSIDY.B1.foreign_cg_ratio);
+      return lim;
+    }
+    return null;
+  }
+  if(bucket==="B2"){
+    if(P._has&&P._has("b2_quota"))return parseInt(P.b2_quota||"0",10);
+    return null;// B2 預設不主動推 zone limit（需 city/zone 都齊）
+  }
+  if(bucket==="B3"){
+    if(P._has&&P._has("b3_quota"))return parseInt(P.b3_quota||"0",10);
+    return SUBSIDY.B3.total_limit;
+  }
+  if(bucket==="B4"){
+    if(P._has&&P._has("b4_quota"))return parseInt(P.b4_quota||"0",10);
+    if(!isNaN(cms)&&SUBSIDY.B4.limits_by_cms[cms]!=null)return SUBSIDY.B4.limits_by_cms[cms];
+    return null;
+  }
+  return null;
+}
+// CARD-058：本區 copay 比 — B1/B4 用 copay_rates、B3 用 B3.copay、B2 zone 缺值（city/zone 任一缺 → null）
+function _bucketCopayRate(bucket){
+  const incomeKey=_income();
+  if(bucket==="B1"||bucket==="B4")return SUBSIDY.copay_rates[incomeKey];
+  if(bucket==="B3")return SUBSIDY.B3.copay[incomeKey];
+  if(bucket==="B2"){
+    // city/zone 皆存在才套；缺任一 → null
+    if(!P.city||!P.zone)return null;
+    const zoneRule=SUBSIDY.B2.zones[String(P.zone)];
+    if(!zoneRule||!zoneRule.copay)return null;
+    return zoneRule.copay[incomeKey];
+  }
+  return null;
+}
+// CARD-058：fmt $ + 千分位（null/undefined → 「—」）
+function _fmtMoney(v){
+  if(v==null||(typeof v==="number"&&isNaN(v)))return "—";
+  return "$"+Number(v).toLocaleString();
+}
+// CARD-058：刷新單區 .section-summary
+function updateSectionSummary(catId){
+  const box=document.querySelector('.section-summary[data-summary-fam="'+CSSEsc(catId)+'"]');
+  if(!box)return;
+  const bucket=BUCKET_OF[catId]||"NOTE";
+  // S / OT 文案（補助規則洽縣市政府，本系統不計入自付額）
+  if(bucket==="NOTE"){
+    box.classList.add("note-only");box.classList.remove("placeholder");
+    box.innerHTML='<span class="ss-note">補助規則洽縣市政府，本系統不計入自付額</span>';
+    return;
+  }
+  // D 區佔位（DA01 user_input pricing 整合 CARD-058b）
+  if(catId==="D"){
+    box.classList.add("placeholder");box.classList.remove("note-only");
+    box.innerHTML='<span class="ss-note">請輸入車資（CARD-058b 整合中）</span>';
+    return;
+  }
+  box.classList.remove("note-only","placeholder");
+  // B1 / B3 / B4：算 spent / 自付 / 餘額
+  const spent=_sectionSpent(catId);
+  const quota=_bucketQuota(bucket);
+  const rate=_bucketCopayRate(bucket);
+  let coshareTxt;
+  if(rate==null){
+    coshareTxt='<span class="ss-val muted" title="需選縣市/區域後估算">需選縣市/區域</span>';
+  }else{
+    const co=Math.round(spent*rate);
+    coshareTxt='<span class="ss-val">'+_fmtMoney(co)+'</span>';
+  }
+  let remTxt;
+  if(quota==null){
+    remTxt='<span class="ss-val muted" title="—=未帶入額度">—</span>';
+  }else{
+    const rem=quota-spent;
+    if(rem<=0)remTxt='<span class="ss-val zero" title="$0=已無餘額">'+_fmtMoney(Math.max(0,rem))+'</span>';
+    else remTxt='<span class="ss-val">'+_fmtMoney(rem)+'</span>';
+  }
+  box.innerHTML=
+    '<span class="ss-cell used"><span class="ss-label">已使用額:</span><span class="ss-val">'+_fmtMoney(spent)+'</span></span>'+
+    '<span class="ss-cell remaining"><span class="ss-label">餘額:</span>'+remTxt+'</span>'+
+    '<span class="ss-cell coshare"><span class="ss-label">自付額:</span>'+coshareTxt+'</span>';
+}
+// CARD-058：刷全部大區
+function updateAllSectionSummary(){CATS.forEach(c=>updateSectionSummary(c.id));}
+
 // CARD-053a：核心 state 寫入 + DOM 同步入口（從 stepper / btnAll / btnNone 全經由此）
 function applyQty(code,nv,fromText){
   nv=Math.max(0,Math.min(99,nv|0));
@@ -630,6 +793,9 @@ function applyQty(code,nv,fromText){
   }
   refreshItemRow(code);
   updateCounter();updateSectionCounts();updateEstimate();
+  // CARD-058：找 code 屬於哪個 cat → 刷該大區 summary
+  const owningCat=CATS.find(c=>c.items.some(it=>it.c===code));
+  if(owningCat)updateSectionSummary(owningCat.id);
 }
 
 // expose for unit test hook（test 環境無 window 仍可 import）
@@ -668,6 +834,7 @@ document.getElementById("btn-clear-all").addEventListener("click",()=>{
     }
   });
   updateCounter();updateSectionCounts();updateEstimate();
+  updateAllSectionSummary();// CARD-058：全部清除後刷所有大區
 });
 document.getElementById("next-btn").addEventListener("click",()=>{
   const url=buildQueryUrl();
@@ -676,14 +843,31 @@ document.getElementById("next-btn").addEventListener("click",()=>{
 });
 
 parseParams();renderStatusBanner();renderQuotaBars();render();updateCounter();updateSectionCounts();updateEstimate();
+// CARD-058：18 大區 summary 初始化
+updateAllSectionSummary();
 // CARD-053a-fix：rent radio change 由 document-level delegate 一次註冊（取代 buildPriceRow 內的 inline callback；只註冊一次避免重複綁定）
 document.addEventListener("change",function(ev){
   const t=ev.target;
   if(t&&t.matches&&t.matches('input[type="radio"][name^="rent-"]')){
     const code=String(t.name||"").replace(/^rent-/,"");
-    if(code){refreshItemRow(code);updateEstimate();}
+    if(code){
+      refreshItemRow(code);updateEstimate();
+      // CARD-058：rent radio 切換 type=both 影響 effectivePrice，連帶刷該大區 summary
+      const owningCat=CATS.find(c=>c.items.some(it=>it.c===code));
+      if(owningCat)updateSectionSummary(owningCat.id);
+    }
   }
 });
+
+// CARD-058：test hook
+window.__CARD058_summary=function(catId){
+  const box=document.querySelector('.section-summary[data-summary-fam="'+CSSEsc(catId)+'"]');
+  if(!box)return null;
+  const txt=box.textContent;
+  return {raw:txt, classes:box.className};
+};
+window.__CARD058_quota=_bucketQuota;
+window.__CARD058_copay=_bucketCopayRate;
 </script>
 </body>
 </html>

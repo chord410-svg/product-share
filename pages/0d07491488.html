@@ -223,7 +223,8 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     var btn = document.getElementById("back-to-discord-link");
     if (btn) {
       if (GUILD && CHANNEL) {
-        btn.href = "https://discord.com/channels/" + encodeURIComponent(GUILD) + "/" + encodeURIComponent(CHANNEL);
+        // CARD-055e-fix2 A：人類拍板 App deep link 三斜線格式 discord:///channels/{guild}/{channel}
+        btn.href = "discord:///channels/" + encodeURIComponent(GUILD) + "/" + encodeURIComponent(CHANNEL);
         btn.style.display = "inline-block";
       } else {
         btn.style.display = "none";

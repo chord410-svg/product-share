@@ -13,8 +13,13 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
 .container{max-width:1200px;margin:0 auto;padding:16px}
-header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center;position:relative}
 header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+/* CARD-055c：返回 Web A 按鈕（左上角，桌機+手機可見） */
+header .back-to-a{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:6px 12px;font-size:.82em;cursor:pointer;font-family:inherit;font-weight:600;transition:background .15s}
+header .back-to-a:hover{background:rgba(255,255,255,.3)}
+header .back-to-a:active{background:rgba(255,255,255,.45)}
+@media (max-width:600px){header .back-to-a{top:8px;left:8px;padding:4px 8px;font-size:.75em}}
 header .subtitle{font-size:.85em;opacity:.85}
 .cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}
 @media (max-width:1024px){.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -66,6 +71,8 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 <body>
 <div id="main-content" class="container">
   <header>
+    <!-- CARD-055c：返回 Web A 按鈕（history.back 保留 stepper N 值；無 referrer 時 fallback Web A page_id） -->
+    <button type="button" class="back-to-a" id="back-to-a-btn" aria-label="返回 Web A 修改補助代碼">← 返回 Web A</button>
     <h1>🔍 補助代碼提問</h1>
     <div class="subtitle">共 <strong>0</strong> 項補助・請為每項描述家屬需求</div>
   </header>
@@ -388,6 +395,30 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   bindTextareas();
   updateSubmitState();
   if (submitBtn) submitBtn.addEventListener("click", doSubmit);
+
+  // CARD-055c：返回 Web A — referrer 含 selector page_id (75805dc75b) → history.back 還原 stepper N；
+  // 否則（直接打 Web B URL / 跨 origin）→ location.href fallback Web A page_id
+  var WEB_A_PAGE_ID = "75805dc75b";  // CARD-034 _CARD034_SELECTOR_ID
+  function goBackToWebA() {
+    try {
+      if (document.referrer && document.referrer.indexOf(WEB_A_PAGE_ID) >= 0) {
+        history.back();
+        return;
+      }
+    } catch(e) {}
+    // fallback：用當前 viewer.html origin + page_id
+    try {
+      var u = new URL(window.location.href);
+      u.search = "?id=" + WEB_A_PAGE_ID;
+      window.location.href = u.toString();
+    } catch(e) {
+      window.location.href = "/viewer.html?id=" + WEB_A_PAGE_ID;
+    }
+  }
+  var backBtn = document.getElementById("back-to-a-btn");
+  if (backBtn) backBtn.addEventListener("click", goBackToWebA);
+  // expose for e2e
+  window.__CARD055c_goBack = goBackToWebA;
 
   /* CARD-042：Web B status banner（橫幅徽章）*/
   function renderStatusBanner(params) {

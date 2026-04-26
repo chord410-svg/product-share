@@ -207,6 +207,8 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 
   // CARD-055e B：URL 帶的 guild（用於 Discord deep link）
   var GUILD = "";
+  // CARD-055e-fix3：deep link 跳結果頻道（不是 4 步精靈頻道 CHANNEL）；缺值 fallback CHANNEL
+  var RESULT_CHANNEL = "";
   function showSuccess(shareUrl) {
     if (mainContent) mainContent.querySelector(".cards-grid") && (mainContent.querySelector(".cards-grid").style.display = "none");
     if (mainContent) mainContent.querySelector(".actions") && (mainContent.querySelector(".actions").style.display = "none");
@@ -222,9 +224,10 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     // CARD-055e B：deep link 按鈕（缺 GUILD/CHANNEL 任一 → 不顯）
     var btn = document.getElementById("back-to-discord-link");
     if (btn) {
-      if (GUILD && CHANNEL) {
-        // CARD-055e-fix2 A：人類拍板 App deep link 三斜線格式 discord:///channels/{guild}/{channel}
-        btn.href = "discord:///channels/" + encodeURIComponent(GUILD) + "/" + encodeURIComponent(CHANNEL);
+      // CARD-055e-fix3：deep link 用 RESULT_CHANNEL（結果頻道），fallback CHANNEL（4 步精靈頻道）
+      var deepCh = RESULT_CHANNEL || CHANNEL;
+      if (GUILD && deepCh) {
+        btn.href = "discord:///channels/" + encodeURIComponent(GUILD) + "/" + encodeURIComponent(deepCh);
         btn.style.display = "inline-block";
       } else {
         btn.style.display = "none";
@@ -247,8 +250,20 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     var payload = buildPayload();
 
     if (!WEBHOOK) {
-      console.warn("[CARD-032 POC] 未帶 webhook，printing payload：", payload);
-      showSuccess();
+      // CARD-055e-fix3：分流 — dev (file:// / localhost / 127.0.0.1) 走 silent 保留；production https 顯紅警告
+      var origin = String(location.origin || location.href || "");
+      var isDev = origin.indexOf("file://") === 0 || origin.indexOf("localhost") >= 0 || origin.indexOf("127.0.0.1") >= 0;
+      if (isDev) {
+        console.warn("[CARD-032 POC dev] 未帶 webhook，printing payload：", payload);
+        showSuccess();
+      } else {
+        // production：明顯不靜默
+        showError(
+          "⚠️ WEB_B_SUBMIT_URL 未設定，POST 不會發送到 server，Discord 不會收到結果。請聯絡開發者設定 cloudflared tunnel URL（.env WEB_B_SUBMIT_URL）。"
+        );
+        submitBtn.disabled = false;
+        updateSubmitState();
+      }
       return;
     }
 
@@ -441,6 +456,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     if (params.has("session")) SESSION = params.get("session");
     if (params.has("channel")) CHANNEL = params.get("channel");
     if (params.has("guild")) GUILD = params.get("guild");  // CARD-055e B：deep link 用
+    if (params.has("result_channel")) RESULT_CHANNEL = params.get("result_channel");  // CARD-055e-fix3
     if (params.has("webhook")) WEBHOOK = params.get("webhook");
     if (params.has("issued_at")) {
       var n = parseInt(params.get("issued_at"), 10);

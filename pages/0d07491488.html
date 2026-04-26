@@ -13,18 +13,25 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
 .container{max-width:1200px;margin:0 auto;padding:16px}
-header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center;position:relative}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
 header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
-/* CARD-055c：返回 Web A 按鈕（左上角，桌機+手機可見） */
-header .back-to-a{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:6px 12px;font-size:.82em;cursor:pointer;font-family:inherit;font-weight:600;transition:background .15s}
-header .back-to-a:hover{background:rgba(255,255,255,.3)}
-header .back-to-a:active{background:rgba(255,255,255,.45)}
-@media (max-width:600px){header .back-to-a{top:8px;left:8px;padding:4px 8px;font-size:.75em}}
+/* CARD-055c-fix：返回 Web A 按鈕從 header 移到 footer / 送出按鈕同列 / 紅色強調 */
+.back-to-a.btn-back-red{background:#dc2626;color:#fff;border:none;padding:10px 20px;border-radius:6px;font-size:.95em;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s}
+.back-to-a.btn-back-red:hover{background:#b91c1c}
+.back-to-a.btn-back-red:active{background:#991b1b}
+.actions{gap:12px;flex-wrap:wrap}
+@media (max-width:600px){.actions{flex-direction:column;gap:8px}.actions .back-to-a{width:100%}}
 header .subtitle{font-size:.85em;opacity:.85}
 .cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}
 @media (max-width:1024px){.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:768px){.cards-grid{grid-template-columns:1fr}}
 .query-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s;display:flex;flex-direction:column}
+/* CARD-055b：非 EF 包預覽卡片（不顯 textarea）— muted bg + 「不需提問」小字 */
+.query-card.preview-only{background:#f3f4f6;opacity:.85}
+.query-card.preview-only .card-header{background:#e5e7eb;color:var(--muted)}
+.query-card.preview-only .preview-note{padding:14px 16px;font-size:.85em;color:var(--muted);font-style:italic;text-align:center}
+.query-card.preview-only .preview-note::before{content:"📋 ";font-style:normal}
+.query-card .preview-tag{margin-left:auto;font-size:.7em;color:var(--muted);background:#e5e7eb;padding:2px 8px;border-radius:10px;font-style:italic;font-weight:500}
 .query-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
 .query-card .card-header{background:var(--primary-light);padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .query-card .code-badge{background:var(--primary);color:#fff;font-size:.78em;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.5px;flex-shrink:0}
@@ -71,8 +78,6 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 <body>
 <div id="main-content" class="container">
   <header>
-    <!-- CARD-055c：返回 Web A 按鈕（history.back 保留 stepper N 值；無 referrer 時 fallback Web A page_id） -->
-    <button type="button" class="back-to-a" id="back-to-a-btn" aria-label="返回 Web A 修改補助代碼">← 返回 Web A</button>
     <h1>🔍 補助代碼提問</h1>
     <div class="subtitle">共 <strong>0</strong> 項補助・請為每項描述家屬需求</div>
   </header>
@@ -120,13 +125,13 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   }
 
   function updateSubmitState() {
+    // CARD-055d：送出按鈕永遠 enable（人類拍板「不是每次查詢都要查商品」）
+    if (!submitBtn) return;
+    submitBtn.disabled = false;
+    // CARD-055d：動態文案 — textarea 全空 → 「📊 直接看額度試算（不查商品）」/ 任一有填 → 「🔍 查詢商品」
     var areas = getTextareas();
-    if (!areas.length) {
-      if (submitBtn) submitBtn.disabled = true;
-      return;
-    }
-    var allFilled = areas.every(function(t){ return t.value.trim().length > 0; });
-    if (submitBtn) submitBtn.disabled = !allFilled;
+    var hasAny = areas.some(function(t){ return (t.value || "").trim().length > 0; });
+    submitBtn.textContent = hasAny ? "🔍 查詢商品" : "📊 直接看額度試算（不查商品）";
   }
 
   function bindTextareas() {
@@ -158,6 +163,17 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   var ISSUED_AT = 0;   // CARD-035：session TTL 判斷用
   // CARD-055a-1：Web A pass-through 帶 qty `code:N,code:N` → 解析成 {code:N} 物件
   var QTY_MAP = {};
+  // CARD-055b：只 EF 包（B3 對應 9 區）渲 textarea；其他 D/G/S/OT 純預覽（hidden qty 仍對全 codes 加）
+  // 集中化（Codex 採納 2）：未來商城合作擴大改此 array 即可
+  var ASKABLE_FAMILIES = ['EA','EB','EC','ED','EE','EF','EG','EH','FA'];
+  function _codeFamily(code) {
+    // 提取字母前綴：BA01 → BA, EA01-1 → EA, FA22 → FA
+    var m = String(code || "").match(/^([A-Z]+)/);
+    return m ? m[1] : "";
+  }
+  function _isAskable(code) {
+    return ASKABLE_FAMILIES.indexOf(_codeFamily(code)) >= 0;
+  }
   function parseQtyParam(raw) {
     var out = {};
     if (!raw) return out;
@@ -173,13 +189,17 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   }
 
   function buildPayload() {
+    var queries = collectQueries();
+    // CARD-055d：hasAnyQuery flag — true 走 matcher / false 跳純額度試算（後端條件處理併入 055a-2）
+    var hasAnyQuery = queries.some(function(q){ return (q.question || "").length > 0; });
     return {
       user_id: USER_ID,
       session: SESSION,
       channel: CHANNEL,
       issued_at: ISSUED_AT,   // CARD-035
-      queries: collectQueries(),
-      qty: QTY_MAP   // CARD-055a-1：pass-through Web A stepper 數量；submit_handler 暫忽略（055a-2 處理）
+      queries: queries,
+      qty: QTY_MAP,   // CARD-055a-1：pass-through Web A stepper 數量；submit_handler 暫忽略（055a-2 處理）
+      hasAnyQuery: hasAnyQuery   // CARD-055d：純前端 flag；submit_handler 暫忽略 extra field（055a-2 處理）
     };
   }
 
@@ -230,21 +250,20 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
         showError("[" + code + "] " + msg);
       }
       submitBtn.disabled = false;
-      submitBtn.textContent = "🔍 查詢商品";
+      updateSubmitState();   // CARD-055d：依 textarea 狀態還原動態文案
     })
     .catch(function(err){
       console.error("[CARD-035] submit failed", err);
       showError("網路錯誤：" + String(err.message || err));
       submitBtn.disabled = false;
-      submitBtn.textContent = "🔍 查詢商品";
+      updateSubmitState();   // CARD-055d
     });
   }
 
   window.retrySubmit = function() {
     errorBox.classList.remove("active");
     submitBtn.disabled = false;
-    submitBtn.textContent = "🔍 查詢商品";
-    updateSubmitState();
+    updateSubmitState();   // CARD-055d：動態文案
   };
 
   // URL param 讀取：codes / user_id / session / channel / webhook
@@ -275,6 +294,31 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     nameSpan.textContent = known ? name : ("\u4EE3\u78BC " + code + " \uFF08\u672A\u77E5\uFF09");
     header.appendChild(badge);
     header.appendChild(nameSpan);
+    // CARD-055b：非 EF 包顯「不需提問」小字 tag + 純預覽（不渲 textarea）
+    var askable = _isAskable(code);
+    if (!askable) {
+      card.classList.add("preview-only");
+      var pTag = document.createElement("span");
+      pTag.className = "preview-tag";
+      pTag.textContent = "不需提問";
+      header.appendChild(pTag);
+      var bodyPv = document.createElement("div");
+      bodyPv.className = "card-body";
+      var notePv = document.createElement("div");
+      notePv.className = "preview-note";
+      notePv.textContent = "本項僅顯示供參考；目前商城僅與 EF 包輔具廠商合作";
+      bodyPv.appendChild(notePv);
+      card.appendChild(header);
+      card.appendChild(bodyPv);
+      // CARD-055a-1 + CARD-055b：hidden field 仍對全 codes 加（POST qty 含全 codes）
+      var hidQtyPv = document.createElement("input");
+      hidQtyPv.type = "hidden";
+      hidQtyPv.name = "qty_" + code;
+      var qvPv = (QTY_MAP && Object.prototype.hasOwnProperty.call(QTY_MAP, code)) ? QTY_MAP[code] : 1;
+      hidQtyPv.value = String(qvPv);
+      card.appendChild(hidQtyPv);
+      return card;
+    }
 
     var body = document.createElement("div");
     body.className = "card-body";
@@ -340,19 +384,20 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 
       codes.forEach(function(c){ grid.appendChild(buildCardFromCode(c, mapping)); });
 
-      // 補 submit button（若不存在）
+      // 補 submit button（若不存在）+ CARD-055c-fix：同時補 back 按鈕
       if (!document.getElementById("submit-btn")) {
         var actions = document.createElement("div");
         actions.className = "actions";
-        actions.innerHTML = '<button id="submit-btn" class="btn btn-primary" disabled>🔍 查詢商品</button>';
+        actions.innerHTML = '<button type="button" class="back-to-a btn-back-red" id="back-to-a-btn" aria-label="返回 Web A 修改補助代碼">← 返回 Web A</button><button id="submit-btn" class="btn btn-primary" disabled>🔍 查詢商品</button>';
         grid.parentNode.insertBefore(actions, grid.nextSibling);
         submitBtn = document.getElementById("submit-btn");
       }
 
-      // 更新 header 的「共 N 項」
+      // CARD-055b：counter 改「共 N 項補助、M 項可填寫提問」（M = askable 內 codes 數）
+      var askableCount = codes.filter(_isAskable).length;
       var subtitle = document.querySelector("header .subtitle");
       if (subtitle) {
-        subtitle.innerHTML = '共 <strong>' + codes.length + '</strong> 項補助・請為每項描述家屬需求';
+        subtitle.innerHTML = '共 <strong>' + codes.length + '</strong> 項補助、<strong>' + askableCount + '</strong> 項可填寫提問';
       }
       return true;
     } catch(e) { return false; }
@@ -376,6 +421,49 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   } catch(e) {}
 
   hydrateFromUrlCodes();
+  // CARD-055b：SSR 既有 cards（render_web_b 預先渲染）— 非 EF 包拿掉 textarea / char-count + 加 preview-only class + 加 tag + 加 preview-note
+  (function _applyAskablePolicy(){
+    document.querySelectorAll(".query-card").forEach(function(card){
+      var code = card.getAttribute("data-code");
+      if (!code) return;
+      if (_isAskable(code)) return;
+      card.classList.add("preview-only");
+      // 加 preview-tag 到 header（避免重複）
+      var header = card.querySelector(".card-header");
+      if (header && !header.querySelector(".preview-tag")) {
+        var pTag = document.createElement("span");
+        pTag.className = "preview-tag";
+        pTag.textContent = "不需提問";
+        header.appendChild(pTag);
+      }
+      // 拿掉 textarea + char-count
+      var body = card.querySelector(".card-body");
+      if (body) {
+        var ta = body.querySelector("textarea");
+        if (ta) ta.remove();
+        var cc = body.querySelector(".char-count");
+        if (cc) cc.remove();
+        if (!body.querySelector(".preview-note")) {
+          var note = document.createElement("div");
+          note.className = "preview-note";
+          note.textContent = "本項僅顯示供參考；目前商城僅與 EF 包輔具廠商合作";
+          body.appendChild(note);
+        }
+      }
+    });
+  })();
+  // CARD-055b：SSR subtitle counter「共 N 項補助、M 項可填寫提問」
+  (function _refreshSsrSubtitle(){
+    var cards = document.querySelectorAll(".query-card");
+    if (!cards.length) return;
+    var total = cards.length;
+    var askable = 0;
+    cards.forEach(function(c){ if (_isAskable(c.getAttribute("data-code"))) askable++; });
+    var subtitle = document.querySelector("header .subtitle");
+    if (subtitle) {
+      subtitle.innerHTML = '共 <strong>' + total + '</strong> 項補助、<strong>' + askable + '</strong> 項可填寫提問';
+    }
+  })();
   // CARD-055a-1：SSR 既有 query-card（render_web_b 預先渲染）也補 hidden qty field
   (function hydrateQtyFields(){
     var cards = document.querySelectorAll(".query-card");

@@ -94,7 +94,9 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 
   <div id="status-success" class="status-box success">
     <h2>✅ 已送出</h2>
-    <p>請回 Discord 查看結果頻道。</p>
+    <p id="success-detail">請回 Discord 查看結果頻道。</p>
+    <!-- CARD-055e B：「← 回 Discord 結果頻道」紅色按鈕（沿用 055c-fix .btn-back-red）；URL 缺 guild/channel 時 JS 隱藏 -->
+    <a id="back-to-discord-link" class="back-to-a btn-back-red" style="display:none;text-decoration:none;margin-top:12px" target="_blank" rel="noopener">← 回 Discord 結果頻道</a>
   </div>
 
   <div id="status-error" class="status-box error">
@@ -203,9 +205,30 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     };
   }
 
-  function showSuccess() {
+  // CARD-055e B：URL 帶的 guild（用於 Discord deep link）
+  var GUILD = "";
+  function showSuccess(shareUrl) {
     if (mainContent) mainContent.querySelector(".cards-grid") && (mainContent.querySelector(".cards-grid").style.display = "none");
     if (mainContent) mainContent.querySelector(".actions") && (mainContent.querySelector(".actions").style.display = "none");
+    // CARD-055e A：share_url 是 file:// 或缺 → 提示有送出但無線上連結；https → doSubmit 直跳不走此 path
+    var detail = document.getElementById("success-detail");
+    if (detail) {
+      if (shareUrl) {
+        detail.textContent = "已送出。share page：" + shareUrl + "（如為 file:// 路徑代表後端暫存，正常情況會跳 GH Pages https）";
+      } else {
+        detail.textContent = "已送出。請回 Discord 查看結果頻道。";
+      }
+    }
+    // CARD-055e B：deep link 按鈕（缺 GUILD/CHANNEL 任一 → 不顯）
+    var btn = document.getElementById("back-to-discord-link");
+    if (btn) {
+      if (GUILD && CHANNEL) {
+        btn.href = "https://discord.com/channels/" + encodeURIComponent(GUILD) + "/" + encodeURIComponent(CHANNEL);
+        btn.style.display = "inline-block";
+      } else {
+        btn.style.display = "none";
+      }
+    }
     successBox.classList.add("active");
     errorBox.classList.remove("active");
   }
@@ -238,7 +261,15 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       return res.json().then(function(body){ return {status: res.status, body: body}; });
     })
     .then(function(r){
-      if (r.body && r.body.ok) { showSuccess(); return; }
+      if (r.body && r.body.ok) {
+        // CARD-055e A：https share_url 直跳 GH Pages share page；file:// 或缺 → showSuccess fallback
+        if (r.body.share_url && /^https?:\/\//.test(r.body.share_url)) {
+          window.location.href = r.body.share_url;
+          return;
+        }
+        showSuccess(r.body.share_url || "");
+        return;
+      }
       // 後端 4xx/5xx 結構化錯誤
       var code = (r.body && r.body.error_code) || ("HTTP_" + r.status);
       var msg = (r.body && r.body.error_msg) || "未知錯誤";
@@ -408,6 +439,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     if (params.has("user_id")) USER_ID = params.get("user_id");
     if (params.has("session")) SESSION = params.get("session");
     if (params.has("channel")) CHANNEL = params.get("channel");
+    if (params.has("guild")) GUILD = params.get("guild");  // CARD-055e B：deep link 用
     if (params.has("webhook")) WEBHOOK = params.get("webhook");
     if (params.has("issued_at")) {
       var n = parseInt(params.get("issued_at"), 10);

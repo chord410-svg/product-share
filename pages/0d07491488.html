@@ -149,6 +149,21 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   var SESSION = "";
   var CHANNEL = "";
   var ISSUED_AT = 0;   // CARD-035：session TTL 判斷用
+  // CARD-055a-1：Web A pass-through 帶 qty `code:N,code:N` → 解析成 {code:N} 物件
+  var QTY_MAP = {};
+  function parseQtyParam(raw) {
+    var out = {};
+    if (!raw) return out;
+    String(raw).split(",").forEach(function(pair){
+      var p = pair.split(":");
+      if (p.length === 2) {
+        var c = (p[0]||"").trim();
+        var n = parseInt(p[1], 10);
+        if (c && !isNaN(n) && n > 0) out[c] = n;
+      }
+    });
+    return out;
+  }
 
   function buildPayload() {
     return {
@@ -156,7 +171,8 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       session: SESSION,
       channel: CHANNEL,
       issued_at: ISSUED_AT,   // CARD-035
-      queries: collectQueries()
+      queries: collectQueries(),
+      qty: QTY_MAP   // CARD-055a-1：pass-through Web A stepper 數量；submit_handler 暫忽略（055a-2 處理）
     };
   }
 
@@ -273,6 +289,13 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 
     card.appendChild(header);
     card.appendChild(body);
+    // CARD-055a-1：Web A 帶 qty 時，每 query-card 加 hidden field（type=hidden a11y 無礙）；DOM querySelector 取，UI 不可見
+    var hidQty = document.createElement("input");
+    hidQty.type = "hidden";
+    hidQty.name = "qty_" + code;
+    var qv = (QTY_MAP && Object.prototype.hasOwnProperty.call(QTY_MAP, code)) ? QTY_MAP[code] : 1;
+    hidQty.value = String(qv);
+    card.appendChild(hidQty);
     return card;
   }
 
@@ -338,12 +361,30 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       var n = parseInt(params.get("issued_at"), 10);
       ISSUED_AT = isNaN(n) ? 0 : n;
     }
+    // CARD-055a-1：Web A → Web B qty pass-through
+    if (params.has("qty")) QTY_MAP = parseQtyParam(params.get("qty"));
     /* CARD-042：status banner + mini quota bars（URL query 帶才顯示）*/
     renderStatusBanner(params);
     renderMiniQuotaBars(params);
   } catch(e) {}
 
   hydrateFromUrlCodes();
+  // CARD-055a-1：SSR 既有 query-card（render_web_b 預先渲染）也補 hidden qty field
+  (function hydrateQtyFields(){
+    var cards = document.querySelectorAll(".query-card");
+    cards.forEach(function(card){
+      var code = card.getAttribute("data-code");
+      if (!code) return;
+      // 已有 hidden 不重加
+      if (card.querySelector('input[type="hidden"][name="qty_'+code+'"]')) return;
+      var hidQty = document.createElement("input");
+      hidQty.type = "hidden";
+      hidQty.name = "qty_" + code;
+      var qv = (QTY_MAP && Object.prototype.hasOwnProperty.call(QTY_MAP, code)) ? QTY_MAP[code] : 1;
+      hidQty.value = String(qv);
+      card.appendChild(hidQty);
+    });
+  })();
   bindTextareas();
   updateSubmitState();
   if (submitBtn) submitBtn.addEventListener("click", doSubmit);

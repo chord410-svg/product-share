@@ -69,9 +69,13 @@ header .subtitle{font-size:.85em;opacity:.85}
   .bucket-summary .bs-title{font-size:.88em}
   .bucket-summary .ss-cell{font-size:.78em;min-width:auto;text-align:left}
 }
-/* CARD-058c：S/OT 區（bucket=note）鎖住 — stepper 灰、不可點；防 buildQueryUrl 帶污染（state 也清） */
-.sec[data-bucket="note"] .div_price_count{pointer-events:none;opacity:.45;filter:grayscale(.7)}
-.sec[data-bucket="note"] .itm{opacity:.7}
+/* CARD-058e：S/OT 解鎖（058c 鎖回退）— stepper 可點、自付/進度條啟用；既有 .sec[data-bucket=note] 鎖樣式整段移除 */
+/* CARD-058e：S 包進度條粉藍漸層（仿 epizy 視覺）；OT 包不放進度條 */
+.bucket-summary .bp-fill.bp-s{background:linear-gradient(90deg,#06b6d4,#0891b2)}
+.bucket-summary .bp-fill.bp-ot{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+/* CARD-058e：S/OT 警示橫幅（取代 058c 的「補助規則洽縣市政府」） */
+.bucket-summary.warn-estimate .bs-warn{flex-basis:100%;color:#854d0e;font-size:.78em;font-style:italic;line-height:1.4}
+.bucket-summary.warn-estimate .ss-val::before{content:"[暫估] ";color:#854d0e;font-size:.85em;font-weight:600;font-style:italic}
 .itm{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(0,0,0,.04);transition:background .12s}
 .itm:last-child{border-bottom:none}
 .itm:hover{background:var(--primary-light)}
@@ -306,7 +310,9 @@ function parseParams(){
     b1_quota:u.get("b1_quota")||"",b1_used:u.get("b1_used")||"",b1_remaining:u.get("b1_remaining")||"",
     b2_quota:u.get("b2_quota")||"",b2_used:u.get("b2_used")||"",b2_remaining:u.get("b2_remaining")||"",
     b3_quota:u.get("b3_quota")||"",b3_used:u.get("b3_used")||"",b3_remaining:u.get("b3_remaining")||"",
-    b4_quota:u.get("b4_quota")||"",b4_used:u.get("b4_used")||"",b4_remaining:u.get("b4_remaining")||""
+    b4_quota:u.get("b4_quota")||"",b4_used:u.get("b4_used")||"",b4_remaining:u.get("b4_remaining")||"",
+    // CARD-058e：S 包 quota（URL 沒帶 → 走 SUBSIDY.S.default_quota=87780 fallback）
+    s_quota:u.get("s_quota")||""
   };
   // CARD-058：URLSearchParams.has() 區分 undefined / 0（未帶入額度 vs 已用完）
   P._has=function(k){return u.has(k);};
@@ -459,11 +465,7 @@ function render(){
     const secActions=document.createElement("div");secActions.className="sec-actions";
     const btnAll=document.createElement("button");btnAll.type="button";btnAll.textContent="全選";
     const btnNone=document.createElement("button");btnNone.type="button";btnNone.textContent="清除";
-    // CARD-058c：S/OT 鎖 — 全選/清除 a11y
-    if(bucket==="NOTE"){
-      btnAll.disabled=true;btnNone.disabled=true;
-      btnAll.setAttribute("aria-disabled","true");btnNone.setAttribute("aria-disabled","true");
-    }
+    // CARD-058e：S/OT 解鎖（058c NOTE disabled 已移除）— 全選/清除按鈕對所有 bucket 啟用
     secActions.appendChild(btnAll);secActions.appendChild(btnNone);
     const secCount=document.createElement("span");secCount.className="sec-count";secCount.textContent="0 / "+cat.items.length;
     secHdr.appendChild(h2);secHdr.appendChild(secActions);secHdr.appendChild(secCount);
@@ -482,24 +484,20 @@ function render(){
       row.appendChild(body);
       // CARD-053a：epizy 風格 stepper —[$小計] [-] [text] [+]
       const stp=buildStepper(it.c,it.n);
-      // CARD-058c：S/OT 區 stepper 鎖 — disable input + aria-disabled
-      if(bucket==="NOTE"){
-        stp.querySelectorAll("input").forEach(inp=>{inp.disabled=true;inp.setAttribute("aria-disabled","true");});
-      }
+      // CARD-058e：S/OT 解鎖（058c stepper input disabled 已移除）
       row.appendChild(stp);
       items.appendChild(row);
     });
     sec.appendChild(items);
     // CARD-053a：btnAll → state.set(code, 1) for all；btnNone → state.delete + qv=0
     btnAll.addEventListener("click",()=>{
-      if(bucket==="NOTE")return;// CARD-058c：S/OT 鎖
+      // CARD-058e：S/OT 解鎖（058c NOTE return guard 已移除）
       cat.items.forEach(it=>{
         const cur=state.get(it.c)||0;
         if(cur===0){applyQty(it.c,1);}
       });
     });
     btnNone.addEventListener("click",()=>{
-      if(bucket==="NOTE")return;// CARD-058c：S/OT 鎖
       cat.items.forEach(it=>{
         if(state.has(it.c)){applyQty(it.c,0);}
       });
@@ -673,15 +671,21 @@ const SUBSIDY={
     "4":{copay:{general:0.21,normal:0.21,mid_low:0.07,low:0.0}}
   }},
   B3:{name:"輔具",total_limit:40000,copay:{general:0.30,normal:0.30,mid_low:0.10,low:0.0}},
-  B4:{name:"喘息",limits_by_cms:{2:32340,3:32340,4:32340,5:32340,6:32340,7:48510,8:48510}}
+  B4:{name:"喘息",limits_by_cms:{2:32340,3:32340,4:32340,5:32340,6:32340,7:48510,8:48510}},
+  // CARD-058e：S / OT 規則（epizy 計算邏輯估算；CARD-059 待校正衛福部 PDF）
+  S:{name:"短期替代照顧服務",default_quota:87780,// epizy 截圖推算 fallback；URL s_quota 帶才覆蓋
+     copay:{general:0.16,normal:0.16,mid_low:0.05,low:0.0}},// 暫用 B1/B4 同率，待 CARD-059 核
+  OT:{name:"營養餐飲服務",
+     copay:{general:0.16,normal:0.16,mid_low:0.05,low:0.0}}// 暫用 待核；OT 無 default_quota（不放進度條）
 };
-// CARD-058：大區 → 補助包對應；S/OT/UNKNOWN 不算（顯文案）；D 顯佔位
+// CARD-058 + CARD-058e：大區 → 補助包對應；S / OT 改獨立 bucket（058c NOTE 鎖回退）
 const BUCKET_OF={
   BA:"B1",BB:"B1",BC:"B1",BD:"B1",C:"B1",
   D:"B2",
   EA:"B3",EB:"B3",EC:"B3",ED:"B3",EE:"B3",EF:"B3",EG:"B3",EH:"B3",FA:"B3",
   G:"B4",
-  S:"NOTE",OT:"NOTE"
+  S:"S",   // CARD-058e：解鎖 → 獨立 bucket（含進度條）
+  OT:"OT"  // CARD-058e：解鎖 → 獨立 bucket（無進度條）
 };
 // CARD-058：URL identity canonical flags 解析
 function _identityHas(flag){
@@ -736,6 +740,13 @@ function _bucketQuota(bucket){
     if(!isNaN(cms)&&SUBSIDY.B4.limits_by_cms[cms]!=null)return SUBSIDY.B4.limits_by_cms[cms];
     return null;
   }
+  // CARD-058e：S 包 — URL s_quota 優先，沒帶用 SUBSIDY.S.default_quota fallback（epizy 推算）
+  if(bucket==="S"){
+    if(P._has&&P._has("s_quota"))return parseInt(P.s_quota||"0",10);
+    return SUBSIDY.S.default_quota;
+  }
+  // CARD-058e：OT 包不放進度條 → quota 永遠 null（updateBucketSummary 跳過 progress）
+  if(bucket==="OT")return null;
   return null;
 }
 // CARD-058：本區 copay 比 — B1/B4 用 copay_rates、B3 用 B3.copay、B2 zone 缺值（city/zone 任一缺 → null）
@@ -750,6 +761,9 @@ function _bucketCopayRate(bucket){
     if(!zoneRule||!zoneRule.copay)return null;
     return zoneRule.copay[incomeKey];
   }
+  // CARD-058e：S / OT 暫用 epizy 估算 copay（CARD-059 待校正衛福部）
+  if(bucket==="S")return SUBSIDY.S.copay[incomeKey];
+  if(bucket==="OT")return SUBSIDY.OT.copay[incomeKey];
   return null;
 }
 // CARD-058：fmt $ + 千分位（null/undefined → 「—」）
@@ -764,7 +778,9 @@ const BUCKET_LABEL={
   B2:'<span class="bs-tag">B2</span><span class="bs-pkg">(D包)</span>交通接送',
   B3:'<span class="bs-tag">B3</span><span class="bs-pkg">(EF包)</span>輔具購買租借及居家無障礙',
   B4:'<span class="bs-tag">B4</span><span class="bs-pkg">(G包)</span>喘息服務',
-  NOTE:'<span class="bs-tag" style="background:var(--warn)">縣市</span>S / OT 服務'
+  // CARD-058e：S / OT 改獨立 label
+  S:'<span class="bs-tag" style="background:#0891b2">S</span><span class="bs-pkg">(S包)</span>短期替代照顧服務',
+  OT:'<span class="bs-tag" style="background:#f59e0b">OT</span><span class="bs-pkg">(OT包)</span>營養餐飲服務'
 };
 // CARD-058c：刷單一包 .bucket-summary（依 bucket 屬性，非依 catId）
 // CARD-058d：加 progress bar（4 包各色 + 百分比；quota=null 灰底顯「—」；over 紅）
@@ -798,23 +814,19 @@ function updateBucketSummary(bucket){
   const box=document.querySelector('.bucket-summary[data-bucket="'+bucket+'"]');
   if(!box)return;
   const titleHTML='<div class="bs-title">'+(BUCKET_LABEL[bucket]||bucket)+'</div>';
-  // NOTE：S/OT 文案（不計算 / 不放進度條）
-  if(bucket==="NOTE"){
-    box.classList.add("note-only");box.classList.remove("placeholder");
-    box.innerHTML=titleHTML+'<span class="ss-note">補助規則洽縣市政府，本系統不計入自付額</span>';
-    return;
-  }
+  // CARD-058e：S/OT 警示橫幅（縣市政策 / epizy 估算 / 待 CARD-059 校正）
+  const warnHTML='<span class="bs-warn">⚠️ 縣市政策補助，本系統使用 epizy 計算邏輯估算，<b>不可作為正式核銷依據</b>，CARD-059 將對衛福部規則校正</span>';
   // CARD-058d：B1-B4 都有 progress bar（B2 placeholder 也保留結構，spent=0 顯 0% / quota null 顯「—」）
   const progressHTML=_bucketProgressHTML(bucket);
   // B2：D 包佔位（DA01 user_input pricing 整合 CARD-058b）— 文案 + progress 並存
   if(bucket==="B2"){
-    box.classList.add("placeholder");box.classList.remove("note-only");
+    box.classList.add("placeholder");box.classList.remove("note-only","warn-estimate");
     box.innerHTML=titleHTML+'<span class="ss-note">請輸入車資（CARD-058b 整合中）</span>'+progressHTML;
     _setBucketProgress(box,bucket,0,_bucketQuota(bucket));
     return;
   }
   box.classList.remove("note-only","placeholder");
-  // B1 / B3 / B4：合併計算包內所有 codes 的 spent / 自付 / 餘額
+  // 計算 spent / quota / copay rate（B1/B3/B4/S/OT 共用）
   const spent=_bucketSpent(bucket);
   const quota=_bucketQuota(bucket);
   const rate=_bucketCopayRate(bucket);
@@ -833,6 +845,28 @@ function updateBucketSummary(bucket){
     if(rem<=0)remTxt='<span class="ss-val zero" title="$0=已無餘額">'+_fmtMoney(Math.max(0,rem))+'</span>';
     else remTxt='<span class="ss-val">'+_fmtMoney(rem)+'</span>';
   }
+  // CARD-058e：S 包完整顯（已用/餘額/自付額/進度條）+ 警示橫幅 + [暫估] 前綴
+  if(bucket==="S"){
+    box.classList.add("warn-estimate");
+    box.innerHTML=titleHTML+
+      '<span class="ss-cell used"><span class="ss-label">已使用額:</span><span class="ss-val">'+_fmtMoney(spent)+'</span></span>'+
+      '<span class="ss-cell remaining"><span class="ss-label">餘額:</span>'+remTxt+'</span>'+
+      '<span class="ss-cell coshare"><span class="ss-label">自付額:</span>'+coshareTxt+'</span>'+
+      progressHTML+warnHTML;
+    _setBucketProgress(box,bucket,spent,quota);
+    return;
+  }
+  // CARD-058e：OT 包只顯（已用/自付額）— 不顯餘額、不放進度條 + 警示橫幅 + [暫估] 前綴
+  if(bucket==="OT"){
+    box.classList.add("warn-estimate");
+    box.innerHTML=titleHTML+
+      '<span class="ss-cell used"><span class="ss-label">已使用額:</span><span class="ss-val">'+_fmtMoney(spent)+'</span></span>'+
+      '<span class="ss-cell coshare"><span class="ss-label">自付額:</span>'+coshareTxt+'</span>'+
+      warnHTML;
+    return;
+  }
+  box.classList.remove("warn-estimate");
+  // B1 / B3 / B4：合併計算包內所有 codes 的 spent / 自付 / 餘額
   box.innerHTML=titleHTML+
     '<span class="ss-cell used"><span class="ss-label">已使用額:</span><span class="ss-val">'+_fmtMoney(spent)+'</span></span>'+
     '<span class="ss-cell remaining"><span class="ss-label">餘額:</span>'+remTxt+'</span>'+
@@ -840,26 +874,16 @@ function updateBucketSummary(bucket){
     progressHTML;
   _setBucketProgress(box,bucket,spent,quota);
 }
-// CARD-058c：刷全部 4+1 包
+// CARD-058c + CARD-058e：刷全部 6 個包（B1/B2/B3/B4/S/OT；058c NOTE 拆 S/OT）
 function updateAllBucketSummary(){
-  ["B1","B2","B3","B4","NOTE"].forEach(b=>updateBucketSummary(b));
+  ["B1","B2","B3","B4","S","OT"].forEach(b=>updateBucketSummary(b));
 }
-// CARD-058c：清掉 NOTE bucket（S/OT）所有 state，防 buildQueryUrl 帶污染
-function _purgeNoteBucketState(){
-  CATS.forEach(cat=>{
-    if((BUCKET_OF[cat.id]||"NOTE")!=="NOTE")return;
-    cat.items.forEach(it=>{if(state.has(it.c))state.delete(it.c);});
-  });
-}
+// CARD-058e：058c 的 _purgeNoteBucketState 已移除（S/OT 解鎖後不再需要清 state）
 
 // CARD-053a：核心 state 寫入 + DOM 同步入口（從 stepper / btnAll / btnNone 全經由此）
 function applyQty(code,nv,fromText){
-  // CARD-058c：NOTE bucket（S/OT）鎖 — applyQty 不寫入該 code（防 stepper 點 + btnAll 繞過）
+  // CARD-058e：058c 的 NOTE bucket guard 已移除（S/OT 解鎖後 applyQty 正常寫入 state）
   const owningCat=CATS.find(c=>c.items.some(it=>it.c===code));
-  if(owningCat&&(BUCKET_OF[owningCat.id]||"NOTE")==="NOTE"){
-    if(state.has(code))state.delete(code);
-    return;
-  }
   nv=Math.max(0,Math.min(99,nv|0));
   if(nv===0)state.delete(code);
   else state.set(code,nv);
@@ -917,8 +941,7 @@ document.getElementById("next-btn").addEventListener("click",()=>{
 });
 
 parseParams();renderStatusBanner();renderQuotaBars();render();
-// CARD-058c：清掉 NOTE bucket（S/OT）init state（CARD-056 對 S/OT prefill 場景或 URL 帶值的防呆，避免 buildQueryUrl 帶 SC/OT codes 污染下游）
-_purgeNoteBucketState();
+// CARD-058e：058c 的 _purgeNoteBucketState 呼叫已移除（S/OT 解鎖後 SC/OT codes 應正常進 buildQueryUrl）
 updateCounter();updateSectionCounts();
 // CARD-058c：5 個 bucket summary 初始化（B1/B2/B3/B4/NOTE）
 updateAllBucketSummary();

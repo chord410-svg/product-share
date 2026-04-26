@@ -943,10 +943,13 @@ function updateSectionCounts(){
 function buildQueryUrl(){
   const base=getQueryBaseUrl();
   if(!base)return "";
-  // CARD-053a：state 改 Map 後內部改 keys filter；對外輸出 codes=A,B,C 形狀不變（N 不傳，CARD-055 處理）
+  // CARD-053a：state 改 Map 後內部改 keys filter；對外輸出 codes=A,B,C 形狀不變
   const codes=Array.from(state.keys()).filter(c=>state.get(c)>0).join(",");
   const qs=new URLSearchParams();
   qs.set("codes",codes);
+  // CARD-055a-1：qty pass-through 給 Web B（form `code:N,code:N`，N 為 state Map 數量；user_input DA01 也帶 N=1 啟用旗標）
+  const qty=Array.from(state.entries()).filter(([_,n])=>n>0).map(([c,n])=>c+":"+n).join(",");
+  if(qty)qs.set("qty",qty);
   if(P.user_id)qs.set("user_id",P.user_id);
   if(P.session)qs.set("session",P.session);
   if(P.channel)qs.set("channel",P.channel);

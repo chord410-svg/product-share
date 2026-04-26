@@ -427,7 +427,8 @@ function parseParams(){
     s_quota:u.get("s_quota")||""
   };
   // CARD-058：URLSearchParams.has() 區分 undefined / 0（未帶入額度 vs 已用完）
-  P._has=function(k){return u.has(k);};
+  // CARD-058f-fix：改為查 P 物件本身（delete P.b*_quota 後即時生效，不依賴 init 時的 URLSearchParams）
+  P._has=function(k){return Object.prototype.hasOwnProperty.call(P,k)&&P[k]!=null&&P[k]!=="";};
 }
 
 /* CARD-042：status banner（URL query → tag 列） */
@@ -756,6 +757,9 @@ function _buildDZonePicker(){
       selDist.title="";
       selDist.removeAttribute("aria-describedby");
     }
+    // CARD-058f-fix：使用者改 D 區縣市 → invalidate P.b2_quota（讓 _resolveDZone 重新算）+ URL 同步刪
+    delete P.b2_quota;
+    try{const u=new URL(location.href);u.searchParams.delete("b2_quota");history.replaceState(null,"",u.toString());}catch(e){}
     _refreshDZoneHint();
     // 只重算 B2（不 cascade 到其他包）
     updateBucketSummary("B2");
@@ -764,6 +768,9 @@ function _buildDZonePicker(){
   selDist.addEventListener("change",ev=>{
     ev.stopPropagation();
     dDistrict=selDist.value||"";
+    // CARD-058f-fix：使用者改 D 區行政區 → invalidate P.b2_quota
+    delete P.b2_quota;
+    try{const u=new URL(location.href);u.searchParams.delete("b2_quota");history.replaceState(null,"",u.toString());}catch(e){}
     _refreshDZoneHint();
     updateBucketSummary("B2");
     updateQuotaTable();
@@ -1348,11 +1355,18 @@ function _ccFlush(){
 }
 function onCaseConditionChange(field,value){
   P[field]=value;
+  // CARD-058f-fix：人類拍板「Web 為準」— 使用者改下拉 → invalidate URL b*_quota（讓 cms/identity 真的 ripple）；
+  // 不保留 Discord 原算值，_bucketQuota 退回 cms × SUBSIDY 算
+  if(field==="cms"){delete P.b1_quota;delete P.b4_quota;}
+  if(field==="identity"){delete P.b1_quota;}
+  // income 只影響 copay rate，不需 invalidate quota
   // 同步 status-banner（既有 CARD-042 顯示）
   renderStatusBanner();
-  // CARD-058f：URL replaceState（不 pushState 避免歷史污染）
+  // CARD-058f：URL replaceState（不 pushState 避免歷史污染）+ CARD-058f-fix：同步 delete URL b*_quota param 避免 reload 後拿回 stale 值
   try{
     const u=new URL(location.href);
+    if(field==="cms"){u.searchParams.delete("b1_quota");u.searchParams.delete("b4_quota");}
+    if(field==="identity"){u.searchParams.delete("b1_quota");}
     if(value===""||value==null)u.searchParams.delete(field);
     else u.searchParams.set(field,String(value));
     history.replaceState(null,"",u.toString());

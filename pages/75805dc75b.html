@@ -38,8 +38,21 @@ header .subtitle{font-size:.85em;opacity:.85}
 .items{display:flex;flex-direction:column;gap:2px;max-height:260px;overflow-y:auto}
 /* CARD-054：D / S / OT 大區暫無資料時顯示佔位字（CARD-056 處理） */
 .items:empty::before{content:"📋 待補資料（CARD-056 處理中）";color:#999;font-size:.85em;display:block;padding:10px;font-style:italic}
-/* CARD-058c：per-bucket summary（4 衛福部包合併計算 + S/OT 文案 + D 佔位）— 橫跨 sections-grid 整列 */
-.bucket-summary{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:10px 14px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border:1px solid var(--primary);border-radius:var(--radius);box-shadow:0 1px 3px rgba(37,99,235,.08);margin:6px 0 2px}
+/* CARD-058g：6 包預設摺疊 wrapper — Codex 補強 .bucket-wrapper 維持 058d progress bar grid-column:1/-1 在 wrapper 內生效 */
+.bucket-wrapper{display:grid;grid-template-columns:1fr;margin-bottom:8px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-sizing:border-box}
+.bucket-wrapper > summary{list-style:none;cursor:pointer;user-select:none}
+.bucket-wrapper > summary::-webkit-details-marker{display:none}
+.bucket-wrapper > summary::before{content:"▶ ";color:var(--muted);font-size:.8em;margin-right:4px;transition:transform .2s;display:inline-block}
+.bucket-wrapper[open] > summary::before{content:"▼ "}
+/* CARD-058g：6 大包配色（標頭背景漸層 + border-left 4px 強調色）— 對齊 058d 進度條配色 */
+.bucket-summary[data-bucket="B1"]{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-left:4px solid #3b82f6;box-sizing:border-box}
+.bucket-summary[data-bucket="B2"]{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;box-sizing:border-box}
+.bucket-summary[data-bucket="B3"]{background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-left:4px solid #10b981;box-sizing:border-box}
+.bucket-summary[data-bucket="B4"]{background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-left:4px solid #a855f7;box-sizing:border-box}
+.bucket-summary[data-bucket="S"]{background:linear-gradient(135deg,#cffafe,#a5f3fc);border-left:4px solid #06b6d4;box-sizing:border-box}
+.bucket-summary[data-bucket="OT"]{background:linear-gradient(135deg,#f3f4f6,#e5e7eb);border-left:4px solid #9ca3af;box-sizing:border-box}
+/* CARD-058c：bucket-summary 主行 — 058g 移除 grid-column:1/-1（已在 details wrapper 不需要）+ margin/border 改 wrapper 控管 */
+.bucket-summary{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:10px 14px}
 .bucket-summary .bs-title{font-size:.95em;font-weight:700;color:var(--primary-dark);flex:1;min-width:0}
 .bucket-summary .bs-title .bs-tag{font-family:"SF Mono",Menlo,monospace;font-size:.85em;background:var(--primary);color:#fff;padding:1px 7px;border-radius:4px;margin-right:6px;letter-spacing:.5px}
 /* CARD-058d：包別碼（BC/D/EF/G 包）對齊 epizy 視覺 */
@@ -60,9 +73,9 @@ header .subtitle{font-size:.85em;opacity:.85}
 .bucket-summary .ss-cell.remaining .ss-val{color:var(--success)}
 .bucket-summary .ss-cell.remaining .ss-val.zero{color:var(--danger)}
 .bucket-summary .ss-cell.remaining .ss-val.muted{color:var(--muted);font-weight:600}
-.bucket-summary.note-only{background:linear-gradient(135deg,#fef3c7,#fffbeb);border-color:var(--warn);font-style:italic}
+/* CARD-058g：058c 的 .placeholder/.note-only 背景與 border 覆蓋已移除（data-bucket 配色優先；只保留文案色彩） */
+.bucket-summary.note-only{font-style:italic}
 .bucket-summary.note-only .bs-title,.bucket-summary.note-only .ss-note{color:#854d0e}
-.bucket-summary.placeholder{background:#f1f5f9;border-color:var(--border)}
 .bucket-summary.placeholder .ss-note{color:#666;font-weight:600}
 @media (max-width:768px){
   .bucket-summary{flex-direction:column;align-items:flex-start;gap:6px;padding:8px 10px}
@@ -73,6 +86,30 @@ header .subtitle{font-size:.85em;opacity:.85}
 /* CARD-058e：S 包進度條粉藍漸層（仿 epizy 視覺）；OT 包不放進度條 */
 .bucket-summary .bp-fill.bp-s{background:linear-gradient(90deg,#06b6d4,#0891b2)}
 .bucket-summary .bp-fill.bp-ot{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+/* CARD-058g：點包展開後 .bucket-content 內細項區 grid 3 欄並排 */
+.bucket-content{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:12px;background:#fafbfc;box-sizing:border-box}
+@media (max-width:1024px){.bucket-content{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:768px){.bucket-content{grid-template-columns:1fr}}
+/* CARD-058g：sticky quota 改 epizy 表格樣式（4 欄 × 6 row + sticky 掛外層 div 不掛 table/tr） */
+.quota-table{width:100%;border-collapse:collapse;font-size:.78em;background:var(--card);box-sizing:border-box}
+.quota-table thead{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff}
+.quota-table thead th{padding:6px 8px;text-align:right;font-weight:600;font-size:.92em;letter-spacing:.3px}
+.quota-table thead th:first-child{text-align:left}
+.quota-table tbody tr{border-bottom:1px solid var(--border)}
+.quota-table tbody tr:last-child{border-bottom:none}
+.quota-table tbody td{padding:5px 8px;text-align:right;font-variant-numeric:tabular-nums;color:var(--text)}
+.quota-table tbody td:first-child{text-align:left;font-weight:600}
+.quota-table tbody tr[data-bucket="B1"] td:first-child{border-left:3px solid #3b82f6;padding-left:6px}
+.quota-table tbody tr[data-bucket="B2"] td:first-child{border-left:3px solid #f59e0b;padding-left:6px}
+.quota-table tbody tr[data-bucket="B3"] td:first-child{border-left:3px solid #10b981;padding-left:6px}
+.quota-table tbody tr[data-bucket="B4"] td:first-child{border-left:3px solid #a855f7;padding-left:6px}
+.quota-table tbody tr[data-bucket="S"] td:first-child{border-left:3px solid #06b6d4;padding-left:6px}
+.quota-table tbody tr[data-bucket="OT"] td:first-child{border-left:3px solid #9ca3af;padding-left:6px}
+.quota-table tbody td.qt-coshare{color:var(--danger);font-weight:600}
+.quota-table tbody td.qt-remaining{color:var(--success);font-weight:600}
+.quota-table tbody td.qt-remaining.qt-zero{color:var(--danger)}
+.quota-table tbody td.qt-muted{color:var(--muted)}
+@media (max-width:768px){.quota-table{font-size:.72em}.quota-table thead th,.quota-table tbody td{padding:4px 5px}}
 /* CARD-058e：S/OT 警示橫幅（取代 058c 的「補助規則洽縣市政府」） */
 .bucket-summary.warn-estimate .bs-warn{flex-basis:100%;color:#854d0e;font-size:.78em;font-style:italic;line-height:1.4}
 .bucket-summary.warn-estimate .ss-val::before{content:"[暫估] ";color:#854d0e;font-size:.85em;font-weight:600;font-style:italic}
@@ -145,6 +182,24 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
 .itm .rent-switch input[type="radio"]{accent-color:var(--primary);cursor:pointer}
 .single-approval-note{text-align:center;margin:12px 0 4px;padding:10px 14px;background:var(--warn-light);color:#854d0e;border:1px dashed #f59e0b;border-radius:8px;font-size:.78em;line-height:1.6}
 .single-approval-note strong{color:#b45309}
+/* CARD-058f：案主條件 3 下拉（CMS / 個案身分 / 服務限制）即時重算 */
+.case-conditions{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.85em;box-sizing:border-box}
+.case-conditions .cc-row{display:flex;align-items:center;gap:6px;flex:1;min-width:200px}
+.case-conditions label{color:var(--muted);font-weight:600;white-space:nowrap}
+.case-conditions select{padding:5px 8px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text);font-size:.95em;font-family:inherit;cursor:pointer;flex:1;min-width:0}
+.case-conditions select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-light)}
+.case-conditions .cc-warn{flex-basis:100%;color:#854d0e;font-size:.78em;font-style:italic;margin-top:2px;display:none}
+.case-conditions.has-multi-identity .cc-warn{display:block}
+@media (max-width:768px){.case-conditions{flex-direction:column;align-items:stretch}.case-conditions .cc-row{min-width:auto}}
+/* CARD-058b：D 區「縣市/行政區」下拉 — 只影響 D 包 B2 per_trip 計算 */
+.d-zone-picker{display:flex;flex-wrap:wrap;gap:8px;padding:6px 10px;background:#fffbeb;border-bottom:1px solid var(--warn-light);font-size:.78em;align-items:center}
+.d-zone-picker label{color:#854d0e;font-weight:600;white-space:nowrap}
+.d-zone-picker select{padding:3px 6px;border:1px solid var(--border);border-radius:4px;background:#fff;font-size:.95em;font-family:inherit;cursor:pointer;min-width:100px}
+.d-zone-picker select:focus{outline:none;border-color:var(--warn)}
+.d-zone-picker .dz-hint{color:var(--muted);font-size:.92em;margin-left:auto}
+/* CARD-058b：DA01 user_input pricing 視覺差別 */
+.div_price_count.user-input .txt_CI_qty{width:80px}
+.div_price_count.user-input .user-input-note{display:inline-block}
 </style>
 </head>
 <body>
@@ -157,22 +212,59 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
   <!-- CARD-042：status banner（CMS/收入/縣市/zone/外看）-->
   <div id="status-banner" class="status-banner" style="display:none"></div>
 
-  <!-- CARD-042：sticky 四色進度條（B1-B4 + 總覽）-->
-  <div id="quota-bars" class="quota-bars" style="display:none">
-    <div class="qb-title">💰 額度使用概況</div>
-    <div id="quota-bars-body"></div>
+  <!-- CARD-058f：案主條件 3 下拉（CMS / 個案身分 / 服務限制）— 改下拉即時 ripple 全頁額度重算 -->
+  <div id="case-conditions" class="case-conditions">
+    <div class="cc-row">
+      <label for="cc-cms">照顧需求等級</label>
+      <select id="cc-cms" aria-label="CMS 照顧需求等級">
+        <option value="2">第 2 級</option>
+        <option value="3">第 3 級</option>
+        <option value="4">第 4 級</option>
+        <option value="5">第 5 級</option>
+        <option value="6">第 6 級</option>
+        <option value="7">第 7 級</option>
+        <option value="8">第 8 級</option>
+      </select>
+    </div>
+    <div class="cc-row">
+      <label for="cc-income">個案身分</label>
+      <select id="cc-income" aria-label="個案身分">
+        <option value="general">一般戶</option>
+        <option value="mid_low">中低收入戶</option>
+        <option value="low">第一類（社福或長照低收入戶）</option>
+      </select>
+    </div>
+    <div class="cc-row">
+      <label for="cc-identity">個案服務限制條件</label>
+      <select id="cc-identity" aria-label="個案服務限制條件">
+        <option value="">無</option>
+        <option value="foreign_caregiver">有外籍看護</option>
+        <option value="indigenous">原住民</option>
+      </select>
+    </div>
+    <div class="cc-warn" id="cc-warn-multi">⚠️ URL 含多項身分標記，本介面僅顯第一個，需多選請手動編輯 URL</div>
+  </div>
+
+  <!-- CARD-042 + CARD-058g：sticky 額度表格（4 欄 × 6 row 對齊 epizy 樣式；sticky 掛外層 div 不掛 table/tr） -->
+  <div id="quota-bars" class="quota-bars">
+    <div class="qb-title">💰 額度使用概況（總覽）</div>
+    <table class="quota-table">
+      <thead>
+        <tr><th>服務項目</th><th>自付額</th><th>已使用額</th><th>餘額</th></tr>
+      </thead>
+      <tbody id="quota-bars-body"></tbody>
+    </table>
   </div>
 
   <div class="toolbar">
     <div class="counter">已選 <strong id="counter">0</strong> 項</div>
     <div>
-      <button type="button" id="btn-expand-all">全部展開</button>
-      <button type="button" id="btn-collapse-all">全部收合</button>
+      <!-- CARD-058g：拿掉「全部展開 / 全部收合」按鈕（details 自帶展開 toggle） -->
       <button type="button" id="btn-clear-all">全部清除</button>
     </div>
   </div>
 
-  <div class="sections-grid" id="sections"></div>
+  <div id="sections"></div>
 
   <!-- CARD-042：單次核定降級為文字提醒（114 JSON 無 max_per_approval 欄位，CARD-041 確認）-->
   <div class="single-approval-note">
@@ -197,16 +289,16 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
 </footer>
 
 <script id="query-base-url" type="application/json">"https://chord410-svg.github.io/product-share/viewer.html?id=0d07491488"</script>
-<script id="item-meta" type="application/json">{"EA01-1": {"type": "buy", "price": 1200, "rent_price": null, "unit": ""}, "EA01-2": {"type": "buy", "price": 1200, "rent_price": null, "unit": ""}, "EA01-3": {"type": "buy", "price": 1200, "rent_price": null, "unit": ""}, "EB01": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "EB02": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EB03": {"type": "buy", "price": 800, "rent_price": null, "unit": ""}, "EB04": {"type": "both", "price": 3000, "rent_price": 300, "unit": ""}, "EC01": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "EC02": {"type": "both", "price": 4000, "rent_price": 450, "unit": ""}, "EC03": {"type": "buy", "price": 9000, "rent_price": null, "unit": ""}, "EC04": {"type": "both", "price": 5000, "rent_price": 150, "unit": ""}, "EC05": {"type": "both", "price": 2000, "rent_price": 150, "unit": ""}, "EC06": {"type": "both", "price": 4000, "rent_price": 150, "unit": ""}, "EC07": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "EC08": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "EC09": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "EC10": {"type": "buy", "price": 2500, "rent_price": null, "unit": ""}, "EC11": {"type": "rent", "price": 2500, "rent_price": 2500, "unit": ""}, "EC12": {"type": "rent", "price": 1200, "rent_price": 1200, "unit": ""}, "ED01": {"type": "buy", "price": 1500, "rent_price": null, "unit": ""}, "ED02": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "ED03": {"type": "buy", "price": 4000, "rent_price": null, "unit": ""}, "ED04": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "ED05": {"type": "buy", "price": 8000, "rent_price": null, "unit": ""}, "ED06": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "ED07": {"type": "both", "price": 40000, "rent_price": 2000, "unit": ""}, "ED08": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "EE01": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE02": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE03": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE04": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EE05": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "EF01": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EF02": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EF03": {"type": "buy", "price": 500, "rent_price": null, "unit": ""}, "EG01": {"type": "both", "price": 8000, "rent_price": 300, "unit": ""}, "EG02": {"type": "both", "price": 12000, "rent_price": 500, "unit": ""}, "EG03": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "EG04": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "EG05": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "EG06": {"type": "buy", "price": 8000, "rent_price": null, "unit": ""}, "EG07": {"type": "buy", "price": 8000, "rent_price": null, "unit": ""}, "EG08": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "EG09": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "EH01": {"type": "both", "price": 8000, "rent_price": 1000, "unit": ""}, "EH02": {"type": "both", "price": 5000, "rent_price": 200, "unit": ""}, "EH03": {"type": "both", "price": 5000, "rent_price": 500, "unit": ""}, "EH04": {"type": "rent", "price": 700, "rent_price": 700, "unit": ""}, "EH05": {"type": "rent", "price": 4000, "rent_price": 4000, "unit": ""}, "FA01": {"type": "buy", "price": 150, "rent_price": null, "unit": "每10cm"}, "FA02": {"type": "buy", "price": 3600, "rent_price": null, "unit": ""}, "FA03": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "FA04": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA05": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA06": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA07": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA08": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA09": {"type": "buy", "price": 600, "rent_price": null, "unit": ""}, "FA10": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA11": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA12": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA13": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA14": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA15": {"type": "buy", "price": 3000, "rent_price": null, "unit": ""}, "FA16": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA17": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA18": {"type": "buy", "price": 15000, "rent_price": null, "unit": ""}, "FA19": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "FA20": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA21": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA22": {"type": "buy", "price": 160, "rent_price": null, "unit": ""}, "FA23": {"type": "buy", "price": 3600, "rent_price": null, "unit": ""}, "FA24": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "FA25": {"type": "buy", "price": 1000, "rent_price": null, "unit": ""}, "FA26": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "FA27": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA28": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA29": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA30": {"type": "buy", "price": 3500, "rent_price": null, "unit": ""}, "FA31": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA32": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA33": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA34": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "FA35": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA36": {"type": "buy", "price": 800, "rent_price": null, "unit": ""}, "FA37": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA38": {"type": "buy", "price": 10000, "rent_price": null, "unit": ""}, "FA39": {"type": "buy", "price": 6000, "rent_price": null, "unit": ""}, "FA40": {"type": "buy", "price": 7000, "rent_price": null, "unit": ""}, "FA41": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "FA42": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA43": {"type": "buy", "price": 2000, "rent_price": null, "unit": ""}, "FA44": {"type": "buy", "price": 5000, "rent_price": null, "unit": ""}, "BA01": {"type": "service", "price": 260, "rent_price": null, "unit": "次"}, "BA02": {"type": "service", "price": 195, "rent_price": null, "unit": "次"}, "BA03": {"type": "service", "price": 35, "rent_price": null, "unit": "次"}, "BA04": {"type": "service", "price": 130, "rent_price": null, "unit": "餐"}, "BA05-1": {"type": "service", "price": 310, "rent_price": null, "unit": "次"}, "BA05-2": {"type": "service", "price": 310, "rent_price": null, "unit": "次"}, "BA07": {"type": "service", "price": 325, "rent_price": null, "unit": "次"}, "BA08": {"type": "service", "price": 500, "rent_price": null, "unit": "次"}, "BA10": {"type": "service", "price": 155, "rent_price": null, "unit": "次"}, "BA11": {"type": "service", "price": 195, "rent_price": null, "unit": "次"}, "BA12": {"type": "service", "price": 130, "rent_price": null, "unit": "次"}, "BA13": {"type": "service", "price": 195, "rent_price": null, "unit": "次"}, "BA14": {"type": "service", "price": 685, "rent_price": null, "unit": "次"}, "BA15-1": {"type": "service", "price": 195, "rent_price": null, "unit": "次"}, "BA16-1": {"type": "service", "price": 130, "rent_price": null, "unit": "次"}, "BA18": {"type": "service", "price": 200, "rent_price": null, "unit": "次"}, "BA20": {"type": "service", "price": 175, "rent_price": null, "unit": "次"}, "BA22": {"type": "service", "price": 130, "rent_price": null, "unit": "次"}, "BA23": {"type": "service", "price": 200, "rent_price": null, "unit": "次"}, "BA24": {"type": "service", "price": 220, "rent_price": null, "unit": "次"}, "BB01": {"type": "service", "price": 1000, "rent_price": null, "unit": "日"}, "BB02": {"type": "service", "price": 600, "rent_price": null, "unit": "日"}, "BB03": {"type": "service", "price": 1200, "rent_price": null, "unit": "日"}, "BB04": {"type": "service", "price": 700, "rent_price": null, "unit": "日"}, "BB05": {"type": "service", "price": 1500, "rent_price": null, "unit": "日"}, "BB06": {"type": "service", "price": 900, "rent_price": null, "unit": "日"}, "BB07": {"type": "service", "price": 1800, "rent_price": null, "unit": "日"}, "BB08": {"type": "service", "price": 1100, "rent_price": null, "unit": "日"}, "BB09": {"type": "service", "price": 1100, "rent_price": null, "unit": "日"}, "BB10": {"type": "service", "price": 1300, "rent_price": null, "unit": "日"}, "BB11": {"type": "service", "price": 1600, "rent_price": null, "unit": "日"}, "BB12": {"type": "service", "price": 1900, "rent_price": null, "unit": "日"}, "BB13": {"type": "service", "price": 100, "rent_price": null, "unit": "日"}, "BB14": {"type": "service", "price": 300, "rent_price": null, "unit": "日"}, "BC01": {"type": "service", "price": 800, "rent_price": null, "unit": "日"}, "BC02": {"type": "service", "price": 500, "rent_price": null, "unit": "日"}, "BC03": {"type": "service", "price": 1000, "rent_price": null, "unit": "日"}, "BC04": {"type": "service", "price": 600, "rent_price": null, "unit": "日"}, "BC05": {"type": "service", "price": 1200, "rent_price": null, "unit": "日"}, "BC06": {"type": "service", "price": 720, "rent_price": null, "unit": "日"}, "BC07": {"type": "service", "price": 1500, "rent_price": null, "unit": "日"}, "BC08": {"type": "service", "price": 900, "rent_price": null, "unit": "日"}, "BC09": {"type": "service", "price": 900, "rent_price": null, "unit": "日"}, "BC10": {"type": "service", "price": 1100, "rent_price": null, "unit": "日"}, "BC11": {"type": "service", "price": 1300, "rent_price": null, "unit": "日"}, "BC12": {"type": "service", "price": 1600, "rent_price": null, "unit": "日"}, "BC13": {"type": "service", "price": 100, "rent_price": null, "unit": "日"}, "BC14": {"type": "service", "price": 200, "rent_price": null, "unit": "日"}, "BD01": {"type": "service", "price": 280, "rent_price": null, "unit": "次"}, "BD02": {"type": "service", "price": 280, "rent_price": null, "unit": "次"}, "BD03": {"type": "service", "price": 320, "rent_price": null, "unit": "次"}, "CA07": {"type": "service", "price": 1600, "rent_price": null, "unit": "組"}, "CB01": {"type": "service", "price": 2500, "rent_price": null, "unit": "組"}, "CB01a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組"}, "CB02": {"type": "service", "price": 2500, "rent_price": null, "unit": "組"}, "CB02a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組"}, "CB03": {"type": "service", "price": 2500, "rent_price": null, "unit": "組"}, "CB03a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組"}, "CC01": {"type": "service", "price": 1500, "rent_price": null, "unit": "組"}, "CD01": {"type": "service", "price": 1500, "rent_price": null, "unit": "組"}, "GA03": {"type": "service", "price": 1800, "rent_price": null, "unit": "日"}, "GA04": {"type": "service", "price": 2000, "rent_price": null, "unit": "日"}, "GA05": {"type": "service", "price": 1200, "rent_price": null, "unit": "日"}, "GA06": {"type": "service", "price": 2500, "rent_price": null, "unit": "次"}, "GA07": {"type": "service", "price": null, "rent_price": null, "unit": "日"}, "GA09": {"type": "service", "price": 2000, "rent_price": null, "unit": "支"}, "SC03": {"type": "service", "price": 1250, "rent_price": null, "unit": "日"}, "SC04": {"type": "service", "price": 625, "rent_price": null, "unit": "日"}, "SC05": {"type": "service", "price": 2310, "rent_price": null, "unit": "日"}, "SC06": {"type": "service", "price": 2000, "rent_price": null, "unit": "日"}, "SC07": {"type": "service", "price": 170, "rent_price": null, "unit": "日"}, "SC09": {"type": "service", "price": 770, "rent_price": null, "unit": "日"}, "OT01": {"type": "service", "price": 100, "rent_price": null, "unit": "餐"}}</script>
+<script id="item-meta" type="application/json">{"EA01-1": {"type": "buy", "price": 1200, "rent_price": null, "unit": "", "pricing_type": null}, "EA01-2": {"type": "buy", "price": 1200, "rent_price": null, "unit": "", "pricing_type": null}, "EA01-3": {"type": "buy", "price": 1200, "rent_price": null, "unit": "", "pricing_type": null}, "EB01": {"type": "buy", "price": 1000, "rent_price": null, "unit": "", "pricing_type": null}, "EB02": {"type": "buy", "price": 500, "rent_price": null, "unit": "", "pricing_type": null}, "EB03": {"type": "buy", "price": 800, "rent_price": null, "unit": "", "pricing_type": null}, "EB04": {"type": "both", "price": 3000, "rent_price": 300, "unit": "", "pricing_type": null}, "EC01": {"type": "buy", "price": 3500, "rent_price": null, "unit": "", "pricing_type": null}, "EC02": {"type": "both", "price": 4000, "rent_price": 450, "unit": "", "pricing_type": null}, "EC03": {"type": "buy", "price": 9000, "rent_price": null, "unit": "", "pricing_type": null}, "EC04": {"type": "both", "price": 5000, "rent_price": 150, "unit": "", "pricing_type": null}, "EC05": {"type": "both", "price": 2000, "rent_price": 150, "unit": "", "pricing_type": null}, "EC06": {"type": "both", "price": 4000, "rent_price": 150, "unit": "", "pricing_type": null}, "EC07": {"type": "buy", "price": 1000, "rent_price": null, "unit": "", "pricing_type": null}, "EC08": {"type": "buy", "price": 6000, "rent_price": null, "unit": "", "pricing_type": null}, "EC09": {"type": "buy", "price": 3000, "rent_price": null, "unit": "", "pricing_type": null}, "EC10": {"type": "buy", "price": 2500, "rent_price": null, "unit": "", "pricing_type": null}, "EC11": {"type": "rent", "price": 2500, "rent_price": 2500, "unit": "", "pricing_type": null}, "EC12": {"type": "rent", "price": 1200, "rent_price": 1200, "unit": "", "pricing_type": null}, "ED01": {"type": "buy", "price": 1500, "rent_price": null, "unit": "", "pricing_type": null}, "ED02": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "ED03": {"type": "buy", "price": 4000, "rent_price": null, "unit": "", "pricing_type": null}, "ED04": {"type": "buy", "price": 3000, "rent_price": null, "unit": "", "pricing_type": null}, "ED05": {"type": "buy", "price": 8000, "rent_price": null, "unit": "", "pricing_type": null}, "ED06": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "ED07": {"type": "both", "price": 40000, "rent_price": 2000, "unit": "", "pricing_type": null}, "ED08": {"type": "buy", "price": 6000, "rent_price": null, "unit": "", "pricing_type": null}, "EE01": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "EE02": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "EE03": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "EE04": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "EE05": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "EF01": {"type": "buy", "price": 500, "rent_price": null, "unit": "", "pricing_type": null}, "EF02": {"type": "buy", "price": 500, "rent_price": null, "unit": "", "pricing_type": null}, "EF03": {"type": "buy", "price": 500, "rent_price": null, "unit": "", "pricing_type": null}, "EG01": {"type": "both", "price": 8000, "rent_price": 300, "unit": "", "pricing_type": null}, "EG02": {"type": "both", "price": 12000, "rent_price": 500, "unit": "", "pricing_type": null}, "EG03": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "EG04": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "EG05": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "EG06": {"type": "buy", "price": 8000, "rent_price": null, "unit": "", "pricing_type": null}, "EG07": {"type": "buy", "price": 8000, "rent_price": null, "unit": "", "pricing_type": null}, "EG08": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "EG09": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "EH01": {"type": "both", "price": 8000, "rent_price": 1000, "unit": "", "pricing_type": null}, "EH02": {"type": "both", "price": 5000, "rent_price": 200, "unit": "", "pricing_type": null}, "EH03": {"type": "both", "price": 5000, "rent_price": 500, "unit": "", "pricing_type": null}, "EH04": {"type": "rent", "price": 700, "rent_price": 700, "unit": "", "pricing_type": null}, "EH05": {"type": "rent", "price": 4000, "rent_price": 4000, "unit": "", "pricing_type": null}, "FA01": {"type": "buy", "price": 150, "rent_price": null, "unit": "每10cm", "pricing_type": null}, "FA02": {"type": "buy", "price": 3600, "rent_price": null, "unit": "", "pricing_type": null}, "FA03": {"type": "buy", "price": 3500, "rent_price": null, "unit": "", "pricing_type": null}, "FA04": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA05": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "FA06": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "FA07": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA08": {"type": "buy", "price": 3000, "rent_price": null, "unit": "", "pricing_type": null}, "FA09": {"type": "buy", "price": 600, "rent_price": null, "unit": "", "pricing_type": null}, "FA10": {"type": "buy", "price": 3000, "rent_price": null, "unit": "", "pricing_type": null}, "FA11": {"type": "buy", "price": 7000, "rent_price": null, "unit": "", "pricing_type": null}, "FA12": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "FA13": {"type": "buy", "price": 3000, "rent_price": null, "unit": "", "pricing_type": null}, "FA14": {"type": "buy", "price": 7000, "rent_price": null, "unit": "", "pricing_type": null}, "FA15": {"type": "buy", "price": 3000, "rent_price": null, "unit": "", "pricing_type": null}, "FA16": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA17": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA18": {"type": "buy", "price": 15000, "rent_price": null, "unit": "", "pricing_type": null}, "FA19": {"type": "buy", "price": 1000, "rent_price": null, "unit": "", "pricing_type": null}, "FA20": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "FA21": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA22": {"type": "buy", "price": 160, "rent_price": null, "unit": "", "pricing_type": null}, "FA23": {"type": "buy", "price": 3600, "rent_price": null, "unit": "", "pricing_type": null}, "FA24": {"type": "buy", "price": 1000, "rent_price": null, "unit": "", "pricing_type": null}, "FA25": {"type": "buy", "price": 1000, "rent_price": null, "unit": "", "pricing_type": null}, "FA26": {"type": "buy", "price": 3500, "rent_price": null, "unit": "", "pricing_type": null}, "FA27": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA28": {"type": "buy", "price": 7000, "rent_price": null, "unit": "", "pricing_type": null}, "FA29": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "FA30": {"type": "buy", "price": 3500, "rent_price": null, "unit": "", "pricing_type": null}, "FA31": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA32": {"type": "buy", "price": 7000, "rent_price": null, "unit": "", "pricing_type": null}, "FA33": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "FA34": {"type": "buy", "price": 6000, "rent_price": null, "unit": "", "pricing_type": null}, "FA35": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "FA36": {"type": "buy", "price": 800, "rent_price": null, "unit": "", "pricing_type": null}, "FA37": {"type": "buy", "price": 7000, "rent_price": null, "unit": "", "pricing_type": null}, "FA38": {"type": "buy", "price": 10000, "rent_price": null, "unit": "", "pricing_type": null}, "FA39": {"type": "buy", "price": 6000, "rent_price": null, "unit": "", "pricing_type": null}, "FA40": {"type": "buy", "price": 7000, "rent_price": null, "unit": "", "pricing_type": null}, "FA41": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "FA42": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "FA43": {"type": "buy", "price": 2000, "rent_price": null, "unit": "", "pricing_type": null}, "FA44": {"type": "buy", "price": 5000, "rent_price": null, "unit": "", "pricing_type": null}, "BA01": {"type": "service", "price": 260, "rent_price": null, "unit": "次", "pricing_type": null}, "BA02": {"type": "service", "price": 195, "rent_price": null, "unit": "次", "pricing_type": null}, "BA03": {"type": "service", "price": 35, "rent_price": null, "unit": "次", "pricing_type": null}, "BA04": {"type": "service", "price": 130, "rent_price": null, "unit": "餐", "pricing_type": null}, "BA05-1": {"type": "service", "price": 310, "rent_price": null, "unit": "次", "pricing_type": null}, "BA05-2": {"type": "service", "price": 310, "rent_price": null, "unit": "次", "pricing_type": null}, "BA07": {"type": "service", "price": 325, "rent_price": null, "unit": "次", "pricing_type": null}, "BA08": {"type": "service", "price": 500, "rent_price": null, "unit": "次", "pricing_type": null}, "BA10": {"type": "service", "price": 155, "rent_price": null, "unit": "次", "pricing_type": null}, "BA11": {"type": "service", "price": 195, "rent_price": null, "unit": "次", "pricing_type": null}, "BA12": {"type": "service", "price": 130, "rent_price": null, "unit": "次", "pricing_type": null}, "BA13": {"type": "service", "price": 195, "rent_price": null, "unit": "次", "pricing_type": null}, "BA14": {"type": "service", "price": 685, "rent_price": null, "unit": "次", "pricing_type": null}, "BA15-1": {"type": "service", "price": 195, "rent_price": null, "unit": "次", "pricing_type": null}, "BA16-1": {"type": "service", "price": 130, "rent_price": null, "unit": "次", "pricing_type": null}, "BA18": {"type": "service", "price": 200, "rent_price": null, "unit": "次", "pricing_type": null}, "BA20": {"type": "service", "price": 175, "rent_price": null, "unit": "次", "pricing_type": null}, "BA22": {"type": "service", "price": 130, "rent_price": null, "unit": "次", "pricing_type": null}, "BA23": {"type": "service", "price": 200, "rent_price": null, "unit": "次", "pricing_type": null}, "BA24": {"type": "service", "price": 220, "rent_price": null, "unit": "次", "pricing_type": null}, "BB01": {"type": "service", "price": 1000, "rent_price": null, "unit": "日", "pricing_type": null}, "BB02": {"type": "service", "price": 600, "rent_price": null, "unit": "日", "pricing_type": null}, "BB03": {"type": "service", "price": 1200, "rent_price": null, "unit": "日", "pricing_type": null}, "BB04": {"type": "service", "price": 700, "rent_price": null, "unit": "日", "pricing_type": null}, "BB05": {"type": "service", "price": 1500, "rent_price": null, "unit": "日", "pricing_type": null}, "BB06": {"type": "service", "price": 900, "rent_price": null, "unit": "日", "pricing_type": null}, "BB07": {"type": "service", "price": 1800, "rent_price": null, "unit": "日", "pricing_type": null}, "BB08": {"type": "service", "price": 1100, "rent_price": null, "unit": "日", "pricing_type": null}, "BB09": {"type": "service", "price": 1100, "rent_price": null, "unit": "日", "pricing_type": null}, "BB10": {"type": "service", "price": 1300, "rent_price": null, "unit": "日", "pricing_type": null}, "BB11": {"type": "service", "price": 1600, "rent_price": null, "unit": "日", "pricing_type": null}, "BB12": {"type": "service", "price": 1900, "rent_price": null, "unit": "日", "pricing_type": null}, "BB13": {"type": "service", "price": 100, "rent_price": null, "unit": "日", "pricing_type": null}, "BB14": {"type": "service", "price": 300, "rent_price": null, "unit": "日", "pricing_type": null}, "BC01": {"type": "service", "price": 800, "rent_price": null, "unit": "日", "pricing_type": null}, "BC02": {"type": "service", "price": 500, "rent_price": null, "unit": "日", "pricing_type": null}, "BC03": {"type": "service", "price": 1000, "rent_price": null, "unit": "日", "pricing_type": null}, "BC04": {"type": "service", "price": 600, "rent_price": null, "unit": "日", "pricing_type": null}, "BC05": {"type": "service", "price": 1200, "rent_price": null, "unit": "日", "pricing_type": null}, "BC06": {"type": "service", "price": 720, "rent_price": null, "unit": "日", "pricing_type": null}, "BC07": {"type": "service", "price": 1500, "rent_price": null, "unit": "日", "pricing_type": null}, "BC08": {"type": "service", "price": 900, "rent_price": null, "unit": "日", "pricing_type": null}, "BC09": {"type": "service", "price": 900, "rent_price": null, "unit": "日", "pricing_type": null}, "BC10": {"type": "service", "price": 1100, "rent_price": null, "unit": "日", "pricing_type": null}, "BC11": {"type": "service", "price": 1300, "rent_price": null, "unit": "日", "pricing_type": null}, "BC12": {"type": "service", "price": 1600, "rent_price": null, "unit": "日", "pricing_type": null}, "BC13": {"type": "service", "price": 100, "rent_price": null, "unit": "日", "pricing_type": null}, "BC14": {"type": "service", "price": 200, "rent_price": null, "unit": "日", "pricing_type": null}, "BD01": {"type": "service", "price": 280, "rent_price": null, "unit": "次", "pricing_type": null}, "BD02": {"type": "service", "price": 280, "rent_price": null, "unit": "次", "pricing_type": null}, "BD03": {"type": "service", "price": 320, "rent_price": null, "unit": "次", "pricing_type": null}, "CA07": {"type": "service", "price": 1600, "rent_price": null, "unit": "組", "pricing_type": null}, "CB01": {"type": "service", "price": 2500, "rent_price": null, "unit": "組", "pricing_type": null}, "CB01a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組", "pricing_type": null}, "CB02": {"type": "service", "price": 2500, "rent_price": null, "unit": "組", "pricing_type": null}, "CB02a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組", "pricing_type": null}, "CB03": {"type": "service", "price": 2500, "rent_price": null, "unit": "組", "pricing_type": null}, "CB03a": {"type": "service", "price": 1800, "rent_price": null, "unit": "組", "pricing_type": null}, "CC01": {"type": "service", "price": 1500, "rent_price": null, "unit": "組", "pricing_type": null}, "CD01": {"type": "service", "price": 1500, "rent_price": null, "unit": "組", "pricing_type": null}, "GA03": {"type": "service", "price": 1800, "rent_price": null, "unit": "日", "pricing_type": null}, "GA04": {"type": "service", "price": 2000, "rent_price": null, "unit": "日", "pricing_type": null}, "GA05": {"type": "service", "price": 1200, "rent_price": null, "unit": "日", "pricing_type": null}, "GA06": {"type": "service", "price": 2500, "rent_price": null, "unit": "次", "pricing_type": null}, "GA07": {"type": "service", "price": null, "rent_price": null, "unit": "日", "pricing_type": null}, "GA09": {"type": "service", "price": 2000, "rent_price": null, "unit": "支", "pricing_type": null}, "SC03": {"type": "service", "price": 1250, "rent_price": null, "unit": "日", "pricing_type": null}, "SC04": {"type": "service", "price": 625, "rent_price": null, "unit": "日", "pricing_type": null}, "SC05": {"type": "service", "price": 2310, "rent_price": null, "unit": "日", "pricing_type": null}, "SC06": {"type": "service", "price": 2000, "rent_price": null, "unit": "日", "pricing_type": null}, "SC07": {"type": "service", "price": 170, "rent_price": null, "unit": "日", "pricing_type": null}, "SC09": {"type": "service", "price": 770, "rent_price": null, "unit": "日", "pricing_type": null}, "OT01": {"type": "service", "price": 100, "rent_price": null, "unit": "餐", "pricing_type": null}, "DA01": {"type": "service", "price": 1, "rent_price": null, "unit": "趟", "pricing_type": "user_input"}}</script>
 <!-- CARD-044：BB/BC/BD/C/G 5 區由 renderer 從 5 檔 JSON 注入；HTML 啟動時 prepend 進 CATS（插在 EA 之前）。
      實作路徑（卡內二選一的「最小路徑」）：保留 EA-FA 既有 hardcode（CARD-034/042 鎖），只新增 5 區。
      優點：不動既有 9 族 inline 結構、不改 type=both/rent radio 邏輯；缺點：碼別非單一真實來源（5 區走 JSON、9 族走 HTML）— 待後續 CARD 全部改 JSON 注入再重構。 -->
-<script id="extra-sections" type="application/json">[{"id": "BA", "name": "🛁 居家服務(BA碼)", "items": [{"c": "BA01", "n": "基本身體清潔"}, {"c": "BA02", "n": "基本日常照顧"}, {"c": "BA03", "n": "測量生命徵象"}, {"c": "BA04", "n": "協助進食或管灌餵食"}, {"c": "BA05-1", "n": "餐食照顧（一般備餐）"}, {"c": "BA05-2", "n": "餐食照顧（管灌飲食備餐）"}, {"c": "BA07", "n": "協助沐浴及洗頭"}, {"c": "BA08", "n": "足部照護"}, {"c": "BA10", "n": "翻身拍背"}, {"c": "BA11", "n": "肢體關節活動"}, {"c": "BA12", "n": "協助上（下）樓梯"}, {"c": "BA13", "n": "陪同外出"}, {"c": "BA14", "n": "陪同就醫"}, {"c": "BA15-1", "n": "家務協助（自用）"}, {"c": "BA16-1", "n": "代購或代領或代送服務（自用）"}, {"c": "BA18", "n": "安全看視"}, {"c": "BA20", "n": "陪伴服務"}, {"c": "BA22", "n": "巡視服務"}, {"c": "BA23", "n": "協助洗頭"}, {"c": "BA24", "n": "協助排泄"}]}, {"id": "BB", "name": "🏠 日照服務(BB碼)", "items": [{"c": "BB01", "n": "日間照顧（全日）CMS 2-3 級"}, {"c": "BB02", "n": "日間照顧（半日）CMS 2-3 級"}, {"c": "BB03", "n": "日間照顧（全日）CMS 4-5 級"}, {"c": "BB04", "n": "日間照顧（半日）CMS 4-5 級"}, {"c": "BB05", "n": "日間照顧（全日）CMS 6-7 級"}, {"c": "BB06", "n": "日間照顧（半日）CMS 6-7 級"}, {"c": "BB07", "n": "日間照顧（全日）CMS 8 級"}, {"c": "BB08", "n": "日間照顧（半日）CMS 8 級"}, {"c": "BB09", "n": "日間照顧失智專區（全日）CMS 2-3 級"}, {"c": "BB10", "n": "日間照顧失智專區（全日）CMS 4-5 級"}, {"c": "BB11", "n": "日間照顧失智專區（全日）CMS 6-7 級"}, {"c": "BB12", "n": "日間照顧失智專區（全日）CMS 8 級"}, {"c": "BB13", "n": "日間照顧備餐服務（午餐）"}, {"c": "BB14", "n": "日間照顧交通接送（往返）"}]}, {"id": "BC", "name": "☀️ 家庭托顧(BC碼)", "items": [{"c": "BC01", "n": "家庭托顧（全日）CMS 2-3 級"}, {"c": "BC02", "n": "家庭托顧（半日）CMS 2-3 級"}, {"c": "BC03", "n": "家庭托顧（全日）CMS 4-5 級"}, {"c": "BC04", "n": "家庭托顧（半日）CMS 4-5 級"}, {"c": "BC05", "n": "家庭托顧（全日）CMS 6-7 級"}, {"c": "BC06", "n": "家庭托顧（半日）CMS 6-7 級"}, {"c": "BC07", "n": "家庭托顧（全日）CMS 8 級"}, {"c": "BC08", "n": "家庭托顧（半日）CMS 8 級"}, {"c": "BC09", "n": "家庭托顧失智照顧（全日）CMS 2-3 級"}, {"c": "BC10", "n": "家庭托顧失智照顧（全日）CMS 4-5 級"}, {"c": "BC11", "n": "家庭托顧失智照顧（全日）CMS 6-7 級"}, {"c": "BC12", "n": "家庭托顧失智照顧（全日）CMS 8 級"}, {"c": "BC13", "n": "家庭托顧備餐服務"}, {"c": "BC14", "n": "家庭托顧照顧者訓練補貼"}]}, {"id": "BD", "name": "🤝 社區式服務(BD碼)", "items": [{"c": "BD01", "n": "社區式身體照顧服務"}, {"c": "BD02", "n": "社區式日常生活照顧服務"}, {"c": "BD03", "n": "社區式失智照顧服務"}]}, {"id": "C", "name": "🛌 專業服務(C碼)", "items": [{"c": "CA07", "n": "護理師居家護理服務"}, {"c": "CB01", "n": "物理治療師居家復健（初次評估）"}, {"c": "CB01a", "n": "物理治療師居家復健（後續治療）"}, {"c": "CB02", "n": "職能治療師居家復健（初次評估）"}, {"c": "CB02a", "n": "職能治療師居家復健（後續治療）"}, {"c": "CB03", "n": "語言治療師居家語言治療（初次評估）"}, {"c": "CB03a", "n": "語言治療師居家語言治療（後續治療）"}, {"c": "CC01", "n": "營養師居家營養指導"}, {"c": "CD01", "n": "社會工作師居家社工服務"}]}, {"id": "G", "name": "💤 喘息服務(G項)", "items": [{"c": "GA03", "n": "機構型喘息服務（短期入住護理機構）"}, {"c": "GA04", "n": "機構型喘息服務（短期入住身障機構）"}, {"c": "GA05", "n": "機構型喘息服務（短期入住日照中心）"}, {"c": "GA06", "n": "居家型喘息服務"}, {"c": "GA07", "n": "巷弄站全日喘息服務"}, {"c": "GA09", "n": "居家型強化喘息服務（含舊 GA01/GA02）"}]}, {"id": "S", "name": "🛋️ 短期替代照顧服務(S項)", "items": [{"c": "SC03", "n": "日間照顧中心短照服務（全日）"}, {"c": "SC04", "n": "日間照顧中心短照服務（半日）"}, {"c": "SC05", "n": "機構住宿式短照服務"}, {"c": "SC06", "n": "小規模多機能服務-夜間短照服務"}, {"c": "SC07", "n": "巷弄長照站短照服務"}, {"c": "SC09", "n": "居家短照服務"}]}, {"id": "OT", "name": "🍱 營養餐飲服務(OT項)", "items": [{"c": "OT01", "n": "營養餐飲"}]}]</script>
+<script id="extra-sections" type="application/json">[{"id": "BA", "name": "🛁 居家服務(BA碼)", "items": [{"c": "BA01", "n": "基本身體清潔"}, {"c": "BA02", "n": "基本日常照顧"}, {"c": "BA03", "n": "測量生命徵象"}, {"c": "BA04", "n": "協助進食或管灌餵食"}, {"c": "BA05-1", "n": "餐食照顧（一般備餐）"}, {"c": "BA05-2", "n": "餐食照顧（管灌飲食備餐）"}, {"c": "BA07", "n": "協助沐浴及洗頭"}, {"c": "BA08", "n": "足部照護"}, {"c": "BA10", "n": "翻身拍背"}, {"c": "BA11", "n": "肢體關節活動"}, {"c": "BA12", "n": "協助上（下）樓梯"}, {"c": "BA13", "n": "陪同外出"}, {"c": "BA14", "n": "陪同就醫"}, {"c": "BA15-1", "n": "家務協助（自用）"}, {"c": "BA16-1", "n": "代購或代領或代送服務（自用）"}, {"c": "BA18", "n": "安全看視"}, {"c": "BA20", "n": "陪伴服務"}, {"c": "BA22", "n": "巡視服務"}, {"c": "BA23", "n": "協助洗頭"}, {"c": "BA24", "n": "協助排泄"}]}, {"id": "BB", "name": "🏠 日照服務(BB碼)", "items": [{"c": "BB01", "n": "日間照顧（全日）CMS 2-3 級"}, {"c": "BB02", "n": "日間照顧（半日）CMS 2-3 級"}, {"c": "BB03", "n": "日間照顧（全日）CMS 4-5 級"}, {"c": "BB04", "n": "日間照顧（半日）CMS 4-5 級"}, {"c": "BB05", "n": "日間照顧（全日）CMS 6-7 級"}, {"c": "BB06", "n": "日間照顧（半日）CMS 6-7 級"}, {"c": "BB07", "n": "日間照顧（全日）CMS 8 級"}, {"c": "BB08", "n": "日間照顧（半日）CMS 8 級"}, {"c": "BB09", "n": "日間照顧失智專區（全日）CMS 2-3 級"}, {"c": "BB10", "n": "日間照顧失智專區（全日）CMS 4-5 級"}, {"c": "BB11", "n": "日間照顧失智專區（全日）CMS 6-7 級"}, {"c": "BB12", "n": "日間照顧失智專區（全日）CMS 8 級"}, {"c": "BB13", "n": "日間照顧備餐服務（午餐）"}, {"c": "BB14", "n": "日間照顧交通接送（往返）"}]}, {"id": "BC", "name": "☀️ 家庭托顧(BC碼)", "items": [{"c": "BC01", "n": "家庭托顧（全日）CMS 2-3 級"}, {"c": "BC02", "n": "家庭托顧（半日）CMS 2-3 級"}, {"c": "BC03", "n": "家庭托顧（全日）CMS 4-5 級"}, {"c": "BC04", "n": "家庭托顧（半日）CMS 4-5 級"}, {"c": "BC05", "n": "家庭托顧（全日）CMS 6-7 級"}, {"c": "BC06", "n": "家庭托顧（半日）CMS 6-7 級"}, {"c": "BC07", "n": "家庭托顧（全日）CMS 8 級"}, {"c": "BC08", "n": "家庭托顧（半日）CMS 8 級"}, {"c": "BC09", "n": "家庭托顧失智照顧（全日）CMS 2-3 級"}, {"c": "BC10", "n": "家庭托顧失智照顧（全日）CMS 4-5 級"}, {"c": "BC11", "n": "家庭托顧失智照顧（全日）CMS 6-7 級"}, {"c": "BC12", "n": "家庭托顧失智照顧（全日）CMS 8 級"}, {"c": "BC13", "n": "家庭托顧備餐服務"}, {"c": "BC14", "n": "家庭托顧照顧者訓練補貼"}]}, {"id": "BD", "name": "🤝 社區式服務(BD碼)", "items": [{"c": "BD01", "n": "社區式身體照顧服務"}, {"c": "BD02", "n": "社區式日常生活照顧服務"}, {"c": "BD03", "n": "社區式失智照顧服務"}]}, {"id": "C", "name": "🛌 專業服務(C碼)", "items": [{"c": "CA07", "n": "護理師居家護理服務"}, {"c": "CB01", "n": "物理治療師居家復健（初次評估）"}, {"c": "CB01a", "n": "物理治療師居家復健（後續治療）"}, {"c": "CB02", "n": "職能治療師居家復健（初次評估）"}, {"c": "CB02a", "n": "職能治療師居家復健（後續治療）"}, {"c": "CB03", "n": "語言治療師居家語言治療（初次評估）"}, {"c": "CB03a", "n": "語言治療師居家語言治療（後續治療）"}, {"c": "CC01", "n": "營養師居家營養指導"}, {"c": "CD01", "n": "社會工作師居家社工服務"}]}, {"id": "D", "name": "🚐 交通接送(D項)", "items": [{"c": "DA01", "n": "交通接送服務（單趟車資由個案輸入）"}]}, {"id": "G", "name": "💤 喘息服務(G項)", "items": [{"c": "GA03", "n": "機構型喘息服務（短期入住護理機構）"}, {"c": "GA04", "n": "機構型喘息服務（短期入住身障機構）"}, {"c": "GA05", "n": "機構型喘息服務（短期入住日照中心）"}, {"c": "GA06", "n": "居家型喘息服務"}, {"c": "GA07", "n": "巷弄站全日喘息服務"}, {"c": "GA09", "n": "居家型強化喘息服務（含舊 GA01/GA02）"}]}, {"id": "S", "name": "🛋️ 短期替代照顧服務(S項)", "items": [{"c": "SC03", "n": "日間照顧中心短照服務（全日）"}, {"c": "SC04", "n": "日間照顧中心短照服務（半日）"}, {"c": "SC05", "n": "機構住宿式短照服務"}, {"c": "SC06", "n": "小規模多機能服務-夜間短照服務"}, {"c": "SC07", "n": "巷弄長照站短照服務"}, {"c": "SC09", "n": "居家短照服務"}]}, {"id": "OT", "name": "🍱 營養餐飲服務(OT項)", "items": [{"c": "OT01", "n": "營養餐飲"}]}]</script>
+<!-- CARD-058b：D 區「縣市/行政區」下拉資料（city_zones.json 22 縣市分區對照） -->
+<script id="city-zones" type="application/json">{"cities": [{"city": "臺北市", "zone": 1, "is_remote": false, "note": "全區皆為第一類", "source": "衛福部城鄉分類"}, {"city": "基隆市", "zone": 1, "is_remote": false, "note": "全區皆為第一類", "source": "衛福部城鄉分類"}, {"city": "新竹市", "zone": 1, "is_remote": false, "note": "全區皆為第一類", "source": "衛福部城鄉分類"}, {"city": "嘉義市", "zone": 1, "is_remote": false, "note": "全區皆為第一類", "source": "衛福部城鄉分類"}, {"city": "新北市", "zone": 2, "is_remote": false, "note": "主要為第二類，山區為第三/第四類", "has_remote_districts": true, "remote_districts": [{"district": "烏來區", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "平溪區", "zone": 3, "source": "衛福部城鄉分類"}, {"district": "雙溪區", "zone": 3, "source": "衛福部城鄉分類"}, {"district": "坪林區", "zone": 3, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "桃園市", "zone": 2, "is_remote": false, "note": "主要為第二類，復興區為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "復興區", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "新竹縣", "zone": 2, "is_remote": false, "note": "主要為第二類，尖石鄉、五峰鄉為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "尖石鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "五峰鄉", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "臺中市", "zone": 2, "is_remote": false, "note": "主要為第二類，和平區為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "和平區", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "彰化縣", "zone": 2, "is_remote": false, "note": "全縣皆為第二類", "source": "衛福部城鄉分類"}, {"city": "臺南市", "zone": 2, "is_remote": false, "note": "主要為第二類，部分山區鄉鎮為第三類", "has_remote_districts": true, "remote_districts": [{"district": "左鎮區", "zone": 3, "source": "衛福部城鄉分類"}, {"district": "南化區", "zone": 3, "source": "衛福部城鄉分類"}, {"district": "楠西區", "zone": 3, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "高雄市", "zone": 2, "is_remote": false, "note": "主要為第二類，山區（桃源/那瑪夏/茂林區）為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "桃源區", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "那瑪夏區", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "茂林區", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "甲仙區", "zone": 3, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "苗栗縣", "zone": 3, "is_remote": true, "note": "主要為第三類，泰安鄉為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "泰安鄉", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "南投縣", "zone": 3, "is_remote": true, "note": "主要為第三類，仁愛鄉、信義鄉為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "仁愛鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "信義鄉", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "雲林縣", "zone": 3, "is_remote": true, "note": "全縣皆為第三類", "source": "衛福部城鄉分類"}, {"city": "嘉義縣", "zone": 3, "is_remote": true, "note": "主要為第三類，阿里山鄉為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "阿里山鄉", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "屏東縣", "zone": 3, "is_remote": true, "note": "主要為第三類，原住民鄉鎮為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "霧臺鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "瑪家鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "泰武鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "來義鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "春日鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "獅子鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "牡丹鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "三地門鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "琉球鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "滿州鄉", "zone": 3, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "宜蘭縣", "zone": 3, "is_remote": true, "note": "主要為第三類，大同鄉、南澳鄉為高度偏遠", "has_remote_districts": true, "remote_districts": [{"district": "大同鄉", "zone": 4, "source": "衛福部城鄉分類"}, {"district": "南澳鄉", "zone": 4, "source": "衛福部城鄉分類"}], "source": "衛福部城鄉分類"}, {"city": "花蓮縣", "zone": 4, "is_remote": true, "note": "全縣皆為第四類（高度偏遠）", "source": "衛福部城鄉分類"}, {"city": "臺東縣", "zone": 4, "is_remote": true, "note": "全縣皆為第四類（高度偏遠）", "source": "衛福部城鄉分類"}, {"city": "澎湖縣", "zone": 4, "is_remote": true, "note": "離島，全縣皆為第四類", "source": "衛福部城鄉分類"}, {"city": "金門縣", "zone": 4, "is_remote": true, "note": "離島，全縣皆為第四類", "source": "衛福部城鄉分類"}, {"city": "連江縣", "zone": 4, "is_remote": true, "note": "離島（馬祖），全縣皆為第四類", "source": "衛福部城鄉分類"}], "zone_summary": {"1": {"label": "第一類", "description": "都會核心區（面積 < 500 km²）", "b2_amount": 1680}, "2": {"label": "第二類", "description": "一般地區（面積 500-1,500 km²）", "b2_amount": 1840}, "3": {"label": "第三類", "description": "偏遠地區（面積 > 1,500 km²）", "b2_amount": 2000}, "4": {"label": "第四類", "description": "高度偏遠（離島/原鄉/山地）", "b2_amount": 2400}}}</script>
 <script>
-// CARD-054：14 區命名統一「<emoji> <中文>(<XX碼/項>)」；D/S/OT 為空 entry 佔位等 CARD-056 補資料
+// CARD-054 + CARD-058b：14 區命名統一「<emoji> <中文>(<XX碼/項>)」；D 改由 renderer 注入（service_codes_d.json + DA01 user_input pricing），不再 hardcode 空 entry
 const CATS=[
-// CARD-054：D 大區（hardcode 空 entry 佔位，等 CARD-056 補 JSON；items=[] 不會進 buildQueryUrl）
-{id:"D",name:"🚐 交通接送(D項)",items:[]},
 {id:"EA",name:"🚿 如廁及沐浴輔具(EA碼)",items:[
 {c:"EA01-1",n:"馬桶增高器"},{c:"EA01-2",n:"便盆椅"},{c:"EA01-3",n:"沐浴椅"}]},
 {id:"EB",name:"🚶 行動輔具(EB碼)",items:[
@@ -256,6 +348,12 @@ const CATS=[
 // CARD-053a：state 改 Map（code → qty；qty>0 計入，0 自動 delete）
 const state=new Map();// code -> qty (>0 計入)
 const rentChoice=new Map();// code → "buy"|"rent"（僅 type=both 用；buy 預設）
+// CARD-058b：DA01 user_input pricing 用獨立 Map（state Map 結構不破壞）— code → 個案輸入金額（整數元）
+const inputAmountMap=new Map();
+// CARD-058b：D 區獨立縣市/行政區（不污染 P.city / P.zone — 058f 案主條件 city 與本卡 D 區 city 語意分離）
+let dCity="";
+let dDistrict="";
+let CITY_ZONES={cities:[],zone_summary:{}};
 let P={};
 let ITEM_META={};
 
@@ -263,6 +361,18 @@ try {
   const metaEl=document.getElementById("item-meta");
   if(metaEl) ITEM_META=JSON.parse(metaEl.textContent||"{}")||{};
 }catch(e){ITEM_META={};}
+
+// CARD-058b：載入 city_zones.json（D 區下拉用）
+try {
+  const czEl=document.getElementById("city-zones");
+  if(czEl){
+    const raw=czEl.textContent||"{}";
+    const data=JSON.parse(raw);
+    if(data&&typeof data==="object"){
+      CITY_ZONES={cities:Array.isArray(data.cities)?data.cities:[],zone_summary:data.zone_summary||{}};
+    }
+  }
+}catch(e){CITY_ZONES={cities:[],zone_summary:{}};}
 
 /* CARD-044 + CARD-054：BB/BC/BD/C 維持 prepend；G 改 push（移到末端，修正 CARD-044 把 G 卡在 EA 前的 bug）。
    注入失敗 / 空陣列 → 不報錯，CATS 保持原樣。 */
@@ -345,36 +455,102 @@ function renderStatusBanner(){
   });
 }
 
-/* CARD-042：四色進度條（若 URL 帶 b*_quota 才顯示）*/
+/* CARD-058g：sticky quota-bars 改 epizy 表格樣式（4 欄 × 6 row + 即時刷 spent/coshare/remaining） */
+const _QUOTA_TABLE_ROWS=[
+  {bucket:"B1",label:"照顧及專業服務(BC項)"},
+  {bucket:"B2",label:"交通接送(D項)"},// label 會依 city/zone 補
+  {bucket:"B3",label:"輔具及無障礙環境改善服務(EF項)"},
+  {bucket:"B4",label:"喘息服務(G項)"},
+  {bucket:"S", label:"短期替代照顧服務(S項)"},
+  {bucket:"OT",label:"營養餐飲服務(OT項)"}
+];
+// CARD-058b：依 dCity/dDistrict 對 city_zones 查詢 zone（優先）；fallback P.zone（058f 案主條件 URL 帶值）
+function _resolveDZone(){
+  // 優先用 D 區獨立下拉值
+  if(dCity){
+    const cityRec=(CITY_ZONES.cities||[]).find(c=>c.city===dCity);
+    if(cityRec){
+      // 行政區優先（remote_districts 列表覆蓋預設 zone）
+      if(dDistrict&&Array.isArray(cityRec.remote_districts)){
+        const dr=cityRec.remote_districts.find(rd=>rd.district===dDistrict);
+        if(dr&&typeof dr.zone==="number")return dr.zone;
+      }
+      if(typeof cityRec.zone==="number")return cityRec.zone;
+    }
+  }
+  // fallback 058f 案主條件 URL 帶值
+  const z=parseInt(P.zone,10);
+  if(!isNaN(z))return z;
+  return null;
+}
+function _quotaRowLabel(row){
+  if(row.bucket==="B2"){
+    // CARD-058g + CARD-058b：D 區「服務項目」帶 city/district 優先級（dCity 優先 / P.city fallback）
+    const city=(dCity||P.city||"").trim();
+    const district=(dDistrict||"").trim();
+    if(city&&district)return row.label+"─"+city+" "+district;
+    if(city){
+      const z=_resolveDZone();
+      if(z!=null)return row.label+"─"+city+" 第"+z+"類";
+      return row.label+"─"+city;
+    }
+  }
+  return row.label;
+}
 function renderQuotaBars(){
   const box=document.getElementById("quota-bars");
   const body=document.getElementById("quota-bars-body");
   if(!box||!body)return;
-  const rows=[];
-  ["b1","b2","b3","b4"].forEach(k=>{
-    const quota=parseInt(P[k+"_quota"]||"",10);
-    const used=parseInt(P[k+"_used"]||"0",10);
-    const remaining=parseInt(P[k+"_remaining"]||"",10);
-    if(isNaN(quota)||quota<=0)return;
-    const pct=Math.max(0,Math.min(100,Math.round((used/quota)*100)));
-    const over=used>quota;
-    rows.push({k:k,quota:quota,used:used,remaining:isNaN(remaining)?(quota-used):remaining,pct:pct,over:over});
-  });
-  if(!rows.length){box.style.display="none";return;}
-  box.style.display="block";
   body.innerHTML="";
-  rows.forEach(r=>{
-    const row=document.createElement("div");
-    row.className="qb-row";
-    const lbl=document.createElement("span");lbl.className="qb-label "+r.k;lbl.textContent=r.k.toUpperCase();
-    const bar=document.createElement("span");bar.className="qb-bar";
-    const fill=document.createElement("span");fill.className="qb-fill "+r.k+(r.over?" over":"");
-    fill.style.width=(r.over?100:r.pct)+"%";
-    bar.appendChild(fill);
-    const nums=document.createElement("span");nums.className="qb-nums";
-    nums.textContent=r.used.toLocaleString()+" / "+r.quota.toLocaleString()+"（剩 "+Math.max(0,r.remaining).toLocaleString()+"）";
-    row.appendChild(lbl);row.appendChild(bar);row.appendChild(nums);
-    body.appendChild(row);
+  _QUOTA_TABLE_ROWS.forEach(row=>{
+    const tr=document.createElement("tr");
+    tr.setAttribute("data-bucket",row.bucket);
+    // 服務項目
+    const td0=document.createElement("td");td0.textContent=_quotaRowLabel(row);
+    // 自付額（updateQuotaTable 即時填）
+    const td1=document.createElement("td");td1.className="qt-coshare";td1.textContent="$0";
+    td1.setAttribute("data-col","coshare");
+    // 已使用額
+    const td2=document.createElement("td");td2.className="qt-used";td2.textContent="$0";
+    td2.setAttribute("data-col","used");
+    // 餘額
+    const td3=document.createElement("td");td3.className="qt-remaining";td3.textContent="$0";
+    td3.setAttribute("data-col","remaining");
+    tr.appendChild(td0);tr.appendChild(td1);tr.appendChild(td2);tr.appendChild(td3);
+    body.appendChild(tr);
+  });
+  box.style.display="block";
+  updateQuotaTable();
+}
+function _fmtQuotaMoney(v){
+  if(v==null||(typeof v==="number"&&isNaN(v)))return "—";
+  return "$"+Number(v).toLocaleString();
+}
+function updateQuotaTable(){
+  const body=document.getElementById("quota-bars-body");
+  if(!body)return;
+  _QUOTA_TABLE_ROWS.forEach(row=>{
+    const tr=body.querySelector('tr[data-bucket="'+row.bucket+'"]');
+    if(!tr)return;
+    const spent=_bucketSpent(row.bucket);
+    const quota=_bucketQuota(row.bucket);
+    const rate=_bucketCopayRate(row.bucket);
+    const tdCo=tr.querySelector('td[data-col="coshare"]');
+    const tdUsed=tr.querySelector('td[data-col="used"]');
+    const tdRem=tr.querySelector('td[data-col="remaining"]');
+    // 自付額：rate=null（B2 缺 city/zone）→ 顯「—」
+    if(rate==null){tdCo.textContent="—";tdCo.classList.add("qt-muted");}
+    else{tdCo.textContent=_fmtQuotaMoney(Math.round(spent*rate));tdCo.classList.remove("qt-muted");}
+    // 已使用額
+    tdUsed.textContent=_fmtQuotaMoney(spent);
+    // 餘額：quota=null（B2 缺 quota / OT 永無 quota）→ 顯「—」
+    tdRem.classList.remove("qt-zero","qt-muted");
+    if(quota==null){tdRem.textContent="—";tdRem.classList.add("qt-muted");}
+    else{
+      const rem=quota-spent;
+      tdRem.textContent=_fmtQuotaMoney(Math.max(0,rem));
+      if(rem<=0)tdRem.classList.add("qt-zero");
+    }
   });
 }
 
@@ -446,17 +622,25 @@ function render(){
   CATS.forEach(c=>c.items.forEach(it=>{if(_seen.has(it.c))_dupes.push(it.c);else _seen.add(it.c);}));
   if(_dupes.length)console.warn("[CARD-053a-fix] duplicate codes detected:",_dupes);
   const root=document.getElementById("sections");
-  // CARD-058c：每包第一個區之前 inject 一個 .bucket-summary 橫跨整列；單區包（D/G/S/OT）也走同邏輯
-  const _bucketSeen=new Set();
+  // CARD-058g：6 包預設摺疊 — <details class="bucket-wrapper"> 包 summary + content；點 summary native toggle
+  const bucketContent=new Map();// bucket → .bucket-content DOM
   CATS.forEach(cat=>{
     const bucket=BUCKET_OF[cat.id]||"NOTE";
-    // 該包第一區出現時 → 先插 bucket-summary
-    if(!_bucketSeen.has(bucket)){
-      _bucketSeen.add(bucket);
-      const bs=document.createElement("div");
-      bs.className="bucket-summary";
-      bs.setAttribute("data-bucket",bucket);
-      root.appendChild(bs);
+    // 該包 wrapper 不存在 → 新建 details + summary + content
+    if(!bucketContent.has(bucket)){
+      const wrapper=document.createElement("details");
+      wrapper.className="bucket-wrapper";
+      wrapper.setAttribute("data-bucket",bucket);
+      // 預設不加 open（全摺疊）
+      const summary=document.createElement("summary");
+      summary.className="bucket-summary";
+      summary.setAttribute("data-bucket",bucket);
+      const content=document.createElement("div");
+      content.className="bucket-content";
+      wrapper.appendChild(summary);
+      wrapper.appendChild(content);
+      root.appendChild(wrapper);
+      bucketContent.set(bucket,content);
     }
     const sec=document.createElement("div");sec.className="sec";sec.setAttribute("data-fam",cat.id);
     sec.setAttribute("data-bucket",bucket);// CARD-058c：S/OT 鎖樣式 hook
@@ -470,6 +654,11 @@ function render(){
     const secCount=document.createElement("span");secCount.className="sec-count";secCount.textContent="0 / "+cat.items.length;
     secHdr.appendChild(h2);secHdr.appendChild(secActions);secHdr.appendChild(secCount);
     sec.appendChild(secHdr);
+    // CARD-058b：D 區加「縣市/行政區」下拉（只影響 D 包 B2 per_trip 計算，不 cascade）
+    if(cat.id==="D"){
+      const dz=_buildDZonePicker();
+      sec.appendChild(dz);
+    }
     const items=document.createElement("div");items.className="items";
     cat.items.forEach(it=>{
       // CARD-053a：label → div（不再用 label[for=cb] 行為，stepper 自有 click 事件）
@@ -490,23 +679,95 @@ function render(){
     });
     sec.appendChild(items);
     // CARD-053a：btnAll → state.set(code, 1) for all；btnNone → state.delete + qv=0
-    btnAll.addEventListener("click",()=>{
+    btnAll.addEventListener("click",ev=>{
+      // CARD-058g：避免 click 冒泡到 details summary（如 btnAll 在 sec-header 內，sec 在 bucket-content 內，不在 summary 內，原則安全；保險起見 stop）
+      ev.stopPropagation();
       // CARD-058e：S/OT 解鎖（058c NOTE return guard 已移除）
       cat.items.forEach(it=>{
         const cur=state.get(it.c)||0;
         if(cur===0){applyQty(it.c,1);}
       });
     });
-    btnNone.addEventListener("click",()=>{
+    btnNone.addEventListener("click",ev=>{
+      ev.stopPropagation();
       cat.items.forEach(it=>{
         if(state.has(it.c)){applyQty(it.c,0);}
       });
     });
-    root.appendChild(sec);
+    // CARD-058g：細項區 sec append 到該包的 .bucket-content（grid 3 欄並排），非 sections root
+    bucketContent.get(bucket).appendChild(sec);
   });
 }
 
+// CARD-058b：建 D 區「縣市/行政區」下拉 — 只影響 D 包 B2 per_trip 計算（不 cascade 到 B1/B3/B4）
+function _buildDZonePicker(){
+  const wrap=document.createElement("div");
+  wrap.className="d-zone-picker";
+  wrap.id="d-zone-picker";
+  // 縣市 select
+  const lblCity=document.createElement("label");lblCity.htmlFor="d-city";lblCity.textContent="所在縣市";
+  const selCity=document.createElement("select");selCity.id="d-city";selCity.setAttribute("aria-label","D 區所在縣市");
+  const optEmptyC=document.createElement("option");optEmptyC.value="";optEmptyC.textContent="-- 請選縣市 --";selCity.appendChild(optEmptyC);
+  (CITY_ZONES.cities||[]).forEach(c=>{
+    const opt=document.createElement("option");opt.value=c.city;opt.textContent=c.city;
+    selCity.appendChild(opt);
+  });
+  // 行政區 select（依 city cascade）
+  const lblDist=document.createElement("label");lblDist.htmlFor="d-district";lblDist.textContent="行政區";
+  const selDist=document.createElement("select");selDist.id="d-district";selDist.setAttribute("aria-label","D 區行政區");
+  const optEmptyD=document.createElement("option");optEmptyD.value="";optEmptyD.textContent="（依縣市預設分區）";selDist.appendChild(optEmptyD);
+  // 提示文字
+  const hint=document.createElement("span");hint.className="dz-hint";hint.id="d-zone-hint";hint.textContent="";
+  // change handlers
+  selCity.addEventListener("change",ev=>{
+    ev.stopPropagation();
+    dCity=selCity.value||"";
+    // 縣市改變 → 重設行政區（避免殘留錯 zone）
+    dDistrict="";
+    selDist.innerHTML="";
+    selDist.appendChild(optEmptyD);
+    if(dCity){
+      const cityRec=(CITY_ZONES.cities||[]).find(c=>c.city===dCity);
+      if(cityRec&&Array.isArray(cityRec.remote_districts)&&cityRec.remote_districts.length){
+        cityRec.remote_districts.forEach(rd=>{
+          const opt=document.createElement("option");opt.value=rd.district;opt.textContent=rd.district+"（第"+rd.zone+"類）";
+          selDist.appendChild(opt);
+        });
+      }
+    }
+    _refreshDZoneHint();
+    // 只重算 B2（不 cascade 到其他包）
+    updateBucketSummary("B2");
+    updateQuotaTable();
+  });
+  selDist.addEventListener("change",ev=>{
+    ev.stopPropagation();
+    dDistrict=selDist.value||"";
+    _refreshDZoneHint();
+    updateBucketSummary("B2");
+    updateQuotaTable();
+  });
+  wrap.appendChild(lblCity);wrap.appendChild(selCity);
+  wrap.appendChild(lblDist);wrap.appendChild(selDist);
+  wrap.appendChild(hint);
+  // 初始套 URL P.city / P.zone（058f 案主條件）— 但 D 區獨立變數預設空
+  // 不 sync P.city → dCity（語意隔離；058b 採 dCity 優先 / P.city fallback）
+  return wrap;
+}
+function _refreshDZoneHint(){
+  const hint=document.getElementById("d-zone-hint");
+  if(!hint)return;
+  const z=_resolveDZone();
+  if(z!=null){
+    const zs=(CITY_ZONES.zone_summary||{})[String(z)];
+    hint.textContent=zs?("→ "+zs.label+" "+(zs.b2_amount?"額度 $"+zs.b2_amount.toLocaleString()+"/月":"")):"→ 第"+z+"類";
+  }else{
+    hint.textContent="（dCity 缺 → 套 058f URL P.zone fallback；皆缺 → B2 自付額顯需選縣市）";
+  }
+}
+
 // CARD-053a：build epizy 風格 stepper（class 與 epizy DOM 對齊；oninput/onclick attr 對齊）
+// CARD-058b：DA01 user_input 例外 — 中央改 type=number 直接輸金額；+/- 步長 100
 function buildStepper(code,nm){
   const wrap=document.createElement("div");
   wrap.className="div_price_count";
@@ -514,6 +775,9 @@ function buildStepper(code,nm){
   wrap.setAttribute("data-code",code);
   wrap.setAttribute("role","group");
   wrap.setAttribute("aria-label",nm+" 數量選擇");
+  const m=ITEM_META[code];
+  const isUserInput=!!(m&&m.pricing_type==="user_input");
+  if(isUserInput)wrap.classList.add("user-input");
   // 該項小計
   const priceBox=document.createElement("div");priceBox.className="div_CI_price";
   const priceSpan=document.createElement("span");priceSpan.className="span_CI_price";priceSpan.textContent="$0";
@@ -523,21 +787,38 @@ function buildStepper(code,nm){
   const minus=document.createElement("input");
   minus.className="btn_minus btn";minus.type="button";minus.value="-";
   minus.setAttribute("onclick","DecreaseCount(this)");
-  minus.setAttribute("aria-label","減少 "+nm+" 數量");
+  minus.setAttribute("aria-label",isUserInput?("減少 "+nm+" 金額（步長 100）"):("減少 "+nm+" 數量"));
   const txt=document.createElement("input");
-  txt.className="txt_CI_qty";txt.type="text";txt.value="";
+  txt.className="txt_CI_qty";
+  if(isUserInput){
+    // CARD-058b：DA01 user_input — 金額輸入框（type=number，0-99999）
+    txt.type="number";
+    txt.setAttribute("min","0");txt.setAttribute("max","99999");txt.setAttribute("step","1");
+    txt.setAttribute("placeholder","車資");
+    txt.setAttribute("aria-label",nm+" 金額（請輸入車資）");
+    txt.style.width="80px";
+  }else{
+    txt.type="text";
+    txt.setAttribute("inputmode","numeric");
+    txt.setAttribute("maxlength","2");
+    txt.setAttribute("aria-label",nm+" 目前數量");
+  }
+  txt.value="";
   txt.setAttribute("oninput","onTextInput(this)");
-  txt.setAttribute("inputmode","numeric");
-  txt.setAttribute("aria-label",nm+" 目前數量");
-  txt.setAttribute("maxlength","2");
   const plus=document.createElement("input");
   plus.className="btn_plus btn";plus.type="button";plus.value="+";
   plus.setAttribute("onclick","IncreaseCount(this)");
-  plus.setAttribute("aria-label","增加 "+nm+" 數量");
+  plus.setAttribute("aria-label",isUserInput?("增加 "+nm+" 金額（步長 100）"):("增加 "+nm+" 數量"));
   counter.appendChild(minus);counter.appendChild(txt);counter.appendChild(plus);
   wrap.appendChild(priceBox);wrap.appendChild(counter);
-  // price=None / 0 時，加小字提示
-  const m=ITEM_META[code];
+  if(isUserInput){
+    const note=document.createElement("span");
+    note.className="user-input-note";
+    note.textContent="※ 請直接輸入車資金額（單趟元）";
+    note.style.fontSize=".7em";note.style.color="var(--muted)";note.style.marginLeft="6px";
+    wrap.appendChild(note);
+  }
+  // price=None / 0 時，加小字提示（CARD-058b：m 已在前面宣告，不重複 const）
   const t=(m&&m.type)||"buy";
   const hasPrice=
     (t==="rent")?(m&&m.rent_price&&m.rent_price>0):
@@ -594,18 +875,44 @@ function _stepperCode(elem){
   const wrap=elem&&elem.closest?elem.closest(".div_price_count"):null;
   return wrap?wrap.getAttribute("data-code"):null;
 }
+// CARD-058b：判斷 code 是否走 user_input pricing
+function _isUserInput(code){
+  const m=ITEM_META[code];
+  return !!(m&&m.pricing_type==="user_input");
+}
 window.IncreaseCount=function(btn){
   const code=_stepperCode(btn);if(!code)return;
+  if(_isUserInput(code)){
+    // CARD-058b：DA01 +/- 步長 100，金額寫 inputAmountMap，state.set("DA01", amt>0 ? 1 : 0)
+    const cur=inputAmountMap.get(code)||0;
+    applyAmount(code,Math.max(0,Math.min(99999,cur+100)));
+    return;
+  }
   const cur=state.get(code)||0;
   applyQty(code,Math.max(0,Math.min(99,cur+1)));
 };
 window.DecreaseCount=function(btn){
   const code=_stepperCode(btn);if(!code)return;
+  if(_isUserInput(code)){
+    const cur=inputAmountMap.get(code)||0;
+    applyAmount(code,Math.max(0,Math.min(99999,cur-100)));
+    return;
+  }
   const cur=state.get(code)||0;
   applyQty(code,Math.max(0,Math.min(99,cur-1)));
 };
 window.onTextInput=function(input){
   const code=_stepperCode(input);if(!code)return;
+  if(_isUserInput(code)){
+    // CARD-058b：DA01 type=number — 直接寫 inputAmountMap，state.set 為啟用旗標
+    let raw=(input.value||"").replace(/[^\d]/g,"");
+    let amt=raw===""?0:parseInt(raw,10);
+    if(isNaN(amt))amt=0;
+    amt=Math.max(0,Math.min(99999,amt));
+    input.value=amt===0?"":String(amt);
+    applyAmount(code,amt,/*fromText=*/true);
+    return;
+  }
   let raw=(input.value||"").replace(/[^\d]/g,"");
   if(raw.length>2)raw=raw.slice(0,2);
   let nv=raw===""?0:parseInt(raw,10);
@@ -615,10 +922,35 @@ window.onTextInput=function(input){
   input.value=nv===0?"":String(nv);
   applyQty(code,nv,/*fromText=*/true);
 };
+// CARD-058b：user_input 商品的 state 寫入入口（與 applyQty 平行）
+function applyAmount(code,amt,fromText){
+  amt=Math.max(0,Math.min(99999,amt|0));
+  if(amt===0){inputAmountMap.delete(code);state.delete(code);}
+  else{inputAmountMap.set(code,amt);state.set(code,1);}
+  const wrap=document.getElementById("prct_"+CSSEsc(code));
+  if(wrap){
+    const txt=wrap.querySelector(".txt_CI_qty");
+    if(txt&&!fromText){txt.value=amt===0?"":String(amt);}
+  }
+  refreshItemRow(code);
+  updateCounter();updateSectionCounts();
+  const owningCat=CATS.find(c=>c.items.some(it=>it.c===code));
+  if(owningCat){
+    const bucket=BUCKET_OF[owningCat.id]||"NOTE";
+    updateBucketSummary(bucket);
+  }
+  updateQuotaTable();
+}
 
-// CARD-053a：依 type 與 rentChoice 決定本次估算用 price 還是 rent_price（None/0 回 null = 不計入）
+// CARD-053a + CARD-058b：依 type 與 rentChoice 決定本次估算用 price 還是 rent_price；
+// pricing_type=user_input → adapter 走 inputAmountMap（DA01 個案直接輸入車資）
 function effectivePrice(code){
   const m=ITEM_META[code];if(!m)return null;
+  // CARD-058b：user_input adapter — 不走 N×price，N 只是啟用旗標（>0 計入），金額用 inputAmountMap
+  if(m.pricing_type==="user_input"){
+    const amt=inputAmountMap.get(code);
+    return (typeof amt==="number"&&amt>0)?amt:null;
+  }
   const t=m.type||"buy";
   if(t==="rent"){return (m.rent_price&&m.rent_price>0)?m.rent_price:null;}
   if(t==="both"){
@@ -644,9 +976,15 @@ function refreshItemRow(code){
   const nv=state.get(code)||0;
   const sub=wrap.querySelector(".span_CI_price");
   if(sub){
-    const eff=effectivePrice(code);
-    if(eff==null){sub.textContent=nv>0?"—":"$0";}
-    else{sub.textContent="$"+(eff*nv).toLocaleString();}
+    // CARD-058b：user_input 商品 — 該項小計 = inputAmountMap 金額（不乘 N）
+    if(_isUserInput(code)){
+      const amt=inputAmountMap.get(code)||0;
+      sub.textContent=amt>0?("$"+amt.toLocaleString()):"$0";
+    }else{
+      const eff=effectivePrice(code);
+      if(eff==null){sub.textContent=nv>0?"—":"$0";}
+      else{sub.textContent="$"+(eff*nv).toLocaleString();}
+    }
   }
   // itm 高亮：N>=1 才 .checked
   const itm=document.querySelector('.itm[data-code="'+CSSEsc(code)+'"]');
@@ -699,7 +1037,7 @@ function _income(){
   if(v==="normal")return "general";// 容忍別名
   return v;
 }
-// CARD-058c：本包 spent（已使用額）= Σ 該包所有 catId 的所有 codes 的 N × effectivePrice
+// CARD-058c + CARD-058b：本包 spent；fixed price 走 N × effectivePrice，user_input 走 inputAmountMap 直加（不乘 N，避免 N>1 重複計）
 function _bucketSpent(bucket){
   let spent=0;
   CATS.forEach(cat=>{
@@ -707,6 +1045,13 @@ function _bucketSpent(bucket){
     cat.items.forEach(it=>{
       const qty=state.get(it.c)||0;
       if(!(qty>0))return;
+      const m=ITEM_META[it.c];
+      if(m&&m.pricing_type==="user_input"){
+        // CARD-058b：user_input — N 只表啟用，金額用 inputAmountMap 直接累加
+        const amt=inputAmountMap.get(it.c);
+        if(typeof amt==="number"&&amt>0)spent+=amt;
+        return;
+      }
       const eff=effectivePrice(it.c);
       if(eff==null)return;
       spent+=eff*qty;
@@ -729,7 +1074,13 @@ function _bucketQuota(bucket){
   }
   if(bucket==="B2"){
     if(P._has&&P._has("b2_quota"))return parseInt(P.b2_quota||"0",10);
-    return null;// B2 預設不主動推 zone limit（需 city/zone 都齊）
+    // CARD-058b：dCity/dDistrict（D 區獨立）優先；推 zone → SUBSIDY.B2.zones[zone].monthly_limit
+    const z=_resolveDZone();
+    if(z!=null){
+      const zoneSummary=(CITY_ZONES.zone_summary||{})[String(z)];
+      if(zoneSummary&&typeof zoneSummary.b2_amount==="number")return zoneSummary.b2_amount;
+    }
+    return null;
   }
   if(bucket==="B3"){
     if(P._has&&P._has("b3_quota"))return parseInt(P.b3_quota||"0",10);
@@ -755,9 +1106,10 @@ function _bucketCopayRate(bucket){
   if(bucket==="B1"||bucket==="B4")return SUBSIDY.copay_rates[incomeKey];
   if(bucket==="B3")return SUBSIDY.B3.copay[incomeKey];
   if(bucket==="B2"){
-    // city/zone 皆存在才套；缺任一 → null
-    if(!P.city||!P.zone)return null;
-    const zoneRule=SUBSIDY.B2.zones[String(P.zone)];
+    // CARD-058b：dCity/dDistrict 獨立優先；fallback P.city/P.zone（058f 案主條件）；皆缺 → null
+    const z=_resolveDZone();
+    if(z==null)return null;
+    const zoneRule=SUBSIDY.B2.zones[String(z)];
     if(!zoneRule||!zoneRule.copay)return null;
     return zoneRule.copay[incomeKey];
   }
@@ -816,15 +1168,9 @@ function updateBucketSummary(bucket){
   const titleHTML='<div class="bs-title">'+(BUCKET_LABEL[bucket]||bucket)+'</div>';
   // CARD-058e：S/OT 警示橫幅（縣市政策 / epizy 估算 / 待 CARD-059 校正）
   const warnHTML='<span class="bs-warn">⚠️ 縣市政策補助，本系統使用 epizy 計算邏輯估算，<b>不可作為正式核銷依據</b>，CARD-059 將對衛福部規則校正</span>';
-  // CARD-058d：B1-B4 都有 progress bar（B2 placeholder 也保留結構，spent=0 顯 0% / quota null 顯「—」）
+  // CARD-058d：B1-B4 都有 progress bar
   const progressHTML=_bucketProgressHTML(bucket);
-  // B2：D 包佔位（DA01 user_input pricing 整合 CARD-058b）— 文案 + progress 並存
-  if(bucket==="B2"){
-    box.classList.add("placeholder");box.classList.remove("note-only","warn-estimate");
-    box.innerHTML=titleHTML+'<span class="ss-note">請輸入車資（CARD-058b 整合中）</span>'+progressHTML;
-    _setBucketProgress(box,bucket,0,_bucketQuota(bucket));
-    return;
-  }
+  // CARD-058b：B2 placeholder 早 return 已移除 — DA01 改 user_input 後 B2 走標準 spent/quota/copay path
   box.classList.remove("note-only","placeholder");
   // 計算 spent / quota / copay rate（B1/B3/B4/S/OT 共用）
   const spent=_bucketSpent(bucket);
@@ -900,6 +1246,8 @@ function applyQty(code,nv,fromText){
     const bucket=BUCKET_OF[owningCat.id]||"NOTE";
     updateBucketSummary(bucket);
   }
+  // CARD-058g：sticky 表格也即時刷（6 row）
+  updateQuotaTable();
 }
 
 // expose for unit test hook（test 環境無 window 仍可 import）
@@ -911,16 +1259,12 @@ window.__CARD053_qty=function(code){return state.get(code)||0;};
 window.__CARD053_applyQty=applyQty;
 // CARD-058c：footer 雙行估算移除，__CARD053_estimate test hook 一併下線
 
-document.getElementById("btn-expand-all").addEventListener("click",()=>{
-  document.querySelectorAll(".items").forEach(el=>el.style.maxHeight="none");
-});
-document.getElementById("btn-collapse-all").addEventListener("click",()=>{
-  document.querySelectorAll(".items").forEach(el=>el.style.maxHeight="260px");
-});
+// CARD-058g：拿掉 btn-expand-all / btn-collapse-all listener（按鈕已從 HTML 移除）；details 自帶 toggle 取代功能
 document.getElementById("btn-clear-all").addEventListener("click",()=>{
-  // CARD-053a：state.clear + 全 stepper qv 歸零；CARD-058c：刷所有 bucket summary（updateEstimate 已下線）
+  // CARD-053a：state.clear + 全 stepper qv 歸零；CARD-058c：刷所有 bucket summary；CARD-058g：刷 sticky 表格；CARD-058b：清 inputAmountMap
   const codes=Array.from(state.keys());
   state.clear();
+  inputAmountMap.clear();// CARD-058b
   codes.forEach(c=>{
     const wrap=document.getElementById("prct_"+CSSEsc(c));
     if(wrap){
@@ -933,6 +1277,7 @@ document.getElementById("btn-clear-all").addEventListener("click",()=>{
   });
   updateCounter();updateSectionCounts();
   updateAllBucketSummary();
+  updateQuotaTable();
 });
 document.getElementById("next-btn").addEventListener("click",()=>{
   const url=buildQueryUrl();
@@ -940,7 +1285,69 @@ document.getElementById("next-btn").addEventListener("click",()=>{
   window.location.href=url;
 });
 
+// CARD-058f：案主條件 3 下拉初始化 + change handler（rAF + dirty flag 合併連續 change）
+function initCaseConditions(){
+  const cms=document.getElementById("cc-cms");
+  const income=document.getElementById("cc-income");
+  const identity=document.getElementById("cc-identity");
+  if(!cms||!income||!identity)return;
+  // URL 預設值套用（CARD-046 注入 cms/income/identity）
+  if(P.cms){const v=String(P.cms);if(cms.querySelector('option[value="'+v+'"]'))cms.value=v;}
+  if(P.income){
+    let v=String(P.income).trim();
+    if(v==="normal")v="general";// 容忍別名
+    if(income.querySelector('option[value="'+v+'"]'))income.value=v;
+  }
+  if(P.identity){
+    // canonical flags comma list（單選對齊 epizy）；多值取第一個 + console.warn + 視覺警示
+    const all=String(P.identity).split(",").map(s=>s.trim()).filter(Boolean);
+    const first=all[0]||"";
+    if(identity.querySelector('option[value="'+first+'"]'))identity.value=first;
+    if(all.length>1){
+      console.warn("[CARD-058f] URL identity 含多值，本介面僅顯第一個："+first+"（其餘忽略：["+all.slice(1).join(",")+"]）");
+      const box=document.getElementById("case-conditions");
+      if(box)box.classList.add("has-multi-identity");
+    }
+  }
+  // 初次同步 P 物件（避免 select 預設與 P 不一致）
+  P.cms=cms.value;
+  P.income=income.value;
+  P.identity=identity.value;
+  // 綁 change handlers
+  cms.addEventListener("change",()=>onCaseConditionChange("cms",cms.value));
+  income.addEventListener("change",()=>onCaseConditionChange("income",income.value));
+  identity.addEventListener("change",()=>onCaseConditionChange("identity",identity.value));
+}
+let _ccDirty=false;
+function _ccFlush(){
+  _ccDirty=false;
+  // 重算 6 包 summary + sticky 表格
+  updateAllBucketSummary();
+  updateQuotaTable();
+}
+function onCaseConditionChange(field,value){
+  P[field]=value;
+  // 同步 status-banner（既有 CARD-042 顯示）
+  renderStatusBanner();
+  // CARD-058f：URL replaceState（不 pushState 避免歷史污染）
+  try{
+    const u=new URL(location.href);
+    if(value===""||value==null)u.searchParams.delete(field);
+    else u.searchParams.set(field,String(value));
+    history.replaceState(null,"",u.toString());
+  }catch(e){/* swallow */}
+  // CARD-058f：rAF + dirty flag 合併連續 change（避免 6 包重複 render lag）
+  if(!_ccDirty){
+    _ccDirty=true;
+    requestAnimationFrame(_ccFlush);
+  }
+}
+
 parseParams();renderStatusBanner();renderQuotaBars();render();
+// CARD-058f：案主條件 3 下拉初始化（必須在 parseParams 之後，render 之後）
+initCaseConditions();
+// CARD-058f：init 後刷一次（_initCaseConditions 內 P 物件可能改變 income normal→general）
+updateAllBucketSummary();updateQuotaTable();
 // CARD-058e：058c 的 _purgeNoteBucketState 呼叫已移除（S/OT 解鎖後 SC/OT codes 應正常進 buildQueryUrl）
 updateCounter();updateSectionCounts();
 // CARD-058c：5 個 bucket summary 初始化（B1/B2/B3/B4/NOTE）
@@ -958,6 +1365,7 @@ document.addEventListener("change",function(ev){
         const bucket=BUCKET_OF[owningCat.id]||"NOTE";
         updateBucketSummary(bucket);
       }
+      updateQuotaTable();// CARD-058g：sticky 表格也刷
     }
   }
 });

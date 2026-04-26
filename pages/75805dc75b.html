@@ -42,6 +42,17 @@ header .subtitle{font-size:.85em;opacity:.85}
 .bucket-summary{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:10px 14px;background:linear-gradient(135deg,#dbeafe,#eff6ff);border:1px solid var(--primary);border-radius:var(--radius);box-shadow:0 1px 3px rgba(37,99,235,.08);margin:6px 0 2px}
 .bucket-summary .bs-title{font-size:.95em;font-weight:700;color:var(--primary-dark);flex:1;min-width:0}
 .bucket-summary .bs-title .bs-tag{font-family:"SF Mono",Menlo,monospace;font-size:.85em;background:var(--primary);color:#fff;padding:1px 7px;border-radius:4px;margin-right:6px;letter-spacing:.5px}
+/* CARD-058d：包別碼（BC/D/EF/G 包）對齊 epizy 視覺 */
+.bucket-summary .bs-title .bs-pkg{color:var(--muted);font-weight:600;margin-right:6px;font-size:.92em}
+/* CARD-058d：bucket-summary 進度條（4 包各色漸層 + over 紅；NOTE 不放） */
+.bucket-summary .bucket-progress{position:relative;flex-basis:100%;height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden;margin-top:4px}
+.bucket-summary .bp-fill{height:100%;border-radius:5px;transition:width .35s;width:0%}
+.bucket-summary .bp-fill.bp-b1{background:linear-gradient(90deg,#3b82f6,#1e40af)}
+.bucket-summary .bp-fill.bp-b2{background:linear-gradient(90deg,#f59e0b,#d97706)}
+.bucket-summary .bp-fill.bp-b3{background:linear-gradient(90deg,#10b981,#059669)}
+.bucket-summary .bp-fill.bp-b4{background:linear-gradient(90deg,#a855f7,#7e22ce)}
+.bucket-summary .bp-fill.over{background:linear-gradient(90deg,#ef4444,#b91c1c)!important}
+.bucket-summary .bp-pct{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:.7em;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;text-shadow:0 0 3px #fff}
 .bucket-summary .ss-cell{white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.85em;min-width:120px;text-align:right}
 .bucket-summary .ss-cell .ss-label{color:var(--muted);margin-right:4px}
 .bucket-summary .ss-cell .ss-val{font-weight:700;color:var(--text)}
@@ -748,27 +759,58 @@ function _fmtMoney(v){
 }
 // CARD-058c：bucket label（標頭顯示）
 const BUCKET_LABEL={
-  B1:'<span class="bs-tag">B1</span>照顧及專業服務',
-  B2:'<span class="bs-tag">B2</span>交通接送',
-  B3:'<span class="bs-tag">B3</span>輔具購買租借及居家無障礙',
-  B4:'<span class="bs-tag">B4</span>喘息服務',
+  // CARD-058d：加包別碼（BC/D/EF/G 包）對齊 epizy 視覺
+  B1:'<span class="bs-tag">B1</span><span class="bs-pkg">(BC包)</span>照顧及專業服務',
+  B2:'<span class="bs-tag">B2</span><span class="bs-pkg">(D包)</span>交通接送',
+  B3:'<span class="bs-tag">B3</span><span class="bs-pkg">(EF包)</span>輔具購買租借及居家無障礙',
+  B4:'<span class="bs-tag">B4</span><span class="bs-pkg">(G包)</span>喘息服務',
   NOTE:'<span class="bs-tag" style="background:var(--warn)">縣市</span>S / OT 服務'
 };
 // CARD-058c：刷單一包 .bucket-summary（依 bucket 屬性，非依 catId）
+// CARD-058d：加 progress bar（4 包各色 + 百分比；quota=null 灰底顯「—」；over 紅）
+function _bucketProgressHTML(bucket){
+  // NOTE 不放 progress；其餘 4 包共用 .bucket-progress 結構，由 updateBucketSummary 設 width / pct / over
+  const cls="bp-fill bp-"+String(bucket).toLowerCase();
+  return '<div class="bucket-progress"><div class="'+cls+'"></div><span class="bp-pct">—</span></div>';
+}
+function _setBucketProgress(box,bucket,spent,quota){
+  const fill=box.querySelector(".bp-fill");
+  const pctEl=box.querySelector(".bp-pct");
+  if(!fill||!pctEl)return;
+  if(quota==null){
+    // 未帶 quota：灰底 / width=0 / pct 顯「—」+ tooltip
+    fill.style.width="0%";
+    fill.classList.remove("over");
+    pctEl.textContent="—";
+    pctEl.setAttribute("title","未帶 quota（URL 沒帶 b"+bucket.charAt(1)+"_quota）");
+    return;
+  }
+  // quota 有值：共用 sticky quota-bars 同邏輯（renderQuotaBars 用 Math.round((used/quota)*100)）
+  const pctRaw=quota>0?(spent/quota)*100:0;
+  const pct=Math.max(0,Math.min(100,Math.round(pctRaw)));
+  const over=spent>quota;
+  fill.style.width=(over?100:pct)+"%";
+  fill.classList.toggle("over",over);
+  pctEl.textContent=pct+"%";
+  pctEl.removeAttribute("title");
+}
 function updateBucketSummary(bucket){
   const box=document.querySelector('.bucket-summary[data-bucket="'+bucket+'"]');
   if(!box)return;
   const titleHTML='<div class="bs-title">'+(BUCKET_LABEL[bucket]||bucket)+'</div>';
-  // NOTE：S/OT 文案（不計算）
+  // NOTE：S/OT 文案（不計算 / 不放進度條）
   if(bucket==="NOTE"){
     box.classList.add("note-only");box.classList.remove("placeholder");
     box.innerHTML=titleHTML+'<span class="ss-note">補助規則洽縣市政府，本系統不計入自付額</span>';
     return;
   }
-  // B2：D 包佔位（DA01 user_input pricing 整合 CARD-058b）
+  // CARD-058d：B1-B4 都有 progress bar（B2 placeholder 也保留結構，spent=0 顯 0% / quota null 顯「—」）
+  const progressHTML=_bucketProgressHTML(bucket);
+  // B2：D 包佔位（DA01 user_input pricing 整合 CARD-058b）— 文案 + progress 並存
   if(bucket==="B2"){
     box.classList.add("placeholder");box.classList.remove("note-only");
-    box.innerHTML=titleHTML+'<span class="ss-note">請輸入車資（CARD-058b 整合中）</span>';
+    box.innerHTML=titleHTML+'<span class="ss-note">請輸入車資（CARD-058b 整合中）</span>'+progressHTML;
+    _setBucketProgress(box,bucket,0,_bucketQuota(bucket));
     return;
   }
   box.classList.remove("note-only","placeholder");
@@ -794,7 +836,9 @@ function updateBucketSummary(bucket){
   box.innerHTML=titleHTML+
     '<span class="ss-cell used"><span class="ss-label">已使用額:</span><span class="ss-val">'+_fmtMoney(spent)+'</span></span>'+
     '<span class="ss-cell remaining"><span class="ss-label">餘額:</span>'+remTxt+'</span>'+
-    '<span class="ss-cell coshare"><span class="ss-label">自付額:</span>'+coshareTxt+'</span>';
+    '<span class="ss-cell coshare"><span class="ss-label">自付額:</span>'+coshareTxt+'</span>'+
+    progressHTML;
+  _setBucketProgress(box,bucket,spent,quota);
 }
 // CARD-058c：刷全部 4+1 包
 function updateAllBucketSummary(){

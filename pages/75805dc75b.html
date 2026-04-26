@@ -196,6 +196,8 @@ footer.page-footer{text-align:center;padding:20px 0 100px;font-size:.78em;color:
 .d-zone-picker label{color:#854d0e;font-weight:600;white-space:nowrap}
 .d-zone-picker select{padding:3px 6px;border:1px solid var(--border);border-radius:4px;background:#fff;font-size:.95em;font-family:inherit;cursor:pointer;min-width:100px}
 .d-zone-picker select:focus{outline:none;border-color:var(--warn)}
+/* CARD-058b-fix：行政區下拉 disabled 視覺（無 remote_districts 縣市顯灰底） */
+.d-zone-picker #d-district:disabled{background:#f3f4f6;color:#9ca3af;cursor:not-allowed;border-color:#e5e7eb}
 .d-zone-picker .dz-hint{color:var(--muted);font-size:.92em;margin-left:auto}
 /* CARD-058b：DA01 user_input pricing 視覺差別 */
 .div_price_count.user-input .txt_CI_qty{width:80px}
@@ -728,12 +730,31 @@ function _buildDZonePicker(){
     selDist.appendChild(optEmptyD);
     if(dCity){
       const cityRec=(CITY_ZONES.cities||[]).find(c=>c.city===dCity);
-      if(cityRec&&Array.isArray(cityRec.remote_districts)&&cityRec.remote_districts.length){
+      const hasRemote=!!(cityRec&&Array.isArray(cityRec.remote_districts)&&cityRec.remote_districts.length);
+      if(hasRemote){
+        // CARD-058b-fix：有 remote_districts → enable + 清 title / aria-describedby（避免從 disabled 縣市切回殘留）
+        optEmptyD.textContent="（依縣市預設分區）";
+        selDist.disabled=false;
+        selDist.title="";
+        selDist.removeAttribute("aria-describedby");
         cityRec.remote_districts.forEach(rd=>{
           const opt=document.createElement("option");opt.value=rd.district;opt.textContent=rd.district+"（第"+rd.zone+"類）";
           selDist.appendChild(opt);
         });
+      }else{
+        // CARD-058b-fix：沒 remote_districts 縣市（如彰化縣）→ disabled + 提示「整縣市同分區」+ a11y
+        const zoneText=cityRec?("第 "+cityRec.zone+" 類"):"";
+        optEmptyD.textContent="（"+dCity+"全縣市同 "+zoneText+"，無需選行政區）";
+        selDist.disabled=true;
+        selDist.title=dCity+"全縣市為 "+zoneText+"，行政區下拉停用（衛福部 city_zones 資料只記偏遠區）";
+        selDist.setAttribute("aria-describedby","d-zone-hint");
       }
+    }else{
+      // dCity 清空 → 還原 enable + 預設提示
+      optEmptyD.textContent="（依縣市預設分區）";
+      selDist.disabled=false;
+      selDist.title="";
+      selDist.removeAttribute("aria-describedby");
     }
     _refreshDZoneHint();
     // 只重算 B2（不 cascade 到其他包）

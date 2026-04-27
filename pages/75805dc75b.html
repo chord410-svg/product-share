@@ -957,6 +957,12 @@ function buildQueryUrl(){
   // CARD-035：把 webhook / issued_at 帶給 Web B
   if(P.webhook)qs.set("webhook",P.webhook);
   if(P.issued_at)qs.set("issued_at",P.issued_at);
+  // CARD-063：補助試算 5 欄 pass-through（cms/income/city/zone/foreign_care）讓 Web B → submit_handler 可重算 calc_summary
+  if(P.cms)qs.set("cms",P.cms);
+  if(P.income)qs.set("income",P.income);
+  if(P.city)qs.set("city",P.city);
+  if(P.zone)qs.set("zone",P.zone);
+  if(P.foreign_care)qs.set("foreign_care",P.foreign_care);
   const sep=base.indexOf("?")>=0?"&":"?";
   return base+sep+qs.toString();
 }

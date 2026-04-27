@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CARD-055a-3 PDPA 最低防線（Q3 自決）：防 Google index；30天TTL/opaque token/真去識別留 CARD-055-pdpa-prod -->
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="bingbot" content="noindex,nofollow">
+<title>長照智慧諮詢 — 產品資訊</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.meta-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;font-size:.82em;color:var(--muted)}
+.meta-bar .tag{background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:20px;font-weight:600}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-card .card-header{background:var(--primary-light);padding:12px 16px;font-weight:700;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px}
+.product-card .card-header .num{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.product-card .card-body{padding:16px}
+.product-card .card-body img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:#f1f5f9}
+.product-card .desc{font-size:.92em;line-height:1.8;white-space:pre-wrap;margin-bottom:12px}
+.product-card .vendor-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88em;border-top:1px solid var(--border);padding-top:12px}
+.product-card .vendor-row .vendor-label{color:var(--muted)}
+.product-card .vendor-row .vendor-name{font-weight:600;color:var(--text)}
+.product-card .vendor-row a{color:var(--primary);text-decoration:none;border:1px solid var(--primary);padding:4px 10px;border-radius:6px;font-size:.85em}
+.product-card .vendor-row a:hover{background:var(--primary);color:#fff}
+.actions{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;border:none;font-size:.9em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.calc-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px}
+.calc-summary h2{font-size:1.05em;color:var(--primary);margin-bottom:10px;letter-spacing:.5px}
+.calc-summary .calc-meta{font-size:.88em;color:var(--muted);margin-bottom:12px;line-height:1.8}
+.calc-summary table.calc-packages{width:100%;border-collapse:collapse;font-size:.88em}
+.calc-summary table.calc-packages th,.calc-summary table.calc-packages td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.calc-summary table.calc-packages th{background:var(--primary-light);color:var(--primary);font-weight:600;font-size:.82em}
+.calc-summary table.calc-packages td.num{text-align:right;font-variant-numeric:tabular-nums}
+.calc-summary .warning{margin-top:10px;background:#fef3c7;color:#92400e;border-left:4px solid #f59e0b;padding:8px 12px;font-size:.82em;border-radius:6px}
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:.92em}
+.query-box .query-label{color:var(--muted);font-size:.82em;margin-bottom:4px}
+.query-box .query-text{color:var(--text);line-height:1.6}
+.product-card .card-header .code-tag{margin-left:auto;background:var(--primary);color:#fff;font-size:.72em;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
+/* CARD-055a-2：每 product-card 加 qty-tag (header) + estimate-row (body) + matches_empty/per-code fallback */
+.product-card .card-header .qty-tag{background:var(--primary-light);color:var(--primary);font-size:.78em;padding:2px 10px;border-radius:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.product-card .card-body .estimate-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.9em}
+.product-card .card-body .estimate-row .est-label{color:var(--muted);font-weight:600}
+.product-card .card-body .estimate-row .est-value{color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums}
+.no-product-notice{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fcd34d;color:#854d0e;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px;text-align:center;font-weight:600;font-size:.95em}
+/* CARD-065b：code_sections 三態 banner（best/soft/fallback/service）*/
+.code-section{margin-bottom:24px}
+.cs-header{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.cs-banner{padding:10px 14px;border-radius:8px;font-size:.9em;margin-bottom:12px;line-height:1.6}
+.cs-banner.best{background:#dcfce7;color:#166534;border-left:3px solid #16a34a}
+.cs-banner.soft{background:#fef3c7;color:#854d0e;border-left:3px solid #f59e0b}
+.cs-banner.fallback{background:#f1f5f9;color:#475569;border-left:3px solid #64748b}
+.cs-banner.service{background:#e0e7ff;color:#3730a3;border-left:3px solid #6366f1}
+/* CARD-065b：底部寫死教學區（位置：footer 上方；spec §5 4-5 條範例）*/
+.search-tips{margin:32px 0 16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.search-tips h2{font-size:1.05em;color:var(--primary);margin-bottom:12px}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tip{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:6px}
+.tip-icon{flex-shrink:0;font-size:1.1em}
+.tip-text strong{display:block;color:var(--text);font-size:.92em}
+.tip-text small{color:var(--muted);font-size:.82em;line-height:1.5}
+.tip.good{border-left:2px solid #16a34a}
+.tip.bad{border-left:2px solid var(--muted)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.expired-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.expired-overlay h1{font-size:1.6em;color:var(--danger);margin-bottom:12px}
+.expired-overlay p{color:var(--muted);font-size:1em}
+.hidden{display:none}
+/* === CARD-042：header 下橫幅 + footer 前四包錢進度條（不動 CARD-028 鎖的 gradient header / 產品卡）=== */
+.info-banner{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:.82em}
+.info-banner .ib-tag{background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:16px;font-weight:600;white-space:nowrap}
+.info-banner .ib-tag.warn{background:#fef3c7;color:#854d0e}
+.info-banner .ib-label{color:var(--muted);margin-right:3px}
+.quota-progress{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px}
+.quota-progress h2{font-size:1em;color:var(--primary);margin-bottom:12px;letter-spacing:.5px}
+.quota-progress .qp-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;margin-bottom:8px;font-size:.82em}
+.quota-progress .qp-row:last-child{margin-bottom:0}
+.quota-progress .qp-label{font-weight:700}
+.quota-progress .qp-label.b1{color:#3b82f6}
+.quota-progress .qp-label.b2{color:#10b981}
+.quota-progress .qp-label.b3{color:#f59e0b}
+.quota-progress .qp-label.b4{color:#8b5cf6}
+.quota-progress .qp-bar{height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden}
+.quota-progress .qp-fill{height:100%;border-radius:5px;transition:width .3s}
+.quota-progress .qp-fill.b1{background:#3b82f6}
+.quota-progress .qp-fill.b2{background:#10b981}
+.quota-progress .qp-fill.b3{background:#f59e0b}
+.quota-progress .qp-fill.b4{background:#8b5cf6}
+.quota-progress .qp-fill.over{background:var(--danger)!important}
+.quota-progress .qp-nums{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.9em}
+.quota-progress .qp-pct{font-weight:700;color:var(--text);margin-left:4px}
+.quota-progress .qp-pct.over{color:var(--danger)}
+@media print{
+  body{background:#fff}
+  .actions,.meta-bar{display:none!important}
+  .product-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  header{background:#1e40af!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border:none}
+}
+</style>
+</head>
+<body>
+<div id="expired-overlay" class="expired-overlay hidden">
+  <h1>⏰ 此頁面已過期</h1>
+  <p>分享頁面已超過 1 天有效期，請重新搜尋。</p>
+</div>
+
+<div id="main-content" class="container">
+  <header>
+    <h1>長照智慧諮詢</h1>
+    <div class="subtitle">產品資訊分享</div>
+  </header>
+
+  
+  
+  <div class="info-banner" aria-label="個案基本資訊">
+    
+    <span class="ib-tag"><span class="ib-label">收入別</span>一般戶</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">縣市</span>苗栗縣</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">分區</span>第 3 類</span>
+    
+    <span class="ib-tag">
+      <span class="ib-label">外看</span>無
+    </span>
+  </div>
+  
+
+  <div class="meta-bar">
+    <span>🕐 建立時間：2026-04-27 21:14</span>
+    <span>📅 有效期至：2026-04-28</span>
+    <span class="tag">輔具補助查詢</span>
+  </div>
+
+  
+
+  
+  <section class="calc-summary">
+    <h2>補助試算摘要</h2>
+    <div class="calc-meta">
+      第 5 級（中度） ／ 一般戶
+       ／ 苗栗縣
+      ／ 第 3 類
+      
+    </div>
+    <table class="calc-packages">
+      <thead>
+        <tr>
+          <th>補助包</th>
+          <th class="num">額度上限</th>
+          <th class="num">已用</th>
+          <th class="num">剩餘</th>
+          <th class="num">自付比例</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>B1 照顧及專業服務</td>
+          <td class="num">24,100</td>
+          <td class="num">0</td>
+          <td class="num">24,100</td>
+          <td class="num">16%</td>
+        </tr>
+        
+        <tr>
+          <td>B2 交通接送服務</td>
+          <td class="num">2,000</td>
+          <td class="num">0</td>
+          <td class="num">2,000</td>
+          <td class="num">25%</td>
+        </tr>
+        
+        <tr>
+          <td>B3 輔具及居家無障礙</td>
+          <td class="num">40,000</td>
+          <td class="num">0</td>
+          <td class="num">40,000</td>
+          <td class="num">30%</td>
+        </tr>
+        
+        <tr>
+          <td>B4 喘息服務</td>
+          <td class="num">32,340</td>
+          <td class="num">0</td>
+          <td class="num">32,340</td>
+          <td class="num">16%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  <div class="code-section" data-code="EC01" data-kind="askable" data-quality="best">
+    <h3 class="cs-header">
+      EC01 輪椅-A款(非輕量化量產型)
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <div class="cs-banner best">✨ 精準推薦（共 5 筆）</div>
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>祥巽擺位輪椅 9T12</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+
+93-120 度 空中傾倒設計
+
+雙層座背墊可拆洗
+
+扶手後掀、撥腳可拆
+
+內附安全帶
+
+座寬16/18吋 總高95CM 背高55CM 
+前輪7吋 後輪12吋 安全載重100KG淨重20/20.3KG
+
+衛署醫器製壹字第000978號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">輔聚企業股份有限公司</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/790-2021-12-14-04-17-55" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>穩得福手動輪椅 B(A)款</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+
+建立擺位輪椅新標準，前輪8吋PU大輪吸震好推，後輪24吋大輪自推方便順手；後輪可快速拆卸，收納上車不占空間，另外卸下後有輔助小輪，方便照顧者於室內移動搬運。
+
+輪椅座背部分為全調整帶，使用上能更符合人體身型，給予更好的支撐。
+
+手推把剎車簡單固定功能減少照顧者彎腰拉手剎車的頻率，減輕照護負擔。
+
+輪椅結構堅固，高強度鋁合金車架，零件耐用。
+
+座寬16/18/20吋 座深42.5CM 座高48CM 背高44CM 總長112CM 
+總寬92.5/97.5/102.5CM 總高92CM 前輪8吋 後輪24吋 安全載重100KG 收折寬33CM 淨重15.5KG
+
+衛署醫器製壹字第003648號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">輔聚企業股份有限公司</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/795-2021-12-14-04-41-38" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>祥巽輕量輪椅 MF-5620A-AB</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+
+扶手後掀
+
+可拆撥腳
+
+靠背可折
+
+雙用煞車
+
+座寬16/18吋 座深42CM 背高42CM 
+總高92CM 前輪8吋 後輪22吋 安全載重100KG淨重13KG
+
+衛署醫器製壹字第000978號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">輔聚企業股份有限公司</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/791-2021-12-14-04-20-39" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">4</span>
+          <span>祥巽輕量輪椅 SC-AE1-S22</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+
+座寬17/19吋 座深42CM 背高37CM 
+總高86CM 前輪7吋 後輪22吋 安全載重100KG淨重12.8KG
+
+衛署醫器製壹字第000978號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">輔聚企業股份有限公司</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/793-2021-12-14-04-29-47" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">5</span>
+          <span>電動輪椅 P113</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+ 、生活輔具
+
+1.新穎時尚流線造型設計，吸引眾人目光。
+
+2.外形精巧，整車可前後收折、可站立放置亦可短途拖行，便於攜帶。
+
+3.英國PG控制器，產品品質穩定，操控性極佳。
+
+4.分離式電池盒設計，可單獨取下充電，配有電量顯示與第二充電口。
+
+5.配置可翻折防滑踏板，長度三檔可調。
+
+6.採用進口蝸輪蝸杆傳動軸，手動、電動模式可自由切換，收折後可攜帶上飛機。
+
+7.背靠上管高度三檔可調 (間距1&#34;)，滿足後面有人推的時候，符合不同人的身高。
+
+控制器：PG VR2 50
+
+最大功率：DC24V,70W(Rating)/210W(Max)
+
+鋰電池：12V/11.4AH*1pcs
+
+充電器：3A
+
+最大爬坡角度：6°
+
+總重：23kg(含電池)
+
+前輪：7”實心胎
+
+後輪：8”實心胎
+
+越障高度：3cm
+
+FDA
+
+TUV
+
+ISO14001:2015
+
+ISO45001:2018
+
+ISO13485:2016
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">美利馳</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/305-2021-12-05-03-35-40" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+  <div class="code-section" data-code="EC02" data-kind="askable" data-quality="soft">
+    <h3 class="cs-header">
+      EC02 輪椅-B款(輕量化量產型)
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <div class="cs-banner soft">🔍 找不到完全符合「氣墊床」的商品，但這些 EC02 補助商品您可以參考（共 3 筆）</div>
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>天使愛 橡膠氣囊輪椅氣墊座</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+ 、生活輔具
+
+1.透氣球型顆粒凹凸結構設計，可使空氣疏通，能散發熱量，涼爽舒適。
+2. 球型顆粒凹凸結構，設計能分散臀部壓力。
+
+尺寸：16&#34;(390x390x70mm)、18&#34;(400x440x60mm),材質：橡膠+不鏽鋼氣嘴
+
+專利字號：新型第 M599597 號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">宏達益企業</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/116-2021-11-23-14-48-06-34" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>天使愛 蝶心液態凝膠減壓輪椅坐墊</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+ 、生活輔具
+
+1. 液態凝膠坐墊結合特殊液態減壓凝膠，與高密度彈性泡棉製成，人體工學臀型設計，更能讓使用者坐起來安穩舒適。
+2. 坐墊上層的吸壓凝膠層可降低因皮膚摩擦造成的傷害。
+
+尺寸：16&#34;(410x410x50~70mm) / 18&#34; (460x410x50~70mm),材質：液態凝膠+倍爾適泡棉
+
+專利字號：新型第 M599601 號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">宏達益企業</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/114-2021-11-23-14-48-06-32" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>天使愛 田心液態凝膠輪椅坐墊</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          
+          <div class="desc">產品分類：
+
+行動輔具
+ 、生活輔具
+
+1. 液態凝膠減壓坐墊結合特殊液態減壓凝膠，與高密度彈性泡棉製成，人體工學臀型設計，有效的降低臀部受壓點之壓力，更能讓使用者坐起來安穩舒適。2. 坐墊上層的吸壓凝膠層可降低因皮膚摩擦造成的傷害。
+
+尺寸：16&#34;(410x410x70~80mm) / 18&#34; (460x410x70~80mm),材質：液態凝膠+適形泡棉
+
+專利字號：新型第 M599597 號
+
+公司名稱
+
+
+
+
+
+
+您的姓名
+
+
+
+
+
+
+職稱
+
+
+
+
+
+
+信箱
+
+
+
+
+
+
+電話
+
+
+
+
+
+
+電話分機
+
+
+
+
+
+
+問題類型
+
+我要詢價哪裡可以買尋找異業合作夥伴其他問題
+
+
+
+
+內容
+
+
+
+
+
+
+產品名稱
+
+
+
+
+
+
+Id
+
+
+
+
+
+
+狀態
+
+
+
+
+
+
+供應商選擇
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+送出</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">宏達益企業</span>
+            
+            
+            <a href="https://www.ankecare.com/product/go/115-2021-11-23-14-48-06-33" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+  <div class="code-section" data-code="EF01" data-kind="askable" data-quality="fallback">
+    <h3 class="cs-header">
+      EF01 衣著用輔具
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+      
+      <div class="cs-banner fallback">📦 本次未填關鍵字提問，純額度試算</div>
+      
+    
+
+    
+      
+    
+  </div>
+  
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">📥 下載 PDF</button>
+    <button class="btn btn-outline" onclick="copyLink()">🔗 複製連結</button>
+  </div>
+
+  
+  <section class="search-tips" aria-label="搜尋技巧">
+    <h2>💡 怎樣關鍵字搜尋更有效</h2>
+    <div class="tips-grid">
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>寫具體商品名</strong>
+          <small>例：「輪椅」「氣墊床」「電動助行器」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>寫具體需求 + 場景</strong>
+          <small>例：「壓瘡需要減壓墊」「浴室防滑扶手」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>寫照顧情境關鍵字</strong>
+          <small>例：「臥床照顧」「洗澡」「移位」</small>
+        </div>
+      </div>
+      <div class="tip bad">
+        <span class="tip-icon">❌</span>
+        <div class="tip-text">
+          <strong>避免抽象身體狀況描述</strong>
+          <small>例：「下肢無力」「行動不便」（matcher 較難對應商品）</small>
+        </div>
+      </div>
+      <div class="tip bad">
+        <span class="tip-icon">❌</span>
+        <div class="tip-text">
+          <strong>避免醫療術語</strong>
+          <small>例：「肌少症」「骨關節炎」（請改寫成需要的輔具或情境）</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="quota-progress" aria-label="四包錢進度">
+    <h2>📊 四包錢使用進度</h2>
+    
+      
+      
+      
+      
+    <div class="qp-row">
+      <span class="qp-label b1">B1</span>
+      <span class="qp-bar">
+        <span class="qp-fill b1" style="width: 0%"></span>
+      </span>
+      <span class="qp-nums">
+        0 / 24,100
+        <span class="qp-pct">0%</span>
+      </span>
+    </div>
+    
+      
+      
+      
+      
+    <div class="qp-row">
+      <span class="qp-label b2">B2</span>
+      <span class="qp-bar">
+        <span class="qp-fill b2" style="width: 0%"></span>
+      </span>
+      <span class="qp-nums">
+        0 / 2,000
+        <span class="qp-pct">0%</span>
+      </span>
+    </div>
+    
+      
+      
+      
+      
+    <div class="qp-row">
+      <span class="qp-label b3">B3</span>
+      <span class="qp-bar">
+        <span class="qp-fill b3" style="width: 0%"></span>
+      </span>
+      <span class="qp-nums">
+        0 / 40,000
+        <span class="qp-pct">0%</span>
+      </span>
+    </div>
+    
+      
+      
+      
+      
+    <div class="qp-row">
+      <span class="qp-label b4">B4</span>
+      <span class="qp-bar">
+        <span class="qp-fill b4" style="width: 0%"></span>
+      </span>
+      <span class="qp-nums">
+        0 / 32,340
+        <span class="qp-pct">0%</span>
+      </span>
+    </div>
+    
+  </section>
+  
+
+  <footer>
+    <p>長照智慧諮詢 · 本頁面由系統自動生成 · 有效期 1 天</p>
+    <p>頁面 ID：63771e735b</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var created = new Date("2026-04-27T21:14:29.441157");
+  var expiryMs = 1 * 86400000;
+  if (Date.now() - created.getTime() > expiryMs) {
+    document.getElementById("expired-overlay").classList.remove("hidden");
+    document.getElementById("main-content").style.display = "none";
+  }
+})();
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    alert("已複製連結！");
+  });
+}
+</script>
+</body>
+</html>

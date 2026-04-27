@@ -42,6 +42,8 @@ header .subtitle{font-size:.85em;opacity:.85}
 .query-card textarea:focus{outline:none;border-color:var(--primary);background:#fff}
 .query-card textarea::placeholder{color:var(--muted);font-size:.88em}
 .query-card .char-count{font-size:.75em;color:var(--muted);margin-top:6px;text-align:right;font-variant-numeric:tabular-nums}
+/* CARD-066：textarea 下方引導 hint（教個管師寫具體需求；配合 CARD-065 三層 fallback） */
+.query-card .query-hint{font-size:.85em;color:#6b7280;margin-top:4px;line-height:1.5}
 .actions{display:flex;justify-content:center;padding:16px 0 24px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;border:none;font-size:1em;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s;font-family:inherit}
 .btn-primary{background:var(--success);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2)}
@@ -384,7 +386,8 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     body.className = "card-body";
     var ta = document.createElement("textarea");
     ta.name = "q-" + code;
-    ta.placeholder = "例如：80 歲男性，輕微偏癱，住公寓 4 樓無電梯…";
+    // CARD-066：placeholder 改具體範例（配合 CARD-065 fallback 教個管師寫具體商品名）
+    ta.placeholder = "例：『輪椅』、『有壓瘡需減壓的坐墊』、『電動床』";
     ta.maxLength = 200;
     ta.rows = 5;
     ta.setAttribute("data-code", code);
@@ -395,8 +398,13 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     ccInner.textContent = "0";
     cc.appendChild(ccInner);
     cc.appendChild(document.createTextNode(" / 200"));
+    // CARD-066：textarea 下方 hint（灰小字）— 教用具體詞 + 空白也能列全部
+    var hint = document.createElement("div");
+    hint.className = "query-hint";
+    hint.textContent = "💡 寫具體商品名或具體需求最容易命中；空白也能列出該補助所有商品";
     body.appendChild(ta);
     body.appendChild(cc);
+    body.appendChild(hint);
 
     card.appendChild(header);
     card.appendChild(body);
@@ -513,13 +521,15 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
         pTag.textContent = "不需提問";
         header.appendChild(pTag);
       }
-      // 拿掉 textarea + char-count
+      // 拿掉 textarea + char-count + query-hint（CARD-066：non-askable 不顯 hint）
       var body = card.querySelector(".card-body");
       if (body) {
         var ta = body.querySelector("textarea");
         if (ta) ta.remove();
         var cc = body.querySelector(".char-count");
         if (cc) cc.remove();
+        var qh = body.querySelector(".query-hint");
+        if (qh) qh.remove();
         if (!body.querySelector(".preview-note")) {
           var note = document.createElement("div");
           note.className = "preview-note";

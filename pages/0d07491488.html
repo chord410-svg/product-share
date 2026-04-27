@@ -165,6 +165,12 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   var ISSUED_AT = 0;   // CARD-035：session TTL 判斷用
   // CARD-055a-1：Web A pass-through 帶 qty `code:N,code:N` → 解析成 {code:N} 物件
   var QTY_MAP = {};
+  // CARD-063：補助試算 5 欄 pass-through（用於 buildPayload 帶給 submit_handler 重算 calc_summary）
+  var CALC_CMS = null;
+  var CALC_INCOME = null;
+  var CALC_CITY = null;
+  var CALC_ZONE = null;
+  var CALC_FOREIGN_CARE = null;
   // CARD-055b：只 EF 包（B3 對應 9 區）渲 textarea；其他 D/G/S/OT 純預覽（hidden qty 仍對全 codes 加）
   // 集中化（Codex 採納 2）：未來商城合作擴大改此 array 即可
   var ASKABLE_FAMILIES = ['EA','EB','EC','ED','EE','EF','EG','EH','FA'];
@@ -194,7 +200,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     var queries = collectQueries();
     // CARD-055d：hasAnyQuery flag — true 走 matcher / false 跳純額度試算（後端條件處理併入 055a-2）
     var hasAnyQuery = queries.some(function(q){ return (q.question || "").length > 0; });
-    return {
+    var payload = {
       user_id: USER_ID,
       session: SESSION,
       channel: CHANNEL,
@@ -203,6 +209,13 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       qty: QTY_MAP,   // CARD-055a-1：pass-through Web A stepper 數量；submit_handler 暫忽略（055a-2 處理）
       hasAnyQuery: hasAnyQuery   // CARD-055d：純前端 flag；submit_handler 暫忽略 extra field（055a-2 處理）
     };
+    // CARD-063：補助試算 5 欄帶給 submit_handler 重算 calc_summary（缺值 → 後端軟降級 calc_summary=None）
+    if (CALC_CMS != null && CALC_CMS !== "") payload.cms = CALC_CMS;
+    if (CALC_INCOME) payload.income = CALC_INCOME;
+    if (CALC_CITY) payload.city = CALC_CITY;
+    if (CALC_ZONE != null && CALC_ZONE !== "") payload.zone = CALC_ZONE;
+    if (CALC_FOREIGN_CARE != null) payload.foreign_caregiver = CALC_FOREIGN_CARE;
+    return payload;
   }
 
   // CARD-055e B：URL 帶的 guild（用於 Discord deep link）
@@ -464,6 +477,21 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     }
     // CARD-055a-1：Web A → Web B qty pass-through
     if (params.has("qty")) QTY_MAP = parseQtyParam(params.get("qty"));
+    // CARD-063：補助試算 5 欄（cms/income/city/zone/foreign_care）→ buildPayload 帶給 submit_handler 重算 calc_summary
+    if (params.has("cms")) {
+      var _c = parseInt(params.get("cms"), 10);
+      if (!isNaN(_c)) CALC_CMS = _c;
+    }
+    if (params.has("income")) CALC_INCOME = params.get("income");
+    if (params.has("city")) CALC_CITY = params.get("city");
+    if (params.has("zone")) {
+      var _z = parseInt(params.get("zone"), 10);
+      if (!isNaN(_z)) CALC_ZONE = _z;
+    }
+    if (params.has("foreign_care")) {
+      var _f = params.get("foreign_care");
+      CALC_FOREIGN_CARE = (_f === "true" || _f === "1");
+    }
     /* CARD-042：status banner + mini quota bars（URL query 帶才顯示）*/
     renderStatusBanner(params);
     renderMiniQuotaBars(params);

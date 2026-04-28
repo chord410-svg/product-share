@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CARD-055a-3 PDPA 最低防線（Q3 自決）：防 Google index；30天TTL/opaque token/真去識別留 CARD-055-pdpa-prod -->
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="bingbot" content="noindex,nofollow">
+<title>長照智慧諮詢 — 產品資訊</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.meta-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;font-size:.82em;color:var(--muted)}
+.meta-bar .tag{background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:20px;font-weight:600}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-card .card-header{background:var(--primary-light);padding:12px 16px;font-weight:700;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px}
+.product-card .card-header .num{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.product-card .card-body{padding:16px}
+.product-card .card-body img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:#f1f5f9}
+.product-card .desc{font-size:.92em;line-height:1.8;white-space:pre-wrap;margin-bottom:12px}
+.product-card .vendor-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88em;border-top:1px solid var(--border);padding-top:12px}
+.product-card .vendor-row .vendor-label{color:var(--muted)}
+.product-card .vendor-row .vendor-name{font-weight:600;color:var(--text)}
+.product-card .vendor-row a{color:var(--primary);text-decoration:none;border:1px solid var(--primary);padding:4px 10px;border-radius:6px;font-size:.85em}
+.product-card .vendor-row a:hover{background:var(--primary);color:#fff}
+.actions{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;border:none;font-size:.9em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.calc-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px}
+.calc-summary h2{font-size:1.05em;color:var(--primary);margin-bottom:10px;letter-spacing:.5px}
+.calc-summary .calc-meta{font-size:.88em;color:var(--muted);margin-bottom:12px;line-height:1.8}
+/* CARD-070：calc-summary section 勾選代碼清單（含碼+名稱；CARD-069 chip 升級為 ul-li 易讀清單）*/
+.calc-summary .selected-codes{margin-bottom:12px}
+.calc-summary .selected-codes .sc-label{display:block;color:var(--muted);font-size:.82em;margin-bottom:4px}
+.calc-summary .selected-codes-list{list-style:disc inside;margin:0;padding-left:8px;font-size:.88em;line-height:1.7}
+.calc-summary .selected-codes-list li{color:var(--text)}
+.calc-summary .selected-codes-list li .sc-code{font-weight:700;color:var(--primary);margin-right:2px}
+.calc-summary table.calc-packages{width:100%;border-collapse:collapse;font-size:.88em}
+.calc-summary table.calc-packages th,.calc-summary table.calc-packages td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.calc-summary table.calc-packages th{background:var(--primary-light);color:var(--primary);font-weight:600;font-size:.82em}
+.calc-summary table.calc-packages td.num{text-align:right;font-variant-numeric:tabular-nums}
+.calc-summary .warning{margin-top:10px;background:#fef3c7;color:#92400e;border-left:4px solid #f59e0b;padding:8px 12px;font-size:.82em;border-radius:6px}
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:.92em}
+.query-box .query-label{color:var(--muted);font-size:.82em;margin-bottom:4px}
+.query-box .query-text{color:var(--text);line-height:1.6}
+.product-card .card-header .code-tag{margin-left:auto;background:var(--primary);color:#fff;font-size:.72em;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
+/* CARD-055a-2：每 product-card 加 qty-tag (header) + estimate-row (body) + matches_empty/per-code fallback */
+.product-card .card-header .qty-tag{background:var(--primary-light);color:var(--primary);font-size:.78em;padding:2px 10px;border-radius:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.product-card .card-body .estimate-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.9em}
+.product-card .card-body .estimate-row .est-label{color:var(--muted);font-weight:600}
+.product-card .card-body .estimate-row .est-value{color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums}
+.no-product-notice{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fcd34d;color:#854d0e;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px;text-align:center;font-weight:600;font-size:.95em}
+/* CARD-065b：code_sections 三態 banner（best/soft/fallback/service）*/
+.code-section{margin-bottom:24px}
+.cs-header{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.cs-banner{padding:10px 14px;border-radius:8px;font-size:.9em;margin-bottom:12px;line-height:1.6}
+.cs-banner.best{background:#dcfce7;color:#166534;border-left:3px solid #16a34a}
+.cs-banner.soft{background:#fef3c7;color:#854d0e;border-left:3px solid #f59e0b}
+.cs-banner.fallback{background:#f1f5f9;color:#475569;border-left:3px solid #64748b}
+.cs-banner.service{background:#e0e7ff;color:#3730a3;border-left:3px solid #6366f1}
+/* CARD-065b：底部寫死教學區（位置：footer 上方；spec §5 4-5 條範例）*/
+.search-tips{margin:32px 0 16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.search-tips h2{font-size:1.05em;color:var(--primary);margin-bottom:12px}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tip{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:6px}
+.tip-icon{flex-shrink:0;font-size:1.1em}
+.tip-text strong{display:block;color:var(--text);font-size:.92em}
+.tip-text small{color:var(--muted);font-size:.82em;line-height:1.5}
+.tip.good{border-left:2px solid #16a34a}
+.tip.bad{border-left:2px solid var(--muted)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.expired-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.expired-overlay h1{font-size:1.6em;color:var(--danger);margin-bottom:12px}
+.expired-overlay p{color:var(--muted);font-size:1em}
+.hidden{display:none}
+/* === CARD-042：header 下橫幅 + footer 前四包錢進度條（不動 CARD-028 鎖的 gradient header / 產品卡）=== */
+.info-banner{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:.82em}
+.info-banner .ib-tag{background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:16px;font-weight:600;white-space:nowrap}
+.info-banner .ib-tag.warn{background:#fef3c7;color:#854d0e}
+.info-banner .ib-label{color:var(--muted);margin-right:3px}
+.quota-progress{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px}
+.quota-progress h2{font-size:1em;color:var(--primary);margin-bottom:12px;letter-spacing:.5px}
+.quota-progress .qp-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;margin-bottom:8px;font-size:.82em}
+.quota-progress .qp-row:last-child{margin-bottom:0}
+.quota-progress .qp-label{font-weight:700}
+.quota-progress .qp-label.b1{color:#3b82f6}
+.quota-progress .qp-label.b2{color:#10b981}
+.quota-progress .qp-label.b3{color:#f59e0b}
+.quota-progress .qp-label.b4{color:#8b5cf6}
+.quota-progress .qp-bar{height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden}
+.quota-progress .qp-fill{height:100%;border-radius:5px;transition:width .3s}
+.quota-progress .qp-fill.b1{background:#3b82f6}
+.quota-progress .qp-fill.b2{background:#10b981}
+.quota-progress .qp-fill.b3{background:#f59e0b}
+.quota-progress .qp-fill.b4{background:#8b5cf6}
+.quota-progress .qp-fill.over{background:var(--danger)!important}
+.quota-progress .qp-nums{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.9em}
+.quota-progress .qp-pct{font-weight:700;color:var(--text);margin-left:4px}
+.quota-progress .qp-pct.over{color:var(--danger)}
+@media print{
+  body{background:#fff}
+  .actions,.meta-bar{display:none!important}
+  .product-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  header{background:#1e40af!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border:none}
+}
+</style>
+</head>
+<body>
+<div id="expired-overlay" class="expired-overlay hidden">
+  <h1>⏰ 此頁面已過期</h1>
+  <p>分享頁面已超過 1 天有效期，請重新搜尋。</p>
+</div>
+
+<div id="main-content" class="container">
+  <header>
+    <h1>長照智慧諮詢</h1>
+    <div class="subtitle">產品資訊分享</div>
+  </header>
+
+  
+  
+  <div class="info-banner" aria-label="個案基本資訊">
+    
+    <span class="ib-tag"><span class="ib-label">收入別</span>一般戶</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">縣市</span>澎湖縣</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">分區</span>第 4 類</span>
+    
+    <span class="ib-tag">
+      <span class="ib-label">外看</span>無
+    </span>
+  </div>
+  
+
+  <div class="meta-bar">
+    <span>🕐 建立時間：2026-04-28 14:43</span>
+    <span>📅 有效期至：2026-04-29</span>
+    <span class="tag">輔具補助查詢</span>
+  </div>
+
+  
+
+  
+  <section class="calc-summary">
+    <h2>補助試算摘要</h2>
+    <div class="calc-meta">
+      第 5 級（中度） ／ 一般戶
+       ／ 澎湖縣
+      ／ 第 4 類
+      
+    </div>
+    
+    
+    <div class="selected-codes" aria-label="勾選的補助代碼">
+      <span class="sc-label">勾選代碼：</span>
+      <ul class="selected-codes-list">
+        
+        <li><span class="sc-code">EC01</span>：輪椅-A款(非輕量化量產型)</li>
+        
+        <li><span class="sc-code">EF01</span>：衣著用輔具</li>
+        
+      </ul>
+    </div>
+    
+    <table class="calc-packages">
+      <thead>
+        <tr>
+          <th>補助包</th>
+          <th class="num">額度上限</th>
+          <th class="num">已用</th>
+          <th class="num">剩餘</th>
+          <th class="num">自付比例</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>B1 照顧及專業服務</td>
+          <td class="num">24,100</td>
+          <td class="num">0</td>
+          <td class="num">24,100</td>
+          <td class="num">16%</td>
+        </tr>
+        
+        <tr>
+          <td>B2 交通接送服務</td>
+          <td class="num">2,400</td>
+          <td class="num">0</td>
+          <td class="num">2,400</td>
+          <td class="num">21%</td>
+        </tr>
+        
+        <tr>
+          <td>B3 輔具及居家無障礙</td>
+          <td class="num">40,000</td>
+          <td class="num">0</td>
+          <td class="num">40,000</td>
+          <td class="num">30%</td>
+        </tr>
+        
+        <tr>
+          <td>B4 喘息服務</td>
+          <td class="num">32,340</td>
+          <td class="num">0</td>
+          <td class="num">32,340</td>
+          <td class="num">16%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  <div class="code-section" data-code="EC01" data-kind="askable" data-quality="best">
+    <h3 class="cs-header">
+      EC01 輪椅-A款(非輕量化量產型)
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <div class="cs-banner best">✨ 精準推薦（共 5 筆）</div>
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>輪椅 躺款 B(AB) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/684a62e22c0150d23b2ebe89/original.jpg?1749705442" alt="輪椅 躺款 B(AB) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 躺款 B(AB) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)
+富士康
+此產品符合長照/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)、EC05輪椅附加功能-B款(具仰躺功能)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：富士康 型號：(座寬16&#34;)AB1616 / (座寬18&#34;)AB1618 車體尺寸： 總長 - 110cm 總寬 - (座寬16&#34;)62cm / (座寬18&#34;)65cm 總高 - 96.5cm 座椅規格： 座寬 - (16&#34;)42cm / (18&#34;)46cm 座深 - 42cm 座高 - 48cm 淨重：(16&#34;) 16kg / (18&#34;) 17kg 承重：110kg 功能性：頭枕可調高、靠腳可拆卸、扶手可後掀/可拆卸、仰躺角度0°~170° 保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。 產地：中國 *實際產品尺寸與數據誤差值在±2.5公分(cm)±0.5公斤(kg) *商品圖片及顏色僅供參考，出貨依實際庫存為主 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅(未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字 第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 製造廠：RAISE MEDICAL INDUSTRIES, INC 製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2138" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>輪椅 介護輪 16吋 B(A)款 FZK-K4</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/62ff29526fd0df0022531864/original.jpg?1660889426" alt="輪椅 介護輪 16吋 B(A)款 FZK-K4" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 介護輪 16吋 B(A)款 FZK-K4
+富士康
+此產品符合長照2.0/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)】 如欲了解長照2.0補助申請資訊，請撥打1966長照服務專線諮詢。 商品主圖僅供示意參考，實際出貨布套為此花色。 《商品圖片及顏色僅供參考，出貨依實際庫存為主》 《加購商品》 富士康輪椅頭靠36cm寬 黑色網布 (適用輪椅坐寬16吋-18吋) 下載『輪椅頭靠』安裝使用說明 產品規格 品牌：富士康型號：FZK-K4材質：輕量化鋁合金附加小腿腳帶，防止小腿掉落雙層布座背墊，可更換、換洗後輪尺寸：16吋小輪坐墊尺寸：16吋 / 18吋 座寬：(16吋)42 / (18吋)46 cm座深：40 cm座高：49 cm總寬：(16吋)59 / (18吋)63 cm總高：90 cm總長：100 cm承重：100 kg 淨重：(16吋)12.7 kg / (18吋)12.8 kg保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇產地：中國 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅 (未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 主製造廠：RAISE MEDICAL INDUSTRIES, INC 主製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商登記地址：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2124" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>輪椅 仰款 B(AC) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/684a72d4c52b5e000db2be49/original.jpg?1749709524" alt="輪椅 仰款 B(AC) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 仰款 B(AC) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)
+富士康
+此產品符合長照/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)、EC05輪椅附加功能-C款(具空中傾倒功能)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：富士康 型號：(座寬16&#34;)AC1616 / (座寬18&#34;)AC1618 車體尺寸： 總長 - 110cm 總寬 - (座寬16&#34;)65cm / (座寬18&#34;)67cm 總高 - 94cm 座椅規格： 座寬 - (16&#34;)42cm / (18&#34;)46cm 座深 - 42cm 座高 - 48cm 淨重：(16&#34;) 18.5kg / (18&#34;) 19kg 承重：110kg 功能性：頭枕可調高、靠腳可拆卸、扶手可後掀/可拆卸、空中傾倒0°~35° 保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。 產地：中國 *實際產品尺寸與數據誤差值在±2.5公分(cm)±0.5公斤(kg) *商品圖片及顏色僅供參考，出貨依實際庫存為主 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅(未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字 第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 製造廠：RAISE MEDICAL INDUSTRIES, INC 製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2140" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">4</span>
+          <span>輪椅 自推輪 20吋 B(A)款 FZK-KA4</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/62ff215783ec61001c8475b8/original.jpg?1660887383" alt="輪椅 自推輪 20吋 B(A)款 FZK-KA4" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 自推輪 20吋 B(A)款 FZK-KA4
+富士康
+此產品符合長照2.0/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)】 如欲了解長照2.0補助申請資訊，請撥打1966長照服務專線諮詢。 《商品圖片及顏色僅供參考，出貨依實際庫存為主》 《加購商品》 富士康輪椅頭靠36cm寬 黑色網布 (適用輪椅坐寬16吋-18吋) 下載『輪椅頭靠』安裝使用說明 產品規格 品牌：富士康型號：FZK-KA4材質：輕量化鋁合金附加小腿腳帶，防止小腿掉落雙層布座背墊，可更換、換洗重量：(16吋)12.6 / (18吋)13.2 kg前輪尺寸：6吋後輪尺寸：20吋中輪坐墊尺寸：16吋 / 18吋 座寬：(16吋)42 / (18吋)46 cm座深：40 cm座高：49 cm總寬：(16吋)56 / (18吋)62 cm總高：90 cm總長：100 cm承重：100 kg 保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇產地：中國 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅 (未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 主製造廠：RAISE MEDICAL INDUSTRIES, INC 主製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2123" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">5</span>
+          <span>&#34;崴鴻&#34; 機械式輪椅(未滅菌) WH-B012J - 附骨盆帶 B(A)款</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd7831f622a561d89f25e88/original.jpeg?1574404894" alt="&#34;崴鴻&#34; 機械式輪椅(未滅菌) WH-B012J - 附骨盆帶 B(A)款" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">&#34;崴鴻&#34; 機械式輪椅(未滅菌) WH-B012J - 附骨盆帶 B(A)款
+Well Home
+1. 此產品符合長照/身心障礙者輔具補助項目【輪椅-B 款(輕量化量產型)】+【輪椅附加功能-A款(具利於移位功能)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 ※商品保固一年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。 網路販售第一等級醫療器材揭載事項 中文品名：&#34;崴鴻&#34; 機械式輪椅(未滅菌)英文品名：&#34;Well Home&#34; Mechanical wheelchair (Non-sterile) 型號：WH-B012J產地：中國保固年限：一年 (僅限主體，輪子等耗材及人為因素造成之損壞不在保固範疇內) 衛字核可字號：衛署醫器製壹字第004637號 (到期日：119/05/09) 醫療器材商名稱：崴鴻有限公司 主製造廠：WELL HOME HEALTH Products Co., LTD 主製造廠址：Building 1, West of Chenjiabang Road, Penglang, Kunshan Development Zone, Jiangsu, 215333, China 販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商登記地址：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m1wc2106blu0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+  <div class="code-section" data-code="EF01" data-kind="askable" data-quality="best">
+    <h3 class="cs-header">
+      EF01 衣著用輔具
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <div class="cs-banner best">✨ 精準推薦（共 5 筆）</div>
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>多功能取物夾 75cm</span>
+          <span class="code-tag">EF</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/66398846712a7100201dd298/original.jpg?1715046470" alt="多功能取物夾 75cm" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">多功能取物夾 75cm
+OO生活輔具
+此產品符合長照輔具補助項目【衣著用輔具】、身心障礙者輔具補助項目【物品裝置與處理輔具】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 撿東西時彎腰不舒服?東西掉進狹縫空間，手不好進入拿取? 東西放太高拿不到嗎? 一個好的工具能在您遇到無法解決的窘境時，幫您解決問題。 取物夾總長75cm 高處取物神器 360度旋轉前端嘴夾(內徑可達9cm)。 輔助高處拿東西無負擔。 特殊板手設計，使用更輕鬆省力。 前端附磁鐵可撿取鐵製小物件。 台灣製造MIT ■ 商品規格 品牌：OO生活輔具 長度：75 公分 重量：196 公克 材質： 長柄/ 鋁 握把/ PP 保固：無 產地：台灣</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/g1ah0033sil0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>日本製通用輔助筷</span>
+          <span class="code-tag">EF</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd78206622a561de0cd1362/original.jpeg?1574404612" alt="日本製通用輔助筷" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">日本製通用輔助筷
+Daiwa
+1. 此產品符合長照/身心障礙者輔具補助項目【飲食用輔具】2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。長輩年紀漸長，手指力量退化，或者因為中風無法用慣用手執起筷子進食，樂齡網推薦此款筷子，可以讓其更容易自行進食而無需人餵食。連用不慣筷子的外國人亦可輕易使用本筷子而享用美食佳餚。產品特色 建議使用對象：無法出力者。只要輕拿便可輕鬆用餐。容易拿握波浪型設計，夾東西時不會脫落防滑功能。圖內商品僅供示意參考，商品顏色請以上方主圖為準！注意事項 使用前請清洗乾淨。請勿拿本產品作別用途使用。請勿使用於微波爐、烤箱、洗碗機、烘乾機、或設置於高溫處。勿使用漂白劑、洗衣粉清洗本產品。勿使用高溫消毒。請勿用力過當，如變形、破裂，請停止使用。產品規格 尺寸44×10×H205 mm主商品-重量 (公克)16材質ABS樹脂 （70℃〜耐熱溫度-20℃）顏色樣式深藍色 / 紅色 產地日本</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/k1dw5601" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>頂級進食輔助筷 PLUS (左右手通用)</span>
+          <span class="code-tag">EF</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/625f7bc4c9bfcf00183f1100/original.jpg?1650424771" alt="頂級進食輔助筷 PLUS (左右手通用)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">頂級進食輔助筷 PLUS (左右手通用)
+1. 此產品符合長照/身心障礙者輔具補助項目【飲食用輔具】 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 讓高齡者自行進食，協助其重新找回自信有部份高齡者由於種種可能原因而導致手指握力較弱或無法適切地持箸，因而需要別人的餵食。但是若情況許可，在適當的輔具協助下能讓其自行進食，將會大大提昇其自信心，而在這樣的狀況下吃起飯來亦將特別甜美。 『箸ノ助』是日本新款頂級木製進食輔助筷 PLUS (左右手通用)，專為高齡者所設計的餐具，極受好評。亦有日本人將其買來贈送給外國友人，讓不會用筷子的外國人士也能輕鬆享用東方佳餚。 為了滿足種種需求所設計的輔助筷： ● 只要動動手指，人人都能使用的筷子。 ● 筷子能方便分開、不易錯位，方便夾取食物。 ● 筷子能輕鬆夾取，食物不易從尖端滑掉。 ● 人體工學設計，筷子直接放在手上，夾取的手勢就能順勢成型，不費勁就能使用。 『箸ノ助』設計簡易好用、造型優雅。適合因中風、受傷等情況造成無法使用一般筷子者，透過『箸ノ助』就能神奇簡單地進食。 機能 這雙筷子是為了手無法活動自如的對象，也能夠有「一般筷子的體驗」所製作的。流暢曲線好上手、好拿取，簡單設計的外觀在餐桌上使用也很得宜。特別適合已習慣輔助筷、或是希望有「相似一般筷子的體驗」、「出外使用不會太顯眼」等對象。 ● 只要大拇指跟食指能拿得起乒乓球，就能夠使用！ ● 筷柄狹窄處有凹槽，能增加持筷時的穩定性。● 中指微彎托住筷子、只要讓大拇指跟食指施力，就可夾取。 ● 左右皆宜，當右手用累了，還能換左手使用、或是憑當日的狀況來決定哪手用、或者因骨折暫時無法使用慣用手時（右撇子就換左手、反之亦然）等狀況都能使用。 ◎ 榮獲 日本GOOD DESIGN AWARD獎 特長 可使用洗碗機、烘碗機。 左右手皆可使用。 簡易設計和質感，擺脫照護用品的外型。 輕巧好拿，重量約33g。 尖端內側為平面、增加夾取接觸面積，並有溝槽刻紋，提供止滑。 保持原本前一代筷子流線型的美麗曲線設計、且可使用洗碗機清洗 透過食指和拇指輕捏圈示處便能使用，流線型設計一拿便能上手。 ■ 商品規格 ● 材質：PBT樹脂、PBT樹脂，不鏽鋼 ● 重量：約 33g ● 筷子長約：約 21.5cm ● 適用手別：左右手皆可 ● 產地：日本 ● 耐熱温度：100℃（可使用洗碗機、烘碗機） ● 勿使用於紫外線燈方式清潔殺菌。</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/k1dw5606caf0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">4</span>
+          <span>弧形盤 (附吸盤)</span>
+          <span class="code-tag">EF</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/60ebbe1f8ebf73002f7aa98b/original.jpg?1626062367" alt="弧形盤 (附吸盤)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">弧形盤 (附吸盤)
+OO生活輔具
+1. 此產品符合長照/身心障礙者輔具補助項目【飲食用輔具】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。家中長輩曾經中風手抖、或是手部有障礙的人，每次用餐時，總是將食物舀出餐盤外，溢得滿桌都是嗎？防滑底座，即使手抖不便者，也可單手輕易勺取食物。可以防止舀起食物時溢出餐盤外，讓您自在、輕鬆、優雅地享用美食，找回自信與尊嚴！ ● 邊緣弧形加高，可防止食物掉出。● 底部吸盤可將盤子固定於桌上。● 吃飯輔具 防漏防滑附吸盤。● 適用: 單手活動者 銀髮長輩 小孩。● 【通過SGS檢驗】● 食品級無毒塑料 / 不含雙酚A / MIT台灣製造● OO生活輔具，為您的食品安全把關 ■ 商品規格 品牌：OO生活輔具型號：長度：23.5 公分高度：6 公分重量：185 公克容量：520 毫升材質：弧形盤/ 食品級塑膠吸盤/ 熱塑性彈性體顏色：白色, 紅色注意事項 - 請勿使用紫外線殺菌。 - 盤子 / 耐熱溫度70°C - 吸盤 / 不可微波、不可用洗碗機清洗※ 吸盤請以冷水手洗，清洗完畢請平放晾乾，請勿倒放或是豎立以免吸盤變形影響吸力。產地：台灣</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/k1dw5818" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">5</span>
+          <span>可變形湯匙</span>
+          <span class="code-tag">EF</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/69572f6b4ad0f72dc7eaecf3/original.jpg?1767321451=&amp;owner_id=5c2351a9ea89f40001107778" alt="可變形湯匙" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">可變形湯匙
+日本進口
+1. 此產品符合長照/身心障礙者輔具補助項目【飲食用輔具】2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 可任意彎折的設計，讓餐具可以輕易配合長者的進食習慣，即使是手掌不靈活的長者也能重新找回自信與尊嚴。產品特色可依適合自己使用的角度上下左右自由彎曲就可自理用餐。握柄採特殊發泡樹脂，質量極輕，防滑、舒適好握。將兩手大拇指按在想彎曲的位置即可輕鬆彎曲。注意事項本品適於微調整彎曲使用若做90度以上角度彎曲10次以上，恐有金屬疲勞現象。第一次使用前或每次使用後請以食器用之溫和洗劑用海綿洗淨。請遠離火源避免變形燒損。請注意高溫殺菌時握柄部分恐會變型。產品規格材質：本體 - 不鏽鋼、握柄 - 乙丙橡膠(耐熱溫度110度、耐冷溫度-40度)尺寸：握柄 - 長9cm、全長約20cm產地：日本</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/k1dw54020000000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">📥 下載 PDF</button>
+    <button class="btn btn-outline" onclick="copyLink()">🔗 複製連結</button>
+    
+    
+    <a id="back-to-discord-link" class="btn btn-outline" href="discord:///channels/1456655145319534666/1491402720375079054" target="_self" rel="noopener">🚀 返回 Discord 結果頻道</a>
+    
+  </div>
+
+  
+
+
+  <footer>
+    <p>長照智慧諮詢 · 本頁面由系統自動生成 · 有效期 1 天</p>
+    <p>頁面 ID：98ec291a9c</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var created = new Date("2026-04-28T14:43:31.803620");
+  var expiryMs = 1 * 86400000;
+  if (Date.now() - created.getTime() > expiryMs) {
+    document.getElementById("expired-overlay").classList.remove("hidden");
+    document.getElementById("main-content").style.display = "none";
+  }
+})();
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    alert("已複製連結！");
+  });
+}
+</script>
+</body>
+</html>

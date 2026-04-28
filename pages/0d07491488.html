@@ -44,6 +44,18 @@ header .subtitle{font-size:.85em;opacity:.85}
 .query-card .char-count{font-size:.75em;color:var(--muted);margin-top:6px;text-align:right;font-variant-numeric:tabular-nums}
 /* CARD-066：textarea 下方引導 hint（教個管師寫具體需求；配合 CARD-065 三層 fallback） */
 .query-card .query-hint{font-size:.85em;color:#6b7280;margin-top:4px;line-height:1.5}
+/* CARD-069：底部教學區（從 share page 搬來；發揮 OB KNN 語意搜尋優勢；≥8 條範例 + KNN 說明）*/
+.search-tips{margin:24px 0 16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.search-tips h2{font-size:1.05em;color:var(--primary);margin-bottom:6px}
+.search-tips .st-intro{color:var(--muted);font-size:.85em;margin-bottom:14px;line-height:1.7}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tip{display:flex;gap:8px;align-items:flex-start;padding:10px;background:#f8fafc;border-radius:6px}
+.tip-icon{flex-shrink:0;font-size:1.1em}
+.tip-text strong{display:block;color:var(--text);font-size:.92em;margin-bottom:2px}
+.tip-text small{color:var(--muted);font-size:.82em;line-height:1.5}
+.tip.good{border-left:2px solid #16a34a}
+.tip.bad{border-left:2px solid var(--muted)}
+.tip.info{border-left:2px solid #6366f1;grid-column:1/-1;background:#eef2ff}
 .actions{display:flex;justify-content:center;padding:16px 0 24px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;border:none;font-size:1em;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s;font-family:inherit}
 .btn-primary{background:var(--success);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2)}
@@ -217,6 +229,9 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     if (CALC_CITY) payload.city = CALC_CITY;
     if (CALC_ZONE != null && CALC_ZONE !== "") payload.zone = CALC_ZONE;
     if (CALC_FOREIGN_CARE != null) payload.foreign_caregiver = CALC_FOREIGN_CARE;
+    // CARD-069：guild + result_channel pass-through 給後端組 share page Discord deep link（缺值軟降級不破整鏈）
+    if (GUILD) payload.guild = GUILD;
+    if (RESULT_CHANNEL) payload.result_channel = RESULT_CHANNEL;
     return payload;
   }
 

@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CARD-071：軟性防 viewer.html 自身被瀏覽器 cache（GH Pages 不能控 HTTP header，meta 命中部分瀏覽器）；codex CONCERN 補強 -->
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
 <title>長照資源導航站 — 載入中</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -41,7 +45,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans
   var maxRetries = 3;
 
   function load() {
-    fetch(rawUrl)
+    // CARD-071：fetch cache 強制 invalidate（修 Web B/share page 改版後 user 看舊版的 cache bug）
+    var sep = rawUrl.indexOf("?") >= 0 ? "&" : "?";
+    fetch(rawUrl + sep + "ts=" + Date.now(), { cache: "no-store" })
       .then(function(r) {
         if (!r.ok) throw new Error(r.status);
         return r.text();

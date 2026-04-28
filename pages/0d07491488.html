@@ -106,6 +106,77 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   </div>
   
 
+  
+  <section class="search-tips" aria-label="搜尋技巧">
+    <h2>💡 怎樣關鍵字搜尋更有效</h2>
+    <div class="st-intro">系統用 BGE-zh 語意搜尋（KNN）找最相近的商品，<strong>越具體越準</strong>。下面是 OB 知識庫整理的關鍵字撰寫策略：</div>
+    <div class="tips-grid">
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>寫具體商品名</strong>
+          <small>例：「輪椅」「氣墊床」「電動助行器」「四腳拐」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>寫具體需求 + 場景</strong>
+          <small>例：「壓瘡需要減壓墊」「浴室防滑扶手」「夜間如廁起身輔助」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>寫照顧情境關鍵字</strong>
+          <small>例：「臥床照顧」「洗澡移位」「外出散步」「居家防跌」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>症狀 → 改寫為功能詞</strong>
+          <small>「下肢無力」→「助步器 / 行動輔具」；「手抖」→「防滑餐具 / 加重餐具」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>身分 / 適用對象關鍵字</strong>
+          <small>例：「失智症友善」「銀髮族」「失能等級 5 適用」「中重度失能」</small>
+        </div>
+      </div>
+      <div class="tip good">
+        <span class="tip-icon">✅</span>
+        <div class="tip-text">
+          <strong>情境組合（時間＋動作）</strong>
+          <small>例：「夜間如廁」「飯後服藥」「外出輪椅」「淋浴防滑」</small>
+        </div>
+      </div>
+      <div class="tip bad">
+        <span class="tip-icon">❌</span>
+        <div class="tip-text">
+          <strong>避免抽象身體狀況描述</strong>
+          <small>例：「下肢無力」「行動不便」（語意太廣，KNN 容易撈到不對的商品 → 請改寫成功能詞）</small>
+        </div>
+      </div>
+      <div class="tip bad">
+        <span class="tip-icon">❌</span>
+        <div class="tip-text">
+          <strong>避免醫療 / 診斷術語</strong>
+          <small>例：「肌少症」「骨關節炎」「巴金森氏症」（請改寫成需要的輔具或情境關鍵字）</small>
+        </div>
+      </div>
+      <div class="tip info">
+        <span class="tip-icon">🤖</span>
+        <div class="tip-text">
+          <strong>為什麼 KNN 會「猜」</strong>
+          <small>系統理解字義後找最相關商品（不是字串比對）— 即使沒有完全相符的商品，也會列出最接近的 4-5 筆；越具體越準，越抽象越容易撈到不對的。所以「具體商品名 / 功能詞 / 情境」遠比「症狀 / 醫療術語」有效。</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="status-success" class="status-box success">
     <h2>✅ 已送出</h2>
     <p id="success-detail">請回 Discord 查看結果頻道。</p>

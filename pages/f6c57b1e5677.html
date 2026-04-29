@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CARD-055a-3 PDPA 最低防線（Q3 自決）：防 Google index；30天TTL/opaque token/真去識別留 CARD-055-pdpa-prod -->
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="bingbot" content="noindex,nofollow">
+<title>長照智慧諮詢 — 產品資訊</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.meta-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;font-size:.82em;color:var(--muted)}
+.meta-bar .tag{background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:20px;font-weight:600}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-card .card-header{background:var(--primary-light);padding:12px 16px;font-weight:700;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px}
+.product-card .card-header .num{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.product-card .card-body{padding:16px}
+.product-card .card-body img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:#f1f5f9}
+.product-card .desc{font-size:.92em;line-height:1.8;white-space:pre-wrap;margin-bottom:12px}
+.product-card .vendor-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88em;border-top:1px solid var(--border);padding-top:12px}
+.product-card .vendor-row .vendor-label{color:var(--muted)}
+.product-card .vendor-row .vendor-name{font-weight:600;color:var(--text)}
+.product-card .vendor-row a{color:var(--primary);text-decoration:none;border:1px solid var(--primary);padding:4px 10px;border-radius:6px;font-size:.85em}
+.product-card .vendor-row a:hover{background:var(--primary);color:#fff}
+.actions{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;border:none;font-size:.9em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+/* CARD-071：返 Discord 結果頻道專屬色（Discord 紫 #5865F2 / hover #4752C4 / 白字）*/
+.btn-discord{background:#5865F2;color:#fff;border:none}
+.btn-discord:hover{background:#4752C4;color:#fff}
+.calc-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px}
+.calc-summary h2{font-size:1.05em;color:var(--primary);margin-bottom:10px;letter-spacing:.5px}
+.calc-summary .calc-meta{font-size:.88em;color:var(--muted);margin-bottom:12px;line-height:1.8}
+/* CARD-070：calc-summary section 勾選代碼清單（含碼+名稱；CARD-069 chip 升級為 ul-li 易讀清單）*/
+.calc-summary .selected-codes{margin-bottom:12px}
+.calc-summary .selected-codes .sc-label{display:block;color:var(--muted);font-size:.82em;margin-bottom:4px}
+.calc-summary .selected-codes-list{list-style:disc inside;margin:0;padding-left:8px;font-size:.88em;line-height:1.7}
+.calc-summary .selected-codes-list li{color:var(--text)}
+.calc-summary .selected-codes-list li .sc-code{font-weight:700;color:var(--primary);margin-right:2px}
+.calc-summary table.calc-packages{width:100%;border-collapse:collapse;font-size:.88em}
+.calc-summary table.calc-packages th,.calc-summary table.calc-packages td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.calc-summary table.calc-packages th{background:var(--primary-light);color:var(--primary);font-weight:600;font-size:.82em}
+.calc-summary table.calc-packages td.num{text-align:right;font-variant-numeric:tabular-nums}
+.calc-summary .warning{margin-top:10px;background:#fef3c7;color:#92400e;border-left:4px solid #f59e0b;padding:8px 12px;font-size:.82em;border-radius:6px}
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:.92em}
+.query-box .query-label{color:var(--muted);font-size:.82em;margin-bottom:4px}
+.query-box .query-text{color:var(--text);line-height:1.6}
+.product-card .card-header .code-tag{margin-left:auto;background:var(--primary);color:#fff;font-size:.72em;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
+/* CARD-055a-2：每 product-card 加 qty-tag (header) + estimate-row (body) + matches_empty/per-code fallback */
+.product-card .card-header .qty-tag{background:var(--primary-light);color:var(--primary);font-size:.78em;padding:2px 10px;border-radius:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.product-card .card-body .estimate-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.9em}
+.product-card .card-body .estimate-row .est-label{color:var(--muted);font-weight:600}
+.product-card .card-body .estimate-row .est-value{color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums}
+.no-product-notice{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fcd34d;color:#854d0e;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px;text-align:center;font-weight:600;font-size:.95em}
+/* CARD-065b：code_sections 三態 banner（best/soft/fallback/service）*/
+.code-section{margin-bottom:24px}
+.cs-header{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.cs-banner{padding:10px 14px;border-radius:8px;font-size:.9em;margin-bottom:12px;line-height:1.6}
+.cs-banner.best{background:#dcfce7;color:#166534;border-left:3px solid #16a34a}
+.cs-banner.soft{background:#fef3c7;color:#854d0e;border-left:3px solid #f59e0b}
+.cs-banner.fallback{background:#f1f5f9;color:#475569;border-left:3px solid #64748b}
+.cs-banner.service{background:#e0e7ff;color:#3730a3;border-left:3px solid #6366f1}
+/* CARD-065b：底部寫死教學區（位置：footer 上方；spec §5 4-5 條範例）*/
+.search-tips{margin:32px 0 16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.search-tips h2{font-size:1.05em;color:var(--primary);margin-bottom:12px}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tip{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:6px}
+.tip-icon{flex-shrink:0;font-size:1.1em}
+.tip-text strong{display:block;color:var(--text);font-size:.92em}
+.tip-text small{color:var(--muted);font-size:.82em;line-height:1.5}
+.tip.good{border-left:2px solid #16a34a}
+.tip.bad{border-left:2px solid var(--muted)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.expired-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.expired-overlay h1{font-size:1.6em;color:var(--danger);margin-bottom:12px}
+.expired-overlay p{color:var(--muted);font-size:1em}
+.hidden{display:none}
+/* === CARD-042：header 下橫幅 + footer 前四包錢進度條（不動 CARD-028 鎖的 gradient header / 產品卡）=== */
+.info-banner{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:.82em}
+.info-banner .ib-tag{background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:16px;font-weight:600;white-space:nowrap}
+.info-banner .ib-tag.warn{background:#fef3c7;color:#854d0e}
+.info-banner .ib-label{color:var(--muted);margin-right:3px}
+.quota-progress{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px}
+.quota-progress h2{font-size:1em;color:var(--primary);margin-bottom:12px;letter-spacing:.5px}
+.quota-progress .qp-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;margin-bottom:8px;font-size:.82em}
+.quota-progress .qp-row:last-child{margin-bottom:0}
+.quota-progress .qp-label{font-weight:700}
+.quota-progress .qp-label.b1{color:#3b82f6}
+.quota-progress .qp-label.b2{color:#10b981}
+.quota-progress .qp-label.b3{color:#f59e0b}
+.quota-progress .qp-label.b4{color:#8b5cf6}
+.quota-progress .qp-bar{height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden}
+.quota-progress .qp-fill{height:100%;border-radius:5px;transition:width .3s}
+.quota-progress .qp-fill.b1{background:#3b82f6}
+.quota-progress .qp-fill.b2{background:#10b981}
+.quota-progress .qp-fill.b3{background:#f59e0b}
+.quota-progress .qp-fill.b4{background:#8b5cf6}
+.quota-progress .qp-fill.over{background:var(--danger)!important}
+.quota-progress .qp-nums{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.9em}
+.quota-progress .qp-pct{font-weight:700;color:var(--text);margin-left:4px}
+.quota-progress .qp-pct.over{color:var(--danger)}
+@media print{
+  body{background:#fff}
+  .actions,.meta-bar{display:none!important}
+  .product-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  header{background:#1e40af!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border:none}
+}
+</style>
+</head>
+<body>
+<div id="expired-overlay" class="expired-overlay hidden">
+  <h1>⏰ 此頁面已過期</h1>
+  <p>分享頁面已超過 1 天有效期，請重新搜尋。</p>
+</div>
+
+<div id="main-content" class="container">
+  <header>
+    <h1>長照智慧諮詢</h1>
+    <div class="subtitle">產品資訊分享</div>
+  </header>
+
+  
+  
+  <div class="info-banner" aria-label="個案基本資訊">
+    
+    <span class="ib-tag"><span class="ib-label">收入別</span>中低收入戶</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">縣市</span>基隆市</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">分區</span>第 1 類</span>
+    
+    <span class="ib-tag">
+      <span class="ib-label">外看</span>無
+    </span>
+  </div>
+  
+
+  <div class="meta-bar">
+    <span>🕐 建立時間：2026-04-29 14:51</span>
+    <span>📅 有效期至：2026-04-30</span>
+    <span class="tag">輔具補助查詢</span>
+  </div>
+
+  
+
+  
+  <section class="calc-summary">
+    <h2>補助試算摘要</h2>
+    <div class="calc-meta">
+      第 7 級（重度） ／ 中低收入戶
+       ／ 基隆市
+      ／ 第 1 類
+      
+    </div>
+    
+    
+    <div class="selected-codes" aria-label="勾選的補助代碼">
+      <span class="sc-label">勾選代碼：</span>
+      <ul class="selected-codes-list">
+        
+        <li><span class="sc-code">EC01</span>：輪椅-A款(非輕量化量產型)</li>
+        
+      </ul>
+    </div>
+    
+    <table class="calc-packages">
+      <thead>
+        <tr>
+          <th>補助包</th>
+          <th class="num">額度上限</th>
+          <th class="num">已用</th>
+          <th class="num">剩餘</th>
+          <th class="num">自付比例</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>B1 照顧及專業服務</td>
+          <td class="num">32,090</td>
+          <td class="num">0</td>
+          <td class="num">32,090</td>
+          <td class="num">5%</td>
+        </tr>
+        
+        <tr>
+          <td>B2 交通接送服務</td>
+          <td class="num">1,680</td>
+          <td class="num">0</td>
+          <td class="num">1,680</td>
+          <td class="num">10%</td>
+        </tr>
+        
+        <tr>
+          <td>B3 輔具及居家無障礙</td>
+          <td class="num">40,000</td>
+          <td class="num">0</td>
+          <td class="num">40,000</td>
+          <td class="num">10%</td>
+        </tr>
+        
+        <tr>
+          <td>B4 喘息服務</td>
+          <td class="num">48,510</td>
+          <td class="num">0</td>
+          <td class="num">48,510</td>
+          <td class="num">5%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  <div class="code-section" data-code="EC01" data-kind="askable" data-quality="best">
+    <h3 class="cs-header">
+      EC01 輪椅-A款(非輕量化量產型)
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <div class="cs-banner best">✨ 精準推薦（共 5 筆）</div>
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>安愛 輕盈輪椅 (小輪) - 安愛 機械式輪椅(未滅菌) B(A)款</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/666bbbdc432626001ca8b60e/original.jpg?1718336476" alt="安愛 輕盈輪椅 (小輪) - 安愛 機械式輪椅(未滅菌) B(A)款" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">安愛 輕盈輪椅 (小輪) - 安愛 機械式輪椅(未滅菌) B(A)款
+A&amp;I
+此產品符合長照/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：安愛 型號：LTAL1208 總長：110 cm 總寬：(18&#34;型) 60 cm 總高：93 cm 座寬：(18&#34;型) 45 cm 重量：6.6 kg 座深：40 cm 座高：50 cm承重：110kg 前輪：直徑 20cm ±3% 後輪：直徑 30cm ±3% 保固：本體保固五年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。 產地：中國 網路販售第一等級醫療器材揭載事項 中文品名：安愛 機械式輪椅(未滅菌) 英文品名：A&amp;amp;I Mechanical Wheelchair(non-sterile) 衛字核可字號：衛署醫器陸輸壹字 第000231號 (到期日：115/04/21) 醫療器材商名稱：安發貿易股份有限公司 主製造廠：SHUNDE A&amp;amp;I INDUSTRIES LTD. 主製造廠址：LIANDU INDUSTRY PARK, ELIU TOWN, SHUNDE DISTRICT, FOSHAN CITY, GUANG DONG, 528300, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2136" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>LUGA戶外輕量型輪椅-自推輪 B款 - &#34;NOVA&#34; 輪椅(未滅菌)</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/689d763ba4286a74fac19d66/original.jpg?1755149883" alt="LUGA戶外輕量型輪椅-自推輪 B款 - &#34;NOVA&#34; 輪椅(未滅菌)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">LUGA戶外輕量型輪椅-自推輪 B款 - &#34;NOVA&#34; 輪椅(未滅菌)
+NOVA
+此產品符合長照/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。產品規格 座寬：39cm座深：40cm背高：40cm前座高：45cm座仰角：3度扶手高度：21cm車體全寬：63cm車體全長：102cm車體全高：86cm收合寬度：35cm全車重：11.8kg最大荷重：100kg保固：一年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。產地：台灣網路販售第一等級醫療器材揭載事項中文品名：&#34;NOVA&#34; 輪椅(未滅菌)衛字核可字號：衛署醫器製壹字號000936號 (到期日：120/01/10)醫療器材商名稱：光星骨科復健器材股份有限公司二廠主製造廠：光星骨科復健器材股份有限公司二廠主製造廠址：臺中市神岡區豐洲路1096、1102號販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商登記地址：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2109" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>輪椅 躺款 B(AB) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/684a62e22c0150d23b2ebe89/original.jpg?1749705442" alt="輪椅 躺款 B(AB) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 躺款 B(AB) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)
+富士康
+此產品符合長照/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)、EC05輪椅附加功能-B款(具仰躺功能)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：富士康 型號：(座寬16&#34;)AB1616 / (座寬18&#34;)AB1618 車體尺寸： 總長 - 110cm 總寬 - (座寬16&#34;)62cm / (座寬18&#34;)65cm 總高 - 96.5cm 座椅規格： 座寬 - (16&#34;)42cm / (18&#34;)46cm 座深 - 42cm 座高 - 48cm 淨重：(16&#34;) 16kg / (18&#34;) 17kg 承重：110kg 功能性：頭枕可調高、靠腳可拆卸、扶手可後掀/可拆卸、仰躺角度0°~170° 保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。 產地：中國 *實際產品尺寸與數據誤差值在±2.5公分(cm)±0.5公斤(kg) *商品圖片及顏色僅供參考，出貨依實際庫存為主 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅(未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字 第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 製造廠：RAISE MEDICAL INDUSTRIES, INC 製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2138" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">4</span>
+          <span>輪椅 介護輪 16吋 B(A)款 FZK-K4</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/62ff29526fd0df0022531864/original.jpg?1660889426" alt="輪椅 介護輪 16吋 B(A)款 FZK-K4" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 介護輪 16吋 B(A)款 FZK-K4
+富士康
+此產品符合長照2.0/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)】 如欲了解長照2.0補助申請資訊，請撥打1966長照服務專線諮詢。 商品主圖僅供示意參考，實際出貨布套為此花色。 《商品圖片及顏色僅供參考，出貨依實際庫存為主》 《加購商品》 富士康輪椅頭靠36cm寬 黑色網布 (適用輪椅坐寬16吋-18吋) 下載『輪椅頭靠』安裝使用說明 產品規格 品牌：富士康型號：FZK-K4材質：輕量化鋁合金附加小腿腳帶，防止小腿掉落雙層布座背墊，可更換、換洗後輪尺寸：16吋小輪坐墊尺寸：16吋 / 18吋 座寬：(16吋)42 / (18吋)46 cm座深：40 cm座高：49 cm總寬：(16吋)59 / (18吋)63 cm總高：90 cm總長：100 cm承重：100 kg 淨重：(16吋)12.7 kg / (18吋)12.8 kg保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇產地：中國 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅 (未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 主製造廠：RAISE MEDICAL INDUSTRIES, INC 主製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商登記地址：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2124" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">5</span>
+          <span>輪椅 仰款 B(AC) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)</span>
+          <span class="code-tag">EC</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/684a72d4c52b5e000db2be49/original.jpg?1749709524" alt="輪椅 仰款 B(AC) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">輪椅 仰款 B(AC) 16吋介護輪 - &#34;富士康&#34; 機械式輪椅(未滅菌)
+富士康
+此產品符合長照/身心障礙者輔具補助項目【EC02輪椅-B款(輕量化 量產型)、EC04輪椅附加功能-A款(具利於移位功能)、EC05輪椅附加功能-C款(具空中傾倒功能)】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：富士康 型號：(座寬16&#34;)AC1616 / (座寬18&#34;)AC1618 車體尺寸： 總長 - 110cm 總寬 - (座寬16&#34;)65cm / (座寬18&#34;)67cm 總高 - 94cm 座椅規格： 座寬 - (16&#34;)42cm / (18&#34;)46cm 座深 - 42cm 座高 - 48cm 淨重：(16&#34;) 18.5kg / (18&#34;) 19kg 承重：110kg 功能性：頭枕可調高、靠腳可拆卸、扶手可後掀/可拆卸、空中傾倒0°~35° 保固：本體保固三年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。 產地：中國 *實際產品尺寸與數據誤差值在±2.5公分(cm)±0.5公斤(kg) *商品圖片及顏色僅供參考，出貨依實際庫存為主 網路販售第一等級醫療器材揭載事項 中文品名：&#34;富士康&#34; 機械式輪椅(未滅菌) 英文品名：&#34;FUZIKON&#34; Mechanical wheelchair(Non-sterile) 衛字核可字號：衛部醫器陸輸壹字 第004891號 (到期日：118/02/23) 醫療器材商名稱：富士康醫療器材有限公司 製造廠：RAISE MEDICAL INDUSTRIES, INC 製造廠址：3#, 4#, PHASE I, NANSHA INDUSTRIAL VILLAGE, JIANGLI NORTH ROAD, DANZAO TOWN, NANHAI DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/m2wc2140" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">📥 下載 PDF</button>
+    <button class="btn btn-outline" onclick="copyLink()">🔗 複製連結</button>
+    
+    
+    <a id="back-to-discord-link" class="btn btn-discord" href="discord:///channels/1456655145319534666/1491402720375079054" target="_self" rel="noopener">🚀 返回 Discord 結果頻道</a>
+    
+  </div>
+
+  
+
+
+  <footer>
+    <p>長照智慧諮詢 · 本頁面由系統自動生成 · 有效期 1 天</p>
+    <p>頁面 ID：1d08d1d353</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var created = new Date("2026-04-29T14:51:50.721897");
+  var expiryMs = 1 * 86400000;
+  if (Date.now() - created.getTime() > expiryMs) {
+    document.getElementById("expired-overlay").classList.remove("hidden");
+    document.getElementById("main-content").style.display = "none";
+  }
+})();
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    alert("已複製連結！");
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CARD-055a-3 PDPA 最低防線（Q3 自決）：防 Google index；30天TTL/opaque token/真去識別留 CARD-055-pdpa-prod -->
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="bingbot" content="noindex,nofollow">
+<title>長照智慧諮詢 — 產品資訊</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.meta-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;font-size:.82em;color:var(--muted)}
+.meta-bar .tag{background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:20px;font-weight:600}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-card .card-header{background:var(--primary-light);padding:12px 16px;font-weight:700;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px}
+.product-card .card-header .num{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.product-card .card-body{padding:16px}
+.product-card .card-body img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:#f1f5f9}
+.product-card .desc{font-size:.92em;line-height:1.8;white-space:pre-wrap;margin-bottom:12px}
+.product-card .vendor-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88em;border-top:1px solid var(--border);padding-top:12px}
+.product-card .vendor-row .vendor-label{color:var(--muted)}
+.product-card .vendor-row .vendor-name{font-weight:600;color:var(--text)}
+.product-card .vendor-row a{color:var(--primary);text-decoration:none;border:1px solid var(--primary);padding:4px 10px;border-radius:6px;font-size:.85em}
+.product-card .vendor-row a:hover{background:var(--primary);color:#fff}
+.actions{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;border:none;font-size:.9em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+/* CARD-071：返 Discord 結果頻道專屬色（Discord 紫 #5865F2 / hover #4752C4 / 白字）*/
+.btn-discord{background:#5865F2;color:#fff;border:none}
+.btn-discord:hover{background:#4752C4;color:#fff}
+.calc-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px}
+.calc-summary h2{font-size:1.05em;color:var(--primary);margin-bottom:10px;letter-spacing:.5px}
+.calc-summary .calc-meta{font-size:.88em;color:var(--muted);margin-bottom:12px;line-height:1.8}
+/* CARD-070：calc-summary section 勾選代碼清單（含碼+名稱；CARD-069 chip 升級為 ul-li 易讀清單）*/
+.calc-summary .selected-codes{margin-bottom:12px}
+.calc-summary .selected-codes .sc-label{display:block;color:var(--muted);font-size:.82em;margin-bottom:4px}
+.calc-summary .selected-codes-list{list-style:disc inside;margin:0;padding-left:8px;font-size:.88em;line-height:1.7}
+.calc-summary .selected-codes-list li{color:var(--text)}
+.calc-summary .selected-codes-list li .sc-code{font-weight:700;color:var(--primary);margin-right:2px}
+.calc-summary table.calc-packages{width:100%;border-collapse:collapse;font-size:.88em}
+.calc-summary table.calc-packages th,.calc-summary table.calc-packages td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.calc-summary table.calc-packages th{background:var(--primary-light);color:var(--primary);font-weight:600;font-size:.82em}
+.calc-summary table.calc-packages td.num{text-align:right;font-variant-numeric:tabular-nums}
+.calc-summary .warning{margin-top:10px;background:#fef3c7;color:#92400e;border-left:4px solid #f59e0b;padding:8px 12px;font-size:.82em;border-radius:6px}
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:.92em}
+.query-box .query-label{color:var(--muted);font-size:.82em;margin-bottom:4px}
+.query-box .query-text{color:var(--text);line-height:1.6}
+.query-box .query-row + .query-row{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.query-box .query-note{display:inline-block;margin-top:4px;color:#854d0e;font-size:.82em}
+.code-query-box{margin-bottom:12px}
+.product-card .card-header .code-tag{margin-left:auto;background:var(--primary);color:#fff;font-size:.72em;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
+/* CARD-055a-2：每 product-card 加 qty-tag (header) + estimate-row (body) + matches_empty/per-code fallback */
+.product-card .card-header .qty-tag{background:var(--primary-light);color:var(--primary);font-size:.78em;padding:2px 10px;border-radius:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.product-card .card-body .estimate-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.9em}
+.product-card .card-body .estimate-row .est-label{color:var(--muted);font-weight:600}
+.product-card .card-body .estimate-row .est-value{color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums}
+.no-product-notice{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fcd34d;color:#854d0e;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px;text-align:center;font-weight:600;font-size:.95em}
+/* CARD-065b：code_sections 三態 banner（best/soft/fallback/service）*/
+.code-section{margin-bottom:24px}
+.cs-header{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.cs-banner{padding:10px 14px;border-radius:8px;font-size:.9em;margin-bottom:12px;line-height:1.6}
+.cs-banner.best{background:#dcfce7;color:#166534;border-left:3px solid #16a34a}
+.cs-banner.soft{background:#fef3c7;color:#854d0e;border-left:3px solid #f59e0b}
+.cs-banner.fallback{background:#f1f5f9;color:#475569;border-left:3px solid #64748b}
+.cs-banner.service{background:#e0e7ff;color:#3730a3;border-left:3px solid #6366f1}
+/* CARD-065b：底部寫死教學區（位置：footer 上方；spec §5 4-5 條範例）*/
+.search-tips{margin:32px 0 16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.search-tips h2{font-size:1.05em;color:var(--primary);margin-bottom:12px}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tip{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:6px}
+.tip-icon{flex-shrink:0;font-size:1.1em}
+.tip-text strong{display:block;color:var(--text);font-size:.92em}
+.tip-text small{color:var(--muted);font-size:.82em;line-height:1.5}
+.tip.good{border-left:2px solid #16a34a}
+.tip.bad{border-left:2px solid var(--muted)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.expired-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.expired-overlay h1{font-size:1.6em;color:var(--danger);margin-bottom:12px}
+.expired-overlay p{color:var(--muted);font-size:1em}
+.hidden{display:none}
+/* === CARD-042：header 下橫幅 + footer 前四包錢進度條（不動 CARD-028 鎖的 gradient header / 產品卡）=== */
+.info-banner{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:.82em}
+.info-banner .ib-tag{background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:16px;font-weight:600;white-space:nowrap}
+.info-banner .ib-tag.warn{background:#fef3c7;color:#854d0e}
+.info-banner .ib-label{color:var(--muted);margin-right:3px}
+.quota-progress{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px}
+.quota-progress h2{font-size:1em;color:var(--primary);margin-bottom:12px;letter-spacing:.5px}
+.quota-progress .qp-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;margin-bottom:8px;font-size:.82em}
+.quota-progress .qp-row:last-child{margin-bottom:0}
+.quota-progress .qp-label{font-weight:700}
+.quota-progress .qp-label.b1{color:#3b82f6}
+.quota-progress .qp-label.b2{color:#10b981}
+.quota-progress .qp-label.b3{color:#f59e0b}
+.quota-progress .qp-label.b4{color:#8b5cf6}
+.quota-progress .qp-bar{height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden}
+.quota-progress .qp-fill{height:100%;border-radius:5px;transition:width .3s}
+.quota-progress .qp-fill.b1{background:#3b82f6}
+.quota-progress .qp-fill.b2{background:#10b981}
+.quota-progress .qp-fill.b3{background:#f59e0b}
+.quota-progress .qp-fill.b4{background:#8b5cf6}
+.quota-progress .qp-fill.over{background:var(--danger)!important}
+.quota-progress .qp-nums{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.9em}
+.quota-progress .qp-pct{font-weight:700;color:var(--text);margin-left:4px}
+.quota-progress .qp-pct.over{color:var(--danger)}
+@media print{
+  body{background:#fff}
+  .actions,.meta-bar{display:none!important}
+  .product-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  header{background:#1e40af!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border:none}
+}
+</style>
+</head>
+<body>
+<div id="expired-overlay" class="expired-overlay hidden">
+  <h1>⏰ 此頁面已過期</h1>
+  <p>分享頁面已超過 1 天有效期，請重新搜尋。</p>
+</div>
+
+<div id="main-content" class="container">
+  <header>
+    <h1>長照智慧諮詢</h1>
+    <div class="subtitle">產品資訊分享</div>
+  </header>
+
+  
+  
+  <div class="info-banner" aria-label="個案基本資訊">
+    
+    <span class="ib-tag"><span class="ib-label">收入別</span>低收入戶</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">縣市</span>新竹縣</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">分區</span>第 2 類</span>
+    
+    <span class="ib-tag">
+      <span class="ib-label">外看</span>無
+    </span>
+  </div>
+  
+
+  <div class="meta-bar">
+    <span>🕐 建立時間：2026-05-19 15:55</span>
+    <span>📅 有效期至：2026-05-20</span>
+    <span class="tag">輔具補助查詢</span>
+  </div>
+
+  
+
+  
+  <section class="calc-summary">
+    <h2>補助試算摘要</h2>
+    <div class="calc-meta">
+      第 3 級（輕度） ／ 低收入戶
+       ／ 新竹縣
+      ／ 第 2 類
+      
+    </div>
+    
+    
+    <div class="selected-codes" aria-label="勾選的補助代碼">
+      <span class="sc-label">勾選代碼：</span>
+      <ul class="selected-codes-list">
+        
+        <li><span class="sc-code">EA01-1</span>：馬桶增高器</li>
+        
+      </ul>
+    </div>
+    
+    <table class="calc-packages">
+      <thead>
+        <tr>
+          <th>補助包</th>
+          <th class="num">額度上限</th>
+          <th class="num">已用</th>
+          <th class="num">剩餘</th>
+          <th class="num">自付比例</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>B1 照顧及專業服務</td>
+          <td class="num">15,460</td>
+          <td class="num">0</td>
+          <td class="num">15,460</td>
+          <td class="num">0%</td>
+        </tr>
+        
+        <tr>
+          <td>B2 交通接送服務</td>
+          <td class="num">1,840</td>
+          <td class="num">0</td>
+          <td class="num">1,840</td>
+          <td class="num">0%</td>
+        </tr>
+        
+        <tr>
+          <td>B3 輔具及居家無障礙</td>
+          <td class="num">40,000</td>
+          <td class="num">0</td>
+          <td class="num">40,000</td>
+          <td class="num">0%</td>
+        </tr>
+        
+        <tr>
+          <td>B4 喘息服務</td>
+          <td class="num">32,340</td>
+          <td class="num">0</td>
+          <td class="num">32,340</td>
+          <td class="num">0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  <div class="code-section" data-code="EA01-1" data-kind="askable" data-quality="fallback">
+    <h3 class="cs-header">
+      EA01-1 馬桶增高器
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <section class="query-box code-query-box">
+      
+      <div class="query-row">
+        <div class="query-label">🔍 家屬需求描述</div>
+        <div class="query-text">家中長輩年紀大了，腿腳不方便</div>
+      </div>
+      
+      
+      <div class="query-row">
+        <div class="query-label">AI 解讀</div>
+        <div class="query-text">長輩 腿腳不方便 下肢無力 助行 支撐 穩定 手杖 拐杖 助行器 輪椅 推車 行動輔具 移位 居家無障礙</div>
+        
+      </div>
+      
+    </section>
+    
+
+    
+      
+      <div class="cs-banner fallback">📦 以下是 EA01-1 補助所有 20 筆商品（找不到語意對應，請手動篩選）</div>
+      
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>017B舒適收合型便盆洗澡椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd78575622a561d89f26281/original.jpeg?1574405491" alt="017B舒適收合型便盆洗澡椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">017B舒適收合型便盆洗澡椅
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。產品規格 主體材質：鋁合金主體顏色：綠色座墊材質：泡棉+塑鋼板總體長寬高：61cm / 58cm / 91cm座寬 / 座深：40 / 40cm座高調整：44.5 ~ 53cm最大荷重：80kg保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣網路販售第一等級醫療器材揭載事項中文品名：&#34;NOVA&#34;機械椅(未滅菌)衛字核可字號：衛署醫器製壹字004847號 (到期日：117/10/03)醫療器材商名稱：光星骨科復健器材股份有限公司製造廠：光星骨科復健器材股份有限公司製造廠址：臺中市神岡區豐洲路1096、1102號販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商登記地址：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6414grn0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>AMIGO 手推移位型附輪洗澡馬桶椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/6073cc2edeccea003e7b4a15/original.jpg?1618201646" alt="AMIGO 手推移位型附輪洗澡馬桶椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">AMIGO 手推移位型附輪洗澡馬桶椅
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【便盆椅(一般型)、沐浴椅或便盆椅附加功能-附輪】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。產品規格主體材質：鋁合金座墊材質：PU 加厚座墊座寬 / 座深：45 / 41cm背高：38cm前座高：47cm 扶手高度：18cm / 20.5cm / 23cm / 25.5cm / 28cm車體全寬：65cm車體全長：100cm車體全高：91.5cm全車重：16.1kg 最大荷重：120kg保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣網路販售第一等級醫療器材揭載事項中文品名：&#34;NOVA&#34; 機械椅(未滅菌)衛字核可字號：衛署醫器製壹字004847號 (到期日：117/10/03)醫療器材商名稱：光星骨科復健器材股份有限公司二廠主製造廠：光星骨科復健器材股份有限公司二廠主製造廠址：臺中市神岡區豐洲路1096、1102號販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商許可執照：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r2bt6406blk0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>Baja 擺位型洗澡馬桶椅(空中傾倒)</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd78578622a561d89f26288/original.jpeg?1574405494" alt="Baja 擺位型洗澡馬桶椅(空中傾倒)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">Baja 擺位型洗澡馬桶椅(空中傾倒)
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【便盆椅(一般型)、沐浴椅或便盆椅附加功能-附輪】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：NOVA 光星主體材質：鋁合金座墊材質：PU 加厚座墊座寬 / 座深 : 44 / 42cm 背高：49cm後座高：55cm扶手高度：22cm踏板長度：40-50cm(六段式高度可調踏板)車體全寬：54cm車體全長：100cm (打到最傾斜時全長約120cm) 車體全高：110-140cm傾倒角度：6-25°全車重：16.4kg最大荷重：120kg 保固：本體保固五年，輪胎、剎車皮、坐墊/背靠等消耗配件及人為損壞不在保固範疇內。產地：台灣 網路販售第一等級醫療器材揭載事項 中文品名：&#34;NOVA&#34; 機械椅(未滅菌) 英文品名：&#34;NOVA&#34; Mechanical Chair (Non-Sterile) 衛字核可字號：衛署醫器製壹字004847號 (到期日：117/10/3) 販賣業醫療器材商名稱：光星骨科復健器材股份有限公司二廠 製造廠：光星骨科復健器材股份有限公司 製造廠址：臺中市神岡區豐洲路1096、1102號 販賣業醫療器材商名稱：樂齡生活事業股份有限公司 販賣業醫療器材商登記地址：台北市大安路一段179號 販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號 製造日期：請參見產品包裝上標示 有效期間：請參見產品包裝上標示 消費者使用前應詳閱產品說明書 諮詢專線：(02)2577-5025 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6415blk0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">4</span>
+          <span>CS012介護舒適型便盆洗澡椅-不鏽鋼</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/6076b28d5b77b4832d70bff8/original.jpg?1618391693" alt="CS012介護舒適型便盆洗澡椅-不鏽鋼" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">CS012介護舒適型便盆洗澡椅-不鏽鋼
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【便盆椅(一般型)、沐浴椅或便盆椅附加功能-附輪】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。網路販售第一等級醫療器材揭載事項主體材質：不鏽鋼主體顏色：銀白主體管徑：1吋 (5.4mm)座墊材質：泡棉+朔鋼板總體 長 / 寬 / 高：78cm / 58cm/ 94 cm座寬/座深：40cm/40cm座高：47cm最大荷重：100kg內徑高度：含便桶-37cm、不含便桶-48cm內徑寬度：42cm保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣網路販售第一等級醫療器材揭載事項中文品名：&#34;NOVA&#34;機械椅(未滅菌)衛字核可字號：衛部醫器製壹字004847號 (到期日：117/10/03)醫療器材商名稱：光星骨科復健器材股份有限公司二廠主製造廠：光星骨科復健器材股份有限公司二廠主製造廠址：臺中市神岡區豐洲路1096、1102號販賣業醫療器材商名稱：樂齡生活事業股份有限公司販賣業醫療器材商登記地址：台北市大安路一段179號販賣業醫療器材商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r2bt6405sil0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">5</span>
+          <span>Just Fit 可攜式便器椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/678ef0fb5e87c6000ca9faad/original.jpg?1737421051" alt="Just Fit 可攜式便器椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">Just Fit 可攜式便器椅
+安壽
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 許多長者由於行動不便，需要在房間設一個便座，但是台灣一般醫療器材行所販售的便器椅，不僅不美觀，而且易生異味。讓使用者感到失去尊嚴及生活品質。 現在推薦一款日本高齡長者房間必備的舒適便盆椅，讓年長者如廁更方便，夜晚不必急著跑廁所，可避免許多意外的發生。方便清洗，房間不再有令人難聞的異味，讓長者及照護者皆感到安適。讓我們所鍾愛的人享有尊嚴的生活品質! 來自日本介護用品領導品牌安壽所開發的 Just Fit 可攜式便器椅，透過模擬海豚嘴型的座椅弧度設計，幫助入座時能更輕易達到理想排泄姿勢，避免尿液外漏。此外，除了扶手高、扶手寬、座高、座仰角皆可依據身形調整之外，配備可拆式扶手，安全平移更省力。座墊採用日本 SlAA ISO22196 抗菌加工材質，能有效減少細菌孳生。 盛接您的所有 海豚曲線，好臀座墊 日本安壽研發團隊透過模擬海豚嘴型打造座椅弧度，以座墊中央微凸、兩側凹陷設計，幫助使用者入座時，能自然達到理想排泄姿勢。避免尿液外漏，幫助維持環境整潔，可減少照護者須反覆清潔的負擔。腳架內側弧度外擴，整體造型圓潤無死角，融合舒適與安全特性，展現出日本職人的細膩與用心。 淨空扶手，輕鬆位移 夜晚如廁，安全加乘 透過可拆式扶手設計，讓使用者的轉移位過程更省力、安全、有效率。夜晚如廁，視線不佳時，減少肢體受阻礙、撞擊造成受傷機率。 舒適，量身定義 多段客製調整 座椅、扶手高度被賦予多段調整功能，可依照乘坐者身形尺寸量身定位。特殊模具設計，將左右扶手拆裝對換，即可創造 2cm 的舒適。細膩思考，專屬於您。 助您 3 °之力 前傾起身不吃力 ‧前傾角度 -3 °：幫助使用者更好轉換身體重心，前傾起身或坐下。 ‧座仰角 0 °：幫助使用者更好平行轉移位。 後傾移順間 照護好傾鬆 於平坦地面時，無須費力搬運，將便器椅後傾即可使用後方腳輪省力移動。 潔淨雙護 便利好拆洗 汙水盤連接著座墊，能盛接沒有進入到便桶的尿液，便於拆卸、清洗及保養。轉角圓潤曲面設計，防止因死角而卡陷汙垢的窘境。而底層污水接收器作為最後一道防線，作為即使汙水溢出，也便於清潔的雙重結構。 蓋是英雄 異味防範 便盆蓋挖深結構設計，使隔臭效果相較一般蓋子表現更佳，作為第一線抵擋異味擴散之防線。 安心享壽，從心動到行動 「やりたい」を「できる」に変えよう 安壽是日本介護用品的領導品牌。 創立 25 餘年來，秉持著提供長者更舒適的安居生活，以協助長者提升自主生活能力、減輕照顧負擔為核心，持續開發不同產品，改善生活上面臨的各種問題。 安壽將進化，全力支持您的「想做」； 我們相信，「能做」會讓您更加快樂。 【產品規格】 品牌：安壽 型號：5533920 尺寸：長49.5 × 寬60 × 高 73~85 cm 重量：10.9 kg 最大荷重：100 kg 座面： 座寬 - 36 cm 座深 - 43 cm 座高 - 33~45 cm (共13段) 材質： 主體 - PP 坐墊 - PE + SIAA 防霉加工 扶手高度：18~30 cm (共5段) 主體顏色：米色 保固：本體１年 (人為因素所造成之損壞及消耗品不在保固範疇內) 產地：日本 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1to6740lka0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">6</span>
+          <span>ZW-366s 移動式坐浴椅洗澡移位 I 照護移動 I長照必備 I 洗浴輔具</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/67cf971905202a000b0ca3e7/original.jpg?1741657881" alt="ZW-366s 移動式坐浴椅洗澡移位 I 照護移動 I長照必備 I 洗浴輔具" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">ZW-366s 移動式坐浴椅洗澡移位 I 照護移動 I長照必備 I 洗浴輔具
+ZUOWEI
+此產品符合長照/身心障礙者輔具補助項目【便盆椅(一般型)、沐浴椅或便盆椅附加功能-附輪】 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 (註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 市售洗澡椅百百款，不知道怎麼選？點此幫你挑到最合適的！ 長輩行動不方便，從寢室要到浴室洗澡或是上廁所，總是大費周章嗎？ 【ZUOWEI】ZW-366s 移動式坐浴椅， 左右邊的手搖升降同步20公分高度， 方便受照顧者上下椅，也節省照顧者的體力。人體工學設計坐椅， 中央開口設計便利私密部位的清潔。溫馨提醒：床底下需有至少20公分以上的高度空間，以利坐浴椅推近使用。 手搖升降，結構簡單， 左右邊的手搖升降同步20公分高度， 方便受照顧者上下椅，也節省照顧者的體力。 移動時有安全帶固定受照顧者的位置。 前5吋後3吋靜音輪組， 適合跨過台灣浴室門檻的高度。 四輪皆有固定器， 避免洗浴時滑動。 人體工學設計坐椅， 受照顧者在洗浴時會因此坐在坐椅中央， 中央開口設計便利私密部位的清潔。 椅子金屬部份為電鍍鐵，堅固耐用。 使用說明書PDF下載 【產品規格】 品牌：達遠 型號：ZW-366s本體長：710mm本體寬：600mm本體高：790~990mm重量：21kg 座面：W46×D40 cm 座高：37~57 cm 前輪尺寸：5 英寸 後輪尺寸：3 英寸 最大承重：100 kg 外箱材積：77×62×42 cm 保固：一年，消耗品及人為損壞不在保固範圍內 產地：中國 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6466yel0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">7</span>
+          <span>一太 上翻淋浴椅 ET-8889</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/60d285e311e594002077e1e0/original.jpg?1624409571" alt="一太 上翻淋浴椅 ET-8889" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">一太 上翻淋浴椅 ET-8889
+ITAI
+1. 此產品符合長照/身心障礙者輔具補助項目【壁掛式淋浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。【ITAI】上翻淋浴椅 ET-8889，一個專為現代浴室打造的聰明設計，讓長輩也可以安全又舒服地享受淋浴體驗。只要安裝在鄰近蓮蓬頭的浴室牆上，符合人體工學的舒適座椅，提供長輩穩定的乘坐支撐，平常不使用時，可直接向上翻起收納，絲毫不佔空間！專為沐浴無法久站的家人所量身設計打造銀髮族及行動不便者更友善的空間，安穩坐享每日的沐浴時光，降低在浴室中發生危險的機率，幫助提升家人的生活品質。商品特色■ 商品規格 產品型號：ET-8889外觀尺寸：長 38 x 寬 31.5 x 高 55.1 cm產品重量：5 kg最大承重：200 kg產品材質：ABS + 不銹鋼產品顏色：白使用方式：安裝於牆上，使用時放下，不使用時可以上翻節省空間產地：台灣想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6428wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">8</span>
+          <span>一太 摺疊淋浴椅 ET-SB007Q</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/63e5d7f2565971002338992f/original.jpg?1676007410" alt="一太 摺疊淋浴椅 ET-SB007Q" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">一太 摺疊淋浴椅 ET-SB007Q
+ITAI
+1. 此產品符合長照/身心障礙者輔具補助項目【壁掛式淋浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。【ITAI】摺疊淋浴椅 ET-SB007Q，一個專為現代浴室打造的聰明設計，讓長輩也可以安全又舒服地享受淋浴體驗。只要安裝在鄰近蓮蓬頭的浴室牆上，符合人體工學的舒適座椅，以及兩側扶手設計，提供長輩穩定的乘坐支撐，平常不使用時，可直接向上翻起收納，絲毫不佔空間！■ 商品規格 尺寸：長58.1 × 寬54.5 × 高86.7 cm重量：6 kg材質：ABS+鋁合金烤漆顏色：坐墊灰 / 烤漆白最大承重：285 kg安裝方式：安裝於牆上，使用時放下，不使用時可以上翻節省空間產地：台灣想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6429wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">9</span>
+          <span>三樂事 折疊式軟墊洗澡椅SP5606</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd7856f622a561d89f26275/original.jpeg?1574405485" alt="三樂事 折疊式軟墊洗澡椅SP5606" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">三樂事 折疊式軟墊洗澡椅SP5606
+Sunlus
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 很多長輩會在浴室中站立洗澡，可是您放心嗎？站著洗澡，怎麼洗腳底呢？體貼長輩，替他(她)準備一張可以坐著洗澡的椅子，安全又舒服。您的用心，讓他安心，全家都放心！此款【三樂事】折疊式軟墊洗澡椅SP5606，具有安全扶手方便起坐、三段式高度依個人需求調整、軟墊舒適好坐，好收折收納不占空間，是銀髮族洗澡的最佳夥伴！ 產品特色★ 好收折,收納不占空間 ★ 安全扶手設計,方便起坐 ★ 三段式高度調整設計 ★ 舒適軟墊設計,方便好拆洗 ★ 椅背軟墊設計,舒適久坐不嫌累 產品規格本體尺寸 : 44cm x 52cm x 68~72cm (三段調整)座面高度：36~42cm (三段調整)本體體重 : 約 3.5kg承重 : 約 100kg包裝尺寸：75x54x29cm商品顏色 : 綠保固：本體一年，耗材及人為因素造成損壞不在保固範疇內產地：台灣還在猶豫嗎？閱讀我們的深度選購指南為了幫助您做出最正確的決定，我們準備了兩篇專業的知識性文章，從不同角度為您分析比較，歡迎點閱參考：不知道從何選起？為您準備了洗澡椅挑選懶人包，從浴室空間、身體狀況等角度，帶您一步步找到最適合的款式。👉 點我看懶人包家人狀況特殊？針對中風、術後等特殊身體狀況，我們提供更專業的選購分析，幫助您找到最有意義的選擇。👉 點我看專家分析想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6411lbl0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">10</span>
+          <span>三樂事 摺疊式軟墊洗澡椅 (U型座墊款)</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/67b7f4786547b3000ae781ec/original.jpg?1740108920" alt="三樂事 摺疊式軟墊洗澡椅 (U型座墊款)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">三樂事 摺疊式軟墊洗澡椅 (U型座墊款)
+Sunlus
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 根據衛福部110年死因統計，65歲以上的跌倒事故位居第二位，而其中以發生在浴室/廁所的比例最高，達26.6%。為了有效防止家中長輩在浴室中跌倒，不僅要在浴室加裝必要的扶手，樂齡網亦建議為家中長輩準備適當的洗澡椅，讓長輩可以坐著洗澡，免除為了要洗腳而前傾跌倒的危險。 很多長輩會站在濕滑的浴缸中站立洗澡，可是您放心嗎？站著洗澡，怎麼洗腳底呢？ 體貼您的長輩，為他準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。 【產品規格】 品牌：Sunlus 三樂事 型號：SP5612 本體尺寸：D49×W51×H68~72 cm 座面尺寸：D35×W40 cm座面高度：三段可調，約42cm、39cm、36cm 座高：42 cm 椅背寬：47 cm 重量：3.5 kg 材質：本體 - 鋁 座墊 - EVA材質 顏色：藍色 保固：本體一年，耗材及人為造成損壞不在保固範疇內 產地：台灣 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6465lbl0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">11</span>
+          <span>光星 9020鋁合金有背洗澡椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/6205c486f82f2500328db6ba/original.jpg?1644545157" alt="光星 9020鋁合金有背洗澡椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">光星 9020鋁合金有背洗澡椅
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 很多長輩會站在濕滑的浴缸中站立洗澡，可是您放心嗎？站著洗澡，怎麼洗腳底呢？體貼您的長輩，為他準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。【NOVA】光星 9020鋁合金有背洗澡椅，承襲9010系列的優良規格，並且增加舒適的大面積弧形 PE 背靠墊，藉此支撐上肢軀幹，來增加沐浴時的便利與安全性。■ 商品規格 主體材質：鋁合金主體顏色：銀色主體管徑：25.4mm座墊材質：PE 真空成型背墊材質：PE 真空成型座寬 / 座深：50 / 28.5cm座高調整：33 ~ 43cm (5段式調整)商品重量：6.3kg最大荷重：100kg保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6430wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">12</span>
+          <span>光星 9102雙扶手有背洗澡椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/6205cc5dcb672c001aa6a985/original.jpg?1644547164" alt="光星 9102雙扶手有背洗澡椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">光星 9102雙扶手有背洗澡椅
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 很多長輩會站在濕滑的浴缸中站立洗澡，可是您放心嗎？站著洗澡，怎麼洗腳底呢？體貼您的長輩，為他準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。【NOVA】光星 9102雙扶手有背洗澡椅，左右雙扶手式的設計，提供給沐浴者起身或坐下時能夠有額外的支撐，進而降低起坐時因重心不穩而跌倒的風險。此外，座墊前端左右皆可嵌入蓮蓬頭，一點貼心讓你沐浴更安心。■ 商品規格 主體材質：鋁合金主體顏色：銀色主體管徑：25.4mm座墊材質：PE 座墊座寬 / 座深：38 / 41cm座高調整：35 ~ 45cm (5段式調整)商品重量：6.3kg最大荷重：100kg保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6431wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">13</span>
+          <span>光星 AQUA 介護移位型附輪洗澡馬桶椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/680597c0c0f5ae0010d53fee/original.jpg?1745196992" alt="光星 AQUA 介護移位型附輪洗澡馬桶椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">光星 AQUA 介護移位型附輪洗澡馬桶椅
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【便盆椅(一般型)、沐浴椅或便盆椅附加功能-附輪】 (註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 產品規格 品牌：NOVA 光星 主體材質：鋁合金座墊材質：PE 塑膠座墊車體全寬：58cm車體全長：92.5cm車體全高：96cm座寬/座深：49 / 43cm背高：43cm 前座高：48cm扶手高度：18cm內徑高度 (座位底下的離地高度；含便桶)：30cm內徑高度 (座位底下的離地高度；拿掉便桶)：42cm 內徑寬度：40cm全車重：12.5kg最大荷重：100kg保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣 網路販售第一等級醫療器材揭載事項 中文品名：&#34;NOVA&#34; 機械椅(未滅菌)英文品名：&#34;NOVA&#34; Mechanical Chair (Non-Sterile) 衛字核可字號：衛署醫器製壹字004847號 (到期日：117/10/03)藥商名稱：光星骨科復健器材股份有限公司製造廠：光星骨科復健器材股份有限公司製造廠址：臺中市神岡區豐洲路1096、1102號販賣藥商名稱：樂齡生活事業股份有限公司販賣藥商登記地址：台北市大安區大安路一段179號販賣業藥商許可執照：北市衛器販(安)字第MD6201006633號製造日期：請參見產品包裝上標示有效期間：請參見產品包裝上標示消費者使用前應詳閱產品說明書諮詢專線：(02)2577-5025 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6416wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">14</span>
+          <span>光星 標準收合型馬桶椅 - 軟墊鐵製 8700EB</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/620625c6fec81000262ae7b5/original.jpg?1644570054" alt="光星 標準收合型馬桶椅 - 軟墊鐵製 8700EB" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">光星 標準收合型馬桶椅 - 軟墊鐵製 8700EB
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。【NOVA】光星標準收合型馬桶椅8700EB，可放置於臥室內或鄰近寢具，讓臥床行動不便者能夠就近如廁，進而降低徒步移動到浴廁時，因重心不穩或者燈光昏暗...等任何可能導致跌倒所造成二次傷害的風險。此外，8700EB 配有大面積弧形背靠與柔軟舒適的 PU 軟座墊，能夠降低需要較長時間如廁的患者因久坐所帶來的不適感。■ 商品規格 主體材質：鐵主體顏色：銀白主體管徑：25.4mm座墊材質：PU 泡棉(軟座墊)座寬 / 座深：40 / 40cm座高調整：44 ~ 54cm內徑高度 (座位底下的離地高度；含便桶)：35cm內徑寬度：45cm最大荷重：120kg保固：一年，消耗品和人為損壞不在保固範疇內產地：台灣還在猶豫嗎？閱讀我們的深度選購指南為了幫助您做出最正確的決定，我們準備了兩篇專業的知識性文章，從不同角度為您分析比較，歡迎點閱參考：不知道從何選起？為您準備了洗澡椅挑選懶人包，從浴室空間、身體狀況等角度，帶您一步步找到最適合的款式。👉 點我看懶人包家人狀況特殊？針對中風、術後等特殊身體狀況，我們提供更專業的選購分析，幫助您找到最有意義的選擇。👉 點我看專家分析想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r2bt6402wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">15</span>
+          <span>可摺疊附扶手大洗澡椅-R型 - 銀髮族坐著洗澡，安全又舒適</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd7855b622a561d89f26253/original.jpeg?1574405466" alt="可摺疊附扶手大洗澡椅-R型 - 銀髮族坐著洗澡，安全又舒適" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">可摺疊附扶手大洗澡椅-R型 - 銀髮族坐著洗澡，安全又舒適
+RICHELL
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 很多長輩會在浴室中站立洗澡，可是您放心嗎? 站著洗澡，怎麼洗腳底呢? 體貼您的長輩，為其準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。樂齡網為您推薦一款日本介護用品大廠RICHELL所設計生產的洗澡椅，有大型的座幅、超柔軟的椅墊(年長者即使臀部肌肉較少也可坐的很舒服)、而且扶手可掀起，洗澡椅還可收折，不佔浴室空間。是洗澡椅的夢幻逸品。 產品特色 柔軟舒適的座面。 坐下時也不會冷。 水不會滲透。 簡單的清潔保養。 用單手簡單折疊。 抬起式扶手。 簡單調整高度。 有附蓮蓬頭架。 2種顏色可以選擇。 最大使用者體重:100Kg。 產品規格 尺寸：49.5×45-54×63-73H(公分) 產品重量：4.9 公斤 最大承重量：100公斤 材質：聚乙烯、EVA樹脂、聚縮醛、鋁、合成橡膠 顏色：粉紅 / 咖啡色 產地：中國 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6407" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">16</span>
+          <span>可收摺凹型洗澡椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5e7afb4b2aaaee00210a21dc/original.jpg?1585118026" alt="可收摺凹型洗澡椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">可收摺凹型洗澡椅
+安壽
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包很多長輩會在浴室中站立洗澡，可是您放心嗎? 站著洗澡，怎麼洗腳底呢?體貼您的長輩，為其準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。樂齡網為您推薦【安壽】可收摺凹型洗澡椅，溝槽座面設計，方便放入蓮蓬頭清洗屁股；溝槽前寬後窄設計，讓臀部較小的人也能安全坐穩。可摺疊收納不占空間，是洗澡椅的夢幻逸品。 ※ 個人清潔用品基於衛生考量請慎選，恕不接受退貨。 產品規格 尺寸：寬46 × 深45~53 × 高64~74cm(到座面高度:33~43cm)(摺疊時:寬46x深19x高78~89cm)座面尺寸：約寬35 x 深29cm重量：約 4.1kg材質：(座部、背靠) PE(扶手) PP(握柄) 合成橡膠(軟墊) EVA(管) 鋁合金想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1to6721" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">17</span>
+          <span>單手可收折疊洗澡椅 IS</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/66e25850acbe39001991f3d9/original.jpg?1726109776" alt="單手可收折疊洗澡椅 IS" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">單手可收折疊洗澡椅 IS
+安壽
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 很多長輩會在浴室中站立洗澡，可是您放心嗎? 站著洗澡，怎麼洗腳底呢?體貼您的長輩，為其準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。樂齡網為您推薦【安壽】單手可收折疊洗澡椅 IS，單手即可收起椅子，讓使用者/照顧者更便利，摺疊收納不占空間，是洗澡椅的夢幻逸品。 產品規格 廠牌/品牌：佳樂美/安壽型號：536322尺寸：寬51 × 深46 × 高64~74cm(到座面高度) 35~45cm(摺疊時) 寬51×深29×高87cm座面尺寸：約寬45×深36.5 cm重量：約 5kg材質：(座部、背靠) PE(扶手) PP(握柄、腳墊) 合成橡膠(軟墊) EVA(管) 鋁合金保固：一年主體椅架(不包括 坐/背墊、腳墊)，非人為破壞產地：中國想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6457" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">18</span>
+          <span>多功能馬桶洗澡椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/63c4f98695b1bf0023752b41/original.jpg?1673853318" alt="多功能馬桶洗澡椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">多功能馬桶洗澡椅
+尊爵
+1. 此產品符合長照2.0/身心障礙者輔具補助項目【便盆椅(一般型)、沐浴椅或便盆椅附加功能-附輪】2. 如欲了解長照2.0補助申請資訊，請撥打1966長照服務專線諮詢。■ 商品規格 尺寸：寬56 × 高94 × 深58 cm座高：第一孔 - 56 cm第二孔 - 60 cm第三孔 - 64 cm內徑高度 (座位底下的離地高度；不含便桶)：45cm內徑寬度：42cm扶手內側寬：49.5 cm坐墊尺寸：長40 × 寬37 cm淨重：9.8 kg材質主體 - 鋁製靠背及坐墊 - PE+EVA泡棉本產品每次限乘載一人，安全乘載為 150kg /人產地：台灣想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6446blu0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">19</span>
+          <span>教練到府運動派遣課程</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/69e80f9b412fc417a020fa07/original.jpg?1776816026=&amp;owner_id=5c2351a9ea89f40001107778" alt="教練到府運動派遣課程" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">教練到府運動派遣課程
+習慣健康
+習慣健康提供專業的到府運動派遣服務，讓您無需奔波至健身房在家就能享有一對一的專屬指導，充分利用零碎時間輕鬆養成規律運動習慣。無論您想提升體能、改善姿勢、增肌減脂，或針對特殊需求量身定制訓練計畫，我們的專業教練皆會根據您的健康狀況與目標，為您打造科學且高效的個人化課程。 特別適合希望維持健康的銀髮族群、需要居家復健的個案。不論您是運動新手，還是想突破瓶頸的進階者，教練都將依據您的能力與需求調整訓練強度，確保您在安全無虞的前提下達成理想成效。此外我們提供彈性的預約時間，隨時隨地為您提供量身打造的全方位運動解決方案，讓健康與便利一舉兩得、無需妥協，實現健康目標，重新找回最佳狀態。 到府運動派遣服務流程 1. 專線諮詢與需求了解 下單後由專業服務人員透過電話了解您的健康狀況、運動目標與居家環境，提供初步建議並協助媒合合適教練。 2. 專業教練派遣與行程安排 根據您的需求與所在地區，安排具備專業證照及相關運動經驗的教練，到府提供一對一服務。 3. 健康檢測與運動計畫制定 教練將進行基礎體能評估與動作分析，依據您的身體狀況與目標，量身規劃個人化的運動訓練計畫。 4. 建立安全與持續的運動習慣 透過持續的課程引導與動作調整，協助您循序漸進地培養規律運動習慣，提升身體機能與生活品質。 Q&amp;amp;A常見問題 Q1.到府運動有哪些項目? A1. 我們提供專業的運動訓練、個人健身指導、姿勢矯正與舒緩放鬆等服務，教練會根據您的身體狀況與需求，量身打造專屬訓練計畫，確保運動效果與安全性。 Q2.到府服務範圍包含哪些地區? A2. 目前到府服務主要涵蓋市區及鄰近地區，若您所在位置較偏遠或超出服務範圍，可聯繫客服確認。我們將盡力安排合適的教練，提供便利且專業的運動服務。 Q3.到府服務如何安排? A3. 下單後由專業服務人員透過電話了解您的健康狀況、運動目標與居家環境，提供初步建議並協助媒合合適教練與時間。 Q4.到府服務需要準備那些器材?如果家中空間有限怎麼辦? A4. 只需提供約 2-3 平方公尺的活動空間，或一個能放置瑜珈墊的空間即可，教練將攜帶基本訓練器材，並依據場地條件和個人身體狀況設計合適的訓練方案。若有特定訓練需求，教練將提前與您溝通，確保訓練順利且有效進行。 Q5.是否提供多人到府訓練方案? A5. 我們提供一對一、一對二或一對三等多種到府服務，適合家人或朋友一起訓練，共享運動樂趣。</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/a1sv00030-a1sv00040-a1sv00050" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">20</span>
+          <span>日本幸和 可摺疊U型坐墊扶手可掀洗澡椅 SCU01</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5febcb4394eea50014d2b2b7/original.jpg?1609288514" alt="日本幸和 可摺疊U型坐墊扶手可掀洗澡椅 SCU01" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">日本幸和 可摺疊U型坐墊扶手可掀洗澡椅 SCU01
+TacaoF
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 很多長輩會在浴室中站立洗澡，可是您放心嗎? 站著洗澡，怎麼洗腳底呢?體貼您的長輩，替他準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，讓他安心，全家都放心！樂齡網為您推薦一款日本大廠【Tacaof幸和】所設計生產的洗澡椅，大型U型座幅，方便清洗臀部、超柔軟的椅墊，年長者即使臀部肌肉較少，也可坐得很舒服、扶手可掀，也可摺疊收納，不佔浴室空間。特色說明方便調整座面高度可以很簡單地調整高度，可以配合不同對象、不同需求使用。折疊收納可以折疊收納，不佔空間。軟墊可拆卸軟墊可拆卸進行清洗，以保持衛生清潔。超舒適軟墊超柔軟，正常坐下時不會感覺硬物而疼痛或座椅冰冷。Point1大座面足夠寬敞的座面，能夠坐得很舒適又安全Point2能夠配合坐姿的靠背椅背可配合坐姿作微調，更加貼合背部。Point3縮短照護者和被照護者的距離U型坐墊縮短了照護者和被照護者的距離，坐著的時候也方便清洗局部部位。商品規格尺寸：(展開) 寬50.5 × 長49~56 × 高 70.5~80.5 cm(收折) 寬50.5 × 長26 × 高 81.5 cm座面尺寸：寬48 × 長32 cm座面高度：35~45 cm (5段可調)重量：5.7 kgs最大使用者體重：100 kgs材質：(本體) 鋁合金(軟墊) EVA(座面/靠背) 聚乙烯(PE)(腳套) 天然橡膠產地：中國想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6426lbl0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">📥 下載 PDF</button>
+    <button class="btn btn-outline" onclick="copyLink()">🔗 複製連結</button>
+    
+    
+    <a id="back-to-discord-link" class="btn btn-discord" href="discord:///channels/1456655145319534666/1491402720375079054" target="_self" rel="noopener">🚀 返回 Discord 結果頻道</a>
+    
+  </div>
+
+  
+
+
+  <footer>
+    <p>長照智慧諮詢 · 本頁面由系統自動生成 · 有效期 1 天</p>
+    <p>頁面 ID：26703f4a7d</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var created = new Date("2026-05-19T15:55:28.264263");
+  var expiryMs = 1 * 86400000;
+  if (Date.now() - created.getTime() > expiryMs) {
+    document.getElementById("expired-overlay").classList.remove("hidden");
+    document.getElementById("main-content").style.display = "none";
+  }
+})();
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    alert("已複製連結！");
+  });
+}
+</script>
+</body>
+</html>

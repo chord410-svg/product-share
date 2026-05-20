@@ -1,0 +1,219 @@
+{
+  "topics": [
+    {
+      "key": "care_professional",
+      "channel_id": "1506657227048489011",
+      "channel_name": "01-照顧及專業",
+      "title": "照顧及專業",
+      "description": "服務流程、特約名單、居家/日照/機構與巷弄站資源。",
+      "options": [
+        {
+          "key": "service_flow",
+          "label": "服務流程"
+        },
+        {
+          "key": "high_risk_referral",
+          "label": "高風險個案轉介"
+        },
+        {
+          "key": "ntpc_contract_list",
+          "label": "新北市特約名單"
+        },
+        {
+          "key": "home_care",
+          "label": "居家照顧"
+        },
+        {
+          "key": "day_care",
+          "label": "日間照顧"
+        },
+        {
+          "key": "ltc_institution",
+          "label": "長照機構"
+        },
+        {
+          "key": "home_bathing_vehicle",
+          "label": "到宅沐浴車"
+        },
+        {
+          "key": "community_c_station",
+          "label": "巷弄長照站 C 據點"
+        }
+      ]
+    },
+    {
+      "key": "transport",
+      "channel_id": "1506657257725890801",
+      "channel_name": "02-交通接送",
+      "title": "交通接送",
+      "description": "長照交通、敬老愛心車與復康巴士。",
+      "options": [
+        {
+          "key": "da01_transport",
+          "label": "新北市特約長照交通接送 DA01"
+        },
+        {
+          "key": "elder_love_taxi",
+          "label": "敬老愛心車"
+        },
+        {
+          "key": "rehab_bus",
+          "label": "身心障礙者復康巴士"
+        }
+      ]
+    },
+    {
+      "key": "assistive_accessibility",
+      "channel_id": "1506657283755741195",
+      "channel_name": "03-輔具及無障礙",
+      "title": "輔具及無障礙",
+      "description": "長照輔具、爬梯機、無障礙改善與醫療輔具。",
+      "options": [
+        {
+          "key": "ltc_assistive_device",
+          "label": "長照輔具"
+        },
+        {
+          "key": "stair_climber",
+          "label": "爬梯機"
+        },
+        {
+          "key": "home_accessibility",
+          "label": "無障礙環境改善"
+        },
+        {
+          "key": "medical_assistive_device",
+          "label": "醫療輔具"
+        }
+      ]
+    },
+    {
+      "key": "multi_professional",
+      "channel_id": "1506657310750015608",
+      "channel_name": "04-多元專業",
+      "title": "多元專業",
+      "description": "照顧者支持、救援、餐飲、失智、身障、到宅醫療藥事等資源。",
+      "options": [
+        {
+          "key": "family_caregiver_support",
+          "label": "家庭照顧者支持"
+        },
+        {
+          "key": "emergency_rescue",
+          "label": "緊急救援服務"
+        },
+        {
+          "key": "meal_service",
+          "label": "餐飲服務"
+        },
+        {
+          "key": "dementia_service",
+          "label": "失智服務"
+        },
+        {
+          "key": "disability_service",
+          "label": "身心障礙服務"
+        },
+        {
+          "key": "mental_disability_service",
+          "label": "精神障礙服務"
+        },
+        {
+          "key": "home_medical",
+          "label": "到宅醫療"
+        },
+        {
+          "key": "home_pharmacy",
+          "label": "到宅藥事"
+        },
+        {
+          "key": "diverse_companion",
+          "label": "多元陪伴"
+        },
+        {
+          "key": "elder_neglect",
+          "label": "老人疏忽"
+        }
+      ]
+    },
+    {
+      "key": "informal",
+      "channel_id": "1506657343662723163",
+      "channel_name": "05-非正式資源",
+      "title": "非正式資源",
+      "description": "實物銀行、急難救助、民間補助與非正式支持。",
+      "options": [
+        {
+          "key": "home_care_fee_subsidy",
+          "label": "居家照顧服務費用補助"
+        },
+        {
+          "key": "veteran_indigenous_denture",
+          "label": "榮民/原民假牙補助"
+        },
+        {
+          "key": "medical_companion",
+          "label": "高齡者就醫陪伴"
+        },
+        {
+          "key": "food_bank",
+          "label": "實物銀行"
+        },
+        {
+          "key": "emergency_aid",
+          "label": "民間急難救助"
+        },
+        {
+          "key": "chuangshi_bathing",
+          "label": "創世原床沐浴泡澡"
+        }
+      ]
+    },
+    {
+      "key": "foreign_caregiver",
+      "channel_id": "1506657374025285672",
+      "channel_name": "06-外籍看護",
+      "title": "外籍看護",
+      "description": "外看申請、到宅指導、短期替代照顧與失聯通報。",
+      "options": [
+        {
+          "key": "foreign_caregiver_apply",
+          "label": "外看申請流程"
+        },
+        {
+          "key": "foreign_caregiver_guidance",
+          "label": "外籍看護安心支援服務"
+        },
+        {
+          "key": "foreign_caregiver_respite",
+          "label": "外看家庭短期替代照顧"
+        },
+        {
+          "key": "foreign_caregiver_missing",
+          "label": "外看失聯通報"
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "channel_id": "1506657398847443064",
+      "channel_name": "07-其他資源",
+      "title": "其他資源",
+      "description": "法律扶助、高齡信託與自費物理治療。",
+      "options": [
+        {
+          "key": "legal_aid",
+          "label": "法律扶助基金會"
+        },
+        {
+          "key": "senior_trust_bank",
+          "label": "高齡信託合作銀行"
+        },
+        {
+          "key": "self_pay_physical_therapy",
+          "label": "自費物理治療"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "resources": [
+    {
+      "id": "ntpc_ltc_service_contracts",
+      "category": "care_professional",
+      "topics": [
+        "ntpc_contract_list",
+        "home_care",
+        "day_care",
+        "ltc_institution"
+      ],
+      "name": "新北市長照服務內容及特約服務單位名冊",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "長照需求",
+        "照顧服務",
+        "日間照顧",
+        "機構照顧"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "查詢新北市長照服務內容與特約服務單位，適合個管師確認可連結的正式照顧資源。",
+      "next_step": "依個案所在行政區與服務需求，先查特約單位，再向承辦窗口確認收案狀態。",
+      "contact": "依名冊各單位聯絡方式",
+      "source_url": "https://www.health.ntpc.gov.tw/basic/?node=204743",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "正式派案前仍需確認單位是否有量能。"
+    },
+    {
+      "id": "ntpc_da01_transport",
+      "category": "transport",
+      "topics": [
+        "da01_transport"
+      ],
+      "name": "新北市特約長照交通接送 DA01",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "長照需求",
+        "交通接送",
+        "就醫"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "長照交通接送服務，適合需要協助往返醫療或復健據點的長照個案。",
+      "next_step": "先確認個案長照資格、額度與目的地，再查特約交通單位。",
+      "contact": "依官方使用須知與特約名冊",
+      "source_url": "https://www.health.ntpc.gov.tw/basic/?node=204743",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "跨區與等待時間需個別確認。"
+    },
+    {
+      "id": "ntpc_rehab_bus",
+      "category": "transport",
+      "topics": [
+        "rehab_bus"
+      ],
+      "name": "新北市身心障礙者復康巴士",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "身心障礙",
+        "交通接送",
+        "行動不便"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "提供身心障礙者交通接送資源，可作為長照交通之外的補充選項。",
+      "next_step": "確認個案身障資格、預約方式與搭乘限制。",
+      "contact": "依新北市復康巴士公告",
+      "source_url": "https://www.sw.ntpc.gov.tw/",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方入口",
+      "internal_notes": "實際預約規則需以當期公告為準。"
+    },
+    {
+      "id": "ntpc_ltc_assistive_device",
+      "category": "assistive_accessibility",
+      "topics": [
+        "ltc_assistive_device",
+        "home_accessibility"
+      ],
+      "name": "新北市長照輔具與居家無障礙改善",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "長照需求",
+        "輔具",
+        "無障礙改善"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "協助查找長照輔具與居家無障礙改善相關申請方向。",
+      "next_step": "先確認補助身份、評估需求與是否需治療師/專業人員評估。",
+      "contact": "1966 或新北市長照服務窗口",
+      "source_url": "https://www.health.ntpc.gov.tw/basic/?node=204743",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "此項可與既有補助計算工具銜接。"
+    },
+    {
+      "id": "ntpc_family_caregiver_support",
+      "category": "multi_professional",
+      "topics": [
+        "family_caregiver_support"
+      ],
+      "name": "新北市家庭照顧者支持資源",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "家庭照顧者",
+        "照顧壓力",
+        "喘息需求"
+      ],
+      "urgency_tags": [
+        "一般",
+        "本週內"
+      ],
+      "summary": "提供家庭照顧者支持、諮詢、喘息與相關轉介方向。",
+      "next_step": "確認照顧者壓力、替手需求與可接受服務型態。",
+      "contact": "1966 或新北市長照服務窗口",
+      "source_url": "https://www.health.ntpc.gov.tw/basic/?node=204743",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "若照顧者已有崩潰風險，應同步評估急迫資源。"
+    },
+    {
+      "id": "ntpc_food_bank",
+      "category": "informal",
+      "topics": [
+        "food_bank"
+      ],
+      "name": "新北市好日子愛心大平台 / 實物銀行",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "弱勢",
+        "物資需求",
+        "急難",
+        "低收",
+        "中低收"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "緊急"
+      ],
+      "summary": "可作為個案臨時物資、生活支持與弱勢資源連結的查詢入口。",
+      "next_step": "先確認是否需社福中心或公所轉介，再確認可提供物資類型。",
+      "contact": "依好日子愛心大平台公告",
+      "source_url": "https://newgoodday.ntpc.gov.tw/public",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "適合放在非正式資源第一順位。"
+    },
+    {
+      "id": "ntpc_social_assistance",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "新北市社會局社會救助 / 急難救助",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "急難",
+        "低收",
+        "中低收",
+        "生活陷困"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "緊急"
+      ],
+      "summary": "急難、生活陷困與社會救助相關資訊入口。",
+      "next_step": "先整理急難事由、收入/支出變化與可佐證文件。",
+      "contact": "新北市社會局或戶籍/居住地公所",
+      "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?id=dff618d9d6f956fa",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "實務上需確認戶籍、居住地與急難事由。"
+    },
+    {
+      "id": "ntpc_foreign_caregiver_guidance",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_guidance"
+      ],
+      "name": "外籍家庭看護工勞雇安心支援服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "外籍看護",
+        "照顧技巧",
+        "到宅指導"
+      ],
+      "urgency_tags": [
+        "一般",
+        "本週內"
+      ],
+      "summary": "提供外籍家庭看護工到宅指導與勞雇安心支持資訊。",
+      "next_step": "確認家庭目前照顧困難、外看語言與是否需要到宅指導。",
+      "contact": "依新北勞工局公告",
+      "source_url": "https://ilabor.ntpc.gov.tw/page/in-house-tutoring-for-foreign-caregivers",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "外看家庭常見卡點是照顧技巧、溝通與短期替手。"
+    },
+    {
+      "id": "legal_aid_foundation",
+      "category": "other",
+      "topics": [
+        "legal_aid"
+      ],
+      "name": "法律扶助基金會",
+      "region": "全台",
+      "districts": [
+        "全新北",
+        "全台"
+      ],
+      "eligibility_tags": [
+        "法律諮詢",
+        "扶助",
+        "高齡",
+        "弱勢"
+      ],
+      "urgency_tags": [
+        "一般",
+        "本週內"
+      ],
+      "summary": "適合處理債務、財產、照顧爭議、保護令或法律扶助需求。",
+      "next_step": "先整理法律問題類型、文件與是否需預約諮詢。",
+      "contact": "法律扶助基金會各分會",
+      "source_url": "https://www.laf.org.tw/",
+      "source_type": "official",
+      "last_checked_at": "2026-05-20",
+      "confidence": "官方資料",
+      "internal_notes": "可搭配高齡信託、監護宣告等議題查詢。"
+    }
+  ]
+}

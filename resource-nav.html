@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>長照資源導航站</title>
+  <link rel="stylesheet" href="./resource-nav.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">New Taipei Resource Navigator</p>
+      <h1>長照資源導航站</h1>
+    </div>
+    <div class="status-pill" id="sourceStatus">Discord 入口</div>
+  </header>
+
+  <div class="layout">
+    <aside class="filters" aria-label="資源篩選">
+      <section class="panel">
+        <h2>查詢條件</h2>
+        <label class="field">
+          <span>主題分類</span>
+          <select id="categorySelect"></select>
+        </label>
+        <div class="field">
+          <span>子主題</span>
+          <div id="topicChecks" class="check-list"></div>
+        </div>
+        <label class="field">
+          <span>行政區</span>
+          <select id="districtSelect">
+            <option value="">不限行政區</option>
+            <option>板橋區</option>
+            <option>三重區</option>
+            <option>中和區</option>
+            <option>永和區</option>
+            <option>新莊區</option>
+            <option>新店區</option>
+            <option>土城區</option>
+            <option>蘆洲區</option>
+            <option>汐止區</option>
+            <option>樹林區</option>
+            <option>淡水區</option>
+            <option>全新北</option>
+          </select>
+        </label>
+        <div class="field">
+          <span>身份/情境</span>
+          <div id="identityChecks" class="check-list compact"></div>
+        </div>
+        <label class="field">
+          <span>急迫性</span>
+          <select id="urgencySelect">
+            <option value="">不限</option>
+            <option>一般</option>
+            <option>本週內</option>
+            <option>緊急</option>
+          </select>
+        </label>
+      </section>
+    </aside>
+
+    <main class="results" aria-live="polite">
+      <section class="summary-band">
+        <div>
+          <p class="eyebrow">目前範圍</p>
+          <h2 id="currentScope">資源查詢</h2>
+          <p id="scopeMeta">正在載入資料...</p>
+        </div>
+        <a class="google-link" id="googleSearchLink" target="_blank" rel="noopener noreferrer">用 Google 延伸搜尋</a>
+      </section>
+      <section id="cards" class="cards"></section>
+    </main>
+
+    <aside class="assistant" aria-label="AI 助手">
+      <section class="panel sticky">
+        <h2>AI 助手</h2>
+        <p id="assistantIntro">我會根據目前選取範圍，協助你縮小資源方向。</p>
+        <div class="question-list" id="assistantQuestions"></div>
+        <div class="note-box">
+          <strong>使用提醒</strong>
+          <p>請勿輸入姓名、身分證、電話、完整地址。資源資格與受理狀態仍以承辦單位最新公告為準。</p>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <template id="resourceCardTemplate">
+    <article class="resource-card">
+      <div class="card-head">
+        <div>
+          <p class="category"></p>
+          <h3></h3>
+        </div>
+        <span class="confidence"></span>
+      </div>
+      <p class="summary"></p>
+      <dl>
+        <div><dt>適用條件</dt><dd class="eligibility"></dd></div>
+        <div><dt>下一步</dt><dd class="next-step"></dd></div>
+        <div><dt>聯絡/申請</dt><dd class="contact"></dd></div>
+      </dl>
+      <div class="card-foot">
+        <span class="checked-at"></span>
+        <a class="source" target="_blank" rel="noopener noreferrer">查看來源</a>
+      </div>
+      <p class="internal-note"></p>
+    </article>
+  </template>
+
+  <script src="./resource-nav.js"></script>
+</body>
+</html>

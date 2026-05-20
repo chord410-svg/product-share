@@ -179,7 +179,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
 
   <div id="status-success" class="status-box success">
     <h2>✅ 已送出</h2>
-    <p id="success-detail">請回 Discord 查看結果頻道。</p>
+    <p id="success-detail">請回 Discord 結果頻道，點「查看我的最新結果」。</p>
     <!-- CARD-055e B：「← 回 Discord 結果頻道」紅色按鈕（沿用 055c-fix .btn-back-red）；URL 缺 guild/channel 時 JS 隱藏 -->
     <a id="back-to-discord-link" class="back-to-a btn-back-red" style="display:none;text-decoration:none;margin-top:12px" target="_blank" rel="noopener">← 回 Discord 結果頻道</a>
   </div>
@@ -319,9 +319,9 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
     var detail = document.getElementById("success-detail");
     if (detail) {
       if (shareUrl) {
-        detail.textContent = "已送出。share page：" + shareUrl + "（如為 file:// 路徑代表後端暫存，正常情況會跳 GH Pages https）";
+        detail.textContent = "已送出。share page：" + shareUrl + "（如為 file:// 路徑代表後端暫存；也可回 Discord 結果頻道點「查看我的最新結果」）";
       } else {
-        detail.textContent = "已送出。請回 Discord 查看結果頻道。";
+        detail.textContent = "已送出。請回 Discord 結果頻道，點「查看我的最新結果」。";
       }
     }
     // CARD-055e B：deep link 按鈕（缺 GUILD/CHANNEL 任一 → 不顯）

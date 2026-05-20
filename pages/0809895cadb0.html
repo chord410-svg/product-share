@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CARD-055a-3 PDPA 最低防線（Q3 自決）：防 Google index；30天TTL/opaque token/真去識別留 CARD-055-pdpa-prod -->
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="bingbot" content="noindex,nofollow">
+<title>長照智慧諮詢 — 產品資訊</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2563eb;--primary-light:#dbeafe;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--danger:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:24px;border-radius:var(--radius);margin-bottom:20px;text-align:center}
+header h1{font-size:1.4em;margin-bottom:4px;letter-spacing:1px}
+header .subtitle{font-size:.85em;opacity:.85}
+.meta-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;font-size:.82em;color:var(--muted)}
+.meta-bar .tag{background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:20px;font-weight:600}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-card .card-header{background:var(--primary-light);padding:12px 16px;font-weight:700;font-size:1em;color:var(--primary);display:flex;align-items:center;gap:8px}
+.product-card .card-header .num{background:var(--primary);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;flex-shrink:0}
+.product-card .card-body{padding:16px}
+.product-card .card-body img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-bottom:12px;background:#f1f5f9}
+.product-card .desc{font-size:.92em;line-height:1.8;white-space:pre-wrap;margin-bottom:12px}
+.product-card .vendor-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88em;border-top:1px solid var(--border);padding-top:12px}
+.product-card .vendor-row .vendor-label{color:var(--muted)}
+.product-card .vendor-row .vendor-name{font-weight:600;color:var(--text)}
+.product-card .vendor-row a{color:var(--primary);text-decoration:none;border:1px solid var(--primary);padding:4px 10px;border-radius:6px;font-size:.85em}
+.product-card .vendor-row a:hover{background:var(--primary);color:#fff}
+.actions{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;border:none;font-size:.9em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+/* CARD-071：返 Discord 結果頻道專屬色（Discord 紫 #5865F2 / hover #4752C4 / 白字）*/
+.btn-discord{background:#5865F2;color:#fff;border:none}
+.btn-discord:hover{background:#4752C4;color:#fff}
+.calc-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px}
+.calc-summary h2{font-size:1.05em;color:var(--primary);margin-bottom:10px;letter-spacing:.5px}
+.calc-summary .calc-meta{font-size:.88em;color:var(--muted);margin-bottom:12px;line-height:1.8}
+/* CARD-070：calc-summary section 勾選代碼清單（含碼+名稱；CARD-069 chip 升級為 ul-li 易讀清單）*/
+.calc-summary .selected-codes{margin-bottom:12px}
+.calc-summary .selected-codes .sc-label{display:block;color:var(--muted);font-size:.82em;margin-bottom:4px}
+.calc-summary .selected-codes-list{list-style:disc inside;margin:0;padding-left:8px;font-size:.88em;line-height:1.7}
+.calc-summary .selected-codes-list li{color:var(--text)}
+.calc-summary .selected-codes-list li .sc-code{font-weight:700;color:var(--primary);margin-right:2px}
+.calc-summary table.calc-packages{width:100%;border-collapse:collapse;font-size:.88em}
+.calc-summary table.calc-packages th,.calc-summary table.calc-packages td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.calc-summary table.calc-packages th{background:var(--primary-light);color:var(--primary);font-weight:600;font-size:.82em}
+.calc-summary table.calc-packages td.num{text-align:right;font-variant-numeric:tabular-nums}
+.calc-summary .warning{margin-top:10px;background:#fef3c7;color:#92400e;border-left:4px solid #f59e0b;padding:8px 12px;font-size:.82em;border-radius:6px}
+.query-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:.92em}
+.query-box .query-label{color:var(--muted);font-size:.82em;margin-bottom:4px}
+.query-box .query-text{color:var(--text);line-height:1.6}
+.query-box .query-row + .query-row{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.query-box .query-note{display:inline-block;margin-top:4px;color:#854d0e;font-size:.82em}
+.code-query-box{margin-bottom:12px}
+.product-card .card-header .code-tag{margin-left:auto;background:var(--primary);color:#fff;font-size:.72em;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
+/* CARD-055a-2：每 product-card 加 qty-tag (header) + estimate-row (body) + matches_empty/per-code fallback */
+.product-card .card-header .qty-tag{background:var(--primary-light);color:var(--primary);font-size:.78em;padding:2px 10px;border-radius:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.product-card .card-body .estimate-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.9em}
+.product-card .card-body .estimate-row .est-label{color:var(--muted);font-weight:600}
+.product-card .card-body .estimate-row .est-value{color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums}
+.no-product-notice{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fcd34d;color:#854d0e;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px;text-align:center;font-weight:600;font-size:.95em}
+/* CARD-065b：code_sections 三態 banner（best/soft/fallback/service）*/
+.code-section{margin-bottom:24px}
+.cs-header{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.cs-banner{padding:10px 14px;border-radius:8px;font-size:.9em;margin-bottom:12px;line-height:1.6}
+.cs-banner.best{background:#dcfce7;color:#166534;border-left:3px solid #16a34a}
+.cs-banner.soft{background:#fef3c7;color:#854d0e;border-left:3px solid #f59e0b}
+.cs-banner.fallback{background:#f1f5f9;color:#475569;border-left:3px solid #64748b}
+.cs-banner.service{background:#e0e7ff;color:#3730a3;border-left:3px solid #6366f1}
+/* CARD-065b：底部寫死教學區（位置：footer 上方；spec §5 4-5 條範例）*/
+.search-tips{margin:32px 0 16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.search-tips h2{font-size:1.05em;color:var(--primary);margin-bottom:12px}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tip{display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:6px}
+.tip-icon{flex-shrink:0;font-size:1.1em}
+.tip-text strong{display:block;color:var(--text);font-size:.92em}
+.tip-text small{color:var(--muted);font-size:.82em;line-height:1.5}
+.tip.good{border-left:2px solid #16a34a}
+.tip.bad{border-left:2px solid var(--muted)}
+footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
+.expired-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.expired-overlay h1{font-size:1.6em;color:var(--danger);margin-bottom:12px}
+.expired-overlay p{color:var(--muted);font-size:1em}
+.hidden{display:none}
+/* === CARD-042：header 下橫幅 + footer 前四包錢進度條（不動 CARD-028 鎖的 gradient header / 產品卡）=== */
+.info-banner{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:.82em}
+.info-banner .ib-tag{background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:16px;font-weight:600;white-space:nowrap}
+.info-banner .ib-tag.warn{background:#fef3c7;color:#854d0e}
+.info-banner .ib-label{color:var(--muted);margin-right:3px}
+.quota-progress{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px}
+.quota-progress h2{font-size:1em;color:var(--primary);margin-bottom:12px;letter-spacing:.5px}
+.quota-progress .qp-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;margin-bottom:8px;font-size:.82em}
+.quota-progress .qp-row:last-child{margin-bottom:0}
+.quota-progress .qp-label{font-weight:700}
+.quota-progress .qp-label.b1{color:#3b82f6}
+.quota-progress .qp-label.b2{color:#10b981}
+.quota-progress .qp-label.b3{color:#f59e0b}
+.quota-progress .qp-label.b4{color:#8b5cf6}
+.quota-progress .qp-bar{height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden}
+.quota-progress .qp-fill{height:100%;border-radius:5px;transition:width .3s}
+.quota-progress .qp-fill.b1{background:#3b82f6}
+.quota-progress .qp-fill.b2{background:#10b981}
+.quota-progress .qp-fill.b3{background:#f59e0b}
+.quota-progress .qp-fill.b4{background:#8b5cf6}
+.quota-progress .qp-fill.over{background:var(--danger)!important}
+.quota-progress .qp-nums{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.9em}
+.quota-progress .qp-pct{font-weight:700;color:var(--text);margin-left:4px}
+.quota-progress .qp-pct.over{color:var(--danger)}
+@media print{
+  body{background:#fff}
+  .actions,.meta-bar{display:none!important}
+  .product-card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+  header{background:#1e40af!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border:none}
+}
+</style>
+</head>
+<body>
+<div id="expired-overlay" class="expired-overlay hidden">
+  <h1>⏰ 此頁面已過期</h1>
+  <p>分享頁面已超過 1 天有效期，請重新搜尋。</p>
+</div>
+
+<div id="main-content" class="container">
+  <header>
+    <h1>長照智慧諮詢</h1>
+    <div class="subtitle">產品資訊分享</div>
+  </header>
+
+  
+  
+  <div class="info-banner" aria-label="個案基本資訊">
+    
+    <span class="ib-tag"><span class="ib-label">收入別</span>一般戶</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">縣市</span>新北市</span>
+    
+    
+    <span class="ib-tag"><span class="ib-label">分區</span>第 2 類</span>
+    
+    <span class="ib-tag">
+      <span class="ib-label">外看</span>無
+    </span>
+  </div>
+  
+
+  <div class="meta-bar">
+    <span>🕐 建立時間：2026-05-20 14:30</span>
+    <span>📅 有效期至：2026-05-21</span>
+    <span class="tag">輔具補助查詢</span>
+  </div>
+
+  
+
+  
+  <section class="calc-summary">
+    <h2>補助試算摘要</h2>
+    <div class="calc-meta">
+      第 2 級（輕度） ／ 一般戶
+       ／ 新北市
+      ／ 第 2 類
+      
+    </div>
+    
+    
+    <div class="selected-codes" aria-label="勾選的補助代碼">
+      <span class="sc-label">勾選代碼：</span>
+      <ul class="selected-codes-list">
+        
+        <li><span class="sc-code">EA01-2</span>：便盆椅</li>
+        
+      </ul>
+    </div>
+    
+    <table class="calc-packages">
+      <thead>
+        <tr>
+          <th>補助包</th>
+          <th class="num">額度上限</th>
+          <th class="num">已用</th>
+          <th class="num">剩餘</th>
+          <th class="num">自付比例</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>B1 照顧及專業服務</td>
+          <td class="num">10,020</td>
+          <td class="num">0</td>
+          <td class="num">10,020</td>
+          <td class="num">16%</td>
+        </tr>
+        
+        <tr>
+          <td>B2 交通接送服務</td>
+          <td class="num">1,840</td>
+          <td class="num">0</td>
+          <td class="num">1,840</td>
+          <td class="num">27%</td>
+        </tr>
+        
+        <tr>
+          <td>B3 輔具及居家無障礙</td>
+          <td class="num">40,000</td>
+          <td class="num">0</td>
+          <td class="num">40,000</td>
+          <td class="num">30%</td>
+        </tr>
+        
+        <tr>
+          <td>B4 喘息服務</td>
+          <td class="num">32,340</td>
+          <td class="num">0</td>
+          <td class="num">32,340</td>
+          <td class="num">16%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  <div class="code-section" data-code="EA01-2" data-kind="askable" data-quality="best">
+    <h3 class="cs-header">
+      EA01-2 便盆椅
+      <span class="qty-tag">× 1 次</span>
+    </h3>
+
+    
+    <section class="query-box code-query-box">
+      
+      <div class="query-row">
+        <div class="query-label">🔍 家屬需求描述</div>
+        <div class="query-text">小型</div>
+      </div>
+      
+      
+      <div class="query-row">
+        <div class="query-label">AI 解讀</div>
+        <div class="query-text">小型 便盆椅 床邊便器 如廁椅 夜間如廁 扶手支撐 移位安全 無法走到馬桶 床邊如廁 穩定 防滑 輕量 緊湊 居家 長照</div>
+        
+      </div>
+      
+    </section>
+    
+
+    
+    <div class="cs-banner best">✨ 精準推薦（共 5 筆）</div>
+    
+
+    
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">1</span>
+          <span>日本臥房專用便座(輕巧型)PS2型</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd784b5622a561de0cd1888/original.jpeg?1574405300" alt="日本臥房專用便座(輕巧型)PS2型" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">日本臥房專用便座(輕巧型)PS2型
+Richell
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準)2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。長輩房間中多一個移動式馬桶，讓年長者如廁更方便，不必急著跑廁所，可避免許多意外的發生。方便清洗，房間不再有令人難聞的異味，讓長者及照護者皆感到安適。※ 本產品不適用貨到付款，請選擇其他付款方式，謝謝配合。 產品特色 高度可調式扶手扶手可降低至座位高度，因此可方便舒適的從床上移位治馬桶。扶手4段調節可以調整高度，對使用者做最合適的調整。 （0,18.5,21,23.5cm） 具有安全鎖功能，防止誤觸動作。附有衛生紙架依使用習慣，左右兩邊皆可選擇安裝紙架。容易清理汙水盒可單獨拆下，並可用清水沖洗清潔。方便的小物品收納可方便收納衛生紙、消臭液等物品。座椅高度可調整椅腳旋轉，可在35~45cm無階段式調整椅座高度。 產品規格 尺寸：58×56.8×76.8~86.8H(cm）重量：9.8kg材質：聚丙烯、ABS樹脂承重量：最大100公斤(扶手承重最大70公斤)產地：日本請點此下載注意事項及保固說明、請點此下載保固書想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1to67050000000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">2</span>
+          <span>Just Fit 可攜式便器椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/678ef0fb5e87c6000ca9faad/original.jpg?1737421051" alt="Just Fit 可攜式便器椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">Just Fit 可攜式便器椅
+安壽
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 許多長者由於行動不便，需要在房間設一個便座，但是台灣一般醫療器材行所販售的便器椅，不僅不美觀，而且易生異味。讓使用者感到失去尊嚴及生活品質。 現在推薦一款日本高齡長者房間必備的舒適便盆椅，讓年長者如廁更方便，夜晚不必急著跑廁所，可避免許多意外的發生。方便清洗，房間不再有令人難聞的異味，讓長者及照護者皆感到安適。讓我們所鍾愛的人享有尊嚴的生活品質! 來自日本介護用品領導品牌安壽所開發的 Just Fit 可攜式便器椅，透過模擬海豚嘴型的座椅弧度設計，幫助入座時能更輕易達到理想排泄姿勢，避免尿液外漏。此外，除了扶手高、扶手寬、座高、座仰角皆可依據身形調整之外，配備可拆式扶手，安全平移更省力。座墊採用日本 SlAA ISO22196 抗菌加工材質，能有效減少細菌孳生。 盛接您的所有 海豚曲線，好臀座墊 日本安壽研發團隊透過模擬海豚嘴型打造座椅弧度，以座墊中央微凸、兩側凹陷設計，幫助使用者入座時，能自然達到理想排泄姿勢。避免尿液外漏，幫助維持環境整潔，可減少照護者須反覆清潔的負擔。腳架內側弧度外擴，整體造型圓潤無死角，融合舒適與安全特性，展現出日本職人的細膩與用心。 淨空扶手，輕鬆位移 夜晚如廁，安全加乘 透過可拆式扶手設計，讓使用者的轉移位過程更省力、安全、有效率。夜晚如廁，視線不佳時，減少肢體受阻礙、撞擊造成受傷機率。 舒適，量身定義 多段客製調整 座椅、扶手高度被賦予多段調整功能，可依照乘坐者身形尺寸量身定位。特殊模具設計，將左右扶手拆裝對換，即可創造 2cm 的舒適。細膩思考，專屬於您。 助您 3 °之力 前傾起身不吃力 ‧前傾角度 -3 °：幫助使用者更好轉換身體重心，前傾起身或坐下。 ‧座仰角 0 °：幫助使用者更好平行轉移位。 後傾移順間 照護好傾鬆 於平坦地面時，無須費力搬運，將便器椅後傾即可使用後方腳輪省力移動。 潔淨雙護 便利好拆洗 汙水盤連接著座墊，能盛接沒有進入到便桶的尿液，便於拆卸、清洗及保養。轉角圓潤曲面設計，防止因死角而卡陷汙垢的窘境。而底層污水接收器作為最後一道防線，作為即使汙水溢出，也便於清潔的雙重結構。 蓋是英雄 異味防範 便盆蓋挖深結構設計，使隔臭效果相較一般蓋子表現更佳，作為第一線抵擋異味擴散之防線。 安心享壽，從心動到行動 「やりたい」を「できる」に変えよう 安壽是日本介護用品的領導品牌。 創立 25 餘年來，秉持著提供長者更舒適的安居生活，以協助長者提升自主生活能力、減輕照顧負擔為核心，持續開發不同產品，改善生活上面臨的各種問題。 安壽將進化，全力支持您的「想做」； 我們相信，「能做」會讓您更加快樂。 【產品規格】 品牌：安壽 型號：5533920 尺寸：長49.5 × 寬60 × 高 73~85 cm 重量：10.9 kg 最大荷重：100 kg 座面： 座寬 - 36 cm 座深 - 43 cm 座高 - 33~45 cm (共13段) 材質： 主體 - PP 坐墊 - PE + SIAA 防霉加工 扶手高度：18~30 cm (共5段) 主體顏色：米色 保固：本體１年 (人為因素所造成之損壞及消耗品不在保固範疇內) 產地：日本 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1to6740lka0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">3</span>
+          <span>附扶手馬桶增高座 - 高度可調，如廁方便又安全</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/5dd784ba622a561de0cd1891/original.jpeg?1574405305" alt="附扶手馬桶增高座 - 高度可調，如廁方便又安全" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">附扶手馬桶增高座 - 高度可調，如廁方便又安全
+NOVA
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。家中長輩是否因馬桶座面低，從馬桶坐下起身都很困難?很多長者因為各種狀況而無法順利坐在一般的馬桶上，若沒有人攙扶，常常會「跌」坐在馬桶上，嚴重的甚至會造成骨折等傷害。現在有了此款馬桶增高座，讓長者的如廁更安全了，昇高的馬桶座讓長輩不再「跌」坐在馬桶上，有了扶手更讓長輩容易起身。讓長輩不再視如廁為畏途。產品特色 升高馬桶座面高度，讓長輩更容易坐下及起身。可掀式扶手設計，方便長者進出馬桶的高度可調整，最高可增高16cm產品規格 主體材質：鐵(扶手)座墊材質：塑膠顏色：珍珠白座寬/座深：36 / 40 cm座高：8 / 12 / 16 cm最大荷重：120 kg本產品須DIY自行安裝產地：越南廠牌：光星型號：C8310-A保固年限：一年 (僅限主體，耗材及人為因素造成之損壞不在保固範疇內)馬桶外緣全寬要小於38cm、全長要小於49.5cm，才可適用。馬桶內緣寬度要大於25.5cm，才可適用。馬桶蓋與坐墊需要可以拆解，才可適用。不適用特殊規格馬桶，如：長方型、尖型等若已安裝免治馬桶則不適用本產品。想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1to6707wht0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">4</span>
+          <span>豪華高扶手洗澡椅</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/682bdecbaac801000eb8c74c/original.jpg?1747705547" alt="豪華高扶手洗澡椅" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">豪華高扶手洗澡椅
+此產品符合輔具補助項目—— 長照 / 身心障礙者 【馬桶增高器、便盆椅或沐浴椅】 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 (註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 根據衛福部110年死因統計，65歲以上的跌倒事故位居第二位，而其中以發生在浴室/廁所的比例最高，達26.6%。為了有效防止家中長輩在浴室中跌倒，不僅要在浴室加裝必要的扶手，樂齡網亦建議為家中長輩準備適當的洗澡椅，讓長輩可以坐著洗澡，免除為了要洗腳而前傾跌倒的危險。 ■ 商品特點 ■ 此款為高扶手、靠背及腳管可調整高度，可360°旋轉之洗澡椅。 靠背及坐墊為PU材質，舒適感提升，久坐不易累，坐墊下採X型管設計，安全性提高，使用壽命長。 兩側扶手增高可掀起，坐入角度不受限，手感圓潤，久放及撐起皆輕鬆。 坐墊右側下方有一紅色壓桿，下壓即可旋轉椅子，此洗澡椅可360°旋轉，每90°為一階段，紅色壓桿下壓，90°轉至欲使用的角度，放開紅色壓桿，「咖」一聲即可放開壓桿固定。 附有止滑腳墊，抓地效果明顯，不易滑動。 靠背(4段)與腳管(5段)皆可調整檔位，將調整鈕往內壓並拉伸，即可依使用者身高及使用習慣調整至適合的高度。 Knock Down 設計，方便收納及攜帶。 本產品每次限乘載一人，安全乘載為 120kg/人。 本產品防水防鏽，免工具組裝，堅固耐用。 產品用途：協助進行沐浴、清潔的動作，增加便利性。 使用說明書/保固卡PDF下載 ■ 商品規格 型號：HS4325D-BL 總高度：74~91.5 cm 扶手內側寬：46 cm 坐墊尺寸：長39×寬32 cm 淨重：6.74 kg 安全乘載：120 kg 材質 主體 - 鋁製 靠背及坐墊 - PU 此款為高扶手，靠背及腳管可調整高度，可360°旋轉之洗澡椅 本產品每次限乘載一人，安全乘載為 120kg /人 產地：台灣 想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1bt6448blu0000" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="card-header">
+          <span class="num">5</span>
+          <span>美而 洗澡便盆椅 (含舒適軟墊)一椅多用 (洗澡椅/便盆椅/馬桶增高器)</span>
+          <span class="code-tag">EA</span>
+          <span class="qty-tag">× 1 次</span>
+        </div>
+        <div class="card-body">
+          
+          <img src="https://img.shoplineapp.com/media/image_clips/66e106fb4c4087002209427a/original.jpg?1726023419" alt="美而 洗澡便盆椅 (含舒適軟墊)一椅多用 (洗澡椅/便盆椅/馬桶增高器)" loading="lazy" referrerpolicy="no-referrer">
+          
+          
+          <div class="desc">美而 洗澡便盆椅 (含舒適軟墊)一椅多用 (洗澡椅/便盆椅/馬桶增高器)
+MedGear
+1. 此產品符合長照/身心障礙者輔具補助項目【馬桶增高器、便盆椅或沐浴椅】(註：商品是否符合補助，皆循法令滾動式修正，最終依各縣市核銷單位認定為準) 2. 如欲了解長照補助申請資訊，請撥打1966長照服務專線諮詢。 市售洗澡椅百百款，不知道怎麼選？點此看👉專家挑選懶人包 根據衛福部110年死因統計，65歲以上的跌倒事故位居第二位，而其中以發生在浴室/廁所的比例最高，達26.6%。為了有效防止家中長輩在浴室中跌倒，不僅要在浴室加裝必要的扶手，樂齡網亦建議為家中長輩準備適當的洗澡椅，讓長輩可以坐著洗澡，免除為了要洗腳而前傾跌倒的危險。 很多長輩會站在濕滑的浴缸中站立洗澡，可是您放心嗎？站著洗澡，怎麼洗腳底呢？ 體貼您的長輩，為他準備一個可以坐著洗澡的椅子，安全又舒服。您的用心，會讓他更安心。 一椅多用 符合您的所有需求 上廁所是每個人最隱密的事，但隨著年齡增長身體機能退化、突發狀況受傷行動不便，人人都有需要被照顧的時候，洗澡便盆椅一椅多用滿足多種要求，不管是洗澡椅、便盆椅，也可以當作馬桶增高座，日常也能當作一般坐椅，三種功能完美結合，體貼長輩們的所有需求，您的用心，讓長輩更安心! 哪些人適合使用便盆椅呢? 1.長輩 根據衛福部的健康調查顯示，每6個長輩就有1個曾經跌傷… 長輩的肌力弱無法久站，使用洗澡便盆椅，避免轉移位時跌倒的風險。 2.受傷行動不便 人生難免會有意外，意外發生時，如何上廁所絕對是一個大難題。不想麻煩家人，想要保有隱私，洗澡便盆椅絕對是必要的選擇 洗澡便盆椅非買不可的理由 ■ 十大特色 1.免工具安裝 不需要師傅，免使用工具，自己就可以快速組裝，省時又便利 2.穩固承重 超高承重227公斤，安全穩固，怎麼動都不怕椅子垮掉 3.防滑腳塞 4個椅腳採TPR材質，提供良好抓地力，穩固安全的要角 4.前端凸起設計 便盆前端凸起設計，避免如廁時小便外濺 5.獨立內桶 高機動性，提供銀髮長輩及行動不便人士，作為臨時廁所，便桶可移出清洗 6.放馬桶當增高椅 移除便桶與坐墊蓋，擺放馬桶上方，可作為馬桶增高器，兩側扶手輔助上下起身 7.放浴室當洗澡椅 蓋取出便桶，蓋上坐墊蓋，即可做為洗澡椅使用 8.可調高度 雙按鈕十段式可調整腳管，依不同的身高需求，調整至最適合乘坐的高度 9.台灣製造 台灣工廠直營，外銷歐洲.美洲.亞洲…等世界各地的優良品質，開發國內市場 人人都需注意浴室安全，我們都應該要建立 HOME CARE 的概念，讓每一間衛浴間對每一個年齡層、族群都能安心的使用，並且輕鬆地享受沐浴時光。 ■ 商品規格 A：55~57cm (21.7&#34;~22.4&#34;) B：41~42.5cm (16.1~16.7&#34;) C：43~54.5cm (16.9~21.5&#34;) D：51.3cm (20.2&#34;) E：37.9cm (14.9&#34;) F：16.7cm (6.6&#34;) G：25cm (9.8&#34;) H：28.4cm (11.2&#34;) I：55cm (21.7&#34;) J：10.9cm (4.3&#34;) 品牌：MedGear美而 型號：(莫蘭迪)A-0277A / (白色)A-0277A1 高度調整：43~54.5cm [16.9~21.5&#34;] (五段式，每段 1.27cm[0.5&#34;]) 重量：約 4.9kgs (10.8磅) 最大承重：227 kgs (500磅) 材質： 本體 -PP、鋁 舒適軟墊 -發泡 表面處理：霧面 (陽極處理) 保固：一年，耗材及人為因素造成之損壞不在保固範疇內。 產地：台灣 舒適軟墊 A：42cm (16.5&#34;) B：32cm (12.6&#34;)想現場體驗、了解更多？除了官網下單，也歡迎到門市參觀選購各式商品👉 點我看門市據點</div>
+          
+          
+          <div class="vendor-row">
+            
+            <span class="vendor-label">廠商：</span><span class="vendor-name">樂齡網</span>
+            
+            
+            <a href="https://www.ez66.com.tw/products/r1to6737" target="_blank" rel="noopener">前往廠商頁 ↗</a>
+            
+          </div>
+          
+          
+          <div class="estimate-row">
+            <span class="est-label">小計</span>
+            <span class="est-value">$0</span>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">📥 下載 PDF</button>
+    <button class="btn btn-outline" onclick="copyLink()">🔗 複製連結</button>
+    
+    
+    <a id="back-to-discord-link" class="btn btn-discord" href="discord:///channels/1456655145319534666/1491402720375079054" target="_self" rel="noopener">🚀 返回 Discord 結果頻道</a>
+    
+  </div>
+
+  
+
+
+  <footer>
+    <p>長照智慧諮詢 · 本頁面由系統自動生成 · 有效期 1 天</p>
+    <p>頁面 ID：6cf58d789e</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var created = new Date("2026-05-20T14:30:06.792929");
+  var expiryMs = 1 * 86400000;
+  if (Date.now() - created.getTime() > expiryMs) {
+    document.getElementById("expired-overlay").classList.remove("hidden");
+    document.getElementById("main-content").style.display = "none";
+  }
+})();
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    alert("已複製連結！");
+  });
+}
+</script>
+</body>
+</html>

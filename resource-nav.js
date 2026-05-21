@@ -7,6 +7,7 @@
     identities: new Set(),
     district: "",
     urgency: "",
+    packageIds: new Set(),
   };
 
   const identityOptions = [
@@ -60,6 +61,28 @@
     return Array.from(state.selectedTopics).map((key) => map.get(key) || key);
   }
 
+  function asList(value) {
+    return Array.isArray(value) ? value.filter(Boolean) : [];
+  }
+
+  function isFamilyVisible(resource) {
+    return resource.public_allowed !== false && resource.status !== "過期";
+  }
+
+  async function copyText(text) {
+    if (!text.trim()) return;
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const area = $("packageOutput");
+    const old = area.value;
+    area.value = text;
+    area.select();
+    document.execCommand("copy");
+    area.value = old;
+  }
+
   function renderCategorySelect() {
     const select = $("categorySelect");
     select.innerHTML = "";
@@ -71,11 +94,11 @@
     });
     if (!state.category && state.topics[0]) state.category = state.topics[0].key;
     select.value = state.category;
-    select.addEventListener("change", () => {
+    select.onchange = () => {
       state.category = select.value;
       state.selectedTopics.clear();
       render();
-    });
+    };
   }
 
   function renderTopicChecks(topic) {
@@ -125,10 +148,20 @@
       state.urgency = event.target.value;
       renderCards();
     });
+    $("packageMode").addEventListener("change", renderPackage);
+    $("copyPackage").addEventListener("click", async () => {
+      await copyText($("packageOutput").value);
+    });
+    $("clearPackage").addEventListener("click", () => {
+      state.packageIds.clear();
+      renderCards();
+      renderPackage();
+    });
   }
 
   function matchesResource(resource) {
     if (resource.category !== state.category) return false;
+    if (resource.status === "停用" || resource.status === "過期") return false;
     if (state.selectedTopics.size > 0) {
       const resourceTopics = new Set(resource.topics || []);
       if (!Array.from(state.selectedTopics).some((key) => resourceTopics.has(key))) return false;
@@ -148,6 +181,48 @@
       if (!urgencyTags.includes(state.urgency)) return false;
     }
     return true;
+  }
+
+  function familyText(resource) {
+    return [
+      resource.name,
+      resource.public_summary || resource.summary || "",
+      "下一步：" + (resource.public_next_step || resource.next_step || "請先確認申請條件與受理狀態。"),
+      "聯絡/申請：" + (resource.public_contact || resource.contact || "依來源公告"),
+      asList(resource.public_required_documents).length
+        ? "可先準備：" + asList(resource.public_required_documents).join("、")
+        : "",
+    ].filter(Boolean).join("\n");
+  }
+
+  function phoneText(resource) {
+    const questions = asList(resource.phone_check_questions);
+    return [
+      resource.name,
+      "聯絡/申請：" + (resource.public_contact || resource.contact || "依來源公告"),
+      questions.length ? "電話確認：" + questions.join("；") : "電話確認：是否仍受理、資格條件、需要文件、服務區域。",
+      resource.internal_notes ? "內部提醒：" + resource.internal_notes : "",
+    ].filter(Boolean).join("\n");
+  }
+
+  function adminText(resource) {
+    const docs = asList(resource.public_required_documents);
+    const flags = asList(resource.risk_flags);
+    return [
+      resource.name,
+      "狀態：" + (resource.status || "待確認"),
+      "資料來源：" + (resource.source_url || "未提供"),
+      "最後確認：" + (resource.last_checked_at || "待確認"),
+      "下次檢查：" + (resource.next_review_at || "未設定"),
+      docs.length ? "文件：" + docs.join("、") : "文件：待確認",
+      flags.length ? "注意：" + flags.join("、") : "",
+    ].filter(Boolean).join("\n");
+  }
+
+  function outputTextFor(resource, mode) {
+    if (mode === "phone") return phoneText(resource);
+    if (mode === "admin") return adminText(resource);
+    return familyText(resource);
   }
 
   function renderCards() {
@@ -172,6 +247,7 @@
       empty.className = "empty";
       empty.textContent = "目前條件沒有符合的資源。可以放寬身份/行政區，或使用 Google 延伸搜尋。";
       cards.appendChild(empty);
+      renderPackage();
       return;
     }
 
@@ -180,20 +256,100 @@
       const node = template.content.cloneNode(true);
       node.querySelector(".category").textContent = topicLabel(resource.category);
       node.querySelector("h3").textContent = resource.name;
-      node.querySelector(".confidence").textContent = resource.confidence || "待確認";
-      node.querySelector(".summary").textContent = resource.summary || "";
+      node.querySelector(".confidence").textContent = resource.confidence || resource.status || "待確認";
+      node.querySelector(".summary").textContent = resource.public_summary || resource.summary || "";
       node.querySelector(".eligibility").textContent = (resource.eligibility_tags || []).join("、") || "未標示";
-      node.querySelector(".next-step").textContent = resource.next_step || "請先確認個案條件與受理狀態。";
-      node.querySelector(".contact").textContent = resource.contact || "依來源公告";
+      node.querySelector(".next-step").textContent = resource.public_next_step || resource.next_step || "請先確認個案條件與受理狀態。";
+      node.querySelector(".contact").textContent = resource.public_contact || resource.contact || "依來源公告";
+      const docs = asList(resource.public_required_documents);
+      node.querySelector(".required-docs").textContent = docs.join("、");
+      if (!docs.length) node.querySelector(".required-docs-row").remove();
       node.querySelector(".checked-at").textContent = "最後確認：" + (resource.last_checked_at || "待確認");
       const source = node.querySelector(".source");
       source.href = resource.source_url || "#";
       if (!resource.source_url) source.removeAttribute("href");
+
+      const addButton = node.querySelector(".add-package");
+      addButton.textContent = state.packageIds.has(resource.id) ? "已加入資源包" : "加入資源包";
+      addButton.addEventListener("click", () => {
+        if (state.packageIds.has(resource.id)) state.packageIds.delete(resource.id);
+        else state.packageIds.add(resource.id);
+        renderCards();
+        renderPackage();
+      });
+      node.querySelector(".copy-family").addEventListener("click", async () => {
+        await copyText(familyText(resource));
+      });
+      node.querySelector(".copy-phone").addEventListener("click", async () => {
+        await copyText(phoneText(resource));
+      });
+
       const note = node.querySelector(".internal-note");
-      note.textContent = resource.internal_notes || "";
-      if (!note.textContent) note.remove();
+      note.textContent = resource.internal_notes || "尚無內部註記。";
+      const questions = node.querySelector(".phone-questions");
+      asList(resource.phone_check_questions).forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        questions.appendChild(li);
+      });
+      if (!questions.children.length) questions.remove();
+      const flags = node.querySelector(".risk-flags");
+      asList(resource.risk_flags).forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        flags.appendChild(li);
+      });
+      if (!flags.children.length) flags.remove();
       cards.appendChild(node);
     });
+    renderPackage();
+  }
+
+  function selectedPackageResources() {
+    return state.resources.filter((resource) => state.packageIds.has(resource.id));
+  }
+
+  function renderPackage() {
+    const items = selectedPackageResources();
+    const mode = $("packageMode").value;
+    const visibleItems = mode === "family" ? items.filter(isFamilyVisible) : items;
+    const wrap = $("packageItems");
+    wrap.innerHTML = "";
+    $("packageStatus").textContent = items.length
+      ? "已加入 " + items.length + " 筆資源。"
+      : "尚未加入資源。";
+
+    items.forEach((resource) => {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "package-item";
+      row.textContent = "移除｜" + resource.name;
+      row.addEventListener("click", () => {
+        state.packageIds.delete(resource.id);
+        renderCards();
+        renderPackage();
+      });
+      wrap.appendChild(row);
+    });
+
+    if (!items.length) {
+      $("packageOutput").value = "";
+      return;
+    }
+    const title = mode === "phone"
+      ? "個管師電話確認清單"
+      : mode === "admin"
+        ? "行政申請清單"
+        : "案家資源包";
+    const skipped = mode === "family" && visibleItems.length !== items.length
+      ? "\n\n（已排除不可公開或過期資源）"
+      : "";
+    $("packageOutput").value = [
+      title,
+      "產生時間：" + new Date().toLocaleString("zh-TW"),
+      "",
+      ...visibleItems.map((resource, index) => (index + 1) + ". " + outputTextFor(resource, mode)),
+    ].join("\n\n") + skipped;
   }
 
   function updateAssistant(topic, selectedLabels) {
@@ -202,6 +358,7 @@
       "個案目前最急的是錢、物資、人力、交通，還是申請流程？",
       "是否有低收/中低收、身障、外籍看護、獨居或急難條件？",
       "需要今天處理、這週處理，還是先收集備案？",
+      "要輸出給家屬看，還是先做電話確認？",
     ];
     if (selectedLabels.length) {
       questions.unshift("你已選「" + selectedLabels.join("、") + "」，是否要再用身份條件縮小？");

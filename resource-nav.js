@@ -13,6 +13,7 @@
     smartQueryText: "",
     smartQueryAppliedText: "",
     packageIds: new Set(),
+    hasUrlContext: false,
   };
 
   function $(id) {
@@ -33,6 +34,7 @@
     const topicParam = params.get("topics") || "";
     topicParam.split(",").filter(Boolean).forEach((key) => state.selectedTopics.add(key));
     const source = params.get("source") || "direct";
+    state.hasUrlContext = Boolean(state.category || topicParam);
     $("sourceStatus").textContent = source === "discord" ? "Discord 入口" : "直接開啟";
   }
 
@@ -50,6 +52,20 @@
 
   function getCurrentTopic() {
     return state.topics.find((topic) => topic.key === state.category) || state.topics[0];
+  }
+
+  function normalizeCategory() {
+    if (!state.topics.length) return;
+    if (!state.topics.some((topic) => topic.key === state.category)) {
+      state.category = state.topics[0].key;
+    }
+  }
+
+  function normalizeSelectedTopics() {
+    const topic = getCurrentTopic();
+    if (!topic) return;
+    const validKeys = new Set((topic.options || []).map((option) => option.key));
+    state.selectedTopics = new Set(Array.from(state.selectedTopics).filter((key) => validKeys.has(key)));
   }
 
   function topicLabel(topicKey) {
@@ -211,6 +227,8 @@
     state.urgency = item.urgency || "";
     state.smartQueryText = item.smartQueryText || "";
     state.smartQueryAppliedText = item.smartQueryAppliedAt ? state.smartQueryText : "";
+    normalizeCategory();
+    normalizeSelectedTopics();
   }
 
   function renderPackageManager() {
@@ -299,6 +317,9 @@
       const url = buildGoogleSearchUrl();
       $("googleSearchButton").dataset.searchUrl = url;
       window.open(url, "_blank", "noopener,noreferrer");
+    });
+    $("packageToggle").addEventListener("click", () => {
+      document.querySelector(".package-panel").classList.toggle("is-open");
     });
     $("packageNameInput").addEventListener("input", () => {
       syncPackageFromState();
@@ -478,16 +499,15 @@
   }
 
   function renderDerivedIdentityChips() {
+    const panel = document.querySelector(".selected-insights");
     const wrap = $("derivedIdentityChips");
     const tags = derivedIdentityTags();
     wrap.innerHTML = "";
     if (!tags.length) {
-      const empty = document.createElement("span");
-      empty.className = "insight-empty";
-      empty.textContent = "尚未選資源，加入卡片後會自動整理身份/情境線索。";
-      wrap.appendChild(empty);
+      panel.hidden = true;
       return;
     }
+    panel.hidden = false;
     tags.forEach((tag) => {
       const chip = document.createElement("span");
       chip.className = "insight-chip";
@@ -657,7 +677,10 @@
     const items = selectedPackageResources();
     const mode = $("packageMode").value;
     const wrap = $("packageItems");
+    const countText = items.length + " 筆";
     wrap.innerHTML = "";
+    $("packageCount").textContent = countText;
+    $("packageToggleCount").textContent = countText;
     $("packageStatus").textContent = items.length
       ? "已加入 " + items.length + " 筆資源。"
       : "尚未加入資源。";
@@ -728,9 +751,12 @@
       ]);
       state.topics = topicsData.topics || [];
       state.resources = resourceData.resources || [];
-      if (!state.category && state.topics[0]) state.category = state.topics[0].key;
+      normalizeCategory();
+      normalizeSelectedTopics();
       state.packages = readPackages();
-      if (state.packages.length) {
+      if (state.hasUrlContext) {
+        createPackage(defaultPackageName(), { save: false });
+      } else if (state.packages.length) {
         applyPackageContext(state.packages[0]);
       } else {
         createPackage(defaultPackageName());

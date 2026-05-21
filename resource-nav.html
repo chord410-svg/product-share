@@ -22,7 +22,6 @@
           <p class="eyebrow">查詢條件</p>
           <h2>先鎖定地區，再選需求</h2>
         </div>
-        <a class="google-link" id="googleSearchLink" target="_blank" rel="noopener noreferrer">用 Google 延伸搜尋</a>
       </div>
 
       <div class="filter-controls">
@@ -59,7 +58,7 @@
         </label>
       </div>
 
-      <div class="choice-grid">
+      <div class="choice-grid single-choice">
         <div class="choice-block">
           <div class="choice-title">
             <span>子主題</span>
@@ -67,25 +66,30 @@
           </div>
           <div id="topicChips" class="chip-row"></div>
         </div>
-        <div class="choice-block">
-          <div class="choice-title">
-            <span>身份/情境</span>
-            <small>可複選</small>
-          </div>
-          <div id="identityChips" class="chip-row"></div>
-        </div>
       </div>
 
       <div class="smart-search">
         <label class="field">
-          <span>智慧查詢</span>
+          <span>智慧查詢補充</span>
           <input id="smartQueryInput" type="text" placeholder="補充描述，例如：獨居、最近沒錢買飯、家屬不穩定">
         </label>
-        <label class="field google-prompt-field">
-          <span>Google 搜尋提示詞</span>
-          <textarea id="googlePrompt" rows="2" aria-label="Google 搜尋提示詞"></textarea>
-        </label>
+        <div class="action-help">
+          <button type="button" id="applySmartQuery">套用智慧查詢</button>
+          <p>依補充描述排序與高亮卡片，不會直接刪掉其他資源。</p>
+        </div>
+        <div class="action-help">
+          <button type="button" id="googleSearchButton">用 Google 延伸搜尋</button>
+          <p>依行政區、主題、子主題、智慧查詢與已選線索組合搜尋，不抓取 Google 結果。</p>
+        </div>
       </div>
+
+      <section class="selected-insights" aria-label="已選資源線索">
+        <div class="choice-title">
+          <span>已選資源線索</span>
+          <small>由已加入資源整理</small>
+        </div>
+        <div id="derivedIdentityChips" class="chip-row muted-chip-row"></div>
+      </section>
     </section>
 
     <section class="summary-band">
@@ -93,46 +97,6 @@
         <p class="eyebrow">目前範圍</p>
         <h2 id="currentScope">資源查詢</h2>
         <p id="scopeMeta">正在載入資料...</p>
-      </div>
-    </section>
-
-    <section id="conclusionPanel" class="conclusion-panel" aria-label="資源包結論頁" hidden>
-      <div class="conclusion-head">
-        <div>
-          <p class="eyebrow">結論頁</p>
-          <h2 id="conclusionTitle">案家資源包結論</h2>
-          <p id="conclusionMeta"></p>
-        </div>
-        <div class="conclusion-actions">
-          <button type="button" id="copyConclusionFamily">複製家屬短訊</button>
-          <button type="button" id="copyConclusionHandoff">複製交接摘要</button>
-        </div>
-      </div>
-      <div class="conclusion-grid">
-        <article>
-          <h3>建議優先順序</h3>
-          <ol id="priorityList"></ol>
-        </article>
-        <article>
-          <h3>先打哪幾通電話</h3>
-          <ol id="phonePlanList"></ol>
-        </article>
-        <article>
-          <h3>可傳給家屬的短訊</h3>
-          <p id="familyMessage"></p>
-        </article>
-        <article>
-          <h3>需要先準備的文件</h3>
-          <ul id="documentList"></ul>
-        </article>
-        <article>
-          <h3>風險提醒</h3>
-          <ul id="riskList"></ul>
-        </article>
-      </div>
-      <div class="conclusion-details">
-        <h3>完整資料集合</h3>
-        <div id="conclusionDetails"></div>
       </div>
     </section>
 
@@ -172,7 +136,7 @@
             </select>
           </label>
           <div class="package-actions">
-            <button type="button" id="generateConclusion">產生結論頁</button>
+            <button type="button" id="generateResult">產生資源包結果</button>
             <button type="button" id="copyPackage">複製資源包</button>
             <button type="button" id="clearPackage">清空</button>
           </div>
@@ -190,11 +154,15 @@
           <p class="category"></p>
           <h3></h3>
         </div>
-        <span class="confidence"></span>
+        <div class="card-badges">
+          <span class="smart-hit" hidden>智慧查詢命中</span>
+          <span class="confidence"></span>
+        </div>
       </div>
       <p class="summary"></p>
-      <div class="tag-strip">
-        <span class="eligibility"></span>
+      <div class="resource-tags">
+        <span class="tag-strip eligibility"></span>
+        <span class="tag-strip urgency-tags"></span>
       </div>
       <dl>
         <div><dt>下一步</dt><dd class="next-step"></dd></div>

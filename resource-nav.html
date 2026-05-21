@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260521-ui-cart">
 </head>
 <body>
   <header class="topbar">
@@ -16,49 +16,50 @@
   </header>
 
   <main class="page-shell">
-    <section class="filter-panel" aria-label="資源篩選">
-      <div class="filter-head">
-        <div>
-          <p class="eyebrow">查詢條件</p>
-          <h2>先鎖定地區，再選需求</h2>
+    <div class="main-column">
+      <section class="filter-panel" aria-label="資源篩選">
+        <div class="filter-head">
+          <div>
+            <p class="eyebrow">查詢條件</p>
+            <h2>先鎖定地區，再選需求</h2>
+          </div>
+          <p class="compact-help">卡片可直接點選加入資源包。</p>
         </div>
-      </div>
 
-      <div class="filter-controls">
-        <label class="field">
-          <span>行政區</span>
-          <select id="districtSelect">
-            <option value="">不限行政區</option>
-            <option>板橋區</option>
-            <option>三重區</option>
-            <option>中和區</option>
-            <option>永和區</option>
-            <option>新莊區</option>
-            <option>新店區</option>
-            <option>土城區</option>
-            <option>蘆洲區</option>
-            <option>汐止區</option>
-            <option>樹林區</option>
-            <option>淡水區</option>
-            <option>全新北</option>
-          </select>
-        </label>
-        <label class="field">
-          <span>主題分類</span>
-          <select id="categorySelect"></select>
-        </label>
-        <label class="field">
-          <span>急迫性</span>
-          <select id="urgencySelect">
-            <option value="">不限</option>
-            <option>一般</option>
-            <option>本週內</option>
-            <option>緊急</option>
-          </select>
-        </label>
-      </div>
+        <div class="filter-controls">
+          <label class="field">
+            <span>行政區</span>
+            <select id="districtSelect">
+              <option value="">不限行政區</option>
+              <option>板橋區</option>
+              <option>三重區</option>
+              <option>中和區</option>
+              <option>永和區</option>
+              <option>新莊區</option>
+              <option>新店區</option>
+              <option>土城區</option>
+              <option>蘆洲區</option>
+              <option>汐止區</option>
+              <option>樹林區</option>
+              <option>淡水區</option>
+              <option>全新北</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>主題分類</span>
+            <select id="categorySelect"></select>
+          </label>
+          <label class="field">
+            <span>急迫性</span>
+            <select id="urgencySelect">
+              <option value="">不限</option>
+              <option>一般</option>
+              <option>本週內</option>
+              <option>緊急</option>
+            </select>
+          </label>
+        </div>
 
-      <div class="choice-grid single-choice">
         <div class="choice-block">
           <div class="choice-title">
             <span>子主題</span>
@@ -66,47 +67,55 @@
           </div>
           <div id="topicChips" class="chip-row"></div>
         </div>
-      </div>
 
-      <div class="smart-search">
-        <label class="field">
-          <span>智慧查詢補充</span>
-          <input id="smartQueryInput" type="text" placeholder="補充描述，例如：獨居、最近沒錢買飯、家屬不穩定">
-        </label>
-        <div class="action-help">
-          <button type="button" id="applySmartQuery">套用智慧查詢</button>
-          <p>依補充描述排序與高亮卡片，不會直接刪掉其他資源。</p>
+        <div class="smart-search">
+          <label class="field smart-field">
+            <span>智慧查詢補充</span>
+            <input id="smartQueryInput" type="text" placeholder="例如：獨居、最近沒錢買飯、家屬不穩定">
+          </label>
+          <div class="quick-actions">
+            <button type="button" id="applySmartQuery">套用智慧查詢</button>
+            <button type="button" id="googleSearchButton">用 Google 延伸搜尋</button>
+            <span class="button-help">智慧查詢只排序/高亮；Google 只開搜尋頁。</span>
+          </div>
         </div>
-        <div class="action-help">
-          <button type="button" id="googleSearchButton">用 Google 延伸搜尋</button>
-          <p>依行政區、主題、子主題、智慧查詢與已選線索組合搜尋，不抓取 Google 結果。</p>
-        </div>
-      </div>
 
-      <section class="selected-insights" aria-label="已選資源線索">
-        <div class="choice-title">
-          <span>已選資源線索</span>
-          <small>由已加入資源整理</small>
-        </div>
-        <div id="derivedIdentityChips" class="chip-row muted-chip-row"></div>
+        <section class="selected-insights" aria-label="已選資源線索" hidden>
+          <div class="choice-title">
+            <span>已選資源線索</span>
+            <small>由已加入資源整理</small>
+          </div>
+          <div id="derivedIdentityChips" class="chip-row muted-chip-row"></div>
+        </section>
       </section>
-    </section>
 
-    <section class="summary-band">
-      <div>
-        <p class="eyebrow">目前範圍</p>
-        <h2 id="currentScope">資源查詢</h2>
-        <p id="scopeMeta">正在載入資料...</p>
-      </div>
-    </section>
+      <section class="summary-band">
+        <div>
+          <p class="eyebrow">目前範圍</p>
+          <h2 id="currentScope">資源查詢</h2>
+          <p id="scopeMeta">正在載入資料...</p>
+        </div>
+      </section>
 
-    <div class="content-layout">
-      <section id="cards" class="cards" aria-live="polite"></section>
+      <section id="cards" class="cards" aria-live="polite">
+        <div class="empty loading-state">正在載入資源資料...</div>
+      </section>
+    </div>
 
-      <aside class="package-panel" aria-label="案家資源包">
-        <section class="panel sticky">
-          <h2>案家資源包</h2>
-          <p class="muted-text">不需要登入，資料只暫存在這台裝置；請勿填姓名、電話、身分證或完整地址。</p>
+    <aside class="package-panel" aria-label="案家資源包">
+      <button type="button" class="package-mobile-toggle" id="packageToggle">
+        <span>案家資源包</span>
+        <span id="packageToggleCount">0 筆</span>
+      </button>
+      <section class="panel sticky" id="packagePanelBody">
+        <div class="package-head">
+          <div>
+            <p class="eyebrow">Resource Pack</p>
+            <h2>案家資源包</h2>
+          </div>
+          <p class="package-count" id="packageCount">0 筆</p>
+        </div>
+        <p class="muted-text">不需要登入，資料只暫存在這台裝置；請勿填姓名、電話、身分證或完整地址。</p>
           <label class="field">
             <span>資源包暫稱</span>
             <input id="packageNameInput" type="text" placeholder="例如：板橋獨居長者資源包">
@@ -142,9 +151,8 @@
           </div>
           <textarea id="packageOutput" readonly rows="10" aria-label="資源包輸出"></textarea>
           <p class="privacy-note">家屬版會自動排除內部註記與不可公開資源。</p>
-        </section>
-      </aside>
-    </div>
+      </section>
+    </aside>
   </main>
 
   <template id="resourceCardTemplate">
@@ -187,6 +195,6 @@
     </article>
   </template>
 
-  <script src="./resource-nav.js"></script>
+  <script src="./resource-nav.js?v=20260521-ui-cart"></script>
 </body>
 </html>

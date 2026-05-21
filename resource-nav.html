@@ -73,8 +73,28 @@
       <section id="cards" class="cards"></section>
     </main>
 
-    <aside class="assistant" aria-label="AI 助手">
+    <aside class="assistant" aria-label="案家資源包與 AI 助手">
       <section class="panel sticky">
+        <h2>案家資源包</h2>
+        <p class="muted-text" id="packageStatus">尚未加入資源。</p>
+        <div id="packageItems" class="package-items"></div>
+        <label class="field">
+          <span>輸出格式</span>
+          <select id="packageMode">
+            <option value="family">家屬版資源包</option>
+            <option value="phone">電話確認清單</option>
+            <option value="admin">行政申請清單</option>
+          </select>
+        </label>
+        <div class="package-actions">
+          <button type="button" id="copyPackage">複製資源包</button>
+          <button type="button" id="clearPackage">清空</button>
+        </div>
+        <textarea id="packageOutput" readonly rows="10" aria-label="資源包輸出"></textarea>
+        <p class="privacy-note">家屬版會自動排除內部註記與不可公開資源。</p>
+      </section>
+
+      <section class="panel">
         <h2>AI 助手</h2>
         <p id="assistantIntro">我會根據目前選取範圍，協助你縮小資源方向。</p>
         <div class="question-list" id="assistantQuestions"></div>
@@ -100,12 +120,23 @@
         <div><dt>適用條件</dt><dd class="eligibility"></dd></div>
         <div><dt>下一步</dt><dd class="next-step"></dd></div>
         <div><dt>聯絡/申請</dt><dd class="contact"></dd></div>
+        <div class="required-docs-row"><dt>常備文件</dt><dd class="required-docs"></dd></div>
       </dl>
+      <div class="card-actions">
+        <button type="button" class="add-package">加入資源包</button>
+        <button type="button" class="copy-family">複製家屬說明</button>
+        <button type="button" class="copy-phone">複製電話確認</button>
+      </div>
+      <details class="internal-details">
+        <summary>查看內部註記</summary>
+        <p class="internal-note"></p>
+        <ul class="phone-questions"></ul>
+        <ul class="risk-flags"></ul>
+      </details>
       <div class="card-foot">
         <span class="checked-at"></span>
         <a class="source" target="_blank" rel="noopener noreferrer">查看來源</a>
       </div>
-      <p class="internal-note"></p>
     </article>
   </template>
 

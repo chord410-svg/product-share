@@ -8,26 +8,12 @@
     activePackageId: "",
     category: "",
     selectedTopics: new Set(),
-    identities: new Set(),
     district: "",
     urgency: "",
     smartQueryText: "",
-    googlePromptEdited: false,
+    smartQueryAppliedText: "",
     packageIds: new Set(),
-    conclusionVisible: false,
   };
-
-  const identityOptions = [
-    "低收",
-    "中低收",
-    "弱勢",
-    "高齡",
-    "身心障礙",
-    "長照需求",
-    "外籍看護",
-    "家庭照顧者",
-    "急難",
-  ];
 
   function $(id) {
     return document.getElementById(id);
@@ -84,6 +70,22 @@
     return Array.from(new Set(items.filter(Boolean)));
   }
 
+  function resourceIdentityTags(resource) {
+    return uniqueList([
+      ...asList(resource.eligibility_tags),
+      ...asList(resource.urgency_tags),
+    ]);
+  }
+
+  function selectedPackageResources() {
+    const byId = new Map(state.resources.map((resource) => [resource.id, resource]));
+    return Array.from(state.packageIds).map((id) => byId.get(id)).filter(Boolean);
+  }
+
+  function derivedIdentityTags() {
+    return uniqueList(selectedPackageResources().flatMap(resourceIdentityTags));
+  }
+
   function isFamilyVisible(resource) {
     return resource.public_allowed !== false && resource.status !== "過期";
   }
@@ -116,9 +118,10 @@
           district: String(item.district || ""),
           category: String(item.category || ""),
           selectedTopicKeys: Array.isArray(item.selectedTopicKeys) ? item.selectedTopicKeys.map(String) : [],
-          identities: Array.isArray(item.identities) ? item.identities.map(String) : [],
           urgency: String(item.urgency || ""),
           smartQueryText: String(item.smartQueryText || ""),
+          smartQueryAppliedAt: String(item.smartQueryAppliedAt || ""),
+          derivedIdentityTags: Array.isArray(item.derivedIdentityTags) ? item.derivedIdentityTags.map(String) : [],
           createdAt: String(item.createdAt || nowIso()),
           updatedAt: String(item.updatedAt || nowIso()),
         }))
@@ -164,9 +167,10 @@
       district: state.district,
       category: state.category,
       selectedTopicKeys: Array.from(state.selectedTopics),
-      identities: Array.from(state.identities),
       urgency: state.urgency,
       smartQueryText: state.smartQueryText,
+      smartQueryAppliedAt: "",
+      derivedIdentityTags: [],
       createdAt: nowIso(),
       updatedAt: nowIso(),
     };
@@ -185,10 +189,16 @@
     item.district = state.district;
     item.category = state.category;
     item.selectedTopicKeys = Array.from(state.selectedTopics);
-    item.identities = Array.from(state.identities);
     item.urgency = state.urgency;
     item.smartQueryText = state.smartQueryText;
+    item.derivedIdentityTags = derivedIdentityTags();
     item.updatedAt = nowIso();
+    writePackages();
+  }
+
+  function markSmartQueryApplied() {
+    const item = currentPackage();
+    item.smartQueryAppliedAt = nowIso();
     writePackages();
   }
 
@@ -198,11 +208,9 @@
     state.district = item.district || state.district;
     state.category = item.category || state.category;
     state.selectedTopics = new Set(item.selectedTopicKeys || []);
-    state.identities = new Set(item.identities || []);
     state.urgency = item.urgency || "";
     state.smartQueryText = item.smartQueryText || "";
-    state.googlePromptEdited = false;
-    state.conclusionVisible = false;
+    state.smartQueryAppliedText = item.smartQueryAppliedAt ? state.smartQueryText : "";
   }
 
   function renderPackageManager() {
@@ -230,10 +238,6 @@
     return button;
   }
 
-  function markPromptStale() {
-    state.googlePromptEdited = false;
-  }
-
   function renderCategorySelect() {
     const select = $("categorySelect");
     select.innerHTML = "";
@@ -248,7 +252,6 @@
     select.onchange = () => {
       state.category = select.value;
       state.selectedTopics.clear();
-      markPromptStale();
       syncPackageFromState();
       render();
     };
@@ -261,25 +264,11 @@
       wrap.appendChild(createChip(item.label, state.selectedTopics.has(item.key), () => {
         if (state.selectedTopics.has(item.key)) state.selectedTopics.delete(item.key);
         else state.selectedTopics.add(item.key);
-        markPromptStale();
         syncPackageFromState();
         renderTopicChips(topic);
         renderCards();
-      }));
-    });
-  }
-
-  function renderIdentityChips() {
-    const wrap = $("identityChips");
-    wrap.innerHTML = "";
-    identityOptions.forEach((item) => {
-      wrap.appendChild(createChip(item, state.identities.has(item), () => {
-        if (state.identities.has(item)) state.identities.delete(item);
-        else state.identities.add(item);
-        markPromptStale();
-        syncPackageFromState();
-        renderIdentityChips();
-        renderCards();
+        renderPackage();
+        updateGoogleButton();
       }));
     });
   }
@@ -287,35 +276,36 @@
   function setupFilters() {
     $("districtSelect").addEventListener("change", (event) => {
       state.district = event.target.value;
-      markPromptStale();
       syncPackageFromState();
       renderCards();
     });
     $("urgencySelect").addEventListener("change", (event) => {
       state.urgency = event.target.value;
-      markPromptStale();
       syncPackageFromState();
       renderCards();
     });
     $("smartQueryInput").addEventListener("input", (event) => {
       state.smartQueryText = event.target.value.trim();
-      markPromptStale();
       syncPackageFromState();
-      renderGooglePrompt();
-      renderConclusion();
+      updateGoogleButton();
     });
-    $("googlePrompt").addEventListener("input", () => {
-      state.googlePromptEdited = true;
-      updateGoogleLink();
+    $("applySmartQuery").addEventListener("click", () => {
+      state.smartQueryAppliedText = state.smartQueryText;
+      markSmartQueryApplied();
+      syncPackageFromState();
+      renderCards();
+    });
+    $("googleSearchButton").addEventListener("click", () => {
+      const url = buildGoogleSearchUrl();
+      $("googleSearchButton").dataset.searchUrl = url;
+      window.open(url, "_blank", "noopener,noreferrer");
     });
     $("packageNameInput").addEventListener("input", () => {
       syncPackageFromState();
       renderPackage();
-      renderConclusion();
     });
     $("packageNoteInput").addEventListener("input", () => {
       syncPackageFromState();
-      renderConclusion();
     });
     $("packageSelect").addEventListener("change", (event) => {
       const item = state.packages.find((pkg) => pkg.id === event.target.value);
@@ -334,6 +324,7 @@
         id: newId("pkg"),
         name: item.name + " 複本",
         resourceIds: [...item.resourceIds],
+        derivedIdentityTags: [...(item.derivedIdentityTags || [])],
         createdAt: nowIso(),
         updatedAt: nowIso(),
       };
@@ -350,27 +341,22 @@
       render();
     });
     $("packageMode").addEventListener("change", renderPackage);
-    $("generateConclusion").addEventListener("click", () => {
-      state.conclusionVisible = true;
-      renderConclusion();
-      $("conclusionPanel").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    $("copyConclusionFamily").addEventListener("click", async () => {
-      await copyText(buildFamilyPackageText(selectedPackageResources()));
-    });
-    $("copyConclusionHandoff").addEventListener("click", async () => {
-      await copyText(buildHandoffPackageText(selectedPackageResources()));
+    $("generateResult").addEventListener("click", () => {
+      syncPackageFromState();
+      if (!state.packageIds.size) {
+        $("packageStatus").textContent = "請先加入至少一筆資源，再產生資源包結果。";
+        return;
+      }
+      window.location.href = "./resource-package-result.html?package_id=" + encodeURIComponent(state.activePackageId);
     });
     $("copyPackage").addEventListener("click", async () => {
       await copyText($("packageOutput").value);
     });
     $("clearPackage").addEventListener("click", () => {
       state.packageIds.clear();
-      state.conclusionVisible = false;
       syncPackageFromState();
       renderCards();
       renderPackage();
-      renderConclusion();
     });
   }
 
@@ -387,15 +373,55 @@
         return false;
       }
     }
-    if (state.identities.size > 0) {
-      const tags = resource.eligibility_tags || [];
-      if (!Array.from(state.identities).some((identity) => tags.some((tag) => tag.includes(identity)))) return false;
-    }
     if (state.urgency) {
       const urgencyTags = resource.urgency_tags || [];
       if (!urgencyTags.includes(state.urgency)) return false;
     }
     return true;
+  }
+
+  function queryTerms(text) {
+    return uniqueList(String(text || "")
+      .toLowerCase()
+      .split(/[\s,，、。；;：:！!？?／/]+/)
+      .map((term) => term.trim())
+      .filter(Boolean));
+  }
+
+  function smartHaystack(resource) {
+    return [
+      resource.name,
+      resource.public_summary,
+      resource.summary,
+      resource.public_next_step,
+      resource.next_step,
+      resource.public_contact,
+      resource.contact,
+      ...asList(resource.public_required_documents),
+      ...resourceIdentityTags(resource),
+      ...asList(resource.phone_check_questions),
+      resource.internal_notes,
+    ].filter(Boolean).join(" ").toLowerCase();
+  }
+
+  function scoreResource(resource) {
+    const query = state.smartQueryAppliedText.trim().toLowerCase();
+    if (!query) return 0;
+    const haystack = smartHaystack(resource);
+    const terms = queryTerms(query);
+    let score = haystack.includes(query) ? 3 : 0;
+    terms.forEach((term) => {
+      if (haystack.includes(term)) score += term.length >= 3 ? 2 : 1;
+    });
+    return score;
+  }
+
+  function sortResults(results) {
+    const scored = results.map((resource) => ({ resource, score: scoreResource(resource) }));
+    if (state.smartQueryAppliedText) {
+      scored.sort((a, b) => b.score - a.score || a.resource.name.localeCompare(b.resource.name, "zh-Hant"));
+    }
+    return scored;
   }
 
   function familyText(resource) {
@@ -443,55 +469,67 @@
     ].filter(Boolean).join("\n");
   }
 
-  function outputTextFor(resource, mode) {
-    if (mode === "phone") return phoneText(resource);
-    if (mode === "admin") return adminText(resource);
-    if (mode === "handoff") return handoffText(resource);
-    return familyText(resource);
-  }
-
   function togglePackageResource(resource) {
     if (state.packageIds.has(resource.id)) state.packageIds.delete(resource.id);
     else state.packageIds.add(resource.id);
-    state.conclusionVisible = false;
     syncPackageFromState();
     renderCards();
     renderPackage();
-    renderConclusion();
+  }
+
+  function renderDerivedIdentityChips() {
+    const wrap = $("derivedIdentityChips");
+    const tags = derivedIdentityTags();
+    wrap.innerHTML = "";
+    if (!tags.length) {
+      const empty = document.createElement("span");
+      empty.className = "insight-empty";
+      empty.textContent = "尚未選資源，加入卡片後會自動整理身份/情境線索。";
+      wrap.appendChild(empty);
+      return;
+    }
+    tags.forEach((tag) => {
+      const chip = document.createElement("span");
+      chip.className = "insight-chip";
+      chip.textContent = tag;
+      wrap.appendChild(chip);
+    });
   }
 
   function renderCards() {
     const topic = getCurrentTopic();
     const cards = $("cards");
-    const results = state.resources.filter(matchesResource);
+    const scoredResults = sortResults(state.resources.filter(matchesResource));
+    const results = scoredResults.map((item) => item.resource);
     $("currentScope").textContent = topic.title + "資源";
     const selectedLabels = optionLabels(topic);
     $("scopeMeta").textContent = [
       state.district ? "行政區：" + state.district : "行政區不限",
       selectedLabels.length ? "子主題：" + selectedLabels.join("、") : "尚未指定子主題",
-      state.identities.size ? "身份：" + Array.from(state.identities).join("、") : "身份不限",
-      state.smartQueryText ? "智慧查詢：" + state.smartQueryText : "",
+      state.smartQueryAppliedText ? "智慧查詢已套用：" + state.smartQueryAppliedText : "",
       "共 " + results.length + " 筆",
     ].filter(Boolean).join("｜");
 
-    renderGooglePrompt();
+    updateGoogleButton();
+    renderDerivedIdentityChips();
 
     cards.innerHTML = "";
     if (results.length === 0) {
       const empty = document.createElement("div");
       empty.className = "empty";
-      empty.textContent = "目前條件沒有符合的資源。可以放寬身份/行政區，或調整智慧查詢後使用 Google 延伸搜尋。";
+      empty.textContent = "目前條件沒有符合的資源。可以放寬行政區或子主題，或用 Google 延伸搜尋補查。";
       cards.appendChild(empty);
       renderPackage();
       return;
     }
 
     const template = $("resourceCardTemplate");
-    results.forEach((resource) => {
+    scoredResults.forEach(({ resource, score }) => {
       const node = template.content.cloneNode(true);
       const card = node.querySelector(".resource-card");
       card.id = "resource-card-" + resource.id;
       card.classList.toggle("is-selected", state.packageIds.has(resource.id));
+      card.classList.toggle("smart-match", Boolean(state.smartQueryAppliedText && score > 0));
       card.addEventListener("click", (event) => {
         if (event.target.closest("button, a, summary, details, input, select, textarea")) return;
         togglePackageResource(resource);
@@ -499,8 +537,15 @@
       node.querySelector(".category").textContent = topicLabel(resource.category);
       node.querySelector("h3").textContent = resource.name;
       node.querySelector(".confidence").textContent = resource.confidence || resource.status || "待確認";
+      const smartHit = node.querySelector(".smart-hit");
+      if (state.smartQueryAppliedText && score > 0) {
+        smartHit.hidden = false;
+        smartHit.textContent = "智慧查詢命中 " + score;
+      }
       node.querySelector(".summary").textContent = resource.public_summary || resource.summary || "";
-      node.querySelector(".eligibility").textContent = (resource.eligibility_tags || []).join("、") || "未標示";
+      node.querySelector(".eligibility").textContent = asList(resource.eligibility_tags).join("、") || "身份/情境未標示";
+      const urgencyTags = asList(resource.urgency_tags);
+      node.querySelector(".urgency-tags").textContent = urgencyTags.length ? "急迫性：" + urgencyTags.join("、") : "";
       node.querySelector(".next-step").textContent = resource.public_next_step || resource.next_step || "請先確認個案條件與受理狀態。";
       node.querySelector(".contact").textContent = resource.public_contact || resource.contact || "依來源公告";
       const docs = asList(resource.public_required_documents);
@@ -547,11 +592,6 @@
     renderPackage();
   }
 
-  function selectedPackageResources() {
-    const byId = new Map(state.resources.map((resource) => [resource.id, resource]));
-    return Array.from(state.packageIds).map((id) => byId.get(id)).filter(Boolean);
-  }
-
   function buildFamilyPackageText(items) {
     const visibleItems = items.filter(isFamilyVisible);
     return [
@@ -576,6 +616,19 @@
       "",
       ...items.map((resource, index) => (index + 1) + ". " + adminText(resource)),
     ].join("\n\n");
+  }
+
+  function packagePurposeText(items) {
+    const topic = getCurrentTopic();
+    const tags = derivedIdentityTags();
+    return [
+      "本次資源包目的：" + currentPackage().name,
+      state.district ? "行政區：" + state.district : "",
+      topic ? "主題：" + topic.title : "",
+      tags.length ? "線索：" + tags.join("、") : "",
+      state.smartQueryText ? "補充描述：" + state.smartQueryText : "",
+      "已選資源：" + items.length + " 筆",
+    ].filter(Boolean).join("｜");
   }
 
   function buildHandoffPackageText(items) {
@@ -616,111 +669,16 @@
       row.textContent = "移除｜" + resource.name;
       row.addEventListener("click", () => {
         state.packageIds.delete(resource.id);
-        state.conclusionVisible = false;
         syncPackageFromState();
         renderCards();
         renderPackage();
-        renderConclusion();
       });
       wrap.appendChild(row);
     });
 
     $("packageOutput").value = buildPackageOutput(items, mode);
-  }
-
-  function packagePurposeText(items) {
-    const topic = getCurrentTopic();
-    return [
-      "本次資源包目的：" + currentPackage().name,
-      state.district ? "行政區：" + state.district : "",
-      topic ? "主題：" + topic.title : "",
-      state.identities.size ? "身份/情境：" + Array.from(state.identities).join("、") : "",
-      state.smartQueryText ? "補充描述：" + state.smartQueryText : "",
-      "已選資源：" + items.length + " 筆",
-    ].filter(Boolean).join("｜");
-  }
-
-  function renderList(list, items, fallback) {
-    list.innerHTML = "";
-    if (!items.length) {
-      const li = document.createElement("li");
-      li.textContent = fallback;
-      list.appendChild(li);
-      return;
-    }
-    items.forEach((text) => {
-      const li = document.createElement("li");
-      li.textContent = text;
-      list.appendChild(li);
-    });
-  }
-
-  function renderConclusion() {
-    const panel = $("conclusionPanel");
-    const items = selectedPackageResources();
-    if (!state.conclusionVisible || !items.length) {
-      panel.hidden = true;
-      return;
-    }
-    panel.hidden = false;
-    $("conclusionTitle").textContent = currentPackage().name || "案家資源包結論";
-    $("conclusionMeta").textContent = packagePurposeText(items);
-
-    const priority = $("priorityList");
-    priority.innerHTML = "";
-    items.forEach((resource, index) => {
-      const li = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = "#conclusion-resource-" + resource.id;
-      link.textContent = resource.name;
-      li.append(link, document.createTextNode("：" + (resource.public_next_step || resource.next_step || "先確認資格與受理狀態。")));
-      priority.appendChild(li);
-    });
-
-    const phonePlan = $("phonePlanList");
-    phonePlan.innerHTML = "";
-    items.forEach((resource) => {
-      const li = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = "#conclusion-resource-" + resource.id;
-      link.textContent = resource.name;
-      li.append(link, document.createTextNode("：" + (asList(resource.phone_check_questions).join("；") || "確認資格、文件與是否仍受理。")));
-      phonePlan.appendChild(li);
-    });
-
-    $("familyMessage").textContent = buildFamilyPackageText(items);
-    renderList(
-      $("documentList"),
-      uniqueList(items.flatMap((resource) => asList(resource.public_required_documents))),
-      "尚無文件欄位，請依來源公告確認。"
-    );
-    renderList(
-      $("riskList"),
-      uniqueList(items.flatMap((resource) => asList(resource.risk_flags)).concat(items.map((resource) => resource.internal_notes || ""))),
-      "尚無特殊風險提醒。"
-    );
-
-    const details = $("conclusionDetails");
-    details.innerHTML = "";
-    items.forEach((resource) => {
-      const section = document.createElement("section");
-      section.className = "conclusion-resource";
-      section.id = "conclusion-resource-" + resource.id;
-      section.innerHTML = [
-        "<h4>" + resource.name + "</h4>",
-        "<dl>",
-        "<div><dt>適用條件</dt><dd>" + ((resource.eligibility_tags || []).join("、") || "未標示") + "</dd></div>",
-        "<div><dt>申請方式</dt><dd>" + (resource.public_next_step || resource.next_step || "請先確認申請條件與受理狀態。") + "</dd></div>",
-        "<div><dt>聯絡資訊</dt><dd>" + (resource.public_contact || resource.contact || "依來源公告") + "</dd></div>",
-        "<div><dt>文件</dt><dd>" + (asList(resource.public_required_documents).join("、") || "待確認") + "</dd></div>",
-        "<div><dt>來源</dt><dd><a href=\"" + (resource.source_url || "#") + "\" target=\"_blank\" rel=\"noopener noreferrer\">查看來源</a></dd></div>",
-        "<div><dt>最後確認</dt><dd>" + (resource.last_checked_at || "待確認") + "</dd></div>",
-        "<div><dt>內部註記</dt><dd>" + (resource.internal_notes || "尚無內部註記。") + "</dd></div>",
-        "<div><dt>電話確認</dt><dd>" + (asList(resource.phone_check_questions).join("；") || "資格、文件、服務區域、是否仍受理。") + "</dd></div>",
-        "</dl>",
-      ].join("");
-      details.appendChild(section);
-    });
+    renderDerivedIdentityChips();
+    updateGoogleButton();
   }
 
   function buildGooglePrompt() {
@@ -731,7 +689,7 @@
       state.district,
       topic ? topic.title : "",
       ...selectedLabels,
-      ...Array.from(state.identities),
+      ...derivedIdentityTags(),
       state.urgency,
       state.smartQueryText,
       "長照 資源 社會局 申請",
@@ -739,19 +697,15 @@
     return Array.from(new Set(parts)).join(" ");
   }
 
-  function renderGooglePrompt() {
-    if (!state.googlePromptEdited) {
-      $("googlePrompt").value = buildGooglePrompt();
-    }
-    updateGoogleLink();
+  function buildGoogleSearchUrl() {
+    return "https://www.google.com/search?q=" + encodeURIComponent(buildGooglePrompt());
   }
 
-  function updateGoogleLink() {
-    const prompt = $("googlePrompt").value.trim() || buildGooglePrompt();
-    const url = "https://www.google.com/search?q=" + encodeURIComponent(prompt);
-    const link = $("googleSearchLink");
-    link.href = url;
-    link.title = prompt;
+  function updateGoogleButton() {
+    const button = $("googleSearchButton");
+    const url = buildGoogleSearchUrl();
+    button.dataset.searchUrl = url;
+    button.title = buildGooglePrompt();
   }
 
   function render() {
@@ -761,9 +715,7 @@
     $("smartQueryInput").value = state.smartQueryText;
     renderCategorySelect();
     renderTopicChips(topic);
-    renderIdentityChips();
     renderCards();
-    renderConclusion();
   }
 
   async function init() {

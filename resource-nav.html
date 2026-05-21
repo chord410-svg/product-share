@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260521-ui-cart">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260522-package-session">
 </head>
 <body>
   <header class="topbar">
@@ -12,7 +12,7 @@
       <p class="eyebrow">New Taipei Resource Navigator</p>
       <h1>長照資源導航站</h1>
     </div>
-    <div class="status-pill" id="sourceStatus">Discord 入口</div>
+    <div class="status-pill" id="sourceStatus">等待身份確認</div>
   </header>
 
   <main class="page-shell">
@@ -115,24 +115,7 @@
           </div>
           <p class="package-count" id="packageCount">0 筆</p>
         </div>
-        <p class="muted-text">不需要登入，資料只暫存在這台裝置；請勿填姓名、電話、身分證或完整地址。</p>
-          <label class="field">
-            <span>資源包暫稱</span>
-            <input id="packageNameInput" type="text" placeholder="例如：板橋獨居長者資源包">
-          </label>
-          <label class="field">
-            <span>備註</span>
-            <textarea id="packageNoteInput" rows="2" placeholder="只寫情境，不寫個資，例如：疑似急難、需要物資與交通備案"></textarea>
-          </label>
-          <label class="field">
-            <span>最近資源包</span>
-            <select id="packageSelect" aria-label="最近資源包"></select>
-          </label>
-          <div class="package-actions">
-            <button type="button" id="newPackage">新增</button>
-            <button type="button" id="duplicatePackage">複製</button>
-            <button type="button" id="deletePackage">刪除</button>
-          </div>
+        <p class="muted-text" id="loginStatus">請從 Discord 資源導航按鈕開啟，才能儲存並產生資源包結果。</p>
           <p class="muted-text" id="packageStatus">尚未加入資源。</p>
           <div id="packageItems" class="package-items"></div>
           <label class="field">
@@ -146,11 +129,7 @@
           </label>
           <div class="package-actions">
             <button type="button" id="generateResult">產生資源包結果</button>
-            <button type="button" id="copyPackage">複製資源包</button>
-            <button type="button" id="clearPackage">清空</button>
           </div>
-          <textarea id="packageOutput" readonly rows="10" aria-label="資源包輸出"></textarea>
-          <p class="privacy-note">家屬版會自動排除內部註記與不可公開資源。</p>
       </section>
     </aside>
   </main>
@@ -177,11 +156,6 @@
         <div><dt>聯絡/申請</dt><dd class="contact"></dd></div>
         <div class="required-docs-row"><dt>常備文件</dt><dd class="required-docs"></dd></div>
       </dl>
-      <div class="card-actions">
-        <button type="button" class="add-package">加入資源包</button>
-        <button type="button" class="copy-family">複製家屬說明</button>
-        <button type="button" class="copy-phone">複製電話確認</button>
-      </div>
       <details class="internal-details">
         <summary>查看內部註記</summary>
         <p class="internal-note"></p>
@@ -195,6 +169,6 @@
     </article>
   </template>
 
-  <script src="./resource-nav.js?v=20260521-ui-cart"></script>
+  <script src="./resource-nav.js?v=20260522-package-session"></script>
 </body>
 </html>

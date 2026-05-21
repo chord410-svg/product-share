@@ -15,18 +15,17 @@
     <div class="status-pill" id="sourceStatus">Discord 入口</div>
   </header>
 
-  <div class="layout">
-    <aside class="filters" aria-label="資源篩選">
-      <section class="panel">
-        <h2>查詢條件</h2>
-        <label class="field">
-          <span>主題分類</span>
-          <select id="categorySelect"></select>
-        </label>
-        <div class="field">
-          <span>子主題</span>
-          <div id="topicChecks" class="check-list"></div>
+  <main class="page-shell">
+    <section class="filter-panel" aria-label="資源篩選">
+      <div class="filter-head">
+        <div>
+          <p class="eyebrow">查詢條件</p>
+          <h2>先鎖定地區，再選需求</h2>
         </div>
+        <a class="google-link" id="googleSearchLink" target="_blank" rel="noopener noreferrer">用 Google 延伸搜尋</a>
+      </div>
+
+      <div class="filter-controls">
         <label class="field">
           <span>行政區</span>
           <select id="districtSelect">
@@ -45,10 +44,10 @@
             <option>全新北</option>
           </select>
         </label>
-        <div class="field">
-          <span>身份/情境</span>
-          <div id="identityChecks" class="check-list compact"></div>
-        </div>
+        <label class="field">
+          <span>主題分類</span>
+          <select id="categorySelect"></select>
+        </label>
         <label class="field">
           <span>急迫性</span>
           <select id="urgencySelect">
@@ -58,53 +57,131 @@
             <option>緊急</option>
           </select>
         </label>
-      </section>
-    </aside>
+      </div>
 
-    <main class="results" aria-live="polite">
-      <section class="summary-band">
-        <div>
-          <p class="eyebrow">目前範圍</p>
-          <h2 id="currentScope">資源查詢</h2>
-          <p id="scopeMeta">正在載入資料...</p>
+      <div class="choice-grid">
+        <div class="choice-block">
+          <div class="choice-title">
+            <span>子主題</span>
+            <small>可複選</small>
+          </div>
+          <div id="topicChips" class="chip-row"></div>
         </div>
-        <a class="google-link" id="googleSearchLink" target="_blank" rel="noopener noreferrer">用 Google 延伸搜尋</a>
-      </section>
-      <section id="cards" class="cards"></section>
-    </main>
+        <div class="choice-block">
+          <div class="choice-title">
+            <span>身份/情境</span>
+            <small>可複選</small>
+          </div>
+          <div id="identityChips" class="chip-row"></div>
+        </div>
+      </div>
 
-    <aside class="assistant" aria-label="案家資源包與 AI 助手">
-      <section class="panel sticky">
-        <h2>案家資源包</h2>
-        <p class="muted-text" id="packageStatus">尚未加入資源。</p>
-        <div id="packageItems" class="package-items"></div>
+      <div class="smart-search">
         <label class="field">
-          <span>輸出格式</span>
-          <select id="packageMode">
-            <option value="family">家屬版資源包</option>
-            <option value="phone">電話確認清單</option>
-            <option value="admin">行政申請清單</option>
-          </select>
+          <span>智慧查詢</span>
+          <input id="smartQueryInput" type="text" placeholder="補充描述，例如：獨居、最近沒錢買飯、家屬不穩定">
         </label>
-        <div class="package-actions">
-          <button type="button" id="copyPackage">複製資源包</button>
-          <button type="button" id="clearPackage">清空</button>
-        </div>
-        <textarea id="packageOutput" readonly rows="10" aria-label="資源包輸出"></textarea>
-        <p class="privacy-note">家屬版會自動排除內部註記與不可公開資源。</p>
-      </section>
+        <label class="field google-prompt-field">
+          <span>Google 搜尋提示詞</span>
+          <textarea id="googlePrompt" rows="2" aria-label="Google 搜尋提示詞"></textarea>
+        </label>
+      </div>
+    </section>
 
-      <section class="panel">
-        <h2>AI 助手</h2>
-        <p id="assistantIntro">我會根據目前選取範圍，協助你縮小資源方向。</p>
-        <div class="question-list" id="assistantQuestions"></div>
-        <div class="note-box">
-          <strong>使用提醒</strong>
-          <p>請勿輸入姓名、身分證、電話、完整地址。資源資格與受理狀態仍以承辦單位最新公告為準。</p>
+    <section class="summary-band">
+      <div>
+        <p class="eyebrow">目前範圍</p>
+        <h2 id="currentScope">資源查詢</h2>
+        <p id="scopeMeta">正在載入資料...</p>
+      </div>
+    </section>
+
+    <section id="conclusionPanel" class="conclusion-panel" aria-label="資源包結論頁" hidden>
+      <div class="conclusion-head">
+        <div>
+          <p class="eyebrow">結論頁</p>
+          <h2 id="conclusionTitle">案家資源包結論</h2>
+          <p id="conclusionMeta"></p>
         </div>
-      </section>
-    </aside>
-  </div>
+        <div class="conclusion-actions">
+          <button type="button" id="copyConclusionFamily">複製家屬短訊</button>
+          <button type="button" id="copyConclusionHandoff">複製交接摘要</button>
+        </div>
+      </div>
+      <div class="conclusion-grid">
+        <article>
+          <h3>建議優先順序</h3>
+          <ol id="priorityList"></ol>
+        </article>
+        <article>
+          <h3>先打哪幾通電話</h3>
+          <ol id="phonePlanList"></ol>
+        </article>
+        <article>
+          <h3>可傳給家屬的短訊</h3>
+          <p id="familyMessage"></p>
+        </article>
+        <article>
+          <h3>需要先準備的文件</h3>
+          <ul id="documentList"></ul>
+        </article>
+        <article>
+          <h3>風險提醒</h3>
+          <ul id="riskList"></ul>
+        </article>
+      </div>
+      <div class="conclusion-details">
+        <h3>完整資料集合</h3>
+        <div id="conclusionDetails"></div>
+      </div>
+    </section>
+
+    <div class="content-layout">
+      <section id="cards" class="cards" aria-live="polite"></section>
+
+      <aside class="package-panel" aria-label="案家資源包">
+        <section class="panel sticky">
+          <h2>案家資源包</h2>
+          <p class="muted-text">不需要登入，資料只暫存在這台裝置；請勿填姓名、電話、身分證或完整地址。</p>
+          <label class="field">
+            <span>資源包暫稱</span>
+            <input id="packageNameInput" type="text" placeholder="例如：板橋獨居長者資源包">
+          </label>
+          <label class="field">
+            <span>備註</span>
+            <textarea id="packageNoteInput" rows="2" placeholder="只寫情境，不寫個資，例如：疑似急難、需要物資與交通備案"></textarea>
+          </label>
+          <label class="field">
+            <span>最近資源包</span>
+            <select id="packageSelect" aria-label="最近資源包"></select>
+          </label>
+          <div class="package-actions">
+            <button type="button" id="newPackage">新增</button>
+            <button type="button" id="duplicatePackage">複製</button>
+            <button type="button" id="deletePackage">刪除</button>
+          </div>
+          <p class="muted-text" id="packageStatus">尚未加入資源。</p>
+          <div id="packageItems" class="package-items"></div>
+          <label class="field">
+            <span>輸出格式</span>
+            <select id="packageMode">
+              <option value="family">家屬版資源包</option>
+              <option value="phone">電話確認清單</option>
+              <option value="admin">行政申請清單</option>
+              <option value="handoff">交接摘要</option>
+            </select>
+          </label>
+          <div class="package-actions">
+            <button type="button" id="generateConclusion">產生結論頁</button>
+            <button type="button" id="copyPackage">複製資源包</button>
+            <button type="button" id="clearPackage">清空</button>
+          </div>
+          <textarea id="packageOutput" readonly rows="10" aria-label="資源包輸出"></textarea>
+          <p class="privacy-note">家屬版會自動排除內部註記與不可公開資源。</p>
+        </section>
+      </aside>
+    </div>
+  </main>
 
   <template id="resourceCardTemplate">
     <article class="resource-card">
@@ -116,8 +193,10 @@
         <span class="confidence"></span>
       </div>
       <p class="summary"></p>
+      <div class="tag-strip">
+        <span class="eligibility"></span>
+      </div>
       <dl>
-        <div><dt>適用條件</dt><dd class="eligibility"></dd></div>
         <div><dt>下一步</dt><dd class="next-step"></dd></div>
         <div><dt>聯絡/申請</dt><dd class="contact"></dd></div>
         <div class="required-docs-row"><dt>常備文件</dt><dd class="required-docs"></dd></div>

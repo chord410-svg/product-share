@@ -14,6 +14,10 @@
     smartQueryAppliedText: "",
     packageIds: new Set(),
     hasUrlContext: false,
+    sessionToken: "",
+    apiBase: "",
+    sessionUser: null,
+    sessionValid: false,
   };
 
   function $(id) {
@@ -34,8 +38,61 @@
     const topicParam = params.get("topics") || "";
     topicParam.split(",").filter(Boolean).forEach((key) => state.selectedTopics.add(key));
     const source = params.get("source") || "direct";
+    state.sessionToken = params.get("session") || "";
+    state.apiBase = (params.get("api_base") || "").replace(/\/$/, "");
+    state.district = params.get("district") || "";
     state.hasUrlContext = Boolean(state.category || topicParam);
     $("sourceStatus").textContent = source === "discord" ? "Discord 入口" : "直接開啟";
+  }
+
+  function apiUrl(path) {
+    if (!state.apiBase) return "";
+    return state.apiBase + path;
+  }
+
+  async function apiFetch(path, options) {
+    if (!state.sessionToken || !state.apiBase) {
+      throw new Error("missing resource session");
+    }
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + state.sessionToken,
+    };
+    const response = await fetch(apiUrl(path), {
+      ...(options || {}),
+      headers: { ...headers, ...((options && options.headers) || {}) },
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || data.ok === false) {
+      throw new Error(data.error || "resource api failed");
+    }
+    return data;
+  }
+
+  async function verifySession() {
+    const loginStatus = $("loginStatus");
+    if (!state.sessionToken || !state.apiBase) {
+      state.sessionValid = false;
+      loginStatus.textContent = "未取得 Discord session：可瀏覽與點選資源，但不能儲存或產生資源包結果。";
+      $("sourceStatus").textContent = "未登入瀏覽";
+      return;
+    }
+    try {
+      const data = await apiFetch("/api/v1/resource/session?token=" + encodeURIComponent(state.sessionToken), {
+        method: "GET",
+        headers: {},
+      });
+      state.sessionValid = true;
+      state.sessionUser = data.user || null;
+      const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
+      $("sourceStatus").textContent = "已連結 Discord";
+      loginStatus.textContent = "已以 " + name + " 的 Discord 身份開啟。資源包結果會保存到你的私密結果入口。";
+    } catch (error) {
+      state.sessionValid = false;
+      $("sourceStatus").textContent = "session 已失效";
+      loginStatus.textContent = "Discord session 無效或已過期：可瀏覽與點選資源，但不能儲存或產生資源包結果。";
+      console.info("resource session verification failed", error);
+    }
   }
 
   async function loadJson(path, fallbackPath) {
@@ -112,12 +169,12 @@
       await navigator.clipboard.writeText(text);
       return;
     }
-    const area = $("packageOutput");
-    const old = area.value;
+    const area = document.createElement("textarea");
+    document.body.appendChild(area);
     area.value = text;
     area.select();
     document.execCommand("copy");
-    area.value = old;
+    area.remove();
   }
 
   function readPackages() {
@@ -199,8 +256,8 @@
 
   function syncPackageFromState() {
     const item = currentPackage();
-    item.name = $("packageNameInput").value.trim() || item.name || "臨時資源包";
-    item.note = $("packageNoteInput").value.trim();
+    item.name = item.name || defaultPackageName();
+    item.note = item.note || "";
     item.resourceIds = Array.from(state.packageIds);
     item.district = state.district;
     item.category = state.category;
@@ -232,18 +289,7 @@
   }
 
   function renderPackageManager() {
-    const item = currentPackage();
-    $("packageNameInput").value = item.name || "";
-    $("packageNoteInput").value = item.note || "";
-    const select = $("packageSelect");
-    select.innerHTML = "";
-    state.packages.forEach((pkg) => {
-      const option = document.createElement("option");
-      option.value = pkg.id;
-      option.textContent = pkg.name + "｜" + (pkg.resourceIds || []).length + " 筆";
-      select.appendChild(option);
-    });
-    select.value = item.id;
+    currentPackage();
   }
 
   function createChip(labelText, selected, onToggle) {
@@ -321,63 +367,18 @@
     $("packageToggle").addEventListener("click", () => {
       document.querySelector(".package-panel").classList.toggle("is-open");
     });
-    $("packageNameInput").addEventListener("input", () => {
-      syncPackageFromState();
-      renderPackage();
-    });
-    $("packageNoteInput").addEventListener("input", () => {
-      syncPackageFromState();
-    });
-    $("packageSelect").addEventListener("change", (event) => {
-      const item = state.packages.find((pkg) => pkg.id === event.target.value);
-      if (!item) return;
-      applyPackageContext(item);
-      render();
-    });
-    $("newPackage").addEventListener("click", () => {
-      createPackage(defaultPackageName());
-      render();
-    });
-    $("duplicatePackage").addEventListener("click", () => {
-      const item = currentPackage();
-      const copy = {
-        ...item,
-        id: newId("pkg"),
-        name: item.name + " 複本",
-        resourceIds: [...item.resourceIds],
-        derivedIdentityTags: [...(item.derivedIdentityTags || [])],
-        createdAt: nowIso(),
-        updatedAt: nowIso(),
-      };
-      state.packages.unshift(copy);
-      applyPackageContext(copy);
-      writePackages();
-      render();
-    });
-    $("deletePackage").addEventListener("click", () => {
-      state.packages = state.packages.filter((pkg) => pkg.id !== state.activePackageId);
-      if (!state.packages.length) createPackage(defaultPackageName(), { save: false });
-      applyPackageContext(state.packages[0]);
-      writePackages();
-      render();
-    });
     $("packageMode").addEventListener("change", renderPackage);
-    $("generateResult").addEventListener("click", () => {
+    $("generateResult").addEventListener("click", async () => {
       syncPackageFromState();
       if (!state.packageIds.size) {
         $("packageStatus").textContent = "請先加入至少一筆資源，再產生資源包結果。";
         return;
       }
-      window.location.href = "./resource-package-result.html?package_id=" + encodeURIComponent(state.activePackageId);
-    });
-    $("copyPackage").addEventListener("click", async () => {
-      await copyText($("packageOutput").value);
-    });
-    $("clearPackage").addEventListener("click", () => {
-      state.packageIds.clear();
-      syncPackageFromState();
-      renderCards();
-      renderPackage();
+      if (!state.sessionValid) {
+        $("packageStatus").textContent = "請從 Discord 資源導航按鈕重新開啟，才能產生資源包結果。";
+        return;
+      }
+      await submitResourcePackage();
     });
   }
 
@@ -555,7 +556,18 @@
         togglePackageResource(resource);
       });
       node.querySelector(".category").textContent = topicLabel(resource.category);
-      node.querySelector("h3").textContent = resource.name;
+      const title = node.querySelector("h3");
+      title.innerHTML = "";
+      if (resource.source_url) {
+        const link = document.createElement("a");
+        link.href = resource.source_url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = resource.name;
+        title.appendChild(link);
+      } else {
+        title.textContent = resource.name;
+      }
       node.querySelector(".confidence").textContent = resource.confidence || resource.status || "待確認";
       const smartHit = node.querySelector(".smart-hit");
       if (state.smartQueryAppliedText && score > 0) {
@@ -575,21 +587,6 @@
       const source = node.querySelector(".source");
       source.href = resource.source_url || "#";
       if (!resource.source_url) source.removeAttribute("href");
-
-      const addButton = node.querySelector(".add-package");
-      addButton.textContent = state.packageIds.has(resource.id) ? "已加入資源包" : "加入資源包";
-      addButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        togglePackageResource(resource);
-      });
-      node.querySelector(".copy-family").addEventListener("click", async (event) => {
-        event.stopPropagation();
-        await copyText(familyText(resource));
-      });
-      node.querySelector(".copy-phone").addEventListener("click", async (event) => {
-        event.stopPropagation();
-        await copyText(phoneText(resource));
-      });
 
       const note = node.querySelector(".internal-note");
       note.textContent = resource.internal_notes || "尚無內部註記。";
@@ -672,6 +669,43 @@
     return buildFamilyPackageText(items) + skipped;
   }
 
+  async function submitResourcePackage() {
+    const item = currentPackage();
+    const payload = {
+      name: item.name || defaultPackageName(),
+      note: item.note || "",
+      category: state.category,
+      selectedTopicKeys: Array.from(state.selectedTopics),
+      district: state.district,
+      urgency: state.urgency,
+      smartQueryText: state.smartQueryText,
+      resourceIds: Array.from(state.packageIds),
+      outputMode: $("packageMode").value,
+    };
+    const button = $("generateResult");
+    const oldText = button.textContent;
+    button.disabled = true;
+    button.textContent = "正在產生...";
+    $("packageStatus").textContent = "正在發布資源包結果，完成後會跳到 Web B 結果頁。";
+    try {
+      const data = await apiFetch("/api/v1/resource/packages", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+      if (data.share_url) {
+        window.location.href = data.share_url;
+        return;
+      }
+      $("packageStatus").textContent = "資源包已儲存，但沒有取得結果連結。";
+    } catch (error) {
+      console.error(error);
+      $("packageStatus").textContent = "產生失敗：" + (error.message || "請稍後再試");
+    } finally {
+      button.disabled = false;
+      button.textContent = oldText;
+    }
+  }
+
   function renderPackage() {
     renderPackageManager();
     const items = selectedPackageResources();
@@ -699,7 +733,6 @@
       wrap.appendChild(row);
     });
 
-    $("packageOutput").value = buildPackageOutput(items, mode);
     renderDerivedIdentityChips();
     updateGoogleButton();
   }
@@ -751,6 +784,7 @@
       ]);
       state.topics = topicsData.topics || [];
       state.resources = resourceData.resources || [];
+      await verifySession();
       normalizeCategory();
       normalizeSelectedTopics();
       state.packages = readPackages();

@@ -42,6 +42,16 @@ h1 { font-size: 24px; font-weight: 760; }
 h2 { font-size: 17px; font-weight: 720; }
 h3 { font-size: 17px; font-weight: 720; }
 
+h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h3 a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
 .eyebrow {
   margin-bottom: 4px;
   color: var(--teal);
@@ -314,20 +324,12 @@ dd {
   font-size: 14px;
 }
 
-.card-actions,
 .package-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: auto;
   padding-top: 14px;
-}
-
-.card-actions button:first-child,
-#copyPackage {
-  border-color: var(--blue);
-  background: var(--soft-blue);
-  color: var(--blue);
 }
 
 .internal-details {
@@ -379,8 +381,7 @@ dd {
   text-decoration: none;
 }
 
-.muted-text,
-.privacy-note {
+.muted-text {
   margin-top: 8px;
   color: var(--muted);
   font-size: 13px;
@@ -421,11 +422,6 @@ dd {
 .resource-card a,
 .resource-card details {
   cursor: auto;
-}
-
-#packageNameInput,
-#packageNoteInput {
-  background: #fff;
 }
 
 .compact-help,
@@ -539,10 +535,6 @@ dd {
   white-space: nowrap;
 }
 
-.package-panel textarea#packageOutput {
-  min-height: 150px;
-}
-
 .loading-state {
   min-height: 160px;
 }
@@ -645,9 +637,6 @@ dd {
   }
   .sticky {
     position: static;
-  }
-  .package-panel textarea#packageOutput {
-    min-height: 110px;
   }
 }
 

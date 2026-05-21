@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>資源包結果｜長照資源導航站</title>
+  <link rel="stylesheet" href="./resource-nav.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Resource Package Result</p>
+      <h1>資源包結果</h1>
+    </div>
+    <a class="status-pill nav-link-pill" id="backLink" href="./resource-nav.html">返回資源導航</a>
+  </header>
+
+  <main class="page-shell result-shell">
+    <section id="missingPackage" class="panel result-missing" hidden>
+      <p class="eyebrow">找不到資源包</p>
+      <h2>此瀏覽器找不到資源包</h2>
+      <p class="muted-text">資源包只暫存在產生它的瀏覽器與裝置。請回到資源導航重新選取資源。</p>
+      <a class="google-link result-back-button" href="./resource-nav.html">返回資源導航</a>
+    </section>
+
+    <section id="resultContent" class="result-panel" hidden>
+      <div class="conclusion-head">
+        <div>
+          <p class="eyebrow">案家資源包</p>
+          <h2 id="resultTitle">資源包結果</h2>
+          <p id="resultMeta"></p>
+        </div>
+        <div class="conclusion-actions">
+          <button type="button" id="copyFamily">複製家屬短訊</button>
+          <button type="button" id="copyHandoff">複製交接摘要</button>
+        </div>
+      </div>
+
+      <div class="conclusion-grid">
+        <article>
+          <h3>建議優先順序</h3>
+          <ol id="priorityList"></ol>
+        </article>
+        <article>
+          <h3>先打哪幾通電話</h3>
+          <ol id="phonePlanList"></ol>
+        </article>
+        <article>
+          <h3>可傳給家屬的短訊</h3>
+          <pre id="familyMessage" class="output-preview"></pre>
+        </article>
+        <article>
+          <h3>需要先準備的文件</h3>
+          <ul id="documentList"></ul>
+        </article>
+        <article>
+          <h3>風險提醒</h3>
+          <ul id="riskList"></ul>
+        </article>
+      </div>
+
+      <div class="conclusion-details">
+        <h3>完整資料集合</h3>
+        <div id="resultDetails"></div>
+      </div>
+    </section>
+  </main>
+
+  <textarea id="resultCopyScratch" class="copy-scratch" aria-hidden="true"></textarea>
+  <script src="./resource-package-result.js"></script>
+</body>
+</html>

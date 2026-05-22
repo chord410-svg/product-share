@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
-  const RESOURCE_DATA_VERSION = "20260522-session-fix";
+  const RESOURCE_DATA_VERSION = "20260522-result-button";
   let topics = [];
   let resources = [];
   let activePackage = null;

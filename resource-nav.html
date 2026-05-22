@@ -118,6 +118,15 @@
           <p class="package-count" id="packageCount">0 筆</p>
         </div>
         <p class="muted-text" id="loginStatus">請從 Discord 資源導航按鈕開啟，才能儲存並產生資源包結果。</p>
+        <details class="session-debug" id="sessionDebug">
+          <summary>登入狀態詳情</summary>
+          <dl class="session-debug-list">
+            <div><dt>session</dt><dd id="sessionTokenStatus">未檢查</dd></div>
+            <div><dt>api_base</dt><dd id="apiBaseStatus">未檢查</dd></div>
+            <div><dt>驗證</dt><dd id="sessionVerifyStatus">未檢查</dd></div>
+            <div><dt>原因</dt><dd id="sessionReasonStatus">等待確認</dd></div>
+          </dl>
+        </details>
           <p class="muted-text" id="packageStatus">尚未加入資源。</p>
           <div id="packageItems" class="package-items"></div>
           <label class="field">
@@ -140,7 +149,10 @@
     <article class="resource-card">
       <div class="card-head">
         <div>
-          <p class="category"></p>
+          <div class="card-meta">
+            <p class="category"></p>
+            <span class="checked-at-inline"></span>
+          </div>
           <h3></h3>
         </div>
         <div class="card-badges">
@@ -155,19 +167,17 @@
       </div>
       <dl>
         <div><dt>下一步</dt><dd class="next-step"></dd></div>
-        <div><dt>聯絡/申請</dt><dd class="contact"></dd></div>
-        <div class="required-docs-row"><dt>常備文件</dt><dd class="required-docs"></dd></div>
       </dl>
       <details class="internal-details">
         <summary>查看內部註記</summary>
-        <p class="internal-note"></p>
-        <ul class="phone-questions"></ul>
-        <ul class="risk-flags"></ul>
+        <dl class="internal-detail-grid">
+          <div><dt>聯絡/申請</dt><dd class="contact"></dd></div>
+          <div class="required-docs-row"><dt>常備文件</dt><dd class="required-docs"></dd></div>
+          <div><dt>電話確認</dt><dd><ul class="phone-questions"></ul></dd></div>
+          <div><dt>內部註記</dt><dd><p class="internal-note"></p></dd></div>
+          <div><dt>風險提醒</dt><dd><ul class="risk-flags"></ul></dd></div>
+        </dl>
       </details>
-      <div class="card-foot">
-        <span class="checked-at"></span>
-        <a class="source" target="_blank" rel="noopener noreferrer">查看來源</a>
-      </div>
     </article>
   </template>
 

@@ -432,6 +432,12 @@ dd {
   gap: 7px;
 }
 
+.result-action-row {
+  display: flex;
+  justify-content: flex-end;
+  grid-column: 2;
+}
+
 #applySmartQuery,
 #googleSearchButton,
 #generateResult {
@@ -684,6 +690,13 @@ dd {
   }
   .quick-actions {
     justify-content: stretch;
+  }
+  .result-action-row {
+    grid-column: 1;
+    justify-content: stretch;
+  }
+  .result-action-row button {
+    width: 100%;
   }
   .quick-actions button {
     flex: 1 1 150px;

@@ -89,6 +89,19 @@
     ].filter(Boolean).join("\n");
   }
 
+  function adminText(resource) {
+    const docs = asList(resource.public_required_documents);
+    const flags = asList(resource.risk_flags);
+    return [
+      resource.name,
+      "狀態：" + (resource.status || "待確認"),
+      "資料來源：" + (resource.source_url || "未提供"),
+      "最後確認：" + (resource.last_checked_at || "待確認"),
+      docs.length ? "文件：" + docs.join("、") : "文件：待確認",
+      flags.length ? "注意：" + flags.join("、") : "",
+    ].filter(Boolean).join("\n");
+  }
+
   function handoffText(resource) {
     return [
       resource.name,
@@ -106,6 +119,22 @@
       "",
       ...visibleItems.map((resource, index) => (index + 1) + ". " + familyText(resource)),
     ].filter(Boolean).join("\n\n");
+  }
+
+  function buildPhonePackageText() {
+    return [
+      "個管師電話確認清單：" + activePackage.name,
+      "",
+      ...selectedResources.map((resource, index) => (index + 1) + ". " + phoneText(resource)),
+    ].join("\n\n");
+  }
+
+  function buildAdminPackageText() {
+    return [
+      "行政申請清單：" + activePackage.name,
+      "",
+      ...selectedResources.map((resource, index) => (index + 1) + ". " + adminText(resource)),
+    ].join("\n\n");
   }
 
   function packagePurposeText() {
@@ -171,6 +200,21 @@
     list.appendChild(li);
   }
 
+  function appendPhonePlanItem(list, resource) {
+    const li = document.createElement("li");
+    const link = document.createElement("a");
+    const contact = document.createElement("span");
+    const question = document.createElement("span");
+    link.href = "#result-resource-" + resource.id;
+    link.textContent = resource.name;
+    contact.className = "phone-contact";
+    contact.textContent = "聯絡/申請：" + (resource.public_contact || resource.contact || "依來源公告");
+    question.className = "phone-question";
+    question.textContent = "電話確認：" + (asList(resource.phone_check_questions).join("；") || "確認資格、文件與是否仍受理。");
+    li.append(link, contact, question);
+    list.appendChild(li);
+  }
+
   function renderResourceDetail(resource) {
     const section = document.createElement("section");
     section.className = "conclusion-resource";
@@ -233,7 +277,17 @@
     const backParams = new URLSearchParams();
     if (activePackage.category) backParams.set("category", activePackage.category);
     if (asList(activePackage.selectedTopicKeys).length) backParams.set("topics", asList(activePackage.selectedTopicKeys).join(","));
+    if (activePackage.guildId) backParams.set("guild", activePackage.guildId);
+    if (activePackage.resultChannelId) backParams.set("result_channel", activePackage.resultChannelId);
     $("backLink").href = "./resource-nav.html" + (backParams.toString() ? "?" + backParams.toString() : "");
+    const discordLink = $("discordResultLink");
+    if (activePackage.guildId && activePackage.resultChannelId) {
+      discordLink.hidden = false;
+      discordLink.href = "discord:///channels/" + encodeURIComponent(activePackage.guildId) + "/" + encodeURIComponent(activePackage.resultChannelId);
+    } else {
+      discordLink.hidden = true;
+      discordLink.removeAttribute("href");
+    }
 
     const priority = $("priorityList");
     priority.innerHTML = "";
@@ -244,10 +298,11 @@
     const phonePlan = $("phonePlanList");
     phonePlan.innerHTML = "";
     selectedResources.forEach((resource) => {
-      appendLinkedListItem(phonePlan, resource, asList(resource.phone_check_questions).join("；") || "確認資格、文件與是否仍受理。");
+      appendPhonePlanItem(phonePlan, resource);
     });
 
     $("familyMessage").textContent = buildFamilyPackageText();
+    $("handoffMessage").textContent = buildHandoffPackageText();
     renderList(
       $("documentList"),
       uniqueList(selectedResources.flatMap((resource) => asList(resource.public_required_documents))),
@@ -264,6 +319,8 @@
     selectedResources.forEach((resource) => details.appendChild(renderResourceDetail(resource)));
 
     $("copyFamily").addEventListener("click", async () => copyText(buildFamilyPackageText()));
+    $("copyPhone").addEventListener("click", async () => copyText(buildPhonePackageText()));
+    $("copyAdmin").addEventListener("click", async () => copyText(buildAdminPackageText()));
     $("copyHandoff").addEventListener("click", async () => copyText(buildHandoffPackageText()));
   }
 

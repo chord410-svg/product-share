@@ -19,6 +19,8 @@
     source: "direct",
     hasSessionParam: false,
     hasApiBaseParam: false,
+    apiBaseSource: "missing",
+    runtimeConfigChecked: false,
     sessionUser: null,
     sessionValid: false,
     sessionFailureReason: "",
@@ -72,6 +74,7 @@
     state.source = source;
     state.hasSessionParam = Boolean(state.sessionToken);
     state.hasApiBaseParam = Boolean(state.apiBase);
+    state.apiBaseSource = state.apiBase ? "url" : "missing";
     state.district = params.get("district") || "";
     state.hasUrlContext = Boolean(state.category || topicParam);
     $("sourceStatus").textContent = source === "discord" ? "Discord 入口" : "直接開啟";
@@ -109,6 +112,7 @@
       verified: "已完成 Discord 身份驗證。",
       no_session: "網址沒有 session；請從 Discord 資源導航入口重新開啟。",
       no_api_base: "網址沒有 api_base；Bot 可能尚未帶入 API 網址，或 RESOURCE_NAV_API_BASE / WEB_B_SUBMIT_URL 尚未設定。",
+      runtime_api_base: "網址內的 API 無法使用，已改用網站 runtime config 內的 API base 重試。",
       session_expired: "後端回覆 session 無效或過期；請回 Discord 重新點入口。",
       api_unavailable: "API 連不上或還不是新版；請確認 Bot 已重啟，且公開網址指向新版 server。",
       api_failed: "正式流程送出失敗；已改用本機預覽結果。",
@@ -124,11 +128,35 @@
     const reasonStatus = $("sessionReasonStatus");
     if (!sessionStatus || !apiBaseStatus || !verifyStatus || !reasonStatus) return;
     sessionStatus.textContent = state.hasSessionParam ? "有 session 參數" : "缺少 session 參數";
-    apiBaseStatus.textContent = state.hasApiBaseParam ? "有 api_base 參數" : "缺少 api_base 參數";
+    if (state.apiBaseSource === "runtime") {
+      apiBaseStatus.textContent = "由 runtime config 補上";
+    } else {
+      apiBaseStatus.textContent = state.hasApiBaseParam ? "有 api_base 參數" : "缺少 api_base 參數";
+    }
     verifyStatus.textContent = state.sessionValid ? "已驗證 Discord 身份" : "未完成後端驗證";
     reasonStatus.textContent = state.sessionValid
       ? sessionReasonLabel("verified")
       : sessionReasonLabel(state.sessionFailureReason || "missing_session");
+  }
+
+  async function applyRuntimeApiBase() {
+    if (state.runtimeConfigChecked) return false;
+    state.runtimeConfigChecked = true;
+    try {
+      const response = await fetch("./resource-nav-runtime.json?v=" + Date.now(), { cache: "no-store" });
+      if (!response.ok) return false;
+      const data = await response.json();
+      const apiBase = String(data.api_base || "").replace(/\/$/, "");
+      if (!apiBase || apiBase === state.apiBase) return false;
+      state.apiBase = apiBase;
+      state.apiBaseSource = "runtime";
+      state.sessionFailureReason = "runtime_api_base";
+      renderSessionDebug();
+      return true;
+    } catch (error) {
+      console.info("resource runtime config unavailable", error);
+      return false;
+    }
   }
 
   async function verifySession() {
@@ -144,6 +172,9 @@
       return;
     }
     if (!state.apiBase) {
+      if (await applyRuntimeApiBase()) {
+        return verifySession();
+      }
       state.sessionValid = false;
       state.sessionFailureReason = "no_api_base";
       loginStatus.textContent = "已取得 session，但網址沒有 api_base，網站不知道要向哪個 Bot API 驗證身份。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請確認 Bot 入口已更新後重新開啟。";
@@ -164,6 +195,9 @@
       loginStatus.textContent = "已以 " + name + " 的 Discord 身份開啟。資源包結果會保存到你的私密結果入口。";
       renderSessionDebug();
     } catch (error) {
+      if (await applyRuntimeApiBase()) {
+        return verifySession();
+      }
       state.sessionValid = false;
       state.sessionFailureReason = error.message === "invalid_or_expired_session" ? "session_expired" : "api_unavailable";
       $("sourceStatus").textContent = "session 已失效";

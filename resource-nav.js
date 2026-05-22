@@ -16,6 +16,9 @@
     hasUrlContext: false,
     sessionToken: "",
     apiBase: "",
+    source: "direct",
+    hasSessionParam: false,
+    hasApiBaseParam: false,
     sessionUser: null,
     sessionValid: false,
     sessionFailureReason: "",
@@ -66,6 +69,9 @@
     const source = params.get("source") || "direct";
     state.sessionToken = params.get("session") || "";
     state.apiBase = (params.get("api_base") || "").replace(/\/$/, "");
+    state.source = source;
+    state.hasSessionParam = Boolean(state.sessionToken);
+    state.hasApiBaseParam = Boolean(state.apiBase);
     state.district = params.get("district") || "";
     state.hasUrlContext = Boolean(state.category || topicParam);
     $("sourceStatus").textContent = source === "discord" ? "Discord 入口" : "直接開啟";
@@ -77,8 +83,11 @@
   }
 
   async function apiFetch(path, options) {
-    if (!state.sessionToken || !state.apiBase) {
-      throw new Error("missing resource session");
+    if (!state.sessionToken) {
+      throw new Error("no_session");
+    }
+    if (!state.apiBase) {
+      throw new Error("no_api_base");
     }
     const headers = {
       "Content-Type": "application/json",
@@ -95,13 +104,51 @@
     return data;
   }
 
+  function sessionReasonLabel(reason) {
+    const labels = {
+      verified: "已完成 Discord 身份驗證。",
+      no_session: "網址沒有 session；請從 Discord 資源導航入口重新開啟。",
+      no_api_base: "網址沒有 api_base；Bot 可能尚未帶入 API 網址，或 RESOURCE_NAV_API_BASE / WEB_B_SUBMIT_URL 尚未設定。",
+      session_expired: "後端回覆 session 無效或過期；請回 Discord 重新點入口。",
+      api_unavailable: "API 連不上或還不是新版；請確認 Bot 已重啟，且公開網址指向新版 server。",
+      api_failed: "正式流程送出失敗；已改用本機預覽結果。",
+      missing_session: "缺少 Discord session 或 API 網址；已改用本機預覽結果。",
+    };
+    return labels[reason] || "尚未完成驗證。";
+  }
+
+  function renderSessionDebug() {
+    const sessionStatus = $("sessionTokenStatus");
+    const apiBaseStatus = $("apiBaseStatus");
+    const verifyStatus = $("sessionVerifyStatus");
+    const reasonStatus = $("sessionReasonStatus");
+    if (!sessionStatus || !apiBaseStatus || !verifyStatus || !reasonStatus) return;
+    sessionStatus.textContent = state.hasSessionParam ? "有 session 參數" : "缺少 session 參數";
+    apiBaseStatus.textContent = state.hasApiBaseParam ? "有 api_base 參數" : "缺少 api_base 參數";
+    verifyStatus.textContent = state.sessionValid ? "已驗證 Discord 身份" : "未完成後端驗證";
+    reasonStatus.textContent = state.sessionValid
+      ? sessionReasonLabel("verified")
+      : sessionReasonLabel(state.sessionFailureReason || "missing_session");
+  }
+
   async function verifySession() {
     const loginStatus = $("loginStatus");
-    if (!state.sessionToken || !state.apiBase) {
+    if (!state.sessionToken) {
       state.sessionValid = false;
-      state.sessionFailureReason = "missing_session";
-      loginStatus.textContent = "未取得 Discord session：可瀏覽與點選資源，也可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
+      state.sessionFailureReason = "no_session";
+      loginStatus.textContent = state.source === "discord"
+        ? "已從 Discord 入口開啟，但網址沒有 session。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。"
+        : "未取得 Discord session：可瀏覽與點選資源，也可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
       $("sourceStatus").textContent = "未登入瀏覽";
+      renderSessionDebug();
+      return;
+    }
+    if (!state.apiBase) {
+      state.sessionValid = false;
+      state.sessionFailureReason = "no_api_base";
+      loginStatus.textContent = "已取得 session，但網址沒有 api_base，網站不知道要向哪個 Bot API 驗證身份。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請確認 Bot 入口已更新後重新開啟。";
+      $("sourceStatus").textContent = "API 未設定";
+      renderSessionDebug();
       return;
     }
     try {
@@ -115,11 +162,13 @@
       const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
       $("sourceStatus").textContent = "已連結 Discord";
       loginStatus.textContent = "已以 " + name + " 的 Discord 身份開啟。資源包結果會保存到你的私密結果入口。";
+      renderSessionDebug();
     } catch (error) {
       state.sessionValid = false;
       state.sessionFailureReason = error.message === "invalid_or_expired_session" ? "session_expired" : "api_unavailable";
       $("sourceStatus").textContent = "session 已失效";
-      loginStatus.textContent = "Discord session 無效、已過期或 API 暫時連不上：可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
+      loginStatus.textContent = "已從 Discord 入口開啟，但後端驗證未通過：" + sessionReasonLabel(state.sessionFailureReason) + " 可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
+      renderSessionDebug();
       console.info("resource session verification failed", error);
     }
   }
@@ -493,6 +542,15 @@
     return scored;
   }
 
+  function cardSummary(resource) {
+    const summary = String(resource.public_summary || resource.summary || "").trim();
+    const body = String(resource.body || "").trim();
+    if (summary && body && body !== summary && !summary.includes(body)) {
+      return summary + " " + body;
+    }
+    return summary || body || "請開啟來源或內部註記確認資源內容。";
+  }
+
   function familyText(resource) {
     return [
       resource.name,
@@ -603,6 +661,7 @@
         togglePackageResource(resource);
       });
       node.querySelector(".category").textContent = topicLabel(resource.category);
+      node.querySelector(".checked-at-inline").textContent = "確認：" + (resource.last_checked_at || "待確認");
       const title = node.querySelector("h3");
       title.innerHTML = "";
       if (resource.source_url) {
@@ -621,19 +680,14 @@
         smartHit.hidden = false;
         smartHit.textContent = "智慧查詢命中 " + score;
       }
-      node.querySelector(".summary").textContent = resource.public_summary || resource.summary || "";
+      node.querySelector(".summary").textContent = cardSummary(resource);
       node.querySelector(".eligibility").textContent = asList(resource.eligibility_tags).join("、") || "身份/情境未標示";
       const urgencyTags = asList(resource.urgency_tags);
       node.querySelector(".urgency-tags").textContent = urgencyTags.length ? "急迫性：" + urgencyTags.join("、") : "";
       node.querySelector(".next-step").textContent = resource.public_next_step || resource.next_step || "請先確認個案條件與受理狀態。";
       node.querySelector(".contact").textContent = resource.public_contact || resource.contact || "依來源公告";
       const docs = asList(resource.public_required_documents);
-      node.querySelector(".required-docs").textContent = docs.join("、");
-      if (!docs.length) node.querySelector(".required-docs-row").remove();
-      node.querySelector(".checked-at").textContent = "最後確認：" + (resource.last_checked_at || "待確認");
-      const source = node.querySelector(".source");
-      source.href = resource.source_url || "#";
-      if (!resource.source_url) source.removeAttribute("href");
+      node.querySelector(".required-docs").textContent = docs.length ? docs.join("、") : "待確認";
 
       const note = node.querySelector(".internal-note");
       note.textContent = resource.internal_notes || "尚無內部註記。";
@@ -643,14 +697,22 @@
         li.textContent = item;
         questions.appendChild(li);
       });
-      if (!questions.children.length) questions.remove();
+      if (!questions.children.length) {
+        const li = document.createElement("li");
+        li.textContent = "資格、文件、服務區域、是否仍受理。";
+        questions.appendChild(li);
+      }
       const flags = node.querySelector(".risk-flags");
       asList(resource.risk_flags).forEach((item) => {
         const li = document.createElement("li");
         li.textContent = item;
         flags.appendChild(li);
       });
-      if (!flags.children.length) flags.remove();
+      if (!flags.children.length) {
+        const li = document.createElement("li");
+        li.textContent = "尚無特殊提醒。";
+        flags.appendChild(li);
+      }
       cards.appendChild(node);
     });
     renderPackage();
@@ -718,7 +780,8 @@
 
   function fallbackReason() {
     if (state.sessionFailureReason) return state.sessionFailureReason;
-    if (!state.sessionToken || !state.apiBase) return "missing_session";
+    if (!state.sessionToken) return "no_session";
+    if (!state.apiBase) return "no_api_base";
     return "api_failed";
   }
 

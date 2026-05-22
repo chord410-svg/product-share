@@ -1,7 +1,7 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260522-session-fix";
+  const RESOURCE_DATA_VERSION = "20260522-result-button";
   const state = {
     topics: [],
     resources: [],

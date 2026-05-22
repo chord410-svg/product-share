@@ -24,6 +24,8 @@
     sessionUser: null,
     sessionValid: false,
     sessionFailureReason: "",
+    guildId: "",
+    resultChannelId: "",
   };
 
   const HELP_CONTENT = {
@@ -71,6 +73,8 @@
     const source = params.get("source") || "direct";
     state.sessionToken = params.get("session") || "";
     state.apiBase = (params.get("api_base") || "").replace(/\/$/, "");
+    state.guildId = params.get("guild") || "";
+    state.resultChannelId = params.get("result_channel") || "";
     state.source = source;
     state.hasSessionParam = Boolean(state.sessionToken);
     state.hasApiBaseParam = Boolean(state.apiBase);
@@ -333,6 +337,8 @@
           smartQueryText: String(item.smartQueryText || ""),
           smartQueryAppliedAt: String(item.smartQueryAppliedAt || ""),
           derivedIdentityTags: Array.isArray(item.derivedIdentityTags) ? item.derivedIdentityTags.map(String) : [],
+          guildId: String(item.guildId || ""),
+          resultChannelId: String(item.resultChannelId || ""),
           createdAt: String(item.createdAt || nowIso()),
           updatedAt: String(item.updatedAt || nowIso()),
         }))
@@ -382,6 +388,8 @@
       smartQueryText: state.smartQueryText,
       smartQueryAppliedAt: "",
       derivedIdentityTags: [],
+      guildId: state.guildId,
+      resultChannelId: state.resultChannelId,
       createdAt: nowIso(),
       updatedAt: nowIso(),
     };
@@ -403,6 +411,8 @@
     item.urgency = state.urgency;
     item.smartQueryText = state.smartQueryText;
     item.derivedIdentityTags = derivedIdentityTags();
+    item.guildId = state.guildId;
+    item.resultChannelId = state.resultChannelId;
     item.updatedAt = nowIso();
     writePackages();
   }
@@ -422,6 +432,8 @@
     state.urgency = item.urgency || "";
     state.smartQueryText = item.smartQueryText || "";
     state.smartQueryAppliedText = item.smartQueryAppliedAt ? state.smartQueryText : "";
+    state.guildId = item.guildId || state.guildId;
+    state.resultChannelId = item.resultChannelId || state.resultChannelId;
     normalizeCategory();
     normalizeSelectedTopics();
   }
@@ -857,6 +869,8 @@
       smartQueryText: state.smartQueryText,
       resourceIds: Array.from(state.packageIds),
       outputMode: $("packageMode").value,
+      guildId: state.guildId,
+      resultChannelId: state.resultChannelId,
     };
     const button = $("generateResult");
     const oldText = button.textContent;

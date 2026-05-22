@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260522-session-fix">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260522-result-button">
 </head>
 <body>
   <header class="topbar">
@@ -80,6 +80,9 @@
             <button type="button" class="help-button" data-help="google" aria-label="Google 延伸搜尋說明">?</button>
             <span class="button-help">說明可點 ? 查看；Google 只開搜尋頁。</span>
           </div>
+          <div class="result-action-row">
+            <button type="button" id="generateResult">產生資源包結果</button>
+          </div>
         </div>
 
         <section class="selected-insights" aria-label="已選資源線索" hidden>
@@ -138,9 +141,6 @@
               <option value="handoff">交接摘要</option>
             </select>
           </label>
-          <div class="package-actions">
-            <button type="button" id="generateResult">產生資源包結果</button>
-          </div>
       </section>
     </aside>
   </main>
@@ -191,6 +191,6 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260522-session-fix"></script>
+  <script src="./resource-nav.js?v=20260522-result-button"></script>
 </body>
 </html>

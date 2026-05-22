@@ -1,6 +1,578 @@
 {
   "resources": [
     {
+      "id": "care1966_foreign_caregiver_ltc",
+      "resource_id": "care1966_foreign_caregiver_ltc",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_guidance",
+        "foreign_caregiver_respite"
+      ],
+      "name": "1966 聘請外籍看護工家庭可使用長照服務",
+      "title": "1966 聘請外籍看護工家庭可使用長照服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "1966 對聘請外籍看護家庭可使用長照服務的說明。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://1966.gov.tw/LTC/cp-6464-56935-207.html",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "1966 對聘請外籍看護家庭可使用長照服務的說明。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：可整理成外看家庭可搭配長照服務的提醒卡。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `care1966_foreign_caregiver_ltc` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：可整理成外看家庭可搭配長照服務的提醒卡。",
+      "embedding_text": "1966 聘請外籍看護工家庭可使用長照服務 foreign_caregiver foreign_caregiver_guidance foreign_caregiver_respite 1966 對聘請外籍看護家庭可使用長照服務的說明。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：可整理成外看家庭可搭配長照服務的提醒卡。"
+    },
+    {
+      "id": "zbswf_emergency_rescue",
+      "resource_id": "zbswf_emergency_rescue",
+      "category": "multi_professional",
+      "topics": [
+        "emergency_rescue"
+      ],
+      "name": "中保關懷新北獨居長輩緊急救援",
+      "title": "中保關懷新北獨居長輩緊急救援",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "民間緊急救援與獨居長者安全服務線索。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.zbswf.org.tw/news/detail/268",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "民間緊急救援與獨居長者安全服務線索。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認是否限特定合作案或年度。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `zbswf_emergency_rescue` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認是否限特定合作案或年度。",
+      "embedding_text": "中保關懷新北獨居長輩緊急救援 multi_professional emergency_rescue 民間緊急救援與獨居長者安全服務線索。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認是否限特定合作案或年度。"
+    },
+    {
+      "id": "shine_physiotherapy_clinic",
+      "resource_id": "shine_physiotherapy_clinic",
+      "category": "other",
+      "topics": [
+        "self_pay_physical_therapy"
+      ],
+      "name": "兆耀物理治療所",
+      "title": "兆耀物理治療所",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北地區自費物理治療服務提供者線索。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://shinephysiotherapyclinic.com/",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "新北地區自費物理治療服務提供者線索。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業服務需標示自費，不作為補助規則。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `shine_physiotherapy_clinic` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：商業服務需標示自費，不作為補助規則。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "兆耀物理治療所 other self_pay_physical_therapy 新北地區自費物理治療服務提供者線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業服務需標示自費，不作為補助規則。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "megacharity_emergency_medical",
+      "resource_id": "megacharity_emergency_medical",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "兆豐慈善基金會急難與醫療補助",
+      "title": "兆豐慈善基金會急難與醫療補助",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "兆豐慈善基金會急難與醫療補助資訊，可作民間補助卡候選。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.megacharity.org.tw/CharityCare?ID=5",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "兆豐慈善基金會急難與醫療補助資訊，可作民間補助卡候選。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認當年度申請規則。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `megacharity_emergency_medical` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認當年度申請規則。",
+      "embedding_text": "兆豐慈善基金會急難與醫療補助 informal emergency_aid 兆豐慈善基金會急難與醫療補助資訊，可作民間補助卡候選。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認當年度申請規則。"
+    },
+    {
+      "id": "bali_health_ltc_resources",
+      "resource_id": "bali_health_ltc_resources",
+      "category": "care_professional",
+      "topics": [
+        "ntpc_contract_list",
+        "community_c_station"
+      ],
+      "name": "八里區衛生所長照特約資源",
+      "title": "八里區衛生所長照特約資源",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "名冊入口",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "區域型長照特約資源頁，可作為後續做行政區入口卡的樣本。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://bali.health.ntpc.gov.tw/article/113%EF%BC%8D%EF%BC%8D114%E5%B9%B4%E5%85%AB%E9%87%8C%E5%8D%80%E9%95%B7%E7%85%A7%E7%89%B9%E7%B4%84%E8%B3%87%E6%BA%90",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "區域型長照特約資源頁，可作為後續做行政區入口卡的樣本。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：若做行政區版資源包，可參考此類區域頁。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本"
+      ],
+      "body": "這張卡由候選來源 `bali_health_ltc_resources` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：若做行政區版資源包，可參考此類區域頁。",
+      "embedding_text": "八里區衛生所長照特約資源 care_professional ntpc_contract_list community_c_station 區域型長照特約資源頁，可作為後續做行政區入口卡的樣本。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：若做行政區版資源包，可參考此類區域頁。"
+    },
+    {
+      "id": "altruistic_home_bathing_public_benefit",
+      "resource_id": "altruistic_home_bathing_public_benefit",
+      "category": "informal",
+      "topics": [
+        "chuangshi_bathing"
+      ],
+      "name": "到宅沐浴車天使到你家公益活動",
+      "title": "到宅沐浴車天使到你家公益活動",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "到宅沐浴公益活動線索，可補充民間沐浴資源，但需確認活動是否仍有效。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://www.altruistic.com.tw/news/1/data/49",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "到宅沐浴公益活動線索，可補充民間沐浴資源，但需確認活動是否仍有效。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：活動時間可能已過，不能直接變成正式可用資源。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `altruistic_home_bathing_public_benefit` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：活動時間可能已過，不能直接變成正式可用資源。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "到宅沐浴車天使到你家公益活動 informal chuangshi_bathing 到宅沐浴公益活動線索，可補充民間沐浴資源，但需確認活動是否仍有效。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：活動時間可能已過，不能直接變成正式可用資源。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "mol_wda_foreign_caregiver_respite",
+      "resource_id": "mol_wda_foreign_caregiver_respite",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_respite"
+      ],
+      "name": "勞動部外籍看護工家庭短期替代照顧服務",
+      "title": "勞動部外籍看護工家庭短期替代照顧服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "外籍看護工家庭短期替代照顧服務官方說明。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.wda.gov.tw/News_Content.aspx?n=31&s=4221",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "外籍看護工家庭短期替代照顧服務官方說明。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需整理適用情境與申請窗口。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `mol_wda_foreign_caregiver_respite` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需整理適用情境與申請窗口。",
+      "embedding_text": "勞動部外籍看護工家庭短期替代照顧服務 foreign_caregiver foreign_caregiver_respite 外籍看護工家庭短期替代照顧服務官方說明。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需整理適用情境與申請窗口。"
+    },
+    {
+      "id": "mol_missing_worker_replacement",
+      "resource_id": "mol_missing_worker_replacement",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_missing"
+      ],
+      "name": "勞動部行蹤不明外籍看護工通報與遞補機制",
+      "title": "勞動部行蹤不明外籍看護工通報與遞補機制",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "外籍看護行蹤不明通報與遞補相關官方說明。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.mol.gov.tw/1607/1632/1640/15194/",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "外籍看護行蹤不明通報與遞補相關官方說明。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：可做危機流程卡：先通報、再銜接短期替代與家庭支持。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `mol_missing_worker_replacement` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：可做危機流程卡：先通報、再銜接短期替代與家庭支持。",
+      "embedding_text": "勞動部行蹤不明外籍看護工通報與遞補機制 foreign_caregiver foreign_caregiver_missing 外籍看護行蹤不明通報與遞補相關官方說明。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：可做危機流程卡：先通報、再銜接短期替代與家庭支持。"
+    },
+    {
+      "id": "pt_association_clinic_map",
+      "resource_id": "pt_association_clinic_map",
+      "category": "other",
+      "topics": [
+        "self_pay_physical_therapy"
+      ],
+      "name": "台灣物理治療所地圖",
+      "title": "台灣物理治療所地圖",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "名冊入口",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "物理治療所查詢入口，可作自費物理治療名冊入口。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://www.pt.org.tw/clinic",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "物理治療所查詢入口，可作自費物理治療名冊入口。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：先做入口卡，後續再評估是否拆區域查詢。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `pt_association_clinic_map` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：先做入口卡，後續再評估是否拆區域查詢。",
+      "embedding_text": "台灣物理治療所地圖 other self_pay_physical_therapy 物理治療所查詢入口，可作自費物理治療名冊入口。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：先做入口卡，後續再評估是否拆區域查詢。"
+    },
+    {
+      "id": "tcb_disability_trust",
+      "resource_id": "tcb_disability_trust",
+      "category": "other",
+      "topics": [
+        "senior_trust_bank"
+      ],
+      "name": "合作金庫高齡者身心障礙者財產信託",
+      "title": "合作金庫高齡者身心障礙者財產信託",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "合作金庫高齡與身障財產信託資訊，可作銀行諮詢資源卡候選。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.tcb-bank.com.tw/personal-banking/insurance-trust/trust-planning/disability",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "合作金庫高齡與身障財產信託資訊，可作銀行諮詢資源卡候選。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需提醒個管師不可代替金融建議，只能引導家屬諮詢。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `tcb_disability_trust` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需提醒個管師不可代替金融建議，只能引導家屬諮詢。",
+      "embedding_text": "合作金庫高齡者身心障礙者財產信託 other senior_trust_bank 合作金庫高齡與身障財產信託資訊，可作銀行諮詢資源卡候選。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需提醒個管師不可代替金融建議，只能引導家屬諮詢。"
+    },
+    {
+      "id": "cathay_retirement_trust",
+      "resource_id": "cathay_retirement_trust",
+      "category": "other",
+      "topics": [
+        "senior_trust_bank"
+      ],
+      "name": "國泰世華悠活退休信託",
+      "title": "國泰世華悠活退休信託",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://www.cathaybk.com.tw/cathaybk/personal/wealth/trust/product/retirement/",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業產品頁不直接作公益資源規則。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `cathay_retirement_trust` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：商業產品頁不直接作公益資源規則。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "國泰世華悠活退休信託 other senior_trust_bank 銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業產品頁不直接作公益資源規則。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
       "id": "ntpc_foreign_caregiver_guidance",
       "resource_id": "ntpc_foreign_caregiver_guidance",
       "category": "foreign_caregiver",
@@ -55,60 +627,413 @@
       "embedding_text": "外籍家庭看護工勞雇安心支援服務 foreign_caregiver foreign_caregiver_guidance 提供外籍家庭看護工到宅指導與勞雇安心支持資訊。 確認家庭目前照顧困難、外看語言與是否需要到宅指導。 雇主資料 外看基本資料 照顧困難說明 是否可到宅指導 服務語言 申請方式 是否有等待期 外看家庭常見卡點是照顧技巧、溝通與短期替手；需注意失聯風險。"
     },
     {
+      "id": "asiapacific_foreign_caregiver_missing",
+      "resource_id": "asiapacific_foreign_caregiver_missing",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_missing"
+      ],
+      "name": "外籍看護逃跑與失聯整理",
+      "title": "外籍看護逃跑與失聯整理",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "C級線索",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "仲介整理文，只能作為失聯通報問題清單線索。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://asiapacific.tw/escape/",
+      "source_type": "lead_only",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "C級線索",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "仲介整理文，只能作為失聯通報問題清單線索。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：C；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：需回勞動部或地方政府確認。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "C級來源僅供查證",
+        "線索卡需人工確認"
+      ],
+      "body": "這張卡由候選來源 `asiapacific_foreign_caregiver_missing` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：C\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：需回勞動部或地方政府確認。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "外籍看護逃跑與失聯整理 foreign_caregiver foreign_caregiver_missing 仲介整理文，只能作為失聯通報問題清單線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：C；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：需回勞動部或地方政府確認。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "yuerong_emergency_aid_pdf",
+      "resource_id": "yuerong_emergency_aid_pdf",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "悅融社會福利基金會急難救助金申請辦法 PDF",
+      "title": "悅融社會福利基金會急難救助金申請辦法 PDF",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待解析文件"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "基金會急難救助申請辦法，適合作為民間急難資源卡候選。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.yuerong.org.tw/product_images/uploaded/1/%E6%82%85%E8%9E%8D%E6%80%A5%E9%9B%A3%E6%95%91%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E8%BE%A6%E6%B3%95.pdf",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "基金會急難救助申請辦法，適合作為民間急難資源卡候選。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源含待解析文件。 備註：需確認受理地區、名額與申請窗口。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `yuerong_emergency_aid_pdf` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認受理地區、名額與申請窗口。",
+      "embedding_text": "悅融社會福利基金會急難救助金申請辦法 PDF informal emergency_aid 基金會急難救助申請辦法，適合作為民間急難資源卡候選。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源含待解析文件。 備註：需確認受理地區、名額與申請窗口。"
+    },
+    {
+      "id": "ilong_foreign_caregiver_missing",
+      "resource_id": "ilong_foreign_caregiver_missing",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_missing"
+      ],
+      "name": "愛長照外籍看護失聯通報整理",
+      "title": "愛長照外籍看護失聯通報整理",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "C級線索",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "外籍看護失聯流程整理文，只能作為找官方資料的線索。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://www.ilong-termcare.com/articles/rkG4",
+      "source_type": "lead_only",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "C級線索",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "外籍看護失聯流程整理文，只能作為找官方資料的線索。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：C；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：不得單獨作為正式規則。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "C級來源僅供查證",
+        "線索卡需人工確認"
+      ],
+      "body": "這張卡由候選來源 `ilong_foreign_caregiver_missing` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：C\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：不得單獨作為正式規則。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "愛長照外籍看護失聯通報整理 foreign_caregiver foreign_caregiver_missing 外籍看護失聯流程整理文，只能作為找官方資料的線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：C；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：不得單獨作為正式規則。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "ntpc_dementia_network",
+      "resource_id": "ntpc_dementia_network",
+      "category": "multi_professional",
+      "topics": [
+        "dementia_service"
+      ],
+      "name": "新北失智共照網施政成果",
+      "title": "新北失智共照網施政成果",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "失智共照服務線索，可補官方失智資源查找方向。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://wedid.ntpc.gov.tw/Governance/Detail/AXzxvdJZLRBy",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "失智共照服務線索，可補官方失智資源查找方向。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：需再找實際失智據點或服務申請頁。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認"
+      ],
+      "body": "這張卡由候選來源 `ntpc_dementia_network` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：需再找實際失智據點或服務申請頁。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "新北失智共照網施政成果 multi_professional dementia_service 失智共照服務線索，可補官方失智資源查找方向。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：需再找實際失智據點或服務申請頁。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "ntpc_traffic_rehab_bus",
+      "resource_id": "ntpc_traffic_rehab_bus",
+      "category": "transport",
+      "topics": [
+        "rehab_bus"
+      ],
+      "name": "新北市交通局身心障礙者復康巴士",
+      "title": "新北市交通局身心障礙者復康巴士",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "復康巴士官方服務入口，可整理為身障交通服務卡。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.traffic.ntpc.gov.tw/home.jsp?id=4bb46f3916aa92d4",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "復康巴士官方服務入口，可整理為身障交通服務卡。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認預約規則、資格、陪同與取消規則。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認"
+      ],
+      "body": "這張卡由候選來源 `ntpc_traffic_rehab_bus` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認預約規則、資格、陪同與取消規則。",
+      "embedding_text": "新北市交通局身心障礙者復康巴士 transport rehab_bus 復康巴士官方服務入口，可整理為身障交通服務卡。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認預約規則、資格、陪同與取消規則。"
+    },
+    {
+      "id": "ntpc_news_stair_climber",
+      "resource_id": "ntpc_news_stair_climber",
+      "category": "assistive_accessibility",
+      "topics": [
+        "stair_climber"
+      ],
+      "name": "新北市全國創新服務老人也可以申請爬梯機",
+      "title": "新北市全國創新服務老人也可以申請爬梯機",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "官方新聞，可補背景與服務脈絡，但正式規則仍以輔具中心頁為準。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://www.ntpc.gov.tw/ch/home.jsp?dataserno=201703210022&id=28&mcustomize=news_view.jsp&mserno=201309100001&parentpath=0%2C6%2C27",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "官方新聞，可補背景與服務脈絡，但正式規則仍以輔具中心頁為準。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：新聞型來源只補說明，不當作最新規則。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認"
+      ],
+      "body": "這張卡由候選來源 `ntpc_news_stair_climber` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：新聞型來源只補說明，不當作最新規則。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "新北市全國創新服務老人也可以申請爬梯機 assistive_accessibility stair_climber 官方新聞，可補背景與服務脈絡，但正式規則仍以輔具中心頁為準。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：新聞型來源只補說明，不當作最新規則。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
       "id": "ntpc_food_bank",
       "resource_id": "ntpc_food_bank",
       "category": "informal",
       "topics": [
         "food_bank"
       ],
-      "name": "新北市好日子愛心大平台 / 實物銀行",
-      "title": "新北市好日子愛心大平台 / 實物銀行",
+      "name": "新北市政府社會局實物銀行方案",
+      "title": "新北市政府社會局實物銀行方案",
       "region": "新北市",
       "districts": [
         "全新北"
       ],
       "eligibility_tags": [
-        "弱勢",
-        "物資需求",
-        "急難",
-        "低收",
-        "中低收"
+        "A級官方候選",
+        "資源聯繫",
+        "待抽全文"
       ],
       "urgency_tags": [
-        "本週內",
-        "緊急"
+        "一般"
       ],
-      "summary": "可作為臨時物資、生活支持與弱勢資源連結的查詢入口。",
-      "next_step": "先確認是否需社福中心或公所轉介，再確認可提供物資類型。",
-      "contact": "依好日子愛心大平台公告",
-      "source_url": "https://newgoodday.ntpc.gov.tw/public",
-      "source_type": "official",
-      "last_checked_at": "2026-05-20",
-      "next_review_at": "2026-08-20",
-      "confidence": "官方資料",
+      "summary": "新北社會局實物銀行方案，適合整理成物資需求與轉介卡。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?id=a48066c1cac2af75",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
       "status": "active",
       "public_allowed": true,
-      "public_summary": "可作為臨時物資、生活支持與弱勢資源連結的查詢入口。",
-      "public_next_step": "先確認是否需社福中心或公所轉介，再確認可提供物資類型。",
+      "public_summary": "新北社會局實物銀行方案，適合整理成物資需求與轉介卡。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
       "public_required_documents": [
         "身分證明",
-        "經濟狀況資料",
-        "急難或需求說明"
+        "需求說明",
+        "申請文件依來源公告"
       ],
-      "public_contact": "依好日子愛心大平台公告",
-      "internal_notes": "適合放在非正式資源第一順位；是否能直接申請需依當期流程確認。",
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補各區聯繫窗口與是否需社工轉介。",
       "phone_check_questions": [
-        "是否需轉介",
-        "目前可提供物資",
-        "服務行政區",
-        "是否有領取期限"
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
       ],
       "risk_flags": [
-        "物資存量變動",
-        "轉介資格需確認"
+        "需電話確認"
       ],
-      "body": "面對斷炊或生活物資不足時，可先列入案家資源包。",
-      "embedding_text": "新北市好日子愛心大平台 / 實物銀行 informal food_bank 可作為臨時物資、生活支持與弱勢資源連結的查詢入口。 先確認是否需社福中心或公所轉介，再確認可提供物資類型。 身分證明 經濟狀況資料 急難或需求說明 是否需轉介 目前可提供物資 服務行政區 是否有領取期限 適合放在非正式資源第一順位；是否能直接申請需依當期流程確認。"
+      "body": "這張卡由候選來源 `ntpc_food_bank` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需補各區聯繫窗口與是否需社工轉介。",
+      "embedding_text": "新北市政府社會局實物銀行方案 informal food_bank 新北社會局實物銀行方案，適合整理成物資需求與轉介卡。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補各區聯繫窗口與是否需社工轉介。"
+    },
+    {
+      "id": "ntpc_senior_trust_news",
+      "resource_id": "ntpc_senior_trust_news",
+      "category": "other",
+      "topics": [
+        "senior_trust_bank"
+      ],
+      "name": "新北市安養信託守護晚美人生新聞",
+      "title": "新北市安養信託守護晚美人生新聞",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北市與信託公會合作宣導高齡及身障者財產信託的官方新聞線索。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://www.ntpc.gov.tw/ch/home.jsp?id=28&parentpath=0,6,27&mcustomize=news_view.jsp&dataserno=201610310012&mserno=201309100001",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "新北市與信託公會合作宣導高齡及身障者財產信託的官方新聞線索。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：新聞不當作最新規則，需連到信託公會或銀行現行頁。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認"
+      ],
+      "body": "這張卡由候選來源 `ntpc_senior_trust_news` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：新聞不當作最新規則，需連到信託公會或銀行現行頁。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "新北市安養信託守護晚美人生新聞 other senior_trust_bank 新北市與信託公會合作宣導高齡及身障者財產信託的官方新聞線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：新聞不當作最新規則，需連到信託公會或銀行現行頁。 此卡只供個管師查證，不進家屬版輸出。"
     },
     {
       "id": "ntpc_family_caregiver_support",
@@ -165,6 +1090,375 @@
       "embedding_text": "新北市家庭照顧者支持資源 multi_professional family_caregiver_support 提供家庭照顧者支持、諮詢、喘息與相關轉介方向。 確認照顧者壓力、替手需求與可接受服務型態。 個案基本資料 照顧者聯絡資訊 長照資格資料 是否有照顧者支持據點 是否可安排喘息 是否需心理支持 收案等待時間 若照顧者已有崩潰風險，應同步評估急迫資源與喘息安排。"
     },
     {
+      "id": "careyou_family_caregiver_service",
+      "resource_id": "careyou_family_caregiver_service",
+      "category": "multi_professional",
+      "topics": [
+        "family_caregiver_support"
+      ],
+      "name": "新北市家庭照顧者服務",
+      "title": "新北市家庭照顧者服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北長照家庭照顧者支持服務入口。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.careyou.ntpc.gov.tw/w/careyou/resources_20082712185936510",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新北長照家庭照顧者支持服務入口。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可加入電話確認：是否需照顧者本人同意、服務區域與等待時間。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認"
+      ],
+      "body": "這張卡由候選來源 `careyou_family_caregiver_service` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：可加入電話確認：是否需照顧者本人同意、服務區域與等待時間。",
+      "embedding_text": "新北市家庭照顧者服務 multi_professional family_caregiver_support 新北長照家庭照顧者支持服務入口。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可加入電話確認：是否需照顧者本人同意、服務區域與等待時間。"
+    },
+    {
+      "id": "takecare880_caregiver_support",
+      "resource_id": "takecare880_caregiver_support",
+      "category": "multi_professional",
+      "topics": [
+        "family_caregiver_support",
+        "diverse_companion"
+      ],
+      "name": "新北市家庭照顧者關懷協會",
+      "title": "新北市家庭照顧者關懷協會",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "家庭照顧者支持與民間合作資源入口。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.takecare880.org/",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "家庭照顧者支持與民間合作資源入口。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可做照顧壓力、喘息與資源轉介卡。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `takecare880_caregiver_support` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：可做照顧壓力、喘息與資源轉介卡。",
+      "embedding_text": "新北市家庭照顧者關懷協會 multi_professional family_caregiver_support diverse_companion 家庭照顧者支持與民間合作資源入口。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可做照顧壓力、喘息與資源轉介卡。"
+    },
+    {
+      "id": "hangan_home_service_units_pdf",
+      "resource_id": "hangan_home_service_units_pdf",
+      "category": "care_professional",
+      "topics": [
+        "home_care"
+      ],
+      "name": "新北市居家服務單位 PDF",
+      "title": "新北市居家服務單位 PDF",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "名冊入口",
+        "待解析文件"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "居家服務單位名冊 PDF 線索，需確認是否為最新版本。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "http://homecare.hangan.org/assets/%E6%96%B0%E5%8C%97%E5%B8%82%E5%B1%85%E5%AE%B6%E6%9C%8D%E5%8B%99%E5%96%AE%E4%BD%8D.pdf",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "居家服務單位名冊 PDF 線索，需確認是否為最新版本。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件。 備註：非政府原始頁，需與官方名冊交叉確認。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "名冊需確認最新版本",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `hangan_home_service_units_pdf` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：非政府原始頁，需與官方名冊交叉確認。",
+      "embedding_text": "新北市居家服務單位 PDF care_professional home_care 居家服務單位名冊 PDF 線索，需確認是否為最新版本。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件。 備註：非政府原始頁，需與官方名冊交叉確認。"
+    },
+    {
+      "id": "rootlaw_ntpc_rehab_bus_rule",
+      "resource_id": "rootlaw_ntpc_rehab_bus_rule",
+      "category": "transport",
+      "topics": [
+        "rehab_bus"
+      ],
+      "name": "新北市復康巴士服務須知",
+      "title": "新北市復康巴士服務須知",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "復康巴士服務須知條文線索，適合補規則來源。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.rootlaw.com.tw/LawContent.aspx?LawID=B020240001014200-1091014",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "復康巴士服務須知條文線索，適合補規則來源。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：法規整理站需與主管機關公告確認版本。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `rootlaw_ntpc_rehab_bus_rule` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：法規整理站需與主管機關公告確認版本。",
+      "embedding_text": "新北市復康巴士服務須知 transport rehab_bus 復康巴士服務須知條文線索，適合補規則來源。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：法規整理站需與主管機關公告確認版本。"
+    },
+    {
+      "id": "rootlaw_ntpc_emergency_aid",
+      "resource_id": "rootlaw_ntpc_emergency_aid",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "新北市政府急難救助作業要點",
+      "title": "新北市政府急難救助作業要點",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "急難救助作業要點線索，適合補資格與文件來源。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.rootlaw.com.tw/LawContent.aspx?LawID=B020070001015400-1070402",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "急難救助作業要點線索，適合補資格與文件來源。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需與新北社會局或法規資料庫最新公告交叉確認。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `rootlaw_ntpc_emergency_aid` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需與新北社會局或法規資料庫最新公告交叉確認。",
+      "embedding_text": "新北市政府急難救助作業要點 informal emergency_aid 急難救助作業要點線索，適合補資格與文件來源。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需與新北社會局或法規資料庫最新公告交叉確認。"
+    },
+    {
+      "id": "ntpc_social_ltc_service",
+      "resource_id": "ntpc_social_ltc_service",
+      "category": "care_professional",
+      "topics": [
+        "service_flow",
+        "home_care",
+        "ltc_institution"
+      ],
+      "name": "新北市政府社會局長期照顧服務",
+      "title": "新北市政府社會局長期照顧服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "社會局長期照顧服務入口，適合整理為申請流程與轉介入口。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?id=05f327fb2f09cacb",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "社會局長期照顧服務入口，適合整理為申請流程與轉介入口。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需人工整理成個管師可用的流程摘要。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `ntpc_social_ltc_service` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需人工整理成個管師可用的流程摘要。",
+      "embedding_text": "新北市政府社會局長期照顧服務 care_professional service_flow home_care ltc_institution 社會局長期照顧服務入口，適合整理為申請流程與轉介入口。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需人工整理成個管師可用的流程摘要。"
+    },
+    {
+      "id": "ntpc_eservice_elder_love_card",
+      "resource_id": "ntpc_eservice_elder_love_card",
+      "category": "transport",
+      "topics": [
+        "elder_love_taxi"
+      ],
+      "name": "新北市敬老、愛心及愛心陪伴悠遊卡線上申辦",
+      "title": "新北市敬老、愛心及愛心陪伴悠遊卡線上申辦",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "說明敬老卡、愛心卡、愛心陪伴卡資格、點數與文件，可整理成交通優惠流程卡。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://service.ntpc.gov.tw/eservice/CaseData.action?itemId=110026",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "說明敬老卡、愛心卡、愛心陪伴卡資格、點數與文件，可整理成交通優惠流程卡。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：查詢結果包含 115 年點數變更資訊，需標示最後確認日。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `ntpc_eservice_elder_love_card` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：查詢結果包含 115 年點數變更資訊，需標示最後確認日。",
+      "embedding_text": "新北市敬老、愛心及愛心陪伴悠遊卡線上申辦 transport elder_love_taxi 說明敬老卡、愛心卡、愛心陪伴卡資格、點數與文件，可整理成交通優惠流程卡。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：查詢結果包含 115 年點數變更資訊，需標示最後確認日。"
+    },
+    {
       "id": "ntpc_da01_transport",
       "resource_id": "ntpc_da01_transport",
       "category": "transport",
@@ -218,60 +1512,161 @@
       "embedding_text": "新北市特約長照交通接送 DA01 transport da01_transport 長照交通接送服務，適合需要協助往返醫療、復健或長照服務據點的個案。 先確認長照資格、額度、目的地與預約規則，再查特約交通單位。 長照資格資料 身分證明 就醫或服務目的地資訊 是否服務該路線 預約提前天數 是否可輪椅搭乘 等候費或自費差額 跨區、等候、陪同與臨時取消規則需逐案確認。"
     },
     {
+      "id": "careyou_da01_service_notice_pdf",
+      "resource_id": "careyou_da01_service_notice_pdf",
+      "category": "transport",
+      "topics": [
+        "da01_transport"
+      ],
+      "name": "新北市特約長照交通接送 DA01 服務使用須知 PDF",
+      "title": "新北市特約長照交通接送 DA01 服務使用須知 PDF",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待解析文件"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "DA01 使用須知，適合整理成交通接送申請與預約流程卡。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.careyou.ntpc.gov.tw/WebUPD/careyou/items/%E6%96%B0%E5%8C%97%E5%B8%82%E7%89%B9%E7%B4%84%E9%95%B7%E7%85%A7%E4%BA%A4%E9%80%9A%E6%8E%A5%E9%80%81(DA01)%E6%9C%8D%E5%8B%99%E4%BD%BF%E7%94%A8%E9%A0%88%E7%9F%A51140919.pdf",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "DA01 使用須知，適合整理成交通接送申請與預約流程卡。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源含待解析文件。 備註：PDF 日期與版本需解析確認。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `careyou_da01_service_notice_pdf` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：PDF 日期與版本需解析確認。",
+      "embedding_text": "新北市特約長照交通接送 DA01 服務使用須知 PDF transport da01_transport DA01 使用須知，適合整理成交通接送申請與預約流程卡。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源含待解析文件。 備註：PDF 日期與版本需解析確認。"
+    },
+    {
       "id": "ntpc_social_assistance",
       "resource_id": "ntpc_social_assistance",
       "category": "informal",
       "topics": [
         "emergency_aid"
       ],
-      "name": "新北市社會局社會救助 / 急難救助",
-      "title": "新北市社會局社會救助 / 急難救助",
+      "name": "新北市政府社會局社會救助",
+      "title": "新北市政府社會局社會救助",
       "region": "新北市",
       "districts": [
         "全新北"
       ],
       "eligibility_tags": [
-        "急難",
-        "低收",
-        "中低收",
-        "生活陷困"
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
       ],
       "urgency_tags": [
-        "本週內",
-        "緊急"
+        "一般"
       ],
-      "summary": "急難、生活陷困與社會救助相關資訊入口。",
-      "next_step": "先整理急難事由、收入或支出變化，以及可佐證文件。",
-      "contact": "新北市社會局或戶籍/居住地公所",
+      "summary": "新北社會局社會救助入口，可整理成急難、低收中低收相關流程卡。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
       "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?id=dff618d9d6f956fa",
-      "source_type": "official",
-      "last_checked_at": "2026-05-20",
-      "next_review_at": "2026-08-20",
-      "confidence": "官方資料",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
       "status": "active",
       "public_allowed": true,
-      "public_summary": "急難、生活陷困與社會救助相關資訊入口。",
-      "public_next_step": "先整理急難事由、收入或支出變化，以及可佐證文件。",
+      "public_summary": "新北社會局社會救助入口，可整理成急難、低收中低收相關流程卡。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
       "public_required_documents": [
         "身分證明",
-        "戶籍或居住資料",
-        "急難事由證明",
-        "收入或支出佐證"
+        "資格或評估資料",
+        "申請文件依來源公告"
       ],
-      "public_contact": "新北市社會局或戶籍/居住地公所",
-      "internal_notes": "實務上需確認戶籍、居住地與急難事由；家屬版避免承諾一定核定。",
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需拆分正式救助與民間急難補助。",
       "phone_check_questions": [
-        "承辦窗口",
-        "是否符合急難事由",
-        "文件是否足夠",
-        "審查時間"
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
       ],
       "risk_flags": [
-        "資格需審查",
-        "文件不足可能退件"
+        "流程需確認是否更新"
       ],
-      "body": "急難救助適合搭配實物銀行、基金會與公所資源一併評估。",
-      "embedding_text": "新北市社會局社會救助 / 急難救助 informal emergency_aid 急難、生活陷困與社會救助相關資訊入口。 先整理急難事由、收入或支出變化，以及可佐證文件。 身分證明 戶籍或居住資料 急難事由證明 收入或支出佐證 承辦窗口 是否符合急難事由 文件是否足夠 審查時間 實務上需確認戶籍、居住地與急難事由；家屬版避免承諾一定核定。"
+      "body": "這張卡由候選來源 `ntpc_social_assistance` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需拆分正式救助與民間急難補助。",
+      "embedding_text": "新北市政府社會局社會救助 informal emergency_aid 新北社會局社會救助入口，可整理成急難、低收中低收相關流程卡。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需拆分正式救助與民間急難補助。"
+    },
+    {
+      "id": "newtaipei_home_pharmacy_delivery",
+      "resource_id": "newtaipei_home_pharmacy_delivery",
+      "category": "multi_professional",
+      "topics": [
+        "home_pharmacy"
+      ],
+      "name": "新北市藥事照護計畫送藥到府",
+      "title": "新北市藥事照護計畫送藥到府",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "藥事照護與送藥到府服務資訊，可供行動不便或多重用藥情境使用。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.pharmaceutical-care.net/%E9%80%81%E8%97%A5%E5%88%B0%E5%BA%9C",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "藥事照護與送藥到府服務資訊，可供行動不便或多重用藥情境使用。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認承辦單位、服務條件與是否仍受理。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `newtaipei_home_pharmacy_delivery` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認承辦單位、服務條件與是否仍受理。",
+      "embedding_text": "新北市藥事照護計畫送藥到府 multi_professional home_pharmacy 藥事照護與送藥到府服務資訊，可供行動不便或多重用藥情境使用。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認承辦單位、服務條件與是否仍受理。"
     },
     {
       "id": "ntpc_rehab_bus",
@@ -324,6 +1719,379 @@
       ],
       "body": "復康巴士適合納入交通備案，不應與 DA01 混為同一套資格。",
       "embedding_text": "新北市身心障礙者復康巴士 transport rehab_bus 提供身心障礙者交通接送資源，可作為長照交通之外的補充選項。 確認身障資格、預約方式、搭乘限制與目的地是否符合。 身心障礙證明 身分證明 預約資料 預約資格 可搭乘區域 陪同規則 是否可臨時取消 實際預約規則與可搭乘目的需以當期公告為準。"
+    },
+    {
+      "id": "ntpc_atrc_stair_climber",
+      "resource_id": "ntpc_atrc_stair_climber",
+      "category": "assistive_accessibility",
+      "topics": [
+        "stair_climber"
+      ],
+      "name": "新北市輔具資源中心爬梯機服務宣導",
+      "title": "新北市輔具資源中心爬梯機服務宣導",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "說明爬梯機單次上下樓與月租服務、申請方式與輔具中心電話。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/Education/69",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "說明爬梯機單次上下樓與月租服務、申請方式與輔具中心電話。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可整理成無電梯公寓就醫外出情境卡。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認"
+      ],
+      "body": "這張卡由候選來源 `ntpc_atrc_stair_climber` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：可整理成無電梯公寓就醫外出情境卡。",
+      "embedding_text": "新北市輔具資源中心爬梯機服務宣導 assistive_accessibility stair_climber 說明爬梯機單次上下樓與月租服務、申請方式與輔具中心電話。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可整理成無電梯公寓就醫外出情境卡。"
+    },
+    {
+      "id": "ntpc_atrc_vendor_search",
+      "resource_id": "ntpc_atrc_vendor_search",
+      "category": "assistive_accessibility",
+      "topics": [
+        "ltc_assistive_device",
+        "home_accessibility",
+        "medical_assistive_device"
+      ],
+      "name": "新北市輔具資源中心特約廠商查詢",
+      "title": "新北市輔具資源中心特約廠商查詢",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "名冊入口",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北輔具特約廠商查詢入口，先做名冊入口卡。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/Service/5",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新北輔具特約廠商查詢入口，先做名冊入口卡。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：互動查詢型資料不急著拆每一列。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本"
+      ],
+      "body": "這張卡由候選來源 `ntpc_atrc_vendor_search` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：互動查詢型資料不急著拆每一列。",
+      "embedding_text": "新北市輔具資源中心特約廠商查詢 assistive_accessibility ltc_assistive_device home_accessibility medical_assistive_device 新北輔具特約廠商查詢入口，先做名冊入口卡。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：互動查詢型資料不急著拆每一列。"
+    },
+    {
+      "id": "ntpc_lkk_universal_taxi",
+      "resource_id": "ntpc_lkk_universal_taxi",
+      "category": "transport",
+      "topics": [
+        "elder_love_taxi",
+        "rehab_bus"
+      ],
+      "name": "新北市通用無障礙計程車",
+      "title": "新北市通用無障礙計程車",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "列出通用無障礙計程車叫車平台與電話，適合做復康巴士以外的交通備案。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://lkk.ntpc.gov.tw/home.jsp?id=74&parentpath=0%2C60",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "列出通用無障礙計程車叫車平台與電話，適合做復康巴士以外的交通備案。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可加入電話確認：是否可輪椅上車、是否需預約、是否可扣敬老愛心點數。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認"
+      ],
+      "body": "這張卡由候選來源 `ntpc_lkk_universal_taxi` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：可加入電話確認：是否可輪椅上車、是否需預約、是否可扣敬老愛心點數。",
+      "embedding_text": "新北市通用無障礙計程車 transport elder_love_taxi rehab_bus 列出通用無障礙計程車叫車平台與電話，適合做復康巴士以外的交通備案。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：可加入電話確認：是否可輪椅上車、是否需預約、是否可扣敬老愛心點數。"
+    },
+    {
+      "id": "careyou_home_bathing_service",
+      "resource_id": "careyou_home_bathing_service",
+      "category": "care_professional",
+      "topics": [
+        "home_bathing_vehicle"
+      ],
+      "name": "新北市長照2.0到宅沐浴車服務內容",
+      "title": "新北市長照2.0到宅沐浴車服務內容",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "說明到宅沐浴車服務內容，可整理成臥床、無法進浴室者的服務卡。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.careyou.ntpc.gov.tw/w/careyou/NursingServiceDetail?id=20083019094059264",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "說明到宅沐浴車服務內容，可整理成臥床、無法進浴室者的服務卡。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補電話確認問題：是否符合長照等級、空間是否可架設浴槽、等待時間。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認"
+      ],
+      "body": "這張卡由候選來源 `careyou_home_bathing_service` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需補電話確認問題：是否符合長照等級、空間是否可架設浴槽、等待時間。",
+      "embedding_text": "新北市長照2.0到宅沐浴車服務內容 care_professional home_bathing_vehicle 說明到宅沐浴車服務內容，可整理成臥床、無法進浴室者的服務卡。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補電話確認問題：是否符合長照等級、空間是否可架設浴槽、等待時間。"
+    },
+    {
+      "id": "ntpc_ltc_transport_platform",
+      "resource_id": "ntpc_ltc_transport_platform",
+      "category": "transport",
+      "topics": [
+        "da01_transport"
+      ],
+      "name": "新北市長照交通接送服務平台",
+      "title": "新北市長照交通接送服務平台",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "名冊入口",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北長照交通接送平台，可作為 DA01 預約與服務說明入口。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://www.ntpc.ltc-car.org/",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新北長照交通接送平台，可作為 DA01 預約與服務說明入口。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：需整理電話確認問題：預約天數、陪同、輪椅與跨區限制。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本"
+      ],
+      "body": "這張卡由候選來源 `ntpc_ltc_transport_platform` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：需整理電話確認問題：預約天數、陪同、輪椅與跨區限制。",
+      "embedding_text": "新北市長照交通接送服務平台 transport da01_transport 新北長照交通接送平台，可作為 DA01 預約與服務說明入口。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：需整理電話確認問題：預約天數、陪同、輪椅與跨區限制。"
+    },
+    {
+      "id": "ntpc_careyou_meal_dm_pdf",
+      "resource_id": "ntpc_careyou_meal_dm_pdf",
+      "category": "multi_professional",
+      "topics": [
+        "meal_service"
+      ],
+      "name": "新北市長照服務 DM 營養餐飲服務 PDF",
+      "title": "新北市長照服務 DM 營養餐飲服務 PDF",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待解析文件"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北長照服務 DM 內含營養餐飲服務說明，可整理成送餐申請流程卡。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.careyou.ntpc.gov.tw/WebUPD/careyou/resources/%E6%96%B0%E5%8C%97%E5%B8%82%E8%A1%9B%E7%94%9F%E5%B1%80-%E9%95%B7%E7%85%A7%E6%9C%8D%E5%8B%99-A4DM-OT-01.pdf",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新北長照服務 DM 內含營養餐飲服務說明，可整理成送餐申請流程卡。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源含待解析文件。 備註：需解析 PDF 並確認服務對象與申請方式。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `ntpc_careyou_meal_dm_pdf` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需解析 PDF 並確認服務對象與申請方式。",
+      "embedding_text": "新北市長照服務 DM 營養餐飲服務 PDF multi_professional meal_service 新北長照服務 DM 內含營養餐飲服務說明，可整理成送餐申請流程卡。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源含待解析文件。 備註：需解析 PDF 並確認服務對象與申請方式。"
+    },
+    {
+      "id": "ntpc_health_ltc_contract_units",
+      "resource_id": "ntpc_health_ltc_contract_units",
+      "category": "care_professional",
+      "topics": [
+        "ntpc_contract_list",
+        "home_care",
+        "day_care",
+        "ltc_institution"
+      ],
+      "name": "新北市長照服務內容介紹及特約服務單位名冊",
+      "title": "新北市長照服務內容介紹及特約服務單位名冊",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "名冊入口",
+        "待解析文件",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新北市長照特約服務單位名冊入口，可作為居家、日照、機構與專業服務名冊入口卡。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://www.health.ntpc.gov.tw/basic/?mode=detail&node=585",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新北市長照特約服務單位名冊入口，可作為居家、日照、機構與專業服務名冊入口卡。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件；此來源尚待全文抽取。 備註：大型名冊先做入口卡，後續再拆表格查詢。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "名冊需確認最新版本"
+      ],
+      "body": "這張卡由候選來源 `ntpc_health_ltc_contract_units` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：大型名冊先做入口卡，後續再拆表格查詢。",
+      "embedding_text": "新北市長照服務內容介紹及特約服務單位名冊 care_professional ntpc_contract_list home_care day_care ltc_institution 新北市長照特約服務單位名冊入口，可作為居家、日照、機構與專業服務名冊入口卡。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件；此來源尚待全文抽取。 備註：大型名冊先做入口卡，後續再拆表格查詢。"
     },
     {
       "id": "ntpc_ltc_service_contracts",
@@ -383,6 +2151,114 @@
       "embedding_text": "新北市長照服務內容及特約服務單位名冊 care_professional ntpc_contract_list home_care day_care ltc_institution 查詢新北市長照服務內容與特約服務單位，適合確認居家、日照、機構與正式照顧資源。 先確認案家行政區、服務需求與長照資格，再向特約單位確認是否仍有服務量能。 長照資格資料 身分證明 需求評估資料 目前是否收新案 可服務行政區 排班等待時間 是否需照會照專 正式派案前仍需確認單位是否有量能；家屬版不應承諾一定可收案。"
     },
     {
+      "id": "hangan_professional_service_pdf",
+      "resource_id": "hangan_professional_service_pdf",
+      "category": "other",
+      "topics": [
+        "self_pay_physical_therapy"
+      ],
+      "name": "新北市長照特約單位專業服務 PDF",
+      "title": "新北市長照特約單位專業服務 PDF",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "名冊入口",
+        "待解析文件"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "專業服務單位 PDF 中包含物理治療等長照專業服務線索。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://homecare.hangan.org/assets/%E6%96%B0%E5%8C%97%E5%B8%82%E5%B0%88%E6%A5%AD%E6%9C%8D%E5%8B%99%E5%96%AE%E4%BD%8D.pdf",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "專業服務單位 PDF 中包含物理治療等長照專業服務線索。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件。 備註：需與官方特約名冊比對。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "名冊需確認最新版本",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `hangan_professional_service_pdf` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：需與官方特約名冊比對。",
+      "embedding_text": "新北市長照特約單位專業服務 PDF other self_pay_physical_therapy 專業服務單位 PDF 中包含物理治療等長照專業服務線索。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件。 備註：需與官方特約名冊比對。"
+    },
+    {
+      "id": "hangan_assistive_units_pdf",
+      "resource_id": "hangan_assistive_units_pdf",
+      "category": "assistive_accessibility",
+      "topics": [
+        "ltc_assistive_device"
+      ],
+      "name": "新北市長照特約單位輔具服務 PDF",
+      "title": "新北市長照特約單位輔具服務 PDF",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "名冊入口",
+        "待解析文件"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "輔具服務單位 PDF 線索，需與新北輔具中心或衛生局名冊對照。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://homecare.hangan.org/assets/%E6%96%B0%E5%8C%97%E5%B8%82%E8%BC%94%E5%85%B7%E7%89%B9%E7%B4%84%E5%96%AE%E4%BD%8D.pdf",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "輔具服務單位 PDF 線索，需與新北輔具中心或衛生局名冊對照。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件。 備註：先放待解析文件，不直接匯入正式名冊。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "文件尚待解析",
+        "名冊需確認最新版本",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `hangan_assistive_units_pdf` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：先放待解析文件，不直接匯入正式名冊。",
+      "embedding_text": "新北市長照特約單位輔具服務 PDF assistive_accessibility ltc_assistive_device 輔具服務單位 PDF 線索，需與新北輔具中心或衛生局名冊對照。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源含待解析文件。 備註：先放待解析文件，不直接匯入正式名冊。"
+    },
+    {
       "id": "ntpc_ltc_assistive_device",
       "resource_id": "ntpc_ltc_assistive_device",
       "category": "assistive_accessibility",
@@ -438,6 +2314,165 @@
       "embedding_text": "新北市長照輔具與居家無障礙改善 assistive_accessibility ltc_assistive_device home_accessibility 協助查找長照輔具與居家無障礙改善相關申請方向。 先確認補助身份、評估需求與是否需治療師或專業人員評估。 身分證明 長照資格資料 評估資料 估價或施工資料 是否需事前核定 是否需治療師評估 可申請項目 是否有自付額 可與既有補助計算工具銜接；補助商品與非合作商品需分開說明。"
     },
     {
+      "id": "ntpc_atrc_vendor_news",
+      "resource_id": "ntpc_atrc_vendor_news",
+      "category": "assistive_accessibility",
+      "topics": [
+        "ltc_assistive_device",
+        "home_accessibility"
+      ],
+      "name": "新北市長照輔具與無障礙服務特約廠商公告",
+      "title": "新北市長照輔具與無障礙服務特約廠商公告",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "名冊入口",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "輔具中心公告的特約廠商資訊，可作為廠商名冊入口。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "輔具中心公告的特約廠商資訊，可作為廠商名冊入口。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：需確認公告是否仍維護。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本"
+      ],
+      "body": "這張卡由候選來源 `ntpc_atrc_vendor_news` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：需確認公告是否仍維護。",
+      "embedding_text": "新北市長照輔具與無障礙服務特約廠商公告 assistive_accessibility ltc_assistive_device home_accessibility 輔具中心公告的特約廠商資訊，可作為廠商名冊入口。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：需確認公告是否仍維護。"
+    },
+    {
+      "id": "yonghe_assistive_subsidy",
+      "resource_id": "yonghe_assistive_subsidy",
+      "category": "assistive_accessibility",
+      "topics": [
+        "ltc_assistive_device",
+        "home_accessibility",
+        "medical_assistive_device"
+      ],
+      "name": "永和區公所輔具費用補助與居家無障礙改善說明",
+      "title": "永和區公所輔具費用補助與居家無障礙改善說明",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "說明身障輔具、長照輔具、居家無障礙改善與醫療輔具申請方式。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.yonghe.ntpc.gov.tw/home.jsp?id=6574400920020c9a",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "說明身障輔具、長照輔具、居家無障礙改善與醫療輔具申請方式。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：區公所頁可作為流程補充，但規則需回官方主來源。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `yonghe_assistive_subsidy` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：區公所頁可作為流程補充，但規則需回官方主來源。",
+      "embedding_text": "永和區公所輔具費用補助與居家無障礙改善說明 assistive_accessibility ltc_assistive_device home_accessibility medical_assistive_device 說明身障輔具、長照輔具、居家無障礙改善與醫療輔具申請方式。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：區公所頁可作為流程補充，但規則需回官方主來源。"
+    },
+    {
+      "id": "laf_official",
+      "resource_id": "laf_official",
+      "category": "other",
+      "topics": [
+        "legal_aid"
+      ],
+      "name": "法律扶助基金會",
+      "title": "法律扶助基金會",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.laf.org.tw/",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補新北分會或預約方式。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `laf_official` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需補新北分會或預約方式。",
+      "embedding_text": "法律扶助基金會 other legal_aid 法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補新北分會或預約方式。"
+    },
+    {
       "id": "legal_aid_foundation",
       "resource_id": "legal_aid_foundation",
       "category": "other",
@@ -446,10 +2481,9 @@
       ],
       "name": "法律扶助基金會",
       "title": "法律扶助基金會",
-      "region": "全台",
+      "region": "新北市",
       "districts": [
-        "全新北",
-        "全台"
+        "全新北"
       ],
       "eligibility_tags": [
         "法律諮詢",
@@ -463,12 +2497,12 @@
       ],
       "summary": "適合處理債務、財產、照顧爭議、保護令或法律扶助需求。",
       "next_step": "先整理法律問題類型、相關文件與是否需預約諮詢。",
-      "contact": "法律扶助基金會各分會",
+      "contact": "依法律扶助基金會公告分會",
       "source_url": "https://www.laf.org.tw/",
-      "source_type": "official",
-      "last_checked_at": "2026-05-20",
-      "next_review_at": "2026-08-20",
-      "confidence": "官方資料",
+      "source_type": "foundation",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "民間公益資料",
       "status": "active",
       "public_allowed": true,
       "public_summary": "適合處理債務、財產、照顧爭議、保護令或法律扶助需求。",
@@ -478,20 +2512,438 @@
         "相關法律文件",
         "收入或財產資料"
       ],
-      "public_contact": "法律扶助基金會各分會",
-      "internal_notes": "可搭配高齡信託、監護宣告等議題查詢；需避免代替法律專業判斷。",
+      "public_contact": "依法律扶助基金會公告分會",
+      "internal_notes": "手工保留入口卡；用於既有資源包測試與正式法律扶助入口。實際申請資格、分會窗口與預約方式仍需回官方網站確認。",
       "phone_check_questions": [
         "是否需預約",
-        "需帶文件",
         "是否符合扶助資格",
-        "是否有急迫保護需求"
+        "需要哪些文件",
+        "是否有新北分會或可近便諮詢點"
       ],
       "risk_flags": [
-        "不可給法律結論",
-        "急迫案件需轉正式窗口"
+        "法律問題需專業判斷",
+        "資格需確認"
       ],
-      "body": "法律扶助適合作為其他資源中的高頻轉介入口。",
-      "embedding_text": "法律扶助基金會 other legal_aid 適合處理債務、財產、照顧爭議、保護令或法律扶助需求。 先整理法律問題類型、相關文件與是否需預約諮詢。 身分證明 相關法律文件 收入或財產資料 是否需預約 需帶文件 是否符合扶助資格 是否有急迫保護需求 可搭配高齡信託、監護宣告等議題查詢；需避免代替法律專業判斷。"
+      "body": "此卡保留為法律扶助的正式入口。若後續與候選來源 `laf_official` 合併，需同步更新測試與既有資源包 payload。",
+      "embedding_text": "法律扶助基金會 other legal_aid 適合處理債務、財產、照顧爭議、保護令或法律扶助需求。 先整理法律問題類型、相關文件與是否需預約諮詢。 身分證明 相關法律文件 收入或財產資料 是否需預約 是否符合扶助資格 需要哪些文件 是否有新北分會或可近便諮詢點 手工保留入口卡；用於既有資源包測試與正式法律扶助入口。實際申請資格、分會窗口與預約方式仍需回官方網站確認。"
+    },
+    {
+      "id": "cth_xindian_meal_service",
+      "resource_id": "cth_xindian_meal_service",
+      "category": "multi_professional",
+      "topics": [
+        "meal_service"
+      ],
+      "name": "耕莘醫院新店區老人營養餐飲服務",
+      "title": "耕莘醫院新店區老人營養餐飲服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新店區送餐服務合作案例，可作行政區服務線索。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.cth.org.tw/?aid=57&iid=663&page_name=detail&pid=121",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新店區送餐服務合作案例，可作行政區服務線索。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認目前是否仍承作。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `cth_xindian_meal_service` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認目前是否仍承作。",
+      "embedding_text": "耕莘醫院新店區老人營養餐飲服務 multi_professional meal_service 新店區送餐服務合作案例，可作行政區服務線索。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認目前是否仍承作。"
+    },
+    {
+      "id": "ycswf_rehab_bus",
+      "resource_id": "ycswf_rehab_bus",
+      "category": "transport",
+      "topics": [
+        "rehab_bus"
+      ],
+      "name": "育成基金會新北市復康巴士",
+      "title": "育成基金會新北市復康巴士",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "受託服務單位頁，可補充服務實務與預約窗口。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://www.ycswf.org.tw/service_detail/6",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "受託服務單位頁，可補充服務實務與預約窗口。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需與交通局官方規則對照。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `ycswf_rehab_bus` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需與交通局官方規則對照。",
+      "embedding_text": "育成基金會新北市復康巴士 transport rehab_bus 受託服務單位頁，可補充服務實務與預約窗口。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需與交通局官方規則對照。"
+    },
+    {
+      "id": "wanhai_emergency_aid",
+      "resource_id": "wanhai_emergency_aid",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "萬海慈善急難救助申請",
+      "title": "萬海慈善急難救助申請",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "資源聯繫",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "萬海慈善急難救助申請入口，可補民間急難資源包。",
+      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "contact": "依來源頁公告聯絡方式",
+      "source_url": "https://wanhai-charity.org.tw/emergency-application/",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "萬海慈善急難救助申請入口，可補民間急難資源包。",
+      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告聯絡方式",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認是否需社福單位轉介與文件清單。",
+      "phone_check_questions": [
+        "目前是否仍受理",
+        "服務區域與對象限制",
+        "需要哪些文件或轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `wanhai_emergency_aid` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認是否需社福單位轉介與文件清單。",
+      "embedding_text": "萬海慈善急難救助申請 informal emergency_aid 萬海慈善急難救助申請入口，可補民間急難資源包。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認是否需社福單位轉介與文件清單。"
+    },
+    {
+      "id": "longshen_foundation",
+      "resource_id": "longshen_foundation",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "融獻社福慈善基金會",
+      "title": "融獻社福慈善基金會",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "查證線索",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "民間慈善基金會線索，需進一步確認是否有可用急難救助方案。",
+      "next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "contact": "待人工查證後確認",
+      "source_url": "https://longshen.tw/",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": false,
+      "public_summary": "民間慈善基金會線索，需進一步確認是否有可用急難救助方案。",
+      "public_next_step": "此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。",
+      "public_required_documents": [
+        "待人工查證"
+      ],
+      "public_contact": "待人工查證後確認",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：先作線索，不直接列正式規則。 此卡只供個管師查證，不進家屬版輸出。",
+      "phone_check_questions": [
+        "此來源是否仍有效",
+        "是否有官方頁或承辦窗口可查證",
+        "是否能對外提供給家屬",
+        "目前是否仍有名額或活動期限"
+      ],
+      "risk_flags": [
+        "線索卡需人工確認",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `longshen_foundation` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：先作線索，不直接列正式規則。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。",
+      "embedding_text": "融獻社福慈善基金會 informal emergency_aid 民間慈善基金會線索，需進一步確認是否有可用急難救助方案。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：先作線索，不直接列正式規則。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "mohw_foreign_caregiver_leave_ltc",
+      "resource_id": "mohw_foreign_caregiver_leave_ltc",
+      "category": "foreign_caregiver",
+      "topics": [
+        "foreign_caregiver_respite"
+      ],
+      "name": "衛福部外籍看護請假返鄉可申請長照2.0服務",
+      "title": "衛福部外籍看護請假返鄉可申請長照2.0服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "外籍看護請假返鄉時可銜接長照服務的官方說明。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.mohw.gov.tw/cp-6568-73411-1.html",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "外籍看護請假返鄉時可銜接長照服務的官方說明。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需加入電話確認：申請時間、服務額度、臨時替代可用性。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `mohw_foreign_caregiver_leave_ltc` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需加入電話確認：申請時間、服務額度、臨時替代可用性。",
+      "embedding_text": "衛福部外籍看護請假返鄉可申請長照2.0服務 foreign_caregiver foreign_caregiver_respite 外籍看護請假返鄉時可銜接長照服務的官方說明。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需加入電話確認：申請時間、服務額度、臨時替代可用性。"
+    },
+    {
+      "id": "mohw_home_medical_integrated",
+      "resource_id": "mohw_home_medical_integrated",
+      "category": "multi_professional",
+      "topics": [
+        "home_medical"
+      ],
+      "name": "衛福部居家醫療整合服務",
+      "title": "衛福部居家醫療整合服務",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "流程確認",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "居家醫療整合服務政策入口，適合整理成到宅醫療查詢方向。",
+      "next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "contact": "依來源頁公告窗口",
+      "source_url": "https://www.mohw.gov.tw/cp-16-55242-1.html",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "居家醫療整合服務政策入口，適合整理成到宅醫療查詢方向。",
+      "public_next_step": "先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。",
+      "public_required_documents": [
+        "身分證明",
+        "資格或評估資料",
+        "申請文件依來源公告"
+      ],
+      "public_contact": "依來源頁公告窗口",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需補新北實際承作名冊來源。",
+      "phone_check_questions": [
+        "目前是否仍依此流程受理",
+        "資格條件是否有更新",
+        "需要哪些文件",
+        "受理窗口與等待時間"
+      ],
+      "risk_flags": [
+        "流程需確認是否更新"
+      ],
+      "body": "這張卡由候選來源 `mohw_home_medical_integrated` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：process\n- 候選用途：process_card_draft\n- 待確認事項：需補新北實際承作名冊來源。",
+      "embedding_text": "衛福部居家醫療整合服務 multi_professional home_medical 居家醫療整合服務政策入口，適合整理成到宅醫療查詢方向。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：需補新北實際承作名冊來源。"
+    },
+    {
+      "id": "mohw_ltcpap_provider_search",
+      "resource_id": "mohw_ltcpap_provider_search",
+      "category": "care_professional",
+      "topics": [
+        "ntpc_contract_list",
+        "home_care",
+        "day_care",
+        "ltc_institution"
+      ],
+      "name": "衛福部長照服務資源地圖",
+      "title": "衛福部長照服務資源地圖",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "A級官方候選",
+        "名冊入口"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "衛福部公開服務資源查詢入口，可讓個管師補查附近服務單位。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://ltcpap.mohw.gov.tw/public/index.html",
+      "source_type": "official_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "A級官方候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "衛福部公開服務資源查詢入口，可讓個管師補查附近服務單位。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory。 備註：互動平台先做入口，不直接抽全量資料。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本"
+      ],
+      "body": "這張卡由候選來源 `mohw_ltcpap_provider_search` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：互動平台先做入口，不直接抽全量資料。",
+      "embedding_text": "衛福部長照服務資源地圖 care_professional ntpc_contract_list home_care day_care ltc_institution 衛福部公開服務資源查詢入口，可讓個管師補查附近服務單位。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory。 備註：互動平台先做入口，不直接抽全量資料。"
+    },
+    {
+      "id": "trust_org_old_disability",
+      "resource_id": "trust_org_old_disability",
+      "category": "other",
+      "topics": [
+        "senior_trust_bank"
+      ],
+      "name": "高齡者身心障礙者財產信託專區",
+      "title": "高齡者身心障礙者財產信託專區",
+      "region": "新北市",
+      "districts": [
+        "全新北"
+      ],
+      "eligibility_tags": [
+        "B級民間候選",
+        "名冊入口",
+        "待抽全文"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。",
+      "next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "contact": "依來源名冊或查詢入口公告",
+      "source_url": "https://www.trust.org.tw/tw/old-disability/trust/6",
+      "source_type": "community_candidate",
+      "last_checked_at": "2026-05-22",
+      "next_review_at": "2026-08-22",
+      "confidence": "B級民間候選",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。",
+      "public_next_step": "先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。",
+      "public_required_documents": [
+        "案家行政區",
+        "服務需求摘要",
+        "長照或福利資格資料"
+      ],
+      "public_contact": "依來源名冊或查詢入口公告",
+      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：適合整理為保護財產、防詐與信託監察人情境卡。",
+      "phone_check_questions": [
+        "名冊是否為最新版本",
+        "是否服務案家行政區",
+        "是否仍有服務量能",
+        "轉介或預約方式是什麼"
+      ],
+      "risk_flags": [
+        "名冊需確認最新版本",
+        "民間資源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `trust_org_old_disability` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：適合整理為保護財產、防詐與信託監察人情境卡。",
+      "embedding_text": "高齡者身心障礙者財產信託專區 other senior_trust_bank 信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：適合整理為保護財產、防詐與信託監察人情境卡。"
     }
   ]
 }

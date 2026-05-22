@@ -255,7 +255,7 @@ button:hover,
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
   align-items: stretch;
 }
@@ -263,8 +263,8 @@ button:hover,
 .resource-card {
   display: flex;
   flex-direction: column;
-  min-height: 310px;
-  padding: 14px;
+  min-height: 260px;
+  padding: 12px;
 }
 
 .card-head {
@@ -279,6 +279,19 @@ button:hover,
   font-weight: 740;
 }
 
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.checked-at-inline {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .confidence {
   align-self: flex-start;
   border-radius: 999px;
@@ -290,7 +303,7 @@ button:hover,
 }
 
 .summary {
-  margin-top: 10px;
+  margin-top: 8px;
   color: #26313d;
   font-size: 14px;
 }
@@ -301,13 +314,13 @@ button:hover,
   font-size: 12px;
 }
 
-dl {
+.resource-card > dl {
   display: grid;
   gap: 8px;
-  margin: 12px 0 0;
+  margin: 10px 0 0;
 }
 
-dl div {
+.resource-card > dl div {
   display: grid;
   gap: 3px;
 }
@@ -333,10 +346,10 @@ dd {
 }
 
 .internal-details {
-  margin-top: 12px;
+  margin-top: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 9px 10px;
   background: #fbfcfd;
 }
 
@@ -347,7 +360,6 @@ dd {
 }
 
 .internal-note {
-  margin-top: 10px;
   border-left: 3px solid var(--amber);
   padding: 8px 10px;
   background: var(--soft-amber);
@@ -357,28 +369,10 @@ dd {
 
 .phone-questions,
 .risk-flags {
-  margin: 10px 0 0;
+  margin: 0;
   padding-left: 20px;
   color: #3a4652;
   font-size: 13px;
-}
-
-.card-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.source {
-  color: var(--blue);
-  font-weight: 720;
-  text-decoration: none;
 }
 
 .muted-text {
@@ -535,6 +529,48 @@ dd {
   display: grid;
   justify-items: end;
   gap: 6px;
+}
+
+.internal-detail-grid {
+  display: grid;
+  gap: 9px;
+  margin: 10px 0 0;
+}
+
+.internal-detail-grid > div {
+  display: grid;
+  gap: 3px;
+}
+
+.session-debug {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fbfcfd;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.session-debug summary {
+  cursor: pointer;
+  color: #3a4652;
+  font-weight: 760;
+}
+
+.session-debug-list {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 0;
+}
+
+.session-debug-list div {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 8px;
+}
+
+.session-debug-list dd {
+  font-size: 12px;
 }
 
 .smart-hit {

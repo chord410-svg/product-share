@@ -18,6 +18,32 @@
     apiBase: "",
     sessionUser: null,
     sessionValid: false,
+    sessionFailureReason: "",
+  };
+
+  const HELP_CONTENT = {
+    smart: {
+      title: "智慧查詢怎麼用",
+      body: `
+        <p>輸入補充描述後按「套用智慧查詢」，系統會依文字重新排序並高亮較可能相關的卡片。</p>
+        <ul>
+          <li>會做：比對資源名稱、摘要、下一步、文件、身份/情境、電話確認問題。</li>
+          <li>不會做：不會刪掉其他卡片，不會判定資格，不會承諾補助一定通過。</li>
+          <li>適合輸入：獨居、最近沒錢買飯、家屬不穩定。</li>
+        </ul>
+      `,
+    },
+    google: {
+      title: "Google 延伸搜尋怎麼用",
+      body: `
+        <p>按下後會用目前條件組成搜尋詞，開啟 Google 搜尋頁補查外部資料。</p>
+        <ul>
+          <li>搜尋詞來源：行政區、主題、子主題、已選資源線索、智慧查詢補充文字。</li>
+          <li>只會開 Google 搜尋頁，不抓取 Google 結果，也不會整理回站內資料。</li>
+          <li>適合用在：站內資料不足、想找最新公告、想補查民間資源或官方流程。</li>
+        </ul>
+      `,
+    },
   };
 
   function $(id) {
@@ -73,7 +99,8 @@
     const loginStatus = $("loginStatus");
     if (!state.sessionToken || !state.apiBase) {
       state.sessionValid = false;
-      loginStatus.textContent = "未取得 Discord session：可瀏覽與點選資源，但不能儲存或產生資源包結果。";
+      state.sessionFailureReason = "missing_session";
+      loginStatus.textContent = "未取得 Discord session：可瀏覽與點選資源，也可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
       $("sourceStatus").textContent = "未登入瀏覽";
       return;
     }
@@ -83,14 +110,16 @@
         headers: {},
       });
       state.sessionValid = true;
+      state.sessionFailureReason = "";
       state.sessionUser = data.user || null;
       const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
       $("sourceStatus").textContent = "已連結 Discord";
       loginStatus.textContent = "已以 " + name + " 的 Discord 身份開啟。資源包結果會保存到你的私密結果入口。";
     } catch (error) {
       state.sessionValid = false;
+      state.sessionFailureReason = error.message === "invalid_or_expired_session" ? "session_expired" : "api_unavailable";
       $("sourceStatus").textContent = "session 已失效";
-      loginStatus.textContent = "Discord session 無效或已過期：可瀏覽與點選資源，但不能儲存或產生資源包結果。";
+      loginStatus.textContent = "Discord session 無效、已過期或 API 暫時連不上：可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
       console.info("resource session verification failed", error);
     }
   }
@@ -175,6 +204,18 @@
     area.select();
     document.execCommand("copy");
     area.remove();
+  }
+
+  function openHelpDialog(kind) {
+    const content = HELP_CONTENT[kind];
+    if (!content) return;
+    $("helpDialogTitle").textContent = content.title;
+    $("helpDialogBody").innerHTML = content.body;
+    $("helpDialog").hidden = false;
+  }
+
+  function closeHelpDialog() {
+    $("helpDialog").hidden = true;
   }
 
   function readPackages() {
@@ -364,6 +405,16 @@
       $("googleSearchButton").dataset.searchUrl = url;
       window.open(url, "_blank", "noopener,noreferrer");
     });
+    document.querySelectorAll("[data-help]").forEach((button) => {
+      button.addEventListener("click", () => openHelpDialog(button.dataset.help || ""));
+    });
+    $("closeHelpDialog").addEventListener("click", closeHelpDialog);
+    $("helpDialog").addEventListener("click", (event) => {
+      if (event.target === $("helpDialog")) closeHelpDialog();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !$("helpDialog").hidden) closeHelpDialog();
+    });
     $("packageToggle").addEventListener("click", () => {
       document.querySelector(".package-panel").classList.toggle("is-open");
     });
@@ -372,10 +423,6 @@
       syncPackageFromState();
       if (!state.packageIds.size) {
         $("packageStatus").textContent = "請先加入至少一筆資源，再產生資源包結果。";
-        return;
-      }
-      if (!state.sessionValid) {
-        $("packageStatus").textContent = "請從 Discord 資源導航按鈕重新開啟，才能產生資源包結果。";
         return;
       }
       await submitResourcePackage();
@@ -669,6 +716,24 @@
     return buildFamilyPackageText(items) + skipped;
   }
 
+  function fallbackReason() {
+    if (state.sessionFailureReason) return state.sessionFailureReason;
+    if (!state.sessionToken || !state.apiBase) return "missing_session";
+    return "api_failed";
+  }
+
+  function openLocalResult(reason) {
+    syncPackageFromState();
+    const item = currentPackage();
+    writePackages();
+    const params = new URLSearchParams({
+      package_id: item.id,
+      mode: "local",
+      reason: reason || "session_expired",
+    });
+    window.location.href = "./resource-package-result.html?" + params.toString();
+  }
+
   async function submitResourcePackage() {
     const item = currentPackage();
     const payload = {
@@ -686,7 +751,12 @@
     const oldText = button.textContent;
     button.disabled = true;
     button.textContent = "正在產生...";
-    $("packageStatus").textContent = "正在發布資源包結果，完成後會跳到 Web B 結果頁。";
+    if (!state.sessionValid) {
+      $("packageStatus").textContent = "session 無效或 API 未連上，正在產生本機預覽結果。此結果不會進 Discord 私密 QR。";
+      openLocalResult(fallbackReason());
+      return;
+    }
+    $("packageStatus").textContent = "正在發布正式資源包結果，完成後會跳到 Web B 結果頁並保存到 Discord 私密 QR。";
     try {
       const data = await apiFetch("/api/v1/resource/packages", {
         method: "POST",
@@ -699,7 +769,8 @@
       $("packageStatus").textContent = "資源包已儲存，但沒有取得結果連結。";
     } catch (error) {
       console.error(error);
-      $("packageStatus").textContent = "產生失敗：" + (error.message || "請稍後再試");
+      $("packageStatus").textContent = "正式發布失敗，改產生本機預覽結果。此結果不會進 Discord 私密 QR。";
+      openLocalResult(error.message || "api_failed");
     } finally {
       button.disabled = false;
       button.textContent = oldText;

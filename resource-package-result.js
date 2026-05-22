@@ -1,5 +1,6 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
+  const RESOURCE_DATA_VERSION = "20260522-resource-candidates";
   let topics = [];
   let resources = [];
   let activePackage = null;
@@ -15,6 +16,10 @@
 
   function uniqueList(items) {
     return Array.from(new Set(items.filter(Boolean)));
+  }
+
+  function versionedAsset(path) {
+    return path + (path.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(RESOURCE_DATA_VERSION);
   }
 
   async function loadJson(path, fallbackPath) {
@@ -327,8 +332,8 @@
   async function init() {
     try {
       const [topicsData, resourceData] = await Promise.all([
-        loadJson("./resource-nav-topics.json", "../../../data/resource_nav/topics.json"),
-        loadJson("./resource-nav-resources.json", "../../../data/resource_nav/resources.json"),
+        loadJson(versionedAsset("./resource-nav-topics.json"), versionedAsset("../../../data/resource_nav/topics.json")),
+        loadJson(versionedAsset("./resource-nav-resources.json"), versionedAsset("../../../data/resource_nav/resources.json")),
       ]);
       topics = topicsData.topics || [];
       resources = resourceData.resources || [];

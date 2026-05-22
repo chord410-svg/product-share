@@ -75,8 +75,10 @@
           </label>
           <div class="quick-actions">
             <button type="button" id="applySmartQuery">套用智慧查詢</button>
+            <button type="button" class="help-button" data-help="smart" aria-label="智慧查詢說明">?</button>
             <button type="button" id="googleSearchButton">用 Google 延伸搜尋</button>
-            <span class="button-help">智慧查詢只排序/高亮；Google 只開搜尋頁。</span>
+            <button type="button" class="help-button" data-help="google" aria-label="Google 延伸搜尋說明">?</button>
+            <span class="button-help">說明可點 ? 查看；Google 只開搜尋頁。</span>
           </div>
         </div>
 
@@ -168,6 +170,16 @@
       </div>
     </article>
   </template>
+
+  <div class="help-dialog-backdrop" id="helpDialog" hidden>
+    <section class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle">
+      <div class="help-dialog-head">
+        <h2 id="helpDialogTitle">說明</h2>
+        <button type="button" id="closeHelpDialog" aria-label="關閉說明">關閉</button>
+      </div>
+      <div id="helpDialogBody" class="help-dialog-body"></div>
+    </section>
+  </div>
 
   <script src="./resource-nav.js?v=20260522-package-session"></script>
 </body>

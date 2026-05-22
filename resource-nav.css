@@ -759,12 +759,53 @@ dd {
 }
 
 .nav-link-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 13px;
+  font-weight: 760;
   text-decoration: none;
+}
+
+.result-top-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.nav-main-pill {
+  border: 1px solid #0f8f5f;
+  background: #0f8f5f;
+  color: #fff;
+}
+
+.nav-discord-pill {
+  border: 1px solid #cf3f3f;
+  background: #cf3f3f;
+  color: #fff;
 }
 
 .result-back-button {
   margin-top: 12px;
   width: fit-content;
+}
+
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.phone-contact,
+.phone-question {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 .output-preview {

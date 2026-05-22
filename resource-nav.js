@@ -105,13 +105,24 @@
       "Content-Type": "application/json",
       "Authorization": "Bearer " + state.sessionToken,
     };
-    const response = await fetch(apiUrl(path), {
-      ...(options || {}),
-      headers: { ...headers, ...((options && options.headers) || {}) },
-    });
+    let response;
+    try {
+      response = await fetch(apiUrl(path), {
+        ...(options || {}),
+        headers: { ...headers, ...((options && options.headers) || {}) },
+      });
+    } catch (error) {
+      throw new Error("api_unreachable");
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok || data.ok === false) {
-      throw new Error(data.error || "resource api failed");
+      if (response.status === 401 || data.error === "invalid_or_expired_session" || data.error === "auth_required") {
+        throw new Error("invalid_or_expired_session");
+      }
+      if (response.status === 404) {
+        throw new Error("api_old_version");
+      }
+      throw new Error(data.error || "api_unavailable");
     }
     return data;
   }
@@ -122,8 +133,10 @@
       no_session: "網址沒有 session；請從 Discord 資源導航入口重新開啟。",
       no_api_base: "網址沒有 api_base；Bot 可能尚未帶入 API 網址，或 RESOURCE_NAV_API_BASE / WEB_B_SUBMIT_URL 尚未設定。",
       runtime_api_base: "網址內的 API 無法使用，已改用網站 runtime config 內的 API base 重試。",
-      session_expired: "後端回覆 session 無效或過期；請回 Discord 重新點入口。",
-      api_unavailable: "API 連不上或還不是新版；請確認 Bot 已重啟，且公開網址指向新版 server。",
+      session_expired: "後端回覆 session 無效或過期；token 已不存在或已超過有效時間，請回 Discord 重新點入口。",
+      api_unreachable: "公開 API 網址連不上；通常是 Cloudflare tunnel 已失效、DNS 解析不到，或 Bot API 沒有啟動。",
+      api_old_version: "公開 API 可連上，但不是新版資源包 API；請確認 Bot 已重啟到新版 server。",
+      api_unavailable: "API 回覆異常；請確認 Bot 已重啟，且公開網址指向新版 server。",
       api_failed: "正式流程送出失敗；已改用本機預覽結果。",
       missing_session: "缺少 Discord session 或 API 網址；已改用本機預覽結果。",
     };
@@ -222,8 +235,19 @@
         return verifySession();
       }
       state.sessionValid = false;
-      state.sessionFailureReason = error.message === "invalid_or_expired_session" ? "session_expired" : "api_unavailable";
-      $("sourceStatus").textContent = "session 已失效";
+      if (error.message === "invalid_or_expired_session") {
+        state.sessionFailureReason = "session_expired";
+        $("sourceStatus").textContent = "session 已失效";
+      } else if (error.message === "api_unreachable") {
+        state.sessionFailureReason = "api_unreachable";
+        $("sourceStatus").textContent = "API 連不上";
+      } else if (error.message === "api_old_version") {
+        state.sessionFailureReason = "api_old_version";
+        $("sourceStatus").textContent = "API 版本不符";
+      } else {
+        state.sessionFailureReason = "api_unavailable";
+        $("sourceStatus").textContent = "API 異常";
+      }
       loginStatus.textContent = "已從 Discord 入口開啟，但後端驗證未通過：" + sessionReasonLabel(state.sessionFailureReason) + " 可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
       renderSessionDebug();
       console.info("resource session verification failed", error);

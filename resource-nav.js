@@ -1,7 +1,7 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260522-resource-candidates";
+  const RESOURCE_DATA_VERSION = "20260522-session-fix";
   const state = {
     topics: [],
     resources: [],
@@ -165,26 +165,28 @@
     if (state.runtimeConfigChecked) return false;
     state.runtimeConfigChecked = true;
     const runtimeUrls = [
-      "./resource-nav-runtime.json?v=" + Date.now(),
       "https://raw.githubusercontent.com/chord410-svg/product-share/main/resource-nav-runtime.json?v=" + Date.now(),
+      "./resource-nav-runtime.json?v=" + Date.now(),
     ];
     try {
-      let data = null;
+      let nextApiBase = "";
       for (const url of runtimeUrls) {
         try {
           const response = await fetch(url, { cache: "no-store" });
           if (response.ok) {
-            data = await response.json();
-            break;
+            const data = await response.json();
+            const apiBase = String(data.api_base || "").replace(/\/$/, "");
+            if (apiBase && apiBase !== state.apiBase) {
+              nextApiBase = apiBase;
+              break;
+            }
           }
         } catch (error) {
           console.info("resource runtime config fetch failed", url, error);
         }
       }
-      if (!data) return false;
-      const apiBase = String(data.api_base || "").replace(/\/$/, "");
-      if (!apiBase || apiBase === state.apiBase) return false;
-      state.apiBase = apiBase;
+      if (!nextApiBase) return false;
+      state.apiBase = nextApiBase;
       state.apiBaseSource = "runtime";
       state.sessionFailureReason = "runtime_api_base";
       renderSessionDebug();

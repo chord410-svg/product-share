@@ -142,10 +142,24 @@
   async function applyRuntimeApiBase() {
     if (state.runtimeConfigChecked) return false;
     state.runtimeConfigChecked = true;
+    const runtimeUrls = [
+      "./resource-nav-runtime.json?v=" + Date.now(),
+      "https://raw.githubusercontent.com/chord410-svg/product-share/main/resource-nav-runtime.json?v=" + Date.now(),
+    ];
     try {
-      const response = await fetch("./resource-nav-runtime.json?v=" + Date.now(), { cache: "no-store" });
-      if (!response.ok) return false;
-      const data = await response.json();
+      let data = null;
+      for (const url of runtimeUrls) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (response.ok) {
+            data = await response.json();
+            break;
+          }
+        } catch (error) {
+          console.info("resource runtime config fetch failed", url, error);
+        }
+      }
+      if (!data) return false;
       const apiBase = String(data.api_base || "").replace(/\/$/, "");
       if (!apiBase || apiBase === state.apiBase) return false;
       state.apiBase = apiBase;

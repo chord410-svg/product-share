@@ -33,6 +33,10 @@
     return new URLSearchParams(window.location.search).get("package_id") || "";
   }
 
+  function isLocalPreviewMode() {
+    return new URLSearchParams(window.location.search).get("mode") === "local";
+  }
+
   function readPackages() {
     try {
       const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -211,6 +215,7 @@
   function showMissing() {
     $("missingPackage").hidden = false;
     $("resultContent").hidden = true;
+    $("localPreviewBanner").hidden = true;
   }
 
   function renderResult() {
@@ -219,6 +224,7 @@
       return;
     }
     $("missingPackage").hidden = true;
+    $("localPreviewBanner").hidden = !isLocalPreviewMode();
     $("resultContent").hidden = false;
     $("resultTitle").textContent = activePackage.name || "資源包結果";
     $("resultMeta").textContent = packagePurposeText();

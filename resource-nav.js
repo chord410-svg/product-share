@@ -922,6 +922,11 @@
         window.location.href = data.share_url;
         return;
       }
+      if (data.share_status === "pending") {
+        $("packageStatus").textContent = "主結果已建立，正式 QR / 分享頁正在背景產生；先開啟本機 Web B 預覽。";
+        openLocalResult("publish_pending");
+        return;
+      }
       $("packageStatus").textContent = "資源包已儲存，但沒有取得結果連結。";
     } catch (error) {
       console.error(error);

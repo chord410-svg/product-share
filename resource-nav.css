@@ -70,6 +70,26 @@ h3 a:hover {
   font-size: 13px;
 }
 
+.view-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.view-tab {
+  border-radius: 999px;
+  padding-inline: 16px;
+  background: #f8fafc;
+}
+
+.view-tab.is-active {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #fff;
+}
+
 .page-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
@@ -381,6 +401,13 @@ dd {
   font-size: 13px;
 }
 
+.privacy-hint {
+  margin: -2px 0 0;
+  color: var(--amber);
+  font-size: 12px;
+  font-weight: 680;
+}
+
 .package-items {
   display: grid;
   gap: 8px;
@@ -632,6 +659,102 @@ dd {
   white-space: nowrap;
 }
 
+.workbench-shell {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.workbench-shell[hidden] {
+  display: none;
+}
+
+.workbench-head,
+.workbench-empty,
+.workbench-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.workbench-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+}
+
+.workbench-empty {
+  padding: 24px;
+  color: var(--muted);
+}
+
+.workbench-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.workbench-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.workbench-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.status-badge {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: var(--soft-blue);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.status-badge.draft {
+  background: #f5f7fa;
+  color: var(--muted);
+}
+
+.status-badge.result-ready {
+  background: var(--soft-teal);
+  color: var(--teal);
+}
+
+.status-badge.result-pending {
+  background: var(--soft-amber);
+  color: var(--amber);
+}
+
+.status-badge.result-failed {
+  background: #fde8e8;
+  color: #b42318;
+}
+
+.workbench-meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.workbench-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.workbench-actions button {
+  flex: 1 1 110px;
+}
+
 .loading-state {
   min-height: 160px;
 }
@@ -653,6 +776,7 @@ dd {
     padding-bottom: 72px;
   }
   .topbar,
+  .workbench-head,
   .filter-head,
   .summary-band {
     align-items: flex-start;
@@ -660,6 +784,9 @@ dd {
   }
   .topbar {
     padding: 12px;
+  }
+  .view-tabs {
+    overflow-x: auto;
   }
   h1 {
     font-size: 21px;

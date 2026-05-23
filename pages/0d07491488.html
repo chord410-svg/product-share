@@ -61,6 +61,12 @@ header .subtitle{font-size:.85em;opacity:.85}
 .btn-primary{background:var(--success);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2)}
 .btn-primary:hover:not(:disabled){background:#15803d;transform:translateY(-1px)}
 .btn-primary:disabled{background:#cbd5e1;cursor:not-allowed;box-shadow:none}
+.btn-primary.is-busy{background:#0f766e;box-shadow:0 0 0 4px rgba(20,184,166,.18),0 8px 18px rgba(15,118,110,.22)}
+.submit-feedback{display:none;max-width:720px;margin:-10px auto 20px;padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:#eff6ff;color:#1e40af;font-weight:650;text-align:center;line-height:1.6}
+.submit-feedback.active{display:block}
+.submit-feedback.error{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.submit-feedback.success{background:#ecfdf5;border-color:#bbf7d0;color:#166534}
+.submit-feedback.info{background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8}
 .status-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:40px 24px;margin:24px auto;max-width:600px;text-align:center;display:none}
 .status-box.active{display:block}
 .status-box.success{border-color:var(--success)}
@@ -206,8 +212,10 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   var successBox = document.getElementById("status-success");
   var errorBox = document.getElementById("status-error");
   var errorDetail = document.getElementById("error-detail");
+  var submitFeedback = document.getElementById("submit-feedback");
   var mainContent = document.getElementById("main-content");
   var QUERY_GUIDANCE = readQueryGuidanceMap();
+  var SUBMIT_TIMEOUT_MS = 60000;
 
   function getTextareas() {
     return Array.prototype.slice.call(document.querySelectorAll(".query-card textarea"));
@@ -216,11 +224,59 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   function updateSubmitState() {
     // CARD-055d：送出按鈕永遠 enable（人類拍板「不是每次查詢都要查商品」）
     if (!submitBtn) return;
+    if (submitBtn.getAttribute("data-busy") === "1") return;
     submitBtn.disabled = false;
     // CARD-055d：動態文案 — textarea 全空 → 「📊 直接看額度試算（不查商品）」/ 任一有填 → 「🔍 查詢商品」
     var areas = getTextareas();
     var hasAny = areas.some(function(t){ return (t.value || "").trim().length > 0; });
     submitBtn.textContent = hasAny ? "🔍 查詢商品" : "📊 直接看額度試算（不查商品）";
+  }
+
+  function ensureSubmitFeedback() {
+    if (submitFeedback) return submitFeedback;
+    var actions = document.querySelector(".actions");
+    if (!actions || !actions.parentNode) return null;
+    submitFeedback = document.createElement("div");
+    submitFeedback.id = "submit-feedback";
+    submitFeedback.className = "submit-feedback";
+    submitFeedback.setAttribute("role", "status");
+    submitFeedback.setAttribute("aria-live", "polite");
+    actions.parentNode.insertBefore(submitFeedback, actions.nextSibling);
+    return submitFeedback;
+  }
+
+  function showSubmitFeedback(kind, msg) {
+    var box = ensureSubmitFeedback();
+    if (!box) return;
+    box.className = "submit-feedback active " + (kind || "info");
+    box.textContent = msg || "";
+  }
+
+  function clearSubmitFeedback() {
+    var box = ensureSubmitFeedback();
+    if (!box) return;
+    box.className = "submit-feedback";
+    box.textContent = "";
+  }
+
+  function finishSubmitBusy() {
+    if (!submitBtn) return;
+    submitBtn.disabled = false;
+    submitBtn.removeAttribute("data-busy");
+    submitBtn.classList.remove("is-busy");
+    updateSubmitState();
+  }
+
+  function clientValidationMessage() {
+    if (!WEBHOOK) {
+      var origin = String(location.origin || location.href || "");
+      var isDev = origin.indexOf("file://") === 0 || origin.indexOf("localhost") >= 0 || origin.indexOf("127.0.0.1") >= 0;
+      if (!isDev) return "⚠️ 缺少 Web B API webhook，請回 Discord 重新開啟補助計算。";
+    }
+    if (!SESSION) return "⏱ 缺少 Discord session，請回 Discord 重新開啟補助計算。";
+    if (!ISSUED_AT || Number(ISSUED_AT) <= 0) return "⏱ 連線時間資料缺失，請回 Discord 重新開啟補助計算。";
+    if (!collectQueries().length) return "⚠️ 未帶入補助代碼，請回 Discord 重新選擇。";
+    return "";
   }
 
   function bindTextareas() {
@@ -313,6 +369,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   // CARD-055e-fix3：deep link 跳結果頻道（不是 4 步精靈頻道 CHANNEL）；缺值 fallback CHANNEL
   var RESULT_CHANNEL = "";
   function showSuccess(shareUrl) {
+    showSubmitFeedback("success", "✅ 結果已送出。");
     if (mainContent) mainContent.querySelector(".cards-grid") && (mainContent.querySelector(".cards-grid").style.display = "none");
     if (mainContent) mainContent.querySelector(".actions") && (mainContent.querySelector(".actions").style.display = "none");
     // CARD-055e A：share_url 是 file:// 或缺 → 提示有送出但無線上連結；https → doSubmit 直跳不走此 path
@@ -341,6 +398,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   }
 
   function showError(msg) {
+    showSubmitFeedback("error", msg || "網路錯誤，請稍後再試。");
     errorDetail.textContent = msg || "網路錯誤，請稍後再試。";
     errorBox.classList.add("active");
     successBox.classList.remove("active");
@@ -349,8 +407,18 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
   function doSubmit() {
     if (submitBtn.disabled) return;
     submitBtn.disabled = true;
+    submitBtn.setAttribute("data-busy", "1");
+    submitBtn.classList.add("is-busy");
     submitBtn.textContent = "⏳ 送出中…";
     var payload = buildPayload();
+    showSubmitFeedback("info", "正在查詢商品與產生結果頁，可能需要幾秒，請不要關閉此頁。");
+
+    var clientError = clientValidationMessage();
+    if (clientError) {
+      showError(clientError);
+      finishSubmitBusy();
+      return;
+    }
 
     if (!WEBHOOK) {
       // CARD-055e-fix3：分流 — dev (file:// / localhost / 127.0.0.1) 走 silent 保留；production https 顯紅警告
@@ -364,16 +432,29 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
         showError(
           "⚠️ WEB_B_SUBMIT_URL 未設定，POST 不會發送到 server，Discord 不會收到結果。請聯絡開發者設定 cloudflared tunnel URL（.env WEB_B_SUBMIT_URL）。"
         );
-        submitBtn.disabled = false;
-        updateSubmitState();
+        finishSubmitBusy();
       }
       return;
     }
 
-    fetch(WEBHOOK, {
+    var controller = null;
+    var timeoutId = null;
+    var fetchOptions = {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
+    };
+    if (typeof AbortController !== "undefined") {
+      controller = new AbortController();
+      fetchOptions.signal = controller.signal;
+      timeoutId = setTimeout(function(){ controller.abort(); }, SUBMIT_TIMEOUT_MS);
+    }
+
+    fetch(WEBHOOK, {
+      method: fetchOptions.method,
+      headers: fetchOptions.headers,
+      body: fetchOptions.body,
+      signal: fetchOptions.signal
     })
     .then(function(res){
       // CARD-035：讀 JSON body 以拿到 error_code/error_msg
@@ -383,6 +464,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       if (r.body && r.body.ok) {
         // CARD-055e A：https share_url 直跳 GH Pages share page；file:// 或缺 → showSuccess fallback
         if (r.body.share_url && /^https?:\/\//.test(r.body.share_url)) {
+          showSubmitFeedback("success", "✅ 結果頁已產生，正在跳轉…");
           window.location.href = r.body.share_url;
           return;
         }
@@ -394,26 +476,34 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
       var msg = (r.body && r.body.error_msg) || "未知錯誤";
       if (code === "session_expired") {
         showError("⏱ 連線已過期，請回 Discord 重按「🔍 選補助代碼查產品」重新開啟。");
+      } else if (code === "share_publish_failed") {
+        showError("⚠️ 結果頁產生失敗，請稍後重試或回 Discord 重新開啟。");
       } else if (code === "pdpa_blocked") {
         showError("⚠️ " + msg);
       } else {
         showError("[" + code + "] " + msg);
       }
-      submitBtn.disabled = false;
-      updateSubmitState();   // CARD-055d：依 textarea 狀態還原動態文案
+      finishSubmitBusy();   // CARD-055d：依 textarea 狀態還原動態文案
     })
     .catch(function(err){
       console.error("[CARD-035] submit failed", err);
-      showError("網路錯誤：" + String(err.message || err));
-      submitBtn.disabled = false;
-      updateSubmitState();   // CARD-055d
+      var isAbort = err && err.name === "AbortError";
+      if (isAbort) {
+        showError("Web B API 等待逾時，請檢查 ob-api-front / tunnel 是否正在運作，或回 Discord 重新開啟補助計算。");
+      } else {
+        showError("Web B API 暫時無法連線，請檢查 ob-api-front / tunnel。詳細：" + String(err.message || err));
+      }
+      finishSubmitBusy();   // CARD-055d
+    })
+    .finally(function(){
+      if (timeoutId) clearTimeout(timeoutId);
     });
   }
 
   window.retrySubmit = function() {
     errorBox.classList.remove("active");
-    submitBtn.disabled = false;
-    updateSubmitState();   // CARD-055d：動態文案
+    clearSubmitFeedback();
+    finishSubmitBusy();   // CARD-055d：動態文案
   };
 
   // URL param 讀取：codes / user_id / session / channel / webhook
@@ -583,6 +673,7 @@ footer{text-align:center;padding:20px;font-size:.78em;color:var(--muted);border-
         actions.innerHTML = '<button type="button" class="back-to-a btn-back-red" id="back-to-a-btn" aria-label="返回 Web A 修改補助代碼">← 返回 Web A</button><button id="submit-btn" class="btn btn-primary" disabled>🔍 查詢商品</button>';
         grid.parentNode.insertBefore(actions, grid.nextSibling);
         submitBtn = document.getElementById("submit-btn");
+        ensureSubmitFeedback();
       }
 
       // CARD-055b：counter 改「共 N 項補助、M 項可填寫提問」（M = askable 內 codes 數）

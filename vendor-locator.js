@@ -81,8 +81,13 @@
   }
 
   function distanceLabel(vendor) {
+    if (vendor.route_distance_meters !== null && vendor.route_distance_meters !== undefined) {
+      const km = Number(vendor.route_distance_meters) / 1000;
+      const mins = Math.max(1, Math.round(Number(vendor.route_duration_seconds || 0) / 60));
+      return `行車 ${km.toFixed(1)} km / 約 ${mins} 分`;
+    }
     if (vendor.geocode_provider === "district_centroid") return "同區估算";
-    return `${Number(vendor.distance_km).toFixed(2)} km`;
+    return `直線 ${Number(vendor.distance_km).toFixed(2)} km`;
   }
 
   function renderList(data) {

@@ -14,6 +14,26 @@
     return "";
   }
 
+  async function runtimeApiBase() {
+    const response = await fetch(`resource-nav-runtime.json?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) return "";
+    const runtime = await response.json();
+    return String(runtime.api_base || "").replace(/\/$/, "");
+  }
+
+  async function fetchShare(base) {
+    const cleanBase = String(base || "").replace(/\/$/, "");
+    if (!cleanBase) throw new Error("missing_api_base");
+    const response = await fetch(`${cleanBase}/api/v1/assistive-vendors/share/${encodeURIComponent(shareId)}`);
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      const error = new Error(data.error || "share_unavailable");
+      error.status = response.status;
+      throw error;
+    }
+    return data;
+  }
+
   function escapeHtml(value) {
     return String(value || "")
       .replaceAll("&", "&amp;")
@@ -143,24 +163,22 @@
       summaryEl.textContent = "連結格式不完整。";
       return;
     }
-    if (!apiBase) {
-      statusEl.textContent = "缺少 api_base，請從 Discord 重新開啟地圖連結。";
-      summaryEl.textContent = "目前沒有 API 來源。";
-      return;
-    }
-    const response = await fetch(`${apiBase}/api/v1/assistive-vendors/share/${encodeURIComponent(shareId)}`);
-    const data = await response.json();
-    if (!response.ok || !data.ok) {
-      statusEl.textContent = "連結已失效或找不到資料，請重新查詢一次。";
-      summaryEl.textContent = "分享結果不可用。";
-      return;
+    let data;
+    try {
+      data = await fetchShare(apiBase);
+    } catch (err) {
+      const fallbackBase = await runtimeApiBase();
+      if (!fallbackBase || fallbackBase === apiBase) throw err;
+      data = await fetchShare(fallbackBase);
     }
     renderList(data);
     renderMap(data);
   }
 
   main().catch((err) => {
-    statusEl.textContent = `載入失敗：${err.name || err}`;
+    statusEl.textContent = err.message === "share_not_found_or_expired" || err.status === 404
+      ? "連結已失效或找不到資料，請重新查詢一次。"
+      : `載入失敗：${err.name || err}`;
     summaryEl.textContent = "請稍後重試。";
   });
 })();

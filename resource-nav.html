@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260522-result-button">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260523-workbench">
 </head>
 <body>
   <header class="topbar">
@@ -15,7 +15,12 @@
     <div class="status-pill" id="sourceStatus">等待身份確認</div>
   </header>
 
-  <main class="page-shell">
+  <nav class="view-tabs" aria-label="資源導航分頁">
+    <button type="button" class="view-tab is-active" id="navTabButton" data-view="nav">資源導航</button>
+    <button type="button" class="view-tab" id="workbenchTabButton" data-view="workbench">我的資源組合</button>
+  </nav>
+
+  <main class="page-shell" id="navView">
     <div class="main-column">
       <section class="filter-panel" aria-label="資源篩選">
         <div class="filter-head">
@@ -130,6 +135,11 @@
             <div><dt>原因</dt><dd id="sessionReasonStatus">等待確認</dd></div>
           </dl>
         </details>
+          <label class="field">
+            <span>資源組合名稱</span>
+            <input id="packageNameInput" type="text" placeholder="例如：板橋獨居送餐急難">
+          </label>
+          <p class="privacy-hint">請勿填姓名、電話、身分證、完整地址。</p>
           <p class="muted-text" id="packageStatus">尚未加入資源。</p>
           <div id="packageItems" class="package-items"></div>
           <label class="field">
@@ -144,6 +154,21 @@
       </section>
     </aside>
   </main>
+
+  <section class="workbench-shell" id="workbenchView" hidden>
+    <div class="workbench-head">
+      <div>
+        <p class="eyebrow">My Resource Packs</p>
+        <h2>我的資源組合</h2>
+        <p class="muted-text" id="workbenchStatus">請從 Discord 入口連結身份後查看自己的資源組合。</p>
+      </div>
+      <button type="button" id="refreshWorkbench">刷新紀錄</button>
+    </div>
+    <div class="workbench-empty" id="workbenchEmpty" hidden>
+      目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。
+    </div>
+    <div class="workbench-grid" id="workbenchList" aria-live="polite"></div>
+  </section>
 
   <template id="resourceCardTemplate">
     <article class="resource-card">
@@ -191,6 +216,6 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260522-result-button"></script>
+  <script src="./resource-nav.js?v=20260523-workbench"></script>
 </body>
 </html>

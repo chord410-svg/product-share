@@ -1,7 +1,8 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260522-result-button";
+  const RESOURCE_DATA_VERSION = "20260523-workbench";
+  const DRAFT_SAVE_DELAY_MS = 700;
   const state = {
     topics: [],
     resources: [],
@@ -27,6 +28,9 @@
     sessionFailureReason: "",
     guildId: "",
     resultChannelId: "",
+    activeView: "nav",
+    draftSaveTimer: null,
+    packageSaveState: "idle",
   };
 
   const HELP_CONTENT = {
@@ -64,6 +68,22 @@
 
   function nowIso() {
     return new Date().toISOString();
+  }
+
+  function todayLabel() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function formatDateTime(value) {
+    if (!value) return "未記錄";
+    const date = typeof value === "number" ? new Date(value * 1000) : new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleString("zh-TW", {
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   }
 
   function versionedAsset(path) {
@@ -230,7 +250,8 @@
       state.sessionUser = data.user || null;
       const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
       $("sourceStatus").textContent = "已連結 Discord";
-      loginStatus.textContent = "已以 " + name + " 的 Discord 身份開啟。資源包結果會保存到你的私密結果入口。";
+      const id = state.sessionUser && state.sessionUser.id ? state.sessionUser.id : "";
+      loginStatus.textContent = "已連結 Discord：" + name + (id ? " / " + id : "") + "。草稿與結果會保存到你的資源組合工作台。";
       renderSessionDebug();
     } catch (error) {
       if (await applyRuntimeApiBase()) {
@@ -372,6 +393,10 @@
           resultChannelId: String(item.resultChannelId || ""),
           createdAt: String(item.createdAt || nowIso()),
           updatedAt: String(item.updatedAt || nowIso()),
+          status: String(item.status || (item.shareUrl ? "result_ready" : "draft")),
+          outputMode: String(item.outputMode || "family"),
+          shareUrl: String(item.shareUrl || ""),
+          sharePageId: String(item.sharePageId || ""),
         }))
         .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
         .slice(0, MAX_PACKAGES);
@@ -395,7 +420,9 @@
   function defaultPackageName() {
     const district = state.district || "未指定地區";
     const topic = getCurrentTopic();
-    return district + (topic ? topic.title : "資源") + "資源包";
+    const selectedLabels = optionLabels(topic).slice(0, 3);
+    const middle = selectedLabels.length ? selectedLabels : [topic ? topic.title : "資源"];
+    return [district, ...middle, todayLabel()].filter(Boolean).join(" / ");
   }
 
   function currentPackage() {
@@ -421,6 +448,10 @@
       derivedIdentityTags: [],
       guildId: state.guildId,
       resultChannelId: state.resultChannelId,
+      status: "draft",
+      outputMode: $("packageMode") ? $("packageMode").value : "family",
+      shareUrl: "",
+      sharePageId: "",
       createdAt: nowIso(),
       updatedAt: nowIso(),
     };
@@ -444,8 +475,11 @@
     item.derivedIdentityTags = derivedIdentityTags();
     item.guildId = state.guildId;
     item.resultChannelId = state.resultChannelId;
+    item.outputMode = $("packageMode") ? $("packageMode").value : item.outputMode || "family";
+    if (item.status !== "result_pending" && item.status !== "result_ready") item.status = "draft";
     item.updatedAt = nowIso();
     writePackages();
+    scheduleDraftSave();
   }
 
   function markSmartQueryApplied() {
@@ -465,12 +499,245 @@
     state.smartQueryAppliedText = item.smartQueryAppliedAt ? state.smartQueryText : "";
     state.guildId = item.guildId || state.guildId;
     state.resultChannelId = item.resultChannelId || state.resultChannelId;
+    if ($("packageMode")) $("packageMode").value = item.outputMode || "family";
     normalizeCategory();
     normalizeSelectedTopics();
   }
 
   function renderPackageManager() {
     currentPackage();
+  }
+
+  function switchView(view) {
+    state.activeView = view === "workbench" ? "workbench" : "nav";
+    $("navView").hidden = state.activeView !== "nav";
+    $("workbenchView").hidden = state.activeView !== "workbench";
+    $("navTabButton").classList.toggle("is-active", state.activeView === "nav");
+    $("workbenchTabButton").classList.toggle("is-active", state.activeView === "workbench");
+    if (state.activeView === "workbench") {
+      if (state.sessionValid) loadRemotePackages();
+      renderWorkbench();
+    }
+  }
+
+  function statusLabel(status) {
+    const labels = {
+      draft: "草稿",
+      result_pending: "結果產生中",
+      result_ready: "已產生結果",
+      result_failed: "結果失敗",
+    };
+    return labels[status] || "草稿";
+  }
+
+  function modeLabel(mode) {
+    const labels = {
+      family: "家屬版",
+      phone: "電話確認",
+      admin: "行政申請",
+      handoff: "交接摘要",
+    };
+    return labels[mode] || "家屬版";
+  }
+
+  function packageTopicText(item) {
+    const topic = state.topics.find((row) => row.key === item.category);
+    const optionMap = new Map(((topic && topic.options) || []).map((option) => [option.key, option.label]));
+    const labels = (item.selectedTopicKeys || []).map((key) => optionMap.get(key) || key).filter(Boolean);
+    return labels.length ? labels.join("、") : (topic ? topic.title : "未指定子主題");
+  }
+
+  function renderWorkbench() {
+    const status = $("workbenchStatus");
+    const list = $("workbenchList");
+    const empty = $("workbenchEmpty");
+    if (!status || !list || !empty) return;
+    list.innerHTML = "";
+    if (!state.sessionValid) {
+      status.textContent = "未連結 Discord session。請回 Discord 重新開啟資源導航入口，才看得到自己的資源組合。";
+      empty.hidden = false;
+      empty.textContent = "目前是未登入瀏覽，只能使用本機暫存，不能讀取個人資源組合。";
+      return;
+    }
+    const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
+    status.textContent = "目前顯示 " + name + " 的草稿與已產生結果。";
+    const packages = state.packages.slice().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    empty.hidden = packages.length > 0;
+    empty.textContent = "目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。";
+    packages.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "workbench-card";
+
+      const head = document.createElement("div");
+      head.className = "workbench-card-head";
+      const titleWrap = document.createElement("div");
+      const eyebrow = document.createElement("p");
+      eyebrow.className = "eyebrow";
+      eyebrow.textContent = modeLabel(item.outputMode) + "｜" + (item.district || "未指定地區");
+      const title = document.createElement("h3");
+      title.textContent = item.name || "臨時資源包";
+      titleWrap.append(eyebrow, title);
+      const badge = document.createElement("span");
+      badge.className = "status-badge " + String(item.status || "draft").replace("_", "-");
+      badge.textContent = statusLabel(item.status);
+      head.append(titleWrap, badge);
+
+      const meta = document.createElement("p");
+      meta.className = "workbench-meta";
+      meta.textContent = [
+        packageTopicText(item),
+        "資源 " + (item.resourceIds || []).length + " 筆",
+        "更新 " + formatDateTime(item.updatedAt),
+      ].join("｜");
+
+      const actions = document.createElement("div");
+      actions.className = "workbench-actions";
+      const edit = document.createElement("button");
+      edit.type = "button";
+      edit.textContent = "繼續編輯";
+      edit.addEventListener("click", () => {
+        applyPackageContext(item);
+        switchView("nav");
+        render();
+      });
+      const view = document.createElement("button");
+      view.type = "button";
+      view.textContent = "查看結果";
+      view.disabled = !item.shareUrl;
+      view.addEventListener("click", () => {
+        if (item.shareUrl) window.open(item.shareUrl, "_blank", "noopener,noreferrer");
+      });
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.textContent = "複製成新組合";
+      copy.addEventListener("click", async () => {
+        const duplicate = {
+          ...item,
+          id: newId("pkg"),
+          name: (item.name || "資源組合") + " 副本",
+          status: "draft",
+          shareUrl: "",
+          sharePageId: "",
+          createdAt: nowIso(),
+          updatedAt: nowIso(),
+        };
+        state.packages.unshift(duplicate);
+        applyPackageContext(duplicate);
+        syncPackageFromState();
+        await saveDraftNow();
+        switchView("nav");
+        render();
+      });
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "刪除";
+      remove.addEventListener("click", async () => {
+        if (!window.confirm("確定刪除這個資源組合？")) return;
+        try {
+          await apiFetch("/api/v1/resource/packages/" + encodeURIComponent(item.id), { method: "DELETE" });
+          state.packages = state.packages.filter((pkg) => pkg.id !== item.id);
+          if (state.activePackageId === item.id) state.activePackageId = "";
+          renderWorkbench();
+        } catch (error) {
+          window.alert("刪除失敗，請稍後再試。");
+        }
+      });
+      actions.append(edit, view, copy, remove);
+      card.append(head, meta, actions);
+      list.appendChild(card);
+    });
+  }
+
+  function normalizeServerPackage(record) {
+    return {
+      id: String(record.package_id || record.id || ""),
+      name: String(record.name || "臨時資源包"),
+      note: String(record.note || ""),
+      resourceIds: Array.isArray(record.resource_ids) ? record.resource_ids.map(String) : [],
+      district: String(record.district || ""),
+      category: String(record.category || ""),
+      selectedTopicKeys: Array.isArray(record.selected_topic_keys) ? record.selected_topic_keys.map(String) : [],
+      urgency: String(record.urgency || ""),
+      smartQueryText: String(record.smart_query_text || ""),
+      smartQueryAppliedAt: "",
+      derivedIdentityTags: [],
+      guildId: String(record.guild_id || ""),
+      resultChannelId: String(record.result_channel_id || ""),
+      status: String(record.status || (record.share_url ? "result_ready" : "draft")),
+      outputMode: String(record.output_mode || "family"),
+      shareUrl: String(record.share_url || ""),
+      sharePageId: String(record.share_page_id || ""),
+      createdAt: record.created_at ? new Date(Number(record.created_at) * 1000).toISOString() : nowIso(),
+      updatedAt: record.updated_at ? new Date(Number(record.updated_at) * 1000).toISOString() : nowIso(),
+    };
+  }
+
+  async function loadRemotePackages() {
+    if (!state.sessionValid) return [];
+    try {
+      const data = await apiFetch("/api/v1/resource/packages", { method: "GET", headers: {} });
+      const packages = Array.isArray(data.packages) ? data.packages.map(normalizeServerPackage).filter((item) => item.id) : [];
+      state.packages = packages;
+      renderWorkbench();
+      return packages;
+    } catch (error) {
+      console.info("resource packages load failed", error);
+      return [];
+    }
+  }
+
+  function packagePayload(item, overrides) {
+    return {
+      packageId: item.id,
+      name: item.name || defaultPackageName(),
+      note: item.note || "",
+      category: item.category || state.category,
+      selectedTopicKeys: item.selectedTopicKeys || Array.from(state.selectedTopics),
+      district: item.district || state.district,
+      urgency: item.urgency || state.urgency,
+      smartQueryText: item.smartQueryText || state.smartQueryText,
+      resourceIds: item.resourceIds || Array.from(state.packageIds),
+      outputMode: item.outputMode || ($("packageMode") ? $("packageMode").value : "family"),
+      guildId: item.guildId || state.guildId,
+      resultChannelId: item.resultChannelId || state.resultChannelId,
+      ...(overrides || {}),
+    };
+  }
+
+  function scheduleDraftSave() {
+    if (!state.sessionValid || !state.packageIds.size) return;
+    if (state.draftSaveTimer) window.clearTimeout(state.draftSaveTimer);
+    state.packageSaveState = "waiting";
+    state.draftSaveTimer = window.setTimeout(() => {
+      saveDraftNow();
+    }, DRAFT_SAVE_DELAY_MS);
+  }
+
+  async function saveDraftNow() {
+    if (!state.sessionValid || !state.packageIds.size) return null;
+    const item = currentPackage();
+    state.packageSaveState = "saving";
+    try {
+      const data = await apiFetch("/api/v1/resource/packages/draft", {
+        method: "POST",
+        body: JSON.stringify(packagePayload(item, { status: "draft" })),
+      });
+      const saved = normalizeServerPackage(data.package || {});
+      const index = state.packages.findIndex((pkg) => pkg.id === item.id);
+      const merged = { ...item, ...saved, resourceIds: item.resourceIds, derivedIdentityTags: item.derivedIdentityTags };
+      if (index >= 0) state.packages[index] = merged;
+      else state.packages.unshift(merged);
+      state.activePackageId = merged.id;
+      state.packageSaveState = "saved";
+      renderWorkbench();
+      renderPackage();
+      return merged;
+    } catch (error) {
+      state.packageSaveState = "failed";
+      console.info("resource draft save failed", error);
+      renderPackage();
+      return null;
+    }
   }
 
   function createChip(labelText, selected, onToggle) {
@@ -519,6 +786,18 @@
   }
 
   function setupFilters() {
+    $("navTabButton").addEventListener("click", () => switchView("nav"));
+    $("workbenchTabButton").addEventListener("click", () => switchView("workbench"));
+    $("refreshWorkbench").addEventListener("click", async () => {
+      if (state.sessionValid) await loadRemotePackages();
+      renderWorkbench();
+    });
+    $("packageNameInput").addEventListener("input", (event) => {
+      const item = currentPackage();
+      item.name = event.target.value.trim() || defaultPackageName();
+      syncPackageFromState();
+      renderWorkbench();
+    });
     $("districtSelect").addEventListener("change", (event) => {
       state.district = event.target.value;
       syncPackageFromState();
@@ -558,7 +837,11 @@
     $("packageToggle").addEventListener("click", () => {
       document.querySelector(".package-panel").classList.toggle("is-open");
     });
-    $("packageMode").addEventListener("change", renderPackage);
+    $("packageMode").addEventListener("change", () => {
+      syncPackageFromState();
+      renderPackage();
+      renderWorkbench();
+    });
     $("generateResult").addEventListener("click", async () => {
       syncPackageFromState();
       if (!state.packageIds.size) {
@@ -890,7 +1173,12 @@
 
   async function submitResourcePackage() {
     const item = currentPackage();
+    if (state.draftSaveTimer) {
+      window.clearTimeout(state.draftSaveTimer);
+      state.draftSaveTimer = null;
+    }
     const payload = {
+      packageId: item.id,
       name: item.name || defaultPackageName(),
       note: item.note || "",
       category: state.category,
@@ -902,6 +1190,7 @@
       outputMode: $("packageMode").value,
       guildId: state.guildId,
       resultChannelId: state.resultChannelId,
+      status: "result_pending",
     };
     const button = $("generateResult");
     const oldText = button.textContent;
@@ -918,6 +1207,14 @@
         method: "POST",
         body: JSON.stringify(payload),
       });
+      if (data.package) {
+        const saved = normalizeServerPackage(data.package);
+        item.status = saved.status;
+        item.shareUrl = saved.shareUrl;
+        item.sharePageId = saved.sharePageId;
+        item.updatedAt = saved.updatedAt;
+        renderWorkbench();
+      }
       if (data.share_url) {
         window.location.href = data.share_url;
         return;
@@ -941,15 +1238,19 @@
   function renderPackage() {
     renderPackageManager();
     const items = selectedPackageResources();
-    const mode = $("packageMode").value;
     const wrap = $("packageItems");
+    const item = currentPackage();
     const countText = items.length + " 筆";
     wrap.innerHTML = "";
+    $("packageNameInput").value = item.name || defaultPackageName();
     $("packageCount").textContent = countText;
     $("packageToggleCount").textContent = countText;
-    $("packageStatus").textContent = items.length
+    const saveHint = state.sessionValid
+      ? (state.packageSaveState === "saving" ? "草稿保存中。" : state.packageSaveState === "failed" ? "草稿保存失敗，可繼續使用本機暫存。" : "草稿會保存到我的資源組合。")
+      : "未連結 Discord，僅能本機暫存。";
+    $("packageStatus").textContent = (items.length
       ? "已加入 " + items.length + " 筆資源。"
-      : "尚未加入資源。";
+      : "尚未加入資源。") + " " + saveHint;
 
     items.forEach((resource) => {
       const row = document.createElement("button");
@@ -1019,7 +1320,7 @@
       await verifySession();
       normalizeCategory();
       normalizeSelectedTopics();
-      state.packages = readPackages();
+      state.packages = state.sessionValid ? await loadRemotePackages() : readPackages();
       if (state.hasUrlContext) {
         createPackage(defaultPackageName(), { save: false });
       } else if (state.packages.length) {
@@ -1028,6 +1329,7 @@
         createPackage(defaultPackageName());
       }
       render();
+      renderWorkbench();
     } catch (error) {
       $("scopeMeta").textContent = "資料載入失敗，請稍後再試。";
       $("cards").innerHTML = '<div class="empty">無法載入資源資料。</div>';

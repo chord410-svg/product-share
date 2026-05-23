@@ -42,6 +42,10 @@
     return new URLSearchParams(window.location.search).get("mode") === "local";
   }
 
+  function localPreviewReason() {
+    return new URLSearchParams(window.location.search).get("reason") || "";
+  }
+
   function readPackages() {
     try {
       const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -274,6 +278,15 @@
     }
     $("missingPackage").hidden = true;
     $("localPreviewBanner").hidden = !isLocalPreviewMode();
+    if (isLocalPreviewMode() && localPreviewReason() === "publish_pending") {
+      const banner = $("localPreviewBanner");
+      const title = banner.querySelector("h2");
+      const body = banner.querySelector(".muted-text");
+      if (title) title.textContent = "正式分享頁正在背景產生";
+      if (body) {
+        body.textContent = "主結果已先在此瀏覽器顯示；GitHub Pages 發布、QR Code 與 Discord 私密結果正在背景完成。稍後到 Discord 資源結果頻道按「查看我的最新資源包結果」即可取得正式連結與 QR。";
+      }
+    }
     $("resultContent").hidden = false;
     $("resultTitle").textContent = activePackage.name || "資源包結果";
     $("resultMeta").textContent = packagePurposeText();

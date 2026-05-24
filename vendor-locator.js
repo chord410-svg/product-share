@@ -1,6 +1,7 @@
 (function () {
   const params = new URLSearchParams(window.location.search);
   const shareId = params.get("share_id") || "";
+  const dataParam = params.get("data") || "";
   const urlApiBase = (params.get("api_base") || inferApiBase()).replace(/\/$/, "");
   const statusEl = document.getElementById("status");
   const summaryEl = document.getElementById("summary");
@@ -47,7 +48,44 @@
     if (!data || data.ok !== true || !data.home || !Array.isArray(data.vendors)) {
       throw new Error("invalid_share_payload");
     }
+    if (data.expires_at && Number(data.expires_at) <= Date.now() / 1000) {
+      throw new Error("share_not_found_or_expired");
+    }
     return data;
+  }
+
+  function normalizeStaticDataPath(value) {
+    const raw = String(value || "").trim();
+    if (!raw || raw.startsWith("http://") || raw.startsWith("https://") || raw.startsWith("//")) {
+      return "";
+    }
+    const cleaned = raw.replace(/^\.\//, "").replace(/^\/+/, "");
+    if (!cleaned || cleaned.includes("..")) return "";
+    return cleaned;
+  }
+
+  function staticShareCandidates() {
+    const defaultPath = shareId ? `vendor-shares/${encodeURIComponent(shareId)}.json` : "";
+    return unique([normalizeStaticDataPath(dataParam), defaultPath]);
+  }
+
+  async function fetchStaticShare(path) {
+    const cleanPath = normalizeStaticDataPath(path);
+    if (!cleanPath) throw new Error("missing_static_share_path");
+    let response;
+    try {
+      response = await fetch(`${cleanPath}?v=${Date.now()}`, { cache: "no-store" });
+    } catch (err) {
+      const error = new Error("static_share_connection_failed");
+      error.cause = err;
+      throw error;
+    }
+    if (!response.ok) {
+      const error = new Error("static_share_unavailable");
+      error.status = response.status;
+      throw error;
+    }
+    return validateSharePayload(await response.json());
   }
 
   async function fetchShare(base) {
@@ -225,6 +263,8 @@
       message = "連結已失效或找不到資料，請重新查詢一次。";
     } else if (err.message === "missing_api_base") {
       message = "目前沒有可用的 API 連線資訊，請重新查詢產生新的地圖連結。";
+    } else if (err.message === "static_share_unavailable" || err.message === "static_share_connection_failed") {
+      message = "靜態分享資料讀取失敗，請回 Discord 重新查詢一次。";
     } else if (err.message === "api_connection_failed") {
       message = "API 連線失敗，可能是 Cloudflare tunnel 已更換；請重新查詢或重啟 tunnel。";
     } else if (err.message === "invalid_share_payload") {
@@ -237,10 +277,17 @@
   }
 
   async function loadShare() {
+    let lastError = null;
+    for (const path of staticShareCandidates()) {
+      try {
+        return await fetchStaticShare(path);
+      } catch (err) {
+        lastError = err;
+      }
+    }
     const runtimeBases = await runtimeApiBases();
     const bases = unique([urlApiBase, ...runtimeBases]);
-    if (!bases.length) throw new Error("missing_api_base");
-    let lastError = null;
+    if (!bases.length) throw lastError || new Error("missing_api_base");
     for (const base of bases) {
       try {
         return await fetchShare(base);

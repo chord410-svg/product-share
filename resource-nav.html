@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260524-output-tabs-return-session">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260524-exchange-tab">
 </head>
 <body>
   <header class="topbar">
@@ -18,6 +18,7 @@
   <nav class="view-tabs" role="tablist" aria-label="資源導航分頁">
     <button type="button" class="view-tab is-active" id="navTabButton" data-view="nav" role="tab" aria-selected="true" aria-controls="navView">資源導航</button>
     <button type="button" class="view-tab" id="workbenchTabButton" data-view="workbench" role="tab" aria-selected="false" aria-controls="workbenchView">我的資源組合</button>
+    <button type="button" class="view-tab" id="exchangeTabButton" data-view="exchange" role="tab" aria-selected="false" aria-controls="exchangeView">資源副本</button>
   </nav>
 
   <main class="page-shell tab-panel is-active" id="navView" role="tabpanel" aria-labelledby="navTabButton">
@@ -136,8 +137,8 @@
         </div>
         <p class="package-count" id="packageCount">0 筆</p>
       </div>
-      <details class="session-debug" id="sessionDebug">
-        <summary>登入狀態詳情</summary>
+      <details class="session-debug" id="sessionDebug" hidden>
+        <summary>連線診斷（開發用）</summary>
         <dl class="session-debug-list">
           <div><dt>session</dt><dd id="sessionTokenStatus">未檢查</dd></div>
           <div><dt>api_base</dt><dd id="apiBaseStatus">未檢查</dd></div>
@@ -164,6 +165,55 @@
       目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。
     </div>
     <div class="workbench-grid" id="workbenchList" aria-live="polite"></div>
+  </section>
+
+  <section class="exchange-shell tab-panel" id="exchangeView" role="tabpanel" aria-labelledby="exchangeTabButton" hidden>
+    <div class="workbench-head">
+      <div>
+        <p class="eyebrow">Resource Pack Exchange</p>
+        <h2>資源副本</h2>
+        <p class="muted-text" id="exchangeStatus">匯入或匯出資源副本封包，方便備份、移交或重新形成草稿。</p>
+      </div>
+    </div>
+    <section class="import-pack-panel panel" aria-label="匯入資源副本">
+      <div class="import-pack-head">
+        <div>
+          <p class="eyebrow">Import Resource Pack</p>
+          <h2>匯入資源副本</h2>
+          <p class="muted-text">支援 .resourcepack.json、含封包區塊的 Markdown，或貼上正式 Web B 結果連結。匯入後會建立新的草稿，不覆蓋原本紀錄。</p>
+        </div>
+      </div>
+      <div class="import-pack-grid">
+        <label class="field">
+          <span>上傳封包或 Markdown</span>
+          <input id="resourcePackFileInput" type="file" accept=".json,.resourcepack.json,.md,.markdown,application/json,text/markdown">
+        </label>
+        <label class="field">
+          <span>貼上 Web B 結果連結</span>
+          <input id="resourcePackUrlInput" type="url" placeholder="https://.../viewer.html?id=...">
+        </label>
+      </div>
+      <label class="field">
+        <span>貼上封包 JSON 或 Markdown manifest</span>
+        <textarea id="resourcePackPasteInput" rows="4" placeholder="可貼上 .resourcepack.json 內容，或 Markdown 裡的 RESOURCE_PACK_MANIFEST 區塊"></textarea>
+      </label>
+      <div class="import-pack-actions">
+        <button type="button" id="importResourcePackButton">匯入資源副本</button>
+        <button type="button" id="clearImportResourcePackButton">清除匯入內容</button>
+        <p class="muted-text" id="importResourcePackStatus" aria-live="polite">匯入會歸到目前 Discord 使用者底下。</p>
+      </div>
+    </section>
+    <section class="exchange-export-panel panel" aria-label="匯出資源副本">
+      <div class="import-pack-head">
+        <div>
+          <p class="eyebrow">Export Resource Packs</p>
+          <h2>匯出既有資源組合</h2>
+          <p class="muted-text">選擇自己的資源組合，匯出可再匯入的 JSON 封包，或可閱讀的 Markdown 備份。</p>
+        </div>
+      </div>
+      <div class="exchange-empty" id="exchangeEmpty" hidden>目前沒有可匯出的資源組合。</div>
+      <div class="exchange-export-list" id="exchangeExportList" aria-live="polite"></div>
+    </section>
   </section>
 
   <template id="resourceCardTemplate">
@@ -212,6 +262,6 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260524-output-tabs-return-session"></script>
+  <script src="./resource-nav.js?v=20260524-exchange-tab"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
-  const RESOURCE_DATA_VERSION = "20260522-result-button";
+  const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
+  const RESOURCE_DATA_VERSION = "20260524-output-tabs-return-session";
   let topics = [];
   let resources = [];
   let activePackage = null;
@@ -44,6 +45,21 @@
 
   function localPreviewReason() {
     return new URLSearchParams(window.location.search).get("reason") || "";
+  }
+
+  function readRememberedEntryUrl() {
+    try {
+      const value = sessionStorage.getItem(LAST_SESSION_ENTRY_KEY) || localStorage.getItem(LAST_SESSION_ENTRY_KEY) || "";
+      if (!value || !value.includes("resource-nav.html")) return "";
+      return value;
+    } catch (error) {
+      console.info("remembered resource nav entry unreadable", error);
+      return "";
+    }
+  }
+
+  function currentResultMode() {
+    return new URLSearchParams(window.location.search).get("output") || localStorage.getItem("resource_nav_result_output_mode_v1") || "full";
   }
 
   function readPackages() {
@@ -265,6 +281,41 @@
     return section;
   }
 
+  const OUTPUT_HELP = {
+    family: "家屬版適合直接貼給家屬或用 LINE 傳送；會排除內部註記與風險判斷。",
+    phone: "電話確認清單給個管師使用，集中顯示聯絡方式與每通電話要問的重點。",
+    admin: "行政清單整理文件、來源、資格與最後確認日，方便填報或備齊申請資料。",
+    handoff: "交接摘要給同事或主管快速接手，包含資源選擇理由、風險與下一步。",
+    full: "完整資料顯示所有區塊與內部提醒，適合個管師自己檢查整包內容。",
+  };
+
+  function setOutputMode(mode) {
+    const selected = OUTPUT_HELP[mode] ? mode : "full";
+    try {
+      localStorage.setItem("resource_nav_result_output_mode_v1", selected);
+    } catch (error) {
+      console.info("result output mode save failed", error);
+    }
+    document.querySelectorAll("[data-result-mode]").forEach((button) => {
+      const active = button.dataset.resultMode === selected;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-selected", active ? "true" : "false");
+    });
+    document.querySelectorAll("[data-output-section]").forEach((section) => {
+      const modes = String(section.dataset.outputSection || "full").split(/\s+/).filter(Boolean);
+      section.hidden = !modes.includes(selected);
+    });
+    const help = $("resultModeHelp");
+    if (help) help.textContent = OUTPUT_HELP[selected];
+  }
+
+  function setupOutputModeTabs() {
+    document.querySelectorAll("[data-result-mode]").forEach((button) => {
+      button.addEventListener("click", () => setOutputMode(button.dataset.resultMode || "full"));
+    });
+    setOutputMode(currentResultMode());
+  }
+
   function showMissing() {
     $("missingPackage").hidden = false;
     $("resultContent").hidden = true;
@@ -297,7 +348,7 @@
     if (asList(activePackage.selectedTopicKeys).length) backParams.set("topics", asList(activePackage.selectedTopicKeys).join(","));
     if (activePackage.guildId) backParams.set("guild", activePackage.guildId);
     if (activePackage.resultChannelId) backParams.set("result_channel", activePackage.resultChannelId);
-    $("backLink").href = "./resource-nav.html" + (backParams.toString() ? "?" + backParams.toString() : "");
+    $("backLink").href = readRememberedEntryUrl() || ("./resource-nav.html" + (backParams.toString() ? "?" + backParams.toString() : ""));
     const discordLink = $("discordResultLink");
     if (activePackage.guildId && activePackage.resultChannelId) {
       discordLink.hidden = false;
@@ -336,6 +387,7 @@
     details.innerHTML = "";
     selectedResources.forEach((resource) => details.appendChild(renderResourceDetail(resource)));
 
+    setupOutputModeTabs();
     $("copyFamily").addEventListener("click", async () => copyText(buildFamilyPackageText()));
     $("copyPhone").addEventListener("click", async () => copyText(buildPhonePackageText()));
     $("copyAdmin").addEventListener("click", async () => copyText(buildAdminPackageText()));

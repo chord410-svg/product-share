@@ -1,7 +1,7 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260523-workbench";
+  const RESOURCE_DATA_VERSION = "20260524-workbench-merge";
   const DRAFT_SAVE_DELAY_MS = 700;
   const state = {
     topics: [],
@@ -106,7 +106,7 @@
     state.apiBaseSource = state.apiBase ? "url" : "missing";
     state.district = params.get("district") || "";
     state.hasUrlContext = Boolean(state.category || topicParam);
-    $("sourceStatus").textContent = source === "discord" ? "Discord 入口" : "直接開啟";
+    renderIdentity("checking", source === "discord" ? "Discord 入口，等待身份確認" : "未連結 Discord，請回 Discord 重新開啟入口");
   }
 
   function apiUrl(path) {
@@ -145,6 +145,33 @@
       throw new Error(data.error || "api_unavailable");
     }
     return data;
+  }
+
+  function identityText() {
+    if (!state.sessionValid || !state.sessionUser) return "";
+    const name = state.sessionUser.name || "Discord 使用者";
+    const id = state.sessionUser.id || "";
+    return name + (id ? " / " + id : "");
+  }
+
+  function renderIdentity(status, reason) {
+    const pill = $("sourceStatus");
+    if (!pill) return;
+    pill.classList.remove("is-linked", "is-offline", "is-error");
+    if (status === "linked") {
+      pill.classList.add("is-linked");
+      pill.textContent = "已連結 Discord：" + identityText();
+      return;
+    }
+    if (status === "offline") {
+      pill.classList.add("is-offline");
+      pill.textContent = "未連結 Discord，請回 Discord 重新開啟入口";
+      return;
+    }
+    if (status === "error") {
+      pill.classList.add("is-error");
+    }
+    pill.textContent = reason || "Discord 身份未確認";
   }
 
   function sessionReasonLabel(reason) {
@@ -225,7 +252,7 @@
       loginStatus.textContent = state.source === "discord"
         ? "已從 Discord 入口開啟，但網址沒有 session。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。"
         : "未取得 Discord session：可瀏覽與點選資源，也可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
-      $("sourceStatus").textContent = "未登入瀏覽";
+      renderIdentity("offline");
       renderSessionDebug();
       return;
     }
@@ -236,7 +263,7 @@
       state.sessionValid = false;
       state.sessionFailureReason = "no_api_base";
       loginStatus.textContent = "已取得 session，但網址沒有 api_base，網站不知道要向哪個 Bot API 驗證身份。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請確認 Bot 入口已更新後重新開啟。";
-      $("sourceStatus").textContent = "API 未設定";
+      renderIdentity("error", "API 未設定");
       renderSessionDebug();
       return;
     }
@@ -248,10 +275,8 @@
       state.sessionValid = true;
       state.sessionFailureReason = "";
       state.sessionUser = data.user || null;
-      const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
-      $("sourceStatus").textContent = "已連結 Discord";
-      const id = state.sessionUser && state.sessionUser.id ? state.sessionUser.id : "";
-      loginStatus.textContent = "已連結 Discord：" + name + (id ? " / " + id : "") + "。草稿與結果會保存到你的資源組合工作台。";
+      renderIdentity("linked");
+      loginStatus.textContent = "已連結 Discord：" + identityText() + "。草稿與結果會保存到你的資源組合工作台。";
       renderSessionDebug();
     } catch (error) {
       if (await applyRuntimeApiBase()) {
@@ -260,16 +285,16 @@
       state.sessionValid = false;
       if (error.message === "invalid_or_expired_session") {
         state.sessionFailureReason = "session_expired";
-        $("sourceStatus").textContent = "session 已失效";
+        renderIdentity("error", "session 已失效");
       } else if (error.message === "api_unreachable") {
         state.sessionFailureReason = "api_unreachable";
-        $("sourceStatus").textContent = "API 連不上";
+        renderIdentity("error", "API 連不上");
       } else if (error.message === "api_old_version") {
         state.sessionFailureReason = "api_old_version";
-        $("sourceStatus").textContent = "API 版本不符";
+        renderIdentity("error", "API 版本不符");
       } else {
         state.sessionFailureReason = "api_unavailable";
-        $("sourceStatus").textContent = "API 異常";
+        renderIdentity("error", "API 異常");
       }
       loginStatus.textContent = "已從 Discord 入口開啟，但後端驗證未通過：" + sessionReasonLabel(state.sessionFailureReason) + " 可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
       renderSessionDebug();
@@ -510,11 +535,20 @@
 
   function switchView(view) {
     state.activeView = view === "workbench" ? "workbench" : "nav";
-    $("navView").hidden = state.activeView !== "nav";
-    $("workbenchView").hidden = state.activeView !== "workbench";
-    $("navTabButton").classList.toggle("is-active", state.activeView === "nav");
-    $("workbenchTabButton").classList.toggle("is-active", state.activeView === "workbench");
+    const isNav = state.activeView === "nav";
+    $("navView").hidden = !isNav;
+    $("workbenchView").hidden = isNav;
+    $("navView").classList.toggle("is-active", isNav);
+    $("workbenchView").classList.toggle("is-active", !isNav);
+    $("navTabButton").classList.toggle("is-active", isNav);
+    $("workbenchTabButton").classList.toggle("is-active", !isNav);
+    $("navTabButton").setAttribute("aria-selected", isNav ? "true" : "false");
+    $("workbenchTabButton").setAttribute("aria-selected", isNav ? "false" : "true");
+    if (document.activeElement && document.activeElement.classList.contains("view-tab")) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     if (state.activeView === "workbench") {
+      renderPackage();
       if (state.sessionValid) loadRemotePackages();
       renderWorkbench();
     }
@@ -554,13 +588,12 @@
     if (!status || !list || !empty) return;
     list.innerHTML = "";
     if (!state.sessionValid) {
-      status.textContent = "未連結 Discord session。請回 Discord 重新開啟資源導航入口，才看得到自己的資源組合。";
+      status.textContent = "未連結 Discord，請回 Discord 重新開啟入口。";
       empty.hidden = false;
       empty.textContent = "目前是未登入瀏覽，只能使用本機暫存，不能讀取個人資源組合。";
       return;
     }
-    const name = state.sessionUser && state.sessionUser.name ? state.sessionUser.name : "Discord 使用者";
-    status.textContent = "目前顯示 " + name + " 的草稿與已產生結果。";
+    status.textContent = "目前查看 " + identityText() + " 的資源組合。";
     const packages = state.packages.slice().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
     empty.hidden = packages.length > 0;
     empty.textContent = "目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。";
@@ -834,9 +867,6 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !$("helpDialog").hidden) closeHelpDialog();
     });
-    $("packageToggle").addEventListener("click", () => {
-      document.querySelector(".package-panel").classList.toggle("is-open");
-    });
     $("packageMode").addEventListener("change", () => {
       syncPackageFromState();
       renderPackage();
@@ -971,11 +1001,16 @@
   }
 
   function togglePackageResource(resource) {
-    if (state.packageIds.has(resource.id)) state.packageIds.delete(resource.id);
-    else state.packageIds.add(resource.id);
+    const willAdd = !state.packageIds.has(resource.id);
+    if (willAdd) state.packageIds.add(resource.id);
+    else state.packageIds.delete(resource.id);
     syncPackageFromState();
     renderCards();
     renderPackage();
+    const notice = $("navPackageNotice");
+    if (notice) {
+      notice.textContent = (willAdd ? "已加入：" : "已移除：") + resource.name + "。到「我的資源組合」可管理與產生結果。";
+    }
   }
 
   function renderDerivedIdentityChips() {
@@ -1244,7 +1279,6 @@
     wrap.innerHTML = "";
     $("packageNameInput").value = item.name || defaultPackageName();
     $("packageCount").textContent = countText;
-    $("packageToggleCount").textContent = countText;
     const saveHint = state.sessionValid
       ? (state.packageSaveState === "saving" ? "草稿保存中。" : state.packageSaveState === "failed" ? "草稿保存失敗，可繼續使用本機暫存。" : "草稿會保存到我的資源組合。")
       : "未連結 Discord，僅能本機暫存。";
@@ -1262,6 +1296,7 @@
         syncPackageFromState();
         renderCards();
         renderPackage();
+        renderWorkbench();
       });
       wrap.appendChild(row);
     });

@@ -1,7 +1,7 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
-  const RESOURCE_DATA_VERSION = "20260524-output-tabs-return-session";
+  const RESOURCE_DATA_VERSION = "20260524-resourcepack-exchange";
   let topics = [];
   let resources = [];
   let activePackage = null;
@@ -281,6 +281,37 @@
     return section;
   }
 
+  function renderSharePanel() {
+    const panel = $("resultSharePanel");
+    const body = $("resultShareBody");
+    const status = $("resultShareStatus");
+    if (!panel || !body || !status) return;
+    body.innerHTML = "";
+    const shareUrl = String(activePackage.shareUrl || activePackage.share_url || "");
+    if (!shareUrl) {
+      status.textContent = isLocalPreviewMode()
+        ? "本機預覽沒有正式連結；正式發布完成後，請從 Discord 資源結果頻道取得 QR Code。"
+        : "正式連結產生後會出現 QR Code。";
+      return;
+    }
+    status.textContent = "可複製正式結果連結；QR Code 若未顯示，請到 Discord 資源結果頻道查看。";
+    const link = document.createElement("a");
+    link.href = shareUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = shareUrl;
+    link.className = "result-share-link";
+    const copy = document.createElement("button");
+    copy.type = "button";
+    copy.textContent = "複製連結";
+    copy.addEventListener("click", async () => {
+      await copyText(shareUrl);
+      copy.textContent = "已複製";
+      setTimeout(() => { copy.textContent = "複製連結"; }, 1200);
+    });
+    body.append(link, copy);
+  }
+
   const OUTPUT_HELP = {
     family: "家屬版適合直接貼給家屬或用 LINE 傳送；會排除內部註記與風險判斷。",
     phone: "電話確認清單給個管師使用，集中顯示聯絡方式與每通電話要問的重點。",
@@ -386,6 +417,7 @@
     const details = $("resultDetails");
     details.innerHTML = "";
     selectedResources.forEach((resource) => details.appendChild(renderResourceDetail(resource)));
+    renderSharePanel();
 
     setupOutputModeTabs();
     $("copyFamily").addEventListener("click", async () => copyText(buildFamilyPackageText()));

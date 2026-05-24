@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>資源包結果｜長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260524-output-tabs-return-session">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260524-resourcepack-exchange">
 </head>
 <body>
   <header class="topbar">
@@ -99,10 +99,19 @@
         <h3>完整資料集合</h3>
         <div id="resultDetails"></div>
       </div>
+
+      <section class="result-share-panel" id="resultSharePanel">
+        <div>
+          <p class="eyebrow">分享此資源包結果</p>
+          <h3>QR CODE 與正式連結</h3>
+          <p class="muted-text" id="resultShareStatus">正式連結產生後會出現 QR Code。</p>
+        </div>
+        <div class="result-share-body" id="resultShareBody"></div>
+      </section>
     </section>
   </main>
 
   <textarea id="resultCopyScratch" class="copy-scratch" aria-hidden="true"></textarea>
-  <script src="./resource-package-result.js?v=20260524-output-tabs-return-session"></script>
+  <script src="./resource-package-result.js?v=20260524-resourcepack-exchange"></script>
 </body>
 </html>

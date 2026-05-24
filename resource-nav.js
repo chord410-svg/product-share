@@ -1,7 +1,8 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
+  const CARD_SIZE_KEY = "resource_nav_card_size_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260524-workbench-merge";
+  const RESOURCE_DATA_VERSION = "20260524-card-size-workbench-actions";
   const DRAFT_SAVE_DELAY_MS = 700;
   const state = {
     topics: [],
@@ -29,6 +30,8 @@
     guildId: "",
     resultChannelId: "",
     activeView: "nav",
+    cardSize: localStorage.getItem(CARD_SIZE_KEY) || "medium",
+    expandedPackageIds: new Set(),
     draftSaveTimer: null,
     packageSaveState: "idle",
   };
@@ -357,6 +360,29 @@
     ]);
   }
 
+  function normalizeCardSize(size) {
+    return ["small", "medium", "large"].includes(size) ? size : "medium";
+  }
+
+  function renderCardSizeControls() {
+    document.querySelectorAll("[data-card-size]").forEach((button) => {
+      const active = button.dataset.cardSize === state.cardSize;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  function setCardSize(size) {
+    state.cardSize = normalizeCardSize(size);
+    localStorage.setItem(CARD_SIZE_KEY, state.cardSize);
+    renderCardSizeControls();
+    renderCards();
+  }
+
+  function resourceById(id) {
+    return state.resources.find((resource) => resource.id === id) || null;
+  }
+
   function selectedPackageResources() {
     const byId = new Map(state.resources.map((resource) => [resource.id, resource]));
     return Array.from(state.packageIds).map((id) => byId.get(id)).filter(Boolean);
@@ -599,7 +625,26 @@
     empty.textContent = "目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。";
     packages.forEach((item) => {
       const card = document.createElement("article");
-      card.className = "workbench-card";
+      const isExpanded = state.expandedPackageIds.has(item.id);
+      card.className = "workbench-card" + (isExpanded ? " is-expanded" : "");
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+      card.title = "點擊可展開或收合已選資源清單";
+      const toggleExpanded = () => {
+        if (state.expandedPackageIds.has(item.id)) state.expandedPackageIds.delete(item.id);
+        else state.expandedPackageIds.add(item.id);
+        renderWorkbench();
+      };
+      card.addEventListener("click", (event) => {
+        if (event.target.closest("button, a, input, select, textarea")) return;
+        toggleExpanded();
+      });
+      card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        toggleExpanded();
+      });
 
       const head = document.createElement("div");
       head.className = "workbench-card-head";
@@ -627,23 +672,29 @@
       actions.className = "workbench-actions";
       const edit = document.createElement("button");
       edit.type = "button";
+      edit.className = "edit-action";
       edit.textContent = "繼續編輯";
-      edit.addEventListener("click", () => {
+      edit.addEventListener("click", (event) => {
+        event.stopPropagation();
         applyPackageContext(item);
         switchView("nav");
         render();
       });
       const view = document.createElement("button");
       view.type = "button";
-      view.textContent = "查看結果";
-      view.disabled = !item.shareUrl;
-      view.addEventListener("click", () => {
-        if (item.shareUrl) window.open(item.shareUrl, "_blank", "noopener,noreferrer");
+      view.className = "primary-action";
+      view.textContent = item.shareUrl ? "查看結果" : "查看結果";
+      view.addEventListener("click", async (event) => {
+        event.stopPropagation();
+        await openOrCreatePackageResult(item, view);
       });
       const copy = document.createElement("button");
       copy.type = "button";
-      copy.textContent = "複製成新組合";
-      copy.addEventListener("click", async () => {
+      copy.className = "copy-action";
+      copy.textContent = "另存副本";
+      copy.title = "複製這包資源成新的草稿，不改原本紀錄。";
+      copy.addEventListener("click", async (event) => {
+        event.stopPropagation();
         const duplicate = {
           ...item,
           id: newId("pkg"),
@@ -663,12 +714,15 @@
       });
       const remove = document.createElement("button");
       remove.type = "button";
+      remove.className = "danger-action";
       remove.textContent = "刪除";
-      remove.addEventListener("click", async () => {
+      remove.addEventListener("click", async (event) => {
+        event.stopPropagation();
         if (!window.confirm("確定刪除這個資源組合？")) return;
         try {
           await apiFetch("/api/v1/resource/packages/" + encodeURIComponent(item.id), { method: "DELETE" });
           state.packages = state.packages.filter((pkg) => pkg.id !== item.id);
+          state.expandedPackageIds.delete(item.id);
           if (state.activePackageId === item.id) state.activePackageId = "";
           renderWorkbench();
         } catch (error) {
@@ -676,7 +730,54 @@
         }
       });
       actions.append(edit, view, copy, remove);
-      card.append(head, meta, actions);
+
+      const expanded = document.createElement("div");
+      expanded.className = "workbench-expanded";
+      expanded.hidden = !isExpanded;
+      const expandedTitle = document.createElement("h4");
+      expandedTitle.textContent = "已選資源清單";
+      const selectedList = document.createElement("div");
+      selectedList.className = "workbench-resource-list";
+      const resourceIds = item.resourceIds || [];
+      if (!resourceIds.length) {
+        const none = document.createElement("p");
+        none.className = "workbench-expanded-empty";
+        none.textContent = "這個資源組合尚未加入資源。";
+        selectedList.appendChild(none);
+      } else {
+        resourceIds.forEach((resourceId) => {
+          const resource = resourceById(resourceId);
+          const row = document.createElement("div");
+          row.className = "workbench-resource-row";
+          const text = document.createElement("div");
+          const strong = document.createElement("strong");
+          strong.textContent = resource ? resource.name : resourceId;
+          const metaLine = document.createElement("span");
+          metaLine.textContent = resource ? topicLabel(resource.category) : "資料尚未載入";
+          text.append(strong, metaLine);
+          const rowRemove = document.createElement("button");
+          rowRemove.type = "button";
+          rowRemove.textContent = "移除";
+          rowRemove.addEventListener("click", (event) => {
+            event.stopPropagation();
+            item.resourceIds = (item.resourceIds || []).filter((id) => id !== resourceId);
+            item.status = "draft";
+            item.shareUrl = "";
+            item.sharePageId = "";
+            item.updatedAt = nowIso();
+            applyPackageContext(item);
+            syncPackageFromState();
+            renderCards();
+            renderPackage();
+            renderWorkbench();
+          });
+          row.append(text, rowRemove);
+          selectedList.appendChild(row);
+        });
+      }
+      expanded.append(expandedTitle, selectedList);
+
+      card.append(head, meta, actions, expanded);
       list.appendChild(card);
     });
   }
@@ -872,14 +973,11 @@
       renderPackage();
       renderWorkbench();
     });
-    $("generateResult").addEventListener("click", async () => {
-      syncPackageFromState();
-      if (!state.packageIds.size) {
-        $("packageStatus").textContent = "請先加入至少一筆資源，再產生資源包結果。";
-        return;
-      }
-      await submitResourcePackage();
+    document.querySelectorAll("[data-card-size]").forEach((button) => {
+      button.addEventListener("click", () => setCardSize(button.dataset.cardSize || "medium"));
     });
+    renderCardSizeControls();
+    $("saveDraftButton").addEventListener("click", updateCurrentDraft);
   }
 
   function matchesResource(resource) {
@@ -1034,6 +1132,10 @@
   function renderCards() {
     const topic = getCurrentTopic();
     const cards = $("cards");
+    state.cardSize = normalizeCardSize(state.cardSize);
+    cards.classList.remove("card-size-small", "card-size-medium", "card-size-large");
+    cards.classList.add("card-size-" + state.cardSize);
+    renderCardSizeControls();
     const scoredResults = sortResults(state.resources.filter(matchesResource));
     const results = scoredResults.map((item) => item.resource);
     $("currentScope").textContent = topic.title + "資源";
@@ -1206,7 +1308,25 @@
     window.location.href = "./resource-package-result.html?" + params.toString();
   }
 
-  async function submitResourcePackage() {
+  async function openOrCreatePackageResult(item, button) {
+    if (item.shareUrl && item.status === "result_ready") {
+      window.open(item.shareUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (item.status === "result_pending" && !item.shareUrl) {
+      $("packageStatus").textContent = "結果產生中，稍後可再按查看結果。";
+      return;
+    }
+    if (!item.resourceIds || !item.resourceIds.length) {
+      $("packageStatus").textContent = "請先加入至少一筆資源，再查看結果。";
+      return;
+    }
+    applyPackageContext(item);
+    renderPackage();
+    await submitResourcePackage(button);
+  }
+
+  async function submitResourcePackage(sourceButton) {
     const item = currentPackage();
     if (state.draftSaveTimer) {
       window.clearTimeout(state.draftSaveTimer);
@@ -1227,10 +1347,12 @@
       resultChannelId: state.resultChannelId,
       status: "result_pending",
     };
-    const button = $("generateResult");
-    const oldText = button.textContent;
-    button.disabled = true;
-    button.textContent = "正在產生...";
+    const button = sourceButton || null;
+    const oldText = button ? button.textContent : "";
+    if (button) {
+      button.disabled = true;
+      button.textContent = "正在產生...";
+    }
     if (!state.sessionValid) {
       $("packageStatus").textContent = "session 無效或 API 未連上，正在產生本機預覽結果。此結果不會進 Discord 私密 QR。";
       openLocalResult(fallbackReason());
@@ -1264,6 +1386,39 @@
       console.error(error);
       $("packageStatus").textContent = "正式發布失敗，改產生本機預覽結果。此結果不會進 Discord 私密 QR。";
       openLocalResult(error.message || "api_failed");
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = oldText;
+      }
+    }
+  }
+
+  async function updateCurrentDraft() {
+    syncPackageFromState();
+    if (state.draftSaveTimer) {
+      window.clearTimeout(state.draftSaveTimer);
+      state.draftSaveTimer = null;
+    }
+    const button = $("saveDraftButton");
+    const oldText = button.textContent;
+    button.disabled = true;
+    button.textContent = "儲存中...";
+    try {
+      writePackages();
+      if (state.sessionValid && state.packageIds.size) {
+        const saved = await saveDraftNow();
+        if (!saved) throw new Error("draft_save_failed");
+        $("packageStatus").textContent = "已更新儲存。草稿會保存到我的資源組合。";
+      } else if (!state.packageIds.size) {
+        $("packageStatus").textContent = "已更新本機暫存。尚未加入資源。";
+      } else {
+        $("packageStatus").textContent = "已更新本機暫存。未連結 Discord，不能保存到個人工作台。";
+      }
+      renderWorkbench();
+    } catch (error) {
+      console.info("manual draft save failed", error);
+      $("packageStatus").textContent = "更新儲存失敗，可先繼續使用本機暫存。";
     } finally {
       button.disabled = false;
       button.textContent = oldText;

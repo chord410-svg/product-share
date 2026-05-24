@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260524-card-size-workbench-actions">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260524-output-tabs-return-session">
 </head>
 <body>
   <header class="topbar">
@@ -153,22 +153,9 @@
           </label>
           <p class="privacy-hint">請勿填姓名、電話、身分證、完整地址。</p>
           <p class="muted-text" id="packageStatus">尚未加入資源。</p>
-          <div class="package-list-head">
-            <span>已選資源清單</span>
-            <small>點擊項目可移除</small>
-          </div>
-          <div id="packageItems" class="package-items"></div>
         </div>
         <div class="current-package-actions">
-          <label class="field">
-            <span>輸出格式</span>
-            <select id="packageMode">
-              <option value="family">家屬版資源包</option>
-              <option value="phone">電話確認清單</option>
-              <option value="admin">行政申請清單</option>
-              <option value="handoff">交接摘要</option>
-            </select>
-          </label>
+          <p class="muted-text output-moved-note">輸出格式已移到 Web B 結果頁，可在結果頁切換家屬版、電話確認、行政清單、交接摘要與完整資料。</p>
           <button type="button" id="saveDraftButton">更新儲存</button>
         </div>
       </div>
@@ -225,6 +212,6 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260524-card-size-workbench-actions"></script>
+  <script src="./resource-nav.js?v=20260524-output-tabs-return-session"></script>
 </body>
 </html>

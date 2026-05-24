@@ -1,8 +1,9 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const CARD_SIZE_KEY = "resource_nav_card_size_v1";
+  const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260524-card-size-workbench-actions";
+  const RESOURCE_DATA_VERSION = "20260524-output-tabs-return-session";
   const DRAFT_SAVE_DELAY_MS = 700;
   const state = {
     topics: [],
@@ -115,6 +116,28 @@
   function apiUrl(path) {
     if (!state.apiBase) return "";
     return state.apiBase + path;
+  }
+
+  function rememberSessionEntryUrl() {
+    if (!state.sessionToken || !state.apiBase) return;
+    try {
+      const currentParams = new URLSearchParams(window.location.search);
+      const params = new URLSearchParams();
+      if (state.category) params.set("category", state.category);
+      if (state.selectedTopics.size) params.set("topics", Array.from(state.selectedTopics).join(","));
+      if (currentParams.get("channel_id")) params.set("channel_id", currentParams.get("channel_id"));
+      if (state.guildId) params.set("guild", state.guildId);
+      if (state.resultChannelId) params.set("result_channel", state.resultChannelId);
+      if (state.district) params.set("district", state.district);
+      params.set("source", "discord");
+      params.set("session", state.sessionToken);
+      params.set("api_base", state.apiBase);
+      const entryUrl = "./resource-nav.html?" + params.toString();
+      sessionStorage.setItem(LAST_SESSION_ENTRY_KEY, entryUrl);
+      localStorage.setItem(LAST_SESSION_ENTRY_KEY, entryUrl);
+    } catch (error) {
+      console.info("remember resource nav entry failed", error);
+    }
   }
 
   async function apiFetch(path, options) {
@@ -278,6 +301,7 @@
       state.sessionValid = true;
       state.sessionFailureReason = "";
       state.sessionUser = data.user || null;
+      rememberSessionEntryUrl();
       renderIdentity("linked");
       loginStatus.textContent = "已連結 Discord：" + identityText() + "。草稿與結果會保存到你的資源組合工作台。";
       renderSessionDebug();
@@ -381,6 +405,19 @@
 
   function resourceById(id) {
     return state.resources.find((resource) => resource.id === id) || null;
+  }
+
+  function categoryAccent(category) {
+    const colors = {
+      care_professional: "#0f8f5f",
+      transport: "#2563eb",
+      assistive_accessibility: "#7c3aed",
+      multi_professional: "#b7791f",
+      informal: "#dc6b19",
+      foreign_caregiver: "#c026d3",
+      other: "#0f766e",
+    };
+    return colors[category] || "#0f766e";
   }
 
   function selectedPackageResources() {
@@ -500,7 +537,7 @@
       guildId: state.guildId,
       resultChannelId: state.resultChannelId,
       status: "draft",
-      outputMode: $("packageMode") ? $("packageMode").value : "family",
+      outputMode: "family",
       shareUrl: "",
       sharePageId: "",
       createdAt: nowIso(),
@@ -526,7 +563,7 @@
     item.derivedIdentityTags = derivedIdentityTags();
     item.guildId = state.guildId;
     item.resultChannelId = state.resultChannelId;
-    item.outputMode = $("packageMode") ? $("packageMode").value : item.outputMode || "family";
+    item.outputMode = item.outputMode || "family";
     if (item.status !== "result_pending" && item.status !== "result_ready") item.status = "draft";
     item.updatedAt = nowIso();
     writePackages();
@@ -550,7 +587,6 @@
     state.smartQueryAppliedText = item.smartQueryAppliedAt ? state.smartQueryText : "";
     state.guildId = item.guildId || state.guildId;
     state.resultChannelId = item.resultChannelId || state.resultChannelId;
-    if ($("packageMode")) $("packageMode").value = item.outputMode || "family";
     normalizeCategory();
     normalizeSelectedTopics();
   }
@@ -651,7 +687,7 @@
       const titleWrap = document.createElement("div");
       const eyebrow = document.createElement("p");
       eyebrow.className = "eyebrow";
-      eyebrow.textContent = modeLabel(item.outputMode) + "｜" + (item.district || "未指定地區");
+      eyebrow.textContent = "資源組合｜" + (item.district || "未指定地區");
       const title = document.createElement("h3");
       title.textContent = item.name || "臨時資源包";
       titleWrap.append(eyebrow, title);
@@ -749,11 +785,13 @@
           const resource = resourceById(resourceId);
           const row = document.createElement("div");
           row.className = "workbench-resource-row";
+          row.style.setProperty("--row-accent", categoryAccent(resource ? resource.category : ""));
           const text = document.createElement("div");
           const strong = document.createElement("strong");
           strong.textContent = resource ? resource.name : resourceId;
           const metaLine = document.createElement("span");
-          metaLine.textContent = resource ? topicLabel(resource.category) : "資料尚未載入";
+          const confidence = resource ? (resource.confidence || resource.source_type || "待確認") : "資料尚未載入";
+          metaLine.textContent = resource ? topicLabel(resource.category) + "｜" + confidence : "資料尚未載入";
           text.append(strong, metaLine);
           const rowRemove = document.createElement("button");
           rowRemove.type = "button";
@@ -831,7 +869,7 @@
       urgency: item.urgency || state.urgency,
       smartQueryText: item.smartQueryText || state.smartQueryText,
       resourceIds: item.resourceIds || Array.from(state.packageIds),
-      outputMode: item.outputMode || ($("packageMode") ? $("packageMode").value : "family"),
+      outputMode: item.outputMode || "family",
       guildId: item.guildId || state.guildId,
       resultChannelId: item.resultChannelId || state.resultChannelId,
       ...(overrides || {}),
@@ -967,11 +1005,6 @@
     });
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !$("helpDialog").hidden) closeHelpDialog();
-    });
-    $("packageMode").addEventListener("change", () => {
-      syncPackageFromState();
-      renderPackage();
-      renderWorkbench();
     });
     document.querySelectorAll("[data-card-size]").forEach((button) => {
       button.addEventListener("click", () => setCardSize(button.dataset.cardSize || "medium"));
@@ -1342,7 +1375,7 @@
       urgency: state.urgency,
       smartQueryText: state.smartQueryText,
       resourceIds: Array.from(state.packageIds),
-      outputMode: $("packageMode").value,
+      outputMode: item.outputMode || "family",
       guildId: state.guildId,
       resultChannelId: state.resultChannelId,
       status: "result_pending",
@@ -1428,33 +1461,16 @@
   function renderPackage() {
     renderPackageManager();
     const items = selectedPackageResources();
-    const wrap = $("packageItems");
     const item = currentPackage();
     const countText = items.length + " 筆";
-    wrap.innerHTML = "";
     $("packageNameInput").value = item.name || defaultPackageName();
     $("packageCount").textContent = countText;
     const saveHint = state.sessionValid
       ? (state.packageSaveState === "saving" ? "草稿保存中。" : state.packageSaveState === "failed" ? "草稿保存失敗，可繼續使用本機暫存。" : "草稿會保存到我的資源組合。")
       : "未連結 Discord，僅能本機暫存。";
-    $("packageStatus").textContent = (items.length
-      ? "已加入 " + items.length + " 筆資源。"
-      : "尚未加入資源。") + " " + saveHint;
-
-    items.forEach((resource) => {
-      const row = document.createElement("button");
-      row.type = "button";
-      row.className = "package-item";
-      row.textContent = "移除｜" + resource.name;
-      row.addEventListener("click", () => {
-        state.packageIds.delete(resource.id);
-        syncPackageFromState();
-        renderCards();
-        renderPackage();
-        renderWorkbench();
-      });
-      wrap.appendChild(row);
-    });
+    $("packageStatus").textContent = items.length
+      ? "已加入 " + items.length + " 筆資源，可到下方資源組合卡片展開查看。 " + saveHint
+      : "尚未加入資源。 " + saveHint;
 
     renderDerivedIdentityChips();
     updateGoogleButton();

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>資源包結果｜長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260522-result-button">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260524-output-tabs-return-session">
 </head>
 <body>
   <header class="topbar">
@@ -41,37 +41,52 @@
         </div>
       </div>
 
+      <section class="result-output-switcher" aria-label="輸出格式切換">
+        <div>
+          <p class="eyebrow">輸出格式</p>
+          <h3>選擇這份結果要怎麼使用</h3>
+          <p id="resultModeHelp" class="muted-text">完整資料會顯示全部區塊；其他模式只聚焦在當下要複製或處理的內容。</p>
+        </div>
+        <div class="result-mode-tabs" role="tablist" aria-label="資源包輸出格式">
+          <button type="button" data-result-mode="family" role="tab">家屬版</button>
+          <button type="button" data-result-mode="phone" role="tab">電話確認</button>
+          <button type="button" data-result-mode="admin" role="tab">行政清單</button>
+          <button type="button" data-result-mode="handoff" role="tab">交接摘要</button>
+          <button type="button" data-result-mode="full" role="tab">完整資料</button>
+        </div>
+      </section>
+
       <div class="conclusion-grid">
-        <article>
+        <article data-output-section="full handoff">
           <h3>建議優先順序</h3>
           <ol id="priorityList"></ol>
         </article>
-        <article>
+        <article data-output-section="full phone">
           <h3>先打哪幾通電話</h3>
           <ol id="phonePlanList"></ol>
           <div class="panel-actions">
             <button type="button" id="copyPhone">複製電話確認</button>
           </div>
         </article>
-        <article>
+        <article data-output-section="full family">
           <h3>可傳給家屬的短訊</h3>
           <pre id="familyMessage" class="output-preview"></pre>
           <div class="panel-actions">
             <button type="button" id="copyFamily">複製家屬版</button>
           </div>
         </article>
-        <article>
+        <article data-output-section="full admin">
           <h3>需要先準備的文件</h3>
           <ul id="documentList"></ul>
           <div class="panel-actions">
             <button type="button" id="copyAdmin">複製行政清單</button>
           </div>
         </article>
-        <article>
+        <article data-output-section="full handoff">
           <h3>風險提醒</h3>
           <ul id="riskList"></ul>
         </article>
-        <article>
+        <article data-output-section="full handoff">
           <h3>交接摘要</h3>
           <pre id="handoffMessage" class="output-preview"></pre>
           <div class="panel-actions">
@@ -80,7 +95,7 @@
         </article>
       </div>
 
-      <div class="conclusion-details">
+      <div class="conclusion-details" data-output-section="full">
         <h3>完整資料集合</h3>
         <div id="resultDetails"></div>
       </div>
@@ -88,6 +103,6 @@
   </main>
 
   <textarea id="resultCopyScratch" class="copy-scratch" aria-hidden="true"></textarea>
-  <script src="./resource-package-result.js?v=20260522-result-button"></script>
+  <script src="./resource-package-result.js?v=20260524-output-tabs-return-session"></script>
 </body>
 </html>

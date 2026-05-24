@@ -127,13 +127,14 @@
   }
 
   function directionsUrl(data, vendor) {
-    if (vendor.directions_url) return vendor.directions_url;
     const originPlace = data.home.geocode_provider === "district_centroid" && data.address
       ? data.address
       : `${data.home.lat},${data.home.lng}`;
-    const destinationPlace = vendor.geocode_provider === "district_centroid" && vendor.address
-      ? vendor.address
-      : `${vendor.lat},${vendor.lng}`;
+    const destinationPlace = vendor.name && vendor.address
+      ? `${vendor.name} ${vendor.address}`
+      : vendor.geocode_provider === "district_centroid" && vendor.address
+        ? vendor.address
+        : vendor.directions_url || `${vendor.lat},${vendor.lng}`;
     const query = new URLSearchParams({
       api: "1",
       origin: originPlace,
@@ -141,6 +142,11 @@
       travelmode: "driving"
     });
     return `https://www.google.com/maps/dir/?${query.toString()}`;
+  }
+
+  function placeSearchUrl(vendor) {
+    const query = [vendor.name, vendor.address].filter(Boolean).join(" ");
+    return `https://www.google.com/maps/search/?${new URLSearchParams({ api: "1", query }).toString()}`;
   }
 
   function allDirectionsUrl(data) {
@@ -163,6 +169,17 @@
     return `https://www.google.com/maps/dir/?${query.toString()}`;
   }
 
+  function hasDistrictCentroid(data) {
+    return data.home.geocode_provider === "district_centroid"
+      || (data.vendors || []).some((vendor) => vendor.geocode_provider === "district_centroid");
+  }
+
+  function experimentalMultiRouteUrl(data) {
+    const allUrl = data.map_url || allDirectionsUrl(data);
+    if (!allUrl || allUrl.length > 1800 || hasDistrictCentroid(data)) return "";
+    return allUrl;
+  }
+
   function distanceLabel(vendor) {
     if (vendor.route_distance_meters !== null && vendor.route_distance_meters !== undefined) {
       const km = Number(vendor.route_distance_meters) / 1000;
@@ -178,38 +195,45 @@
     const fallbackNote = data.home.geocode_provider === "district_centroid"
       ? '<p class="meta warning">目前使用行政區中心點定位；正式最近距離需完成 Google 地址定位後才會更準。</p>'
       : "";
-    const allUrl = data.map_url || allDirectionsUrl(data);
+    const experimentalRoute = experimentalMultiRouteUrl(data);
     statusEl.innerHTML = `
       <strong>住家定位</strong><br>
       ${escapeHtml(data.address)}<br>
       <span class="meta">${escapeHtml(data.home.geocode_provider)} / ${escapeHtml(data.home.geocode_precision)}</span>
       ${fallbackNote}
-      ${allUrl ? `<div class="actions"><a class="button" href="${allUrl}" target="_blank" rel="noopener">用 Google Maps 開啟全部點位</a></div>` : ""}
+      <p class="meta">名單來源：新北市輔具資源中心特約廠商清冊。</p>
+      ${experimentalRoute ? `<div class="actions"><a class="button secondary" href="${experimentalRoute}" target="_blank" rel="noopener">開啟多點路線（實驗）</a></div>` : ""}
     `;
     listEl.innerHTML = data.vendors.map((vendor, index) => {
       const services = (vendor.service_types || []).join("、") || "未標示";
       const route = directionsUrl(data, vendor);
+      const place = placeSearchUrl(vendor);
       return `
         <article class="vendor">
           <h2>${index + 1}. ${escapeHtml(vendor.name)}</h2>
           <p class="meta">${escapeHtml(vendor.district)}｜${distanceLabel(vendor)}｜${escapeHtml(services)}</p>
           <p class="meta">${escapeHtml(vendor.address)}<br>${escapeHtml(vendor.phone || "無電話")}</p>
           <div class="actions">
+            <a class="button" href="${place}" target="_blank" rel="noopener">查看 Google 地圖</a>
             <a class="button secondary" href="${route}" target="_blank" rel="noopener">導航到這裡</a>
           </div>
         </article>
       `;
     }).join("");
-    summaryEl.textContent = `住家與最近 ${data.vendors.length} 家特約地點。距離為估算值，實際路程請以 Google Maps 為準。`;
+    summaryEl.textContent = `住家與 ${data.vendors.length} 家特約地點清單。距離為估算值，實際路程請以 Google Maps 為準。`;
   }
 
   function renderMapFallback(data, message) {
-    const allUrl = data && (data.map_url || allDirectionsUrl(data));
+    const vendors = data && Array.isArray(data.vendors) ? data.vendors.slice(0, 5) : [];
     mapEl.innerHTML = `
       <div class="status">
         <strong>${escapeHtml(message)}</strong><br>
-        ${allUrl ? "目前先用外開 Google Maps 路線查看住家與特約地點。" : "目前沒有可用路線連結。"}
-        ${allUrl ? `<div class="actions"><a class="button" href="${allUrl}" target="_blank" rel="noopener">開啟 Google Maps 多點路線</a></div>` : ""}
+        請從左側選一家店開 Google Maps；下方也提供前 5 家快速查看。
+        <div class="quick-links">
+          ${vendors.map((vendor, index) => (
+            `<a class="button secondary" href="${placeSearchUrl(vendor)}" target="_blank" rel="noopener">${index + 1}. ${escapeHtml(vendor.name)}</a>`
+          )).join("")}
+        </div>
       </div>
     `;
   }
@@ -235,6 +259,11 @@
         label: "家",
         title: "住家"
       });
+      const infoWindow = new google.maps.InfoWindow();
+      homeMarker.addListener("click", () => {
+        infoWindow.setContent(`<strong>住家</strong><br>${escapeHtml(data.address)}`);
+        infoWindow.open(map, homeMarker);
+      });
       bounds.extend(homeMarker.getPosition());
       data.vendors.forEach((vendor, index) => {
         const position = { lat: Number(vendor.lat), lng: Number(vendor.lng) };
@@ -243,6 +272,16 @@
           map,
           label: String(index + 1),
           title: vendor.name
+        });
+        marker.addListener("click", () => {
+          const services = (vendor.service_types || []).join("、") || "未標示";
+          infoWindow.setContent(
+            `<strong>${index + 1}. ${escapeHtml(vendor.name)}</strong><br>` +
+            `${escapeHtml(vendor.address)}<br>` +
+            `${escapeHtml(vendor.phone || "無電話")}<br>` +
+            `${escapeHtml(services)}`
+          );
+          infoWindow.open(map, marker);
         });
         bounds.extend(marker.getPosition());
       });

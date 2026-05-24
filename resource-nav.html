@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260524-workbench-merge">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260524-card-size-workbench-actions">
 </head>
 <body>
   <header class="topbar">
@@ -103,6 +103,12 @@
           <h2 id="currentScope">資源查詢</h2>
           <p id="scopeMeta">正在載入資料...</p>
         </div>
+        <div class="card-size-control" role="group" aria-label="資源卡片大小">
+          <span>卡片大小</span>
+          <button type="button" data-card-size="small">小</button>
+          <button type="button" data-card-size="medium">中</button>
+          <button type="button" data-card-size="large">大</button>
+        </div>
       </section>
 
       <section id="cards" class="cards" aria-live="polite">
@@ -126,7 +132,7 @@
         <div>
           <p class="eyebrow">Current Resource Pack</p>
           <h2>目前編輯中的資源組合</h2>
-          <p class="muted-text" id="loginStatus">請從 Discord 資源導航按鈕開啟，才能儲存並產生資源包結果。</p>
+          <p class="muted-text" id="loginStatus">請從 Discord 資源導航按鈕開啟，才能儲存並建立資源包結果。</p>
         </div>
         <p class="package-count" id="packageCount">0 筆</p>
       </div>
@@ -163,7 +169,7 @@
               <option value="handoff">交接摘要</option>
             </select>
           </label>
-          <button type="button" id="generateResult">產生資源包結果</button>
+          <button type="button" id="saveDraftButton">更新儲存</button>
         </div>
       </div>
     </section>
@@ -219,6 +225,6 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260524-workbench-merge"></script>
+  <script src="./resource-nav.js?v=20260524-card-size-workbench-actions"></script>
 </body>
 </html>

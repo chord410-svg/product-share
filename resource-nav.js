@@ -3,7 +3,7 @@
   const CARD_SIZE_KEY = "resource_nav_card_size_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260524-output-tabs-return-session";
+  const RESOURCE_DATA_VERSION = "20260524-exchange-tab";
   const DRAFT_SAVE_DELAY_MS = 700;
   const state = {
     topics: [],
@@ -33,6 +33,9 @@
     activeView: "nav",
     cardSize: localStorage.getItem(CARD_SIZE_KEY) || "medium",
     expandedPackageIds: new Set(),
+    expandedQrPackageIds: new Set(),
+    qrDataUrls: new Map(),
+    debugMode: false,
     draftSaveTimer: null,
     packageSaveState: "idle",
   };
@@ -105,6 +108,7 @@
     state.guildId = params.get("guild") || "";
     state.resultChannelId = params.get("result_channel") || "";
     state.source = source;
+    state.debugMode = params.get("debug") === "1";
     state.hasSessionParam = Boolean(state.sessionToken);
     state.hasApiBaseParam = Boolean(state.apiBase);
     state.apiBaseSource = state.apiBase ? "url" : "missing";
@@ -217,6 +221,10 @@
   }
 
   function renderSessionDebug() {
+    const debugPanel = $("sessionDebug");
+    if (debugPanel) {
+      debugPanel.hidden = state.sessionValid && !state.debugMode;
+    }
     const sessionStatus = $("sessionTokenStatus");
     const apiBaseStatus = $("apiBaseStatus");
     const verifyStatus = $("sessionVerifyStatus");
@@ -447,6 +455,237 @@
     area.remove();
   }
 
+  function sourceDomain(url) {
+    try {
+      return new URL(url).hostname;
+    } catch (error) {
+      return "外部網站";
+    }
+  }
+
+  function confirmOpenSource(resource, url) {
+    if (state.cardSize !== "small") return true;
+    return window.confirm(
+      "即將開啟來源網站：\n\n" +
+      (resource.name || "未命名資源") +
+      "\n" +
+      sourceDomain(url) +
+      "\n\n小卡片模式容易誤觸，確定要離開目前頁面嗎？"
+    );
+  }
+
+  async function copyPackageLink(item, button) {
+    if (!item.shareUrl) return;
+    const oldText = button.textContent;
+    try {
+      await copyText(item.shareUrl);
+      button.textContent = "已複製";
+      button.classList.add("is-done");
+      window.setTimeout(() => {
+        button.textContent = oldText;
+        button.classList.remove("is-done");
+      }, 1200);
+    } catch (error) {
+      button.textContent = "複製失敗";
+      window.setTimeout(() => { button.textContent = oldText; }, 1200);
+    }
+  }
+
+  function apiHeaders(extra) {
+    return {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + state.sessionToken,
+      ...(extra || {}),
+    };
+  }
+
+  function downloadTextFile(filename, mimeType, text) {
+    const blob = new Blob([text], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 500);
+  }
+
+  function safeFilename(text, suffix) {
+    const base = String(text || "resource-pack")
+      .replace(/[\\/:*?"<>|]+/g, "-")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .slice(0, 80)
+      .replace(/^-|-$/g, "") || "resource-pack";
+    return base + "." + suffix;
+  }
+
+  async function exportPackage(item, format, button) {
+    if (!state.sessionValid) {
+      window.alert("請從 Discord 重新開啟入口後再匯出封包。");
+      return;
+    }
+    const oldText = button.textContent;
+    button.disabled = true;
+    button.textContent = "匯出中...";
+    try {
+      const response = await fetch(
+        apiUrl("/api/v1/resource/packages/" + encodeURIComponent(item.id) + "/export?format=" + encodeURIComponent(format)),
+        { method: "GET", headers: apiHeaders({}) }
+      );
+      const text = await response.text();
+      if (!response.ok) throw new Error(text || "export_failed");
+      const isMarkdown = format === "markdown" || format === "md";
+      downloadTextFile(
+        safeFilename(item.name, isMarkdown ? "resourcepack.md" : "resourcepack.json"),
+        isMarkdown ? "text/markdown;charset=utf-8" : "application/json;charset=utf-8",
+        text
+      );
+      button.textContent = "已匯出";
+      button.classList.add("is-done");
+      window.setTimeout(() => {
+        button.textContent = oldText;
+        button.classList.remove("is-done");
+      }, 1200);
+    } catch (error) {
+      console.info("resource package export failed", error);
+      button.textContent = "匯出失敗";
+      window.setTimeout(() => { button.textContent = oldText; }, 1400);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  async function importResourcePackPayload(payload, button) {
+    if (!state.sessionValid) {
+      $("importResourcePackStatus").textContent = "請從 Discord 重新開啟入口後再匯入到個人工作台。";
+      return;
+    }
+    const oldText = button ? button.textContent : "";
+    if (button) {
+      button.disabled = true;
+      button.textContent = "匯入中...";
+    }
+    try {
+      const response = await fetch(apiUrl("/api/v1/resource/packages/import"), {
+        method: "POST",
+        headers: apiHeaders({}),
+        body: JSON.stringify(payload),
+      });
+      let data = await response.json().catch(() => ({}));
+      if (response.status === 409 && data.error === "personal_data_warning") {
+        const ok = window.confirm(
+          "封包名稱或備註疑似含個資：\n\n" +
+          (Array.isArray(data.warnings) ? data.warnings.join("、") : "未列明") +
+          "\n\n請先確認不含姓名、電話、身分證、完整地址。仍要匯入成自己的草稿嗎？"
+        );
+        if (!ok) {
+          $("importResourcePackStatus").textContent = "已取消匯入，請先清理封包內容。";
+          return;
+        }
+        const retry = await fetch(apiUrl("/api/v1/resource/packages/import"), {
+          method: "POST",
+          headers: apiHeaders({}),
+          body: JSON.stringify({ ...payload, allowPersonalData: true }),
+        });
+        data = await retry.json().catch(() => ({}));
+        if (!retry.ok || data.ok === false) throw new Error(data.error || "import_failed");
+      } else if (!response.ok || data.ok === false) {
+        throw new Error(data.error || "import_failed");
+      }
+      const imported = normalizeServerPackage(data.package || {});
+      state.packages = [imported, ...state.packages.filter((item) => item.id !== imported.id)];
+      applyPackageContext(imported);
+      render();
+      renderPackage();
+      renderWorkbench();
+      renderExchange();
+      $("importResourcePackStatus").textContent = "已匯入成新的草稿：" + imported.name;
+      switchView("workbench");
+    } catch (error) {
+      $("importResourcePackStatus").textContent = "匯入失敗：" + (error.message || "格式不支援或封包不完整");
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = oldText;
+      }
+    }
+  }
+
+  function detectImportFormat(text, filename) {
+    const lowerName = String(filename || "").toLowerCase();
+    const trimmed = String(text || "").trim();
+    if (lowerName.endsWith(".md") || lowerName.endsWith(".markdown") || trimmed.includes("RESOURCE_PACK_MANIFEST")) {
+      return "markdown";
+    }
+    return "json";
+  }
+
+  async function importResourcePackFromInputs(button) {
+    const fileInput = $("resourcePackFileInput");
+    const pasteInput = $("resourcePackPasteInput");
+    const urlInput = $("resourcePackUrlInput");
+    const file = fileInput && fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
+    const url = urlInput ? urlInput.value.trim() : "";
+    if (file) {
+      const text = await file.text();
+      await importResourcePackPayload({ format: detectImportFormat(text, file.name), content: text }, button);
+      return;
+    }
+    const pasted = pasteInput ? pasteInput.value.trim() : "";
+    if (pasted) {
+      await importResourcePackPayload({ format: detectImportFormat(pasted, ""), content: pasted }, button);
+      return;
+    }
+    if (url) {
+      await importResourcePackPayload({ format: "url", url }, button);
+      return;
+    }
+    $("importResourcePackStatus").textContent = "請先選擇檔案、貼上封包內容，或貼上 Web B 結果連結。";
+  }
+
+  async function ensurePackageQr(item, button) {
+    if (!item.id || !item.shareUrl || state.qrDataUrls.has(item.id)) return;
+    if (!state.sessionValid) throw new Error("auth_required");
+    const oldText = button ? button.textContent : "";
+    if (button) {
+      button.disabled = true;
+      button.textContent = "產生中...";
+    }
+    try {
+      const data = await apiFetch("/api/v1/resource/packages/" + encodeURIComponent(item.id) + "/qr", {
+        method: "GET",
+        headers: {},
+      });
+      const raw = data.qr_png_base64 || "";
+      if (!raw) throw new Error(data.error || "qr_unavailable");
+      state.qrDataUrls.set(item.id, "data:image/png;base64," + raw);
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = oldText;
+      }
+    }
+  }
+
+  async function togglePackageQr(item, button) {
+    if (!item.shareUrl || item.status !== "result_ready") return;
+    if (state.expandedQrPackageIds.has(item.id)) {
+      state.expandedQrPackageIds.delete(item.id);
+      renderWorkbench();
+      return;
+    }
+    try {
+      await ensurePackageQr(item, button);
+      state.expandedQrPackageIds.add(item.id);
+    } catch (error) {
+      state.qrDataUrls.set(item.id, "");
+      state.expandedQrPackageIds.add(item.id);
+    }
+    renderWorkbench();
+  }
+
   function openHelpDialog(kind) {
     const content = HELP_CONTENT[kind];
     if (!content) return;
@@ -485,6 +724,8 @@
           outputMode: String(item.outputMode || "family"),
           shareUrl: String(item.shareUrl || ""),
           sharePageId: String(item.sharePageId || ""),
+          items: Array.isArray(item.items) ? item.items : [],
+          outputs: Array.isArray(item.outputs) ? item.outputs : [],
         }))
         .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
         .slice(0, MAX_PACKAGES);
@@ -540,6 +781,8 @@
       outputMode: "family",
       shareUrl: "",
       sharePageId: "",
+      items: [],
+      outputs: [],
       createdAt: nowIso(),
       updatedAt: nowIso(),
     };
@@ -596,16 +839,18 @@
   }
 
   function switchView(view) {
-    state.activeView = view === "workbench" ? "workbench" : "nav";
-    const isNav = state.activeView === "nav";
-    $("navView").hidden = !isNav;
-    $("workbenchView").hidden = isNav;
-    $("navView").classList.toggle("is-active", isNav);
-    $("workbenchView").classList.toggle("is-active", !isNav);
-    $("navTabButton").classList.toggle("is-active", isNav);
-    $("workbenchTabButton").classList.toggle("is-active", !isNav);
-    $("navTabButton").setAttribute("aria-selected", isNav ? "true" : "false");
-    $("workbenchTabButton").setAttribute("aria-selected", isNav ? "false" : "true");
+    const allowedViews = new Set(["nav", "workbench", "exchange"]);
+    state.activeView = allowedViews.has(view) ? view : "nav";
+    document.querySelectorAll(".tab-panel").forEach((panel) => {
+      const isActive = panel.id === state.activeView + "View";
+      panel.hidden = !isActive;
+      panel.classList.toggle("is-active", isActive);
+    });
+    document.querySelectorAll(".view-tab").forEach((button) => {
+      const isActive = button.dataset.view === state.activeView;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
     if (document.activeElement && document.activeElement.classList.contains("view-tab")) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -613,6 +858,9 @@
       renderPackage();
       if (state.sessionValid) loadRemotePackages();
       renderWorkbench();
+    } else if (state.activeView === "exchange") {
+      if (state.sessionValid) loadRemotePackages();
+      renderExchange();
     }
   }
 
@@ -724,12 +972,12 @@
         event.stopPropagation();
         await openOrCreatePackageResult(item, view);
       });
-      const copy = document.createElement("button");
-      copy.type = "button";
-      copy.className = "copy-action";
-      copy.textContent = "另存副本";
-      copy.title = "複製這包資源成新的草稿，不改原本紀錄。";
-      copy.addEventListener("click", async (event) => {
+      const duplicateButton = document.createElement("button");
+      duplicateButton.type = "button";
+      duplicateButton.className = "copy-action";
+      duplicateButton.textContent = "複製此副本";
+      duplicateButton.title = "複製這包資源成新的草稿，不改原本紀錄。";
+      duplicateButton.addEventListener("click", async (event) => {
         event.stopPropagation();
         const duplicate = {
           ...item,
@@ -738,6 +986,7 @@
           status: "draft",
           shareUrl: "",
           sharePageId: "",
+          outputs: [],
           createdAt: nowIso(),
           updatedAt: nowIso(),
         };
@@ -765,7 +1014,35 @@
           window.alert("刪除失敗，請稍後再試。");
         }
       });
-      actions.append(edit, view, copy, remove);
+      actions.append(edit, view, duplicateButton, remove);
+      if (item.status === "result_ready" && item.shareUrl) {
+        const copyLink = document.createElement("button");
+        copyLink.type = "button";
+        copyLink.className = "link-action";
+        copyLink.textContent = "複製連結";
+        copyLink.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          await copyPackageLink(item, copyLink);
+        });
+        const qrButton = document.createElement("button");
+        qrButton.type = "button";
+        qrButton.className = "qr-action";
+        qrButton.textContent = state.expandedQrPackageIds.has(item.id) ? "收合 QR CODE" : "查看 QR CODE";
+        qrButton.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          await togglePackageQr(item, qrButton);
+        });
+        const printButton = document.createElement("button");
+        printButton.type = "button";
+        printButton.className = "print-action";
+        printButton.textContent = "PDF/列印";
+        printButton.title = "開啟 Web B 結果頁後，可用瀏覽器列印或另存 PDF。";
+        printButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          window.open(item.shareUrl, "_blank", "noopener,noreferrer");
+        });
+        actions.append(copyLink, qrButton, printButton);
+      }
 
       const expanded = document.createElement("div");
       expanded.className = "workbench-expanded";
@@ -815,7 +1092,104 @@
       }
       expanded.append(expandedTitle, selectedList);
 
-      card.append(head, meta, actions, expanded);
+      const qrPanel = document.createElement("div");
+      qrPanel.className = "workbench-qr-panel";
+      qrPanel.hidden = !state.expandedQrPackageIds.has(item.id);
+      if (!qrPanel.hidden) {
+        const qrTitle = document.createElement("h4");
+        qrTitle.textContent = "QR CODE 與結果連結";
+        const dataUrl = state.qrDataUrls.get(item.id) || "";
+        if (dataUrl) {
+          const img = document.createElement("img");
+          img.src = dataUrl;
+          img.alt = item.name + " QR Code";
+          const link = document.createElement("a");
+          link.href = item.shareUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = item.shareUrl;
+          qrPanel.append(qrTitle, img, link);
+        } else {
+          const errorText = document.createElement("p");
+          errorText.className = "workbench-expanded-empty";
+          errorText.textContent = "QR 暫時無法產生，可先使用複製連結。";
+          qrPanel.append(qrTitle, errorText);
+        }
+      }
+
+      card.append(head, meta, actions, expanded, qrPanel);
+      list.appendChild(card);
+    });
+  }
+
+  function renderExchange() {
+    const status = $("exchangeStatus");
+    const list = $("exchangeExportList");
+    const empty = $("exchangeEmpty");
+    if (!status || !list || !empty) return;
+    list.innerHTML = "";
+    if (!state.sessionValid) {
+      status.textContent = "未連結 Discord，請回 Discord 重新開啟入口後再匯入或匯出資源副本。";
+      empty.hidden = false;
+      empty.textContent = "目前是未登入瀏覽，不能讀取個人資源組合，也不能匯入到個人工作台。";
+      return;
+    }
+    status.textContent = "目前可匯入到 " + identityText() + "，也可匯出自己的資源組合。";
+    const packages = state.packages.slice().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    empty.hidden = packages.length > 0;
+    empty.textContent = "目前沒有可匯出的資源組合。";
+    packages.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "exchange-card";
+      const head = document.createElement("div");
+      head.className = "exchange-card-head";
+      const titleWrap = document.createElement("div");
+      const eyebrow = document.createElement("p");
+      eyebrow.className = "eyebrow";
+      eyebrow.textContent = statusLabel(item.status) + "｜" + (item.district || "未指定地區");
+      const title = document.createElement("h3");
+      title.textContent = item.name || "臨時資源包";
+      titleWrap.append(eyebrow, title);
+      const count = document.createElement("span");
+      count.className = "package-count";
+      count.textContent = (item.resourceIds || []).length + " 筆";
+      head.append(titleWrap, count);
+
+      const meta = document.createElement("p");
+      meta.className = "muted-text";
+      meta.textContent = [
+        packageTopicText(item),
+        "更新 " + formatDateTime(item.updatedAt),
+      ].join("｜");
+
+      const actions = document.createElement("div");
+      actions.className = "exchange-actions";
+      const exportJson = document.createElement("button");
+      exportJson.type = "button";
+      exportJson.className = "export-action";
+      exportJson.textContent = "匯出封包 JSON";
+      exportJson.title = "下載可再次匯入的 .resourcepack.json。";
+      exportJson.addEventListener("click", async () => {
+        await exportPackage(item, "json", exportJson);
+      });
+      const exportMarkdown = document.createElement("button");
+      exportMarkdown.type = "button";
+      exportMarkdown.className = "export-action";
+      exportMarkdown.textContent = "匯出 Markdown";
+      exportMarkdown.title = "下載可閱讀的 Markdown，內含可還原封包區塊。";
+      exportMarkdown.addEventListener("click", async () => {
+        await exportPackage(item, "markdown", exportMarkdown);
+      });
+      const printButton = document.createElement("button");
+      printButton.type = "button";
+      printButton.className = "print-action";
+      printButton.textContent = "PDF/列印";
+      printButton.title = item.shareUrl ? "開啟 Web B 結果頁後，用瀏覽器列印或另存 PDF。" : "草稿會先產生 Web B 結果，再開啟列印頁。";
+      printButton.addEventListener("click", async () => {
+        await openOrCreatePackageResult(item, printButton);
+      });
+      actions.append(exportJson, exportMarkdown, printButton);
+      card.append(head, meta, actions);
       list.appendChild(card);
     });
   }
@@ -839,6 +1213,8 @@
       outputMode: String(record.output_mode || "family"),
       shareUrl: String(record.share_url || ""),
       sharePageId: String(record.share_page_id || ""),
+      items: Array.isArray(record.items) ? record.items : [],
+      outputs: Array.isArray(record.outputs) ? record.outputs : [],
       createdAt: record.created_at ? new Date(Number(record.created_at) * 1000).toISOString() : nowIso(),
       updatedAt: record.updated_at ? new Date(Number(record.updated_at) * 1000).toISOString() : nowIso(),
     };
@@ -851,6 +1227,7 @@
       const packages = Array.isArray(data.packages) ? data.packages.map(normalizeServerPackage).filter((item) => item.id) : [];
       state.packages = packages;
       renderWorkbench();
+      renderExchange();
       return packages;
     } catch (error) {
       console.info("resource packages load failed", error);
@@ -960,9 +1337,11 @@
   function setupFilters() {
     $("navTabButton").addEventListener("click", () => switchView("nav"));
     $("workbenchTabButton").addEventListener("click", () => switchView("workbench"));
+    $("exchangeTabButton").addEventListener("click", () => switchView("exchange"));
     $("refreshWorkbench").addEventListener("click", async () => {
       if (state.sessionValid) await loadRemotePackages();
       renderWorkbench();
+      renderExchange();
     });
     $("packageNameInput").addEventListener("input", (event) => {
       const item = currentPackage();
@@ -1011,6 +1390,15 @@
     });
     renderCardSizeControls();
     $("saveDraftButton").addEventListener("click", updateCurrentDraft);
+    $("importResourcePackButton").addEventListener("click", async () => {
+      await importResourcePackFromInputs($("importResourcePackButton"));
+    });
+    $("clearImportResourcePackButton").addEventListener("click", () => {
+      $("resourcePackFileInput").value = "";
+      $("resourcePackUrlInput").value = "";
+      $("resourcePackPasteInput").value = "";
+      $("importResourcePackStatus").textContent = "匯入會歸到目前 Discord 使用者底下。";
+    });
   }
 
   function matchesResource(resource) {
@@ -1214,6 +1602,12 @@
         link.target = "_blank";
         link.rel = "noopener noreferrer";
         link.textContent = resource.name;
+        link.addEventListener("click", (event) => {
+          if (!confirmOpenSource(resource, resource.source_url)) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        });
         title.appendChild(link);
       } else {
         title.textContent = resource.name;
@@ -1511,6 +1905,7 @@
     renderCategorySelect();
     renderTopicChips(topic);
     renderCards();
+    renderExchange();
   }
 
   async function init() {
@@ -1536,6 +1931,7 @@
       }
       render();
       renderWorkbench();
+      renderExchange();
     } catch (error) {
       $("scopeMeta").textContent = "資料載入失敗，請稍後再試。";
       $("cards").innerHTML = '<div class="empty">無法載入資源資料。</div>';

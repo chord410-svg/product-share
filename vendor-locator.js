@@ -316,25 +316,26 @@
   }
 
   async function loadShare() {
-    let lastError = null;
+    let staticError = null;
     for (const path of staticShareCandidates()) {
       try {
         return await fetchStaticShare(path);
       } catch (err) {
-        lastError = err;
+        staticError = err;
       }
     }
     const runtimeBases = await runtimeApiBases();
     const bases = unique([urlApiBase, ...runtimeBases]);
-    if (!bases.length) throw lastError || new Error("missing_api_base");
+    if (!bases.length) throw staticError || new Error("missing_api_base");
+    let apiError = null;
     for (const base of bases) {
       try {
         return await fetchShare(base);
       } catch (err) {
-        lastError = err;
+        apiError = err;
       }
     }
-    throw lastError || new Error("api_connection_failed");
+    throw staticError || apiError || new Error("api_connection_failed");
   }
 
   async function main() {

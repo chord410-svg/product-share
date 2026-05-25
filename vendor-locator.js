@@ -8,6 +8,7 @@
   const listEl = document.getElementById("vendorList");
   const mapEl = document.getElementById("map");
   const rawRuntimeUrl = "https://raw.githubusercontent.com/chord410-svg/product-share/main/resource-nav-runtime.json";
+  const STATIC_SHARE_RETRY_DELAYS_MS = [800, 1600, 3200, 5000, 8000];
 
   function inferApiBase() {
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
@@ -25,6 +26,17 @@
         seen.add(value);
         return true;
       });
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+  }
+
+  function renderStaticShareRetry(path, attempt, totalAttempts) {
+    const message = `正在等待分享資料發布（${attempt}/${totalAttempts}）`;
+    statusEl.innerHTML = `<strong>${escapeHtml(message)}</strong>`;
+    summaryEl.textContent = "GitHub Pages 資料包可能還在同步，系統會自動重試。";
+    mapEl.innerHTML = `<div class="status">${escapeHtml(message)}<br>${escapeHtml(path)}</div>`;
   }
 
   async function readRuntimeApiBase(url) {
@@ -72,20 +84,31 @@
   async function fetchStaticShare(path) {
     const cleanPath = normalizeStaticDataPath(path);
     if (!cleanPath) throw new Error("missing_static_share_path");
-    let response;
-    try {
-      response = await fetch(`${cleanPath}?v=${Date.now()}`, { cache: "no-store" });
-    } catch (err) {
-      const error = new Error("static_share_connection_failed");
-      error.cause = err;
-      throw error;
+    let lastError = null;
+    const totalAttempts = STATIC_SHARE_RETRY_DELAYS_MS.length + 1;
+    for (let attempt = 1; attempt <= totalAttempts; attempt += 1) {
+      if (attempt > 1) {
+        renderStaticShareRetry(cleanPath, attempt, totalAttempts);
+        await sleep(STATIC_SHARE_RETRY_DELAYS_MS[attempt - 2]);
+      }
+      let response;
+      try {
+        response = await fetch(`${cleanPath}?v=${Date.now()}`, { cache: "no-store" });
+      } catch (err) {
+        const error = new Error("static_share_connection_failed");
+        error.cause = err;
+        lastError = error;
+        continue;
+      }
+      if (!response.ok) {
+        const error = new Error("static_share_unavailable");
+        error.status = response.status;
+        lastError = error;
+        continue;
+      }
+      return validateSharePayload(await response.json());
     }
-    if (!response.ok) {
-      const error = new Error("static_share_unavailable");
-      error.status = response.status;
-      throw error;
-    }
-    return validateSharePayload(await response.json());
+    throw lastError || new Error("static_share_unavailable");
   }
 
   async function fetchShare(base) {
@@ -226,9 +249,9 @@
   function renderMapFallback(data, message) {
     const vendors = data && Array.isArray(data.vendors) ? data.vendors.slice(0, 5) : [];
     mapEl.innerHTML = `
-      <div class="status">
+      <div class="status map-fallback">
         <strong>${escapeHtml(message)}</strong><br>
-        請從左側選一家店開 Google Maps；下方也提供前 5 家快速查看。
+        仍可從左側清單開啟單店 Google Maps；下方也提供前 5 家快速查看。
         <div class="quick-links">
           ${vendors.map((vendor, index) => (
             `<a class="button secondary" href="${placeSearchUrl(vendor)}" target="_blank" rel="noopener">${index + 1}. ${escapeHtml(vendor.name)}</a>`
@@ -238,62 +261,72 @@
     `;
   }
 
+  function validLatLng(lat, lng) {
+    const latNum = Number(lat);
+    const lngNum = Number(lng);
+    return Number.isFinite(latNum) && Number.isFinite(lngNum) && Math.abs(latNum) <= 90 && Math.abs(lngNum) <= 180;
+  }
+
+  function markerPopup(data, vendor, index) {
+    const services = (vendor.service_types || []).join("、") || "未標示";
+    return `
+      <strong>${index + 1}. ${escapeHtml(vendor.name)}</strong><br>
+      ${escapeHtml(distanceLabel(vendor))}<br>
+      ${escapeHtml(vendor.address)}<br>
+      ${escapeHtml(vendor.phone || "無電話")}<br>
+      ${escapeHtml(services)}<br>
+      <a href="${placeSearchUrl(vendor)}" target="_blank" rel="noopener">查看 Google 地圖</a> ·
+      <a href="${directionsUrl(data, vendor)}" target="_blank" rel="noopener">導航</a>
+    `;
+  }
+
+  function divIcon(label, className) {
+    return L.divIcon({
+      className: `map-marker ${className}`,
+      html: `<span>${escapeHtml(label)}</span>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -16]
+    });
+  }
+
   function renderMap(data) {
-    if (!data.google_maps_browser_key) {
-      renderMapFallback(data, "尚未設定 Google Maps browser key");
+    if (!window.L) {
+      renderMapFallback(data, "互動地圖暫時無法載入");
       return;
     }
-    window.__vendorLocatorData = data;
-    window.__initVendorLocatorMap = function () {
-      const home = { lat: Number(data.home.lat), lng: Number(data.home.lng) };
-      const map = new google.maps.Map(mapEl, {
-        center: home,
-        zoom: 13,
-        mapTypeControl: false,
-        streetViewControl: false
-      });
-      const bounds = new google.maps.LatLngBounds();
-      const homeMarker = new google.maps.Marker({
-        position: home,
-        map,
-        label: "家",
-        title: "住家"
-      });
-      const infoWindow = new google.maps.InfoWindow();
-      homeMarker.addListener("click", () => {
-        infoWindow.setContent(`<strong>住家</strong><br>${escapeHtml(data.address)}`);
-        infoWindow.open(map, homeMarker);
-      });
-      bounds.extend(homeMarker.getPosition());
-      data.vendors.forEach((vendor, index) => {
-        const position = { lat: Number(vendor.lat), lng: Number(vendor.lng) };
-        const marker = new google.maps.Marker({
-          position,
-          map,
-          label: String(index + 1),
-          title: vendor.name
-        });
-        marker.addListener("click", () => {
-          const services = (vendor.service_types || []).join("、") || "未標示";
-          infoWindow.setContent(
-            `<strong>${index + 1}. ${escapeHtml(vendor.name)}</strong><br>` +
-            `${escapeHtml(vendor.address)}<br>` +
-            `${escapeHtml(vendor.phone || "無電話")}<br>` +
-            `${escapeHtml(services)}`
-          );
-          infoWindow.open(map, marker);
-        });
-        bounds.extend(marker.getPosition());
-      });
-      map.fitBounds(bounds, 64);
-    };
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(data.google_maps_browser_key)}&callback=__initVendorLocatorMap`;
-    script.async = true;
-    script.onerror = () => {
-      renderMapFallback(data, "Google Maps 載入失敗");
-    };
-    document.head.appendChild(script);
+    if (!validLatLng(data.home.lat, data.home.lng)) {
+      renderMapFallback(data, "缺少住家座標，無法顯示互動地圖");
+      return;
+    }
+    mapEl.innerHTML = "";
+    const home = [Number(data.home.lat), Number(data.home.lng)];
+    const map = L.map(mapEl, { scrollWheelZoom: true });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const bounds = L.latLngBounds([]);
+    L.marker(home, { icon: divIcon("家", "home-marker"), title: "住家" })
+      .bindPopup(`<strong>住家</strong><br>${escapeHtml(data.address)}`)
+      .addTo(map);
+    bounds.extend(home);
+
+    (data.vendors || []).forEach((vendor, index) => {
+      if (!validLatLng(vendor.lat, vendor.lng)) return;
+      const point = [Number(vendor.lat), Number(vendor.lng)];
+      L.marker(point, { icon: divIcon(String(index + 1), "vendor-marker"), title: vendor.name })
+        .bindPopup(markerPopup(data, vendor, index))
+        .addTo(map);
+      bounds.extend(point);
+    });
+
+    if (bounds.isValid()) {
+      map.fitBounds(bounds.pad(0.18), { maxZoom: 15 });
+    } else {
+      map.setView(home, 13);
+    }
   }
 
   function renderLoadError(err) {

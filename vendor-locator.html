@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>特約輔具廠商地圖</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root {
       color-scheme: light;
@@ -15,6 +16,7 @@
       --accent-dark: #115e59;
       --panel: #ffffff;
       --warn: #9a3412;
+      --home: #dc2626;
     }
     * { box-sizing: border-box; }
     body {
@@ -63,6 +65,7 @@
       background: #fbfcfe;
       line-height: 1.6;
     }
+    .map-fallback { margin: 16px; }
     .vendor {
       padding: 14px 0;
       border-bottom: 1px solid var(--line);
@@ -105,9 +108,23 @@
       color: var(--accent-dark);
       background: #d9f4ef;
     }
-    .warning {
-      color: var(--warn);
+    .warning { color: var(--warn); }
+    .leaflet-container { font-family: inherit; }
+    .map-marker {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: 2px solid #fff;
+      border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.28);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1;
     }
+    .home-marker { background: var(--home); }
+    .vendor-marker { background: var(--accent); }
     @media (max-width: 860px) {
       main { grid-template-columns: 1fr; }
       aside { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -125,8 +142,9 @@
       <div id="status" class="status">正在讀取分享結果。</div>
       <div id="vendorList"></div>
     </aside>
-    <section id="map" aria-label="Google map"></section>
+    <section id="map" aria-label="OpenStreetMap map"></section>
   </main>
-  <script src="vendor-locator.js?v=20260524-static-rootfix-v6"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="vendor-locator.js?v=20260525-osm-leaflet-v1"></script>
 </body>
 </html>

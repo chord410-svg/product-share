@@ -3,8 +3,11 @@
   const CARD_SIZE_KEY = "resource_nav_card_size_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260524-exchange-tab";
+  const RESOURCE_DATA_VERSION = "20260525-area-smart-search";
   const DRAFT_SAVE_DELAY_MS = 700;
+  const AREA_CITY = "新北市";
+  const CITYWIDE_AREA_VALUES = new Set(["新北市", "全新北", "全台"]);
+  const VALID_COVERAGE_SCOPES = new Set(["citywide", "district", "cross_district", "unknown"]);
   const state = {
     topics: [],
     resources: [],
@@ -16,6 +19,9 @@
     urgency: "",
     smartQueryText: "",
     smartQueryAppliedText: "",
+    smartSearchResults: null,
+    smartSearchNotice: "",
+    smartSearchMode: "",
     packageIds: new Set(),
     hasUrlContext: false,
     sessionToken: "",
@@ -44,10 +50,11 @@
     smart: {
       title: "智慧查詢怎麼用",
       body: `
-        <p>輸入補充描述後按「套用智慧查詢」，系統會依文字重新排序並高亮較可能相關的卡片。</p>
+        <p>智慧搜尋會交給後端依行政區規則建立搜尋池，再用語意/文字比對排序，不只是目前畫面排序。</p>
         <ul>
-          <li>會做：比對資源名稱、摘要、下一步、文件、身份/情境、電話確認問題。</li>
-          <li>不會做：不會刪掉其他卡片，不會判定資格，不會承諾補助一定通過。</li>
+          <li>一般瀏覽：選新北市只看新北市級資源；選永和區只看永和區加新北市級資源。</li>
+          <li>智慧搜尋：選新北市時，會搜尋新北市級 + 下轄行政區資源；選單一行政區時，只搜尋該區 + 新北市級。</li>
+          <li>不會做：不會判定資格、不承諾補助、不把其他區資料塞進一般瀏覽。</li>
           <li>適合輸入：獨居、最近沒錢買飯、家屬不穩定。</li>
         </ul>
       `,
@@ -112,7 +119,7 @@
     state.hasSessionParam = Boolean(state.sessionToken);
     state.hasApiBaseParam = Boolean(state.apiBase);
     state.apiBaseSource = state.apiBase ? "url" : "missing";
-    state.district = params.get("district") || "";
+    state.district = normalizeArea(params.get("district") || "");
     state.hasUrlContext = Boolean(state.category || topicParam);
     renderIdentity("checking", source === "discord" ? "Discord 入口，等待身份確認" : "未連結 Discord，請回 Discord 重新開啟入口");
   }
@@ -383,6 +390,98 @@
 
   function uniqueList(items) {
     return Array.from(new Set(items.filter(Boolean)));
+  }
+
+
+  function normalizeArea(value) {
+    const text = String(value || "").trim();
+    return text === "全新北" ? AREA_CITY : text;
+  }
+
+  function clearSmartSearchResults() {
+    state.smartSearchResults = null;
+    state.smartSearchNotice = "";
+    state.smartSearchMode = "";
+  }
+
+  function resourceDistricts(resource) {
+    return asList(resource.districts).map(normalizeArea).filter(Boolean);
+  }
+
+  function coverageScope(resource) {
+    const raw = String(resource.coverage_scope || "").trim();
+    if (VALID_COVERAGE_SCOPES.has(raw)) return raw;
+    const districts = resourceDistricts(resource);
+    if (!districts.length) return "unknown";
+    if (districts.some((item) => CITYWIDE_AREA_VALUES.has(item))) return "citywide";
+    return districts.length === 1 ? "district" : "cross_district";
+  }
+
+  function isCitywideResource(resource) {
+    return coverageScope(resource) === "citywide" || resourceDistricts(resource).some((item) => CITYWIDE_AREA_VALUES.has(item));
+  }
+
+  function resourceCoversArea(resource, area) {
+    const normalized = normalizeArea(area);
+    if (!normalized) return true;
+    if (isCitywideResource(resource)) return true;
+    return resourceDistricts(resource).includes(normalized);
+  }
+
+  function browseAreaRank(resource) {
+    const area = normalizeArea(state.district);
+    if (!area) return 30;
+    if (area === AREA_CITY) return isCitywideResource(resource) ? 10 : Infinity;
+    if (!resourceCoversArea(resource, area)) return Infinity;
+    return isCitywideResource(resource) ? 20 : 10;
+  }
+
+  function smartAreaRank(resource) {
+    const area = normalizeArea(state.district);
+    const scope = coverageScope(resource);
+    if (!area) return 30;
+    if (area === AREA_CITY) {
+      if (isCitywideResource(resource)) return 10;
+      return ["district", "cross_district"].includes(scope) ? 20 : Infinity;
+    }
+    if (resourceCoversArea(resource, area) && !isCitywideResource(resource)) return 10;
+    return isCitywideResource(resource) ? 20 : Infinity;
+  }
+
+  function coverageScopeLabel(resource) {
+    const scope = coverageScope(resource);
+    const districts = resourceDistricts(resource).filter((item) => !CITYWIDE_AREA_VALUES.has(item));
+    if (isCitywideResource(resource)) return "新北市級";
+    if (scope === "district" && districts[0]) return districts[0];
+    if (scope === "cross_district" && districts.length) return "跨區";
+    return "範圍待確認";
+  }
+
+  function smartGroupLabel(resource) {
+    const scope = coverageScope(resource);
+    const districts = resourceDistricts(resource).filter((item) => !CITYWIDE_AREA_VALUES.has(item));
+    if (isCitywideResource(resource)) return "新北市級";
+    if (scope === "district" && districts[0]) return districts[0];
+    if (scope === "cross_district" && districts.length) return "跨區：" + districts.join("、");
+    return "範圍待確認";
+  }
+
+  function smartResultFor(resource) {
+    if (!state.smartSearchResults) return null;
+    return state.smartSearchResults.get(resource.id) || state.smartSearchResults.get(resource.resource_id) || null;
+  }
+
+  function scopeDescription() {
+    const area = normalizeArea(state.district);
+    if (state.smartQueryAppliedText) {
+      if (state.smartSearchNotice) return state.smartSearchNotice;
+      if (area === AREA_CITY) return "智慧搜尋範圍：新北市級 + 新北市下轄行政區資源。";
+      if (area) return "智慧搜尋範圍：" + area + " + 新北市級資源。";
+      return "智慧搜尋範圍：全部資源。";
+    }
+    if (area === AREA_CITY) return "一般瀏覽：只顯示新北市級資源。";
+    if (area) return "一般瀏覽：優先顯示 " + area + "，並附新北市級通用資源。";
+    return "一般瀏覽：不限行政區，顯示全部資料。";
   }
 
   function resourceIdentityTags(resource) {
@@ -1313,6 +1412,7 @@
     select.onchange = () => {
       state.category = select.value;
       state.selectedTopics.clear();
+      clearSmartSearchResults();
       syncPackageFromState();
       render();
     };
@@ -1325,6 +1425,7 @@
       wrap.appendChild(createChip(item.label, state.selectedTopics.has(item.key), () => {
         if (state.selectedTopics.has(item.key)) state.selectedTopics.delete(item.key);
         else state.selectedTopics.add(item.key);
+        clearSmartSearchResults();
         syncPackageFromState();
         renderTopicChips(topic);
         renderCards();
@@ -1350,26 +1451,24 @@
       renderWorkbench();
     });
     $("districtSelect").addEventListener("change", (event) => {
-      state.district = event.target.value;
+      state.district = normalizeArea(event.target.value);
+      clearSmartSearchResults();
       syncPackageFromState();
       renderCards();
     });
     $("urgencySelect").addEventListener("change", (event) => {
       state.urgency = event.target.value;
+      clearSmartSearchResults();
       syncPackageFromState();
       renderCards();
     });
     $("smartQueryInput").addEventListener("input", (event) => {
       state.smartQueryText = event.target.value.trim();
+      clearSmartSearchResults();
       syncPackageFromState();
       updateGoogleButton();
     });
-    $("applySmartQuery").addEventListener("click", () => {
-      state.smartQueryAppliedText = state.smartQueryText;
-      markSmartQueryApplied();
-      syncPackageFromState();
-      renderCards();
-    });
+    $("applySmartQuery").addEventListener("click", applySmartSearch);
     $("googleSearchButton").addEventListener("click", () => {
       const url = buildGoogleSearchUrl();
       $("googleSearchButton").dataset.searchUrl = url;
@@ -1401,24 +1500,24 @@
     });
   }
 
-  function matchesResource(resource) {
+  function matchesBaseResource(resource) {
     if (resource.category !== state.category) return false;
     if (resource.status === "停用" || resource.status === "過期") return false;
     if (state.selectedTopics.size > 0) {
       const resourceTopics = new Set(resource.topics || []);
       if (!Array.from(state.selectedTopics).some((key) => resourceTopics.has(key))) return false;
     }
-    if (state.district) {
-      const districts = resource.districts || [];
-      if (!districts.includes("全新北") && !districts.includes("全台") && !districts.includes(state.district)) {
-        return false;
-      }
-    }
     if (state.urgency) {
       const urgencyTags = resource.urgency_tags || [];
       if (!urgencyTags.includes(state.urgency)) return false;
     }
     return true;
+  }
+
+  function matchesResource(resource) {
+    if (!matchesBaseResource(resource)) return false;
+    const rank = state.smartQueryAppliedText ? smartAreaRank(resource) : browseAreaRank(resource);
+    return Number.isFinite(rank);
   }
 
   function queryTerms(text) {
@@ -1438,14 +1537,20 @@
       resource.next_step,
       resource.public_contact,
       resource.contact,
+      resource.coverage_scope,
+      resource.service_area_note,
+      ...asList(resource.districts),
       ...asList(resource.public_required_documents),
       ...resourceIdentityTags(resource),
       ...asList(resource.phone_check_questions),
       resource.internal_notes,
+      resource.embedding_text,
     ].filter(Boolean).join(" ").toLowerCase();
   }
 
   function scoreResource(resource) {
+    const backend = smartResultFor(resource);
+    if (backend) return Number(backend.score || 0);
     const query = state.smartQueryAppliedText.trim().toLowerCase();
     if (!query) return 0;
     const haystack = smartHaystack(resource);
@@ -1460,9 +1565,68 @@
   function sortResults(results) {
     const scored = results.map((resource) => ({ resource, score: scoreResource(resource) }));
     if (state.smartQueryAppliedText) {
-      scored.sort((a, b) => b.score - a.score || a.resource.name.localeCompare(b.resource.name, "zh-Hant"));
+      scored.sort((a, b) => b.score - a.score || smartAreaRank(a.resource) - smartAreaRank(b.resource) || a.resource.name.localeCompare(b.resource.name, "zh-Hant"));
+      return scored;
     }
+    scored.sort((a, b) => browseAreaRank(a.resource) - browseAreaRank(b.resource) || a.resource.name.localeCompare(b.resource.name, "zh-Hant"));
     return scored;
+  }
+
+  async function requestSmartSearch() {
+    if (!state.apiBase) throw new Error("no_api_base");
+    let response;
+    try {
+      response = await fetch(apiUrl("/api/v1/resource/smart-search"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          selected_area: normalizeArea(state.district),
+          category: state.category,
+          topics: Array.from(state.selectedTopics),
+          urgency: state.urgency,
+          query: state.smartQueryAppliedText,
+          limit: 100,
+        }),
+      });
+    } catch (error) {
+      throw new Error("api_unreachable");
+    }
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || data.ok === false) throw new Error(data.error || "smart_search_failed");
+    const map = new Map();
+    (data.results || []).forEach((item) => {
+      const id = String(item.resource_id || item.id || "");
+      if (id) map.set(id, item);
+    });
+    state.smartSearchResults = map;
+    state.smartSearchMode = data.engine || "backend";
+    state.smartSearchNotice = (data.scope && data.scope.description) || "";
+  }
+
+  async function applySmartSearch() {
+    const button = $("applySmartQuery");
+    const originalText = button.textContent;
+    state.smartQueryAppliedText = state.smartQueryText;
+    clearSmartSearchResults();
+    markSmartQueryApplied();
+    syncPackageFromState();
+    if (!state.smartQueryAppliedText) {
+      renderCards();
+      return;
+    }
+    button.disabled = true;
+    button.textContent = "搜尋中...";
+    try {
+      await requestSmartSearch();
+    } catch (error) {
+      state.smartSearchMode = "local_fallback";
+      state.smartSearchNotice = "智慧搜尋 API 暫時不可用，已改用本頁資料做排序；正式語意搜尋需後端服務正常。";
+      console.info("resource smart search fallback", error);
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
+      renderCards();
+    }
   }
 
   function cardSummary(resource) {
@@ -1561,12 +1725,17 @@
     const results = scoredResults.map((item) => item.resource);
     $("currentScope").textContent = topic.title + "資源";
     const selectedLabels = optionLabels(topic);
-    $("scopeMeta").textContent = [
-      state.district ? "行政區：" + state.district : "行政區不限",
+    const scopeMeta = $("scopeMeta");
+    scopeMeta.textContent = [
+      state.district ? "行政區：" + normalizeArea(state.district) : "行政區不限",
       selectedLabels.length ? "子主題：" + selectedLabels.join("、") : "尚未指定子主題",
-      state.smartQueryAppliedText ? "智慧查詢已套用：" + state.smartQueryAppliedText : "",
+      state.smartQueryAppliedText ? "智慧搜尋已套用：" + state.smartQueryAppliedText : "",
       "共 " + results.length + " 筆",
     ].filter(Boolean).join("｜");
+    const scopeNote = document.createElement("span");
+    scopeNote.className = "smart-scope-note";
+    scopeNote.textContent = scopeDescription();
+    scopeMeta.append("｜", scopeNote);
 
     updateGoogleButton();
     renderDerivedIdentityChips();
@@ -1582,7 +1751,18 @@
     }
 
     const template = $("resourceCardTemplate");
+    let lastSmartGroup = "";
     scoredResults.forEach(({ resource, score }) => {
+      if (state.smartQueryAppliedText) {
+        const group = smartGroupLabel(resource);
+        if (group !== lastSmartGroup) {
+          lastSmartGroup = group;
+          const heading = document.createElement("div");
+          heading.className = "scope-group-heading";
+          heading.textContent = group;
+          cards.appendChild(heading);
+        }
+      }
       const node = template.content.cloneNode(true);
       const card = node.querySelector(".resource-card");
       card.id = "resource-card-" + resource.id;
@@ -1612,11 +1792,15 @@
       } else {
         title.textContent = resource.name;
       }
+      const scopeBadge = node.querySelector(".scope-badge");
+      scopeBadge.textContent = coverageScopeLabel(resource);
+      scopeBadge.classList.add("scope-" + coverageScope(resource));
       node.querySelector(".confidence").textContent = resource.confidence || resource.status || "待確認";
       const smartHit = node.querySelector(".smart-hit");
-      if (state.smartQueryAppliedText && score > 0) {
+      const smartResult = smartResultFor(resource);
+      if (state.smartQueryAppliedText && (score > 0 || smartResult)) {
         smartHit.hidden = false;
-        smartHit.textContent = "智慧查詢命中 " + score;
+        smartHit.textContent = smartResult && smartResult.match_reason ? smartResult.match_reason : "智慧查詢命中 " + score;
       }
       node.querySelector(".summary").textContent = cardSummary(resource);
       node.querySelector(".eligibility").textContent = asList(resource.eligibility_tags).join("、") || "身份/情境未標示";

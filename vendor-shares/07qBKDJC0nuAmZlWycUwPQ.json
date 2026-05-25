@@ -1,0 +1,220 @@
+{
+  "share_id": "07qBKDJC0nuAmZlWycUwPQ",
+  "address": "234台灣新北市永和區秀得里秀朗路二段148巷7弄10號",
+  "home": {
+    "lat": 25.0003792,
+    "lng": 121.5255649,
+    "geocode_provider": "google",
+    "geocode_precision": "rooftop"
+  },
+  "vendors": [
+    {
+      "vendor_id": "ntpc-b7fd284dbb7c1989",
+      "name": "大欣安藥局",
+      "district": "永和區",
+      "address": "新北市永和區得和路370號",
+      "phone": "02-29450808",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.999144,
+      "lng": 121.5251611,
+      "geocode_provider": "google",
+      "distance_km": 0.143,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9991440%2C121.5251611&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-1afd74fbfddbb2ad",
+      "name": "一家人健康藥局",
+      "district": "永和區",
+      "address": "新北市永和區得和路412號1樓",
+      "phone": "02-29488813",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9990205,
+      "lng": 121.5259381,
+      "geocode_provider": "google",
+      "distance_km": 0.156,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9990205%2C121.5259381&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-361663b156774440",
+      "name": "悠活藥局",
+      "district": "永和區",
+      "address": "新北市永和區得和路330號1樓",
+      "phone": "02-31516288",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9993932,
+      "lng": 121.5234245,
+      "geocode_provider": "google",
+      "distance_km": 0.242,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9993932%2C121.5234245&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-14f1865079270728",
+      "name": "久駿企業有限公司台北分公司",
+      "district": "永和區",
+      "address": "新北市永和區秀朗路1段153巷11號13樓",
+      "phone": "02-29295642",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9989399,
+      "lng": 121.5213727,
+      "geocode_provider": "google",
+      "distance_km": 0.452,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9989399%2C121.5213727&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-5954b2b3376310a2",
+      "name": "台大防滑工程行",
+      "district": "永和區",
+      "address": "新北市永和區民權路17號5樓",
+      "phone": "0919-492887",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9980117,
+      "lng": 121.5201443,
+      "geocode_provider": "google",
+      "distance_km": 0.606,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9980117%2C121.5201443&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-202450d306a7ac9b",
+      "name": "台灣屈臣氏個人用品商店股份有限公司秀山分公司",
+      "district": "永和區",
+      "address": "新北市永和區民權路53號1樓",
+      "phone": "02-89434370",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9965229,
+      "lng": 121.5205143,
+      "geocode_provider": "google",
+      "distance_km": 0.666,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9965229%2C121.5205143&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-46503d828cdc79c5",
+      "name": "暐天事業股份有限公司",
+      "district": "永和區",
+      "address": "新北市永和區民權路53號8樓819室",
+      "phone": "02-82878111",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9965229,
+      "lng": 121.5205143,
+      "geocode_provider": "google",
+      "distance_km": 0.666,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9965229%2C121.5205143&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-bccb58c9c14294ed",
+      "name": "秀朗台安藥局",
+      "district": "永和區",
+      "address": "新北市永和區中正路352號",
+      "phone": "02-29296681",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0006049,
+      "lng": 121.5178869,
+      "geocode_provider": "google",
+      "distance_km": 0.774,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0006049%2C121.5178869&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-bb09e1d62d473ffc",
+      "name": "鐵塔室內裝修設計有限公司",
+      "district": "永和區",
+      "address": "新北市永和區福和路55-1號",
+      "phone": "0905-926085",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0078681,
+      "lng": 121.5231457,
+      "geocode_provider": "google",
+      "distance_km": 0.868,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0078681%2C121.5231457&travelmode=driving&origin=25.0003792%2C121.5255649"
+    },
+    {
+      "vendor_id": "ntpc-2abeaff8f36edd3c",
+      "name": "永正健康人生藥局",
+      "district": "永和區",
+      "address": "新北市永和區中正路191號、193號1樓、197號2樓、197號2樓之1",
+      "phone": "02-29467351",
+      "service_types": [
+        "購置"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9993443,
+      "lng": 121.5169412,
+      "geocode_provider": "google",
+      "distance_km": 0.877,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=24.9993443%2C121.5169412&travelmode=driving&origin=25.0003792%2C121.5255649"
+    }
+  ],
+  "map_url": "https://www.google.com/maps/dir/?api=1&destination=24.9993443%2C121.5169412&travelmode=driving&origin=25.0003792%2C121.5255649&waypoints=24.9991440%2C121.5251611%7C24.9990205%2C121.5259381%7C24.9993932%2C121.5234245%7C24.9989399%2C121.5213727%7C24.9980117%2C121.5201443%7C24.9965229%2C121.5205143%7C24.9965229%2C121.5205143%7C25.0006049%2C121.5178869%7C25.0078681%2C121.5231457",
+  "created_at": 1779726760.8217402,
+  "expires_at": 1780331560.8217402,
+  "google_maps_browser_key": "",
+  "ok": true,
+  "static_share": true,
+  "static_data_path": "vendor-shares/07qBKDJC0nuAmZlWycUwPQ.json"
+}

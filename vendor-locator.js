@@ -266,21 +266,59 @@
   }
 
   function renderDistrictEstimateMap(data, message) {
-    const districtNames = unique((data.vendors || [])
-      .filter((vendor) => vendor.geocode_provider === "district_centroid")
-      .map((vendor) => vendor.district));
-    mapEl.innerHTML = `
-      <div class="status map-fallback">
-        <strong>${escapeHtml(message)}</strong><br>
-        目前尚未完成店家門牌定位，地圖不顯示精準店址 marker。請以左側店家清單的單店 Google 地圖與導航按鈕確認位置。
-        ${districtNames.length ? `<p class="meta warning">本次含區級估算：${escapeHtml(districtNames.join("、"))}</p>` : ""}
-        <div class="quick-links">
-          ${(data.vendors || []).slice(0, 5).map((vendor, index) => (
-            `<a class="button secondary" href="${placeSearchUrl(vendor)}" target="_blank" rel="noopener">${index + 1}. ${escapeHtml(vendor.name)}</a>`
-          )).join("")}
-        </div>
-      </div>
-    `;
+    mapEl.innerHTML = "";
+    const map = L.map(mapEl, { scrollWheelZoom: true });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const bounds = L.latLngBounds([]);
+    const note = L.control({ position: "topright" });
+    note.onAdd = function () {
+      const div = L.DomUtil.create("div", "status map-note");
+      div.innerHTML = `<strong>${escapeHtml(message)}</strong><br>目前尚未完成店家門牌定位，因此只顯示行政區估算點，不顯示精準店址 marker。請以左側清單的單店 Google 地圖與導航按鈕確認位置。`;
+      return div;
+    };
+    note.addTo(map);
+
+    const homeValid = validLatLng(data.home.lat, data.home.lng);
+    if (homeValid) {
+      const homePoint = [Number(data.home.lat), Number(data.home.lng)];
+      L.marker(homePoint, { icon: estimateIcon("住家區"), title: "住家行政區估算" })
+        .bindPopup(`<strong>住家行政區估算</strong><br>${escapeHtml(data.address)}<br>非精準門牌位置`)
+        .addTo(map);
+      bounds.extend(homePoint);
+    }
+
+    const groups = new Map();
+    (data.vendors || []).forEach((vendor, index) => {
+      if (vendor.geocode_provider !== "district_centroid" || !validLatLng(vendor.lat, vendor.lng)) return;
+      const key = `${vendor.district || "未標示"}|${vendor.lat}|${vendor.lng}`;
+      const group = groups.get(key) || {
+        district: vendor.district || "未標示",
+        lat: Number(vendor.lat),
+        lng: Number(vendor.lng),
+        vendors: [],
+      };
+      group.vendors.push({ ...vendor, originalIndex: index + 1 });
+      groups.set(key, group);
+    });
+
+    groups.forEach((group) => {
+      const point = [group.lat, group.lng];
+      const districtLabel = String(group.district).replace(/[區鄉鎮市]$/, "");
+      L.marker(point, { icon: estimateIcon(`${districtLabel}${group.vendors.length}`), title: `${group.district}估算` })
+        .bindPopup(estimatePopup(data, group))
+        .addTo(map);
+      bounds.extend(point);
+    });
+
+    if (bounds.isValid()) {
+      map.fitBounds(bounds.pad(0.18), { maxZoom: 13 });
+    } else {
+      renderMapFallback(data, "缺少可顯示的行政區估算座標");
+    }
   }
 
   function validLatLng(lat, lng) {
@@ -310,6 +348,28 @@
       iconAnchor: [16, 16],
       popupAnchor: [0, -16]
     });
+  }
+
+  function estimateIcon(label) {
+    return L.divIcon({
+      className: "map-marker estimate-marker",
+      html: `<span>${escapeHtml(label)}</span>`,
+      iconSize: [64, 32],
+      iconAnchor: [32, 16],
+      popupAnchor: [0, -16]
+    });
+  }
+
+  function estimatePopup(data, group) {
+    const preview = group.vendors.slice(0, 5).map((vendor) => (
+      `${vendor.originalIndex}. ${escapeHtml(vendor.name)}`
+    )).join("<br>");
+    return `
+      <strong>${escapeHtml(group.district)}行政區估算</strong><br>
+      共 ${group.vendors.length} 家，不代表店家精準地址。<br>
+      ${preview}<br>
+      <a href="${placeSearchUrl(group.vendors[0])}" target="_blank" rel="noopener">查看第一家 Google 地圖</a>
+    `;
   }
 
   function renderMap(data) {

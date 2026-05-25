@@ -1,0 +1,227 @@
+{
+  "share_id": "oboh1CK6zq3u57k-gb-Tqw",
+  "address": "新北市永和區永和路二段１４８巷７弄１０號",
+  "home": {
+    "lat": 25.0097,
+    "lng": 121.5147,
+    "geocode_provider": "district_centroid",
+    "geocode_precision": "district"
+  },
+  "vendors": [
+    {
+      "vendor_id": "ntpc-b7fd284dbb7c1989",
+      "name": "大欣安藥局",
+      "district": "永和區",
+      "address": "新北市永和區得和路370號",
+      "phone": "02-29450808",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0097,
+      "lng": 121.5147,
+      "geocode_provider": "district_centroid",
+      "distance_km": 0.0,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E5%BE%97%E5%92%8C%E8%B7%AF370%E8%99%9F&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-3c124d6471f11e42",
+      "name": "欣安大藥局",
+      "district": "永和區",
+      "address": "新北市永和區福和路221號",
+      "phone": "02-22326685",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0097,
+      "lng": 121.5147,
+      "geocode_provider": "district_centroid",
+      "distance_km": 0.0,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E7%A6%8F%E5%92%8C%E8%B7%AF221%E8%99%9F&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-e1cf2a05424faad4",
+      "name": "伍品藥局",
+      "district": "中和區",
+      "address": "新北市中和區莊敬路35號1樓",
+      "phone": "02-82456789",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9994,
+      "lng": 121.4989,
+      "geocode_provider": "district_centroid",
+      "distance_km": 1.961,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E8%8E%8A%E6%95%AC%E8%B7%AF35%E8%99%9F1%E6%A8%93&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-b39b3c58f0a0fb56",
+      "name": "佳醫創照健康股份有限公司",
+      "district": "中和區",
+      "address": "新北市中和區中正路880號17樓之3",
+      "phone": "02-22258688",
+      "service_types": [
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9994,
+      "lng": 121.4989,
+      "geocode_provider": "district_centroid",
+      "distance_km": 1.961,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E4%B8%AD%E6%AD%A3%E8%B7%AF880%E8%99%9F17%E6%A8%93%E4%B9%8B3&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-f01eb2db19dcdc51",
+      "name": "健康之星景德店",
+      "district": "中和區",
+      "address": "新北市中和區景德街53號",
+      "phone": "02-29402019",
+      "service_types": [
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9994,
+      "lng": 121.4989,
+      "geocode_provider": "district_centroid",
+      "distance_km": 1.961,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E5%BE%B7%E8%A1%9753%E8%99%9F&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-38ed8c7f2b330537",
+      "name": "北台灣無障礙運輸產業工會",
+      "district": "中和區",
+      "address": "新北市中和區連勝街159號5樓",
+      "phone": "0938-553344",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9994,
+      "lng": 121.4989,
+      "geocode_provider": "district_centroid",
+      "distance_km": 1.961,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E9%80%A3%E5%8B%9D%E8%A1%97159%E8%99%9F5%E6%A8%93&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-2436f2e6a22bd872",
+      "name": "惠安醫療用品有限公司",
+      "district": "中和區",
+      "address": "新北市中和區圓通路248號1樓",
+      "phone": "02-82419179",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9994,
+      "lng": 121.4989,
+      "geocode_provider": "district_centroid",
+      "distance_km": 1.961,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E5%9C%93%E9%80%9A%E8%B7%AF248%E8%99%9F1%E6%A8%93&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-ef4c4529e0dcfb4b",
+      "name": "益百利國際實業有限公司中和店",
+      "district": "中和區",
+      "address": "新北市中和區建六路70號5樓-1",
+      "phone": "02-22281238",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 24.9994,
+      "lng": 121.4989,
+      "geocode_provider": "district_centroid",
+      "distance_km": 1.961,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E5%BB%BA%E5%85%AD%E8%B7%AF70%E8%99%9F5%E6%A8%93-1&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-d0aaea13bdfcff7c",
+      "name": "吉盛服務有限公司",
+      "district": "板橋區",
+      "address": "新北市板橋區新生街23巷1弄4號4樓",
+      "phone": "02-29660011",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0114,
+      "lng": 121.4618,
+      "geocode_provider": "district_centroid",
+      "distance_km": 5.334,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%9D%BF%E6%A9%8B%E5%8D%80%E6%96%B0%E7%94%9F%E8%A1%9723%E5%B7%B71%E5%BC%844%E8%99%9F4%E6%A8%93&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    },
+    {
+      "vendor_id": "ntpc-414eb9555cd69cfe",
+      "name": "大瀚醫療儀器有限公司",
+      "district": "板橋區",
+      "address": "新北市板橋區校前街28號",
+      "phone": "02-29539781 02-29518998",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0114,
+      "lng": 121.4618,
+      "geocode_provider": "district_centroid",
+      "distance_km": 5.334,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%9D%BF%E6%A9%8B%E5%8D%80%E6%A0%A1%E5%89%8D%E8%A1%9728%E8%99%9F&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F"
+    }
+  ],
+  "map_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%9D%BF%E6%A9%8B%E5%8D%80%E6%A0%A1%E5%89%8D%E8%A1%9728%E8%99%9F&travelmode=driving&origin=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E6%B0%B8%E5%92%8C%E8%B7%AF%E4%BA%8C%E6%AE%B5%EF%BC%91%EF%BC%94%EF%BC%98%E5%B7%B7%EF%BC%97%E5%BC%84%EF%BC%91%EF%BC%90%E8%99%9F&waypoints=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E5%BE%97%E5%92%8C%E8%B7%AF370%E8%99%9F%7C%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E7%A6%8F%E5%92%8C%E8%B7%AF221%E8%99%9F%7C%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E8%8E%8A%E6%95%AC%E8%B7%AF35%E8%99%9F1%E6%A8%93%7C%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E4%B8%AD%E6%AD%A3%E8%B7%AF880%E8%99%9F17%E6%A8%93%E4%B9%8B3%7C%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E5%BE%B7%E8%A1%9753%E8%99%9F%7C%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E9%80%A3%E5%8B%9D%E8%A1%97159%E8%99%9F5%E6%A8%93%7C%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E5%9C%93%E9%80%9A%E8%B7%AF248%E8%99%9F1%E6%A8%93%7C%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E5%BB%BA%E5%85%AD%E8%B7%AF70%E8%99%9F5%E6%A8%93-1%7C%E6%96%B0%E5%8C%97%E5%B8%82%E6%9D%BF%E6%A9%8B%E5%8D%80%E6%96%B0%E7%94%9F%E8%A1%9723%E5%B7%B71%E5%BC%844%E8%99%9F4%E6%A8%93",
+  "created_at": 1779693658.4588559,
+  "expires_at": 1780298458.4588559,
+  "google_maps_browser_key": "",
+  "ok": true,
+  "static_share": true,
+  "static_data_path": "vendor-shares/oboh1CK6zq3u57k-gb-Tqw.json"
+}

@@ -6,6 +6,7 @@
   const statusEl = document.getElementById("status");
   const summaryEl = document.getElementById("summary");
   const listEl = document.getElementById("vendorList");
+  const resultCountEl = document.getElementById("resultCount");
   const mapEl = document.getElementById("map");
   const rawRuntimeUrl = "https://raw.githubusercontent.com/chord410-svg/product-share/main/resource-nav-runtime.json";
   const STATIC_SHARE_RETRY_DELAYS_MS = [800, 1600, 3200, 5000, 8000];
@@ -197,6 +198,17 @@
       || (data.vendors || []).some((vendor) => vendor.geocode_provider === "district_centroid");
   }
 
+  function vendorDistrictSummary(vendors) {
+    const counts = new Map();
+    (vendors || []).forEach((vendor) => {
+      const district = String(vendor.district || "未標示");
+      counts.set(district, (counts.get(district) || 0) + 1);
+    });
+    return Array.from(counts.entries())
+      .map(([district, count]) => `${district}${count}家`)
+      .join("、");
+  }
+
   function hasPreciseCoordinate(record) {
     return ["google", "literal", "manual", "official"].includes(String(record && record.geocode_provider || ""));
   }
@@ -219,6 +231,7 @@
   }
 
   function renderList(data) {
+    const districtSummary = vendorDistrictSummary(data.vendors || []);
     const fallbackNote = data.home.geocode_provider === "district_centroid"
       ? '<p class="meta warning">目前使用行政區中心點定位；正式最近距離需完成 Google 地址定位後才會更準。</p>'
       : "";
@@ -229,15 +242,20 @@
       <span class="meta">${escapeHtml(data.home.geocode_provider)} / ${escapeHtml(data.home.geocode_precision)}</span>
       ${fallbackNote}
       <p class="meta">名單來源：新北市輔具資源中心特約廠商清冊。</p>
+      <p class="meta"><strong>本頁共 ${data.vendors.length} 家：</strong>${escapeHtml(districtSummary || "無分布資料")}</p>
       ${experimentalRoute ? `<div class="actions"><a class="button secondary" href="${experimentalRoute}" target="_blank" rel="noopener">開啟多點路線（實驗）</a></div>` : ""}
     `;
+    if (resultCountEl) {
+      resultCountEl.hidden = false;
+      resultCountEl.textContent = `本頁顯示 ${data.vendors.length} 家：${districtSummary || "無分布資料"}。左側可往下捲動查看完整 1-${data.vendors.length} 清單。`;
+    }
     listEl.innerHTML = data.vendors.map((vendor, index) => {
       const services = (vendor.service_types || []).join("、") || "未標示";
       const route = directionsUrl(data, vendor);
       const place = placeSearchUrl(vendor);
       return `
         <article class="vendor">
-          <h2>${index + 1}. ${escapeHtml(vendor.name)}</h2>
+          <h2>${index + 1}/${data.vendors.length}. ${escapeHtml(vendor.name)}</h2>
           <p class="meta">${escapeHtml(vendor.district)}｜${distanceLabel(vendor)}｜${escapeHtml(services)}</p>
           <p class="meta">${escapeHtml(vendor.address)}<br>${escapeHtml(vendor.phone || "無電話")}</p>
           <div class="actions">
@@ -277,7 +295,8 @@
     const note = L.control({ position: "topright" });
     note.onAdd = function () {
       const div = L.DomUtil.create("div", "status map-note");
-      div.innerHTML = `<strong>${escapeHtml(message)}</strong><br>目前尚未完成店家門牌定位，因此只顯示行政區估算點，不顯示精準店址 marker。請以左側清單的單店 Google 地圖與導航按鈕確認位置。`;
+      const districtSummary = vendorDistrictSummary(data.vendors || []);
+      div.innerHTML = `<strong>${escapeHtml(message)}</strong><br>目前尚未完成店家門牌定位，因此只顯示行政區估算點，不顯示精準店址 marker。請以左側清單的單店 Google 地圖與導航按鈕確認位置。<div class="group-summary">本頁 ${data.vendors.length} 家：${escapeHtml(districtSummary || "無分布資料")}</div>`;
       return div;
     };
     note.addTo(map);
@@ -431,6 +450,7 @@
     }
     statusEl.innerHTML = `<strong>${escapeHtml(message)}</strong>`;
     summaryEl.textContent = "無法讀取本次分享資料。";
+    if (resultCountEl) resultCountEl.hidden = true;
     listEl.innerHTML = "";
     mapEl.innerHTML = `<div class="status">${escapeHtml(message)}</div>`;
   }
@@ -462,6 +482,7 @@
     if (!shareId) {
       statusEl.textContent = "缺少 share_id，無法讀取地圖結果。";
       summaryEl.textContent = "連結格式不完整。";
+      if (resultCountEl) resultCountEl.hidden = true;
       renderMapFallback(null, "缺少 share_id");
       return;
     }

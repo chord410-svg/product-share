@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generated_at": "2026-05-25T22:35:27+08:00",
+  "generated_at": "2026-05-25T22:41:47+08:00",
   "source_label": "新北市輔具資源中心特約廠商清冊",
   "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
   "directory_url": "https://chord410-svg.github.io/product-share/vendor-directory.html",
@@ -9,7 +9,6 @@
     "geocoded": 2,
     "precise_geocoded": 0,
     "district_centroid_geocoded": 2,
-    "pending_precise_geocode": 2,
     "missing_coordinates": 0,
     "districts": {
       "三重區": 1,
@@ -59,7 +58,7 @@
       "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
       "lat": 25.0615,
       "lng": 121.4881,
-      "geocoded_at": "2026-05-25T22:35:27+08:00",
+      "geocoded_at": "2026-05-25T22:41:47+08:00",
       "geocode_provider": "district_centroid",
       "active": true
     },
@@ -75,7 +74,7 @@
       "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
       "lat": 25.0097,
       "lng": 121.5147,
-      "geocoded_at": "2026-05-25T22:35:27+08:00",
+      "geocoded_at": "2026-05-25T22:41:47+08:00",
       "geocode_provider": "district_centroid",
       "active": true
     }

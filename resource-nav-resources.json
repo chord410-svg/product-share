@@ -58,6 +58,252 @@
       "embedding_text": "1966 聘請外籍看護工家庭可使用長照服務 foreign_caregiver foreign_caregiver_guidance foreign_caregiver_respite citywide 全新北 1966 對聘請外籍看護家庭可使用長照服務的說明。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：可整理成外看家庭可搭配長照服務的提醒卡。"
     },
     {
+      "id": "sanchong_zhude_community_care_point",
+      "resource_id": "sanchong_zhude_community_care_point",
+      "category": "care_professional",
+      "topics": [
+        "community_c_station"
+      ],
+      "name": "三重助德社區照顧關懷據點",
+      "title": "三重助德社區照顧關懷據點",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "三重區社區關懷據點；課程、共餐、收費與開放資格需電話確認。",
+      "eligibility_tags": [
+        "三重區",
+        "社區據點",
+        "長照需求",
+        "照顧服務"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。",
+      "next_step": "先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。",
+      "contact": "台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。",
+      "source_url": "https://www.tapdsw.org/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%A4%9A%E5%85%83%E7%A4%BE%E5%8D%80%E9%97%9C%E6%87%B7%E6%93%9A%E9%BB%9E/%E5%8A%A9%E5%BE%B7%E6%93%9A%E9%BB%9E",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。",
+      "public_next_step": "先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。",
+      "public_required_documents": [
+        "身分證明",
+        "基本聯絡資料",
+        "參與需求說明"
+      ],
+      "public_contact": "台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。",
+      "internal_notes": "五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。",
+      "phone_check_questions": [
+        "目前服務項目與開放時段",
+        "是否有共餐或課程",
+        "是否限服務里別",
+        "是否需報名或評估"
+      ],
+      "risk_flags": [
+        "B級服務來源需電話確認",
+        "服務內容可能異動",
+        "非緊急資源"
+      ],
+      "body": "這張卡由候選來源 `sanchong_zhude_community_care_point` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。\n- 下一步：先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。\n- 服務範圍：三重區社區關懷據點；課程、共餐、收費與開放資格需電話確認。\n- 審核提醒：五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。",
+      "content_hash": "d1d4967185db7c25d17695abb37c04e369505e8c64f92e9c759612a393ee1e8c",
+      "resource_version": "2026-05-25-d1d49671",
+      "embedding_text": "三重助德社區照顧關懷據點 care_professional community_c_station district 三重區社區關懷據點；課程、共餐、收費與開放資格需電話確認。 三重區 三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。 先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。 身分證明 基本聯絡資料 參與需求說明 目前服務項目與開放時段 是否有共餐或課程 是否限服務里別 是否需報名或評估 五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。"
+    },
+    {
+      "id": "sanchong_elder_meal_faq",
+      "resource_id": "sanchong_elder_meal_faq",
+      "category": "multi_professional",
+      "topics": [
+        "meal_service"
+      ],
+      "name": "三重區獨居長者送餐暨關懷服務常見問題",
+      "title": "三重區獨居長者送餐暨關懷服務常見問題",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "限三重區獨居長者等條件；需確認最新資格、轉介窗口與評估方式。",
+      "eligibility_tags": [
+        "三重區",
+        "送餐",
+        "獨居",
+        "高齡"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需評估"
+      ],
+      "summary": "三重區獨居長者送餐暨關懷服務 FAQ，可協助確認年滿 65 歲以上獨居且有送餐需求者的申請方向。",
+      "next_step": "先確認長者是否獨居、年齡與送餐需求，再向三重區公所確認評估與申請流程。",
+      "contact": "依三重區公所獨居長者送餐暨關懷服務 FAQ 公告。",
+      "source_url": "https://www.sanchong.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=6eb1a24fc1d911402f9417d63e1173f7&id=dc5b21213dfb17e5",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "三重區獨居長者送餐暨關懷服務 FAQ，可協助確認年滿 65 歲以上獨居且有送餐需求者的申請方向。",
+      "public_next_step": "先確認長者是否獨居、年齡與送餐需求，再向三重區公所確認評估與申請流程。",
+      "public_required_documents": [
+        "身分證明",
+        "獨居或照顧需求說明",
+        "經濟或健康資料依窗口要求"
+      ],
+      "public_contact": "依三重區公所獨居長者送餐暨關懷服務 FAQ 公告。",
+      "internal_notes": "五問審核：適合三重獨居送餐情境；下一步可打公所；資格方向明確但須最新確認；A級官方來源。",
+      "phone_check_questions": [
+        "送餐服務最新資格",
+        "是否需里幹事或社工評估",
+        "送餐天數與等待時間",
+        "是否有關懷訪視搭配"
+      ],
+      "risk_flags": [
+        "資格需評估",
+        "名額與服務量能需確認",
+        "非立即物資"
+      ],
+      "body": "這張卡由候選來源 `sanchong_elder_meal_faq` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重區獨居長者送餐暨關懷服務 FAQ，可協助確認年滿 65 歲以上獨居且有送餐需求者的申請方向。\n- 下一步：先確認長者是否獨居、年齡與送餐需求，再向三重區公所確認評估與申請流程。\n- 服務範圍：限三重區獨居長者等條件；需確認最新資格、轉介窗口與評估方式。\n- 審核提醒：五問審核：適合三重獨居送餐情境；下一步可打公所；資格方向明確但須最新確認；A級官方來源。",
+      "content_hash": "c14a1fe53989b7b6b9bc907db72a893f87b4c7e93437875255f539849dcbb26a",
+      "resource_version": "2026-05-25-c14a1fe5",
+      "embedding_text": "三重區獨居長者送餐暨關懷服務常見問題 multi_professional meal_service district 限三重區獨居長者等條件；需確認最新資格、轉介窗口與評估方式。 三重區 三重區獨居長者送餐暨關懷服務 FAQ，可協助確認年滿 65 歲以上獨居且有送餐需求者的申請方向。 先確認長者是否獨居、年齡與送餐需求，再向三重區公所確認評估與申請流程。 身分證明 獨居或照顧需求說明 經濟或健康資料依窗口要求 送餐服務最新資格 是否需里幹事或社工評估 送餐天數與等待時間 是否有關懷訪視搭配 五問審核：適合三重獨居送餐情境；下一步可打公所；資格方向明確但須最新確認；A級官方來源。"
+    },
+    {
+      "id": "sanchong_lezhi_daycare",
+      "resource_id": "sanchong_lezhi_daycare",
+      "category": "care_professional",
+      "topics": [
+        "day_care"
+      ],
+      "name": "三重樂智社區日間長照機構",
+      "title": "三重樂智社區日間長照機構",
+      "region": "新北市",
+      "districts": [
+        "三重區",
+        "蘆洲區",
+        "新莊區",
+        "板橋區",
+        "五股區",
+        "樹林區"
+      ],
+      "coverage_scope": "cross_district",
+      "service_area_note": "日間照顧服務候選；長照給付、自費、交通接送與名額需電話確認。",
+      "eligibility_tags": [
+        "三重區",
+        "日間照顧",
+        "失智服務",
+        "照顧服務"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "三重樂智日照中心提供日間照顧、延緩失能失智與生活照顧服務，可作三重及周邊日照候選。",
+      "next_step": "先確認案家是否有日間照顧或失智支持需求，再電話詢問名額、接送、收費與長照給付使用方式。",
+      "contact": "依三重樂智日照中心官方網站公告。",
+      "source_url": "https://www.lezhi-care.com/index.php",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "三重樂智日照中心提供日間照顧、延緩失能失智與生活照顧服務，可作三重及周邊日照候選。",
+      "public_next_step": "先確認案家是否有日間照顧或失智支持需求，再電話詢問名額、接送、收費與長照給付使用方式。",
+      "public_required_documents": [
+        "長照資格資料",
+        "身分證明",
+        "健康或失智相關資料如有",
+        "需求評估資料"
+      ],
+      "public_contact": "依三重樂智日照中心官方網站公告。",
+      "internal_notes": "五問審核：適合三重日照/失智支持；下一步電話確認；服務區跨多區，家屬版須提示需確認；B級服務提供者來源。",
+      "phone_check_questions": [
+        "目前是否有名額",
+        "是否可服務案家行政區",
+        "交通接送方式",
+        "長照給付與自費項目"
+      ],
+      "risk_flags": [
+        "B級服務來源需電話確認",
+        "跨區服務需確認",
+        "可能有等待名額"
+      ],
+      "body": "這張卡由候選來源 `sanchong_lezhi_daycare` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重樂智日照中心提供日間照顧、延緩失能失智與生活照顧服務，可作三重及周邊日照候選。\n- 下一步：先確認案家是否有日間照顧或失智支持需求，再電話詢問名額、接送、收費與長照給付使用方式。\n- 服務範圍：日間照顧服務候選；長照給付、自費、交通接送與名額需電話確認。\n- 審核提醒：五問審核：適合三重日照/失智支持；下一步電話確認；服務區跨多區，家屬版須提示需確認；B級服務提供者來源。",
+      "content_hash": "b292f016ee4be40119d6990f1c7c3791a4612abf7ac0c77f5120dae145c9d235",
+      "resource_version": "2026-05-25-b292f016",
+      "embedding_text": "三重樂智社區日間長照機構 care_professional day_care cross_district 日間照顧服務候選；長照給付、自費、交通接送與名額需電話確認。 三重區 蘆洲區 新莊區 板橋區 五股區 樹林區 三重樂智日照中心提供日間照顧、延緩失能失智與生活照顧服務，可作三重及周邊日照候選。 先確認案家是否有日間照顧或失智支持需求，再電話詢問名額、接送、收費與長照給付使用方式。 長照資格資料 身分證明 健康或失智相關資料如有 需求評估資料 目前是否有名額 是否可服務案家行政區 交通接送方式 長照給付與自費項目 五問審核：適合三重日照/失智支持；下一步電話確認；服務區跨多區，家屬版須提示需確認；B級服務提供者來源。"
+    },
+    {
+      "id": "rocdown_sanchong_daycare_disability",
+      "resource_id": "rocdown_sanchong_daycare_disability",
+      "category": "multi_professional",
+      "topics": [
+        "disability_service"
+      ],
+      "name": "三重重新障礙者日間照顧中心",
+      "title": "三重重新障礙者日間照顧中心",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "收案條件、名額、轉介流程與是否仍承辦需電話確認。",
+      "eligibility_tags": [
+        "三重區",
+        "身心障礙",
+        "日間照顧",
+        "照顧支持"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "三重重新障礙者日間照顧中心提供身心障礙者日間照顧候選，適合需要白天照顧與支持的身障家庭。",
+      "next_step": "先確認年齡、身障證明、失能等級或照顧需求，再電話確認名額、收費與轉介流程。",
+      "contact": "依唐氏症基金會三重重新障礙者日間照顧中心頁面公告。",
+      "source_url": "https://www.rocdown-syndrome.org.tw/branch_detail/14",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "三重重新障礙者日間照顧中心提供身心障礙者日間照顧候選，適合需要白天照顧與支持的身障家庭。",
+      "public_next_step": "先確認年齡、身障證明、失能等級或照顧需求，再電話確認名額、收費與轉介流程。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "身分證明",
+        "需求或失能評估資料",
+        "轉介資料依中心要求"
+      ],
+      "public_contact": "依唐氏症基金會三重重新障礙者日間照顧中心頁面公告。",
+      "internal_notes": "五問審核：適合三重身障日照；下一步可電話確認；資格有條件限制，家屬版不承諾可收案；B級服務來源。",
+      "phone_check_questions": [
+        "目前收案條件與年齡限制",
+        "是否有名額",
+        "是否接受長照或社福轉介",
+        "費用與服務時間"
+      ],
+      "risk_flags": [
+        "需確認名額",
+        "資格條件較明確但仍需審核",
+        "B級服務來源需電話確認"
+      ],
+      "body": "這張卡由候選來源 `rocdown_sanchong_daycare_disability` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重重新障礙者日間照顧中心提供身心障礙者日間照顧候選，適合需要白天照顧與支持的身障家庭。\n- 下一步：先確認年齡、身障證明、失能等級或照顧需求，再電話確認名額、收費與轉介流程。\n- 服務範圍：收案條件、名額、轉介流程與是否仍承辦需電話確認。\n- 審核提醒：五問審核：適合三重身障日照；下一步可電話確認；資格有條件限制，家屬版不承諾可收案；B級服務來源。",
+      "content_hash": "8a059230fca7d5ee0e4f1dbb7f68efa04a045cc9c526333b6e0c2033bc9b2003",
+      "resource_version": "2026-05-25-8a059230",
+      "embedding_text": "三重重新障礙者日間照顧中心 multi_professional disability_service district 收案條件、名額、轉介流程與是否仍承辦需電話確認。 三重區 三重重新障礙者日間照顧中心提供身心障礙者日間照顧候選，適合需要白天照顧與支持的身障家庭。 先確認年齡、身障證明、失能等級或照顧需求，再電話確認名額、收費與轉介流程。 身心障礙證明 身分證明 需求或失能評估資料 轉介資料依中心要求 目前收案條件與年齡限制 是否有名額 是否接受長照或社福轉介 費用與服務時間 五問審核：適合三重身障日照；下一步可電話確認；資格有條件限制，家屬版不承諾可收案；B級服務來源。"
+    },
+    {
       "id": "zbswf_emergency_rescue",
       "resource_id": "zbswf_emergency_rescue",
       "category": "multi_professional",
@@ -112,6 +358,128 @@
       "content_hash": "98e81e233b63b9114adee8ba8634015b5e59e1658490d0d6b2e0c37c0a0e9f0a",
       "resource_version": "2026-05-22-98e81e23",
       "embedding_text": "中保關懷新北獨居長輩緊急救援 multi_professional emergency_rescue citywide 全新北 民間緊急救援與獨居長者安全服務線索。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認是否限特定合作案或年度。"
+    },
+    {
+      "id": "atf_1919_foodbank_yonghe",
+      "resource_id": "atf_1919_foodbank_yonghe",
+      "category": "informal",
+      "topics": [
+        "food_bank",
+        "emergency_aid"
+      ],
+      "name": "中華基督教救助協會 1919 食物銀行（永和辦公室）",
+      "title": "中華基督教救助協會 1919 食物銀行（永和辦公室）",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "辦公室在永和，實際服務區域、轉介窗口與物資發放方式需電話確認。",
+      "eligibility_tags": [
+        "永和區",
+        "物資需求",
+        "急難需求",
+        "民間資源"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "1919 食物銀行永和辦公室可作為永和物資與急難需求的民間資源候選，實際發放或轉介規則需確認。",
+      "next_step": "先電話確認永和辦公室是否受理物資需求、轉介方式、服務區域與所需文件。",
+      "contact": "1919 食物銀行頁面列電話 02-86609995；地址與服務方式以官方頁確認為準。",
+      "source_url": "https://www.atf.tw/atf/public/foodbank/view/56/",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "1919 食物銀行永和辦公室可作為永和物資與急難需求的民間資源候選，實際發放或轉介規則需確認。",
+      "public_next_step": "先電話確認永和辦公室是否受理物資需求、轉介方式、服務區域與所需文件。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "轉介資料或經濟弱勢證明依窗口要求"
+      ],
+      "public_contact": "1919 食物銀行頁面列電話 02-86609995；地址與服務方式以官方頁確認為準。",
+      "internal_notes": "五問審核：適合永和物資/急難補位；下一步電話查證；家屬版只給聯絡方向；B級民間來源。",
+      "phone_check_questions": [
+        "是否受理永和區個案物資需求",
+        "是否需要教會、社工或單位轉介",
+        "物資內容與頻率",
+        "是否有急難協助或僅物資支持"
+      ],
+      "risk_flags": [
+        "B級民間資源需電話確認",
+        "服務區域需確認",
+        "不承諾一定發放"
+      ],
+      "body": "這張卡由候選來源 `atf_1919_foodbank_yonghe` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：1919 食物銀行永和辦公室可作為永和物資與急難需求的民間資源候選，實際發放或轉介規則需確認。\n- 下一步：先電話確認永和辦公室是否受理物資需求、轉介方式、服務區域與所需文件。\n- 服務範圍：辦公室在永和，實際服務區域、轉介窗口與物資發放方式需電話確認。\n- 審核提醒：五問審核：適合永和物資/急難補位；下一步電話查證；家屬版只給聯絡方向；B級民間來源。",
+      "content_hash": "fa2be85220742c47deb1670a8e85480f6f671549e5fee6782deab3beb9baa4c3",
+      "resource_version": "2026-05-25-fa2be852",
+      "embedding_text": "中華基督教救助協會 1919 食物銀行（永和辦公室） informal food_bank emergency_aid district 辦公室在永和，實際服務區域、轉介窗口與物資發放方式需電話確認。 永和區 1919 食物銀行永和辦公室可作為永和物資與急難需求的民間資源候選，實際發放或轉介規則需確認。 先電話確認永和辦公室是否受理物資需求、轉介方式、服務區域與所需文件。 身分證明 需求說明 轉介資料或經濟弱勢證明依窗口要求 是否受理永和區個案物資需求 是否需要教會、社工或單位轉介 物資內容與頻率 是否有急難協助或僅物資支持 五問審核：適合永和物資/急難補位；下一步電話查證；家屬版只給聯絡方向；B級民間來源。"
+    },
+    {
+      "id": "eden_xindian_zhongzheng_disability_daycare",
+      "resource_id": "eden_xindian_zhongzheng_disability_daycare",
+      "category": "multi_professional",
+      "topics": [
+        "disability_service"
+      ],
+      "name": "伊甸新店中正身心障礙者日間照顧中心",
+      "title": "伊甸新店中正身心障礙者日間照顧中心",
+      "region": "新北市",
+      "districts": [
+        "新店區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "新店區身障日照資源；收案年齡、證明、服務名額與轉介流程需電話確認。",
+      "eligibility_tags": [
+        "新店區",
+        "身心障礙",
+        "日間照顧",
+        "照顧支持"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "伊甸新店中正身心障礙者日間照顧中心可作新店區身障者日間照顧與家庭支持候選。",
+      "next_step": "先確認身障證明、年齡、日間照顧需求，再電話詢問名額、收費與轉介方式。",
+      "contact": "依伊甸新店中正身心障礙者日間照顧中心頁面公告。",
+      "source_url": "https://www.eden.org.tw/service/branches/BranchesDetail.php?BranchesId=y6&returnPageUrl=L3NlcnZpY2UvYnJhbmNoZXMvQnJhbmNoZXMucGhwPyZwYWdlPTE2",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "伊甸新店中正身心障礙者日間照顧中心可作新店區身障者日間照顧與家庭支持候選。",
+      "public_next_step": "先確認身障證明、年齡、日間照顧需求，再電話詢問名額、收費與轉介方式。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "身分證明",
+        "需求或評估資料",
+        "轉介資料依中心要求"
+      ],
+      "public_contact": "依伊甸新店中正身心障礙者日間照顧中心頁面公告。",
+      "internal_notes": "五問審核：適合新店身障日照；下一步電話確認；家屬版不承諾可收案；B級服務來源。",
+      "phone_check_questions": [
+        "目前收案條件與名額",
+        "服務時間與收費方式",
+        "是否接受社福或長照轉介",
+        "是否有交通或接送安排"
+      ],
+      "risk_flags": [
+        "B級服務來源需電話確認",
+        "可能有等待名額",
+        "資格需中心審核"
+      ],
+      "body": "這張卡由候選來源 `eden_xindian_zhongzheng_disability_daycare` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：伊甸新店中正身心障礙者日間照顧中心可作新店區身障者日間照顧與家庭支持候選。\n- 下一步：先確認身障證明、年齡、日間照顧需求，再電話詢問名額、收費與轉介方式。\n- 服務範圍：新店區身障日照資源；收案年齡、證明、服務名額與轉介流程需電話確認。\n- 審核提醒：五問審核：適合新店身障日照；下一步電話確認；家屬版不承諾可收案；B級服務來源。",
+      "content_hash": "d687dc9474f853b062bd3198abd8ad744386ded3f0a511450b4b333ad77c65c1",
+      "resource_version": "2026-05-25-d687dc94",
+      "embedding_text": "伊甸新店中正身心障礙者日間照顧中心 multi_professional disability_service district 新店區身障日照資源；收案年齡、證明、服務名額與轉介流程需電話確認。 新店區 伊甸新店中正身心障礙者日間照顧中心可作新店區身障者日間照顧與家庭支持候選。 先確認身障證明、年齡、日間照顧需求，再電話詢問名額、收費與轉介方式。 身心障礙證明 身分證明 需求或評估資料 轉介資料依中心要求 目前收案條件與名額 服務時間與收費方式 是否接受社福或長照轉介 是否有交通或接送安排 五問審核：適合新店身障日照；下一步電話確認；家屬版不承諾可收案；B級服務來源。"
     },
     {
       "id": "megacharity_emergency_medical",
@@ -394,6 +762,67 @@
       "embedding_text": "勞動部行蹤不明外籍看護工通報與遞補機制 foreign_caregiver foreign_caregiver_missing citywide 全新北 外籍看護行蹤不明通報與遞補相關官方說明。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：可做危機流程卡：先通報、再銜接短期替代與家庭支持。"
     },
     {
+      "id": "yonghe_disability_family_support_tadef",
+      "resource_id": "yonghe_disability_family_support_tadef",
+      "category": "multi_professional",
+      "topics": [
+        "family_caregiver_support",
+        "disability_service"
+      ],
+      "name": "台灣障友家庭經濟研究會身心障礙家庭支持服務（永和）",
+      "title": "台灣障友家庭經濟研究會身心障礙家庭支持服務（永和）",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "永和區身障家庭支持候選；實際收案、服務內容與是否需轉介需電話確認。",
+      "eligibility_tags": [
+        "永和區",
+        "身心障礙",
+        "家庭照顧者",
+        "照顧支持"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "台灣障友家庭經濟研究會位於永和，可作為身心障礙者家庭照顧者支持、家庭支持與資源諮詢候選。",
+      "next_step": "先確認案家是否有身心障礙家庭照顧壓力，再電話詢問服務內容、收案條件與是否需轉介。",
+      "contact": "新北市社會局身心障礙福利頁列電話 02-29230308；實際服務以單位確認為準。",
+      "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?act=d19aebfe3f86bf8a8c8c3287c96253f7&id=c3d5681a5f8d9d3a&mclassno=b04b3ba1e37587258f99326d83ca0db2",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "台灣障友家庭經濟研究會位於永和，可作為身心障礙者家庭照顧者支持、家庭支持與資源諮詢候選。",
+      "public_next_step": "先確認案家是否有身心障礙家庭照顧壓力，再電話詢問服務內容、收案條件與是否需轉介。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "家庭照顧需求說明",
+        "聯絡資料"
+      ],
+      "public_contact": "新北市社會局身心障礙福利頁列電話 02-29230308；實際服務以單位確認為準。",
+      "internal_notes": "五問審核：適合身障家庭照顧壓力；下一步可電話確認；資格需身障家庭情境；A級官方列冊來源。",
+      "phone_check_questions": [
+        "目前服務身障家庭哪些支持項目",
+        "是否限永和或特定區域",
+        "是否需社工轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認服務項目",
+        "可能需轉介",
+        "非所有長照案家適用"
+      ],
+      "body": "這張卡由候選來源 `yonghe_disability_family_support_tadef` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：台灣障友家庭經濟研究會位於永和，可作為身心障礙者家庭照顧者支持、家庭支持與資源諮詢候選。\n- 下一步：先確認案家是否有身心障礙家庭照顧壓力，再電話詢問服務內容、收案條件與是否需轉介。\n- 服務範圍：永和區身障家庭支持候選；實際收案、服務內容與是否需轉介需電話確認。\n- 審核提醒：五問審核：適合身障家庭照顧壓力；下一步可電話確認；資格需身障家庭情境；A級官方列冊來源。",
+      "content_hash": "3f19b792ae27b68ead38de3167e1485238ee8a36e3ac8fbd455a8c141917e4fb",
+      "resource_version": "2026-05-25-3f19b792",
+      "embedding_text": "台灣障友家庭經濟研究會身心障礙家庭支持服務（永和） multi_professional family_caregiver_support disability_service district 永和區身障家庭支持候選；實際收案、服務內容與是否需轉介需電話確認。 永和區 台灣障友家庭經濟研究會位於永和，可作為身心障礙者家庭照顧者支持、家庭支持與資源諮詢候選。 先確認案家是否有身心障礙家庭照顧壓力，再電話詢問服務內容、收案條件與是否需轉介。 身心障礙證明 家庭照顧需求說明 聯絡資料 目前服務身障家庭哪些支持項目 是否限永和或特定區域 是否需社工轉介 是否有名額或等待時間 五問審核：適合身障家庭照顧壓力；下一步可電話確認；資格需身障家庭情境；A級官方列冊來源。"
+    },
+    {
       "id": "tcb_disability_trust",
       "resource_id": "tcb_disability_trust",
       "category": "other",
@@ -618,6 +1047,253 @@
       "embedding_text": "外籍看護逃跑與失聯整理 foreign_caregiver foreign_caregiver_missing citywide 全新北 仲介整理文，只能作為失聯通報問題清單線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：C；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：需回勞動部或地方政府確認。 此卡只供個管師查證，不進家屬版輸出。"
     },
     {
+      "id": "sanchong_jiayi_home_service_ilabor",
+      "resource_id": "sanchong_jiayi_home_service_ilabor",
+      "category": "care_professional",
+      "topics": [
+        "home_care"
+      ],
+      "name": "安心好生活附設佳醫居家長照機構（三重）",
+      "title": "安心好生活附設佳醫居家長照機構（三重）",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "三重區居家服務單位候選；服務區域、是否仍特約與收案量需電話確認。",
+      "eligibility_tags": [
+        "三重區",
+        "居家服務",
+        "長照需求",
+        "照顧服務"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "安心好生活附設佳醫居家長照機構為三重區居家服務單位候選，可用來確認居服量能與服務區域。",
+      "next_step": "先確認案家長照資格與居家服務需求，再電話詢問是否仍特約、是否收新案與可服務區域。",
+      "contact": "新北勞動雲資料列電話 02-2977-6001；實際服務與特約狀態需確認。",
+      "source_url": "https://ilabor.ntpc.gov.tw/cloud/GoodJob/unit?offset=120&max=10",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "安心好生活附設佳醫居家長照機構為三重區居家服務單位候選，可用來確認居服量能與服務區域。",
+      "public_next_step": "先確認案家長照資格與居家服務需求，再電話詢問是否仍特約、是否收新案與可服務區域。",
+      "public_required_documents": [
+        "長照資格資料",
+        "照顧需求說明",
+        "身分證明",
+        "需求評估資料"
+      ],
+      "public_contact": "新北勞動雲資料列電話 02-2977-6001；實際服務與特約狀態需確認。",
+      "internal_notes": "五問審核：適合三重居服需求；下一步電話確認量能；資格與派案需依長照流程；A級官方名冊來源。",
+      "phone_check_questions": [
+        "目前是否仍收新案",
+        "可服務三重哪些區域",
+        "排班等待時間",
+        "是否需照專派案或可先諮詢"
+      ],
+      "risk_flags": [
+        "需確認特約與量能",
+        "不可直接承諾服務",
+        "名冊可能更新"
+      ],
+      "body": "這張卡由候選來源 `sanchong_jiayi_home_service_ilabor` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：安心好生活附設佳醫居家長照機構為三重區居家服務單位候選，可用來確認居服量能與服務區域。\n- 下一步：先確認案家長照資格與居家服務需求，再電話詢問是否仍特約、是否收新案與可服務區域。\n- 服務範圍：三重區居家服務單位候選；服務區域、是否仍特約與收案量需電話確認。\n- 審核提醒：五問審核：適合三重居服需求；下一步電話確認量能；資格與派案需依長照流程；A級官方名冊來源。",
+      "content_hash": "026b3842f114f1f31c5814553385ba830d54b92382f87788f615145b67b9e741",
+      "resource_version": "2026-05-25-026b3842",
+      "embedding_text": "安心好生活附設佳醫居家長照機構（三重） care_professional home_care district 三重區居家服務單位候選；服務區域、是否仍特約與收案量需電話確認。 三重區 安心好生活附設佳醫居家長照機構為三重區居家服務單位候選，可用來確認居服量能與服務區域。 先確認案家長照資格與居家服務需求，再電話詢問是否仍特約、是否收新案與可服務區域。 長照資格資料 照顧需求說明 身分證明 需求評估資料 目前是否仍收新案 可服務三重哪些區域 排班等待時間 是否需照專派案或可先諮詢 五問審核：適合三重居服需求；下一步電話確認量能；資格與派案需依長照流程；A級官方名冊來源。"
+    },
+    {
+      "id": "kuangching_food_bank_xindian",
+      "resource_id": "kuangching_food_bank_xindian",
+      "category": "informal",
+      "topics": [
+        "food_bank",
+        "emergency_aid"
+      ],
+      "name": "廣青文教基金會食（實）物銀行（新店）",
+      "title": "廣青文教基金會食（實）物銀行（新店）",
+      "region": "新北市",
+      "districts": [
+        "新店區",
+        "深坑區",
+        "烏來區",
+        "坪林區"
+      ],
+      "coverage_scope": "cross_district",
+      "service_area_note": "新店區物資資源候選；申請方式、轉介窗口、服務區域與物資類型需電話確認。",
+      "eligibility_tags": [
+        "新店區",
+        "物資需求",
+        "急難需求",
+        "民間資源"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "廣青文教基金會食（實）物銀行位於新店並服務周邊區域，可作物資需求與弱勢家庭支持候選。",
+      "next_step": "先電話確認服務區域、物資類型、是否需轉介，以及案家是否符合申請方式。",
+      "contact": "依廣青文教基金會食（實）物銀行頁面公告。",
+      "source_url": "https://www.kuang-ching.org/OnePage.aspx?mid=119",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "廣青文教基金會食（實）物銀行位於新店並服務周邊區域，可作物資需求與弱勢家庭支持候選。",
+      "public_next_step": "先電話確認服務區域、物資類型、是否需轉介，以及案家是否符合申請方式。",
+      "public_required_documents": [
+        "身分證明",
+        "需求說明",
+        "轉介資料或弱勢證明依窗口要求"
+      ],
+      "public_contact": "依廣青文教基金會食（實）物銀行頁面公告。",
+      "internal_notes": "五問審核：適合新店及周邊物資需求；下一步電話查證；家屬版只給聯絡與準備方向；B級基金會來源。",
+      "phone_check_questions": [
+        "目前是否受理新店區物資需求",
+        "是否需社工或單位轉介",
+        "服務深坑/烏來/坪林等區域的規則",
+        "物資內容與領取方式"
+      ],
+      "risk_flags": [
+        "B級民間資源需電話確認",
+        "跨區服務需確認",
+        "不承諾一定發放"
+      ],
+      "body": "這張卡由候選來源 `kuangching_food_bank_xindian` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：廣青文教基金會食（實）物銀行位於新店並服務周邊區域，可作物資需求與弱勢家庭支持候選。\n- 下一步：先電話確認服務區域、物資類型、是否需轉介，以及案家是否符合申請方式。\n- 服務範圍：新店區物資資源候選；申請方式、轉介窗口、服務區域與物資類型需電話確認。\n- 審核提醒：五問審核：適合新店及周邊物資需求；下一步電話查證；家屬版只給聯絡與準備方向；B級基金會來源。",
+      "content_hash": "e88d844b95501b4d3b36ed8e8b3ae41ed1437de03b10dd4a413cce1a3e1286ff",
+      "resource_version": "2026-05-25-e88d844b",
+      "embedding_text": "廣青文教基金會食（實）物銀行（新店） informal food_bank emergency_aid cross_district 新店區物資資源候選；申請方式、轉介窗口、服務區域與物資類型需電話確認。 新店區 深坑區 烏來區 坪林區 廣青文教基金會食（實）物銀行位於新店並服務周邊區域，可作物資需求與弱勢家庭支持候選。 先電話確認服務區域、物資類型、是否需轉介，以及案家是否符合申請方式。 身分證明 需求說明 轉介資料或弱勢證明依窗口要求 目前是否受理新店區物資需求 是否需社工或單位轉介 服務深坑/烏來/坪林等區域的規則 物資內容與領取方式 五問審核：適合新店及周邊物資需求；下一步電話查證；家屬版只給聯絡與準備方向；B級基金會來源。"
+    },
+    {
+      "id": "syinlu_aizhong_sanchong_disability_service",
+      "resource_id": "syinlu_aizhong_sanchong_disability_service",
+      "category": "multi_professional",
+      "topics": [
+        "disability_service"
+      ],
+      "name": "心路基金會新北市愛重服務中心",
+      "title": "心路基金會新北市愛重服務中心",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "實際服務項目與收案條件需以中心電話確認。",
+      "eligibility_tags": [
+        "三重區",
+        "身心障礙",
+        "家庭支持",
+        "民間資源"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "心路基金會新北市愛重服務中心位於三重，可作身心障礙者家庭支持、日間支持或資源連結候選。",
+      "next_step": "先確認案家是否為身心障礙者或家庭照顧支持需求，再電話詢問服務項目與收案流程。",
+      "contact": "依心路基金會新北市愛重服務中心頁面公告。",
+      "source_url": "https://www.syinlu.org.tw/about/service_location/6",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "心路基金會新北市愛重服務中心位於三重，可作身心障礙者家庭支持、日間支持或資源連結候選。",
+      "public_next_step": "先確認案家是否為身心障礙者或家庭照顧支持需求，再電話詢問服務項目與收案流程。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "需求說明",
+        "聯絡資料",
+        "轉介資料依中心要求"
+      ],
+      "public_contact": "依心路基金會新北市愛重服務中心頁面公告。",
+      "internal_notes": "五問審核：適合三重身障家庭/資源連結；下一步電話確認；資格需身障情境；B級基金會服務來源。",
+      "phone_check_questions": [
+        "中心目前提供哪些服務",
+        "是否限三重或新北特定區域",
+        "是否需要社工轉介",
+        "是否有名額或等待時間"
+      ],
+      "risk_flags": [
+        "需電話確認服務項目",
+        "可能需轉介",
+        "非所有長照個案適用"
+      ],
+      "body": "這張卡由候選來源 `syinlu_aizhong_sanchong_disability_service` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：心路基金會新北市愛重服務中心位於三重，可作身心障礙者家庭支持、日間支持或資源連結候選。\n- 下一步：先確認案家是否為身心障礙者或家庭照顧支持需求，再電話詢問服務項目與收案流程。\n- 服務範圍：實際服務項目與收案條件需以中心電話確認。\n- 審核提醒：五問審核：適合三重身障家庭/資源連結；下一步電話確認；資格需身障情境；B級基金會服務來源。",
+      "content_hash": "c747e682818bffa55ab2eb7de68a67d8bf09dfd4e1fbd15d7255de37fe3dd8d8",
+      "resource_version": "2026-05-25-c747e682",
+      "embedding_text": "心路基金會新北市愛重服務中心 multi_professional disability_service district 實際服務項目與收案條件需以中心電話確認。 三重區 心路基金會新北市愛重服務中心位於三重，可作身心障礙者家庭支持、日間支持或資源連結候選。 先確認案家是否為身心障礙者或家庭照顧支持需求，再電話詢問服務項目與收案流程。 身心障礙證明 需求說明 聯絡資料 轉介資料依中心要求 中心目前提供哪些服務 是否限三重或新北特定區域 是否需要社工轉介 是否有名額或等待時間 五問審核：適合三重身障家庭/資源連結；下一步電話確認；資格需身障情境；B級基金會服務來源。"
+    },
+    {
+      "id": "xinlu_xindian_wenshan_workshop",
+      "resource_id": "xinlu_xindian_wenshan_workshop",
+      "category": "multi_professional",
+      "topics": [
+        "disability_service"
+      ],
+      "name": "心路基金會新店文山小型作業所",
+      "title": "心路基金會新店文山小型作業所",
+      "region": "新北市",
+      "districts": [
+        "新店區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "成人身心障礙者日間支持與作業活動候選；收案資格、名額與轉介流程需電話確認。",
+      "eligibility_tags": [
+        "新店區",
+        "身心障礙",
+        "日間支持",
+        "民間資源"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "心路基金會新店文山小型作業所位於新店，可作成人身心障礙者日間支持、作業活動與社區參與候選。",
+      "next_step": "先確認案家是否有成人身障日間支持或作業活動需求，再電話詢問資格、名額與轉介流程。",
+      "contact": "心路基金會頁面列電話 02-2911-2001；地址與服務以中心確認為準。",
+      "source_url": "https://www.syinlu.org.tw/about/service_location/45",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "心路基金會新店文山小型作業所位於新店，可作成人身心障礙者日間支持、作業活動與社區參與候選。",
+      "public_next_step": "先確認案家是否有成人身障日間支持或作業活動需求，再電話詢問資格、名額與轉介流程。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "身分證明",
+        "需求說明",
+        "轉介資料依中心要求"
+      ],
+      "public_contact": "心路基金會頁面列電話 02-2911-2001；地址與服務以中心確認為準。",
+      "internal_notes": "五問審核：適合新店成人身障日間支持；下一步電話確認；B級基金會服務來源。",
+      "phone_check_questions": [
+        "目前是否有名額",
+        "收案條件與年齡限制",
+        "是否需社工轉介",
+        "服務時間與費用"
+      ],
+      "risk_flags": [
+        "B級服務來源需電話確認",
+        "可能有名額限制",
+        "非所有長照個案適用"
+      ],
+      "body": "這張卡由候選來源 `xinlu_xindian_wenshan_workshop` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：心路基金會新店文山小型作業所位於新店，可作成人身心障礙者日間支持、作業活動與社區參與候選。\n- 下一步：先確認案家是否有成人身障日間支持或作業活動需求，再電話詢問資格、名額與轉介流程。\n- 服務範圍：成人身心障礙者日間支持與作業活動候選；收案資格、名額與轉介流程需電話確認。\n- 審核提醒：五問審核：適合新店成人身障日間支持；下一步電話確認；B級基金會服務來源。",
+      "content_hash": "8f731a10933c501f503cc4aa4528ea645faaa6184570c6cdf3b8ada96a2c396f",
+      "resource_version": "2026-05-25-8f731a10",
+      "embedding_text": "心路基金會新店文山小型作業所 multi_professional disability_service district 成人身心障礙者日間支持與作業活動候選；收案資格、名額與轉介流程需電話確認。 新店區 心路基金會新店文山小型作業所位於新店，可作成人身心障礙者日間支持、作業活動與社區參與候選。 先確認案家是否有成人身障日間支持或作業活動需求，再電話詢問資格、名額與轉介流程。 身心障礙證明 身分證明 需求說明 轉介資料依中心要求 目前是否有名額 收案條件與年齡限制 是否需社工轉介 服務時間與費用 五問審核：適合新店成人身障日間支持；下一步電話確認；B級基金會服務來源。"
+    },
+    {
       "id": "yuerong_emergency_aid_pdf",
       "resource_id": "yuerong_emergency_aid_pdf",
       "category": "informal",
@@ -782,6 +1458,130 @@
       "content_hash": "babede23e62c13a8a016081cbbe9c33c2f579ab62b1e1a4564610947266965f6",
       "resource_version": "2026-05-22-babede23",
       "embedding_text": "新北失智共照網施政成果 multi_professional dementia_service citywide 全新北 失智共照服務線索，可補官方失智資源查找方向。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：需再找實際失智據點或服務申請頁。 此卡只供個管師查證，不進家屬版輸出。"
+    },
+    {
+      "id": "sanchong_district_office_social_affairs",
+      "resource_id": "sanchong_district_office_social_affairs",
+      "category": "informal",
+      "topics": [
+        "food_bank",
+        "emergency_aid"
+      ],
+      "name": "新北市三重區公所社會人文課",
+      "title": "新北市三重區公所社會人文課",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "三重區公所轄區社福窗口；各業務分機與服務條件需抽頁確認。",
+      "eligibility_tags": [
+        "三重區",
+        "公所窗口",
+        "急難救助",
+        "獨居送餐"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "三重區公所社會人文課可協助確認三重區長照申請、獨居老人送餐、災害救助、急難救助與身障業務窗口。",
+      "next_step": "依案家需求先打三重區公所社會人文課，確認應找哪個業務分機與需要哪些文件。",
+      "contact": "依三重區公所社會人文課官方頁公告。",
+      "source_url": "https://www.sanchong.ntpc.gov.tw/home.jsp?id=af4f5c98e2488b5d",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "三重區公所社會人文課可協助確認三重區長照申請、獨居老人送餐、災害救助、急難救助與身障業務窗口。",
+      "public_next_step": "依案家需求先打三重區公所社會人文課，確認應找哪個業務分機與需要哪些文件。",
+      "public_required_documents": [
+        "身分證明",
+        "戶籍或居住資料",
+        "需求或急難事由說明",
+        "申請文件依業務窗口要求"
+      ],
+      "public_contact": "依三重區公所社會人文課官方頁公告。",
+      "internal_notes": "五問審核：適合三重多項社福入口；下一步電話分流；資格按業務個別確認；A級官方來源。",
+      "phone_check_questions": [
+        "急難救助或獨居送餐分機",
+        "是否需本人到場",
+        "身障或長照業務應找哪個窗口",
+        "文件不足能否先諮詢"
+      ],
+      "risk_flags": [
+        "窗口分工需確認",
+        "文件依業務不同",
+        "不得承諾補助結果"
+      ],
+      "body": "這張卡由候選來源 `sanchong_district_office_social_affairs` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重區公所社會人文課可協助確認三重區長照申請、獨居老人送餐、災害救助、急難救助與身障業務窗口。\n- 下一步：依案家需求先打三重區公所社會人文課，確認應找哪個業務分機與需要哪些文件。\n- 服務範圍：三重區公所轄區社福窗口；各業務分機與服務條件需抽頁確認。\n- 審核提醒：五問審核：適合三重多項社福入口；下一步電話分流；資格按業務個別確認；A級官方來源。",
+      "content_hash": "c840c74276469e44bc3550c3e3cd26ac9f47ede474bdbc5c5462cf14dbf04667",
+      "resource_version": "2026-05-25-c840c742",
+      "embedding_text": "新北市三重區公所社會人文課 informal food_bank emergency_aid district 三重區公所轄區社福窗口；各業務分機與服務條件需抽頁確認。 三重區 三重區公所社會人文課可協助確認三重區長照申請、獨居老人送餐、災害救助、急難救助與身障業務窗口。 依案家需求先打三重區公所社會人文課，確認應找哪個業務分機與需要哪些文件。 身分證明 戶籍或居住資料 需求或急難事由說明 申請文件依業務窗口要求 急難救助或獨居送餐分機 是否需本人到場 身障或長照業務應找哪個窗口 文件不足能否先諮詢 五問審核：適合三重多項社福入口；下一步電話分流；資格按業務個別確認；A級官方來源。"
+    },
+    {
+      "id": "ntpc_sw_service_center_sanchong",
+      "resource_id": "ntpc_sw_service_center_sanchong",
+      "category": "informal",
+      "topics": [
+        "food_bank",
+        "emergency_aid"
+      ],
+      "name": "新北市三重社會福利服務中心",
+      "title": "新北市三重社會福利服務中心",
+      "region": "新北市",
+      "districts": [
+        "三重區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "三重區官方社福中心/實物銀行分行入口；個案需依轄區與社工評估確認。",
+      "eligibility_tags": [
+        "三重區",
+        "社福窗口",
+        "物資需求",
+        "急難需求"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "三重社福中心是三重區社會工作服務、實物銀行、急難與弱勢資源轉介的官方在地窗口。",
+      "next_step": "先確認案家是否屬三重服務範圍，再詢問實物銀行、急難或社福資源的受理方式與文件。",
+      "contact": "新北市社會局頁面列三重社福中心電話 2982-6255；地址與服務時間以官方公告為準。",
+      "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?id=a9190e599d37b366",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "三重社福中心是三重區社會工作服務、實物銀行、急難與弱勢資源轉介的官方在地窗口。",
+      "public_next_step": "先確認案家是否屬三重服務範圍，再詢問實物銀行、急難或社福資源的受理方式與文件。",
+      "public_required_documents": [
+        "身分證明",
+        "居住或服務區域資料",
+        "需求說明",
+        "相關經濟或急難證明依窗口要求"
+      ],
+      "public_contact": "新北市社會局頁面列三重社福中心電話 2982-6255；地址與服務時間以官方公告為準。",
+      "internal_notes": "五問審核：適合三重急難/物資/弱勢轉介；下一步清楚；資格文件需窗口確認；A級官方來源。",
+      "phone_check_questions": [
+        "實物銀行或急難需求是否由中心受理",
+        "是否需社工轉介",
+        "需要哪些文件",
+        "是否有等候或名額限制"
+      ],
+      "risk_flags": [
+        "需確認轄區",
+        "需電話確認文件",
+        "不可直接承諾核准"
+      ],
+      "body": "這張卡由候選來源 `ntpc_sw_service_center_sanchong` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重社福中心是三重區社會工作服務、實物銀行、急難與弱勢資源轉介的官方在地窗口。\n- 下一步：先確認案家是否屬三重服務範圍，再詢問實物銀行、急難或社福資源的受理方式與文件。\n- 服務範圍：三重區官方社福中心/實物銀行分行入口；個案需依轄區與社工評估確認。\n- 審核提醒：五問審核：適合三重急難/物資/弱勢轉介；下一步清楚；資格文件需窗口確認；A級官方來源。",
+      "content_hash": "66b47e7c438e9a5a647955193b1fb3e8d1c4fe2e4ecc747119bd8bac18f5c57c",
+      "resource_version": "2026-05-25-66b47e7c",
+      "embedding_text": "新北市三重社會福利服務中心 informal food_bank emergency_aid district 三重區官方社福中心/實物銀行分行入口；個案需依轄區與社工評估確認。 三重區 三重社福中心是三重區社會工作服務、實物銀行、急難與弱勢資源轉介的官方在地窗口。 先確認案家是否屬三重服務範圍，再詢問實物銀行、急難或社福資源的受理方式與文件。 身分證明 居住或服務區域資料 需求說明 相關經濟或急難證明依窗口要求 實物銀行或急難需求是否由中心受理 是否需社工轉介 需要哪些文件 是否有等候或名額限制 五問審核：適合三重急難/物資/弱勢轉介；下一步清楚；資格文件需窗口確認；A級官方來源。"
     },
     {
       "id": "ntpc_traffic_rehab_bus",
@@ -1512,6 +2312,371 @@
       "content_hash": "61c2b02109213c82102cf61a9bf140be8a22e4fb1d1a4315f91a52fb60ad5a5d",
       "resource_version": "2026-05-22-61c2b021",
       "embedding_text": "新北市敬老、愛心及愛心陪伴悠遊卡線上申辦 transport elder_love_taxi citywide 全新北 說明敬老卡、愛心卡、愛心陪伴卡資格、點數與文件，可整理成交通優惠流程卡。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：查詢結果包含 115 年點數變更資訊，需標示最後確認日。"
+    },
+    {
+      "id": "xindian_district_office_social_affairs_faq",
+      "resource_id": "xindian_district_office_social_affairs_faq",
+      "category": "informal",
+      "topics": [
+        "food_bank",
+        "emergency_aid"
+      ],
+      "name": "新北市新店區公所社會人文課常見問答",
+      "title": "新北市新店區公所社會人文課常見問答",
+      "region": "新北市",
+      "districts": [
+        "新店區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "新店區公所轄區社福窗口；實物銀行、急難或身障文件需抽頁確認。",
+      "eligibility_tags": [
+        "新店區",
+        "公所窗口",
+        "急難救助",
+        "身心障礙"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "新店區公所社會人文課常見問答可作新店區低收中低收、急難、身障補助與敬老愛心卡等社福業務入口。",
+      "next_step": "依案家需求先向新店區公所確認受理窗口、資格、文件與是否需到場辦理。",
+      "contact": "依新店區公所社會人文課常見問答與頁面公告。",
+      "source_url": "https://www.xindian.ntpc.gov.tw/home.jsp?id=ba85df57eaf29096",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新店區公所社會人文課常見問答可作新店區低收中低收、急難、身障補助與敬老愛心卡等社福業務入口。",
+      "public_next_step": "依案家需求先向新店區公所確認受理窗口、資格、文件與是否需到場辦理。",
+      "public_required_documents": [
+        "身分證明",
+        "戶籍或居住資料",
+        "經濟或身障證明如適用",
+        "申請文件依窗口要求"
+      ],
+      "public_contact": "依新店區公所社會人文課常見問答與頁面公告。",
+      "internal_notes": "五問審核：適合新店多項社福入口；下一步可電話分流；資格文件個別確認；A級官方來源。",
+      "phone_check_questions": [
+        "急難或低收中低收應找哪個窗口",
+        "實物銀行或物資需求如何轉介",
+        "身障補助需哪些文件",
+        "是否可先電話諮詢"
+      ],
+      "risk_flags": [
+        "窗口分工需確認",
+        "文件依業務不同",
+        "不得承諾補助結果"
+      ],
+      "body": "這張卡由候選來源 `xindian_district_office_social_affairs_faq` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：新店區公所社會人文課常見問答可作新店區低收中低收、急難、身障補助與敬老愛心卡等社福業務入口。\n- 下一步：依案家需求先向新店區公所確認受理窗口、資格、文件與是否需到場辦理。\n- 服務範圍：新店區公所轄區社福窗口；實物銀行、急難或身障文件需抽頁確認。\n- 審核提醒：五問審核：適合新店多項社福入口；下一步可電話分流；資格文件個別確認；A級官方來源。",
+      "content_hash": "4580355226917ff66726297d5295d99d61b486d5f8a7566ea38ee545d4c1e45e",
+      "resource_version": "2026-05-25-45803552",
+      "embedding_text": "新北市新店區公所社會人文課常見問答 informal food_bank emergency_aid district 新店區公所轄區社福窗口；實物銀行、急難或身障文件需抽頁確認。 新店區 新店區公所社會人文課常見問答可作新店區低收中低收、急難、身障補助與敬老愛心卡等社福業務入口。 依案家需求先向新店區公所確認受理窗口、資格、文件與是否需到場辦理。 身分證明 戶籍或居住資料 經濟或身障證明如適用 申請文件依窗口要求 急難或低收中低收應找哪個窗口 實物銀行或物資需求如何轉介 身障補助需哪些文件 是否可先電話諮詢 五問審核：適合新店多項社福入口；下一步可電話分流；資格文件個別確認；A級官方來源。"
+    },
+    {
+      "id": "xindian_beixin_community_care_point",
+      "resource_id": "xindian_beixin_community_care_point",
+      "category": "care_professional",
+      "topics": [
+        "community_c_station"
+      ],
+      "name": "新北市新店區北新社區發展協會社區照顧關懷據點",
+      "title": "新北市新店區北新社區發展協會社區照顧關懷據點",
+      "region": "新北市",
+      "districts": [
+        "新店區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "新店區社區照顧關懷據點；服務對象、課程、共餐與開放狀態需電話確認。",
+      "eligibility_tags": [
+        "新店區",
+        "社區據點",
+        "長照需求",
+        "照顧服務"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "新店區北新社區發展協會社區照顧關懷據點，可作新店區長者關懷、活動、共餐或社區支持資源。",
+      "next_step": "先電話確認服務里別、開放時段、共餐或課程內容，以及是否需要報名或評估。",
+      "contact": "衛福部社區照顧關懷據點資料列電話 0963-366378；實際服務以據點確認為準。",
+      "source_url": "https://ccare.sfaa.gov.tw/home/community-point/CP3100102",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新店區北新社區發展協會社區照顧關懷據點，可作新店區長者關懷、活動、共餐或社區支持資源。",
+      "public_next_step": "先電話確認服務里別、開放時段、共餐或課程內容，以及是否需要報名或評估。",
+      "public_required_documents": [
+        "身分證明",
+        "基本聯絡資料",
+        "參與需求說明"
+      ],
+      "public_contact": "衛福部社區照顧關懷據點資料列電話 0963-366378；實際服務以據點確認為準。",
+      "internal_notes": "五問審核：適合新店社區支持；下一步電話確認；A級政府登錄來源。",
+      "phone_check_questions": [
+        "目前服務項目與開放時段",
+        "是否有共餐或關懷訪視",
+        "是否限服務里別",
+        "是否需事先報名"
+      ],
+      "risk_flags": [
+        "服務內容可能異動",
+        "需確認服務里別",
+        "非緊急資源"
+      ],
+      "body": "這張卡由候選來源 `xindian_beixin_community_care_point` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：新店區北新社區發展協會社區照顧關懷據點，可作新店區長者關懷、活動、共餐或社區支持資源。\n- 下一步：先電話確認服務里別、開放時段、共餐或課程內容，以及是否需要報名或評估。\n- 服務範圍：新店區社區照顧關懷據點；服務對象、課程、共餐與開放狀態需電話確認。\n- 審核提醒：五問審核：適合新店社區支持；下一步電話確認；A級政府登錄來源。",
+      "content_hash": "76ca949733786ce0d6322c226a1da4b575e629ee3f55e10b35e7d91dcd1c0a13",
+      "resource_version": "2026-05-25-76ca9497",
+      "embedding_text": "新北市新店區北新社區發展協會社區照顧關懷據點 care_professional community_c_station district 新店區社區照顧關懷據點；服務對象、課程、共餐與開放狀態需電話確認。 新店區 新店區北新社區發展協會社區照顧關懷據點，可作新店區長者關懷、活動、共餐或社區支持資源。 先電話確認服務里別、開放時段、共餐或課程內容，以及是否需要報名或評估。 身分證明 基本聯絡資料 參與需求說明 目前服務項目與開放時段 是否有共餐或關懷訪視 是否限服務里別 是否需事先報名 五問審核：適合新店社區支持；下一步電話確認；A級政府登錄來源。"
+    },
+    {
+      "id": "yonghe_district_office_social_assistance",
+      "resource_id": "yonghe_district_office_social_assistance",
+      "category": "informal",
+      "topics": [
+        "emergency_aid"
+      ],
+      "name": "新北市永和區公所社會救助",
+      "title": "新北市永和區公所社會救助",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "永和區公所轄區社會救助窗口；資格、文件與分機需抽頁確認。",
+      "eligibility_tags": [
+        "永和區",
+        "急難救助",
+        "低收中低收",
+        "公所窗口"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需文件"
+      ],
+      "summary": "永和區公所社會救助入口，可用來確認急難救助、低收中低收、弱勢扶助與相關申請流程。",
+      "next_step": "先向永和區公所確認案家符合哪一類社會救助，再整理申請文件與是否需要里辦、公所或社工協助。",
+      "contact": "依永和區公所社會救助官方頁公告。",
+      "source_url": "https://www.yonghe.ntpc.gov.tw/home.jsp?id=43e9320326537ebf",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "永和區公所社會救助入口，可用來確認急難救助、低收中低收、弱勢扶助與相關申請流程。",
+      "public_next_step": "先向永和區公所確認案家符合哪一類社會救助，再整理申請文件與是否需要里辦、公所或社工協助。",
+      "public_required_documents": [
+        "身分證明",
+        "戶籍或居住資料",
+        "經濟狀況證明",
+        "急難事由或醫療費用相關文件依窗口要求"
+      ],
+      "public_contact": "依永和區公所社會救助官方頁公告。",
+      "internal_notes": "五問審核：適合永和急難/經濟弱勢情境；下一步可行；資格文件需公所確認；家屬版不寫未確認金額；A級官方來源。",
+      "phone_check_questions": [
+        "急難救助目前受理條件",
+        "低收中低收或其他救助應找哪個分機",
+        "是否需本人或家屬到場",
+        "文件不足時可否先諮詢"
+      ],
+      "risk_flags": [
+        "資格需審查",
+        "文件需個別確認",
+        "不得保證補助結果"
+      ],
+      "body": "這張卡由候選來源 `yonghe_district_office_social_assistance` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：永和區公所社會救助入口，可用來確認急難救助、低收中低收、弱勢扶助與相關申請流程。\n- 下一步：先向永和區公所確認案家符合哪一類社會救助，再整理申請文件與是否需要里辦、公所或社工協助。\n- 服務範圍：永和區公所轄區社會救助窗口；資格、文件與分機需抽頁確認。\n- 審核提醒：五問審核：適合永和急難/經濟弱勢情境；下一步可行；資格文件需公所確認；家屬版不寫未確認金額；A級官方來源。",
+      "content_hash": "9343a430a279095069764688aee61b8bf59f31ee59617cc686a5e84020342502",
+      "resource_version": "2026-05-25-9343a430",
+      "embedding_text": "新北市永和區公所社會救助 informal emergency_aid district 永和區公所轄區社會救助窗口；資格、文件與分機需抽頁確認。 永和區 永和區公所社會救助入口，可用來確認急難救助、低收中低收、弱勢扶助與相關申請流程。 先向永和區公所確認案家符合哪一類社會救助，再整理申請文件與是否需要里辦、公所或社工協助。 身分證明 戶籍或居住資料 經濟狀況證明 急難事由或醫療費用相關文件依窗口要求 急難救助目前受理條件 低收中低收或其他救助應找哪個分機 是否需本人或家屬到場 文件不足時可否先諮詢 五問審核：適合永和急難/經濟弱勢情境；下一步可行；資格文件需公所確認；家屬版不寫未確認金額；A級官方來源。"
+    },
+    {
+      "id": "yonghe_dehe_community_care_point",
+      "resource_id": "yonghe_dehe_community_care_point",
+      "category": "care_professional",
+      "topics": [
+        "community_c_station"
+      ],
+      "name": "新北市永和區得和社區發展協會社區照顧關懷據點",
+      "title": "新北市永和區得和社區發展協會社區照顧關懷據點",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "永和區社區關懷據點；共餐、課程、開放時間與收案對象需依據點確認。",
+      "eligibility_tags": [
+        "永和區",
+        "社區據點",
+        "長照需求",
+        "照顧服務"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "永和區得和社區發展協會社區照顧關懷據點，可作為在地長者關懷、活動、共餐或初步社區支持資源。",
+      "next_step": "先電話確認服務里別、開放時段、是否有共餐或課程，以及案家是否適合參與。",
+      "contact": "衛福部社區照顧關懷據點資料列電話 02-29247766；實際開放時間以據點確認為準。",
+      "source_url": "https://ccare.sfaa.gov.tw/home/community-point/CP3100129",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "永和區得和社區發展協會社區照顧關懷據點，可作為在地長者關懷、活動、共餐或初步社區支持資源。",
+      "public_next_step": "先電話確認服務里別、開放時段、是否有共餐或課程，以及案家是否適合參與。",
+      "public_required_documents": [
+        "身分證明",
+        "基本聯絡資料",
+        "參與需求說明"
+      ],
+      "public_contact": "衛福部社區照顧關懷據點資料列電話 02-29247766；實際開放時間以據點確認為準。",
+      "internal_notes": "五問審核：適合永和社區支持/預防孤立；下一步電話確認；資格多為據點規則；家屬版可給聯絡方向；A級政府登錄來源。",
+      "phone_check_questions": [
+        "目前服務項目與開放時段",
+        "是否有共餐或關懷訪視",
+        "是否限服務里別",
+        "是否需事先報名或評估"
+      ],
+      "risk_flags": [
+        "服務內容可能異動",
+        "需確認服務里別",
+        "非緊急資源"
+      ],
+      "body": "這張卡由候選來源 `yonghe_dehe_community_care_point` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：永和區得和社區發展協會社區照顧關懷據點，可作為在地長者關懷、活動、共餐或初步社區支持資源。\n- 下一步：先電話確認服務里別、開放時段、是否有共餐或課程，以及案家是否適合參與。\n- 服務範圍：永和區社區關懷據點；共餐、課程、開放時間與收案對象需依據點確認。\n- 審核提醒：五問審核：適合永和社區支持/預防孤立；下一步電話確認；資格多為據點規則；家屬版可給聯絡方向；A級政府登錄來源。",
+      "content_hash": "b06d6c9948bfcdc058632617e65696113bcc480396c10ebd7e8351b71bd40819",
+      "resource_version": "2026-05-25-b06d6c99",
+      "embedding_text": "新北市永和區得和社區發展協會社區照顧關懷據點 care_professional community_c_station district 永和區社區關懷據點；共餐、課程、開放時間與收案對象需依據點確認。 永和區 永和區得和社區發展協會社區照顧關懷據點，可作為在地長者關懷、活動、共餐或初步社區支持資源。 先電話確認服務里別、開放時段、是否有共餐或課程，以及案家是否適合參與。 身分證明 基本聯絡資料 參與需求說明 目前服務項目與開放時段 是否有共餐或關懷訪視 是否限服務里別 是否需事先報名或評估 五問審核：適合永和社區支持/預防孤立；下一步電話確認；資格多為據點規則；家屬版可給聯絡方向；A級政府登錄來源。"
+    },
+    {
+      "id": "yonghe_health_ltc_single_window",
+      "resource_id": "yonghe_health_ltc_single_window",
+      "category": "care_professional",
+      "topics": [
+        "service_flow",
+        "high_risk_referral"
+      ],
+      "name": "新北市永和區衛生所長照申請服務單一窗口",
+      "title": "新北市永和區衛生所長照申請服務單一窗口",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "永和區長照申請入口；送件後由長照管理中心聯繫評估。",
+      "eligibility_tags": [
+        "永和區",
+        "長照需求",
+        "服務流程",
+        "高風險轉介"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需評估"
+      ],
+      "summary": "永和區衛生所提供長照申請單一窗口，可協助民眾提出長照需求並銜接後續評估。",
+      "next_step": "協助家屬整理照顧需求、聯絡資料與身分資料，再向永和區衛生所或1966確認長照申請流程。",
+      "contact": "依永和區衛生所長照申請服務單一窗口公告。",
+      "source_url": "https://yonghe.health.ntpc.gov.tw/news/%E6%9C%AC%E6%89%80%E6%8F%90%E4%BE%9B%E9%95%B7%E7%85%A7%E7%94%B3%E8%AB%8B%E6%9C%8D%E5%8B%99%E5%96%AE%E4%B8%80%E7%AA%97%E5%8F%A3",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "永和區衛生所提供長照申請單一窗口，可協助民眾提出長照需求並銜接後續評估。",
+      "public_next_step": "協助家屬整理照顧需求、聯絡資料與身分資料，再向永和區衛生所或1966確認長照申請流程。",
+      "public_required_documents": [
+        "身分證明",
+        "聯絡資料",
+        "照顧需求說明",
+        "醫療或失能相關資料如有可備"
+      ],
+      "public_contact": "依永和區衛生所長照申請服務單一窗口公告。",
+      "internal_notes": "五問審核：適合永和長照申請/高風險轉介；下一步清楚；資格由長照評估決定；家屬版只說申請入口；A級官方來源。",
+      "phone_check_questions": [
+        "目前是否可由衛生所協助長照申請",
+        "送件後多久會聯繫評估",
+        "是否需本人或家屬提供資料",
+        "高風險或急迫個案是否有轉介方式"
+      ],
+      "risk_flags": [
+        "需後續評估",
+        "非立即派案",
+        "急迫情形需同步找正式窗口"
+      ],
+      "body": "這張卡由候選來源 `yonghe_health_ltc_single_window` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：永和區衛生所提供長照申請單一窗口，可協助民眾提出長照需求並銜接後續評估。\n- 下一步：協助家屬整理照顧需求、聯絡資料與身分資料，再向永和區衛生所或1966確認長照申請流程。\n- 服務範圍：永和區長照申請入口；送件後由長照管理中心聯繫評估。\n- 審核提醒：五問審核：適合永和長照申請/高風險轉介；下一步清楚；資格由長照評估決定；家屬版只說申請入口；A級官方來源。",
+      "content_hash": "62328c212f029c5b24f8fc9b309edf104300e36b509cac0c39470c6414ef2b5c",
+      "resource_version": "2026-05-25-62328c21",
+      "embedding_text": "新北市永和區衛生所長照申請服務單一窗口 care_professional service_flow high_risk_referral district 永和區長照申請入口；送件後由長照管理中心聯繫評估。 永和區 永和區衛生所提供長照申請單一窗口，可協助民眾提出長照需求並銜接後續評估。 協助家屬整理照顧需求、聯絡資料與身分資料，再向永和區衛生所或1966確認長照申請流程。 身分證明 聯絡資料 照顧需求說明 醫療或失能相關資料如有可備 目前是否可由衛生所協助長照申請 送件後多久會聯繫評估 是否需本人或家屬提供資料 高風險或急迫個案是否有轉介方式 五問審核：適合永和長照申請/高風險轉介；下一步清楚；資格由長照評估決定；家屬版只說申請入口；A級官方來源。"
+    },
+    {
+      "id": "ntpc_sw_service_center_yonghe",
+      "resource_id": "ntpc_sw_service_center_yonghe",
+      "category": "informal",
+      "topics": [
+        "food_bank",
+        "emergency_aid"
+      ],
+      "name": "新北市永和社會福利服務中心",
+      "title": "新北市永和社會福利服務中心",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "服務區域以官方社福中心分區為準；實物銀行或急難需求仍需電話確認。",
+      "eligibility_tags": [
+        "永和區",
+        "急難需求",
+        "物資需求",
+        "社福窗口"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "永和社福中心是永和區弱勢家庭、急難、物資與社福資源轉介的在地窗口，可作為非正式資源與急難需求的第一通確認電話。",
+      "next_step": "先確認案家是否屬永和區服務範圍，再詢問急難救助、實物銀行或其他社福資源的受理方式與轉介文件。",
+      "contact": "依新北市社會局社會福利服務中心官方頁公告；永和社福中心服務窗口需以最新公告為準。",
+      "source_url": "https://www.sw.ntpc.gov.tw/home.jsp?id=194&parentpath=0.3",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "永和社福中心是永和區弱勢家庭、急難、物資與社福資源轉介的在地窗口，可作為非正式資源與急難需求的第一通確認電話。",
+      "public_next_step": "先確認案家是否屬永和區服務範圍，再詢問急難救助、實物銀行或其他社福資源的受理方式與轉介文件。",
+      "public_required_documents": [
+        "身分證明",
+        "居住或服務區域資料",
+        "需求說明",
+        "相關經濟或急難證明依窗口要求"
+      ],
+      "public_contact": "依新北市社會局社會福利服務中心官方頁公告；永和社福中心服務窗口需以最新公告為準。",
+      "internal_notes": "五問審核：情境為永和弱勢/急難/物資需求；下一步可電話確認；資格與文件需窗口確認；家屬版只給入口與準備方向；A級官方來源可轉正式卡。",
+      "phone_check_questions": [
+        "目前永和區急難或物資需求由哪個窗口受理",
+        "是否需要社工轉介或公所證明",
+        "需要準備哪些文件",
+        "是否有等候或名額限制"
+      ],
+      "risk_flags": [
+        "需確認轄區",
+        "需電話確認文件",
+        "不可直接承諾核准"
+      ],
+      "body": "這張卡由候選來源 `ntpc_sw_service_center_yonghe` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：永和社福中心是永和區弱勢家庭、急難、物資與社福資源轉介的在地窗口，可作為非正式資源與急難需求的第一通確認電話。\n- 下一步：先確認案家是否屬永和區服務範圍，再詢問急難救助、實物銀行或其他社福資源的受理方式與轉介文件。\n- 服務範圍：服務區域以官方社福中心分區為準；實物銀行或急難需求仍需電話確認。\n- 審核提醒：五問審核：情境為永和弱勢/急難/物資需求；下一步可電話確認；資格與文件需窗口確認；家屬版只給入口與準備方向；A級官方來源可轉正式卡。",
+      "content_hash": "ba70caa4baecefe3d5d93e408afde61a1c94800a15caf4c491ae8ec607042a27",
+      "resource_version": "2026-05-25-ba70caa4",
+      "embedding_text": "新北市永和社會福利服務中心 informal food_bank emergency_aid district 服務區域以官方社福中心分區為準；實物銀行或急難需求仍需電話確認。 永和區 永和社福中心是永和區弱勢家庭、急難、物資與社福資源轉介的在地窗口，可作為非正式資源與急難需求的第一通確認電話。 先確認案家是否屬永和區服務範圍，再詢問急難救助、實物銀行或其他社福資源的受理方式與轉介文件。 身分證明 居住或服務區域資料 需求說明 相關經濟或急難證明依窗口要求 目前永和區急難或物資需求由哪個窗口受理 是否需要社工轉介或公所證明 需要準備哪些文件 是否有等候或名額限制 五問審核：情境為永和弱勢/急難/物資需求；下一步可電話確認；資格與文件需窗口確認；家屬版只給入口與準備方向；A級官方來源可轉正式卡。"
     },
     {
       "id": "ntpc_da01_transport",
@@ -3045,6 +4210,198 @@
       "embedding_text": "新北市高風險家庭整合型安全網案例研究 PDF care_professional high_risk_referral citywide 全新北 高風險家庭整合型安全網案例研究，可作理解跨網絡治理的內部背景線索，不作正式服務規則。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：C；候選用途：lead_only；資料型態：lead；此來源含待解析文件。 備註：五問初判：可幫助理解高風險轉介背景，但不是現行服務入口；不能給家屬版，不能當正式規則；C級線索，僅供內部查證。 此卡只供個管師查證，不進家屬版輸出。"
     },
     {
+      "id": "xindian_vocational_rehab_center",
+      "resource_id": "xindian_vocational_rehab_center",
+      "category": "multi_professional",
+      "topics": [
+        "disability_service"
+      ],
+      "name": "新店區身心障礙者職業重建服務中心",
+      "title": "新店區身心障礙者職業重建服務中心",
+      "region": "新北市",
+      "districts": [
+        "新店區",
+        "中和區",
+        "永和區",
+        "烏來區",
+        "深坑區",
+        "石碇區",
+        "坪林區",
+        "汐止區",
+        "平溪區",
+        "瑞芳區"
+      ],
+      "coverage_scope": "cross_district",
+      "service_area_note": "職業重建與就業支持資源，非長照給付；是否適合案家需依身障就業需求確認。",
+      "eligibility_tags": [
+        "新店區",
+        "永和區",
+        "身心障礙",
+        "職業重建"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "新店區身心障礙者職業重建服務中心服務新店及多個周邊行政區，適合有就業支持、職業重建或身障資源連結需求的案家。",
+      "next_step": "先確認案家是否有身障就業或職業重建需求，再電話詢問服務區域、資格與轉介流程。",
+      "contact": "依新北市勞工局職業重建服務中心公告。",
+      "source_url": "https://ilabor.ntpc.gov.tw/page/xindian-vocational-rehabilitation-center",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新店區身心障礙者職業重建服務中心服務新店及多個周邊行政區，適合有就業支持、職業重建或身障資源連結需求的案家。",
+      "public_next_step": "先確認案家是否有身障就業或職業重建需求，再電話詢問服務區域、資格與轉介流程。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "就業或職業重建需求說明",
+        "身分證明",
+        "轉介資料依窗口要求"
+      ],
+      "public_contact": "依新北市勞工局職業重建服務中心公告。",
+      "internal_notes": "五問審核：適合身障就業/職重，不是一般長照服務；來源確定跨區，永和一般瀏覽若納入需標示跨區與電話確認；A級官方來源。",
+      "phone_check_questions": [
+        "服務哪些行政區",
+        "目前可提供哪些職業重建服務",
+        "是否需預約或轉介",
+        "是否適合高齡身障或長照案家"
+      ],
+      "risk_flags": [
+        "跨區服務需確認",
+        "非長照給付",
+        "需有身障就業需求"
+      ],
+      "body": "這張卡由候選來源 `xindian_vocational_rehab_center` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：新店區身心障礙者職業重建服務中心服務新店及多個周邊行政區，適合有就業支持、職業重建或身障資源連結需求的案家。\n- 下一步：先確認案家是否有身障就業或職業重建需求，再電話詢問服務區域、資格與轉介流程。\n- 服務範圍：職業重建與就業支持資源，非長照給付；是否適合案家需依身障就業需求確認。\n- 審核提醒：五問審核：適合身障就業/職重，不是一般長照服務；來源確定跨區，永和一般瀏覽若納入需標示跨區與電話確認；A級官方來源。",
+      "content_hash": "a39e18853d0aaf47922a7c6fcba4910614399de5c5004d0495e5157c8969a5e9",
+      "resource_version": "2026-05-25-a39e1885",
+      "embedding_text": "新店區身心障礙者職業重建服務中心 multi_professional disability_service cross_district 職業重建與就業支持資源，非長照給付；是否適合案家需依身障就業需求確認。 新店區 中和區 永和區 烏來區 深坑區 石碇區 坪林區 汐止區 平溪區 瑞芳區 新店區身心障礙者職業重建服務中心服務新店及多個周邊行政區，適合有就業支持、職業重建或身障資源連結需求的案家。 先確認案家是否有身障就業或職業重建需求，再電話詢問服務區域、資格與轉介流程。 身心障礙證明 就業或職業重建需求說明 身分證明 轉介資料依窗口要求 服務哪些行政區 目前可提供哪些職業重建服務 是否需預約或轉介 是否適合高齡身障或長照案家 五問審核：適合身障就業/職重，不是一般長照服務；來源確定跨區，永和一般瀏覽若納入需標示跨區與電話確認；A級官方來源。"
+    },
+    {
+      "id": "xindian_dafeng_social_welfare_center",
+      "resource_id": "xindian_dafeng_social_welfare_center",
+      "category": "multi_professional",
+      "topics": [
+        "disability_service",
+        "family_caregiver_support"
+      ],
+      "name": "新店大豐社福館與樂康身心障礙者家庭資源中心",
+      "title": "新店大豐社福館與樂康身心障礙者家庭資源中心",
+      "region": "新北市",
+      "districts": [
+        "新店區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "新店區身障與家庭支持官方入口；細項服務、轉介條件與時段需電話確認。",
+      "eligibility_tags": [
+        "新店區",
+        "身心障礙",
+        "家庭照顧者",
+        "照顧支持"
+      ],
+      "urgency_tags": [
+        "一般",
+        "需電話確認"
+      ],
+      "summary": "新店大豐社福館與樂康身心障礙者家庭資源中心可協助身障家庭福利諮詢、生活重建、心理諮商與照顧者支持。",
+      "next_step": "先確認案家是否有身障家庭支持或照顧者壓力需求，再電話詢問服務項目、收案條件與預約方式。",
+      "contact": "依新店區公所大豐社福館與樂康身心障礙者家庭資源中心公告。",
+      "source_url": "https://www.xindian.ntpc.gov.tw/home.jsp?id=9d88fe5f3b6f5e1f",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "新店大豐社福館與樂康身心障礙者家庭資源中心可協助身障家庭福利諮詢、生活重建、心理諮商與照顧者支持。",
+      "public_next_step": "先確認案家是否有身障家庭支持或照顧者壓力需求，再電話詢問服務項目、收案條件與預約方式。",
+      "public_required_documents": [
+        "身心障礙證明",
+        "需求說明",
+        "聯絡資料",
+        "轉介資料依中心要求"
+      ],
+      "public_contact": "依新店區公所大豐社福館與樂康身心障礙者家庭資源中心公告。",
+      "internal_notes": "五問審核：適合新店身障家庭與照顧者支持；下一步可電話確認；A級官方入口。",
+      "phone_check_questions": [
+        "目前提供哪些身障家庭支持服務",
+        "是否需預約或轉介",
+        "心理諮商或生活重建是否有名額",
+        "服務區域與對象限制"
+      ],
+      "risk_flags": [
+        "需電話確認服務內容",
+        "可能需預約",
+        "非所有長照案家適用"
+      ],
+      "body": "這張卡由候選來源 `xindian_dafeng_social_welfare_center` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：新店大豐社福館與樂康身心障礙者家庭資源中心可協助身障家庭福利諮詢、生活重建、心理諮商與照顧者支持。\n- 下一步：先確認案家是否有身障家庭支持或照顧者壓力需求，再電話詢問服務項目、收案條件與預約方式。\n- 服務範圍：新店區身障與家庭支持官方入口；細項服務、轉介條件與時段需電話確認。\n- 審核提醒：五問審核：適合新店身障家庭與照顧者支持；下一步可電話確認；A級官方入口。",
+      "content_hash": "f641447ca42b50ea61c89bb58090a160b2a85de173e4d354e61647acfcf8aa3e",
+      "resource_version": "2026-05-25-f641447c",
+      "embedding_text": "新店大豐社福館與樂康身心障礙者家庭資源中心 multi_professional disability_service family_caregiver_support district 新店區身障與家庭支持官方入口；細項服務、轉介條件與時段需電話確認。 新店區 新店大豐社福館與樂康身心障礙者家庭資源中心可協助身障家庭福利諮詢、生活重建、心理諮商與照顧者支持。 先確認案家是否有身障家庭支持或照顧者壓力需求，再電話詢問服務項目、收案條件與預約方式。 身心障礙證明 需求說明 聯絡資料 轉介資料依中心要求 目前提供哪些身障家庭支持服務 是否需預約或轉介 心理諮商或生活重建是否有名額 服務區域與對象限制 五問審核：適合新店身障家庭與照顧者支持；下一步可電話確認；A級官方入口。"
+    },
+    {
+      "id": "yonghe_elder_love_card_district_office",
+      "resource_id": "yonghe_elder_love_card_district_office",
+      "category": "transport",
+      "topics": [
+        "elder_love_taxi"
+      ],
+      "name": "永和區公所敬老、愛心及愛心陪伴悠遊卡申辦",
+      "title": "永和區公所敬老、愛心及愛心陪伴悠遊卡申辦",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "永和區申辦窗口；實際可用於計程車、YouBike、公車或其他交通點數需依新北市最新規定確認。",
+      "eligibility_tags": [
+        "永和區",
+        "交通優惠",
+        "高齡",
+        "身心障礙"
+      ],
+      "urgency_tags": [
+        "一般"
+      ],
+      "summary": "永和區公所敬老、愛心與愛心陪伴悠遊卡申辦入口，可協助長者或身障者確認交通優惠與陪伴卡。",
+      "next_step": "先確認身分別、年齡或身障資格，再向永和區公所確認申辦方式、文件與可使用範圍。",
+      "contact": "依永和區公所敬老、愛心及愛心陪伴悠遊卡申辦公告。",
+      "source_url": "https://www.yonghe.ntpc.gov.tw/home.jsp?id=f5819bb65919966a",
+      "source_type": "official",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "A級官方資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "永和區公所敬老、愛心與愛心陪伴悠遊卡申辦入口，可協助長者或身障者確認交通優惠與陪伴卡。",
+      "public_next_step": "先確認身分別、年齡或身障資格，再向永和區公所確認申辦方式、文件與可使用範圍。",
+      "public_required_documents": [
+        "身分證明",
+        "符合資格證明",
+        "照片或申請表依公告",
+        "身心障礙證明如適用"
+      ],
+      "public_contact": "依永和區公所敬老、愛心及愛心陪伴悠遊卡申辦公告。",
+      "internal_notes": "五問審核：適合交通補助/陪伴卡情境；下一步可申辦確認；資格明確但會更新；家屬版可給申辦方向；A級官方來源。",
+      "phone_check_questions": [
+        "目前申辦資格與文件",
+        "是否可代辦",
+        "點數或可用交通工具是否有更新",
+        "愛心陪伴卡適用條件"
+      ],
+      "risk_flags": [
+        "規則可能更新",
+        "交通點數用途需確認",
+        "非交通接送服務本身"
+      ],
+      "body": "這張卡由候選來源 `yonghe_elder_love_card_district_office` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：永和區公所敬老、愛心與愛心陪伴悠遊卡申辦入口，可協助長者或身障者確認交通優惠與陪伴卡。\n- 下一步：先確認身分別、年齡或身障資格，再向永和區公所確認申辦方式、文件與可使用範圍。\n- 服務範圍：永和區申辦窗口；實際可用於計程車、YouBike、公車或其他交通點數需依新北市最新規定確認。\n- 審核提醒：五問審核：適合交通補助/陪伴卡情境；下一步可申辦確認；資格明確但會更新；家屬版可給申辦方向；A級官方來源。",
+      "content_hash": "7055baa9a254d3eeb109ad5d3e2d102513dd506c3d21481fe03d75261f270584",
+      "resource_version": "2026-05-25-7055baa9",
+      "embedding_text": "永和區公所敬老、愛心及愛心陪伴悠遊卡申辦 transport elder_love_taxi district 永和區申辦窗口；實際可用於計程車、YouBike、公車或其他交通點數需依新北市最新規定確認。 永和區 永和區公所敬老、愛心與愛心陪伴悠遊卡申辦入口，可協助長者或身障者確認交通優惠與陪伴卡。 先確認身分別、年齡或身障資格，再向永和區公所確認申辦方式、文件與可使用範圍。 身分證明 符合資格證明 照片或申請表依公告 身心障礙證明如適用 目前申辦資格與文件 是否可代辦 點數或可用交通工具是否有更新 愛心陪伴卡適用條件 五問審核：適合交通補助/陪伴卡情境；下一步可申辦確認；資格明確但會更新；家屬版可給申辦方向；A級官方來源。"
+    },
+    {
       "id": "yonghe_assistive_subsidy",
       "resource_id": "yonghe_assistive_subsidy",
       "category": "assistive_accessibility",
@@ -3101,6 +4458,67 @@
       "content_hash": "fd61c8c8bbded18ebb545c2d4311553132422fbbfa3dcadefce9f0cada3ddecd",
       "resource_version": "2026-05-22-fd61c8c8",
       "embedding_text": "永和區公所輔具費用補助與居家無障礙改善說明 assistive_accessibility ltc_assistive_device home_accessibility medical_assistive_device citywide 全新北 說明身障輔具、長照輔具、居家無障礙改善與醫療輔具申請方式。 先開啟來源頁確認申請流程、資格、文件與受理窗口，再依案家狀況安排下一步。 身分證明 資格或評估資料 申請文件依來源公告 目前是否仍依此流程受理 資格條件是否有更新 需要哪些文件 受理窗口與等待時間 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：process_card_draft；資料型態：process；此來源尚待全文抽取。 備註：區公所頁可作為流程補充，但規則需回官方主來源。"
+    },
+    {
+      "id": "cthyh_yonghe_elder_meal_service",
+      "resource_id": "cthyh_yonghe_elder_meal_service",
+      "category": "multi_professional",
+      "topics": [
+        "meal_service"
+      ],
+      "name": "永和耕莘醫院獨居長者送餐服務",
+      "title": "永和耕莘醫院獨居長者送餐服務",
+      "region": "新北市",
+      "districts": [
+        "永和區"
+      ],
+      "coverage_scope": "district",
+      "service_area_note": "永和區送餐服務候選；收案資格、是否仍開放與轉介流程需電話確認。",
+      "eligibility_tags": [
+        "永和區",
+        "送餐",
+        "獨居",
+        "中低收"
+      ],
+      "urgency_tags": [
+        "本週內",
+        "需電話確認"
+      ],
+      "summary": "永和耕莘醫院獨居長者送餐服務候選，適合永和區獨居、低收或中低收、行動不便且無法自行備餐的長者需求。",
+      "next_step": "先電話確認是否仍受理、資格條件、轉介方式與送餐時段，再判斷是否納入案家資源包。",
+      "contact": "依永和耕莘醫院服務頁公告聯絡方式。",
+      "source_url": "https://www.cthyh.org.tw/?aid=62&pid=98",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
+      "status": "active",
+      "public_allowed": true,
+      "public_summary": "永和耕莘醫院獨居長者送餐服務候選，適合永和區獨居、低收或中低收、行動不便且無法自行備餐的長者需求。",
+      "public_next_step": "先電話確認是否仍受理、資格條件、轉介方式與送餐時段，再判斷是否納入案家資源包。",
+      "public_required_documents": [
+        "身分證明",
+        "經濟弱勢資料如適用",
+        "獨居或照顧需求說明",
+        "評估或轉介資料依窗口要求"
+      ],
+      "public_contact": "依永和耕莘醫院服務頁公告聯絡方式。",
+      "internal_notes": "五問審核：適合永和送餐/獨居營養需求；下一步需電話確認；資格與名額不應在家屬版承諾；B級服務提供者來源。",
+      "phone_check_questions": [
+        "目前是否仍提供永和區送餐",
+        "收案資格與評估流程",
+        "是否需社工或營養師評估",
+        "送餐天數與等待時間"
+      ],
+      "risk_flags": [
+        "B級服務來源需電話確認",
+        "可能有名額限制",
+        "不可承諾立即送餐"
+      ],
+      "body": "這張卡由候選來源 `cthyh_yonghe_elder_meal_service` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：永和耕莘醫院獨居長者送餐服務候選，適合永和區獨居、低收或中低收、行動不便且無法自行備餐的長者需求。\n- 下一步：先電話確認是否仍受理、資格條件、轉介方式與送餐時段，再判斷是否納入案家資源包。\n- 服務範圍：永和區送餐服務候選；收案資格、是否仍開放與轉介流程需電話確認。\n- 審核提醒：五問審核：適合永和送餐/獨居營養需求；下一步需電話確認；資格與名額不應在家屬版承諾；B級服務提供者來源。",
+      "content_hash": "831e389abe4637a69f2108301b8f577edba2819d174b47c756aceec257d98533",
+      "resource_version": "2026-05-25-831e389a",
+      "embedding_text": "永和耕莘醫院獨居長者送餐服務 multi_professional meal_service district 永和區送餐服務候選；收案資格、是否仍開放與轉介流程需電話確認。 永和區 永和耕莘醫院獨居長者送餐服務候選，適合永和區獨居、低收或中低收、行動不便且無法自行備餐的長者需求。 先電話確認是否仍受理、資格條件、轉介方式與送餐時段，再判斷是否納入案家資源包。 身分證明 經濟弱勢資料如適用 獨居或照顧需求說明 評估或轉介資料依窗口要求 目前是否仍提供永和區送餐 收案資格與評估流程 是否需社工或營養師評估 送餐天數與等待時間 五問審核：適合永和送餐/獨居營養需求；下一步需電話確認；資格與名額不應在家屬版承諾；B級服務提供者來源。"
     },
     {
       "id": "laf_official",
@@ -3284,50 +4702,55 @@
       "title": "耕莘醫院新店區老人營養餐飲服務",
       "region": "新北市",
       "districts": [
-        "全新北"
+        "新店區"
       ],
-      "coverage_scope": "citywide",
-      "service_area_note": "",
+      "coverage_scope": "district",
+      "service_area_note": "新店區老人營養餐飲/送餐服務；資格、轉介流程、是否仍承作需電話確認。",
       "eligibility_tags": [
-        "B級民間候選",
-        "資源聯繫",
-        "待抽全文"
+        "新店區",
+        "送餐",
+        "獨居",
+        "營養支持"
       ],
       "urgency_tags": [
-        "一般"
+        "本週內",
+        "需電話確認"
       ],
-      "summary": "新店區送餐服務合作案例，可作行政區服務線索。",
-      "next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
-      "contact": "依來源頁公告聯絡方式",
+      "summary": "耕莘醫院新店區老人營養餐飲服務可作新店區長者送餐與營養支持候選，適合獨居、行動不便或備餐困難情境。",
+      "next_step": "先電話確認是否仍承作、收案資格、轉介流程、送餐時段與是否有等待時間。",
+      "contact": "依耕莘醫院新店區老人營養餐飲服務頁面公告。",
       "source_url": "https://www.cth.org.tw/?aid=57&iid=663&page_name=detail&pid=121",
-      "source_type": "community_candidate",
-      "last_checked_at": "2026-05-22",
-      "next_review_at": "2026-08-22",
-      "confidence": "B級民間候選",
+      "source_type": "service_provider",
+      "last_checked_at": "2026-05-25",
+      "next_review_at": "2026-08-25",
+      "confidence": "B級民間/受託資料",
       "status": "active",
       "public_allowed": true,
-      "public_summary": "新店區送餐服務合作案例，可作行政區服務線索。",
-      "public_next_step": "先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。",
+      "public_summary": "耕莘醫院新店區老人營養餐飲服務可作新店區長者送餐與營養支持候選，適合獨居、行動不便或備餐困難情境。",
+      "public_next_step": "先電話確認是否仍承作、收案資格、轉介流程、送餐時段與是否有等待時間。",
       "public_required_documents": [
         "身分證明",
-        "需求說明",
-        "申請文件依來源公告"
+        "照顧或備餐困難說明",
+        "經濟弱勢資料如適用",
+        "轉介資料依窗口要求"
       ],
-      "public_contact": "依來源頁公告聯絡方式",
-      "internal_notes": "由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認目前是否仍承作。",
+      "public_contact": "依耕莘醫院新店區老人營養餐飲服務頁面公告。",
+      "internal_notes": "五問審核：適合新店送餐/營養需求；下一步電話確認；資格與名額不在家屬版承諾；B級服務提供者來源。",
       "phone_check_questions": [
-        "目前是否仍受理",
-        "服務區域與對象限制",
-        "需要哪些文件或轉介",
-        "是否有名額或等待時間"
+        "目前是否仍提供新店區送餐",
+        "收案資格與評估流程",
+        "是否需社工或營養師評估",
+        "送餐天數與等待時間"
       ],
       "risk_flags": [
-        "民間資源需電話確認"
+        "B級服務來源需電話確認",
+        "可能有名額限制",
+        "不可承諾立即送餐"
       ],
-      "body": "這張卡由候選來源 `cth_xindian_meal_service` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需確認目前是否仍承作。",
-      "content_hash": "7e3f271aafbbc37bac3e6df5e658cd7b1e35a658f757b7fe1402cbe857ef968f",
-      "resource_version": "2026-05-22-7e3f271a",
-      "embedding_text": "耕莘醫院新店區老人營養餐飲服務 multi_professional meal_service citywide 全新北 新店區送餐服務合作案例，可作行政區服務線索。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需確認目前是否仍承作。"
+      "body": "這張卡由候選來源 `cth_xindian_meal_service` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：耕莘醫院新店區老人營養餐飲服務可作新店區長者送餐與營養支持候選，適合獨居、行動不便或備餐困難情境。\n- 下一步：先電話確認是否仍承作、收案資格、轉介流程、送餐時段與是否有等待時間。\n- 服務範圍：新店區老人營養餐飲/送餐服務；資格、轉介流程、是否仍承作需電話確認。\n- 審核提醒：五問審核：適合新店送餐/營養需求；下一步電話確認；資格與名額不在家屬版承諾；B級服務提供者來源。",
+      "content_hash": "7dda5c2fe9585dba6bec027dfde6d72a3ed491c275a6fd0bf8249a096ef241dd",
+      "resource_version": "2026-05-25-7dda5c2f",
+      "embedding_text": "耕莘醫院新店區老人營養餐飲服務 multi_professional meal_service district 新店區老人營養餐飲/送餐服務；資格、轉介流程、是否仍承作需電話確認。 新店區 耕莘醫院新店區老人營養餐飲服務可作新店區長者送餐與營養支持候選，適合獨居、行動不便或備餐困難情境。 先電話確認是否仍承作、收案資格、轉介流程、送餐時段與是否有等待時間。 身分證明 照顧或備餐困難說明 經濟弱勢資料如適用 轉介資料依窗口要求 目前是否仍提供新店區送餐 收案資格與評估流程 是否需社工或營養師評估 送餐天數與等待時間 五問審核：適合新店送餐/營養需求；下一步電話確認；資格與名額不在家屬版承諾；B級服務提供者來源。"
     },
     {
       "id": "ycswf_rehab_bus",

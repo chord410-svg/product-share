@@ -197,6 +197,10 @@
       || (data.vendors || []).some((vendor) => vendor.geocode_provider === "district_centroid");
   }
 
+  function hasPreciseCoordinate(record) {
+    return ["google", "literal", "manual", "official"].includes(String(record && record.geocode_provider || ""));
+  }
+
   function experimentalMultiRouteUrl(data) {
     const allUrl = data.map_url || allDirectionsUrl(data);
     if (!allUrl || allUrl.length > 1800 || hasDistrictCentroid(data)) return "";
@@ -261,6 +265,24 @@
     `;
   }
 
+  function renderDistrictEstimateMap(data, message) {
+    const districtNames = unique((data.vendors || [])
+      .filter((vendor) => vendor.geocode_provider === "district_centroid")
+      .map((vendor) => vendor.district));
+    mapEl.innerHTML = `
+      <div class="status map-fallback">
+        <strong>${escapeHtml(message)}</strong><br>
+        目前尚未完成店家門牌定位，地圖不顯示精準店址 marker。請以左側店家清單的單店 Google 地圖與導航按鈕確認位置。
+        ${districtNames.length ? `<p class="meta warning">本次含區級估算：${escapeHtml(districtNames.join("、"))}</p>` : ""}
+        <div class="quick-links">
+          ${(data.vendors || []).slice(0, 5).map((vendor, index) => (
+            `<a class="button secondary" href="${placeSearchUrl(vendor)}" target="_blank" rel="noopener">${index + 1}. ${escapeHtml(vendor.name)}</a>`
+          )).join("")}
+        </div>
+      </div>
+    `;
+  }
+
   function validLatLng(lat, lng) {
     const latNum = Number(lat);
     const lngNum = Number(lng);
@@ -295,7 +317,12 @@
       renderMapFallback(data, "互動地圖暫時無法載入");
       return;
     }
-    if (!validLatLng(data.home.lat, data.home.lng)) {
+    const preciseVendors = (data.vendors || []).filter((vendor) => hasPreciseCoordinate(vendor) && validLatLng(vendor.lat, vendor.lng));
+    if (hasDistrictCentroid(data) && !preciseVendors.length) {
+      renderDistrictEstimateMap(data, "目前為區級估算，未顯示精準店址 marker");
+      return;
+    }
+    if (!hasPreciseCoordinate(data.home) || !validLatLng(data.home.lat, data.home.lng)) {
       renderMapFallback(data, "缺少住家座標，無法顯示互動地圖");
       return;
     }
@@ -314,7 +341,7 @@
     bounds.extend(home);
 
     (data.vendors || []).forEach((vendor, index) => {
-      if (!validLatLng(vendor.lat, vendor.lng)) return;
+      if (!hasPreciseCoordinate(vendor) || !validLatLng(vendor.lat, vendor.lng)) return;
       const point = [Number(vendor.lat), Number(vendor.lng)];
       L.marker(point, { icon: divIcon(String(index + 1), "vendor-marker"), title: vendor.name })
         .bindPopup(markerPopup(data, vendor, index))

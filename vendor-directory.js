@@ -5,6 +5,7 @@
   const mapEl = document.getElementById("map");
   const districtFilter = document.getElementById("districtFilter");
   const serviceFilter = document.getElementById("serviceFilter");
+  const categoryFilter = document.getElementById("categoryFilter");
   const keywordFilter = document.getElementById("keywordFilter");
   let directoryData = null;
   let map = null;
@@ -31,6 +32,10 @@
 
   function serviceLabel(vendor) {
     return (vendor.service_types || []).join("、") || "未標示";
+  }
+
+  function categoryLabel(vendor) {
+    return String(vendor.vendor_category || "未分類");
   }
 
   function placeSearchUrl(vendor) {
@@ -64,6 +69,7 @@
   function vendorPopup(vendor, index) {
     return `
       <strong>${index + 1}. ${escapeHtml(vendor.name)}</strong><br>
+      ${escapeHtml(categoryLabel(vendor))}<br>
       ${escapeHtml(vendor.district)}｜${escapeHtml(serviceLabel(vendor))}<br>
       ${escapeHtml(vendor.address)}<br>
       ${escapeHtml(vendor.phone || "無電話")}<br>
@@ -92,6 +98,7 @@
       <strong>${escapeHtml(data.source_label || "新北市特約廠商清冊")}</strong><br>
       總筆數：${Number(summary.total || data.vendors.length)}｜目前顯示：${vendors.length}<br>
       精準座標：${precise}｜區級座標：${districtOnly}｜缺座標：${missing}<br>
+      ${categorySummary(summary.vendor_categories || {})}<br>
       <span class="warning">目前區級座標不代表店家門牌位置；請用單店 Google 地圖確認。</span>
     `;
     summaryEl.textContent = `新北市 ${Number(summary.total || data.vendors.length)} 筆特約廠商名單，可依行政區、服務類型與關鍵字篩選。`;
@@ -106,28 +113,45 @@
 
   function keywordMatches(vendor, keyword) {
     if (!keyword) return true;
-    const haystack = [vendor.name, vendor.district, vendor.address, vendor.phone, serviceLabel(vendor)]
+    const haystack = [vendor.name, vendor.district, vendor.address, vendor.phone, serviceLabel(vendor), categoryLabel(vendor)]
       .join(" ")
       .toLowerCase();
     return haystack.includes(keyword.toLowerCase());
   }
 
+  function categoryMatches(vendor, category) {
+    return !category || categoryLabel(vendor) === category;
+  }
+
+  function categorySummary(categories) {
+    const entries = Object.entries(categories || {}).filter(([, count]) => Number(count) > 0);
+    if (!entries.length) return "單位類型：尚未分類";
+    return `單位類型：${entries.map(([name, count]) => `${name} ${count}`).join("｜")}`;
+  }
+
   function filteredVendors() {
     const district = districtFilter.value;
     const service = serviceFilter.value;
+    const category = categoryFilter.value;
     const keyword = keywordFilter.value.trim();
     return (directoryData.vendors || []).filter((vendor) => (
       (!district || vendor.district === district)
       && serviceMatches(vendor, service)
+      && categoryMatches(vendor, category)
       && keywordMatches(vendor, keyword)
     ));
   }
 
   function renderFilters(data) {
     const districts = Array.from(new Set((data.vendors || []).map((vendor) => vendor.district).filter(Boolean))).sort();
+    const categories = Array.from(new Set((data.vendors || []).map((vendor) => categoryLabel(vendor)).filter(Boolean))).sort();
     districtFilter.innerHTML = [
       '<option value="">全部行政區</option>',
       ...districts.map((district) => `<option value="${escapeHtml(district)}">${escapeHtml(district)}</option>`)
+    ].join("");
+    categoryFilter.innerHTML = [
+      '<option value="">全部單位類型</option>',
+      ...categories.map((category) => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`)
     ].join("");
   }
 
@@ -139,6 +163,7 @@
     listEl.innerHTML = vendors.map((vendor, index) => `
       <article class="vendor">
         <h2>${index + 1}. ${escapeHtml(vendor.name)}</h2>
+        <p class="meta"><span class="tag">${escapeHtml(categoryLabel(vendor))}</span></p>
         <p class="meta">${escapeHtml(vendor.district)}｜${escapeHtml(serviceLabel(vendor))}｜${escapeHtml(vendor.geocode_provider || "未定位")}</p>
         <p class="meta">${escapeHtml(vendor.address)}<br>${escapeHtml(vendor.phone || "無電話")}</p>
         <div class="actions">
@@ -242,6 +267,7 @@
     renderFilters(directoryData);
     districtFilter.addEventListener("change", renderAll);
     serviceFilter.addEventListener("change", renderAll);
+    categoryFilter.addEventListener("change", renderAll);
     keywordFilter.addEventListener("input", renderAll);
     renderAll();
   }

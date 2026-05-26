@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260525-area-smart-search">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260526-vector-smart-search">
 </head>
 <body>
   <header class="topbar">
@@ -12,7 +12,10 @@
       <p class="eyebrow">New Taipei Resource Navigator</p>
       <h1>長照資源導航站</h1>
     </div>
-    <div class="status-pill" id="sourceStatus">等待身份確認</div>
+    <div class="identity-actions">
+      <div class="status-pill" id="sourceStatus">等待身份確認</div>
+      <button type="button" class="verify-session-button" id="retrySessionVerify" hidden>重新驗證</button>
+    </div>
   </header>
 
   <nav class="view-tabs" role="tablist" aria-label="資源導航分頁">
@@ -263,6 +266,6 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260525-area-smart-search"></script>
+  <script src="./resource-nav.js?v=20260526-vector-smart-search"></script>
 </body>
 </html>

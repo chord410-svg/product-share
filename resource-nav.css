@@ -73,6 +73,43 @@ h3 a:hover {
   overflow-wrap: anywhere;
 }
 
+.identity-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.verify-session-button {
+  min-height: 34px;
+  border: 1px solid #9dbbe2;
+  border-radius: 999px;
+  padding: 7px 12px;
+  color: #1d4f86;
+  background: #eff6ff;
+  font-size: 13px;
+  font-weight: 720;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.verify-session-button:hover {
+  background: #dbeafe;
+  box-shadow: 0 6px 14px rgba(40, 100, 166, .16);
+}
+
+.verify-session-button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.verify-session-button:disabled {
+  cursor: wait;
+  opacity: .62;
+  box-shadow: none;
+}
+
 .status-pill.is-linked {
   border-color: #99f6e4;
   color: var(--green);
@@ -1072,6 +1109,11 @@ dd {
   .status-pill {
     max-width: 100%;
     text-align: left;
+  }
+  .identity-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
   }
   .view-tabs {
     top: 0;

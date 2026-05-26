@@ -106,6 +106,17 @@
       font-size: 13px;
       line-height: 1.5;
     }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: var(--accent-dark);
+      background: #d9f4ef;
+      font-size: 12px;
+      font-weight: 800;
+    }
     .warning { color: var(--warn); }
     .actions {
       display: flex;
@@ -181,6 +192,9 @@
             <option value="__blank__">未標示</option>
           </select>
         </label>
+        <label>單位類型
+          <select id="categoryFilter"></select>
+        </label>
         <label>關鍵字
           <input id="keywordFilter" type="search" placeholder="搜尋店名、地址、電話">
         </label>
@@ -190,6 +204,6 @@
     <section id="map" aria-label="OpenStreetMap vendor directory map"></section>
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="vendor-directory.js?v=20260525-directory-v1"></script>
+  <script src="vendor-directory.js?v=20260526-vendor-category-v1"></script>
 </body>
 </html>

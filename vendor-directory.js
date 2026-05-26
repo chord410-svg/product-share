@@ -7,6 +7,7 @@
   const serviceFilter = document.getElementById("serviceFilter");
   const categoryFilter = document.getElementById("categoryFilter");
   const keywordFilter = document.getElementById("keywordFilter");
+  const rawDirectoryUrl = "https://raw.githubusercontent.com/chord410-svg/product-share/main/vendor-directory.json";
   let directoryData = null;
   let map = null;
   let mapLayer = null;
@@ -252,14 +253,28 @@
     renderMap(vendors);
   }
 
-  async function loadDirectory() {
-    const response = await fetch(`vendor-directory.json?v=${Date.now()}`, { cache: "no-store" });
-    if (!response.ok) throw new Error(`directory_http_${response.status}`);
-    const data = await response.json();
+  function validateDirectoryPayload(data) {
     if (!data || data.ok !== true || !Array.isArray(data.vendors)) {
       throw new Error("invalid_directory_payload");
     }
     return data;
+  }
+
+  async function fetchDirectory(url) {
+    const response = await fetch(`${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`directory_http_${response.status}`);
+    return validateDirectoryPayload(await response.json());
+  }
+
+  async function loadDirectory() {
+    try {
+      const local = await fetchDirectory("vendor-directory.json");
+      const total = Number(local.summary && local.summary.total || local.vendors.length || 0);
+      if (total >= 100) return local;
+    } catch (_err) {
+      // Fall back to raw GitHub below.
+    }
+    return fetchDirectory(rawDirectoryUrl);
   }
 
   async function main() {

@@ -1,6 +1,7 @@
 (function () {
   const STORAGE_KEY = "resource_nav_packages_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
+  const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
   const RESOURCE_DATA_VERSION = "20260524-resourcepack-exchange";
   let topics = [];
   let resources = [];
@@ -49,7 +50,11 @@
 
   function readRememberedEntryUrl() {
     try {
-      const value = sessionStorage.getItem(LAST_SESSION_ENTRY_KEY) || localStorage.getItem(LAST_SESSION_ENTRY_KEY) || "";
+      const value = sessionStorage.getItem(LAST_SESSION_ENTRY_KEY)
+        || localStorage.getItem(LAST_SESSION_ENTRY_KEY)
+        || sessionStorage.getItem(PENDING_SESSION_ENTRY_KEY)
+        || localStorage.getItem(PENDING_SESSION_ENTRY_KEY)
+        || "";
       if (!value || !value.includes("resource-nav.html")) return "";
       return value;
     } catch (error) {

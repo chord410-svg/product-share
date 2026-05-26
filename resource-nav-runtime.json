@@ -1,9 +1,9 @@
 {
   "api_base": "https://planner-handhelds-briefing-specifications.trycloudflare.com",
   "version": "20260526-vector-smart-search",
-  "generated_at": "2026-05-26T11:11:24+00:00",
+  "generated_at": "2026-05-26T11:15:59+00:00",
   "tunnel_type": "cloudflare_quick",
-  "health_checked_at": "2026-05-26T11:11:24+00:00",
+  "health_checked_at": "2026-05-26T11:15:59+00:00",
   "health_ok": false,
   "health_reason": "api_session_unreachable:ConnectionError"
 }

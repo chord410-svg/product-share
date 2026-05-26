@@ -230,6 +230,10 @@
     return Number.isFinite(km) ? `直線 ${km.toFixed(2)} km` : "距離未知";
   }
 
+  function categoryLabel(vendor) {
+    return String(vendor.vendor_category || "未分類");
+  }
+
   function renderList(data) {
     const districtSummary = vendorDistrictSummary(data.vendors || []);
     const fallbackNote = data.home.geocode_provider === "district_centroid"
@@ -251,11 +255,13 @@
     }
     listEl.innerHTML = data.vendors.map((vendor, index) => {
       const services = (vendor.service_types || []).join("、") || "未標示";
+      const category = categoryLabel(vendor);
       const route = directionsUrl(data, vendor);
       const place = placeSearchUrl(vendor);
       return `
         <article class="vendor">
           <h2>${index + 1}/${data.vendors.length}. ${escapeHtml(vendor.name)}</h2>
+          <p class="meta"><span class="tag">${escapeHtml(category)}</span></p>
           <p class="meta">${escapeHtml(vendor.district)}｜${distanceLabel(vendor)}｜${escapeHtml(services)}</p>
           <p class="meta">${escapeHtml(vendor.address)}<br>${escapeHtml(vendor.phone || "無電話")}</p>
           <div class="actions">
@@ -348,8 +354,10 @@
 
   function markerPopup(data, vendor, index) {
     const services = (vendor.service_types || []).join("、") || "未標示";
+    const category = categoryLabel(vendor);
     return `
       <strong>${index + 1}. ${escapeHtml(vendor.name)}</strong><br>
+      ${escapeHtml(category)}<br>
       ${escapeHtml(distanceLabel(vendor))}<br>
       ${escapeHtml(vendor.address)}<br>
       ${escapeHtml(vendor.phone || "無電話")}<br>

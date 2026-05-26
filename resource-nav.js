@@ -2,8 +2,9 @@
   const STORAGE_KEY = "resource_nav_packages_v1";
   const CARD_SIZE_KEY = "resource_nav_card_size_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
+  const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260525-area-smart-search";
+  const RESOURCE_DATA_VERSION = "20260526-vector-smart-search";
   const DRAFT_SAVE_DELAY_MS = 700;
   const AREA_CITY = "新北市";
   const CITYWIDE_AREA_VALUES = new Set(["新北市", "全新北", "全台"]);
@@ -22,6 +23,8 @@
     smartSearchResults: null,
     smartSearchNotice: "",
     smartSearchMode: "",
+    smartSearchDegraded: false,
+    smartSearchSearchQuery: "",
     packageIds: new Set(),
     hasUrlContext: false,
     sessionToken: "",
@@ -31,6 +34,7 @@
     hasApiBaseParam: false,
     apiBaseSource: "missing",
     runtimeConfigChecked: false,
+    sessionVerifyBusy: false,
     sessionUser: null,
     sessionValid: false,
     sessionFailureReason: "",
@@ -121,6 +125,7 @@
     state.apiBaseSource = state.apiBase ? "url" : "missing";
     state.district = normalizeArea(params.get("district") || "");
     state.hasUrlContext = Boolean(state.category || topicParam);
+    rememberSessionEntryUrl({ verified: false });
     renderIdentity("checking", source === "discord" ? "Discord 入口，等待身份確認" : "未連結 Discord，請回 Discord 重新開啟入口");
   }
 
@@ -129,26 +134,74 @@
     return state.apiBase + path;
   }
 
-  function rememberSessionEntryUrl() {
-    if (!state.sessionToken || !state.apiBase) return;
+  function buildSessionEntryUrl(apiBase) {
+    if (!state.sessionToken || !apiBase) return "";
+    const currentParams = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams();
+    if (state.category) params.set("category", state.category);
+    if (state.selectedTopics.size) params.set("topics", Array.from(state.selectedTopics).join(","));
+    if (currentParams.get("channel_id")) params.set("channel_id", currentParams.get("channel_id"));
+    if (state.guildId) params.set("guild", state.guildId);
+    if (state.resultChannelId) params.set("result_channel", state.resultChannelId);
+    if (state.district) params.set("district", state.district);
+    params.set("source", "discord");
+    params.set("session", state.sessionToken);
+    params.set("api_base", apiBase);
+    return "./resource-nav.html?" + params.toString();
+  }
+
+  function rememberSessionEntryUrl(options) {
+    const verified = Boolean(options && options.verified);
+    const entryUrl = buildSessionEntryUrl(state.apiBase);
+    if (!entryUrl) return;
     try {
-      const currentParams = new URLSearchParams(window.location.search);
-      const params = new URLSearchParams();
-      if (state.category) params.set("category", state.category);
-      if (state.selectedTopics.size) params.set("topics", Array.from(state.selectedTopics).join(","));
-      if (currentParams.get("channel_id")) params.set("channel_id", currentParams.get("channel_id"));
-      if (state.guildId) params.set("guild", state.guildId);
-      if (state.resultChannelId) params.set("result_channel", state.resultChannelId);
-      if (state.district) params.set("district", state.district);
-      params.set("source", "discord");
-      params.set("session", state.sessionToken);
-      params.set("api_base", state.apiBase);
-      const entryUrl = "./resource-nav.html?" + params.toString();
-      sessionStorage.setItem(LAST_SESSION_ENTRY_KEY, entryUrl);
-      localStorage.setItem(LAST_SESSION_ENTRY_KEY, entryUrl);
+      sessionStorage.setItem(PENDING_SESSION_ENTRY_KEY, entryUrl);
+      localStorage.setItem(PENDING_SESSION_ENTRY_KEY, entryUrl);
+      if (verified) {
+        sessionStorage.setItem(LAST_SESSION_ENTRY_KEY, entryUrl);
+        localStorage.setItem(LAST_SESSION_ENTRY_KEY, entryUrl);
+      }
     } catch (error) {
       console.info("remember resource nav entry failed", error);
     }
+  }
+
+  function readStoredEntryUrl(key) {
+    try {
+      return sessionStorage.getItem(key) || localStorage.getItem(key) || "";
+    } catch (error) {
+      console.info("stored resource nav entry unreadable", key, error);
+      return "";
+    }
+  }
+
+  function apiBaseFromEntryUrl(entryUrl) {
+    try {
+      if (!entryUrl || !entryUrl.includes("resource-nav.html")) return "";
+      const url = new URL(entryUrl, window.location.href);
+      return String(url.searchParams.get("api_base") || "").replace(/\/$/, "");
+    } catch (error) {
+      console.info("stored resource nav entry invalid", error);
+      return "";
+    }
+  }
+
+  function applyStoredApiBase() {
+    const candidates = [
+      readStoredEntryUrl(LAST_SESSION_ENTRY_KEY),
+      readStoredEntryUrl(PENDING_SESSION_ENTRY_KEY),
+    ];
+    for (const entryUrl of candidates) {
+      const apiBase = apiBaseFromEntryUrl(entryUrl);
+      if (apiBase && apiBase !== state.apiBase) {
+        state.apiBase = apiBase;
+        state.apiBaseSource = "stored";
+        state.sessionFailureReason = "stored_api_base";
+        renderSessionDebug();
+        return true;
+      }
+    }
+    return false;
   }
 
   async function apiFetch(path, options) {
@@ -179,6 +232,9 @@
       if (response.status === 404) {
         throw new Error("api_old_version");
       }
+      if ([502, 503, 504].includes(response.status) || data.error === "upstream_unreachable") {
+        throw new Error("api_unreachable");
+      }
       throw new Error(data.error || "api_unavailable");
     }
     return data;
@@ -191,24 +247,37 @@
     return name + (id ? " / " + id : "");
   }
 
+  function updateRetrySessionButton() {
+    const button = $("retrySessionVerify");
+    if (!button) return;
+    const shouldShow = Boolean(state.sessionToken && !state.sessionValid && state.sessionFailureReason);
+    button.hidden = !shouldShow;
+    button.disabled = state.sessionVerifyBusy;
+    button.textContent = state.sessionVerifyBusy ? "驗證中..." : "重新驗證";
+  }
+
   function renderIdentity(status, reason) {
     const pill = $("sourceStatus");
+    updateRetrySessionButton();
     if (!pill) return;
     pill.classList.remove("is-linked", "is-offline", "is-error");
     if (status === "linked") {
       pill.classList.add("is-linked");
       pill.textContent = "已連結 Discord：" + identityText();
+      updateRetrySessionButton();
       return;
     }
     if (status === "offline") {
       pill.classList.add("is-offline");
       pill.textContent = "未連結 Discord，請回 Discord 重新開啟入口";
+      updateRetrySessionButton();
       return;
     }
     if (status === "error") {
       pill.classList.add("is-error");
     }
     pill.textContent = reason || "Discord 身份未確認";
+    updateRetrySessionButton();
   }
 
   function sessionReasonLabel(reason) {
@@ -217,6 +286,7 @@
       no_session: "網址沒有 session；請從 Discord 資源導航入口重新開啟。",
       no_api_base: "網址沒有 api_base；Bot 可能尚未帶入 API 網址，或 RESOURCE_NAV_API_BASE / WEB_B_SUBMIT_URL 尚未設定。",
       runtime_api_base: "網址內的 API 無法使用，已改用網站 runtime config 內的 API base 重試。",
+      stored_api_base: "網站 runtime config 無法取得時，已改用此瀏覽器上次保存的 API base 重試。",
       session_expired: "後端回覆 session 無效或過期；token 已不存在或已超過有效時間，請回 Discord 重新點入口。",
       api_unreachable: "公開 API 網址連不上；通常是 Cloudflare tunnel 已失效、DNS 解析不到，或 Bot API 沒有啟動。",
       api_old_version: "公開 API 可連上，但不是新版資源包 API；請確認 Bot 已重啟到新版 server。",
@@ -240,6 +310,8 @@
     sessionStatus.textContent = state.hasSessionParam ? "有 session 參數" : "缺少 session 參數";
     if (state.apiBaseSource === "runtime") {
       apiBaseStatus.textContent = "由 runtime config 補上";
+    } else if (state.apiBaseSource === "stored") {
+      apiBaseStatus.textContent = "由瀏覽器保存入口補上";
     } else {
       apiBaseStatus.textContent = state.hasApiBaseParam ? "有 api_base 參數" : "缺少 api_base 參數";
     }
@@ -247,10 +319,13 @@
     reasonStatus.textContent = state.sessionValid
       ? sessionReasonLabel("verified")
       : sessionReasonLabel(state.sessionFailureReason || "missing_session");
+    updateRetrySessionButton();
   }
 
-  async function applyRuntimeApiBase() {
-    if (state.runtimeConfigChecked) return false;
+  async function applyRuntimeApiBase(options) {
+    const force = Boolean(options && options.force);
+    if (force) state.runtimeConfigChecked = false;
+    if (state.runtimeConfigChecked) return applyStoredApiBase();
     state.runtimeConfigChecked = true;
     const runtimeUrls = [
       "https://raw.githubusercontent.com/chord410-svg/product-share/main/resource-nav-runtime.json?v=" + Date.now(),
@@ -273,15 +348,16 @@
           console.info("resource runtime config fetch failed", url, error);
         }
       }
-      if (!nextApiBase) return false;
+      if (!nextApiBase) return applyStoredApiBase();
       state.apiBase = nextApiBase;
       state.apiBaseSource = "runtime";
       state.sessionFailureReason = "runtime_api_base";
       renderSessionDebug();
+      rememberSessionEntryUrl({ verified: false });
       return true;
     } catch (error) {
       console.info("resource runtime config unavailable", error);
-      return false;
+      return applyStoredApiBase();
     }
   }
 
@@ -316,7 +392,7 @@
       state.sessionValid = true;
       state.sessionFailureReason = "";
       state.sessionUser = data.user || null;
-      rememberSessionEntryUrl();
+      rememberSessionEntryUrl({ verified: true });
       renderIdentity("linked");
       loginStatus.textContent = "已連結 Discord：" + identityText() + "。草稿與結果會保存到你的資源組合工作台。";
       renderSessionDebug();
@@ -341,6 +417,30 @@
       loginStatus.textContent = "已從 Discord 入口開啟，但後端驗證未通過：" + sessionReasonLabel(state.sessionFailureReason) + " 可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
       renderSessionDebug();
       console.info("resource session verification failed", error);
+    }
+  }
+
+  async function retrySessionVerification() {
+    if (state.sessionVerifyBusy) return;
+    state.sessionVerifyBusy = true;
+    state.runtimeConfigChecked = false;
+    state.sessionFailureReason = "";
+    renderIdentity("checking", "正在重新驗證 Discord 身份");
+    try {
+      await verifySession();
+      if (state.sessionValid) {
+        state.packages = await loadRemotePackages();
+        if (state.packages.length && !state.activePackageId) {
+          applyPackageContext(state.packages[0]);
+        }
+        render();
+        renderWorkbench();
+        renderExchange();
+      }
+    } finally {
+      state.sessionVerifyBusy = false;
+      updateRetrySessionButton();
+      renderSessionDebug();
     }
   }
 
@@ -402,6 +502,8 @@
     state.smartSearchResults = null;
     state.smartSearchNotice = "";
     state.smartSearchMode = "";
+    state.smartSearchDegraded = false;
+    state.smartSearchSearchQuery = "";
   }
 
   function resourceDistricts(resource) {
@@ -471,13 +573,25 @@
     return state.smartSearchResults.get(resource.id) || state.smartSearchResults.get(resource.resource_id) || null;
   }
 
+  function smartEngineLabel() {
+    if (!state.smartQueryAppliedText) return "";
+    if (state.smartSearchMode === "resource_vector_bge") {
+      return state.smartSearchDegraded ? "語意搜尋（GLM 降級）" : "語意搜尋";
+    }
+    if (state.smartSearchMode === "resource_keyword_fallback") return "關鍵字備援";
+    if (state.smartSearchMode === "local_fallback") return "本頁排序備援";
+    return "智慧搜尋";
+  }
+
   function scopeDescription() {
     const area = normalizeArea(state.district);
     if (state.smartQueryAppliedText) {
-      if (state.smartSearchNotice) return state.smartSearchNotice;
-      if (area === AREA_CITY) return "智慧搜尋範圍：新北市級 + 新北市下轄行政區資源。";
-      if (area) return "智慧搜尋範圍：" + area + " + 新北市級資源。";
-      return "智慧搜尋範圍：全部資源。";
+      const label = smartEngineLabel();
+      const query = state.smartSearchSearchQuery ? "｜搜尋詞：" + state.smartSearchSearchQuery : "";
+      if (state.smartSearchNotice) return (label ? label + "｜" : "") + state.smartSearchNotice + query;
+      if (area === AREA_CITY) return (label ? label + "｜" : "") + "智慧搜尋範圍：新北市級 + 新北市下轄行政區資源。" + query;
+      if (area) return (label ? label + "｜" : "") + "智慧搜尋範圍：" + area + " + 新北市級資源。" + query;
+      return (label ? label + "｜" : "") + "智慧搜尋範圍：全部資源。" + query;
     }
     if (area === AREA_CITY) return "一般瀏覽：只顯示新北市級資源。";
     if (area) return "一般瀏覽：優先顯示 " + area + "，並附新北市級通用資源。";
@@ -1439,6 +1553,10 @@
     $("navTabButton").addEventListener("click", () => switchView("nav"));
     $("workbenchTabButton").addEventListener("click", () => switchView("workbench"));
     $("exchangeTabButton").addEventListener("click", () => switchView("exchange"));
+    const retryButton = $("retrySessionVerify");
+    if (retryButton) {
+      retryButton.addEventListener("click", retrySessionVerification);
+    }
     $("refreshWorkbench").addEventListener("click", async () => {
       if (state.sessionValid) await loadRemotePackages();
       renderWorkbench();
@@ -1600,7 +1718,9 @@
     });
     state.smartSearchResults = map;
     state.smartSearchMode = data.engine || "backend";
-    state.smartSearchNotice = (data.scope && data.scope.description) || "";
+    state.smartSearchDegraded = Boolean(data.query_degraded);
+    state.smartSearchSearchQuery = data.search_query || state.smartQueryAppliedText;
+    state.smartSearchNotice = (data.scope && (data.scope.description || data.scope.search_pool)) || "";
   }
 
   async function applySmartSearch() {
@@ -1620,6 +1740,8 @@
       await requestSmartSearch();
     } catch (error) {
       state.smartSearchMode = "local_fallback";
+      state.smartSearchDegraded = true;
+      state.smartSearchSearchQuery = state.smartQueryAppliedText;
       state.smartSearchNotice = "智慧搜尋 API 暫時不可用，已改用本頁資料做排序；正式語意搜尋需後端服務正常。";
       console.info("resource smart search fallback", error);
     } finally {

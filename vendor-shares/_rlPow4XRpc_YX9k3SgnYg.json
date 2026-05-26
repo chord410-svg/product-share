@@ -1,0 +1,230 @@
+{
+  "share_id": "_rlPow4XRpc_YX9k3SgnYg",
+  "address": "234台灣新北市永和區豫溪里竹林路200號",
+  "home": {
+    "lat": 25.0091768,
+    "lng": 121.5202731,
+    "geocode_provider": "google",
+    "geocode_precision": "geometric_center"
+  },
+  "vendors": [
+    {
+      "vendor_id": "ntpc-059f97f756e0baf0",
+      "name": "安安藥局",
+      "district": "永和區",
+      "address": "新北市永和區竹林路203號1樓",
+      "phone": "02-89263651",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "藥局",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0090888,
+      "lng": 121.5207549,
+      "geocode_provider": "google",
+      "distance_km": 0.05,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0090888%2C121.5207549&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-b47e07904eb47de3",
+      "name": "永和大樹藥局",
+      "district": "永和區",
+      "address": "新北市永和區福和路143號1、2樓",
+      "phone": "02-29233377",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "藥局",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0074884,
+      "lng": 121.5207671,
+      "geocode_provider": "google",
+      "distance_km": 0.194,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0074884%2C121.5207671&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-3c124d6471f11e42",
+      "name": "欣安大藥局",
+      "district": "永和區",
+      "address": "新北市永和區福和路221號",
+      "phone": "02-22326685",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "vendor_category": "藥局",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0074707,
+      "lng": 121.5190009,
+      "geocode_provider": "google",
+      "distance_km": 0.229,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0074707%2C121.5190009&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-7b581dff2b058b89",
+      "name": "緣來藥師藥局",
+      "district": "永和區",
+      "address": "新北市永和區福和路252號1樓",
+      "phone": "02-29211798",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "藥局",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.007738,
+      "lng": 121.518601,
+      "geocode_provider": "google",
+      "distance_km": 0.232,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0077380%2C121.5186010&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-bb09e1d62d473ffc",
+      "name": "鐵塔室內裝修設計有限公司",
+      "district": "永和區",
+      "address": "新北市永和區福和路55-1號",
+      "phone": "0905-926085",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "居家無障礙/工程",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0078681,
+      "lng": 121.5231457,
+      "geocode_provider": "google",
+      "distance_km": 0.324,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0078681%2C121.5231457&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-047770128a9d9654",
+      "name": "杏一醫療用品股份有限公司永和耕莘住院門市部",
+      "district": "永和區",
+      "address": "新北市永和區國光路123號1樓",
+      "phone": "02-29263167",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "醫材/輔具行",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0111755,
+      "lng": 121.5175093,
+      "geocode_provider": "google",
+      "distance_km": 0.356,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0111755%2C121.5175093&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-e6242fd7aa81602a",
+      "name": "杏一醫療用品股份有限公司永和耕莘門市部",
+      "district": "永和區",
+      "address": "新北市永和區中興街80號",
+      "phone": "02-89214200",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "醫材/輔具行",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0118281,
+      "lng": 121.5179183,
+      "geocode_provider": "google",
+      "distance_km": 0.378,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0118281%2C121.5179183&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-09d5744138d94e1c",
+      "name": "美德耐股份有限公司永和耕莘院外店",
+      "district": "永和區",
+      "address": "新北市永和區中興街103號1樓",
+      "phone": "02-89212037",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "醫材/輔具行",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0121937,
+      "lng": 121.5179338,
+      "geocode_provider": "google",
+      "distance_km": 0.41,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0121937%2C121.5179338&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-19e4fa34c6dc6006",
+      "name": "名品生技開發有限公司",
+      "district": "永和區",
+      "address": "新北市永和區勵行街119號",
+      "phone": "02-22318585",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "照護/協會/其他單位",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0120409,
+      "lng": 121.517529,
+      "geocode_provider": "google",
+      "distance_km": 0.422,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0120409%2C121.5175290&travelmode=driving&origin=25.0091768%2C121.5202731"
+    },
+    {
+      "vendor_id": "ntpc-2142e572876f3c57",
+      "name": "杏一醫療用品股份有限公司永和耕莘院外門市部",
+      "district": "永和區",
+      "address": "新北市永和區中興街87號1樓",
+      "phone": "02-29223256",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "醫材/輔具行",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0119265,
+      "lng": 121.5173228,
+      "geocode_provider": "google",
+      "distance_km": 0.426,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=25.0119265%2C121.5173228&travelmode=driving&origin=25.0091768%2C121.5202731"
+    }
+  ],
+  "map_url": "https://www.google.com/maps/dir/?api=1&destination=25.0119265%2C121.5173228&travelmode=driving&origin=25.0091768%2C121.5202731&waypoints=25.0090888%2C121.5207549%7C25.0074884%2C121.5207671%7C25.0074707%2C121.5190009%7C25.0077380%2C121.5186010%7C25.0078681%2C121.5231457%7C25.0111755%2C121.5175093%7C25.0118281%2C121.5179183%7C25.0121937%2C121.5179338%7C25.0120409%2C121.5175290",
+  "created_at": 1779806691.694356,
+  "expires_at": 1780411491.694356,
+  "google_maps_browser_key": "",
+  "ok": true,
+  "static_share": true,
+  "static_data_path": "vendor-shares/_rlPow4XRpc_YX9k3SgnYg.json"
+}

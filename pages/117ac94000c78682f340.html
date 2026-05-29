@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>未指定地區 / 照顧及專業 / 2026-05-29｜長照資源包結果</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#66758a; --line:#d9e2ef; --brand:#0b66c3; --soft:#f4f7fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #eef3f8; }
+    a { color: var(--brand); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 24px; background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; }
+    .topbar h1 { margin:0; font-size:24px; }
+    .eyebrow { margin:0 0 6px; color:#087f7a; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+    .button, button { border:1px solid #aac4df; background:#fff; color:#17324f; border-radius:8px; padding:10px 14px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+    .button.primary, button.primary { background:var(--brand); border-color:var(--brand); color:#fff; }
+    .button-green { background:#0f8f5f; border-color:#0f8f5f; color:#fff; }
+    .button-red { background:#cf3f3f; border-color:#cf3f3f; color:#fff; }
+    main { width:min(1180px, 100%); margin:0 auto; padding:20px; }
+    .hero, .panel, .resource-detail { background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; box-shadow:0 8px 28px rgba(20,42,70,.06); }
+    .hero { display:grid; grid-template-columns: 1.3fr .7fr; gap:16px; margin-bottom:18px; }
+    .hero h2 { margin:0 0 8px; font-size:28px; }
+    .muted { color:var(--muted); line-height:1.7; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .top-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .panel-actions { margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; }
+    .item-note { margin-top:4px; color:var(--muted); line-height:1.6; }
+    .result-output-switcher { display:flex; justify-content:space-between; gap:16px; align-items:center; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-bottom:18px; background:#fff; box-shadow:0 8px 28px rgba(20,42,70,.05); }
+    .result-output-switcher h3 { margin:0 0 4px; font-size:18px; }
+    .result-mode-tabs { display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+    .result-mode-tabs button { min-height:38px; border-radius:999px; padding:8px 13px; background:#fff; color:var(--ink); transition:transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease; }
+    .result-mode-tabs button:hover { transform:translateY(-1px); box-shadow:0 8px 18px rgba(24,39,75,.1); }
+    .result-mode-tabs button:active { transform:translateY(1px); }
+    .result-mode-tabs button.is-active { border-color:var(--brand); background:var(--brand); color:#fff; }
+    [data-output-section][hidden] { display:none !important; }
+    .grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:14px; margin-bottom:18px; }
+    .panel h3, .resource-detail h3 { margin:0 0 10px; }
+    .panel ol, .panel ul { margin:0; padding-left:22px; line-height:1.8; }
+    pre { white-space:pre-wrap; word-break:break-word; background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:12px; line-height:1.7; }
+    .resource-list { display:grid; gap:14px; }
+    .resource-detail dl { display:grid; gap:10px; margin:0; }
+    .resource-detail dl div { padding-top:10px; border-top:1px solid #edf1f6; }
+    dt { font-weight:800; color:#233d58; margin-bottom:4px; }
+    dd { margin:0; color:#26374d; line-height:1.7; }
+    .share-panel { display:grid; gap:12px; margin-top:18px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; box-shadow:0 8px 28px rgba(20,42,70,.06); }
+    .share-body { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+    .share-qr { width:min(240px, 100%); border:1px solid var(--line); border-radius:10px; background:#fff; padding:10px; }
+    .share-link { flex:1 1 280px; overflow-wrap:anywhere; }
+    @media (max-width: 760px) {
+      .topbar { align-items:flex-start; flex-direction:column; }
+      main { padding:12px; }
+      .hero, .grid { grid-template-columns: 1fr; }
+      .result-output-switcher { align-items:stretch; flex-direction:column; }
+      .result-mode-tabs { justify-content:stretch; }
+      .result-mode-tabs button { flex:1 1 130px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Resource Package Result</p>
+      <h1>資源包結果</h1>
+    </div>
+    <div class="top-actions">
+      <a class="button button-green" data-return-main href="https://chord410-svg.github.io/product-share/resource-nav.html?category=other&amp;source=resource_package_result&amp;guild=1456655145319534666&amp;result_channel=1491402720375079054">返回長照資源導航站主頁</a>
+      <a class="button button-red" href="discord:///channels/1456655145319534666/1491402720375079054">返回 Discord 資源結果頻道</a>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">案家資源包</p>
+        <h2>未指定地區 / 照顧及專業 / 2026-05-29</h2>
+        <p class="muted">建立者身份來自 Discord session。此頁包含所選資源、電話確認、行政文件與交接摘要；請勿在對外分享時附上內部註記。</p>
+        <p class="muted">更新時間：2026-05-29 20:05｜資源數：9 筆</p>
+        
+      </div>
+    </section>
+
+    <section class="result-output-switcher" aria-label="輸出格式切換">
+      <div>
+        <p class="eyebrow">輸出格式</p>
+        <h3>選擇這份結果要怎麼使用</h3>
+        <p class="muted" id="resultModeHelp">完整資料會顯示全部區塊；其他模式只聚焦在當下要複製或處理的內容。</p>
+      </div>
+      <div class="result-mode-tabs" role="tablist" aria-label="資源包輸出格式">
+        <button type="button" data-result-mode="family" role="tab">家屬版</button>
+        <button type="button" data-result-mode="phone" role="tab">電話確認</button>
+        <button type="button" data-result-mode="admin" role="tab">行政清單</button>
+        <button type="button" data-result-mode="handoff" role="tab">交接摘要</button>
+        <button type="button" data-result-mode="full" role="tab">完整資料</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel" data-output-section="full handoff">
+        <h3>建議優先順序</h3>
+        <ol><li><a href="#resource-bali_health_ltc_resources">八里區衛生所長照特約資源</a></li><li><a href="#resource-sanzhi_community_care_point_directory">三芝區社區照顧關懷據點名冊入口</a></li><li><a href="#resource-bali_ltc_contract_units_directory">八里區長照特約服務單位名冊入口</a></li><li><a href="#resource-sanzhi_ltc_contract_units_directory">三芝區長照特約服務單位名冊入口</a></li><li><a href="#resource-sanchong_zhude_community_care_point">三重助德社區照顧關懷據點</a></li><li><a href="#resource-legal_aid_foundation">法律扶助基金會</a></li><li><a href="#resource-laf_official">法律扶助基金會</a></li><li><a href="#resource-trust_org_old_disability">高齡者身心障礙者財產信託專區</a></li><li><a href="#resource-cathay_retirement_trust">國泰世華悠活退休信託</a></li></ol>
+      </article>
+      <article class="panel" data-output-section="full phone">
+        <h3>先打哪幾通電話</h3>
+        <ol><li><a href="#resource-bali_health_ltc_resources">八里區衛生所長照特約資源</a><div class="item-note"><strong>聯絡/申請：</strong>依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。</div><div class="item-note"><strong>電話確認：</strong>名冊是否為最新版本；是否服務案家行政區；是否仍有服務量能；轉介或預約方式是什麼</div></li><li><a href="#resource-sanzhi_community_care_point_directory">三芝區社區照顧關懷據點名冊入口</a><div class="item-note"><strong>聯絡/申請：</strong>依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。</div><div class="item-note"><strong>電話確認：</strong>該據點目前是否仍提供服務；服務時段與服務項目是什麼；案家是否符合服務對象或收案條件；是否需要預約或由個管師轉介；是否有名額或交通限制</div></li><li><a href="#resource-bali_ltc_contract_units_directory">八里區長照特約服務單位名冊入口</a><div class="item-note"><strong>聯絡/申請：</strong>依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。</div><div class="item-note"><strong>電話確認：</strong>是否服務案家所在行政區；目前是否有服務量能或等待時間；轉介、預約或申請流程是什麼；是否需要長照評估或照專轉介；若無量能是否可提供替代窗口</div></li><li><a href="#resource-sanzhi_ltc_contract_units_directory">三芝區長照特約服務單位名冊入口</a><div class="item-note"><strong>聯絡/申請：</strong>依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。</div><div class="item-note"><strong>電話確認：</strong>是否服務案家所在行政區；目前是否有服務量能或等待時間；轉介、預約或申請流程是什麼；是否需要長照評估或照專轉介；若無量能是否可提供替代窗口</div></li><li><a href="#resource-sanchong_zhude_community_care_point">三重助德社區照顧關懷據點</a><div class="item-note"><strong>聯絡/申請：</strong>台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。</div><div class="item-note"><strong>電話確認：</strong>目前服務項目與開放時段；是否有共餐或課程；是否限服務里別；是否需報名或評估</div></li><li><a href="#resource-legal_aid_foundation">法律扶助基金會</a><div class="item-note"><strong>聯絡/申請：</strong>依法律扶助基金會公告分會</div><div class="item-note"><strong>電話確認：</strong>是否需預約；是否符合扶助資格；需要哪些文件；是否有新北分會或可近便諮詢點</div></li><li><a href="#resource-laf_official">法律扶助基金會</a><div class="item-note"><strong>聯絡/申請：</strong>依來源頁公告聯絡方式</div><div class="item-note"><strong>電話確認：</strong>目前是否仍受理；服務區域與對象限制；需要哪些文件或轉介；是否有名額或等待時間</div></li><li><a href="#resource-trust_org_old_disability">高齡者身心障礙者財產信託專區</a><div class="item-note"><strong>聯絡/申請：</strong>依來源名冊或查詢入口公告</div><div class="item-note"><strong>電話確認：</strong>名冊是否為最新版本；是否服務案家行政區；是否仍有服務量能；轉介或預約方式是什麼</div></li><li><a href="#resource-cathay_retirement_trust">國泰世華悠活退休信託</a><div class="item-note"><strong>聯絡/申請：</strong>待人工查證後確認</div><div class="item-note"><strong>電話確認：</strong>此來源是否仍有效；是否有官方頁或承辦窗口可查證；是否能對外提供給家屬；目前是否仍有名額或活動期限</div></li></ol>
+        <div class="panel-actions"><button data-copy="phone">複製電話確認</button></div>
+      </article>
+      <article class="panel" data-output-section="full family">
+        <h3>可傳給家屬的短訊</h3>
+        <pre>家屬版資源包：未指定地區 / 照顧及專業 / 2026-05-29
+
+八里區衛生所長照特約資源
+八里區衛生所長照特約資源頁，可作為查詢八里區長照特約服務與區域資源的入口；使用前需確認最新名冊、服務範圍與量能。
+下一步：先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。
+聯絡/申請：依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。
+可先準備：八里區、案家行政區、服務需求摘要、長照或福利資格資料
+
+三芝區社區照顧關懷據點名冊入口
+三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。
+下一步：先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。
+聯絡/申請：依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。
+可先準備：案家行政區、服務需求摘要、聯絡方式、是否需陪同或共餐需求
+
+八里區長照特約服務單位名冊入口
+八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。
+下一步：先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。
+聯絡/申請：依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。
+可先準備：案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型
+
+三芝區長照特約服務單位名冊入口
+三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。
+下一步：先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。
+聯絡/申請：依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。
+可先準備：案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型
+
+三重助德社區照顧關懷據點
+三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。
+下一步：先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。
+聯絡/申請：台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。
+可先準備：身分證明、基本聯絡資料、參與需求說明
+
+法律扶助基金會
+適合處理債務、財產、照顧爭議、保護令或法律扶助需求。
+下一步：先整理法律問題類型、相關文件與是否需預約諮詢。
+聯絡/申請：依法律扶助基金會公告分會
+可先準備：身分證明、相關法律文件、收入或財產資料
+
+法律扶助基金會
+法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。
+下一步：先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。
+聯絡/申請：依來源頁公告聯絡方式
+可先準備：身分證明、需求說明、申請文件依來源公告
+
+高齡者身心障礙者財產信託專區
+信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。
+下一步：先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。
+聯絡/申請：依來源名冊或查詢入口公告
+可先準備：案家行政區、服務需求摘要、長照或福利資格資料</pre>
+        <div class="panel-actions"><button class="primary" data-copy="family">複製家屬版</button></div>
+      </article>
+      <article class="panel" data-output-section="full admin">
+        <h3>需要先準備的文件</h3>
+        <ul><li>八里區</li><li>案家行政區</li><li>服務需求摘要</li><li>長照或福利資格資料</li><li>聯絡方式</li><li>是否需陪同或共餐需求</li><li>長照資格或評估資料</li><li>欲連結服務類型</li><li>身分證明</li><li>基本聯絡資料</li><li>參與需求說明</li><li>相關法律文件</li><li>收入或財產資料</li><li>需求說明</li><li>申請文件依來源公告</li><li>待人工查證</li></ul>
+        <div class="panel-actions"><button data-copy="admin">複製行政清單</button></div>
+      </article>
+      <article class="panel" data-output-section="full handoff">
+        <h3>風險提醒</h3>
+        <ul><li>名冊需確認最新版本</li><li>據點時段與量能可能異動</li><li>不可直接承諾收案</li><li>服務區域與名額需逐一確認</li><li>不可直接承諾可立即收案</li><li>B級服務來源需電話確認</li><li>服務內容可能異動</li><li>非緊急資源</li><li>法律問題需專業判斷</li><li>資格需確認</li><li>民間資源需電話確認</li><li>線索卡需人工確認</li></ul>
+      </article>
+      <article class="panel" data-output-section="full handoff">
+        <h3>交接摘要</h3>
+        <pre>交接摘要：未指定地區 / 照顧及專業 / 2026-05-29
+主題：其他資源
+線索：A級官方候選、名冊入口、待抽全文、一般、三芝區、社區照顧、C據點、官方名冊、需電話確認、八里區、長照服務、居家服務
+已選資源：9 筆</pre>
+        <div class="panel-actions"><button data-copy="handoff">複製交接摘要</button></div>
+      </article>
+    </section>
+
+    <section class="resource-list" aria-label="完整資料集合" data-output-section="full">
+      <p class="eyebrow">完整資料集合</p>
+      
+    <article class="resource-detail" id="resource-bali_health_ltc_resources">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>1. <a href="https://bali.health.ntpc.gov.tw/article/113%EF%BC%8D%EF%BC%8D114%E5%B9%B4%E5%85%AB%E9%87%8C%E5%8D%80%E9%95%B7%E7%85%A7%E7%89%B9%E7%B4%84%E8%B3%87%E6%BA%90" target="_blank" rel="noopener noreferrer">八里區衛生所長照特約資源</a></h3>
+      </div>
+      <p>八里區衛生所長照特約資源頁，可作為查詢八里區長照特約服務與區域資源的入口；使用前需確認最新名冊、服務範圍與量能。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。</dd></div>
+        <div><dt>常備文件</dt><dd>八里區、案家行政區、服務需求摘要、長照或福利資格資料</dd></div>
+        <div><dt>電話確認</dt><dd>名冊是否為最新版本；是否服務案家行政區；是否仍有服務量能；轉介或預約方式是什麼</dd></div>
+        <div><dt>內部註記</dt><dd>由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：若做行政區版資源包，可參考此類區域頁。</dd></div>
+        <div><dt>風險提醒</dt><dd>名冊需確認最新版本</dd></div>
+        <div><dt>來源/確認</dt><dd>official_candidate｜最後確認：2026-05-22</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-sanzhi_community_care_point_directory">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>2. <a href="https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d" target="_blank" rel="noopener noreferrer">三芝區社區照顧關懷據點名冊入口</a></h3>
+      </div>
+      <p>三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。</dd></div>
+        <div><dt>常備文件</dt><dd>案家行政區、服務需求摘要、聯絡方式、是否需陪同或共餐需求</dd></div>
+        <div><dt>電話確認</dt><dd>該據點目前是否仍提供服務；服務時段與服務項目是什麼；案家是否符合服務對象或收案條件；是否需要預約或由個管師轉介；是否有名額或交通限制</dd></div>
+        <div><dt>內部註記</dt><dd>五問審核：適合三芝區個管師在案家需要社區據點、共餐、健康促進或日間支持線索時使用；A級官方名冊入口，可作行動查詢，但實際服務量能須電話確認。</dd></div>
+        <div><dt>風險提醒</dt><dd>名冊需確認最新版本、據點時段與量能可能異動、不可直接承諾收案</dd></div>
+        <div><dt>來源/確認</dt><dd>official｜最後確認：2026-05-25</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-bali_ltc_contract_units_directory">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>3. <a href="https://www.health.ntpc.gov.tw/basic/?mode=detail&amp;node=585" target="_blank" rel="noopener noreferrer">八里區長照特約服務單位名冊入口</a></h3>
+      </div>
+      <p>八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。</dd></div>
+        <div><dt>常備文件</dt><dd>案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型</dd></div>
+        <div><dt>電話確認</dt><dd>是否服務案家所在行政區；目前是否有服務量能或等待時間；轉介、預約或申請流程是什麼；是否需要長照評估或照專轉介；若無量能是否可提供替代窗口</dd></div>
+        <div><dt>內部註記</dt><dd>五問審核：適合八里區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。</dd></div>
+        <div><dt>風險提醒</dt><dd>名冊需確認最新版本、服務區域與名額需逐一確認、不可直接承諾可立即收案</dd></div>
+        <div><dt>來源/確認</dt><dd>official｜最後確認：2026-05-25</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-sanzhi_ltc_contract_units_directory">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>4. <a href="https://www.health.ntpc.gov.tw/basic/?mode=detail&amp;node=585" target="_blank" rel="noopener noreferrer">三芝區長照特約服務單位名冊入口</a></h3>
+      </div>
+      <p>三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。</dd></div>
+        <div><dt>常備文件</dt><dd>案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型</dd></div>
+        <div><dt>電話確認</dt><dd>是否服務案家所在行政區；目前是否有服務量能或等待時間；轉介、預約或申請流程是什麼；是否需要長照評估或照專轉介；若無量能是否可提供替代窗口</dd></div>
+        <div><dt>內部註記</dt><dd>五問審核：適合三芝區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。</dd></div>
+        <div><dt>風險提醒</dt><dd>名冊需確認最新版本、服務區域與名額需逐一確認、不可直接承諾可立即收案</dd></div>
+        <div><dt>來源/確認</dt><dd>official｜最後確認：2026-05-25</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-sanchong_zhude_community_care_point">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>5. <a href="https://www.tapdsw.org/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%A4%9A%E5%85%83%E7%A4%BE%E5%8D%80%E9%97%9C%E6%87%B7%E6%93%9A%E9%BB%9E/%E5%8A%A9%E5%BE%B7%E6%93%9A%E9%BB%9E" target="_blank" rel="noopener noreferrer">三重助德社區照顧關懷據點</a></h3>
+      </div>
+      <p>三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。</dd></div>
+        <div><dt>常備文件</dt><dd>身分證明、基本聯絡資料、參與需求說明</dd></div>
+        <div><dt>電話確認</dt><dd>目前服務項目與開放時段；是否有共餐或課程；是否限服務里別；是否需報名或評估</dd></div>
+        <div><dt>內部註記</dt><dd>五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。</dd></div>
+        <div><dt>風險提醒</dt><dd>B級服務來源需電話確認、服務內容可能異動、非緊急資源</dd></div>
+        <div><dt>來源/確認</dt><dd>service_provider｜最後確認：2026-05-25</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-legal_aid_foundation">
+      <div class="resource-detail-head">
+        <p class="eyebrow">other</p>
+        <h3>6. <a href="https://www.laf.org.tw/" target="_blank" rel="noopener noreferrer">法律扶助基金會</a></h3>
+      </div>
+      <p>適合處理債務、財產、照顧爭議、保護令或法律扶助需求。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先整理法律問題類型、相關文件與是否需預約諮詢。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依法律扶助基金會公告分會</dd></div>
+        <div><dt>常備文件</dt><dd>身分證明、相關法律文件、收入或財產資料</dd></div>
+        <div><dt>電話確認</dt><dd>是否需預約；是否符合扶助資格；需要哪些文件；是否有新北分會或可近便諮詢點</dd></div>
+        <div><dt>內部註記</dt><dd>手工保留入口卡；用於既有資源包測試與正式法律扶助入口。實際申請資格、分會窗口與預約方式仍需回官方網站確認。</dd></div>
+        <div><dt>風險提醒</dt><dd>法律問題需專業判斷、資格需確認</dd></div>
+        <div><dt>來源/確認</dt><dd>foundation｜最後確認：2026-05-22</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-laf_official">
+      <div class="resource-detail-head">
+        <p class="eyebrow">other</p>
+        <h3>7. <a href="https://www.laf.org.tw/" target="_blank" rel="noopener noreferrer">法律扶助基金會</a></h3>
+      </div>
+      <p>法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依來源頁公告聯絡方式</dd></div>
+        <div><dt>常備文件</dt><dd>身分證明、需求說明、申請文件依來源公告</dd></div>
+        <div><dt>電話確認</dt><dd>目前是否仍受理；服務區域與對象限制；需要哪些文件或轉介；是否有名額或等待時間</dd></div>
+        <div><dt>內部註記</dt><dd>由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補新北分會或預約方式。</dd></div>
+        <div><dt>風險提醒</dt><dd>民間資源需電話確認</dd></div>
+        <div><dt>來源/確認</dt><dd>community_candidate｜最後確認：2026-05-22</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-trust_org_old_disability">
+      <div class="resource-detail-head">
+        <p class="eyebrow">other</p>
+        <h3>8. <a href="https://www.trust.org.tw/tw/old-disability/trust/6" target="_blank" rel="noopener noreferrer">高齡者身心障礙者財產信託專區</a></h3>
+      </div>
+      <p>信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>依來源名冊或查詢入口公告</dd></div>
+        <div><dt>常備文件</dt><dd>案家行政區、服務需求摘要、長照或福利資格資料</dd></div>
+        <div><dt>電話確認</dt><dd>名冊是否為最新版本；是否服務案家行政區；是否仍有服務量能；轉介或預約方式是什麼</dd></div>
+        <div><dt>內部註記</dt><dd>由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：適合整理為保護財產、防詐與信託監察人情境卡。</dd></div>
+        <div><dt>風險提醒</dt><dd>名冊需確認最新版本、民間資源需電話確認</dd></div>
+        <div><dt>來源/確認</dt><dd>community_candidate｜最後確認：2026-05-22</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-cathay_retirement_trust">
+      <div class="resource-detail-head">
+        <p class="eyebrow">other</p>
+        <h3>9. <a href="https://www.cathaybk.com.tw/cathaybk/personal/wealth/trust/product/retirement/" target="_blank" rel="noopener noreferrer">國泰世華悠活退休信託</a></h3>
+      </div>
+      <p>銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>待人工查證後確認</dd></div>
+        <div><dt>常備文件</dt><dd>待人工查證</dd></div>
+        <div><dt>電話確認</dt><dd>此來源是否仍有效；是否有官方頁或承辦窗口可查證；是否能對外提供給家屬；目前是否仍有名額或活動期限</dd></div>
+        <div><dt>內部註記</dt><dd>由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業產品頁不直接作公益資源規則。 此卡只供個管師查證，不進家屬版輸出。</dd></div>
+        <div><dt>風險提醒</dt><dd>線索卡需人工確認、民間資源需電話確認</dd></div>
+        <div><dt>來源/確認</dt><dd>community_candidate｜最後確認：2026-05-22</dd></div>
+      </dl>
+    </article>
+    
+    </section>
+    
+    <section class="share-panel">
+      <div>
+        <p class="eyebrow">分享此資源包結果</p>
+        <h3>QR CODE 與正式連結</h3>
+        <p class="muted">這是正式 Web B 結果連結，可複製給需要查看的人；對外分享前請確認內容不含內部註記。</p>
+      </div>
+      <div class="share-body">
+        <img class="share-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAa4AAAGuCAIAAABHl3XNAAAITUlEQVR4nO3dwXHbQAxAUTrjPlhLOkip6SC1qBJmhFxy4iFrBMDyvbstiZT/wSBmP67rOgCe7Vv1GwCoJ4UAUggghQBSCCCFAMHYBEAKAaQQQAoBpBAgGJsASCGAFAJIIYAUAgRjEwApBJBCACkEkEKAYGwCIIUAUggghQBSCBCMTQCkEEAKAY7j+My7Cuf3n5td4tevH//8ee9/dr+7MPFaVV3JvM/7tL/BFf5XCCCFAFIIIIUAUggQjE0ApBBACgGkECB52+Te0zYKVl6357XK+0Qrd2Hitar6bvS8VmfR36CxCYAUAkghgBQCSCFAMDYBkEIAKQSQQoDSbZP9zpGo+kRV16rnFkTepkre1eh5Asm53d/gPWMTACkEkEIAKQSQQoBgbAIghQBSCCCFAI23TSbK2yjI2+vI282Y+J7zXtdpLf0ZmwBIIYAUAkghgBQCBGMTACkEkEIAKQR4s23yZfJOt8jbY9lvY+T+N698orzP2/Osj6cxNgGQQgApBJBCACkEkEKAP0yQAaQQQAoB+m6bTHz+vupskxV5v7nqDubtoqy87kSv7T7RPf8rBJBCACkEkEIAKQQIxiYAUggghQBSCFC6bZK351Cl59kmfrbDvtCKnifM7MfYBEAKAaQQQAoBpBAgGJsASCGAFAJIIUDytsnTzkbo+XmrdlF6mriLkvee+ZuxCYAUAkghgBQCSCFAMDYBkEIAKQSQQoC3j+u6kq6EMxn67yrsd48m7s/03FQ50/aUVuTdI2MTACkEkEIAKQSQQoBgbAIghQBSCCCFAMlnm6yYuBWQt+fQ83ySiZsqE3ckep5Pcrb8Tq4wNgGQQgApBJBCACkECMYmAFIIIIUAUgiQfLbJfmdf5Ml7wn6/Eyqedo/yTPzWvZxtApDHBBlACgGkEEAKAaQQIBibAEghgBQC5G6b9HzivGr7Yr/9ip67KCvy7m/VNyfP2fI7ucL/CgGkEEAKAaQQQAoBgrEJgBQCSCGAFAKUnm2youfGyMRdlJ6fiK8y8Q6ezjYBqGKCDCCFAFIIIIUAUggQjE0ApBBACgGO4/jMuwpVZ5tUPa2ep+qkl6ep+ubkvW7PLaZ7VX+h/lcIIIUAUggghQBSCBCMTQCkEEAKAaQQIPlsk55nbuSp2kbY70pOPI+l55Xs+YleLbfFjE0ApBBACgGkEEAKAYKxCYAUAkghgBQCJJ9tsqLqSfeVd9XzLIiqc1F6ngSyco+cmfN/rmQVYxMAKQSQQgApBJBCgGBsAiCFAFIIIIUAyWeb5On5tHrVTkjVlsuKp21u5On53TjTvs/ONgFIZIIMIIUAUggghQBSCBCMTQCkEEAKAXLPNum5BTHxGfq8K9nz5JOeuyhVd3DiSS8rqu6v/xUCSCGAFAJIIYAUAgRjEwApBJBCACkESN42mbgFcW/ldav2Z3peyRU993Ym6nmtTmebAFQxQQaQQgApBJBCACkECMYmAFIIIIUAldsmefZ7Sr7qZ23mdLga+50S05P/FQJIIYAUAkghgBQCBGMTACkEkEIAKQR4+7iuq+GVyHuyv+pEjoknkFSdfVH1m3v+7L2q7/O9iXssxiYAUggghQBSCCCFAMHYBEAKAaQQQAoBkrdNeu51TGRHov/uzYqJ7+q13ZkqxiYAUggghQBSCCCFAMHYBEAKAaQQQAoB3j7zLsPEExt6nqqxIu8UkaftSOz3veq5T3IW/aUYmwBIIYAUAkghgBQCBGMTACkEkEIAKQRofLZJz9MP8rYRep6bMVHPnZ+q3YyJXkV/+8YmAFIIIIUAUggghQDB2ARACgGkEEAKAZK3TfL0fHa/6hyJlXd1b7/zK3re/RU9vzn3er4rYxMAKQSQQgApBJBCgGBsAiCFAFIIIIUAb595l6Fqv2LFxHc18cn+iZ+o5zZRz42gs+U20T1jEwApBJBCACkEkEKAYGwCIIUAUggghQDJ2yZVz7JPfEreBsX0HZiqM0aqNqBW9NyAMjYBkEIAKQSQQgApBAjGJgBSCCCFAFIIULptUrX1MfHUhTz7beZUnUCSt6mSJ+9MlYn7M8YmAFIIIIUAUggghQDB2ARACgGkEEAKAUq3TVasPPdf9aR73oZM1WZOnomv2/Mu9Dz55Gz5roxNAKQQQAoBpBBACgGCsQmAFAJIIYAUAiRvm0w87WHibkbVe97vJJCJJ9vsd4ZMFWMTACkEkEIAKQSQQoBgbAIghQBSCCCFAMnbJj1PMOi517FyHstEPb8bE/eF7lVtfbyK/lJWGJsASCGAFAJIIYAUAgRjEwApBJBCACkESN42uddzg6LnFkTV+SQrr7vf2Rd5nyjvW9fzSp4t/8qMTQCkEEAKAaQQQAoBgrEJgBQCSCGAFAKUbpvc2+/5+7xdhapNhipVmyo9N2Qm3t9Xy2+ssQmAFAJIIYAUAkghQDA2AZBCACkEkEKAxtsm+8l7hr5qC6Jqr2O/E1fyTpjp+bo9GZsASCGAFAJIIYAUAgRjEwApBJBCACkEeLNt8mXynt2fuEHR83XzVN0jd/CrGJsASCGAFAJIIYAUAgRjEwApBJBCACkEaLxtkvcMfZW8bYSqHZieJ2OsvKu8n+25e9PzDlYxNgGQQgApBJBCACkECMYmAFIIIIUAUghQum2y39PqK5+oahuhaoOi592v2uq5l3eten7rzqLvhrEJgBQCSCGAFAJIIUAwNgGQQgApBJBCgLeP67pcCeDhjE0ApBBACgGkEEAKAaQQ4A8TZAApBJBCACkEkEKAYGwCIIUAUggghQBSCBCMTQCkEEAKAaQQQAoBgrEJgBQCSCGAFAJIIUAwNgGQQgApBA6O4zf+XsFAvAjU3AAAAABJRU5ErkJggg==" alt="資源包結果 QR Code">
+        <a class="share-link" href="https://chord410-svg.github.io/product-share/viewer.html?id=117ac94000c78682f340" target="_blank" rel="noopener noreferrer">https://chord410-svg.github.io/product-share/viewer.html?id=117ac94000c78682f340</a>
+        <button type="button" data-copy-link>複製連結</button>
+      </div>
+    </section>
+        
+  </main>
+  <textarea id="copyScratch" hidden></textarea>
+  <script type="application/json" id="resourcePackManifest">{"content_hash":"f9e244a751d943a74aed7f0e2a255a9b89ebb2abc2f308fee6cda434023cf392","export_id":"rpex-cc0f097b711c18f0c5be","exported_at":1780056353.558174,"output_history":[{"created_at":1780056353.5235531,"output_id":"117ac94000c78682f340","output_mode":"family","qr_status":"pending","share_page_id":"117ac94000c78682f340","share_url":"","status":"pending","updated_at":1780056353.5235531}],"package_metadata":{"category":"other","created_at":1780056319.277072,"created_by":{"discord_user_id":"1088409939241865278","discord_user_name":"chord410"},"district":"","name":"未指定地區 / 照顧及專業 / 2026-05-29","note":"","original_package_id":"pkg-mpqvkhco-8u9ps","output_mode":"family","resource_ids":["bali_health_ltc_resources","sanzhi_community_care_point_directory","bali_ltc_contract_units_directory","sanzhi_ltc_contract_units_directory","sanchong_zhude_community_care_point","legal_aid_foundation","laf_official","trust_org_old_disability","cathay_retirement_trust"],"selected_topic_keys":[],"smart_query_text":"","status":"result_pending","updated_at":1780056353.521667,"urgency":""},"resource_snapshots":[{"body":"這張卡由候選來源 `bali_health_ltc_resources` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：A\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：若做行政區版資源包，可參考此類區域頁。","category":"care_professional","confidence":"A級官方候選","contact":"依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。","content_hash":"a8daa8139feb52a64af37d2f552da1afd0bd1ca4f0b901cc2648ff2c4f90d5c4","coverage_scope":"district","districts":["八里區"],"eligibility_tags":["A級官方候選","名冊入口","待抽全文"],"embedding_text":"八里區衛生所長照特約資源 care_professional ntpc_contract_list community_c_station district 八里區衛生所長照特約資源入口；實際服務內容、服務區域、最新名冊與量能需電話確認。 八里區 八里區衛生所長照特約資源頁，可作為查詢八里區長照特約服務與區域資源的入口；使用前需確認最新名冊、服務範圍與量能。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 八里區 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：若做行政區版資源包，可參考此類區域頁。","id":"bali_health_ltc_resources","internal_notes":"由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：若做行政區版資源包，可參考此類區域頁。","last_checked_at":"2026-05-22","name":"八里區衛生所長照特約資源","next_review_at":"2026-08-22","next_step":"先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。","phone_check_questions":["名冊是否為最新版本","是否服務案家行政區","是否仍有服務量能","轉介或預約方式是什麼"],"public_allowed":true,"public_contact":"依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。","public_next_step":"先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。","public_required_documents":["八里區","案家行政區","服務需求摘要","長照或福利資格資料"],"public_summary":"八里區衛生所長照特約資源頁，可作為查詢八里區長照特約服務與區域資源的入口；使用前需確認最新名冊、服務範圍與量能。","region":"新北市","resource_id":"bali_health_ltc_resources","resource_version":"2026-05-22-a8daa813","risk_flags":["名冊需確認最新版本"],"service_area_note":"八里區衛生所長照特約資源入口；實際服務內容、服務區域、最新名冊與量能需電話確認。","source_type":"official_candidate","source_url":"https://bali.health.ntpc.gov.tw/article/113%EF%BC%8D%EF%BC%8D114%E5%B9%B4%E5%85%AB%E9%87%8C%E5%8D%80%E9%95%B7%E7%85%A7%E7%89%B9%E7%B4%84%E8%B3%87%E6%BA%90","status":"active","summary":"八里區衛生所長照特約資源頁，可作為查詢八里區長照特約服務與區域資源的入口；使用前需確認最新名冊、服務範圍與量能。","title":"八里區衛生所長照特約資源","topics":["ntpc_contract_list","community_c_station"],"urgency_tags":["一般"]},{"body":"這張卡由候選來源 `sanzhi_community_care_point_directory` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。\n- 下一步：先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。\n- 服務範圍：以官方全市入口查詢或確認三芝區服務資源；實際服務範圍、名額與時段需電話確認。\n- 審核提醒：五問審核：適合三芝區個管師在案家需要社區據點、共餐、健康促進或日間支持線索時使用；A級官方名冊入口，可作行動查詢，但實際服務量能須電話確認。","category":"care_professional","confidence":"A級官方資料","contact":"依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。","content_hash":"7c071a6c481c14dcde43e8661bccbcfd19b2780963848ed1b4399df471b1988e","coverage_scope":"district","districts":["三芝區"],"eligibility_tags":["三芝區","社區照顧","C據點","官方名冊"],"embedding_text":"三芝區社區照顧關懷據點名冊入口 care_professional community_c_station district 以官方全市入口查詢或確認三芝區服務資源；實際服務範圍、名額與時段需電話確認。 三芝區 三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。 先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。 案家行政區 服務需求摘要 聯絡方式 是否需陪同或共餐需求 該據點目前是否仍提供服務 服務時段與服務項目是什麼 案家是否符合服務對象或收案條件 是否需要預約或由個管師轉介 是否有名額或交通限制 五問審核：適合三芝區個管師在案家需要社區據點、共餐、健康促進或日間支持線索時使用；A級官方名冊入口，可作行動查詢，但實際服務量能須電話確認。","id":"sanzhi_community_care_point_directory","internal_notes":"五問審核：適合三芝區個管師在案家需要社區據點、共餐、健康促進或日間支持線索時使用；A級官方名冊入口，可作行動查詢，但實際服務量能須電話確認。","last_checked_at":"2026-05-25","name":"三芝區社區照顧關懷據點名冊入口","next_review_at":"2026-08-25","next_step":"先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。","phone_check_questions":["該據點目前是否仍提供服務","服務時段與服務項目是什麼","案家是否符合服務對象或收案條件","是否需要預約或由個管師轉介","是否有名額或交通限制"],"public_allowed":true,"public_contact":"依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。","public_next_step":"先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。","public_required_documents":["案家行政區","服務需求摘要","聯絡方式","是否需陪同或共餐需求"],"public_summary":"三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。","region":"新北市","resource_id":"sanzhi_community_care_point_directory","resource_version":"1","risk_flags":["名冊需確認最新版本","據點時段與量能可能異動","不可直接承諾收案"],"service_area_note":"以官方全市入口查詢或確認三芝區服務資源；實際服務範圍、名額與時段需電話確認。","source_type":"official","source_url":"https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d","status":"active","summary":"三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。","title":"三芝區社區照顧關懷據點名冊入口","topics":["community_c_station"],"urgency_tags":["一般","需電話確認"]},{"body":"這張卡由候選來源 `bali_ltc_contract_units_directory` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。\n- 下一步：先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。\n- 服務範圍：以官方全市入口查詢或確認八里區服務資源；實際服務範圍、名額與時段需電話確認。\n- 審核提醒：五問審核：適合八里區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。","category":"care_professional","confidence":"A級官方資料","contact":"依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。","content_hash":"1b27b4b44fbf61a21253f4d63bc37820c4419b93645c904102ac04d5ed24cb63","coverage_scope":"district","districts":["八里區"],"eligibility_tags":["八里區","長照服務","居家服務","日照或特約單位"],"embedding_text":"八里區長照特約服務單位名冊入口 care_professional ntpc_contract_list home_care day_care district 以官方全市入口查詢或確認八里區服務資源；實際服務範圍、名額與時段需電話確認。 八里區 八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。 先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。 案家行政區 服務需求摘要 長照資格或評估資料 欲連結服務類型 是否服務案家所在行政區 目前是否有服務量能或等待時間 轉介、預約或申請流程是什麼 是否需要長照評估或照專轉介 若無量能是否可提供替代窗口 五問審核：適合八里區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。","id":"bali_ltc_contract_units_directory","internal_notes":"五問審核：適合八里區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。","last_checked_at":"2026-05-25","name":"八里區長照特約服務單位名冊入口","next_review_at":"2026-08-25","next_step":"先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。","phone_check_questions":["是否服務案家所在行政區","目前是否有服務量能或等待時間","轉介、預約或申請流程是什麼","是否需要長照評估或照專轉介","若無量能是否可提供替代窗口"],"public_allowed":true,"public_contact":"依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。","public_next_step":"先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。","public_required_documents":["案家行政區","服務需求摘要","長照資格或評估資料","欲連結服務類型"],"public_summary":"八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。","region":"新北市","resource_id":"bali_ltc_contract_units_directory","resource_version":"1","risk_flags":["名冊需確認最新版本","服務區域與名額需逐一確認","不可直接承諾可立即收案"],"service_area_note":"以官方全市入口查詢或確認八里區服務資源；實際服務範圍、名額與時段需電話確認。","source_type":"official","source_url":"https://www.health.ntpc.gov.tw/basic/?mode=detail&amp;node=585","status":"active","summary":"八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。","title":"八里區長照特約服務單位名冊入口","topics":["ntpc_contract_list","home_care","day_care"],"urgency_tags":["一般","需電話確認"]},{"body":"這張卡由候選來源 `sanzhi_ltc_contract_units_directory` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。\n- 下一步：先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。\n- 服務範圍：以官方全市入口查詢或確認三芝區服務資源；實際服務範圍、名額與時段需電話確認。\n- 審核提醒：五問審核：適合三芝區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。","category":"care_professional","confidence":"A級官方資料","contact":"依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。","content_hash":"3e4316954d1ae3e27cfe04c98a2c7fb1e4fac3facbe74ce66b9900015556257f","coverage_scope":"district","districts":["三芝區"],"eligibility_tags":["三芝區","長照服務","居家服務","日照或特約單位"],"embedding_text":"三芝區長照特約服務單位名冊入口 care_professional ntpc_contract_list home_care day_care district 以官方全市入口查詢或確認三芝區服務資源；實際服務範圍、名額與時段需電話確認。 三芝區 三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。 先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。 案家行政區 服務需求摘要 長照資格或評估資料 欲連結服務類型 是否服務案家所在行政區 目前是否有服務量能或等待時間 轉介、預約或申請流程是什麼 是否需要長照評估或照專轉介 若無量能是否可提供替代窗口 五問審核：適合三芝區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。","id":"sanzhi_ltc_contract_units_directory","internal_notes":"五問審核：適合三芝區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。","last_checked_at":"2026-05-25","name":"三芝區長照特約服務單位名冊入口","next_review_at":"2026-08-25","next_step":"先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。","phone_check_questions":["是否服務案家所在行政區","目前是否有服務量能或等待時間","轉介、預約或申請流程是什麼","是否需要長照評估或照專轉介","若無量能是否可提供替代窗口"],"public_allowed":true,"public_contact":"依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。","public_next_step":"先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。","public_required_documents":["案家行政區","服務需求摘要","長照資格或評估資料","欲連結服務類型"],"public_summary":"三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。","region":"新北市","resource_id":"sanzhi_ltc_contract_units_directory","resource_version":"1","risk_flags":["名冊需確認最新版本","服務區域與名額需逐一確認","不可直接承諾可立即收案"],"service_area_note":"以官方全市入口查詢或確認三芝區服務資源；實際服務範圍、名額與時段需電話確認。","source_type":"official","source_url":"https://www.health.ntpc.gov.tw/basic/?mode=detail&amp;node=585","status":"active","summary":"三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。","title":"三芝區長照特約服務單位名冊入口","topics":["ntpc_contract_list","home_care","day_care"],"urgency_tags":["一般","需電話確認"]},{"body":"這張卡由候選來源 `sanchong_zhude_community_care_point` 經五問審核後轉為行政區正式卡。\n\n- 使用情境：三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。\n- 下一步：先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。\n- 服務範圍：三重區社區關懷據點；課程、共餐、收費與開放資格需電話確認。\n- 審核提醒：五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。","category":"care_professional","confidence":"B級民間/受託資料","contact":"台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。","content_hash":"d1d4967185db7c25d17695abb37c04e369505e8c64f92e9c759612a393ee1e8c","coverage_scope":"district","districts":["三重區"],"eligibility_tags":["三重區","社區據點","長照需求","照顧服務"],"embedding_text":"三重助德社區照顧關懷據點 care_professional community_c_station district 三重區社區關懷據點；課程、共餐、收費與開放資格需電話確認。 三重區 三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。 先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。 身分證明 基本聯絡資料 參與需求說明 目前服務項目與開放時段 是否有共餐或課程 是否限服務里別 是否需報名或評估 五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。","id":"sanchong_zhude_community_care_point","internal_notes":"五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。","last_checked_at":"2026-05-25","name":"三重助德社區照顧關懷據點","next_review_at":"2026-08-25","next_step":"先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。","phone_check_questions":["目前服務項目與開放時段","是否有共餐或課程","是否限服務里別","是否需報名或評估"],"public_allowed":true,"public_contact":"台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。","public_next_step":"先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。","public_required_documents":["身分證明","基本聯絡資料","參與需求說明"],"public_summary":"三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。","region":"新北市","resource_id":"sanchong_zhude_community_care_point","resource_version":"2026-05-25-d1d49671","risk_flags":["B級服務來源需電話確認","服務內容可能異動","非緊急資源"],"service_area_note":"三重區社區關懷據點；課程、共餐、收費與開放資格需電話確認。","source_type":"service_provider","source_url":"https://www.tapdsw.org/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%A4%9A%E5%85%83%E7%A4%BE%E5%8D%80%E9%97%9C%E6%87%B7%E6%93%9A%E9%BB%9E/%E5%8A%A9%E5%BE%B7%E6%93%9A%E9%BB%9E","status":"active","summary":"三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。","title":"三重助德社區照顧關懷據點","topics":["community_c_station"],"urgency_tags":["一般"]},{"body":"此卡保留為法律扶助的正式入口。若後續與候選來源 `laf_official` 合併，需同步更新測試與既有資源包 payload。","category":"other","confidence":"民間公益資料","contact":"依法律扶助基金會公告分會","content_hash":"0153a61adec1621a8883541d1fdec0965967bf04e8d0a3e5631d610acc2bd89c","coverage_scope":"citywide","districts":["全新北"],"eligibility_tags":["法律諮詢","扶助","高齡","弱勢"],"embedding_text":"法律扶助基金會 other legal_aid citywide 全新北 適合處理債務、財產、照顧爭議、保護令或法律扶助需求。 先整理法律問題類型、相關文件與是否需預約諮詢。 身分證明 相關法律文件 收入或財產資料 是否需預約 是否符合扶助資格 需要哪些文件 是否有新北分會或可近便諮詢點 手工保留入口卡；用於既有資源包測試與正式法律扶助入口。實際申請資格、分會窗口與預約方式仍需回官方網站確認。","id":"legal_aid_foundation","internal_notes":"手工保留入口卡；用於既有資源包測試與正式法律扶助入口。實際申請資格、分會窗口與預約方式仍需回官方網站確認。","last_checked_at":"2026-05-22","name":"法律扶助基金會","next_review_at":"2026-08-22","next_step":"先整理法律問題類型、相關文件與是否需預約諮詢。","phone_check_questions":["是否需預約","是否符合扶助資格","需要哪些文件","是否有新北分會或可近便諮詢點"],"public_allowed":true,"public_contact":"依法律扶助基金會公告分會","public_next_step":"先整理法律問題類型、相關文件與是否需預約諮詢。","public_required_documents":["身分證明","相關法律文件","收入或財產資料"],"public_summary":"適合處理債務、財產、照顧爭議、保護令或法律扶助需求。","region":"新北市","resource_id":"legal_aid_foundation","resource_version":"2026-05-22-0153a61a","risk_flags":["法律問題需專業判斷","資格需確認"],"service_area_note":"","source_type":"foundation","source_url":"https://www.laf.org.tw/","status":"active","summary":"適合處理債務、財產、照顧爭議、保護令或法律扶助需求。","title":"法律扶助基金會","topics":["legal_aid"],"urgency_tags":["一般","本週內"]},{"body":"這張卡由候選來源 `laf_official` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：resource_card\n- 候選用途：resource_card_draft\n- 待確認事項：需補新北分會或預約方式。","category":"other","confidence":"B級民間候選","contact":"依來源頁公告聯絡方式","content_hash":"14d51a88304aee3addaf451c7ee7291b41a97766ea5ddb9dd55ee7b8a931ccc5","coverage_scope":"citywide","districts":["全新北"],"eligibility_tags":["B級民間候選","資源聯繫","待抽全文"],"embedding_text":"法律扶助基金會 other legal_aid citywide 全新北 法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。 先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。 身分證明 需求說明 申請文件依來源公告 目前是否仍受理 服務區域與對象限制 需要哪些文件或轉介 是否有名額或等待時間 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補新北分會或預約方式。","id":"laf_official","internal_notes":"由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補新北分會或預約方式。","last_checked_at":"2026-05-22","name":"法律扶助基金會","next_review_at":"2026-08-22","next_step":"先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。","phone_check_questions":["目前是否仍受理","服務區域與對象限制","需要哪些文件或轉介","是否有名額或等待時間"],"public_allowed":true,"public_contact":"依來源頁公告聯絡方式","public_next_step":"先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。","public_required_documents":["身分證明","需求說明","申請文件依來源公告"],"public_summary":"法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。","region":"新北市","resource_id":"laf_official","resource_version":"2026-05-22-14d51a88","risk_flags":["民間資源需電話確認"],"service_area_note":"","source_type":"community_candidate","source_url":"https://www.laf.org.tw/","status":"active","summary":"法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。","title":"法律扶助基金會","topics":["legal_aid"],"urgency_tags":["一般"]},{"body":"這張卡由候選來源 `trust_org_old_disability` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：directory\n- 候選用途：directory_entry_card\n- 待確認事項：適合整理為保護財產、防詐與信託監察人情境卡。","category":"other","confidence":"B級民間候選","contact":"依來源名冊或查詢入口公告","content_hash":"36fd37f3673137c5d9f4ca6c01ef129dfd2e7ac7c54effbe4c67a7064bbd2b24","coverage_scope":"citywide","districts":["全新北"],"eligibility_tags":["B級民間候選","名冊入口","待抽全文"],"embedding_text":"高齡者身心障礙者財產信託專區 other senior_trust_bank citywide 全新北 信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。 先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。 案家行政區 服務需求摘要 長照或福利資格資料 名冊是否為最新版本 是否服務案家行政區 是否仍有服務量能 轉介或預約方式是什麼 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：適合整理為保護財產、防詐與信託監察人情境卡。","id":"trust_org_old_disability","internal_notes":"由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：適合整理為保護財產、防詐與信託監察人情境卡。","last_checked_at":"2026-05-22","name":"高齡者身心障礙者財產信託專區","next_review_at":"2026-08-22","next_step":"先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。","phone_check_questions":["名冊是否為最新版本","是否服務案家行政區","是否仍有服務量能","轉介或預約方式是什麼"],"public_allowed":true,"public_contact":"依來源名冊或查詢入口公告","public_next_step":"先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。","public_required_documents":["案家行政區","服務需求摘要","長照或福利資格資料"],"public_summary":"信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。","region":"新北市","resource_id":"trust_org_old_disability","resource_version":"2026-05-22-36fd37f3","risk_flags":["名冊需確認最新版本","民間資源需電話確認"],"service_area_note":"","source_type":"community_candidate","source_url":"https://www.trust.org.tw/tw/old-disability/trust/6","status":"active","summary":"信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。","title":"高齡者身心障礙者財產信託專區","topics":["senior_trust_bank"],"urgency_tags":["一般"]},{"body":"這張卡由候選來源 `cathay_retirement_trust` 快速轉入，目的是先讓資源導航站可查可選。\n\n- 來源等級：B\n- 資料型態：lead\n- 候選用途：lead_only\n- 待確認事項：商業產品頁不直接作公益資源規則。\n\n此卡目前只作為個管師查證線索，不應直接複製給家屬。","category":"other","confidence":"B級民間候選","contact":"待人工查證後確認","content_hash":"536c6720e0d0fbb14a3f61282c041c95d08d6e15efa773d56218b1540ce27925","coverage_scope":"citywide","districts":["全新北"],"eligibility_tags":["B級民間候選","查證線索","待抽全文"],"embedding_text":"國泰世華悠活退休信託 other senior_trust_bank citywide 全新北 銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。 此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。 待人工查證 此來源是否仍有效 是否有官方頁或承辦窗口可查證 是否能對外提供給家屬 目前是否仍有名額或活動期限 由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業產品頁不直接作公益資源規則。 此卡只供個管師查證，不進家屬版輸出。","id":"cathay_retirement_trust","internal_notes":"由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業產品頁不直接作公益資源規則。 此卡只供個管師查證，不進家屬版輸出。","last_checked_at":"2026-05-22","name":"國泰世華悠活退休信託","next_review_at":"2026-08-22","next_step":"此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。","phone_check_questions":["此來源是否仍有效","是否有官方頁或承辦窗口可查證","是否能對外提供給家屬","目前是否仍有名額或活動期限"],"public_allowed":false,"public_contact":"待人工查證後確認","public_next_step":"此筆目前只作查證線索；請先回到官方或承辦單位確認有效性，再提供給家屬或安排後續。","public_required_documents":["待人工查證"],"public_summary":"銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。","region":"新北市","resource_id":"cathay_retirement_trust","resource_version":"2026-05-22-536c6720","risk_flags":["線索卡需人工確認","民間資源需電話確認"],"service_area_note":"","source_type":"community_candidate","source_url":"https://www.cathaybk.com.tw/cathaybk/personal/wealth/trust/product/retirement/","status":"active","summary":"銀行退休信託產品頁，可作比較不同信託諮詢入口的線索。","title":"國泰世華悠活退休信託","topics":["senior_trust_bank"],"urgency_tags":["一般"]}],"schema_version":"resourcepack.v1","signature_status":"unsigned","source_app_version":"resource-nav-20260524-resourcepack-exchange"}</script>
+  <script>
+    const COPY_TEXTS = {'family': '家屬版資源包：未指定地區 / 照顧及專業 / 2026-05-29\n\n八里區衛生所長照特約資源\n八里區衛生所長照特約資源頁，可作為查詢八里區長照特約服務與區域資源的入口；使用前需確認最新名冊、服務範圍與量能。\n下一步：先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。\n聯絡/申請：依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。\n可先準備：八里區、案家行政區、服務需求摘要、長照或福利資格資料\n\n三芝區社區照顧關懷據點名冊入口\n三芝區社區照顧關懷據點名冊入口可協助個管師查找三芝區社區照顧關懷據點、共餐、健康促進或 C 據點候選資源。\n下一步：先依行政區查詢據點，再電話確認服務時段、服務內容、收案條件、是否仍有服務量能。\n聯絡/申請：依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。\n可先準備：案家行政區、服務需求摘要、聯絡方式、是否需陪同或共餐需求\n\n八里區長照特約服務單位名冊入口\n八里區長照特約服務單位名冊入口可作為查詢八里區居家服務、日照、長照特約或相關服務單位的官方入口。\n下一步：先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。\n聯絡/申請：依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。\n可先準備：案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型\n\n三芝區長照特約服務單位名冊入口\n三芝區長照特約服務單位名冊入口可作為查詢三芝區居家服務、日照、長照特約或相關服務單位的官方入口。\n下一步：先依案家行政區與服務需求查詢候選單位，再電話確認是否服務該區、是否仍有量能、轉介或預約方式。\n聯絡/申請：依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。\n可先準備：案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型\n\n三重助德社區照顧關懷據點\n三重助德社區照顧關懷據點可作三重區長者社區支持、關懷、活動或共餐候選。\n下一步：先電話確認據點開放時間、服務內容、是否有共餐或關懷訪視，以及是否限特定里別。\n聯絡/申請：台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。\n可先準備：身分證明、基本聯絡資料、參與需求說明\n\n法律扶助基金會\n適合處理債務、財產、照顧爭議、保護令或法律扶助需求。\n下一步：先整理法律問題類型、相關文件與是否需預約諮詢。\n聯絡/申請：依法律扶助基金會公告分會\n可先準備：身分證明、相關法律文件、收入或財產資料\n\n法律扶助基金會\n法律扶助官方入口，可整理成法律問題、保護令、財產與照顧爭議資源卡。\n下一步：先電話確認目前是否受理、服務範圍、文件與等待時間，再決定是否納入案家資源包。\n聯絡/申請：依來源頁公告聯絡方式\n可先準備：身分證明、需求說明、申請文件依來源公告\n\n高齡者身心障礙者財產信託專區\n信託公會高齡與身障財產信託合作資訊，可作高齡信託入口。\n下一步：先開啟來源名冊或查詢入口，確認服務行政區、承作單位、聯絡方式與最新版本。\n聯絡/申請：依來源名冊或查詢入口公告\n可先準備：案家行政區、服務需求摘要、長照或福利資格資料', 'phone': '個管師電話確認清單：未指定地區 / 照顧及專業 / 2026-05-29\n\n八里區衛生所長照特約資源\n聯絡/申請：依八里區衛生所來源頁、名冊或查詢入口公告聯絡，建議先電話確認最新版本。\n電話確認：名冊是否為最新版本；是否服務案家行政區；是否仍有服務量能；轉介或預約方式是什麼\n內部提醒：由 AnySearch 候選來源池快速轉入。來源等級：A；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：若做行政區版資源包，可參考此類區域頁。\n\n三芝區社區照顧關懷據點名冊入口\n聯絡/申請：依官方名冊或查詢入口公告聯絡資訊；建議以來源頁面最新資料為準。\n電話確認：該據點目前是否仍提供服務；服務時段與服務項目是什麼；案家是否符合服務對象或收案條件；是否需要預約或由個管師轉介；是否有名額或交通限制\n內部提醒：五問審核：適合三芝區個管師在案家需要社區據點、共餐、健康促進或日間支持線索時使用；A級官方名冊入口，可作行動查詢，但實際服務量能須電話確認。\n\n八里區長照特約服務單位名冊入口\n聯絡/申請：依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。\n電話確認：是否服務案家所在行政區；目前是否有服務量能或等待時間；轉介、預約或申請流程是什麼；是否需要長照評估或照專轉介；若無量能是否可提供替代窗口\n內部提醒：五問審核：適合八里區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。\n\n三芝區長照特約服務單位名冊入口\n聯絡/申請：依長照特約名冊或查詢入口公告；建議以來源頁面最新電話與單位資料為準。\n電話確認：是否服務案家所在行政區；目前是否有服務量能或等待時間；轉介、預約或申請流程是什麼；是否需要長照評估或照專轉介；若無量能是否可提供替代窗口\n內部提醒：五問審核：適合三芝區個管師在需要找居服、日照、長照特約單位時作為官方入口；A級來源，但名冊資料仍需逐一電話確認。\n\n三重助德社區照顧關懷據點\n聯絡/申請：台灣多元社會福利協會頁面列電話 02-2971-1266；地址與服務以據點確認為準。\n電話確認：目前服務項目與開放時段；是否有共餐或課程；是否限服務里別；是否需報名或評估\n內部提醒：五問審核：適合三重社區支持與預防孤立；下一步電話確認；B級服務來源。\n\n法律扶助基金會\n聯絡/申請：依法律扶助基金會公告分會\n電話確認：是否需預約；是否符合扶助資格；需要哪些文件；是否有新北分會或可近便諮詢點\n內部提醒：手工保留入口卡；用於既有資源包測試與正式法律扶助入口。實際申請資格、分會窗口與預約方式仍需回官方網站確認。\n\n法律扶助基金會\n聯絡/申請：依來源頁公告聯絡方式\n電話確認：目前是否仍受理；服務區域與對象限制；需要哪些文件或轉介；是否有名額或等待時間\n內部提醒：由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：resource_card_draft；資料型態：resource_card；此來源尚待全文抽取。 備註：需補新北分會或預約方式。\n\n高齡者身心障礙者財產信託專區\n聯絡/申請：依來源名冊或查詢入口公告\n電話確認：名冊是否為最新版本；是否服務案家行政區；是否仍有服務量能；轉介或預約方式是什麼\n內部提醒：由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：directory_entry_card；資料型態：directory；此來源尚待全文抽取。 備註：適合整理為保護財產、防詐與信託監察人情境卡。\n\n國泰世華悠活退休信託\n聯絡/申請：待人工查證後確認\n電話確認：此來源是否仍有效；是否有官方頁或承辦窗口可查證；是否能對外提供給家屬；目前是否仍有名額或活動期限\n內部提醒：由 AnySearch 候選來源池快速轉入。來源等級：B；候選用途：lead_only；資料型態：lead；此來源尚待全文抽取。 備註：商業產品頁不直接作公益資源規則。 此卡只供個管師查證，不進家屬版輸出。', 'admin': '行政申請清單：未指定地區 / 照顧及專業 / 2026-05-29\n\n八里區衛生所長照特約資源\n狀態：active\n資料來源：https://bali.health.ntpc.gov.tw/article/113%EF%BC%8D%EF%BC%8D114%E5%B9%B4%E5%85%AB%E9%87%8C%E5%8D%80%E9%95%B7%E7%85%A7%E7%89%B9%E7%B4%84%E8%B3%87%E6%BA%90\n最後確認：2026-05-22\n文件：八里區、案家行政區、服務需求摘要、長照或福利資格資料\n注意：名冊需確認最新版本\n\n三芝區社區照顧關懷據點名冊入口\n狀態：active\n資料來源：https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d\n最後確認：2026-05-25\n文件：案家行政區、服務需求摘要、聯絡方式、是否需陪同或共餐需求\n注意：名冊需確認最新版本、據點時段與量能可能異動、不可直接承諾收案\n\n八里區長照特約服務單位名冊入口\n狀態：active\n資料來源：https://www.health.ntpc.gov.tw/basic/?mode=detail&node=585\n最後確認：2026-05-25\n文件：案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型\n注意：名冊需確認最新版本、服務區域與名額需逐一確認、不可直接承諾可立即收案\n\n三芝區長照特約服務單位名冊入口\n狀態：active\n資料來源：https://www.health.ntpc.gov.tw/basic/?mode=detail&node=585\n最後確認：2026-05-25\n文件：案家行政區、服務需求摘要、長照資格或評估資料、欲連結服務類型\n注意：名冊需確認最新版本、服務區域與名額需逐一確認、不可直接承諾可立即收案\n\n三重助德社區照顧關懷據點\n狀態：active\n資料來源：https://www.tapdsw.org/%E6%9C%8D%E5%8B%99%E9%A0%85%E7%9B%AE/%E5%A4%9A%E5%85%83%E7%A4%BE%E5%8D%80%E9%97%9C%E6%87%B7%E6%93%9A%E9%BB%9E/%E5%8A%A9%E5%BE%B7%E6%93%9A%E9%BB%9E\n最後確認：2026-05-25\n文件：身分證明、基本聯絡資料、參與需求說明\n注意：B級服務來源需電話確認、服務內容可能異動、非緊急資源\n\n法律扶助基金會\n狀態：active\n資料來源：https://www.laf.org.tw/\n最後確認：2026-05-22\n文件：身分證明、相關法律文件、收入或財產資料\n注意：法律問題需專業判斷、資格需確認\n\n法律扶助基金會\n狀態：active\n資料來源：https://www.laf.org.tw/\n最後確認：2026-05-22\n文件：身分證明、需求說明、申請文件依來源公告\n注意：民間資源需電話確認\n\n高齡者身心障礙者財產信託專區\n狀態：active\n資料來源：https://www.trust.org.tw/tw/old-disability/trust/6\n最後確認：2026-05-22\n文件：案家行政區、服務需求摘要、長照或福利資格資料\n注意：名冊需確認最新版本、民間資源需電話確認\n\n國泰世華悠活退休信託\n狀態：active\n資料來源：https://www.cathaybk.com.tw/cathaybk/personal/wealth/trust/product/retirement/\n最後確認：2026-05-22\n文件：待人工查證\n注意：線索卡需人工確認、民間資源需電話確認', 'handoff': '交接摘要：未指定地區 / 照顧及專業 / 2026-05-29\n主題：其他資源\n線索：A級官方候選、名冊入口、待抽全文、一般、三芝區、社區照顧、C據點、官方名冊、需電話確認、八里區、長照服務、居家服務\n已選資源：9 筆'};
+    const SHARE_URL = 'https://chord410-svg.github.io/product-share/viewer.html?id=117ac94000c78682f340';
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const area = document.getElementById("copyScratch");
+      area.hidden = false;
+      area.value = text;
+      area.select();
+      document.execCommand("copy");
+      area.hidden = true;
+    }
+    const OUTPUT_HELP = {
+      family: "家屬版適合貼 LINE 或訊息，會排除內部註記與不適合外流的提醒。",
+      phone: "電話確認適合個管師打電話前使用，聚焦聯絡方式與要問的問題。",
+      admin: "行政清單整理文件、來源與最後確認日，方便補件或填報。",
+      handoff: "交接摘要給同事或主管接手，聚焦優先順序、風險與下一步。",
+      full: "完整資料顯示所有區塊與內部提醒，適合個管師自己檢查整包內容。",
+    };
+    function setOutputMode(mode) {
+      const safeMode = OUTPUT_HELP[mode] ? mode : "full";
+      try { localStorage.setItem("resource_package_result_mode_v1", safeMode); } catch (e) {}
+      document.querySelectorAll("[data-result-mode]").forEach((button) => {
+        const active = button.dataset.resultMode === safeMode;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      document.querySelectorAll("[data-output-section]").forEach((section) => {
+        const modes = String(section.dataset.outputSection || "full").split(/\s+/);
+        section.hidden = !modes.includes(safeMode);
+      });
+      const help = document.getElementById("resultModeHelp");
+      if (help) help.textContent = OUTPUT_HELP[safeMode];
+    }
+    document.querySelectorAll("[data-result-mode]").forEach((button) => {
+      button.addEventListener("click", () => setOutputMode(button.dataset.resultMode || "full"));
+    });
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        await copyText(COPY_TEXTS[button.dataset.copy] || "");
+        button.textContent = "已複製";
+        setTimeout(() => { button.textContent = button.dataset.copy === "family" ? "複製家屬版" : button.dataset.copy === "phone" ? "複製電話確認" : button.dataset.copy === "admin" ? "複製行政清單" : "複製交接摘要"; }, 1200);
+      });
+    });
+    document.querySelectorAll("[data-copy-link]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        await copyText(SHARE_URL);
+        button.textContent = "已複製";
+        setTimeout(() => { button.textContent = "複製連結"; }, 1200);
+      });
+    });
+    
+    const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
+    function readRememberedEntryUrl() {
+      try {
+        const value = sessionStorage.getItem(LAST_SESSION_ENTRY_KEY) || localStorage.getItem(LAST_SESSION_ENTRY_KEY) || "";
+        if (!value || !value.includes("resource-nav.html") || !value.includes("session=")) return "";
+        return value;
+      } catch (e) {
+        return "";
+      }
+    }
+    const rememberedEntry = readRememberedEntryUrl();
+    if (rememberedEntry) {
+      document.querySelectorAll("[data-return-main]").forEach((link) => { link.href = rememberedEntry; });
+    }
+    
+    let savedMode = "full";
+    try { savedMode = localStorage.getItem("resource_package_result_mode_v1") || "full"; } catch (e) {}
+    setOutputMode(savedMode);
+  </script>
+</body>
+</html>

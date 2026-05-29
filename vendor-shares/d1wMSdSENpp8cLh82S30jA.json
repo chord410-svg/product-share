@@ -1,0 +1,62 @@
+{
+  "share_id": "d1wMSdSENpp8cLh82S30jA",
+  "address": "25.0615,121.4881",
+  "home": {
+    "lat": 25.0615,
+    "lng": 121.4881,
+    "geocode_provider": "literal",
+    "geocode_precision": "coordinate"
+  },
+  "vendors": [
+    {
+      "vendor_id": "ntpc-61e6dd2b5ab87e73",
+      "name": "三重輔具行",
+      "district": "三重區",
+      "address": "新北市三重區重新路三段1號",
+      "phone": "02-1111",
+      "service_types": [
+        "購置",
+        "租賃"
+      ],
+      "vendor_category": "醫材/輔具行",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0615,
+      "lng": 121.4881,
+      "geocode_provider": "district_centroid",
+      "distance_km": 0.0,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%89%E9%87%8D%E5%8D%80%E9%87%8D%E6%96%B0%E8%B7%AF%E4%B8%89%E6%AE%B51%E8%99%9F&travelmode=driving&origin=25.0615000%2C121.4881000"
+    },
+    {
+      "vendor_id": "ntpc-f5d976c479fbf97c",
+      "name": "永和輔具行",
+      "district": "永和區",
+      "address": "新北市永和區中正路100號",
+      "phone": "02-2222",
+      "service_types": [
+        "購置"
+      ],
+      "vendor_category": "醫材/輔具行",
+      "source_url": "https://atrc.aihsin.ntpc.gov.tw/NewsInfo/24",
+      "lat": 25.0097,
+      "lng": 121.5147,
+      "geocode_provider": "district_centroid",
+      "distance_km": 6.353,
+      "route_distance_meters": null,
+      "route_duration_seconds": null,
+      "route_status": "",
+      "route_source": "",
+      "directions_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E4%B8%AD%E6%AD%A3%E8%B7%AF100%E8%99%9F&travelmode=driving&origin=25.0615000%2C121.4881000"
+    }
+  ],
+  "map_url": "https://www.google.com/maps/dir/?api=1&destination=%E6%96%B0%E5%8C%97%E5%B8%82%E6%B0%B8%E5%92%8C%E5%8D%80%E4%B8%AD%E6%AD%A3%E8%B7%AF100%E8%99%9F&travelmode=driving&origin=25.0615000%2C121.4881000&waypoints=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%89%E9%87%8D%E5%8D%80%E9%87%8D%E6%96%B0%E8%B7%AF%E4%B8%89%E6%AE%B51%E8%99%9F",
+  "created_at": 1780070944.754174,
+  "expires_at": 1780675744.754174,
+  "google_maps_browser_key": "",
+  "ok": true,
+  "static_share": true,
+  "static_data_path": "vendor-shares/d1wMSdSENpp8cLh82S30jA.json"
+}

@@ -2,11 +2,12 @@
   const STORAGE_KEY = "resource_nav_packages_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
   const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
-  const RESOURCE_DATA_VERSION = "20260531-public-safe";
+  const RESOURCE_DATA_VERSION = "20260531-print-output";
   let topics = [];
   let resources = [];
   let activePackage = null;
   let selectedResources = [];
+  let autoPrintScheduled = false;
 
   function $(id) {
     return document.getElementById(id);
@@ -65,6 +66,41 @@
 
   function currentResultMode() {
     return new URLSearchParams(window.location.search).get("output") || localStorage.getItem("resource_nav_result_output_mode_v1") || "full";
+  }
+
+  function shouldAutoPrint() {
+    return new URLSearchParams(window.location.search).get("print") === "1";
+  }
+
+  function triggerPrint() {
+    if (typeof window.print !== "function") return;
+    window.setTimeout(() => {
+      try {
+        window.focus();
+      } catch (error) {
+        console.info("window focus before print failed", error);
+      }
+      window.print();
+    }, 120);
+  }
+
+  function scheduleAutoPrint() {
+    if (!shouldAutoPrint() || autoPrintScheduled) return;
+    autoPrintScheduled = true;
+    const key = "resource_nav_auto_print_v1:" + (packageIdFromUrl() || "unknown") + ":" + currentResultMode();
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+    } catch (error) {
+      console.info("auto print marker unavailable", error);
+    }
+    triggerPrint();
+  }
+
+  function setupPrintControls() {
+    const button = $("printResultButton");
+    if (!button) return;
+    button.addEventListener("click", triggerPrint);
   }
 
   function readPackages() {
@@ -429,6 +465,7 @@
     $("copyPhone").addEventListener("click", async () => copyText(buildPhonePackageText()));
     $("copyAdmin").addEventListener("click", async () => copyText(buildAdminPackageText()));
     $("copyHandoff").addEventListener("click", async () => copyText(buildHandoffPackageText()));
+    scheduleAutoPrint();
   }
 
   async function init() {
@@ -454,5 +491,6 @@
     }
   }
 
+  setupPrintControls();
   init();
 })();

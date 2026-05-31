@@ -295,11 +295,11 @@
     const shareUrl = String(activePackage.shareUrl || activePackage.share_url || "");
     if (!shareUrl) {
       status.textContent = isLocalPreviewMode()
-        ? "本機預覽沒有正式連結；正式發布完成後，請從 Discord 資源結果頻道取得 QR Code。"
+        ? "本機預覽沒有正式連結；正式發布完成後，資源組合卡片與結果頁底部會顯示 QR Code。"
         : "正式連結產生後會出現 QR Code。";
       return;
     }
-    status.textContent = "可複製正式結果連結；QR Code 若未顯示，請到 Discord 資源結果頻道查看。";
+    status.textContent = "可複製正式結果連結；QR Code 若未顯示，仍可先使用連結。";
     const link = document.createElement("a");
     link.href = shareUrl;
     link.target = "_blank";
@@ -371,7 +371,7 @@
       const body = banner.querySelector(".muted-text");
       if (title) title.textContent = "正式分享頁正在背景產生";
       if (body) {
-        body.textContent = "主結果已先在此瀏覽器顯示；GitHub Pages 發布、QR Code 與 Discord 私密結果正在背景完成。稍後到 Discord 資源結果頻道按「查看我的最新資源包結果」即可取得正式連結與 QR。";
+        body.textContent = "主結果已先在此瀏覽器顯示；GitHub Pages 發布與 QR Code 正在背景完成。稍後回到「我的資源組合」即可從資源副本卡片取得正式連結與 QR。";
       }
     }
     $("resultContent").hidden = false;

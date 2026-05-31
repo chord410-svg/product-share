@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>資源包結果｜長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260531-public-safe">
+  <link rel="stylesheet" href="./resource-nav.css?v=20260531-print-output">
 </head>
 <body>
   <header class="topbar">
@@ -13,6 +13,7 @@
       <h1>資源包結果</h1>
     </div>
     <div class="result-top-actions">
+      <button type="button" class="nav-link-pill result-print-pill" id="printResultButton">列印 / 另存 PDF</button>
       <a class="nav-link-pill nav-main-pill" id="backLink" href="./resource-nav.html">返回長照資源導航站主頁</a>
       <a class="nav-link-pill nav-discord-pill" id="discordResultLink" href="#" hidden>返回 Discord 資源結果頻道</a>
     </div>
@@ -46,6 +47,7 @@
           <p class="eyebrow">輸出格式</p>
           <h3>選擇這份結果要怎麼使用</h3>
           <p id="resultModeHelp" class="muted-text">完整資料會顯示全部區塊；其他模式只聚焦在當下要複製或處理的內容。</p>
+          <p class="muted-text print-help">列印會使用目前選取的輸出格式；若要存檔，請在瀏覽器列印視窗選擇「另存為 PDF」。</p>
         </div>
         <div class="result-mode-tabs" role="tablist" aria-label="資源包輸出格式">
           <button type="button" data-result-mode="family" role="tab">家屬版</button>
@@ -112,6 +114,6 @@
   </main>
 
   <textarea id="resultCopyScratch" class="copy-scratch" aria-hidden="true"></textarea>
-  <script src="./resource-package-result.js?v=20260531-public-safe"></script>
+  <script src="./resource-package-result.js?v=20260531-print-output"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
   const CARD_SIZE_KEY = "resource_nav_card_size_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
   const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
+  const LAST_IDENTITY_KEY = "resource_nav_last_identity_v1";
   const MAX_PACKAGES = 10;
   const RESOURCE_DATA_VERSION = "20260526-vector-smart-search";
   const DRAFT_SAVE_DELAY_MS = 700;
@@ -38,6 +39,8 @@
     sessionUser: null,
     sessionValid: false,
     sessionFailureReason: "",
+    packageDataSource: "local_cache",
+    packageLoadError: "",
     guildId: "",
     resultChannelId: "",
     activeView: "nav",
@@ -175,6 +178,38 @@
     }
   }
 
+  function rememberIdentity(user) {
+    if (!user || !user.id) return;
+    const payload = {
+      id: String(user.id || ""),
+      name: String(user.name || "Discord 使用者"),
+      savedAt: nowIso(),
+    };
+    try {
+      localStorage.setItem(LAST_IDENTITY_KEY, JSON.stringify(payload));
+      sessionStorage.setItem(LAST_IDENTITY_KEY, JSON.stringify(payload));
+    } catch (error) {
+      console.info("remember resource nav identity failed", error);
+    }
+  }
+
+  function readRememberedIdentity() {
+    try {
+      const raw = sessionStorage.getItem(LAST_IDENTITY_KEY) || localStorage.getItem(LAST_IDENTITY_KEY) || "";
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (!data || !data.id) return null;
+      return {
+        id: String(data.id || ""),
+        name: String(data.name || "Discord 使用者"),
+        savedAt: String(data.savedAt || ""),
+      };
+    } catch (error) {
+      console.info("stored resource nav identity unreadable", error);
+      return null;
+    }
+  }
+
   function apiBaseFromEntryUrl(entryUrl) {
     try {
       if (!entryUrl || !entryUrl.includes("resource-nav.html")) return "";
@@ -247,6 +282,12 @@
     return name + (id ? " / " + id : "");
   }
 
+  function rememberedIdentityText() {
+    const identity = readRememberedIdentity();
+    if (!identity) return "";
+    return identity.name + (identity.id ? " / " + identity.id : "");
+  }
+
   function updateRetrySessionButton() {
     const button = $("retrySessionVerify");
     if (!button) return;
@@ -269,12 +310,21 @@
     }
     if (status === "offline") {
       pill.classList.add("is-offline");
-      pill.textContent = "未連結 Discord，請回 Discord 重新開啟入口";
+      const cached = rememberedIdentityText();
+      pill.textContent = cached
+        ? "曾連結 Discord：" + cached + "；目前未完成後端驗證"
+        : "未連結 Discord，請回 Discord 重新開啟入口";
       updateRetrySessionButton();
       return;
     }
     if (status === "error") {
       pill.classList.add("is-error");
+      const cached = rememberedIdentityText();
+      if (cached) {
+        pill.textContent = "曾連結 Discord：" + cached + "；" + (reason || "目前 API/Session 無法驗證");
+        updateRetrySessionButton();
+        return;
+      }
     }
     pill.textContent = reason || "Discord 身份未確認";
     updateRetrySessionButton();
@@ -367,8 +417,8 @@
       state.sessionValid = false;
       state.sessionFailureReason = "no_session";
       loginStatus.textContent = state.source === "discord"
-        ? "已從 Discord 入口開啟，但網址沒有 session。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。"
-        : "未取得 Discord session：可瀏覽與點選資源，也可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
+        ? "已從 Discord 入口開啟，但網址沒有 session。可先看本機快取與本機預覽；若要保存到後端，請回 Discord 重新點入口。"
+        : "未取得 Discord session：可瀏覽與點選資源，也可先產生本機預覽結果；若要保存到後端，請回 Discord 重新點入口。";
       renderIdentity("offline");
       renderSessionDebug();
       return;
@@ -379,7 +429,7 @@
       }
       state.sessionValid = false;
       state.sessionFailureReason = "no_api_base";
-      loginStatus.textContent = "已取得 session，但網址沒有 api_base，網站不知道要向哪個 Bot API 驗證身份。可先產生本機預覽結果；若要保存到 Discord 私密 QR，請確認 Bot 入口已更新後重新開啟。";
+      loginStatus.textContent = "已取得 session，但網址沒有 api_base，網站不知道要向哪個 Bot API 驗證身份。可先看本機快取與本機預覽；若要保存到後端，請確認 Bot 入口已更新後重新開啟。";
       renderIdentity("error", "API 未設定");
       renderSessionDebug();
       return;
@@ -393,6 +443,7 @@
       state.sessionFailureReason = "";
       state.sessionUser = data.user || null;
       rememberSessionEntryUrl({ verified: true });
+      rememberIdentity(state.sessionUser);
       renderIdentity("linked");
       loginStatus.textContent = "已連結 Discord：" + identityText() + "。草稿與結果會保存到你的資源組合工作台。";
       renderSessionDebug();
@@ -414,7 +465,7 @@
         state.sessionFailureReason = "api_unavailable";
         renderIdentity("error", "API 異常");
       }
-      loginStatus.textContent = "已從 Discord 入口開啟，但後端驗證未通過：" + sessionReasonLabel(state.sessionFailureReason) + " 可先產生本機預覽結果；若要保存到 Discord 私密 QR，請回 Discord 重新點入口。";
+      loginStatus.textContent = "已從 Discord 入口開啟，但後端驗證未通過：" + sessionReasonLabel(state.sessionFailureReason) + " 可先看本機快取與本機預覽；若要保存到後端，請回 Discord 重新點入口。";
       renderSessionDebug();
       console.info("resource session verification failed", error);
     }
@@ -1110,16 +1161,21 @@
     const empty = $("workbenchEmpty");
     if (!status || !list || !empty) return;
     list.innerHTML = "";
-    if (!state.sessionValid) {
-      status.textContent = "未連結 Discord，請回 Discord 重新開啟入口。";
-      empty.hidden = false;
-      empty.textContent = "目前是未登入瀏覽，只能使用本機暫存，不能讀取個人資源組合。";
-      return;
-    }
-    status.textContent = "目前查看 " + identityText() + " 的資源組合。";
     const packages = state.packages.slice().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    let emptyText = "目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。";
+    if (!state.sessionValid) {
+      const cached = rememberedIdentityText();
+      status.textContent = packages.length
+        ? "目前顯示本機快取" + (cached ? "（曾連結 " + cached + "）" : "") + "；API/session 未驗證，不能寫入後端。"
+        : "未連結 Discord，請回 Discord 重新開啟入口。";
+      emptyText = "目前是未登入瀏覽，只能使用本機暫存，不能讀取個人資源組合。";
+    } else if (state.packageDataSource === "local_cache") {
+      status.textContent = "目前查看 " + identityText() + " 的本機快取；後端同步暫時失敗：" + sessionReasonLabel(state.packageLoadError || "api_unavailable");
+    } else {
+      status.textContent = "目前查看 " + identityText() + " 的資源組合，已由後端同步。";
+    }
     empty.hidden = packages.length > 0;
-    empty.textContent = "目前還沒有資源組合。回到資源導航，點選卡片後會先建立草稿。";
+    empty.textContent = emptyText;
     packages.forEach((item) => {
       const card = document.createElement("article");
       const isExpanded = state.expandedPackageIds.has(item.id);
@@ -1214,8 +1270,11 @@
       remove.type = "button";
       remove.className = "danger-action";
       remove.textContent = "刪除";
+      remove.disabled = !state.sessionValid;
+      remove.title = state.sessionValid ? "" : "重新連結 Discord 後才能刪除後端資源組合。";
       remove.addEventListener("click", async (event) => {
         event.stopPropagation();
+        if (!state.sessionValid) return;
         if (!window.confirm("確定刪除這個資源組合？")) return;
         try {
           await apiFetch("/api/v1/resource/packages/" + encodeURIComponent(item.id), { method: "DELETE" });
@@ -1439,12 +1498,21 @@
       const data = await apiFetch("/api/v1/resource/packages", { method: "GET", headers: {} });
       const packages = Array.isArray(data.packages) ? data.packages.map(normalizeServerPackage).filter((item) => item.id) : [];
       state.packages = packages;
+      state.packageDataSource = "server";
+      state.packageLoadError = "";
+      writePackages();
       renderWorkbench();
       renderExchange();
       return packages;
     } catch (error) {
       console.info("resource packages load failed", error);
-      return [];
+      state.packageDataSource = "local_cache";
+      state.packageLoadError = error.message || "api_unavailable";
+      const cached = readPackages();
+      if (cached.length || !state.packages.length) state.packages = cached;
+      renderWorkbench();
+      renderExchange();
+      return state.packages;
     }
   }
 
@@ -1491,6 +1559,9 @@
       else state.packages.unshift(merged);
       state.activePackageId = merged.id;
       state.packageSaveState = "saved";
+      state.packageDataSource = "server";
+      state.packageLoadError = "";
+      writePackages();
       renderWorkbench();
       renderPackage();
       return merged;
@@ -2087,11 +2158,11 @@
       button.textContent = "正在產生...";
     }
     if (!state.sessionValid) {
-      $("packageStatus").textContent = "session 無效或 API 未連上，正在產生本機預覽結果。此結果不會進 Discord 私密 QR。";
+      $("packageStatus").textContent = "session 無效或 API 未連上，正在產生本機預覽結果。此結果不會寫入後端，也不會產生正式分享連結。";
       openLocalResult(fallbackReason());
       return;
     }
-    $("packageStatus").textContent = "正在發布正式資源包結果，完成後會跳到 Web B 結果頁並保存到 Discord 私密 QR。";
+    $("packageStatus").textContent = "正在發布正式資源包結果，完成後會跳到 Web B 結果頁；卡片可直接複製連結或查看 QR。";
     try {
       const data = await apiFetch("/api/v1/resource/packages", {
         method: "POST",
@@ -2117,7 +2188,7 @@
       $("packageStatus").textContent = "資源包已儲存，但沒有取得結果連結。";
     } catch (error) {
       console.error(error);
-      $("packageStatus").textContent = "正式發布失敗，改產生本機預覽結果。此結果不會進 Discord 私密 QR。";
+      $("packageStatus").textContent = "正式發布失敗，改產生本機預覽結果。此結果不會寫入後端，也不會產生正式分享連結。";
       openLocalResult(error.message || "api_failed");
     } finally {
       if (button) {
@@ -2227,7 +2298,12 @@
       await verifySession();
       normalizeCategory();
       normalizeSelectedTopics();
-      state.packages = state.sessionValid ? await loadRemotePackages() : readPackages();
+      state.packages = readPackages();
+      if (state.sessionValid) {
+        await loadRemotePackages();
+      } else {
+        state.packageDataSource = state.packages.length ? "local_cache" : "empty";
+      }
       if (state.hasUrlContext) {
         createPackage(defaultPackageName(), { save: false });
       } else if (state.packages.length) {

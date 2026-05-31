@@ -5,7 +5,7 @@
   const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
   const LAST_IDENTITY_KEY = "resource_nav_last_identity_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260531-public-safe";
+  const RESOURCE_DATA_VERSION = "20260531-print-output";
   const DRAFT_SAVE_DELAY_MS = 700;
   const AREA_CITY = "新北市";
   const CITYWIDE_AREA_VALUES = new Set(["新北市", "全新北", "全台"]);
@@ -1307,11 +1307,11 @@
         const printButton = document.createElement("button");
         printButton.type = "button";
         printButton.className = "print-action";
-        printButton.textContent = "PDF/列印";
-        printButton.title = "開啟 Web B 結果頁後，可用瀏覽器列印或另存 PDF。";
+        printButton.textContent = "列印 / 另存 PDF";
+        printButton.title = "開啟 Web B 結果頁並叫出列印視窗，可在瀏覽器選擇另存 PDF。";
         printButton.addEventListener("click", (event) => {
           event.stopPropagation();
-          window.open(item.shareUrl, "_blank", "noopener,noreferrer");
+          openResultUrl(item.shareUrl, true);
         });
         actions.append(copyLink, qrButton, printButton);
       }
@@ -1455,10 +1455,10 @@
       const printButton = document.createElement("button");
       printButton.type = "button";
       printButton.className = "print-action";
-      printButton.textContent = "PDF/列印";
-      printButton.title = item.shareUrl ? "開啟 Web B 結果頁後，用瀏覽器列印或另存 PDF。" : "草稿會先產生 Web B 結果，再開啟列印頁。";
+      printButton.textContent = "列印 / 另存 PDF";
+      printButton.title = item.shareUrl ? "開啟 Web B 結果頁並叫出列印視窗，可在瀏覽器選擇另存 PDF。" : "草稿會先產生 Web B 結果，再開啟列印頁。";
       printButton.addEventListener("click", async () => {
-        await openOrCreatePackageResult(item, printButton);
+        await openOrCreatePackageResult(item, printButton, { print: true });
       });
       actions.append(exportJson, exportMarkdown, printButton);
       card.append(head, meta, actions);
@@ -2100,7 +2100,22 @@
     return "api_failed";
   }
 
-  function openLocalResult(reason) {
+  function withPrintParam(url, shouldPrint) {
+    if (!shouldPrint || !url) return url;
+    try {
+      const parsed = new URL(url, window.location.href);
+      parsed.searchParams.set("print", "1");
+      return parsed.toString();
+    } catch (error) {
+      return url + (url.includes("?") ? "&" : "?") + "print=1";
+    }
+  }
+
+  function openResultUrl(url, shouldPrint) {
+    window.open(withPrintParam(url, shouldPrint), "_blank", "noopener,noreferrer");
+  }
+
+  function openLocalResult(reason, options = {}) {
     syncPackageFromState();
     const item = currentPackage();
     writePackages();
@@ -2109,12 +2124,13 @@
       mode: "local",
       reason: reason || "session_expired",
     });
+    if (options.print) params.set("print", "1");
     window.location.href = "./resource-package-result.html?" + params.toString();
   }
 
-  async function openOrCreatePackageResult(item, button) {
+  async function openOrCreatePackageResult(item, button, options = {}) {
     if (item.shareUrl && item.status === "result_ready") {
-      window.open(item.shareUrl, "_blank", "noopener,noreferrer");
+      openResultUrl(item.shareUrl, Boolean(options.print));
       return;
     }
     if (item.status === "result_pending" && !item.shareUrl) {
@@ -2127,10 +2143,10 @@
     }
     applyPackageContext(item);
     renderPackage();
-    await submitResourcePackage(button);
+    await submitResourcePackage(button, options);
   }
 
-  async function submitResourcePackage(sourceButton) {
+  async function submitResourcePackage(sourceButton, options = {}) {
     const item = currentPackage();
     if (state.draftSaveTimer) {
       window.clearTimeout(state.draftSaveTimer);
@@ -2159,7 +2175,7 @@
     }
     if (!state.sessionValid) {
       $("packageStatus").textContent = "session 無效或 API 未連上，正在產生本機預覽結果。此結果不會寫入後端，也不會產生正式分享連結。";
-      openLocalResult(fallbackReason());
+      openLocalResult(fallbackReason(), options);
       return;
     }
     $("packageStatus").textContent = "正在發布正式資源包結果，完成後會跳到 Web B 結果頁；卡片可直接複製連結或查看 QR。";
@@ -2177,19 +2193,19 @@
         renderWorkbench();
       }
       if (data.share_url) {
-        window.location.href = data.share_url;
+        window.location.href = withPrintParam(data.share_url, Boolean(options.print));
         return;
       }
       if (data.share_status === "pending") {
         $("packageStatus").textContent = "主結果已建立，正式 QR / 分享頁正在背景產生；先開啟本機 Web B 預覽。";
-        openLocalResult("publish_pending");
+        openLocalResult("publish_pending", options);
         return;
       }
       $("packageStatus").textContent = "資源包已儲存，但沒有取得結果連結。";
     } catch (error) {
       console.error(error);
       $("packageStatus").textContent = "正式發布失敗，改產生本機預覽結果。此結果不會寫入後端，也不會產生正式分享連結。";
-      openLocalResult(error.message || "api_failed");
+      openLocalResult(error.message || "api_failed", options);
     } finally {
       if (button) {
         button.disabled = false;

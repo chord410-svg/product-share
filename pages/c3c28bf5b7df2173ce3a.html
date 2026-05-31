@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>未指定地區 / 照顧及專業 / 2026-05-31｜長照資源包結果</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#66758a; --line:#d9e2ef; --brand:#0b66c3; --soft:#f4f7fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #eef3f8; }
+    a { color: var(--brand); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 24px; background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; }
+    .topbar h1 { margin:0; font-size:24px; }
+    .eyebrow { margin:0 0 6px; color:#087f7a; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+    .button, button { border:1px solid #aac4df; background:#fff; color:#17324f; border-radius:8px; padding:10px 14px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+    .button.primary, button.primary { background:var(--brand); border-color:var(--brand); color:#fff; }
+    .button-green { background:#0f8f5f; border-color:#0f8f5f; color:#fff; }
+    .button-red { background:#cf3f3f; border-color:#cf3f3f; color:#fff; }
+    .button-print { background:#f4f8fd; border-color:#9ab8d8; color:#17324f; }
+    .button-print:hover { background:#e8f2fc; transform:translateY(-1px); }
+    main { width:min(1180px, 100%); margin:0 auto; padding:20px; }
+    .hero, .panel, .resource-detail { background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; box-shadow:0 8px 28px rgba(20,42,70,.06); }
+    .hero { display:grid; grid-template-columns: 1.3fr .7fr; gap:16px; margin-bottom:18px; }
+    .hero h2 { margin:0 0 8px; font-size:28px; }
+    .muted { color:var(--muted); line-height:1.7; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .top-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .panel-actions { margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; }
+    .item-note { margin-top:4px; color:var(--muted); line-height:1.6; }
+    .result-output-switcher { display:flex; justify-content:space-between; gap:16px; align-items:center; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-bottom:18px; background:#fff; box-shadow:0 8px 28px rgba(20,42,70,.05); }
+    .result-output-switcher h3 { margin:0 0 4px; font-size:18px; }
+    .result-mode-tabs { display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+    .result-mode-tabs button { min-height:38px; border-radius:999px; padding:8px 13px; background:#fff; color:var(--ink); transition:transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease; }
+    .result-mode-tabs button:hover { transform:translateY(-1px); box-shadow:0 8px 18px rgba(24,39,75,.1); }
+    .result-mode-tabs button:active { transform:translateY(1px); }
+    .result-mode-tabs button.is-active { border-color:var(--brand); background:var(--brand); color:#fff; }
+    [data-output-section][hidden] { display:none !important; }
+    .grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:14px; margin-bottom:18px; }
+    .panel h3, .resource-detail h3 { margin:0 0 10px; }
+    .panel ol, .panel ul { margin:0; padding-left:22px; line-height:1.8; }
+    pre { white-space:pre-wrap; word-break:break-word; background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:12px; line-height:1.7; }
+    .resource-list { display:grid; gap:14px; }
+    .resource-detail dl { display:grid; gap:10px; margin:0; }
+    .resource-detail dl div { padding-top:10px; border-top:1px solid #edf1f6; }
+    dt { font-weight:800; color:#233d58; margin-bottom:4px; }
+    dd { margin:0; color:#26374d; line-height:1.7; }
+    .share-panel { display:grid; gap:12px; margin-top:18px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; box-shadow:0 8px 28px rgba(20,42,70,.06); }
+    .share-body { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+    .share-qr { width:min(240px, 100%); border:1px solid var(--line); border-radius:10px; background:#fff; padding:10px; }
+    .share-link { flex:1 1 280px; overflow-wrap:anywhere; }
+    @media print {
+      @page { margin: 14mm; }
+      body { background:#fff; color:#111827; font-size:12pt; }
+      .topbar { position:static; border-bottom:1px solid #d1d5db; padding:0 0 10px; }
+      .top-actions, .result-output-switcher, .panel-actions, .share-body button, #copyScratch { display:none !important; }
+      main { width:100%; max-width:none; padding:0; }
+      .hero, .panel, .resource-detail, .share-panel { box-shadow:none; border-color:#cbd5e1; break-inside:avoid; page-break-inside:avoid; }
+      .hero, .grid { grid-template-columns:1fr; }
+      .grid { gap:10px; }
+      .resource-list { display:block; }
+      .resource-detail { margin:0 0 10px; }
+      pre { background:#fff; border-color:#cbd5e1; }
+      a[href^="http"]::after { content:" (" attr(href) ")"; color:#475569; font-size:9pt; }
+      .share-link::after { content:""; }
+    }
+    @media (max-width: 760px) {
+      .topbar { align-items:flex-start; flex-direction:column; }
+      main { padding:12px; }
+      .hero, .grid { grid-template-columns: 1fr; }
+      .result-output-switcher { align-items:stretch; flex-direction:column; }
+      .result-mode-tabs { justify-content:stretch; }
+      .result-mode-tabs button { flex:1 1 130px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Resource Package Result</p>
+      <h1>資源包結果</h1>
+    </div>
+    <div class="top-actions">
+      <a class="button button-green" data-return-main href="https://chord410-svg.github.io/product-share/resource-nav.html?category=care_professional&amp;source=resource_package_result&amp;guild=1456655145319534666">返回長照資源導航站主頁</a>
+      
+      <button type="button" class="button button-print" data-print-result>列印 / 另存 PDF</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">案家資源包</p>
+        <h2>未指定地區 / 照顧及專業 / 2026-05-31</h2>
+        <p class="muted">建立者身份來自 Discord session。此頁包含所選資源、電話確認、行政文件與交接摘要；請勿在對外分享時附上內部註記。</p>
+        <p class="muted">更新時間：2026-05-31 14:10｜資源數：3 筆</p>
+        
+      </div>
+    </section>
+
+    <section class="result-output-switcher" aria-label="輸出格式切換">
+      <div>
+        <p class="eyebrow">輸出格式</p>
+        <h3>選擇這份結果要怎麼使用</h3>
+        <p class="muted" id="resultModeHelp">完整資料會顯示全部區塊；其他模式只聚焦在當下要複製或處理的內容。</p>
+        <p class="muted print-help">列印會使用目前選取的輸出格式；若要存檔，請在瀏覽器列印視窗選擇「另存為 PDF」。</p>
+      </div>
+      <div class="result-mode-tabs" role="tablist" aria-label="資源包輸出格式">
+        <button type="button" data-result-mode="family" role="tab">家屬版</button>
+        <button type="button" data-result-mode="phone" role="tab">電話確認</button>
+        <button type="button" data-result-mode="admin" role="tab">行政清單</button>
+        <button type="button" data-result-mode="handoff" role="tab">交接摘要</button>
+        <button type="button" data-result-mode="full" role="tab">完整資料</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel" data-output-section="full handoff">
+        <h3>建議優先順序</h3>
+        <ol><li><a href="#resource-shuangxi_ltc_contract_units_directory">雙溪區長照特約服務單位清冊</a></li><li><a href="#resource-shuangxi_community_care_point_directory">雙溪區社區照顧關懷據點服務資料</a></li><li><a href="#resource-luzhou_community_care_point_directory">蘆洲區社區照顧關懷據點服務資訊</a></li></ol>
+      </article>
+      <article class="panel" data-output-section="full phone">
+        <h3>先打哪幾通電話</h3>
+        <ol><li><a href="#resource-shuangxi_ltc_contract_units_directory">雙溪區長照特約服務單位清冊</a><div class="item-note"><strong>聯絡/申請：</strong>長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。</div><div class="item-note"><strong>電話確認：</strong>單位是否仍承作雙溪區，服務範圍是否包含案家地址；目前是否可接案，是否有等待或時段限制；承作服務是居家服務、日照、小規機、營養餐飲、機構或專業服務哪一類；是否需要先由 1966、照管中心或照專完成評估與照顧計畫；轉介、試服務、費用、請假與暫停服務規則如何處理</div></li><li><a href="#resource-shuangxi_community_care_point_directory">雙溪區社區照顧關懷據點服務資料</a><div class="item-note"><strong>聯絡/申請：</strong>新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。</div><div class="item-note"><strong>電話確認：</strong>雙溪區哪些據點目前可服務；服務時段、共餐、活動和訪視內容為何；是否限村里或需事前報名；長者交通不便時是否有替代安排；據點能否協助觀察高風險長者並回報</div></li><li><a href="#resource-luzhou_community_care_point_directory">蘆洲區社區照顧關懷據點服務資訊</a><div class="item-note"><strong>聯絡/申請：</strong>新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。</div><div class="item-note"><strong>電話確認：</strong>目前是否服務蘆洲區或案家所在里別；有無關懷訪視、電話問安、餐飲服務、健康促進或社會參與活動；服務時間、活動頻率與是否需事前報名；是否限特定里別、年齡或福利身分；是否可接新案，若不可接案有無鄰近據點可詢問；是否需里辦、公所、個管師或家屬先行聯絡</div></li></ol>
+        <div class="panel-actions"><button data-copy="phone">複製電話確認</button></div>
+      </article>
+      <article class="panel" data-output-section="full family">
+        <h3>可傳給家屬的短訊</h3>
+        <pre>家屬版資源包：未指定地區 / 照顧及專業 / 2026-05-31
+
+雙溪區長照特約服務單位清冊
+雙溪區長照特約服務單位清冊用來協助照顧服務團隊在雙溪區案家需要長照服務時，先查找可能承作的居家服務、日照、小規機、營養餐飲、機構或專業服務單位。這張卡是單位查找工具，不等於長照申請核定或已完成派案。
+下一步：先確認案家行政區、長照評估狀態與需要的服務類型，再依新北市長照特約服務清冊找單位名稱、電話與服務類別；正式連結前仍要洽 1966、照管中心或特約單位電話複核承作狀態。
+聯絡/申請：長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。
+可先準備：案家行政區與完整服務地址、長照評估或照顧計畫資料、需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務、失能、失智、照顧負荷與特殊照顧需求摘要、主要照顧者聯絡方式與可配合服務時段
+
+雙溪區社區照顧關懷據點服務資料
+雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。
+下一步：先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。
+聯絡/申請：新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。
+可先準備：長者基本資料、居住村里、聯絡電話、行動與交通狀況、活動、共餐或關懷需求
+
+蘆洲區社區照顧關懷據點服務資訊
+新北市社會局「當我們老在一起」平台說明社區照顧關懷據點可提供健康促進、關懷訪視、電話問安、餐飲服務或社會參與活動。這張卡用於先篩選蘆洲區據點，再安排電話複核。
+下一步：先在平台以蘆洲區篩選據點，記下據點名稱、服務項目與服務時間；再致電據點或洽新北市1999/02-2960-3456轉老人福利科，複核目前服務狀態、是否限里別、是否接受新案。
+聯絡/申請：新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。
+可先準備：案家行政區與里別、長者基本資料、主要聯絡方式、共餐、關懷訪視或活動參與需求、行動與陪同需求</pre>
+        <div class="panel-actions"><button class="primary" data-copy="family">複製家屬版</button></div>
+      </article>
+      <article class="panel" data-output-section="full admin">
+        <h3>需要先準備的文件</h3>
+        <ul><li>案家行政區與完整服務地址</li><li>長照評估或照顧計畫資料</li><li>需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務</li><li>失能、失智、照顧負荷與特殊照顧需求摘要</li><li>主要照顧者聯絡方式與可配合服務時段</li><li>長者基本資料</li><li>居住村里</li><li>聯絡電話</li><li>行動與交通狀況</li><li>活動、共餐或關懷需求</li><li>案家行政區與里別</li><li>主要聯絡方式</li><li>共餐、關懷訪視或活動參與需求</li><li>行動與陪同需求</li></ul>
+        <div class="panel-actions"><button data-copy="admin">複製行政清單</button></div>
+      </article>
+      <article class="panel" data-output-section="full handoff">
+        <h3>風險提醒</h3>
+        <ul><li>清冊是找單位，不是派案核定</li><li>服務單位可能只承作部分服務類型</li><li>可接案狀態與服務時段需電話複核</li><li>正式服務仍需長照評估與照顧計畫</li><li>偏區交通限制</li><li>據點服務非全天照顧</li><li>據點電話與時段需逐點複核</li><li>官方平台需逐點複核</li><li>據點服務狀態會異動</li><li>不可承諾名額或共餐</li><li>跨里服務需先問清楚</li></ul>
+      </article>
+      <article class="panel" data-output-section="full handoff">
+        <h3>交接摘要</h3>
+        <pre>交接摘要：未指定地區 / 照顧及專業 / 2026-05-31
+主題：照顧及專業
+線索：雙溪區、長照特約清冊、居家服務、日照/小規機、機構或專業服務、一般、需電話複核、社區照顧、C據點、官方名冊、需電話確認、蘆洲區
+已選資源：3 筆</pre>
+        <div class="panel-actions"><button data-copy="handoff">複製交接摘要</button></div>
+      </article>
+    </section>
+
+    <section class="resource-list" aria-label="完整資料集合" data-output-section="full">
+      <p class="eyebrow">完整資料集合</p>
+      
+    <article class="resource-detail" id="resource-shuangxi_ltc_contract_units_directory">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>1. <a href="https://www.careyou.ntpc.gov.tw/w/agecare/unit" target="_blank" rel="noopener noreferrer">雙溪區長照特約服務單位清冊</a></h3>
+      </div>
+      <p>雙溪區長照特約服務單位清冊用來協助照顧服務團隊在雙溪區案家需要長照服務時，先查找可能承作的居家服務、日照、小規機、營養餐飲、機構或專業服務單位。這張卡是單位查找工具，不等於長照申請核定或已完成派案。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先確認案家行政區、長照評估狀態與需要的服務類型，再依新北市長照特約服務清冊找單位名稱、電話與服務類別；正式連結前仍要洽 1966、照管中心或特約單位電話複核承作狀態。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。</dd></div>
+        <div><dt>常備文件</dt><dd>案家行政區與完整服務地址、長照評估或照顧計畫資料、需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務、失能、失智、照顧負荷與特殊照顧需求摘要、主要照顧者聯絡方式與可配合服務時段</dd></div>
+        <div><dt>電話確認</dt><dd>單位是否仍承作雙溪區，服務範圍是否包含案家地址；目前是否可接案，是否有等待或時段限制；承作服務是居家服務、日照、小規機、營養餐飲、機構或專業服務哪一類；是否需要先由 1966、照管中心或照專完成評估與照顧計畫；轉介、試服務、費用、請假與暫停服務規則如何處理</dd></div>
+        <div><dt>內部註記</dt><dd>2026-05-30 深修：此卡定位為雙溪區長照單位查找與電話複核工具。個管師應把清冊、長照評估、照顧計畫與服務單位承作狀態分開說明，避免家屬以為清冊有名字就一定能收案。</dd></div>
+        <div><dt>風險提醒</dt><dd>清冊是找單位，不是派案核定、服務單位可能只承作部分服務類型、可接案狀態與服務時段需電話複核、正式服務仍需長照評估與照顧計畫</dd></div>
+        <div><dt>來源/確認</dt><dd>official_directory｜最後確認：2026-05-30</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-shuangxi_community_care_point_directory">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>2. <a href="https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d" target="_blank" rel="noopener noreferrer">雙溪區社區照顧關懷據點服務資料</a></h3>
+      </div>
+      <p>雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。</dd></div>
+        <div><dt>常備文件</dt><dd>長者基本資料、居住村里、聯絡電話、行動與交通狀況、活動、共餐或關懷需求</dd></div>
+        <div><dt>電話確認</dt><dd>雙溪區哪些據點目前可服務；服務時段、共餐、活動和訪視內容為何；是否限村里或需事前報名；長者交通不便時是否有替代安排；據點能否協助觀察高風險長者並回報</dd></div>
+        <div><dt>內部註記</dt><dd>2026-05-31 深修。雙溪偏區要優先問交通、里別限制、共餐時段與家屬接送能力。據點可補社會參與，不可取代居服、日照或緊急照顧。</dd></div>
+        <div><dt>風險提醒</dt><dd>偏區交通限制、據點服務非全天照顧、據點電話與時段需逐點複核</dd></div>
+        <div><dt>來源/確認</dt><dd>official｜最後確認：2026-05-30</dd></div>
+      </dl>
+    </article>
+    
+
+    <article class="resource-detail" id="resource-luzhou_community_care_point_directory">
+      <div class="resource-detail-head">
+        <p class="eyebrow">care_professional</p>
+        <h3>3. <a href="https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d" target="_blank" rel="noopener noreferrer">蘆洲區社區照顧關懷據點服務資訊</a></h3>
+      </div>
+      <p>新北市社會局「當我們老在一起」平台說明社區照顧關懷據點可提供健康促進、關懷訪視、電話問安、餐飲服務或社會參與活動。這張卡用於先篩選蘆洲區據點，再安排電話複核。</p>
+      <dl>
+        <div><dt>下一步</dt><dd>先在平台以蘆洲區篩選據點，記下據點名稱、服務項目與服務時間；再致電據點或洽新北市1999/02-2960-3456轉老人福利科，複核目前服務狀態、是否限里別、是否接受新案。</dd></div>
+        <div><dt>聯絡/申請</dt><dd>新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。</dd></div>
+        <div><dt>常備文件</dt><dd>案家行政區與里別、長者基本資料、主要聯絡方式、共餐、關懷訪視或活動參與需求、行動與陪同需求</dd></div>
+        <div><dt>電話確認</dt><dd>目前是否服務蘆洲區或案家所在里別；有無關懷訪視、電話問安、餐飲服務、健康促進或社會參與活動；服務時間、活動頻率與是否需事前報名；是否限特定里別、年齡或福利身分；是否可接新案，若不可接案有無鄰近據點可詢問；是否需里辦、公所、個管師或家屬先行聯絡</dd></div>
+        <div><dt>內部註記</dt><dd>來源為新北市社會局官方平台，頁面描述據點服務內容與老人福利科聯絡方式。此卡不是單一據點承諾；蘆洲區據點的服務時段、共餐、關懷訪視、收案限制與跨里服務需逐點複核。家屬版可說明為社區支持線索，不可寫成已安排成功。</dd></div>
+        <div><dt>風險提醒</dt><dd>官方平台需逐點複核、據點服務狀態會異動、不可承諾名額或共餐、跨里服務需先問清楚</dd></div>
+        <div><dt>來源/確認</dt><dd>official｜最後確認：2026-05-30</dd></div>
+      </dl>
+    </article>
+    
+    </section>
+    
+    <section class="share-panel">
+      <div>
+        <p class="eyebrow">分享此資源包結果</p>
+        <h3>QR CODE 與正式連結</h3>
+        <p class="muted">這是正式 Web B 結果連結，可複製給需要查看的人；對外分享前請確認內容不含內部註記。</p>
+      </div>
+      <div class="share-body">
+        <img class="share-qr" src="data:image/png;base64,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" alt="資源包結果 QR Code">
+        <a class="share-link" href="https://chord410-svg.github.io/product-share/viewer.html?id=c3c28bf5b7df2173ce3a" target="_blank" rel="noopener noreferrer">https://chord410-svg.github.io/product-share/viewer.html?id=c3c28bf5b7df2173ce3a</a>
+        <button type="button" data-copy-link>複製連結</button>
+      </div>
+    </section>
+        
+  </main>
+  <textarea id="copyScratch" hidden></textarea>
+  <script type="application/json" id="resourcePackManifest">{"content_hash":"d2ca57008a3b857d00b9a8d2bb0044add377743f4310ddbaa0a7a7c232ff4240","export_id":"rpex-a15872698860c3db5c34","exported_at":1780207848.30262,"output_history":[{"created_at":1780207848.245424,"output_id":"c3c28bf5b7df2173ce3a","output_mode":"family","qr_status":"pending","share_page_id":"c3c28bf5b7df2173ce3a","share_url":"","status":"pending","updated_at":1780207848.245424}],"package_metadata":{"category":"care_professional","created_at":1780207831.7081048,"created_by":{"discord_user_id":"1088409939241865278","discord_user_name":"chord410"},"district":"","name":"未指定地區 / 照顧及專業 / 2026-05-31","note":"","original_package_id":"pkg-mptdrttz-ramim","output_mode":"family","resource_ids":["shuangxi_ltc_contract_units_directory","shuangxi_community_care_point_directory","luzhou_community_care_point_directory"],"selected_topic_keys":[],"smart_query_text":"","status":"result_pending","updated_at":1780207848.244192,"urgency":""},"resource_snapshots":[{"body":"## 個管師使用重點\n\n這張卡適合在雙溪區案家已經有居家服務、日照、小規機、營養餐飲、機構或專業服務需求時使用。先把需求拆成服務類型，再用清冊找可能承作單位，最後回到 1966、照管中心或特約單位完成正式複核。\n\n## 可給家屬\n\n可以先依雙溪區查找新北市長照特約服務單位。是否能正式提供服務，仍要看長照評估、照顧計畫、單位承作項目與當時可服務狀態。\n\n## 電話複核\n\n- 單位是否仍承作雙溪區，服務範圍是否包含案家地址\n- 目前是否可接案，是否有等待或時段限制\n- 承作服務是居家服務、日照、小規機、營養餐飲、機構或專業服務哪一類\n- 是否需要先由 1966、照管中心或照專完成評估與照顧計畫\n- 轉介、試服務、費用、請假與暫停服務規則如何處理\n\n## 內部提醒\n\n清冊不是派案結果。若家屬急著找服務，先用這張卡整理可電話複核的單位清單，再依服務類型與案家地址逐一確認；不要只因為清冊列名就承諾一定可收案。","category":"care_professional","confidence":"A級官方清冊深修","contact":"長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。","content_hash":"0c2768dc1113ad9ec9ce16f3bce62c6d78913b8e54b4f2f11a4342ff39f6ac9f","coverage_scope":"district","districts":["雙溪區"],"eligibility_tags":["雙溪區","長照特約清冊","居家服務","日照/小規機","機構或專業服務"],"embedding_text":"雙溪區長照特約服務單位清冊 care_professional home_care day_care transport_da01 professional_service meal_service district 雙溪區行政區長照特約服務單位查找卡；實際承作服務仍要依服務類型、案家地址與單位當日回覆電話複核。 雙溪區 雙溪區長照特約服務單位清冊用來協助照顧服務團隊在雙溪區案家需要長照服務時，先查找可能承作的居家服務、日照、小規機、營養餐飲、機構或專業服務單位。這張卡是單位查找工具，不等於長照申請核定或已完成派案。 先確認案家行政區、長照評估狀態與需要的服務類型，再依新北市長照特約服務清冊找單位名稱、電話與服務類別；正式連結前仍要洽 1966、照管中心或特約單位電話複核承作狀態。 案家行政區與完整服務地址 長照評估或照顧計畫資料 需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務 失能、失智、照顧負荷與特殊照顧需求摘要 主要照顧者聯絡方式與可配合服務時段 單位是否仍承作雙溪區，服務範圍是否包含案家地址 目前是否可接案，是否有等待或時段限制 承作服務是居家服務、日照、小規機、營養餐飲、機構或專業服務哪一類 是否需要先由 1966、照管中心或照專完成評估與照顧計畫 轉介、試服務、費用、請假與暫停服務規則如何處理 2026-05-30 深修：此卡定位為雙溪區長照單位查找與電話複核工具。個管師應把清冊、長照評估、照顧計畫與服務單位承作狀態分開說明，避免家屬以為清冊有名字就一定能收案。","id":"shuangxi_ltc_contract_units_directory","internal_notes":"2026-05-30 深修：此卡定位為雙溪區長照單位查找與電話複核工具。個管師應把清冊、長照評估、照顧計畫與服務單位承作狀態分開說明，避免家屬以為清冊有名字就一定能收案。","last_checked_at":"2026-05-30","name":"雙溪區長照特約服務單位清冊","next_review_at":"2026-08-30","next_step":"先確認案家行政區、長照評估狀態與需要的服務類型，再依新北市長照特約服務清冊找單位名稱、電話與服務類別；正式連結前仍要洽 1966、照管中心或特約單位電話複核承作狀態。","phone_check_questions":["單位是否仍承作雙溪區，服務範圍是否包含案家地址","目前是否可接案，是否有等待或時段限制","承作服務是居家服務、日照、小規機、營養餐飲、機構或專業服務哪一類","是否需要先由 1966、照管中心或照專完成評估與照顧計畫","轉介、試服務、費用、請假與暫停服務規則如何處理"],"public_allowed":true,"public_contact":"長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。","public_next_step":"先確認案家行政區、長照評估狀態與需要的服務類型，再依新北市長照特約服務清冊找單位名稱、電話與服務類別；正式連結前仍要洽 1966、照管中心或特約單位電話複核承作狀態。","public_required_documents":["案家行政區與完整服務地址","長照評估或照顧計畫資料","需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務","失能、失智、照顧負荷與特殊照顧需求摘要","主要照顧者聯絡方式與可配合服務時段"],"public_summary":"雙溪區長照特約服務單位清冊用來協助照顧服務團隊在雙溪區案家需要長照服務時，先查找可能承作的居家服務、日照、小規機、營養餐飲、機構或專業服務單位。這張卡是單位查找工具，不等於長照申請核定或已完成派案。","region":"新北市","resource_id":"shuangxi_ltc_contract_units_directory","resource_version":"3","risk_flags":["清冊是找單位，不是派案核定","服務單位可能只承作部分服務類型","可接案狀態與服務時段需電話複核","正式服務仍需長照評估與照顧計畫"],"service_area_note":"雙溪區行政區長照特約服務單位查找卡；實際承作服務仍要依服務類型、案家地址與單位當日回覆電話複核。","source_type":"official_directory","source_url":"https://www.careyou.ntpc.gov.tw/w/agecare/unit","status":"active","summary":"雙溪區長照特約服務單位清冊用來協助照顧服務團隊在雙溪區案家需要長照服務時，先查找可能承作的居家服務、日照、小規機、營養餐飲、機構或專業服務單位。這張卡是單位查找工具，不等於長照申請核定或已完成派案。","title":"雙溪區長照特約服務單位清冊","topics":["home_care","day_care","transport_da01","professional_service","meal_service"],"urgency_tags":["一般","需電話複核"]},{"body":"# 雙溪區社區照顧關懷據點服務資料\n\n## 個管師使用重點\n雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。\n\n## 可給家屬\n先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。\n\n聯絡/申請：新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。\n\n可先準備:\n- 長者基本資料\n- 居住村里\n- 聯絡電話\n- 行動與交通狀況\n- 活動、共餐或關懷需求\n\n## 電話複核\n- 雙溪區哪些據點目前可服務\n- 服務時段、共餐、活動和訪視內容為何\n- 是否限村里或需事前報名\n- 長者交通不便時是否有替代安排\n- 據點能否協助觀察高風險長者並回報\n\n## 內部提醒\n2026-05-31 深修。雙溪偏區要優先問交通、里別限制、共餐時段與家屬接送能力。據點可補社會參與，不可取代居服、日照或緊急照顧。\n\n風險提醒:\n- 偏區交通限制\n- 據點服務非全天照顧\n- 據點電話與時段需逐點複核\n\n服務範圍：雙溪區社區照顧關懷據點服務整理，適合找長者關懷訪視、共餐、健康促進或 C 據點活動；實際電話、時段和服務內容需逐點複核。\n\n來源：https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d","category":"care_professional","confidence":"A級官方據點資料深修","contact":"新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。","content_hash":"656e5a726fb56029cb487ac813357b1bca9ee65c0ca054efb85a5642b9f43b37","coverage_scope":"district","districts":["雙溪區"],"eligibility_tags":["雙溪區","社區照顧","C據點","官方名冊"],"embedding_text":"雙溪區社區照顧關懷據點服務資料 care_professional community_c_station district 雙溪區社區照顧關懷據點服務整理，適合找長者關懷訪視、共餐、健康促進或 C 據點活動；實際電話、時段和服務內容需逐點複核。 雙溪區 雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。 先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。 長者基本資料 居住村里 聯絡電話 行動與交通狀況 活動、共餐或關懷需求 雙溪區哪些據點目前可服務 服務時段、共餐、活動和訪視內容為何 是否限村里或需事前報名 長者交通不便時是否有替代安排 據點能否協助觀察高風險長者並回報 2026-05-31 深修。雙溪偏區要優先問交通、里別限制、共餐時段與家屬接送能力。據點可補社會參與，不可取代居服、日照或緊急照顧。","id":"shuangxi_community_care_point_directory","internal_notes":"2026-05-31 深修。雙溪偏區要優先問交通、里別限制、共餐時段與家屬接送能力。據點可補社會參與，不可取代居服、日照或緊急照顧。","last_checked_at":"2026-05-30","name":"雙溪區社區照顧關懷據點服務資料","next_review_at":"2026-08-28","next_step":"先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。","phone_check_questions":["雙溪區哪些據點目前可服務","服務時段、共餐、活動和訪視內容為何","是否限村里或需事前報名","長者交通不便時是否有替代安排","據點能否協助觀察高風險長者並回報"],"public_allowed":true,"public_contact":"新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。","public_next_step":"先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。","public_required_documents":["長者基本資料","居住村里","聯絡電話","行動與交通狀況","活動、共餐或關懷需求"],"public_summary":"雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。","region":"新北市","resource_id":"shuangxi_community_care_point_directory","resource_version":"20260531-batch18","risk_flags":["偏區交通限制","據點服務非全天照顧","據點電話與時段需逐點複核"],"service_area_note":"雙溪區社區照顧關懷據點服務整理，適合找長者關懷訪視、共餐、健康促進或 C 據點活動；實際電話、時段和服務內容需逐點複核。","source_type":"official","source_url":"https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d","status":"active","summary":"雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。","title":"雙溪區社區照顧關懷據點服務資料","topics":["community_c_station"],"urgency_tags":["一般","需電話確認"]},{"body":"深修批次：2026-05-30 第四批高頻資源深修。已讀取新北市社會局「當我們老在一起」官方頁面，補上服務內容、老人福利科電話與個管師電話複核重點。\n\n## 個管師使用重點\n\n適合蘆洲區長者需要社區活動、關懷訪視、電話問安、共餐或健康促進時使用。這張卡的功能是先找到蘆洲區可能據點，再逐點確認服務狀態。\n\n## 來源重點\n\n新北市社會局頁面說明，社區照顧關懷據點可辦理健康促進活動、關懷訪視、電話問安、餐飲服務或社會參與活動；有些據點也可能銜接巷弄長照站、共餐、預防延緩失能或喘息服務。\n\n## 下一步\n\n1. 在官方平台以「蘆洲區」篩選據點。\n2. 先記錄據點名稱、地址、電話與服務內容。\n3. 致電複核是否仍服務、是否限里別、是否可接新案、是否有共餐或固定活動。\n4. 若案家有失能、交通或陪同限制，要同步詢問到場方式與陪同安排。\n\n## 聯絡與服務區\n\n- 新北市境內市話直撥1999。\n- 新北市政府總機：02-2960-3456，可轉老人福利科3801-3808、3810-3818、3891、3892。\n- 個別據點電話、地址與服務時間以平台篩選結果為準。\n\n## 內部提醒\n\n此卡可放入家屬版作社區支持資源，但家屬版要避免寫成「已可參加」或「一定有共餐」。若家屬需要立即餐食或急難物資，應另搭配實物銀行、急難救助或送餐資源。","category":"care_professional","confidence":"A級官方資料","contact":"新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。","content_hash":"7b5cfdc2d7d787fa6b1c5ff0968cb2c5dcf43f6db4199c56f965bd6f6edf985b","coverage_scope":"district","districts":["蘆洲區"],"eligibility_tags":["蘆洲區","社區照顧","關懷據點","共餐","健康促進","新北市官方平台"],"embedding_text":"蘆洲區社區照顧關懷據點服務資訊 care_professional community_c_station district 以蘆洲區為主要篩選範圍；實際服務項目、時段、共餐、關懷訪視與收案方式以據點及新北市社會局平台資料複核。 蘆洲區 新北市社會局「當我們老在一起」平台說明社區照顧關懷據點可提供健康促進、關懷訪視、電話問安、餐飲服務或社會參與活動。這張卡用於先篩選蘆洲區據點，再安排電話複核。 先在平台以蘆洲區篩選據點，記下據點名稱、服務項目與服務時間；再致電據點或洽新北市1999/02-2960-3456轉老人福利科，複核目前服務狀態、是否限里別、是否接受新案。 案家行政區與里別 長者基本資料 主要聯絡方式 共餐、關懷訪視或活動參與需求 行動與陪同需求 目前是否服務蘆洲區或案家所在里別 有無關懷訪視、電話問安、餐飲服務、健康促進或社會參與活動 服務時間、活動頻率與是否需事前報名 是否限特定里別、年齡或福利身分 是否可接新案，若不可接案有無鄰近據點可詢問 是否需里辦、公所、個管師或家屬先行聯絡 來源為新北市社會局官方平台，頁面描述據點服務內容與老人福利科聯絡方式。此卡不是單一據點承諾；蘆洲區據點的服務時段、共餐、關懷訪視、收案限制與跨里服務需逐點複核。家屬版可說明為社區支持線索，不可寫成已安排成功。","id":"luzhou_community_care_point_directory","internal_notes":"來源為新北市社會局官方平台，頁面描述據點服務內容與老人福利科聯絡方式。此卡不是單一據點承諾；蘆洲區據點的服務時段、共餐、關懷訪視、收案限制與跨里服務需逐點複核。家屬版可說明為社區支持線索，不可寫成已安排成功。","last_checked_at":"2026-05-30","name":"蘆洲區社區照顧關懷據點服務資訊","next_review_at":"2026-08-30","next_step":"先在平台以蘆洲區篩選據點，記下據點名稱、服務項目與服務時間；再致電據點或洽新北市1999/02-2960-3456轉老人福利科，複核目前服務狀態、是否限里別、是否接受新案。","phone_check_questions":["目前是否服務蘆洲區或案家所在里別","有無關懷訪視、電話問安、餐飲服務、健康促進或社會參與活動","服務時間、活動頻率與是否需事前報名","是否限特定里別、年齡或福利身分","是否可接新案，若不可接案有無鄰近據點可詢問","是否需里辦、公所、個管師或家屬先行聯絡"],"public_allowed":true,"public_contact":"新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。","public_next_step":"先在平台以蘆洲區篩選據點，記下據點名稱、服務項目與服務時間；再致電據點或洽新北市1999/02-2960-3456轉老人福利科，複核目前服務狀態、是否限里別、是否接受新案。","public_required_documents":["案家行政區與里別","長者基本資料","主要聯絡方式","共餐、關懷訪視或活動參與需求","行動與陪同需求"],"public_summary":"新北市社會局「當我們老在一起」平台說明社區照顧關懷據點可提供健康促進、關懷訪視、電話問安、餐飲服務或社會參與活動。這張卡用於先篩選蘆洲區據點，再安排電話複核。","region":"新北市","resource_id":"luzhou_community_care_point_directory","resource_version":"4","risk_flags":["官方平台需逐點複核","據點服務狀態會異動","不可承諾名額或共餐","跨里服務需先問清楚"],"service_area_note":"以蘆洲區為主要篩選範圍；實際服務項目、時段、共餐、關懷訪視與收案方式以據點及新北市社會局平台資料複核。","source_type":"official","source_url":"https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d","status":"active","summary":"新北市社會局「當我們老在一起」平台說明社區照顧關懷據點可提供健康促進、關懷訪視、電話問安、餐飲服務或社會參與活動。這張卡用於先篩選蘆洲區據點，再安排電話複核。","title":"蘆洲區社區照顧關懷據點服務資訊","topics":["community_c_station"],"urgency_tags":["一般","需電話複核"]}],"schema_version":"resourcepack.v1","signature_status":"unsigned","source_app_version":"resource-nav-20260524-resourcepack-exchange"}</script>
+  <script>
+    const COPY_TEXTS = {'family': '家屬版資源包：未指定地區 / 照顧及專業 / 2026-05-31\n\n雙溪區長照特約服務單位清冊\n雙溪區長照特約服務單位清冊用來協助照顧服務團隊在雙溪區案家需要長照服務時，先查找可能承作的居家服務、日照、小規機、營養餐飲、機構或專業服務單位。這張卡是單位查找工具，不等於長照申請核定或已完成派案。\n下一步：先確認案家行政區、長照評估狀態與需要的服務類型，再依新北市長照特約服務清冊找單位名稱、電話與服務類別；正式連結前仍要洽 1966、照管中心或特約單位電話複核承作狀態。\n聯絡/申請：長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。\n可先準備：案家行政區與完整服務地址、長照評估或照顧計畫資料、需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務、失能、失智、照顧負荷與特殊照顧需求摘要、主要照顧者聯絡方式與可配合服務時段\n\n雙溪區社區照顧關懷據點服務資料\n雙溪區社區照顧關懷據點服務可協助照顧團隊找在地長者活動、關懷訪視、共餐或健康促進資源。適合獨居、偏遠、交通不便或家屬希望長者先接觸社區支持時使用。\n下一步：先確認長者村里、交通能力、是否需要共餐或活動，再聯絡雙溪區據點，詢問開放時間、服務內容、是否收新成員與是否需要家屬陪同。\n聯絡/申請：新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。\n可先準備：長者基本資料、居住村里、聯絡電話、行動與交通狀況、活動、共餐或關懷需求\n\n蘆洲區社區照顧關懷據點服務資訊\n新北市社會局「當我們老在一起」平台說明社區照顧關懷據點可提供健康促進、關懷訪視、電話問安、餐飲服務或社會參與活動。這張卡用於先篩選蘆洲區據點，再安排電話複核。\n下一步：先在平台以蘆洲區篩選據點，記下據點名稱、服務項目與服務時間；再致電據點或洽新北市1999/02-2960-3456轉老人福利科，複核目前服務狀態、是否限里別、是否接受新案。\n聯絡/申請：新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。\n可先準備：案家行政區與里別、長者基本資料、主要聯絡方式、共餐、關懷訪視或活動參與需求、行動與陪同需求', 'phone': '個管師電話確認清單：未指定地區 / 照顧及專業 / 2026-05-31\n\n雙溪區長照特約服務單位清冊\n聯絡/申請：長照申請可撥 1966；新北市政府總機 1999 或 02-2960-3456 可轉接長照相關窗口。個別服務單位電話、地址與承作項目，以新北市衛生局長照特約服務清冊逐一電話複核。\n電話確認：單位是否仍承作雙溪區，服務範圍是否包含案家地址；目前是否可接案，是否有等待或時段限制；承作服務是居家服務、日照、小規機、營養餐飲、機構或專業服務哪一類；是否需要先由 1966、照管中心或照專完成評估與照顧計畫；轉介、試服務、費用、請假與暫停服務規則如何處理\n內部提醒：2026-05-30 深修：此卡定位為雙溪區長照單位查找與電話複核工具。個管師應把清冊、長照評估、照顧計畫與服務單位承作狀態分開說明，避免家屬以為清冊有名字就一定能收案。\n\n雙溪區社區照顧關懷據點服務資料\n聯絡/申請：新北市政府 1999 或 02-2960-3456 可協助轉接老人福利相關窗口；雙溪區各據點電話、地址與服務項目需逐點複核。\n電話確認：雙溪區哪些據點目前可服務；服務時段、共餐、活動和訪視內容為何；是否限村里或需事前報名；長者交通不便時是否有替代安排；據點能否協助觀察高風險長者並回報\n內部提醒：2026-05-31 深修。雙溪偏區要優先問交通、里別限制、共餐時段與家屬接送能力。據點可補社會參與，不可取代居服、日照或緊急照顧。\n\n蘆洲區社區照顧關懷據點服務資訊\n聯絡/申請：新北市政府社會局老人福利科：新北市境內市話直撥1999，或洽02-2960-3456轉3801-3808、3810-3818、3891、3892；實際據點電話與地址以平台篩選後列出的據點資料為準。\n電話確認：目前是否服務蘆洲區或案家所在里別；有無關懷訪視、電話問安、餐飲服務、健康促進或社會參與活動；服務時間、活動頻率與是否需事前報名；是否限特定里別、年齡或福利身分；是否可接新案，若不可接案有無鄰近據點可詢問；是否需里辦、公所、個管師或家屬先行聯絡\n內部提醒：來源為新北市社會局官方平台，頁面描述據點服務內容與老人福利科聯絡方式。此卡不是單一據點承諾；蘆洲區據點的服務時段、共餐、關懷訪視、收案限制與跨里服務需逐點複核。家屬版可說明為社區支持線索，不可寫成已安排成功。', 'admin': '行政申請清單：未指定地區 / 照顧及專業 / 2026-05-31\n\n雙溪區長照特約服務單位清冊\n狀態：active\n資料來源：https://www.careyou.ntpc.gov.tw/w/agecare/unit\n最後確認：2026-05-30\n文件：案家行政區與完整服務地址、長照評估或照顧計畫資料、需要的服務類型：居家服務、日照、小規機、營養餐飲、機構或專業服務、失能、失智、照顧負荷與特殊照顧需求摘要、主要照顧者聯絡方式與可配合服務時段\n注意：清冊是找單位，不是派案核定、服務單位可能只承作部分服務類型、可接案狀態與服務時段需電話複核、正式服務仍需長照評估與照顧計畫\n\n雙溪區社區照顧關懷據點服務資料\n狀態：active\n資料來源：https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d\n最後確認：2026-05-30\n文件：長者基本資料、居住村里、聯絡電話、行動與交通狀況、活動、共餐或關懷需求\n注意：偏區交通限制、據點服務非全天照顧、據點電話與時段需逐點複核\n\n蘆洲區社區照顧關懷據點服務資訊\n狀態：active\n資料來源：https://lkk.ntpc.gov.tw/home.jsp?id=9539ce925ac3028d\n最後確認：2026-05-30\n文件：案家行政區與里別、長者基本資料、主要聯絡方式、共餐、關懷訪視或活動參與需求、行動與陪同需求\n注意：官方平台需逐點複核、據點服務狀態會異動、不可承諾名額或共餐、跨里服務需先問清楚', 'handoff': '交接摘要：未指定地區 / 照顧及專業 / 2026-05-31\n主題：照顧及專業\n線索：雙溪區、長照特約清冊、居家服務、日照/小規機、機構或專業服務、一般、需電話複核、社區照顧、C據點、官方名冊、需電話確認、蘆洲區\n已選資源：3 筆'};
+    const SHARE_URL = 'https://chord410-svg.github.io/product-share/viewer.html?id=c3c28bf5b7df2173ce3a';
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const area = document.getElementById("copyScratch");
+      area.hidden = false;
+      area.value = text;
+      area.select();
+      document.execCommand("copy");
+      area.hidden = true;
+    }
+    const OUTPUT_HELP = {
+      family: "家屬版適合貼 LINE 或訊息，會排除內部註記與不適合外流的提醒。",
+      phone: "電話確認適合個管師打電話前使用，聚焦聯絡方式與要問的問題。",
+      admin: "行政清單整理文件、來源與最後確認日，方便補件或填報。",
+      handoff: "交接摘要給同事或主管接手，聚焦優先順序、風險與下一步。",
+      full: "完整資料顯示所有區塊與內部提醒，適合個管師自己檢查整包內容。",
+    };
+    function setOutputMode(mode) {
+      const safeMode = OUTPUT_HELP[mode] ? mode : "full";
+      try { localStorage.setItem("resource_package_result_mode_v1", safeMode); } catch (e) {}
+      document.querySelectorAll("[data-result-mode]").forEach((button) => {
+        const active = button.dataset.resultMode === safeMode;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      document.querySelectorAll("[data-output-section]").forEach((section) => {
+        const modes = String(section.dataset.outputSection || "full").split(/\s+/);
+        section.hidden = !modes.includes(safeMode);
+      });
+      const help = document.getElementById("resultModeHelp");
+      if (help) help.textContent = OUTPUT_HELP[safeMode];
+    }
+    document.querySelectorAll("[data-result-mode]").forEach((button) => {
+      button.addEventListener("click", () => setOutputMode(button.dataset.resultMode || "full"));
+    });
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        await copyText(COPY_TEXTS[button.dataset.copy] || "");
+        button.textContent = "已複製";
+        setTimeout(() => { button.textContent = button.dataset.copy === "family" ? "複製家屬版" : button.dataset.copy === "phone" ? "複製電話確認" : button.dataset.copy === "admin" ? "複製行政清單" : "複製交接摘要"; }, 1200);
+      });
+    });
+    document.querySelectorAll("[data-copy-link]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        await copyText(SHARE_URL);
+        button.textContent = "已複製";
+        setTimeout(() => { button.textContent = "複製連結"; }, 1200);
+      });
+    });
+    const URL_PARAMS = new URLSearchParams(window.location.search);
+    const AUTO_PRINT_QUERY_VALUE = "print=1";
+    const AUTO_PRINT_KEY = 'resource_nav_auto_print_v1:c3c28bf5b7df2173ce3a';
+    function shouldAutoPrint() {
+      return URL_PARAMS.get("print") === "1";
+    }
+    function triggerPrint() {
+      setTimeout(() => {
+        try { window.focus(); } catch (e) {}
+        window.print();
+      }, 160);
+    }
+    document.querySelectorAll("[data-print-result]").forEach((button) => {
+      button.addEventListener("click", triggerPrint);
+    });
+    if (shouldAutoPrint()) {
+      let alreadyPrinted = false;
+      try { alreadyPrinted = sessionStorage.getItem(AUTO_PRINT_KEY) === "1"; } catch (e) {}
+      if (!alreadyPrinted) {
+        try { sessionStorage.setItem(AUTO_PRINT_KEY, "1"); } catch (e) {}
+        window.addEventListener("load", triggerPrint, { once: true });
+      }
+    }
+    
+    const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
+    function readRememberedEntryUrl() {
+      try {
+        const value = sessionStorage.getItem(LAST_SESSION_ENTRY_KEY) || localStorage.getItem(LAST_SESSION_ENTRY_KEY) || "";
+        if (!value || !value.includes("resource-nav.html") || !value.includes("session=")) return "";
+        return value;
+      } catch (e) {
+        return "";
+      }
+    }
+    const rememberedEntry = readRememberedEntryUrl();
+    if (rememberedEntry) {
+      document.querySelectorAll("[data-return-main]").forEach((link) => { link.href = rememberedEntry; });
+    }
+    
+    let savedMode = "full";
+    try { savedMode = localStorage.getItem("resource_package_result_mode_v1") || "full"; } catch (e) {}
+    setOutputMode(savedMode);
+  </script>
+</body>
+</html>

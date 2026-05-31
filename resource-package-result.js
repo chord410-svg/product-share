@@ -2,7 +2,7 @@
   const STORAGE_KEY = "resource_nav_packages_v1";
   const LAST_SESSION_ENTRY_KEY = "resource_nav_last_session_entry_v1";
   const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
-  const RESOURCE_DATA_VERSION = "20260524-resourcepack-exchange";
+  const RESOURCE_DATA_VERSION = "20260531-public-safe";
   let topics = [];
   let resources = [];
   let activePackage = null;

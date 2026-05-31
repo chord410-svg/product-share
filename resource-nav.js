@@ -5,7 +5,7 @@
   const PENDING_SESSION_ENTRY_KEY = "resource_nav_pending_session_entry_v1";
   const LAST_IDENTITY_KEY = "resource_nav_last_identity_v1";
   const MAX_PACKAGES = 10;
-  const RESOURCE_DATA_VERSION = "20260526-vector-smart-search";
+  const RESOURCE_DATA_VERSION = "20260531-public-safe";
   const DRAFT_SAVE_DELAY_MS = 700;
   const AREA_CITY = "新北市";
   const CITYWIDE_AREA_VALUES = new Set(["新北市", "全新北", "全台"]);

@@ -1,0 +1,1258 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ob-online 功能情境與 A 單位經營價值矩陣</title>
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --panel: #ffffff;
+      --panel-soft: #eef3ef;
+      --ink: #1f2925;
+      --muted: #66736e;
+      --line: #d8ded8;
+      --accent: #1f6f5d;
+      --accent-soft: #e1f0eb;
+      --warm: #a76633;
+      --warm-soft: #f6eadf;
+      --danger: #8e3c35;
+      --danger-soft: #f5e8e6;
+      --shadow: 0 8px 24px rgba(35, 44, 40, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      margin: 0 0 6px;
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      margin: 12px 0 0;
+      max-width: 860px;
+      color: var(--muted);
+    }
+
+    .print-btn,
+    .copy-btn,
+    .ghost-btn,
+    .chip {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .print-btn {
+      padding: 10px 14px;
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .ghost-btn {
+      padding: 8px 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .copy-btn {
+      padding: 7px 10px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: var(--panel-soft);
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .chip:hover,
+    .ghost-btn:hover,
+    .copy-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .use-cases {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 20px 0 18px;
+    }
+
+    .case-card,
+    .panel,
+    .value-card,
+    details,
+    .scenario-card,
+    .audience-card,
+    .safety-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .case-card {
+      padding: 16px;
+    }
+
+    .case-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .case-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 -4px 22px;
+      padding: 10px 4px;
+      background: rgba(246, 247, 244, 0.95);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .quick-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .quick-nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.42rem;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 820px;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .value-card {
+      padding: 14px;
+    }
+
+    .value-card h3,
+    .scenario-card h3,
+    .audience-card h3,
+    .safety-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .value-card p,
+    .scenario-card p,
+    .audience-card p,
+    .safety-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.5fr) repeat(3, minmax(160px, 1fr)) auto;
+      gap: 10px;
+      align-items: end;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      padding: 8px 10px;
+    }
+
+    textarea {
+      min-height: 180px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .filter-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1040px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #eef3ef;
+      color: #31413b;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    td {
+      font-size: 0.93rem;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .module-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: var(--warm-soft);
+      color: var(--warm);
+      font-weight: 800;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .matrix-cards {
+      display: none;
+    }
+
+    details {
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: 800;
+      list-style: none;
+      background: #eef3ef;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-meta {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .accordion-body {
+      padding: 12px 16px 16px;
+    }
+
+    .accordion-intro {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .feature-item {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .scenario-grid,
+    .audience-grid,
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .scenario-card,
+    .audience-card,
+    .safety-card,
+    .panel {
+      padding: 14px;
+    }
+
+    .safety-card.strong {
+      border-color: #e0c4c0;
+      background: var(--danger-soft);
+    }
+
+    .safety-card.strong h3 {
+      color: var(--danger);
+    }
+
+    .prompt-box {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footnote {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .empty {
+      padding: 18px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .use-cases,
+      .value-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 22px, 720px);
+        padding-top: 12px;
+      }
+
+      .topbar {
+        display: block;
+      }
+
+      .print-btn {
+        margin-top: 14px;
+        width: 100%;
+      }
+
+      .use-cases,
+      .value-grid,
+      .controls,
+      .feature-list,
+      .scenario-grid,
+      .audience-grid,
+      .safety-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-nav {
+        position: static;
+      }
+
+      .section-head,
+      .filter-summary {
+        display: block;
+      }
+
+      .table-wrap {
+        display: none;
+      }
+
+      .matrix-cards {
+        display: grid;
+        gap: 10px;
+      }
+
+      .matrix-card {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .matrix-card h3 {
+        margin: 8px 0 8px;
+        font-size: 1.05rem;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+
+      .matrix-card dl {
+        margin: 0;
+      }
+
+      .matrix-card dt {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .matrix-card dd {
+        margin: 2px 0 0;
+        font-size: 0.94rem;
+      }
+
+      summary {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        width: 100%;
+        padding: 0;
+      }
+
+      .quick-nav,
+      .controls,
+      .filter-summary,
+      .copy-btn,
+      .print-btn,
+      .ghost-btn {
+        display: none !important;
+      }
+
+      .topbar,
+      section,
+      .panel,
+      .value-card,
+      details,
+      .scenario-card,
+      .audience-card,
+      .safety-card {
+        box-shadow: none;
+      }
+
+      .table-wrap {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 0;
+        font-size: 10px;
+      }
+
+      th,
+      td {
+        padding: 6px;
+      }
+
+      details {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div>
+        <p class="kicker">ob-online 交流工作頁</p>
+        <h1>功能情境與 A 單位經營價值矩陣</h1>
+        <p class="summary">這份頁面用來把現有功能拆成「個管師遇到的工作情境、原本痛點、工具解法、A 單位可感受到的價值、可追問的回饋問題」。定位是低壓交流與訪談引導，不是正式採購文件。</p>
+      </div>
+      <button class="print-btn" id="printPage" type="button">列印目前結果</button>
+    </header>
+
+    <div class="use-cases" aria-label="核心用途">
+      <article class="case-card">
+        <strong>A 單位交流</strong>
+        <p>讓負責人、督導與個管師快速理解每個工具要處理哪一段日常流程。</p>
+      </article>
+      <article class="case-card">
+        <strong>訪談引導</strong>
+        <p>從對方說出的情境反推分類與功能，避免只停在「看起來不錯」。</p>
+      </article>
+      <article class="case-card">
+        <strong>內部排序</strong>
+        <p>把回饋轉成可比較的功能矩陣，協助判斷下一步應優先補強什麼。</p>
+      </article>
+    </div>
+
+    <nav class="quick-nav" aria-label="快速導覽">
+      <a href="#matrix">功能矩陣</a>
+      <a href="#values">價值分類</a>
+      <a href="#reverse">情境反推</a>
+      <a href="#audience">角色展示</a>
+      <a href="#safety">安全邊界</a>
+      <a href="#notebooklm">NotebookLM</a>
+    </nav>
+
+    <section id="values">
+      <div class="section-head">
+        <div>
+          <h2>價值分類字典</h2>
+          <p class="section-note">這九個分類把「功能」翻成 A 單位比較容易討論的經營語言。點擊分類 chip 可以套用到矩陣篩選。</p>
+        </div>
+      </div>
+      <div class="value-grid" id="valueGrid"></div>
+    </section>
+
+    <section id="matrix">
+      <div class="section-head">
+        <div>
+          <h2>可篩選功能矩陣</h2>
+          <p class="section-note">先用搜尋或篩選找到想討論的功能列，再用「複製追問」把回饋問題帶到訪談紀錄或簡報備註。</p>
+        </div>
+      </div>
+
+      <div class="controls" aria-label="矩陣篩選">
+        <label>
+          關鍵字搜尋
+          <input id="searchInput" type="search" placeholder="例：家屬版、電話確認、個資、新人">
+        </label>
+        <label>
+          功能模組
+          <select id="moduleFilter"></select>
+        </label>
+        <label>
+          經營價值分類
+          <select id="valueFilter"></select>
+        </label>
+        <label>
+          展示對象
+          <select id="audienceFilter"></select>
+        </label>
+        <button class="ghost-btn" id="clearFilters" type="button">清除篩選</button>
+      </div>
+
+      <div class="filter-summary">
+        <span id="resultCount">正在載入矩陣。</span>
+        <span>提示：手機會自動改成卡片版，列印時會隱藏篩選工具。</span>
+      </div>
+
+      <div class="table-wrap" aria-label="桌機矩陣表格">
+        <table>
+          <thead>
+            <tr>
+              <th>模組</th>
+              <th>子功能</th>
+              <th>解決情境</th>
+              <th>原本痛點</th>
+              <th>工具解法</th>
+              <th>價值分類</th>
+              <th>展示對象</th>
+              <th>追問</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody"></tbody>
+        </table>
+      </div>
+      <div class="matrix-cards" id="matrixCards" aria-label="手機矩陣卡片"></div>
+    </section>
+
+    <section id="modules">
+      <div class="section-head">
+        <div>
+          <h2>A-G 模組展開檢視</h2>
+          <p class="section-note">預設展開「長照資源導航與案家資源包」，方便先從最貼近日常行政耗損的情境開始談。</p>
+        </div>
+      </div>
+      <div id="moduleAccordion"></div>
+    </section>
+
+    <section id="reverse">
+      <div class="section-head">
+        <div>
+          <h2>從情境反推功能</h2>
+          <p class="section-note">交流時可以先讓對方講工作情境，再回到分類與功能，不急著推某一個工具。</p>
+        </div>
+      </div>
+      <div class="scenario-grid" id="scenarioGrid"></div>
+    </section>
+
+    <section id="audience">
+      <div class="section-head">
+        <div>
+          <h2>角色展示路徑</h2>
+          <p class="section-note">同一套工具對不同角色要講不同價值：個管師看省時，督導看一致性，負責人看管理與服務印象。</p>
+        </div>
+      </div>
+      <div class="audience-grid" id="audienceGrid"></div>
+    </section>
+
+    <section id="safety">
+      <div class="section-head">
+        <div>
+          <h2>安全邊界與使用提醒</h2>
+          <p class="section-note">這段適合放在簡報最後，也適合在 Demo 前先講清楚，避免對方誤解工具責任。</p>
+        </div>
+      </div>
+      <div class="safety-grid">
+        <article class="safety-card strong">
+          <h3>不可取代</h3>
+          <p>不取代個管師、督導、治療師或其他專業人員的判斷；不取代主管機關或照專的正式補助核定。</p>
+        </article>
+        <article class="safety-card strong">
+          <h3>不可作為醫療決策</h3>
+          <p>不提供醫療診斷、醫囑、治療處方或用藥建議。專業搜尋只協助整理查詢問題與資料方向。</p>
+        </article>
+        <article class="safety-card">
+          <h3>資料仍需確認</h3>
+          <p>資源資訊仍需以官方公告、單位流程與人工電話確認為準，卡片與結果頁只作為整理輔助。</p>
+        </article>
+        <article class="safety-card">
+          <h3>敏感資料控管</h3>
+          <p>不應輸入個案姓名、電話、身分證、病歷號、完整地址等敏感資料到不適合的功能中。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="notebooklm">
+      <div class="section-head">
+        <div>
+          <h2>NotebookLM 簡報提示詞</h2>
+          <p class="section-note">若要把這份來源再轉成 8-10 頁簡報，可複製下方提示詞使用。語氣維持請教式、早期交流式。</p>
+        </div>
+      </div>
+      <div class="panel prompt-box">
+        <textarea id="notebookPrompt" readonly></textarea>
+        <div>
+          <button class="copy-btn" type="button" data-copy-target="notebookPrompt">複製提示詞</button>
+        </div>
+        <p class="footnote">建議簡報生成後人工檢查每一頁：功能描述不能誇大，也要保留安全邊界。</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const valueCategories = [
+      {
+        name: "行政效率與人力成本",
+        definition: "減少翻資料、重複抄寫、重複整理、重複轉述與電話前準備時間。",
+        reason: "個管師時間很碎，行政耗損降低後，才有空處理高風險與複雜個案。"
+      },
+      {
+        name: "專業可信度與服務品質",
+        definition: "把口語說明、資源資訊、輔具概念與專業搜尋整理得更穩定。",
+        reason: "家屬會感覺單位不是憑印象回答，而是有系統地整理資訊。"
+      },
+      {
+        name: "家屬溝通與服務體驗",
+        definition: "將複雜資訊轉成家屬看得懂、可保存、可再次查看的格式。",
+        reason: "家屬少來回追問，個管師也比較容易留下清楚說明。"
+      },
+      {
+        name: "新人訓練與單位知識保存",
+        definition: "把資深個管師腦中的經驗、紙本資料夾與日常紀錄轉成可查詢流程。",
+        reason: "減少新人一直問督導，也避免資源只存在少數人的記憶裡。"
+      },
+      {
+        name: "評鑑佐證與流程留痕",
+        definition: "將電話確認、行政文件、交接摘要、使用紀錄與回饋紀錄整理得更有跡可循。",
+        reason: "對督導與負責人來說，流程一致與紀錄完整比單次查詢更重要。"
+      },
+      {
+        name: "單位品牌與服務差異化",
+        definition: "讓單位在家屬、外部對象與新進同仁眼中更有系統、更像現代化服務團隊。",
+        reason: "不只是有工具，而是讓外部感受到服務流程清楚、回覆專業。"
+      },
+      {
+        name: "資源網絡與地方能見度",
+        definition: "讓地方資源、民間資源、特約廠商、跨專業資源更容易被找到、回報與更新。",
+        reason: "A 單位的價值常來自資源連結能力；資料越可用，地方網絡越有價值。"
+      },
+      {
+        name: "風險治理與個資安全",
+        definition: "透過私密回覆、個資提醒、不同輸出版本，降低錯傳、誤用與敏感資料外流。",
+        reason: "多人協作環境要能降低風險，而不是增加新的管理負擔。"
+      },
+      {
+        name: "管理透明度與營運洞察",
+        definition: "用單位身份、功能使用紀錄、服務狀態與報告雛形理解工具使用情況。",
+        reason: "主管想知道工具是否真的被用、誰需要協助、哪些情境需求最多。"
+      }
+    ];
+
+    const moduleInfo = [
+      {
+        key: "A",
+        name: "長照資源導航與案家資源包",
+        intro: "把資源查找、篩選、保存、家屬轉述、電話確認、行政準備與交接摘要串在一起，是最適合先展示情境導向的模組。"
+      },
+      {
+        key: "B",
+        name: "長照補助計算與 Web 結果頁",
+        intro: "處理初步說明、快速估算與家屬可重看的情境，但需清楚保留正式補助核定邊界。"
+      },
+      {
+        key: "C",
+        name: "輔具查詢與產品說明",
+        intro: "協助個管師從照護情境找到可能方向，再轉成家屬看得懂的圖片、名稱與差異說明。"
+      },
+      {
+        key: "D",
+        name: "特約輔具廠商地圖查詢",
+        intro: "把名冊與地理位置結合，回應家屬對附近可詢問、報價或試看地點的需求。"
+      },
+      {
+        key: "E",
+        name: "專業報告搜尋輔助",
+        intro: "把口語照顧情境轉成較專業的搜尋問題，協助個管師找到查詢方向，不替代專業判斷。"
+      },
+      {
+        key: "F",
+        name: "單位身份領取",
+        intro: "支撐多人測試、單位使用紀錄、權限管理與後續單位層級報告。"
+      },
+      {
+        key: "G",
+        name: "使用紀錄、系統管理與月／季度報告示範",
+        intro: "回答主管關心的使用狀況、服務狀態、資料健康與未來報告可能性。"
+      }
+    ];
+
+    const moduleByKey = Object.fromEntries(moduleInfo.map((module) => [module.key, module]));
+
+    const matrixRows = [
+      row("A", "七大主題分類", "個管師遇到交通、送餐、非正式資源、外籍看護、法律扶助等需求，需要先知道去哪裡找。", "平常可能要翻厚重紙本資料夾、找舊紀錄、問同事或逐頁查網站。", "將資源整理成照顧及專業、交通接送、輔具及無障礙、多元專業、非正式資源、外籍看護、其他資源七大入口。", ["行政效率與人力成本", "新人訓練與單位知識保存"], "你們現在的紙本或雲端資料夾，分類方式跟這七類接近嗎？", ["個管師", "督導"]),
+      row("A", "子主題分類", "個管師知道大方向，但需要再縮小到急難救助、實物銀行、復康巴士、外籍看護失聯等細項。", "大分類太粗時仍要一頁一頁翻；新人不知道關鍵字。", "每個主題再拆子主題，讓個管師可用需求線索快速縮小範圍。", ["行政效率與人力成本", "專業可信度與服務品質"], "哪些子主題是你們最常查、最常漏掉或最想新增的？", ["個管師"]),
+      row("A", "行政區與地區篩選", "個案在不同區域，個管師需要知道哪些資源適用該區。", "全市、跨區、單一行政區資料混在一起，容易把不適用的資源講給家屬。", "以行政區與服務範圍協助篩選，並保留城市級、區域級、跨區資源差異。", ["專業可信度與服務品質", "風險治理與個資安全"], "你們平常最常遇到哪幾個行政區？跨區資源會不會造成誤解？", ["個管師", "督導"]),
+      row("A", "智慧查詢", "個管師只知道模糊情境，例如獨居、最近沒錢買飯、家屬不穩定。", "非正式資源常常不是精準品項，無法只靠正式名稱查到。", "讓個管師輸入口語情境，系統依行政區與資源線索排序，協助找到可能相關資源。", ["行政效率與人力成本", "專業可信度與服務品質"], "你們個管師最常用什麼口語描述來找資源？", ["個管師"]),
+      row("A", "Google 延伸搜尋", "站內資料不足、概念模糊、或想補查最新公告時。", "個管師不知道該用哪些關鍵字；每次都重新想搜尋詞。", "依目前行政區、主題、子主題、已選資源與智慧查詢文字組成搜尋詞，開啟外部搜尋。", ["行政效率與人力成本", "資源網絡與地方能見度"], "你們通常會搜尋官方公告、民間資源，還是服務流程？", ["個管師", "督導"]),
+      row("A", "資源卡片系統", "個管師在外訪或電話中，需要快速掃過資源名稱、摘要、下一步與聯絡方向。", "紙本資料太厚，手機上不好看；資料來源不清楚時也難追溯。", "將資源做成電子卡片，可在手機上瀏覽；卡片包含摘要、下一步、聯絡申請、來源與狀態線索。", ["家屬溝通與服務體驗", "專業可信度與服務品質"], "卡片上哪些欄位對你們最重要？哪些欄位太多會干擾？", ["個管師"]),
+      row("A", "卡片大小切換", "個管師在辦公室可看完整卡片，在外面用手機時需要快速掃描。", "固定版面容易在手機上太擠，或在電腦上資訊太少。", "卡片支援大小切換，讓外訪、手機、桌機有不同閱讀密度。", ["行政效率與人力成本", "家屬溝通與服務體驗"], "手機外訪時，你們比較想看簡短清單還是完整卡片？", ["個管師"]),
+      row("A", "原始資料追溯", "個管師需要確認資源是否仍有效，或想看官方與原始來源。", "紙本資料常常不知道從哪來、何時更新、是否過期。", "卡片保留來源、最後確認與狀態線索，點開後可追溯原始資料。", ["評鑑佐證與流程留痕", "風險治理與個資安全"], "哪些資源一定要附來源才敢給家屬或同事？", ["督導", "個管師"]),
+      row("A", "資源包命名", "每個個案常需要不同資源組合，例如交通加送餐、急難救助加法律扶助。", "以往要重複抄寫、截圖或把多個連結貼在一起。", "可自由命名案家資源包，將不同資源集中在同一處。", ["行政效率與人力成本", "新人訓練與單位知識保存"], "你們會用案家名稱、情境名稱，還是內部代號來命名比較安全？", ["個管師", "督導"]),
+      row("A", "資源包草稿保存", "個管師先查到一半，可能被電話、外訪或臨時事件打斷。", "查詢過程容易中斷，回來要重新找。", "已選資源可形成草稿，後續可繼續編輯。", ["行政效率與人力成本", "評鑑佐證與流程留痕"], "你們個管師常不常查一半被打斷？草稿保存對誰最有用？", ["個管師"]),
+      row("A", "檢視結果", "個管師選好資源後，需要快速看整包資料是否能用。", "多個卡片分散時，不知道整體說明是否完整。", "產生 Web 結果頁，整合所選資源與不同輸出格式。", ["家屬溝通與服務體驗", "專業可信度與服務品質"], "結果頁比較適合現場看、傳連結，還是列印存檔？", ["個管師", "督導"]),
+      row("A", "繼續編輯", "個管師發現資源不足或家屬又補充新需求。", "已整理好的資料常常要重新製作。", "可回到資源包繼續新增、刪除或調整。", ["行政效率與人力成本"], "你們常不常第一次整理後，家屬才補充其他需求？", ["個管師"]),
+      row("A", "刪除資源包", "測試、重複或不再需要的組合需要清理。", "資料堆積後反而找不到正式版本。", "提供刪除功能，避免草稿與結果混在一起。", ["管理透明度與營運洞察", "風險治理與個資安全"], "你們會希望誰可以刪除？個管師自己、督導，還是管理員？", ["督導", "負責人"]),
+      row("A", "複製副本", "遇到類似個案，例如同區域、同樣交通與送餐需求。", "類似資源組合仍要重新建一次。", "可複製既有資源包成新的草稿，不改原本紀錄。", ["行政效率與人力成本", "新人訓練與單位知識保存"], "類似個案是否常有可重用的資源組合？", ["個管師", "督導"]),
+      row("A", "複製連結與 QR", "家屬不在現場，或現場需要用手機查看。", "口頭講完容易忘，訊息貼太多內容也容易看不完。", "產生連結或 QR，讓家屬可手機查看結果頁。", ["家屬溝通與服務體驗", "單位品牌與服務差異化"], "家屬通常比較願意掃 QR、點連結，還是要紙本？", ["個管師"]),
+      row("A", "家屬版輸出", "家屬問現在可以做什麼時，需要簡短、可行、不要太多內部資訊。", "一次貼太多資料，家屬不看；貼太少又一直追問。", "家屬版只整理名稱、摘要、下一步、聯絡申請與可先準備項目，排除內部註記。", ["家屬溝通與服務體驗", "風險治理與個資安全"], "家屬版應該多短？哪些欄位一定不能出現在家屬版？", ["個管師", "督導"]),
+      row("A", "平日電話確認輸出", "個管師要自行打電話給資源單位或廠商確認。", "每通電話要問什麼常臨時想，容易漏問資格、文件、服務區域或是否仍受理。", "電話確認清單集中列出聯絡方向與每筆資源要問的問題。", ["行政效率與人力成本", "評鑑佐證與流程留痕"], "你們平常電話確認最常漏問什麼？", ["個管師"]),
+      row("A", "行政清單輸出", "需要告訴家屬準備文件，或內部要先整理申請材料。", "家屬不知道要準備什麼；個管師也可能少講文件或來源。", "行政清單整理文件、來源、狀態與最後確認日。", ["評鑑佐證與流程留痕", "專業可信度與服務品質"], "哪些資源最需要行政清單？急難救助、補助、交通，還是外籍看護？", ["督導", "個管師"]),
+      row("A", "交接摘要輸出", "個管師請同事接手，或督導需要快速知道目前資源安排方向。", "交接常靠口頭或訊息，容易漏掉為什麼選這些資源。", "交接摘要保留目的、行政區、主題、線索、選擇理由與下一步。", ["新人訓練與單位知識保存", "評鑑佐證與流程留痕"], "你們交接時最需要知道的是下一步、風險、聯絡狀態，還是家屬態度？", ["督導", "個管師"]),
+      row("A", "完整資料工作頁", "個管師自己檢查整包內容，或督導要看完整脈絡。", "家屬版太簡略，內部又需要更完整的資訊。", "完整資料顯示所有區塊與內部提醒，適合內部檢查。", ["專業可信度與服務品質", "風險治理與個資安全"], "完整資料應該只給內部看，還是可以選擇部分給家屬？", ["督導"]),
+      row("A", "列印與另存 PDF", "評鑑、內部歸檔或需要紙本留存時。", "網頁資料難保存，截圖不完整。", "結果頁可用列印功能保存，並依目前輸出模式列印。", ["評鑑佐證與流程留痕", "管理透明度與營運洞察"], "哪些情境你們會想把資源包印出來或存檔？", ["督導", "負責人"]),
+      row("A", "資源維護回報", "個管師發現電話錯誤、資料過期、想新增資源或內容修正。", "紙本資料更新慢；個人發現錯誤不一定回到單位資料庫。", "提供維護回報入口，提醒不要填入個案個資。", ["資源網絡與地方能見度", "新人訓練與單位知識保存"], "你們願意讓個管師回報資源錯誤嗎？誰負責審核更新？", ["督導", "負責人"]),
+
+      row("B", "Discord 補助入口", "個管師需要從固定位置開始補助估算。", "功能入口分散時，新人不知道從哪開始。", "在 Discord 中提供固定補助入口，減少尋找工具的時間。", ["行政效率與人力成本", "新人訓練與單位知識保存"], "你們希望補助工具放在哪個頻道最直覺？", ["個管師"]),
+      row("B", "CMS/身分別/縣市等條件輸入", "家屬問大概能補助多少時，需要先整理條件。", "新人常忘記要問哪些基本條件。", "用流程式輸入提醒個管師逐步確認條件。", ["專業可信度與服務品質", "新人訓練與單位知識保存"], "哪些條件是你們最常漏問、但會影響說明的？", ["個管師", "督導"]),
+      row("B", "常見服務碼與額度概念", "個管師需要快速理解服務額度、自付比例與常見服務組合。", "翻表與手算耗時，且不同同仁說法可能不一致。", "將常見資料放入計算流程，協助產生初步說明。", ["行政效率與人力成本", "專業可信度與服務品質"], "目前計算結果比較像新人教學，還是資深個管也會用？", ["個管師", "督導"]),
+      row("B", "Web 結果頁", "家屬不在現場，或需要回家後重新看。", "口頭講完家屬容易忘，純文字訊息容易混亂。", "產生可查看的 Web 結果頁，讓家屬可自行重看。", ["家屬溝通與服務體驗", "單位品牌與服務差異化"], "結果頁對家屬來說會不會太像正式核定？需要加哪些提醒？", ["督導", "個管師"]),
+      row("B", "QR Code 分享", "現場服務時，家屬希望用手機帶走資訊。", "個管師現場傳連結或截圖不一定順手。", "用 QR Code 讓家屬掃描查看結果。", ["家屬溝通與服務體驗"], "家屬在現場掃 QR 的接受度如何？", ["個管師"]),
+      row("B", "私密結果區", "補助估算結果可能包含個案情境，不適合公開。", "公開頻道容易讓其他人看到操作結果。", "結果透過私密方式回覆或放到指定結果區，降低外洩風險。", ["風險治理與個資安全", "管理透明度與營運洞察"], "哪些結果應該只給操作者看？督導是否需要可查看紀錄？", ["督導", "負責人"]),
+      row("B", "輔助聲明", "工具算出結果後，個管師仍需要說明不是正式核定。", "家屬可能把工具結果當成政府核定結果。", "在說明中保留僅供初步說明，仍以正式補助核定為準的邊界。", ["風險治理與個資安全", "專業可信度與服務品質"], "這段提醒要放在頁首、頁尾，還是結果旁邊最清楚？", ["督導"]),
+
+      row("C", "主題與多主題選擇", "家屬需求可能同時牽涉輪椅、移位、浴廁、營養或安全監測。", "單一分類不夠，個管師要重複查不同資料夾。", "可選擇單一或多個輔具主題，用同一入口搜尋。", ["行政效率與人力成本", "新人訓練與單位知識保存"], "你們最常把哪些輔具類型一起查？", ["個管師"]),
+      row("C", "口語情境查詢", "個管師不一定知道品名，只知道單手吃飯、走路不穩、洗澡怕跌倒。", "傳統搜尋常要求精準品名；新人不會用專業關鍵字。", "讓使用者描述需求、症狀或使用情境，系統轉成產品搜尋方向。", ["專業可信度與服務品質", "行政效率與人力成本"], "個管師比較常用症狀、生活動作，還是品名來查？", ["個管師"]),
+      row("C", "查詢提示與焦點提醒", "個管師輸入前，不知道該補充哪些資訊。", "問得太少會查不到；問得太多又很慢。", "每個主題提示要描述的焦點，例如移位路徑、浴室空間、是否可站立、照顧者操作能力。", ["新人訓練與單位知識保存", "專業可信度與服務品質"], "哪些追問最符合你們實務？哪些太治療師語氣？", ["個管師", "督導"]),
+      row("C", "AI 解讀欄位", "個管師輸入口語描述後，希望知道系統理解成什麼搜尋方向。", "系統直接給結果時，使用者不知道為何出現這些項目。", "顯示查詢解讀，讓個管師可判斷是否需要改問法。", ["專業可信度與服務品質", "風險治理與個資安全"], "你們希望看見 AI 怎麼理解問題，還是只想看結果？", ["個管師"]),
+      row("C", "產品卡與圖片", "家屬問便盆椅、洗澡椅、移位相關輔具長什麼樣。", "口頭描述很抽象，家屬很難想像差異。", "先顯示名稱與圖片，完整內容放分享頁展開。", ["家屬溝通與服務體驗", "單位品牌與服務差異化"], "哪些圖片適合給家屬看？哪些可能造成誤解？", ["個管師"]),
+      row("C", "分享頁與 QR", "個管師想把完整輔具資訊交給家屬回去看。", "訊息太長，貼很多圖片也容易混亂。", "產生分享頁與 QR Code，家屬可手機查看完整資訊。", ["家屬溝通與服務體驗", "單位品牌與服務差異化"], "分享頁應該保留幾個項目最剛好？", ["個管師", "督導"]),
+      row("C", "補助與生活用品分開說明", "某些產品是生活支持或照護延伸，不一定是長照補助品項。", "家屬容易把看到項目誤會成一定可申請。", "在查詢提醒中區分正式輔具、生活用品、照護延伸與需再確認事項。", ["風險治理與個資安全", "專業可信度與服務品質"], "哪些詞最容易讓家屬誤會成保證可申請？", ["督導"]),
+      row("C", "找不到時的改問法", "查詢結果不足或錯誤時，個管師需要知道怎麼修正。", "查不到就中斷，或只能再問同事。", "系統提示可改問法、補充情境或換主題。", ["新人訓練與單位知識保存", "行政效率與人力成本"], "你們希望系統在查不到時教個管師怎麼問嗎？", ["個管師"]),
+      row("C", "主查詢與分享服務分離", "分享頁或 QR 暫時不可用時，仍需要保留主要查詢結果。", "外部連結服務失效會讓使用者誤以為整個功能壞掉。", "主要查詢結果與分享頁/QR 狀態分開回報。", ["風險治理與個資安全", "管理透明度與營運洞察"], "當分享頁不能用時，個管師需要看到怎樣的錯誤提醒？", ["督導", "管理者"]),
+
+      row("D", "Discord 入口", "個管師在服務中想快速找廠商地圖。", "查名冊、開地圖、貼地址要分開做。", "從 Discord 入口進入地圖查詢流程。", ["行政效率與人力成本"], "廠商地圖應該獨立頻道，還是放在資源導航下面？", ["個管師"]),
+      row("D", "地址或行政區輸入", "家屬問住家附近有哪些特約廠商。", "完整地址涉及隱私，行政區又可能不夠準。", "以地址或行政區逐步查詢，並提醒距離為估算。", ["風險治理與個資安全", "行政效率與人力成本"], "你們實務上願意輸入完整地址嗎？還是只想輸入路名或行政區？", ["督導", "個管師"]),
+      row("D", "附近廠商清單", "個管師需要快速知道可先聯絡哪幾家。", "特約名冊通常只是一長串表格，沒有排序與距離概念。", "顯示附近廠商、地址、電話、距離估算與地圖連結。", ["行政效率與人力成本", "家屬溝通與服務體驗"], "一次顯示幾家最適合？太多會不會讓家屬更混亂？", ["個管師"]),
+      row("D", "Google 地圖連結", "家屬或個管師需要確認路線與實際位置。", "名冊地址要再手動貼到地圖。", "提供地圖查看入口，實際路程仍以地圖確認。", ["家屬溝通與服務體驗", "單位品牌與服務差異化"], "家屬會需要導航，還是個管師自己確認即可？", ["個管師"]),
+      row("D", "行政區估算提示", "店家門牌定位不完整時，避免誤以為位置很精準。", "地圖看起來太精準時，可能造成錯誤期待。", "顯示行政區估算與實際路程需再確認的提醒。", ["風險治理與個資安全", "專業可信度與服務品質"], "估算提醒要多明顯才不會被忽略？", ["督導"]),
+      row("D", "特約資訊集中", "個管師需要找補助相關廠商，但也要知道資訊可能需要人工確認。", "廠商資料分散在縣市公告、名冊、Google 和個人經驗。", "將特約廠商資訊集中，方便先找聯絡方向。", ["資源網絡與地方能見度", "新人訓練與單位知識保存"], "你們最希望廠商資料多哪一欄：服務項目、承辦速度、聯絡人，還是營業時間？", ["督導", "個管師"]),
+      row("D", "私密輸出", "查詢住家位置或附近廠商時，不適合公開在頻道。", "在公開頻道輸入地址有個資風險。", "查詢與結果採私密回覆或私密頁面設計。", ["風險治理與個資安全"], "地圖查詢要不要完全禁止完整地址，只允許行政區？", ["負責人", "督導"]),
+
+      row("E", "專業類型選擇", "個管師面對復能、ADL、吞嚥、營養、護理、照顧者壓力等不同情境。", "不同專業要用不同關鍵字，新人很難掌握。", "先選擇專業類型，再產生對應搜尋問題。", ["專業可信度與服務品質", "新人訓練與單位知識保存"], "哪些專業類型是個管師最需要協助搜尋的？", ["個管師", "督導"]),
+      row("E", "口語描述轉專業搜尋", "個管師只會描述剛出院、下肢無力、走路不穩、家裡走道窄。", "不知道該用哪些專業詞搜尋，常查不到好資料。", "將口語描述整理成較完整的 Google AI 或一般搜尋提問。", ["專業可信度與服務品質", "行政效率與人力成本"], "搜尋問題要偏報告用語、照顧計畫用語，還是家屬溝通用語？", ["個管師"]),
+      row("E", "產生 Google AI 與搜尋連結", "個管師需要自行開啟外部搜尋結果閱讀判斷。", "每次重新組搜尋詞很耗時。", "產生 Google AI 與一般搜尋連結，使用者自行查看結果。", ["行政效率與人力成本", "專業可信度與服務品質"], "你們比較需要 Google AI、一般搜尋，還是兩者都要？", ["個管師"]),
+      row("E", "不抓外部搜尋結果", "系統只協助組問題，不把外部答案直接存回系統。", "若直接整理外部答案，可能有正確性與責任風險。", "只產生搜尋連結，不抓取搜尋結果。", ["風險治理與個資安全"], "這樣的邊界是否足夠安心？還是會覺得太不方便？", ["督導", "負責人"]),
+      row("E", "個資阻擋", "個管師不小心輸入姓名、電話、地址、身分證或病歷號。", "AI 流程若吃到個資，會造成安全疑慮。", "偵測可能個資時阻擋處理，要求移除後重試。", ["風險治理與個資安全", "管理透明度與營運洞察"], "個資阻擋要多嚴格？太嚴會不會影響使用？", ["督導", "負責人"]),
+      row("E", "專業邊界提醒", "個管師需要知道這不是診斷、醫囑或治療建議。", "搜尋輔助容易被誤解成專業判斷。", "每次結果保留報告撰寫與資料搜尋輔助定位。", ["風險治理與個資安全", "專業可信度與服務品質"], "哪些字眼會讓照專或主管誤解成醫療建議？", ["督導"]),
+      row("E", "背景處理", "搜尋問題整理需要等待，系統完成後私密回覆。", "若等太久或公開回覆，使用體驗與安全都不好。", "任務排入背景處理，完成後私密回覆操作者。", ["管理透明度與營運洞察", "風險治理與個資安全"], "等待多久是可以接受的？完成通知要在哪裡出現？", ["個管師"]),
+
+      row("F", "單位選擇", "多個 A 單位或同一伺服器多人使用時，需要知道使用者屬於哪個單位。", "如果只看 Discord 名稱，後續無法統計或管理。", "使用者在 Discord 領取所屬單位身份，建立使用者與單位對照。", ["管理透明度與營運洞察", "風險治理與個資安全"], "測試時需要分單位統計嗎？還是先不做？", ["負責人", "督導"]),
+      row("F", "暱稱格式", "Discord 成員列表需要快速看出單位與編號。", "使用者暱稱混亂，督導或管理者難辨識。", "嘗試將暱稱改成單位前綴加編號。", ["管理透明度與營運洞察"], "對方是否接受在 Discord 顯示單位名稱？", ["負責人"]),
+      row("F", "不存個案資料聲明", "單位擔心身份流程會收集個案資訊。", "新系統最容易被擔心個資與權限。", "明確說明只記錄單位與操作者身份，不存個案姓名、電話、身分證或完整地址。", ["風險治理與個資安全"], "這段說明是否足以降低單位疑慮？", ["負責人", "督導"]),
+      row("F", "管理員新增與更新單位", "新增測試單位或修改單位名稱時。", "手動管理容易出錯，且正式代碼不宜頻繁變動。", "提供新增與更新單位表單，區分系統代碼與顯示前綴。", ["管理透明度與營運洞察", "新人訓練與單位知識保存"], "單位名稱、代碼與暱稱顯示要怎麼設計才不混亂？", ["管理者"]),
+
+      row("G", "使用紀錄", "主管想知道哪些功能真的被個管師使用。", "只靠口頭回饋，無法知道工具是否有黏著度。", "保存功能使用紀錄，用於除錯、統計與改善。", ["管理透明度與營運洞察"], "主管想看的是使用次數、使用者、功能類型，還是需求主題？", ["負責人", "督導"]),
+      row("G", "服務狀態", "工具很多，某個服務壞掉時需要判斷影響範圍。", "使用者只會覺得整個壞了，管理者難判斷。", "系統管理可查看服務是否正常、版本與資料庫狀態。", ["管理透明度與營運洞察", "風險治理與個資安全"], "測試時需要一個簡單狀態頁給管理者看嗎？", ["管理者"]),
+      row("G", "資料健康檢查", "JSON、SQLite、圖片、分享頁、搜尋資料都會影響功能。", "資料壞掉時不一定立刻發現。", "系統管理可檢查資料是否可讀，協助維護。", ["風險治理與個資安全", "評鑑佐證與流程留痕"], "誰應該負責通報資料錯誤？誰負責審核？", ["督導", "管理者"]),
+      row("G", "月／季度報告示範", "主管想知道未來是否能按單位產生使用摘要。", "只看零散使用紀錄，不容易看出整體價值。", "提供示範版單位報告概念，未來可依正式資料整理摘要。", ["管理透明度與營運洞察", "單位品牌與服務差異化"], "主管最想在月報看到哪些指標？", ["負責人", "督導"]),
+      row("G", "單位需求觀察", "工具長期使用後，可看出哪些情境最常被查。", "開發方向容易只靠印象，不知道實際需求密度。", "以使用紀錄與回饋資料觀察功能需求。", ["管理透明度與營運洞察", "資源網絡與地方能見度"], "如果要決定下一輪開發，哪些需求數據最有說服力？", ["負責人"])
+    ];
+
+    const scenarioRows = [
+      scenario("新人不知道去哪裡查資源。", ["新人訓練與單位知識保存", "行政效率與人力成本"], "長照資源導航、輔具查詢、專業報告搜尋", "新人最常問督導哪三類問題？"),
+      scenario("資深個管覺得查資料很煩，但不想用太複雜系統。", ["行政效率與人力成本", "家屬溝通與服務體驗"], "資源包、Google 延伸搜尋、輔具分享頁", "哪些動作只要少 3 分鐘，就值得用？"),
+      scenario("家屬一直問補助、輔具、去哪買、怎麼申請。", ["家屬溝通與服務體驗", "專業可信度與服務品質"], "補助計算、輔具查詢、特約輔具地圖", "家屬最常誤解哪一段？"),
+      scenario("紙本資料夾很多，但大家更新速度不同。", ["新人訓練與單位知識保存", "資源網絡與地方能見度"], "長照資源導航、維護回報、原始資料追溯", "現在誰負責更新資料？多久更新一次？"),
+      scenario("電話確認常漏問文件、資格或受理狀態。", ["行政效率與人力成本", "評鑑佐證與流程留痕"], "資源包電話確認、行政清單", "哪些資源最需要電話確認模板？"),
+      scenario("交接時同事不知道前一位個管為何選這些資源。", ["評鑑佐證與流程留痕", "新人訓練與單位知識保存"], "資源包交接摘要、完整資料工作頁", "交接時最常漏掉原因還是下一步？"),
+      scenario("督導想知道工具到底有沒有被用。", ["管理透明度與營運洞察"], "單位身份、使用紀錄、月／季度報告示範", "督導需要看個人、單位，還是功能層級統計？"),
+      scenario("單位希望家屬覺得服務比較有系統。", ["單位品牌與服務差異化", "家屬溝通與服務體驗"], "Web 結果頁、QR、家屬版輸出、輔具分享頁", "哪一種輸出最能讓家屬感覺清楚？"),
+      scenario("擔心 AI 或 Discord 牽涉個資。", ["風險治理與個資安全"], "私密輸出、個資阻擋、安全聲明、身份領取", "哪些資料你們會完全禁止輸入？"),
+      scenario("個管師不知道怎麼寫專業目標或查專業資料。", ["專業可信度與服務品質", "新人訓練與單位知識保存"], "專業報告搜尋、查詢提示、邊界提醒", "比較需要專業關鍵字、範例目標，還是資料搜尋方向？")
+    ];
+
+    const audienceRows = [
+      audience("個管師", "重點講省時、少漏問、手機可看、家屬可重看。", "長照資源導航、資源包、輔具查詢、補助計算"),
+      audience("新進個管師", "重點講不必一直問督導，系統會提示分類、追問與改問法。", "主題分類、輔具查詢提示、補助流程、專業搜尋"),
+      audience("資深個管師", "重點講不要限制專業判斷，只減少重複整理與轉述。", "資源包副本、電話確認、Google 延伸搜尋、家屬版輸出"),
+      audience("督導", "重點講流程一致、交接更清楚、資料可維護、風險邊界可控。", "交接摘要、行政清單、維護回報、身份領取、使用紀錄"),
+      audience("負責人", "重點講管理透明度、服務印象、資料治理與未來報告。", "單位品牌、使用紀錄、系統管理、月／季度報告示範、安全邊界")
+    ];
+
+    const notebookPrompt = `請根據我提供的來源，生成一份 8-10 頁的簡報。受眾是台灣長照 A 單位的負責人、督導與個管師。簡報語氣要低壓、專業、請教式，不要像正式提案。
+
+簡報目標是讓對方快速理解：清新居家物理治療所正在測試一套給長照個管師使用的 AI 輔助工具，希望邀請 A 單位參考後給予實務回饋，並安排 20-30 分鐘交流。
+
+請保留以下重點：
+1. 工具仍在測試與交流階段。
+2. 主要協助補助、輔具、廠商資訊、長照資源、專業搜尋與單位管理資料整理。
+3. 可以減少個管師查找、整理、轉述、電話確認與交接的時間。
+4. 不取代個管師專業判斷。
+5. 不取代正式補助核定。
+6. 不提供醫療診斷、醫囑或治療處方。
+7. 最後一頁以邀請回饋與約時間交流收尾。
+
+每頁請有清楚標題、3-5 個重點，並避免誇大效果。`;
+
+    const allAudiences = [...new Set(matrixRows.flatMap((item) => item.audience))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
+
+    function row(moduleKey, feature, scenarioText, pain, solution, values, question, audienceList) {
+      return {
+        id: `${moduleKey}-${feature}`,
+        moduleKey,
+        module: moduleByKey[moduleKey]?.name || moduleKey,
+        feature,
+        scenario: scenarioText,
+        pain,
+        solution,
+        values,
+        question,
+        audience: audienceList
+      };
+    }
+
+    function scenario(text, values, features, question) {
+      return { text, values, features, question };
+    }
+
+    function audience(role, focus, modules) {
+      return { role, focus, modules };
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderValueGrid() {
+      const grid = document.getElementById("valueGrid");
+      grid.innerHTML = valueCategories.map((category) => `
+        <article class="value-card">
+          <h3>${escapeHtml(category.name)}</h3>
+          <p>${escapeHtml(category.definition)}</p>
+          <p class="footnote">${escapeHtml(category.reason)}</p>
+          <div style="margin-top: 10px;">
+            <button class="chip" type="button" data-value-chip="${escapeHtml(category.name)}">套用篩選</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function fillSelects() {
+      const moduleFilter = document.getElementById("moduleFilter");
+      const valueFilter = document.getElementById("valueFilter");
+      const audienceFilter = document.getElementById("audienceFilter");
+
+      moduleFilter.innerHTML = `<option value="">全部模組</option>` + moduleInfo
+        .map((module) => `<option value="${escapeHtml(module.key)}">${escapeHtml(module.key)}. ${escapeHtml(module.name)}</option>`)
+        .join("");
+      valueFilter.innerHTML = `<option value="">全部價值分類</option>` + valueCategories
+        .map((category) => `<option value="${escapeHtml(category.name)}">${escapeHtml(category.name)}</option>`)
+        .join("");
+      audienceFilter.innerHTML = `<option value="">全部展示對象</option>` + allAudiences
+        .map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`)
+        .join("");
+    }
+
+    function getFilteredRows() {
+      const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+      const moduleValue = document.getElementById("moduleFilter").value;
+      const valueValue = document.getElementById("valueFilter").value;
+      const audienceValue = document.getElementById("audienceFilter").value;
+
+      return matrixRows.filter((item) => {
+        const haystack = [
+          item.module,
+          item.feature,
+          item.scenario,
+          item.pain,
+          item.solution,
+          item.question,
+          item.values.join(" "),
+          item.audience.join(" ")
+        ].join(" ").toLowerCase();
+
+        return (!keyword || haystack.includes(keyword))
+          && (!moduleValue || item.moduleKey === moduleValue)
+          && (!valueValue || item.values.includes(valueValue))
+          && (!audienceValue || item.audience.includes(audienceValue));
+      });
+    }
+
+    function chipList(values) {
+      return `<div class="chips">${values.map((value) => `<button class="chip" type="button" data-value-chip="${escapeHtml(value)}">${escapeHtml(value)}</button>`).join("")}</div>`;
+    }
+
+    function renderMatrix() {
+      const rows = getFilteredRows();
+      const body = document.getElementById("matrixTableBody");
+      const cards = document.getElementById("matrixCards");
+      const resultCount = document.getElementById("resultCount");
+
+      resultCount.textContent = `目前顯示 ${rows.length} / ${matrixRows.length} 筆功能情境。`;
+
+      if (rows.length === 0) {
+        body.innerHTML = `<tr><td colspan="8" class="empty">沒有符合條件的列，請放寬搜尋或清除篩選。</td></tr>`;
+        cards.innerHTML = `<div class="empty">沒有符合條件的列，請放寬搜尋或清除篩選。</div>`;
+        return;
+      }
+
+      body.innerHTML = rows.map((item) => `
+        <tr>
+          <td><span class="module-tag">${escapeHtml(item.moduleKey)}</span><br>${escapeHtml(item.module)}</td>
+          <td><strong>${escapeHtml(item.feature)}</strong></td>
+          <td>${escapeHtml(item.scenario)}</td>
+          <td>${escapeHtml(item.pain)}</td>
+          <td>${escapeHtml(item.solution)}</td>
+          <td>${chipList(item.values)}</td>
+          <td>${escapeHtml(item.audience.join("、"))}</td>
+          <td>
+            <button class="copy-btn" type="button" data-copy-text="${escapeHtml(item.question)}">複製追問</button>
+            <div class="footnote">${escapeHtml(item.question)}</div>
+          </td>
+        </tr>
+      `).join("");
+
+      cards.innerHTML = rows.map((item) => `
+        <article class="matrix-card">
+          <span class="module-tag">${escapeHtml(item.moduleKey)}. ${escapeHtml(item.module)}</span>
+          <h3>${escapeHtml(item.feature)}</h3>
+          <dl>
+            <dt>解決情境</dt>
+            <dd>${escapeHtml(item.scenario)}</dd>
+            <dt>原本痛點</dt>
+            <dd>${escapeHtml(item.pain)}</dd>
+            <dt>工具解法</dt>
+            <dd>${escapeHtml(item.solution)}</dd>
+            <dt>價值分類</dt>
+            <dd>${chipList(item.values)}</dd>
+            <dt>展示對象</dt>
+            <dd>${escapeHtml(item.audience.join("、"))}</dd>
+            <dt>追問</dt>
+            <dd>
+              ${escapeHtml(item.question)}
+              <div style="margin-top: 8px;">
+                <button class="copy-btn" type="button" data-copy-text="${escapeHtml(item.question)}">複製追問</button>
+              </div>
+            </dd>
+          </dl>
+        </article>
+      `).join("");
+    }
+
+    function renderAccordion() {
+      const container = document.getElementById("moduleAccordion");
+      container.innerHTML = moduleInfo.map((module, index) => {
+        const rows = matrixRows.filter((item) => item.moduleKey === module.key);
+        return `
+          <details ${index === 0 ? "open" : ""}>
+            <summary>
+              <span>${escapeHtml(module.key)}. ${escapeHtml(module.name)}</span>
+              <span class="summary-meta">${rows.length} 個子功能</span>
+            </summary>
+            <div class="accordion-body">
+              <p class="accordion-intro">${escapeHtml(module.intro)}</p>
+              <div class="feature-list">
+                ${rows.map((item) => `
+                  <article class="feature-item">
+                    <strong>${escapeHtml(item.feature)}</strong>
+                    <p>${escapeHtml(item.scenario)}</p>
+                    ${chipList(item.values)}
+                  </article>
+                `).join("")}
+              </div>
+            </div>
+          </details>
+        `;
+      }).join("");
+    }
+
+    function renderScenarioGrid() {
+      const grid = document.getElementById("scenarioGrid");
+      grid.innerHTML = scenarioRows.map((item) => `
+        <article class="scenario-card">
+          <h3>${escapeHtml(item.text)}</h3>
+          ${chipList(item.values)}
+          <p><strong>可對應功能：</strong>${escapeHtml(item.features)}</p>
+          <p><strong>建議追問：</strong>${escapeHtml(item.question)}</p>
+          <div style="margin-top: 10px;">
+            <button class="copy-btn" type="button" data-copy-text="${escapeHtml(item.question)}">複製追問</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderAudienceGrid() {
+      const grid = document.getElementById("audienceGrid");
+      grid.innerHTML = audienceRows.map((item) => `
+        <article class="audience-card">
+          <h3>${escapeHtml(item.role)}</h3>
+          <p><strong>展示重點：</strong>${escapeHtml(item.focus)}</p>
+          <p><strong>建議功能：</strong>${escapeHtml(item.modules)}</p>
+        </article>
+      `).join("");
+    }
+
+    async function copyText(text, button) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          document.execCommand("copy");
+          field.remove();
+        }
+        if (button) {
+          const original = button.textContent;
+          button.textContent = "已複製";
+          window.setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        }
+      } catch (error) {
+        window.alert("複製失敗，請手動選取文字。");
+      }
+    }
+
+    function attachEvents() {
+      ["searchInput", "moduleFilter", "valueFilter", "audienceFilter"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", renderMatrix);
+      });
+
+      document.getElementById("clearFilters").addEventListener("click", () => {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("moduleFilter").value = "";
+        document.getElementById("valueFilter").value = "";
+        document.getElementById("audienceFilter").value = "";
+        renderMatrix();
+      });
+
+      document.getElementById("printPage").addEventListener("click", () => window.print());
+
+      document.body.addEventListener("click", (event) => {
+        const valueChip = event.target.closest("[data-value-chip]");
+        if (valueChip) {
+          document.getElementById("valueFilter").value = valueChip.dataset.valueChip;
+          renderMatrix();
+          document.getElementById("matrix").scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+
+        const copyButton = event.target.closest("[data-copy-text]");
+        if (copyButton) {
+          copyText(copyButton.dataset.copyText, copyButton);
+          return;
+        }
+
+        const copyTargetButton = event.target.closest("[data-copy-target]");
+        if (copyTargetButton) {
+          const target = document.getElementById(copyTargetButton.dataset.copyTarget);
+          copyText(target.value, copyTargetButton);
+        }
+      });
+    }
+
+    function init() {
+      document.getElementById("notebookPrompt").value = notebookPrompt;
+      renderValueGrid();
+      fillSelects();
+      renderMatrix();
+      renderAccordion();
+      renderScenarioGrid();
+      renderAudienceGrid();
+      attachEvents();
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -238,7 +238,7 @@
 
     .controls {
       display: grid;
-      grid-template-columns: minmax(220px, 1.5fr) repeat(3, minmax(160px, 1fr)) auto;
+      grid-template-columns: minmax(220px, 1fr) auto;
       gap: 10px;
       align-items: end;
       padding: 14px;
@@ -246,6 +246,45 @@
       border-radius: 8px;
       background: var(--panel);
       box-shadow: var(--shadow);
+    }
+
+    .module-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .module-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .module-switch-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .module-switch-btn.is-active {
+      border-color: var(--warm);
+      background: var(--warm-soft);
+      color: var(--warm);
+    }
+
+    .module-count {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
     }
 
     label {
@@ -297,7 +336,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1040px;
+      min-width: 930px;
     }
 
     th,
@@ -467,7 +506,16 @@
       }
 
       .view-tab {
-        flex: 1 1 30%;
+        flex: 1 1 40%;
+      }
+
+      .module-switch {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .module-switch-btn {
+        justify-content: center;
       }
 
       .section-head,
@@ -582,6 +630,7 @@
 
     <div class="view-tabs" role="tablist" aria-label="主要畫面切換">
       <button class="view-tab is-active" type="button" role="tab" aria-selected="true" data-view-target="matrix">功能矩陣</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="modules">A-G 模組</button>
       <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="values">價值分類</button>
       <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="reverse">情境反推</button>
     </div>
@@ -590,26 +639,16 @@
       <div class="section-head">
         <div>
           <h2>可篩選功能矩陣</h2>
-          <p class="section-note">先用搜尋或篩選找到想討論的功能列，再用「複製追問」把回饋問題帶到訪談紀錄或簡報備註。</p>
+          <p class="section-note">先用 A-G 模組切換或價值分類找到想討論的功能列，再用「複製追問」把回饋問題帶到訪談紀錄或簡報備註。</p>
         </div>
       </div>
 
+      <div class="module-switch" id="matrixModuleSwitch" role="tablist" aria-label="功能模組切換"></div>
+
       <div class="controls" aria-label="矩陣篩選">
-        <label>
-          關鍵字搜尋
-          <input id="searchInput" type="search" placeholder="例：家屬版、電話確認、個資、新人">
-        </label>
-        <label>
-          功能模組
-          <select id="moduleFilter"></select>
-        </label>
         <label>
           經營價值分類
           <select id="valueFilter"></select>
-        </label>
-        <label>
-          展示對象
-          <select id="audienceFilter"></select>
         </label>
         <button class="ghost-btn" id="clearFilters" type="button">清除篩選</button>
       </div>
@@ -629,7 +668,6 @@
               <th>原本痛點</th>
               <th>工具解法</th>
               <th>價值分類</th>
-              <th>展示對象</th>
               <th>追問</th>
             </tr>
           </thead>
@@ -637,16 +675,16 @@
         </table>
       </div>
       <div class="matrix-cards" id="matrixCards" aria-label="手機矩陣卡片"></div>
+    </section>
 
-      <section id="modules">
-        <div class="section-head">
-          <div>
-            <h2>A-G 模組展開檢視</h2>
-            <p class="section-note">預設展開「長照資源導航與案家資源包」，方便先從最貼近日常行政耗損的情境開始談。</p>
-          </div>
+    <section id="modules" class="view-panel" data-view-panel hidden>
+      <div class="section-head">
+        <div>
+          <h2>A-G 模組展開檢視</h2>
+          <p class="section-note">把所有功能依 A-G 模組分開看，適合先讓對方理解每一組工具在處理哪一類工作情境。</p>
         </div>
-        <div id="moduleAccordion"></div>
-      </section>
+      </div>
+      <div id="moduleAccordion"></div>
     </section>
 
     <section id="values" class="view-panel" data-view-panel hidden>
@@ -842,9 +880,9 @@
       scenario("個管師不知道怎麼寫專業目標或查專業資料。", ["專業可信度與服務品質", "新人訓練與單位知識保存"], "專業報告搜尋、查詢提示、邊界提醒", "比較需要專業關鍵字、範例目標，還是資料搜尋方向？")
     ];
 
-    const allAudiences = [...new Set(matrixRows.flatMap((item) => item.audience))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
+    let activeModuleKey = "";
 
-    function row(moduleKey, feature, scenarioText, pain, solution, values, question, audienceList) {
+    function row(moduleKey, feature, scenarioText, pain, solution, values, question) {
       return {
         id: `${moduleKey}-${feature}`,
         moduleKey,
@@ -854,8 +892,7 @@
         pain,
         solution,
         values,
-        question,
-        audience: audienceList
+        question
       };
     }
 
@@ -887,44 +924,45 @@
     }
 
     function fillSelects() {
-      const moduleFilter = document.getElementById("moduleFilter");
       const valueFilter = document.getElementById("valueFilter");
-      const audienceFilter = document.getElementById("audienceFilter");
 
-      moduleFilter.innerHTML = `<option value="">全部模組</option>` + moduleInfo
-        .map((module) => `<option value="${escapeHtml(module.key)}">${escapeHtml(module.key)}. ${escapeHtml(module.name)}</option>`)
-        .join("");
       valueFilter.innerHTML = `<option value="">全部價值分類</option>` + valueCategories
         .map((category) => `<option value="${escapeHtml(category.name)}">${escapeHtml(category.name)}</option>`)
-        .join("");
-      audienceFilter.innerHTML = `<option value="">全部展示對象</option>` + allAudiences
-        .map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`)
         .join("");
     }
 
     function getFilteredRows() {
-      const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
-      const moduleValue = document.getElementById("moduleFilter").value;
       const valueValue = document.getElementById("valueFilter").value;
-      const audienceValue = document.getElementById("audienceFilter").value;
 
       return matrixRows.filter((item) => {
-        const haystack = [
-          item.module,
-          item.feature,
-          item.scenario,
-          item.pain,
-          item.solution,
-          item.question,
-          item.values.join(" "),
-          item.audience.join(" ")
-        ].join(" ").toLowerCase();
-
-        return (!keyword || haystack.includes(keyword))
-          && (!moduleValue || item.moduleKey === moduleValue)
-          && (!valueValue || item.values.includes(valueValue))
-          && (!audienceValue || item.audience.includes(audienceValue));
+        return (!activeModuleKey || item.moduleKey === activeModuleKey)
+          && (!valueValue || item.values.includes(valueValue));
       });
+    }
+
+    function renderModuleSwitch() {
+      const container = document.getElementById("matrixModuleSwitch");
+      const items = [
+        { key: "", label: "全部", count: matrixRows.length },
+        ...moduleInfo.map((module) => ({
+          key: module.key,
+          label: module.key,
+          count: matrixRows.filter((item) => item.moduleKey === module.key).length
+        }))
+      ];
+
+      container.innerHTML = items.map((item) => `
+        <button class="module-switch-btn${item.key === activeModuleKey ? " is-active" : ""}" type="button" data-module-key="${escapeHtml(item.key)}" aria-pressed="${item.key === activeModuleKey ? "true" : "false"}">
+          <span>${escapeHtml(item.label)}</span>
+          <span class="module-count">${item.count}</span>
+        </button>
+      `).join("");
+    }
+
+    function setActiveModule(moduleKey) {
+      activeModuleKey = moduleKey;
+      renderModuleSwitch();
+      renderMatrix();
     }
 
     function chipList(values) {
@@ -940,8 +978,8 @@
       resultCount.textContent = `目前顯示 ${rows.length} / ${matrixRows.length} 筆功能情境。`;
 
       if (rows.length === 0) {
-        body.innerHTML = `<tr><td colspan="8" class="empty">沒有符合條件的列，請放寬搜尋或清除篩選。</td></tr>`;
-        cards.innerHTML = `<div class="empty">沒有符合條件的列，請放寬搜尋或清除篩選。</div>`;
+        body.innerHTML = `<tr><td colspan="7" class="empty">沒有符合條件的列，請放寬篩選或清除篩選。</td></tr>`;
+        cards.innerHTML = `<div class="empty">沒有符合條件的列，請放寬篩選或清除篩選。</div>`;
         return;
       }
 
@@ -953,7 +991,6 @@
           <td>${escapeHtml(item.pain)}</td>
           <td>${escapeHtml(item.solution)}</td>
           <td>${chipList(item.values)}</td>
-          <td>${escapeHtml(item.audience.join("、"))}</td>
           <td>
             <button class="copy-btn" type="button" data-copy-text="${escapeHtml(item.question)}">複製追問</button>
             <div class="footnote">${escapeHtml(item.question)}</div>
@@ -974,8 +1011,6 @@
             <dd>${escapeHtml(item.solution)}</dd>
             <dt>價值分類</dt>
             <dd>${chipList(item.values)}</dd>
-            <dt>展示對象</dt>
-            <dd>${escapeHtml(item.audience.join("、"))}</dd>
             <dt>追問</dt>
             <dd>
               ${escapeHtml(item.question)}
@@ -1079,21 +1114,22 @@
         button.addEventListener("click", () => setActiveView(button.dataset.viewTarget));
       });
 
-      ["searchInput", "moduleFilter", "valueFilter", "audienceFilter"].forEach((id) => {
-        document.getElementById(id).addEventListener("input", renderMatrix);
-      });
+      document.getElementById("valueFilter").addEventListener("input", renderMatrix);
 
       document.getElementById("clearFilters").addEventListener("click", () => {
-        document.getElementById("searchInput").value = "";
-        document.getElementById("moduleFilter").value = "";
         document.getElementById("valueFilter").value = "";
-        document.getElementById("audienceFilter").value = "";
-        renderMatrix();
+        setActiveModule("");
       });
 
       document.getElementById("printPage").addEventListener("click", () => window.print());
 
       document.body.addEventListener("click", (event) => {
+        const moduleButton = event.target.closest("[data-module-key]");
+        if (moduleButton) {
+          setActiveModule(moduleButton.dataset.moduleKey);
+          return;
+        }
+
         const valueChip = event.target.closest("[data-value-chip]");
         if (valueChip) {
           document.getElementById("valueFilter").value = valueChip.dataset.valueChip;
@@ -1114,6 +1150,7 @@
     function init() {
       renderValueGrid();
       fillSelects();
+      renderModuleSwitch();
       renderMatrix();
       renderAccordion();
       renderScenarioGrid();

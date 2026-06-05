@@ -133,42 +133,17 @@
       background: var(--accent-soft);
     }
 
-    .use-cases {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 20px 0 18px;
-    }
-
-    .case-card,
     .panel,
     .value-card,
     details,
-    .scenario-card,
-    .audience-card,
-    .safety-card {
+    .scenario-card {
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--panel);
       box-shadow: var(--shadow);
     }
 
-    .case-card {
-      padding: 16px;
-    }
-
-    .case-card strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .case-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .quick-nav {
+    .view-tabs {
       position: sticky;
       top: 0;
       z-index: 5;
@@ -181,23 +156,34 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .quick-nav a {
+    .view-tab {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       min-height: 36px;
       padding: 6px 10px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--panel);
       color: var(--ink);
-      text-decoration: none;
       font-weight: 700;
       font-size: 0.92rem;
+      cursor: pointer;
     }
 
-    .quick-nav a:hover {
+    .view-tab:hover {
       border-color: var(--accent);
       color: var(--accent);
+    }
+
+    .view-tab.is-active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .view-panel[hidden] {
+      display: none !important;
     }
 
     section {
@@ -236,9 +222,7 @@
     }
 
     .value-card h3,
-    .scenario-card h3,
-    .audience-card h3,
-    .safety-card h3 {
+    .scenario-card h3 {
       margin: 0 0 8px;
       font-size: 1rem;
       line-height: 1.35;
@@ -246,9 +230,7 @@
     }
 
     .value-card p,
-    .scenario-card p,
-    .audience-card p,
-    .safety-card p {
+    .scenario-card p {
       margin: 0;
       color: var(--muted);
       font-size: 0.94rem;
@@ -425,33 +407,15 @@
       font-size: 0.93rem;
     }
 
-    .scenario-grid,
-    .audience-grid,
-    .safety-grid {
+    .scenario-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
     }
 
     .scenario-card,
-    .audience-card,
-    .safety-card,
     .panel {
       padding: 14px;
-    }
-
-    .safety-card.strong {
-      border-color: #e0c4c0;
-      background: var(--danger-soft);
-    }
-
-    .safety-card.strong h3 {
-      color: var(--danger);
-    }
-
-    .prompt-box {
-      display: grid;
-      gap: 10px;
     }
 
     .footnote {
@@ -466,7 +430,6 @@
     }
 
     @media (max-width: 960px) {
-      .use-cases,
       .value-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -491,18 +454,20 @@
         width: 100%;
       }
 
-      .use-cases,
       .value-grid,
       .controls,
       .feature-list,
-      .scenario-grid,
-      .audience-grid,
-      .safety-grid {
+      .scenario-grid {
         grid-template-columns: 1fr;
       }
 
-      .quick-nav {
-        position: static;
+      .view-tabs {
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .view-tab {
+        flex: 1 1 30%;
       }
 
       .section-head,
@@ -566,7 +531,7 @@
         padding: 0;
       }
 
-      .quick-nav,
+      .view-tabs,
       .controls,
       .filter-summary,
       .copy-btn,
@@ -580,9 +545,7 @@
       .panel,
       .value-card,
       details,
-      .scenario-card,
-      .audience-card,
-      .safety-card {
+      .scenario-card {
         box-shadow: none;
       }
 
@@ -617,41 +580,13 @@
       <button class="print-btn" id="printPage" type="button">列印目前結果</button>
     </header>
 
-    <div class="use-cases" aria-label="核心用途">
-      <article class="case-card">
-        <strong>A 單位交流</strong>
-        <p>讓負責人、督導與個管師快速理解每個工具要處理哪一段日常流程。</p>
-      </article>
-      <article class="case-card">
-        <strong>訪談引導</strong>
-        <p>從對方說出的情境反推分類與功能，避免只停在「看起來不錯」。</p>
-      </article>
-      <article class="case-card">
-        <strong>內部排序</strong>
-        <p>把回饋轉成可比較的功能矩陣，協助判斷下一步應優先補強什麼。</p>
-      </article>
+    <div class="view-tabs" role="tablist" aria-label="主要畫面切換">
+      <button class="view-tab is-active" type="button" role="tab" aria-selected="true" data-view-target="matrix">功能矩陣</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="values">價值分類</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="reverse">情境反推</button>
     </div>
 
-    <nav class="quick-nav" aria-label="快速導覽">
-      <a href="#matrix">功能矩陣</a>
-      <a href="#values">價值分類</a>
-      <a href="#reverse">情境反推</a>
-      <a href="#audience">角色展示</a>
-      <a href="#safety">安全邊界</a>
-      <a href="#notebooklm">NotebookLM</a>
-    </nav>
-
-    <section id="values">
-      <div class="section-head">
-        <div>
-          <h2>價值分類字典</h2>
-          <p class="section-note">這九個分類把「功能」翻成 A 單位比較容易討論的經營語言。點擊分類 chip 可以套用到矩陣篩選。</p>
-        </div>
-      </div>
-      <div class="value-grid" id="valueGrid"></div>
-    </section>
-
-    <section id="matrix">
+    <section id="matrix" class="view-panel is-active" data-view-panel>
       <div class="section-head">
         <div>
           <h2>可篩選功能矩陣</h2>
@@ -702,19 +637,29 @@
         </table>
       </div>
       <div class="matrix-cards" id="matrixCards" aria-label="手機矩陣卡片"></div>
+
+      <section id="modules">
+        <div class="section-head">
+          <div>
+            <h2>A-G 模組展開檢視</h2>
+            <p class="section-note">預設展開「長照資源導航與案家資源包」，方便先從最貼近日常行政耗損的情境開始談。</p>
+          </div>
+        </div>
+        <div id="moduleAccordion"></div>
+      </section>
     </section>
 
-    <section id="modules">
+    <section id="values" class="view-panel" data-view-panel hidden>
       <div class="section-head">
         <div>
-          <h2>A-G 模組展開檢視</h2>
-          <p class="section-note">預設展開「長照資源導航與案家資源包」，方便先從最貼近日常行政耗損的情境開始談。</p>
+          <h2>價值分類字典</h2>
+          <p class="section-note">這九個分類把「功能」翻成 A 單位比較容易討論的經營語言。點擊分類 chip 可以套用到矩陣篩選。</p>
         </div>
       </div>
-      <div id="moduleAccordion"></div>
+      <div class="value-grid" id="valueGrid"></div>
     </section>
 
-    <section id="reverse">
+    <section id="reverse" class="view-panel" data-view-panel hidden>
       <div class="section-head">
         <div>
           <h2>從情境反推功能</h2>
@@ -722,59 +667,6 @@
         </div>
       </div>
       <div class="scenario-grid" id="scenarioGrid"></div>
-    </section>
-
-    <section id="audience">
-      <div class="section-head">
-        <div>
-          <h2>角色展示路徑</h2>
-          <p class="section-note">同一套工具對不同角色要講不同價值：個管師看省時，督導看一致性，負責人看管理與服務印象。</p>
-        </div>
-      </div>
-      <div class="audience-grid" id="audienceGrid"></div>
-    </section>
-
-    <section id="safety">
-      <div class="section-head">
-        <div>
-          <h2>安全邊界與使用提醒</h2>
-          <p class="section-note">這段適合放在簡報最後，也適合在 Demo 前先講清楚，避免對方誤解工具責任。</p>
-        </div>
-      </div>
-      <div class="safety-grid">
-        <article class="safety-card strong">
-          <h3>不可取代</h3>
-          <p>不取代個管師、督導、治療師或其他專業人員的判斷；不取代主管機關或照專的正式補助核定。</p>
-        </article>
-        <article class="safety-card strong">
-          <h3>不可作為醫療決策</h3>
-          <p>不提供醫療診斷、醫囑、治療處方或用藥建議。專業搜尋只協助整理查詢問題與資料方向。</p>
-        </article>
-        <article class="safety-card">
-          <h3>資料仍需確認</h3>
-          <p>資源資訊仍需以官方公告、單位流程與人工電話確認為準，卡片與結果頁只作為整理輔助。</p>
-        </article>
-        <article class="safety-card">
-          <h3>敏感資料控管</h3>
-          <p>不應輸入個案姓名、電話、身分證、病歷號、完整地址等敏感資料到不適合的功能中。</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="notebooklm">
-      <div class="section-head">
-        <div>
-          <h2>NotebookLM 簡報提示詞</h2>
-          <p class="section-note">若要把這份來源再轉成 8-10 頁簡報，可複製下方提示詞使用。語氣維持請教式、早期交流式。</p>
-        </div>
-      </div>
-      <div class="panel prompt-box">
-        <textarea id="notebookPrompt" readonly></textarea>
-        <div>
-          <button class="copy-btn" type="button" data-copy-target="notebookPrompt">複製提示詞</button>
-        </div>
-        <p class="footnote">建議簡報生成後人工檢查每一頁：功能描述不能誇大，也要保留安全邊界。</p>
-      </div>
     </section>
   </main>
 
@@ -950,29 +842,6 @@
       scenario("個管師不知道怎麼寫專業目標或查專業資料。", ["專業可信度與服務品質", "新人訓練與單位知識保存"], "專業報告搜尋、查詢提示、邊界提醒", "比較需要專業關鍵字、範例目標，還是資料搜尋方向？")
     ];
 
-    const audienceRows = [
-      audience("個管師", "重點講省時、少漏問、手機可看、家屬可重看。", "長照資源導航、資源包、輔具查詢、補助計算"),
-      audience("新進個管師", "重點講不必一直問督導，系統會提示分類、追問與改問法。", "主題分類、輔具查詢提示、補助流程、專業搜尋"),
-      audience("資深個管師", "重點講不要限制專業判斷，只減少重複整理與轉述。", "資源包副本、電話確認、Google 延伸搜尋、家屬版輸出"),
-      audience("督導", "重點講流程一致、交接更清楚、資料可維護、風險邊界可控。", "交接摘要、行政清單、維護回報、身份領取、使用紀錄"),
-      audience("負責人", "重點講管理透明度、服務印象、資料治理與未來報告。", "單位品牌、使用紀錄、系統管理、月／季度報告示範、安全邊界")
-    ];
-
-    const notebookPrompt = `請根據我提供的來源，生成一份 8-10 頁的簡報。受眾是台灣長照 A 單位的負責人、督導與個管師。簡報語氣要低壓、專業、請教式，不要像正式提案。
-
-簡報目標是讓對方快速理解：清新居家物理治療所正在測試一套給長照個管師使用的 AI 輔助工具，希望邀請 A 單位參考後給予實務回饋，並安排 20-30 分鐘交流。
-
-請保留以下重點：
-1. 工具仍在測試與交流階段。
-2. 主要協助補助、輔具、廠商資訊、長照資源、專業搜尋與單位管理資料整理。
-3. 可以減少個管師查找、整理、轉述、電話確認與交接的時間。
-4. 不取代個管師專業判斷。
-5. 不取代正式補助核定。
-6. 不提供醫療診斷、醫囑或治療處方。
-7. 最後一頁以邀請回饋與約時間交流收尾。
-
-每頁請有清楚標題、3-5 個重點，並避免誇大效果。`;
-
     const allAudiences = [...new Set(matrixRows.flatMap((item) => item.audience))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
 
     function row(moduleKey, feature, scenarioText, pain, solution, values, question, audienceList) {
@@ -992,10 +861,6 @@
 
     function scenario(text, values, features, question) {
       return { text, values, features, question };
-    }
-
-    function audience(role, focus, modules) {
-      return { role, focus, modules };
     }
 
     function escapeHtml(value) {
@@ -1165,15 +1030,21 @@
       `).join("");
     }
 
-    function renderAudienceGrid() {
-      const grid = document.getElementById("audienceGrid");
-      grid.innerHTML = audienceRows.map((item) => `
-        <article class="audience-card">
-          <h3>${escapeHtml(item.role)}</h3>
-          <p><strong>展示重點：</strong>${escapeHtml(item.focus)}</p>
-          <p><strong>建議功能：</strong>${escapeHtml(item.modules)}</p>
-        </article>
-      `).join("");
+    function setActiveView(targetId) {
+      const targetPanel = document.getElementById(targetId);
+      if (!targetPanel) return;
+
+      document.querySelectorAll("[data-view-panel]").forEach((panel) => {
+        const active = panel.id === targetId;
+        panel.hidden = !active;
+        panel.classList.toggle("is-active", active);
+      });
+
+      document.querySelectorAll("[data-view-target]").forEach((button) => {
+        const active = button.dataset.viewTarget === targetId;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
     }
 
     async function copyText(text, button) {
@@ -1204,6 +1075,10 @@
     }
 
     function attachEvents() {
+      document.querySelectorAll("[data-view-target]").forEach((button) => {
+        button.addEventListener("click", () => setActiveView(button.dataset.viewTarget));
+      });
+
       ["searchInput", "moduleFilter", "valueFilter", "audienceFilter"].forEach((id) => {
         document.getElementById(id).addEventListener("input", renderMatrix);
       });
@@ -1223,7 +1098,7 @@
         if (valueChip) {
           document.getElementById("valueFilter").value = valueChip.dataset.valueChip;
           renderMatrix();
-          document.getElementById("matrix").scrollIntoView({ behavior: "smooth", block: "start" });
+          setActiveView("matrix");
           return;
         }
 
@@ -1233,23 +1108,17 @@
           return;
         }
 
-        const copyTargetButton = event.target.closest("[data-copy-target]");
-        if (copyTargetButton) {
-          const target = document.getElementById(copyTargetButton.dataset.copyTarget);
-          copyText(target.value, copyTargetButton);
-        }
       });
     }
 
     function init() {
-      document.getElementById("notebookPrompt").value = notebookPrompt;
       renderValueGrid();
       fillSelects();
       renderMatrix();
       renderAccordion();
       renderScenarioGrid();
-      renderAudienceGrid();
       attachEvents();
+      setActiveView("matrix");
     }
 
     init();

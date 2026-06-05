@@ -629,7 +629,7 @@
       <div>
         <p class="kicker">ob-online 交流工作頁</p>
         <h1>長照個管輔助工具交流說明</h1>
-        <p class="summary">這頁整理目前工具可以協助哪些日常工作情境、原本卡在哪裡、工具怎麼幫忙，以及想請個管師與督導回饋的問題。定位是試用交流與討論，不是正式採購文件。</p>
+        <p class="summary">這頁是交流用的工作草稿，用來對齊個管師日常會遇到哪些情境、哪些地方最花時間、目前工具可能怎麼協助。重點不是請貴單位立即判斷是否採用，而是希望一起找出哪些情境寫得準、哪些還需要補充。</p>
       </div>
       <button class="print-btn" id="printPage" type="button">列印目前結果</button>
     </header>
@@ -644,12 +644,12 @@
     <section id="matrix" class="view-panel is-active" data-view-panel>
       <div class="section-head">
         <div>
-          <h2>功能與使用情境對照</h2>
-          <p class="section-note">先用功能分類或幫助類型找到想討論的功能，再用「複製追問」把回饋問題帶到訪談紀錄或簡報備註。</p>
+          <h2>用工作情境看功能</h2>
+          <p class="section-note">這裡把每個功能放回個管師實際會遇到的工作情境中：原本怎麼卡住、工具可能怎麼幫忙、還想請對方補充什麼。交流時可以先選一個功能或幫助類型，再請對方回應「這是不是實務上會發生」「哪裡不準」「還缺哪些情境」。</p>
         </div>
       </div>
 
-      <div class="filter-stack" aria-label="矩陣篩選">
+      <div class="filter-stack" aria-label="功能情境篩選">
         <div>
           <div class="switch-label">功能分類</div>
           <div class="module-switch" id="matrixModuleSwitch" role="tablist" aria-label="功能分類切換"></div>
@@ -662,11 +662,11 @@
       </div>
 
       <div class="filter-summary">
-        <span id="resultCount">正在載入矩陣。</span>
-        <span>提示：手機會自動改成卡片版，列印時會隱藏篩選工具。</span>
+        <span id="resultCount">正在載入功能情境。</span>
+        <span>提示：手機會自動改成卡片版；可直接點功能分類或幫助類型切換討論方向。</span>
       </div>
 
-      <div class="table-wrap" aria-label="桌機矩陣表格">
+      <div class="table-wrap" aria-label="桌機功能情境表格">
         <table>
           <thead>
             <tr>
@@ -682,14 +682,14 @@
           <tbody id="matrixTableBody"></tbody>
         </table>
       </div>
-      <div class="matrix-cards" id="matrixCards" aria-label="手機矩陣卡片"></div>
+      <div class="matrix-cards" id="matrixCards" aria-label="手機功能情境卡片"></div>
     </section>
 
     <section id="modules" class="view-panel" data-view-panel hidden>
       <div class="section-head">
         <div>
           <h2>功能總覽</h2>
-          <p class="section-note">把目前工具依用途分開看，適合先讓對方理解每一組功能在處理哪一類工作情境。</p>
+          <p class="section-note">先快速看目前有哪些工具。若對方對某一組功能有感，再回到「功能情境」頁，討論它在實務流程裡是否真的用得到。</p>
         </div>
       </div>
       <div id="moduleAccordion"></div>
@@ -699,7 +699,7 @@
       <div class="section-head">
         <div>
           <h2>這些功能可能帶來的幫助</h2>
-          <p class="section-note">下面把工具可能帶來的幫助整理成六個方向，例如省時間、幫新人上手、讓家屬比較看得懂。點選分類後，可以回到功能情境頁查看相關功能。</p>
+          <p class="section-note">這裡把功能翻成 A 單位比較容易討論的六種幫助，例如省時間、幫新人上手、讓家屬比較看得懂。點選分類後，可以回到功能情境頁看有哪些功能與情境相關。</p>
         </div>
       </div>
       <div class="value-grid" id="valueGrid"></div>
@@ -709,7 +709,7 @@
       <div class="section-head">
         <div>
           <h2>從情境反推功能</h2>
-          <p class="section-note">交流時可以先讓對方講工作情境，再回到分類與功能，不急著推某一個工具。</p>
+          <p class="section-note">如果對方一開始不想看功能，可以先請他們描述最近最常卡住的工作情境，再反推可能需要哪一類幫助與哪一組工具。</p>
         </div>
       </div>
       <div class="scenario-grid" id="scenarioGrid"></div>

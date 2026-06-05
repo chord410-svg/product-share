@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ob-online 功能情境與 A 單位經營價值矩陣</title>
+  <title>ob-online 長照個管工具交流說明</title>
   <style>
     :root {
       --bg: #f6f7f4;
@@ -373,7 +373,7 @@
       color: var(--warm);
       font-weight: 800;
       font-size: 0.8rem;
-      white-space: nowrap;
+      line-height: 1.35;
     }
 
     .chips {
@@ -622,15 +622,15 @@
     <header class="topbar">
       <div>
         <p class="kicker">ob-online 交流工作頁</p>
-        <h1>功能情境與 A 單位經營價值矩陣</h1>
-        <p class="summary">這份頁面用來把現有功能拆成「個管師遇到的工作情境、原本痛點、工具解法、A 單位可感受到的價值、可追問的回饋問題」。定位是低壓交流與訪談引導，不是正式採購文件。</p>
+        <h1>長照個管輔助工具交流說明</h1>
+        <p class="summary">這頁整理目前工具可以協助哪些日常工作情境、原本卡在哪裡、工具怎麼幫忙，以及想請個管師與督導回饋的問題。定位是試用交流與討論，不是正式採購文件。</p>
       </div>
       <button class="print-btn" id="printPage" type="button">列印目前結果</button>
     </header>
 
     <div class="view-tabs" role="tablist" aria-label="主要畫面切換">
-      <button class="view-tab is-active" type="button" role="tab" aria-selected="true" data-view-target="matrix">功能矩陣</button>
-      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="modules">A-G 模組</button>
+      <button class="view-tab is-active" type="button" role="tab" aria-selected="true" data-view-target="matrix">功能情境</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="modules">功能總覽</button>
       <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="values">價值分類</button>
       <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="reverse">情境反推</button>
     </div>
@@ -638,16 +638,16 @@
     <section id="matrix" class="view-panel is-active" data-view-panel>
       <div class="section-head">
         <div>
-          <h2>可篩選功能矩陣</h2>
-          <p class="section-note">先用 A-G 模組切換或價值分類找到想討論的功能列，再用「複製追問」把回饋問題帶到訪談紀錄或簡報備註。</p>
+          <h2>功能與使用情境對照</h2>
+          <p class="section-note">先用功能分類或價值分類找到想討論的功能，再用「複製追問」把回饋問題帶到訪談紀錄或簡報備註。</p>
         </div>
       </div>
 
-      <div class="module-switch" id="matrixModuleSwitch" role="tablist" aria-label="功能模組切換"></div>
+      <div class="module-switch" id="matrixModuleSwitch" role="tablist" aria-label="功能分類切換"></div>
 
       <div class="controls" aria-label="矩陣篩選">
         <label>
-          經營價值分類
+          幫助類型
           <select id="valueFilter"></select>
         </label>
         <button class="ghost-btn" id="clearFilters" type="button">清除篩選</button>
@@ -662,12 +662,12 @@
         <table>
           <thead>
             <tr>
-              <th>模組</th>
+              <th>工具</th>
               <th>子功能</th>
               <th>解決情境</th>
               <th>原本痛點</th>
               <th>工具解法</th>
-              <th>價值分類</th>
+              <th>可能帶來的幫助</th>
               <th>追問</th>
             </tr>
           </thead>
@@ -680,8 +680,8 @@
     <section id="modules" class="view-panel" data-view-panel hidden>
       <div class="section-head">
         <div>
-          <h2>A-G 模組展開檢視</h2>
-          <p class="section-note">把所有功能依 A-G 模組分開看，適合先讓對方理解每一組工具在處理哪一類工作情境。</p>
+          <h2>功能總覽</h2>
+          <p class="section-note">把目前工具依用途分開看，適合先讓對方理解每一組功能在處理哪一類工作情境。</p>
         </div>
       </div>
       <div id="moduleAccordion"></div>
@@ -690,8 +690,8 @@
     <section id="values" class="view-panel" data-view-panel hidden>
       <div class="section-head">
         <div>
-          <h2>價值分類字典</h2>
-          <p class="section-note">這九個分類把「功能」翻成 A 單位比較容易討論的經營語言。點擊分類 chip 可以套用到矩陣篩選。</p>
+          <h2>這些功能可能帶來的幫助</h2>
+          <p class="section-note">下面把工具可能帶來的幫助整理成幾個方向，例如省時間、幫新人上手、讓家屬比較看得懂。點選分類後，可以回到功能情境頁查看相關功能。</p>
         </div>
       </div>
       <div class="value-grid" id="valueGrid"></div>
@@ -752,46 +752,47 @@
       },
       {
         name: "管理透明度與營運洞察",
-        definition: "用單位身份、功能使用紀錄、服務狀態與報告雛形理解工具使用情況。",
-        reason: "主管想知道工具是否真的被用、誰需要協助、哪些情境需求最多。"
+        definition: "用單位身份、回饋紀錄與維護流程，讓主管知道哪些情境需要被整理或改善。",
+        reason: "主管想知道哪些需求最常出現、哪些資料需要更新、哪些流程需要協助。"
       }
     ];
 
     const moduleInfo = [
       {
         key: "A",
+        shortName: "資源導航",
         name: "長照資源導航與案家資源包",
         intro: "把資源查找、篩選、保存、家屬轉述、電話確認、行政準備與交接摘要串在一起，是最適合先展示情境導向的模組。"
       },
       {
         key: "B",
+        shortName: "補助計算",
         name: "長照補助計算與 Web 結果頁",
         intro: "處理初步說明、快速估算與家屬可重看的情境，但需清楚保留正式補助核定邊界。"
       },
       {
         key: "C",
+        shortName: "輔具查詢",
         name: "輔具查詢與產品說明",
         intro: "協助個管師從照護情境找到可能方向，再轉成家屬看得懂的圖片、名稱與差異說明。"
       },
       {
         key: "D",
+        shortName: "廠商地圖",
         name: "特約輔具廠商地圖查詢",
         intro: "把名冊與地理位置結合，回應家屬對附近可詢問、報價或試看地點的需求。"
       },
       {
         key: "E",
+        shortName: "專業搜尋",
         name: "專業報告搜尋輔助",
         intro: "把口語照顧情境轉成較專業的搜尋問題，協助個管師找到查詢方向，不替代專業判斷。"
       },
       {
         key: "F",
+        shortName: "單位身份",
         name: "單位身份領取",
-        intro: "支撐多人測試、單位使用紀錄、權限管理與後續單位層級報告。"
-      },
-      {
-        key: "G",
-        name: "使用紀錄、系統管理與月／季度報告示範",
-        intro: "回答主管關心的使用狀況、服務狀態、資料健康與未來報告可能性。"
+        intro: "支撐多人測試、單位辨識、權限管理與後續單位層級討論。"
       }
     ];
 
@@ -858,13 +859,7 @@
       row("F", "單位選擇", "多個 A 單位或同一伺服器多人使用時，需要知道使用者屬於哪個單位。", "如果只看 Discord 名稱，後續無法統計或管理。", "使用者在 Discord 領取所屬單位身份，建立使用者與單位對照。", ["管理透明度與營運洞察", "風險治理與個資安全"], "測試時需要分單位統計嗎？還是先不做？", ["負責人", "督導"]),
       row("F", "暱稱格式", "Discord 成員列表需要快速看出單位與編號。", "使用者暱稱混亂，督導或管理者難辨識。", "嘗試將暱稱改成單位前綴加編號。", ["管理透明度與營運洞察"], "對方是否接受在 Discord 顯示單位名稱？", ["負責人"]),
       row("F", "不存個案資料聲明", "單位擔心身份流程會收集個案資訊。", "新系統最容易被擔心個資與權限。", "明確說明只記錄單位與操作者身份，不存個案姓名、電話、身分證或完整地址。", ["風險治理與個資安全"], "這段說明是否足以降低單位疑慮？", ["負責人", "督導"]),
-      row("F", "管理員新增與更新單位", "新增測試單位或修改單位名稱時。", "手動管理容易出錯，且正式代碼不宜頻繁變動。", "提供新增與更新單位表單，區分系統代碼與顯示前綴。", ["管理透明度與營運洞察", "新人訓練與單位知識保存"], "單位名稱、代碼與暱稱顯示要怎麼設計才不混亂？", ["管理者"]),
-
-      row("G", "使用紀錄", "主管想知道哪些功能真的被個管師使用。", "只靠口頭回饋，無法知道工具是否有黏著度。", "保存功能使用紀錄，用於除錯、統計與改善。", ["管理透明度與營運洞察"], "主管想看的是使用次數、使用者、功能類型，還是需求主題？", ["負責人", "督導"]),
-      row("G", "服務狀態", "工具很多，某個服務壞掉時需要判斷影響範圍。", "使用者只會覺得整個壞了，管理者難判斷。", "系統管理可查看服務是否正常、版本與資料庫狀態。", ["管理透明度與營運洞察", "風險治理與個資安全"], "測試時需要一個簡單狀態頁給管理者看嗎？", ["管理者"]),
-      row("G", "資料健康檢查", "JSON、SQLite、圖片、分享頁、搜尋資料都會影響功能。", "資料壞掉時不一定立刻發現。", "系統管理可檢查資料是否可讀，協助維護。", ["風險治理與個資安全", "評鑑佐證與流程留痕"], "誰應該負責通報資料錯誤？誰負責審核？", ["督導", "管理者"]),
-      row("G", "月／季度報告示範", "主管想知道未來是否能按單位產生使用摘要。", "只看零散使用紀錄，不容易看出整體價值。", "提供示範版單位報告概念，未來可依正式資料整理摘要。", ["管理透明度與營運洞察", "單位品牌與服務差異化"], "主管最想在月報看到哪些指標？", ["負責人", "督導"]),
-      row("G", "單位需求觀察", "工具長期使用後，可看出哪些情境最常被查。", "開發方向容易只靠印象，不知道實際需求密度。", "以使用紀錄與回饋資料觀察功能需求。", ["管理透明度與營運洞察", "資源網絡與地方能見度"], "如果要決定下一輪開發，哪些需求數據最有說服力？", ["負責人"])
+      row("F", "管理員新增與更新單位", "新增測試單位或修改單位名稱時。", "手動管理容易出錯，且正式代碼不宜頻繁變動。", "提供新增與更新單位表單，區分系統代碼與顯示前綴。", ["管理透明度與營運洞察", "新人訓練與單位知識保存"], "單位名稱、代碼與暱稱顯示要怎麼設計才不混亂？", ["管理者"])
     ];
 
     const scenarioRows = [
@@ -874,7 +869,7 @@
       scenario("紙本資料夾很多，但大家更新速度不同。", ["新人訓練與單位知識保存", "資源網絡與地方能見度"], "長照資源導航、維護回報、原始資料追溯", "現在誰負責更新資料？多久更新一次？"),
       scenario("電話確認常漏問文件、資格或受理狀態。", ["行政效率與人力成本", "評鑑佐證與流程留痕"], "資源包電話確認、行政清單", "哪些資源最需要電話確認模板？"),
       scenario("交接時同事不知道前一位個管為何選這些資源。", ["評鑑佐證與流程留痕", "新人訓練與單位知識保存"], "資源包交接摘要、完整資料工作頁", "交接時最常漏掉原因還是下一步？"),
-      scenario("督導想知道工具到底有沒有被用。", ["管理透明度與營運洞察"], "單位身份、使用紀錄、月／季度報告示範", "督導需要看個人、單位，還是功能層級統計？"),
+      scenario("督導想知道哪些資料最需要被更新或補強。", ["管理透明度與營運洞察"], "資源維護回報、單位身份領取、交接摘要", "督導比較想看資源錯誤、個管師需求，還是家屬常問問題？"),
       scenario("單位希望家屬覺得服務比較有系統。", ["單位品牌與服務差異化", "家屬溝通與服務體驗"], "Web 結果頁、QR、家屬版輸出、輔具分享頁", "哪一種輸出最能讓家屬感覺清楚？"),
       scenario("擔心 AI 或 Discord 牽涉個資。", ["風險治理與個資安全"], "私密輸出、個資阻擋、安全聲明、身份領取", "哪些資料你們會完全禁止輸入？"),
       scenario("個管師不知道怎麼寫專業目標或查專業資料。", ["專業可信度與服務品質", "新人訓練與單位知識保存"], "專業報告搜尋、查詢提示、邊界提醒", "比較需要專業關鍵字、範例目標，還是資料搜尋方向？")
@@ -887,6 +882,7 @@
         id: `${moduleKey}-${feature}`,
         moduleKey,
         module: moduleByKey[moduleKey]?.name || moduleKey,
+        moduleShortName: moduleByKey[moduleKey]?.shortName || moduleByKey[moduleKey]?.name || moduleKey,
         feature,
         scenario: scenarioText,
         pain,
@@ -926,7 +922,7 @@
     function fillSelects() {
       const valueFilter = document.getElementById("valueFilter");
 
-      valueFilter.innerHTML = `<option value="">全部價值分類</option>` + valueCategories
+      valueFilter.innerHTML = `<option value="">全部幫助類型</option>` + valueCategories
         .map((category) => `<option value="${escapeHtml(category.name)}">${escapeHtml(category.name)}</option>`)
         .join("");
     }
@@ -946,13 +942,14 @@
         { key: "", label: "全部", count: matrixRows.length },
         ...moduleInfo.map((module) => ({
           key: module.key,
-          label: module.key,
+          label: module.shortName,
+          title: module.name,
           count: matrixRows.filter((item) => item.moduleKey === module.key).length
         }))
       ];
 
       container.innerHTML = items.map((item) => `
-        <button class="module-switch-btn${item.key === activeModuleKey ? " is-active" : ""}" type="button" data-module-key="${escapeHtml(item.key)}" aria-pressed="${item.key === activeModuleKey ? "true" : "false"}">
+        <button class="module-switch-btn${item.key === activeModuleKey ? " is-active" : ""}" type="button" data-module-key="${escapeHtml(item.key)}" aria-pressed="${item.key === activeModuleKey ? "true" : "false"}" title="${escapeHtml(item.title || item.label)}">
           <span>${escapeHtml(item.label)}</span>
           <span class="module-count">${item.count}</span>
         </button>
@@ -960,7 +957,7 @@
     }
 
     function setActiveModule(moduleKey) {
-      activeModuleKey = moduleKey;
+      activeModuleKey = moduleKey && moduleInfo.some((module) => module.key === moduleKey) ? moduleKey : "";
       renderModuleSwitch();
       renderMatrix();
     }
@@ -985,7 +982,7 @@
 
       body.innerHTML = rows.map((item) => `
         <tr>
-          <td><span class="module-tag">${escapeHtml(item.moduleKey)}</span><br>${escapeHtml(item.module)}</td>
+          <td><span class="module-tag">${escapeHtml(item.module)}</span></td>
           <td><strong>${escapeHtml(item.feature)}</strong></td>
           <td>${escapeHtml(item.scenario)}</td>
           <td>${escapeHtml(item.pain)}</td>
@@ -1000,7 +997,7 @@
 
       cards.innerHTML = rows.map((item) => `
         <article class="matrix-card">
-          <span class="module-tag">${escapeHtml(item.moduleKey)}. ${escapeHtml(item.module)}</span>
+          <span class="module-tag">${escapeHtml(item.module)}</span>
           <h3>${escapeHtml(item.feature)}</h3>
           <dl>
             <dt>解決情境</dt>
@@ -1009,7 +1006,7 @@
             <dd>${escapeHtml(item.pain)}</dd>
             <dt>工具解法</dt>
             <dd>${escapeHtml(item.solution)}</dd>
-            <dt>價值分類</dt>
+            <dt>可能帶來的幫助</dt>
             <dd>${chipList(item.values)}</dd>
             <dt>追問</dt>
             <dd>
@@ -1030,7 +1027,7 @@
         return `
           <details ${index === 0 ? "open" : ""}>
             <summary>
-              <span>${escapeHtml(module.key)}. ${escapeHtml(module.name)}</span>
+              <span>${escapeHtml(module.name)}</span>
               <span class="summary-meta">${rows.length} 個子功能</span>
             </summary>
             <div class="accordion-body">

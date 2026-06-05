@@ -236,11 +236,9 @@
       font-size: 0.94rem;
     }
 
-    .controls {
+    .filter-stack {
       display: grid;
-      grid-template-columns: minmax(220px, 1fr) auto;
-      gap: 10px;
-      align-items: end;
+      gap: 12px;
       padding: 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -248,14 +246,22 @@
       box-shadow: var(--shadow);
     }
 
-    .module-switch {
+    .switch-label {
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .module-switch,
+    .value-switch {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 12px;
     }
 
-    .module-switch-btn {
+    .module-switch-btn,
+    .value-switch-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -270,12 +276,14 @@
       cursor: pointer;
     }
 
-    .module-switch-btn:hover {
+    .module-switch-btn:hover,
+    .value-switch-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
 
-    .module-switch-btn.is-active {
+    .module-switch-btn.is-active,
+    .value-switch-btn.is-active {
       border-color: var(--warm);
       background: var(--warm-soft);
       color: var(--warm);
@@ -473,9 +481,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .controls {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
     }
 
     @media (max-width: 760px) {
@@ -494,7 +499,6 @@
       }
 
       .value-grid,
-      .controls,
       .feature-list,
       .scenario-grid {
         grid-template-columns: 1fr;
@@ -509,12 +513,14 @@
         flex: 1 1 40%;
       }
 
-      .module-switch {
+      .module-switch,
+      .value-switch {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .module-switch-btn {
+      .module-switch-btn,
+      .value-switch-btn {
         justify-content: center;
       }
 
@@ -580,7 +586,7 @@
       }
 
       .view-tabs,
-      .controls,
+      .filter-stack,
       .filter-summary,
       .copy-btn,
       .print-btn,
@@ -643,13 +649,15 @@
         </div>
       </div>
 
-      <div class="module-switch" id="matrixModuleSwitch" role="tablist" aria-label="功能分類切換"></div>
-
-      <div class="controls" aria-label="矩陣篩選">
-        <label>
-          幫助類型
-          <select id="valueFilter"></select>
-        </label>
+      <div class="filter-stack" aria-label="矩陣篩選">
+        <div>
+          <div class="switch-label">功能分類</div>
+          <div class="module-switch" id="matrixModuleSwitch" role="tablist" aria-label="功能分類切換"></div>
+        </div>
+        <div>
+          <div class="switch-label">幫助類型</div>
+          <div class="value-switch" id="matrixValueSwitch" role="tablist" aria-label="幫助類型切換"></div>
+        </div>
         <button class="ghost-btn" id="clearFilters" type="button">清除篩選</button>
       </div>
 
@@ -772,12 +780,6 @@
         shortName: "專業搜尋",
         name: "專業報告搜尋輔助",
         intro: "把口語照顧情境轉成較專業的搜尋問題，協助個管師找到查詢方向，不替代專業判斷。"
-      },
-      {
-        key: "F",
-        shortName: "單位身份",
-        name: "單位身份領取",
-        intro: "支撐多人測試、單位辨識、權限管理與後續單位層級討論。"
       }
     ];
 
@@ -839,12 +841,7 @@
       row("E", "不抓外部搜尋結果", "系統只協助組問題，不把外部答案直接存回系統。", "若直接整理外部答案，可能有正確性與責任風險。", "只產生搜尋連結，不抓取搜尋結果。", ["資料安全與責任邊界"], "這樣的邊界是否足夠安心？還是會覺得太不方便？", ["督導", "負責人"]),
       row("E", "個資阻擋", "個管師不小心輸入姓名、電話、地址、身分證或病歷號。", "AI 流程若吃到個資，會造成安全疑慮。", "偵測可能個資時阻擋處理，要求移除後重試。", ["資料安全與責任邊界", "評鑑佐證與流程管理"], "個資阻擋要多嚴格？太嚴會不會影響使用？", ["督導", "負責人"]),
       row("E", "專業邊界提醒", "個管師需要知道這不是診斷、醫囑或治療建議。", "搜尋輔助容易被誤解成專業判斷。", "每次結果保留報告撰寫與資料搜尋輔助定位。", ["資料安全與責任邊界", "家屬溝通與專業說明"], "哪些字眼會讓照專或主管誤解成醫療建議？", ["督導"]),
-      row("E", "背景處理", "搜尋問題整理需要等待，系統完成後私密回覆。", "若等太久或公開回覆，使用體驗與安全都不好。", "任務排入背景處理，完成後私密回覆操作者。", ["評鑑佐證與流程管理", "資料安全與責任邊界"], "等待多久是可以接受的？完成通知要在哪裡出現？", ["個管師"]),
-
-      row("F", "單位選擇", "多個 A 單位或同一伺服器多人使用時，需要知道使用者屬於哪個單位。", "如果只看 Discord 名稱，後續無法統計或管理。", "使用者在 Discord 領取所屬單位身份，建立使用者與單位對照。", ["評鑑佐證與流程管理", "資料安全與責任邊界"], "測試時需要分單位統計嗎？還是先不做？", ["負責人", "督導"]),
-      row("F", "暱稱格式", "Discord 成員列表需要快速看出單位與編號。", "使用者暱稱混亂，督導或管理者難辨識。", "嘗試將暱稱改成單位前綴加編號。", ["評鑑佐證與流程管理"], "對方是否接受在 Discord 顯示單位名稱？", ["負責人"]),
-      row("F", "不存個案資料聲明", "單位擔心身份流程會收集個案資訊。", "新系統最容易被擔心個資與權限。", "明確說明只記錄單位與操作者身份，不存個案姓名、電話、身分證或完整地址。", ["資料安全與責任邊界"], "這段說明是否足以降低單位疑慮？", ["負責人", "督導"]),
-      row("F", "管理員新增與更新單位", "新增測試單位或修改單位名稱時。", "手動管理容易出錯，且正式代碼不宜頻繁變動。", "提供新增與更新單位表單，區分系統代碼與顯示前綴。", ["評鑑佐證與流程管理", "新人上手與知識保存"], "單位名稱、代碼與暱稱顯示要怎麼設計才不混亂？", ["管理者"])
+      row("E", "背景處理", "搜尋問題整理需要等待，系統完成後私密回覆。", "若等太久或公開回覆，使用體驗與安全都不好。", "任務排入背景處理，完成後私密回覆操作者。", ["評鑑佐證與流程管理", "資料安全與責任邊界"], "等待多久是可以接受的？完成通知要在哪裡出現？", ["個管師"])
     ];
 
     const scenarioRows = [
@@ -854,13 +851,14 @@
       scenario("紙本資料夾很多，但大家更新速度不同。", ["新人上手與知識保存", "資源整理與地方連結"], "長照資源導航、維護回報、原始資料追溯", "現在誰負責更新資料？多久更新一次？"),
       scenario("電話確認常漏問文件、資格或受理狀態。", ["節省時間與行政減量", "評鑑佐證與流程管理"], "資源包電話確認、行政清單", "哪些資源最需要電話確認模板？"),
       scenario("交接時同事不知道前一位個管為何選這些資源。", ["評鑑佐證與流程管理", "新人上手與知識保存"], "資源包交接摘要、完整資料工作頁", "交接時最常漏掉原因還是下一步？"),
-      scenario("督導想知道哪些資料最需要被更新或補強。", ["評鑑佐證與流程管理"], "資源維護回報、單位身份領取、交接摘要", "督導比較想看資源錯誤、個管師需求，還是家屬常問問題？"),
+      scenario("督導想知道哪些資料最需要被更新或補強。", ["評鑑佐證與流程管理"], "資源維護回報、完整資料工作頁、交接摘要", "督導比較想看資源錯誤、個管師需求，還是家屬常問問題？"),
       scenario("單位希望家屬覺得服務比較有系統。", ["家屬溝通與專業說明", "家屬溝通與專業說明"], "Web 結果頁、QR、家屬版輸出、輔具分享頁", "哪一種輸出最能讓家屬感覺清楚？"),
-      scenario("擔心 AI 或 Discord 牽涉個資。", ["資料安全與責任邊界"], "私密輸出、個資阻擋、安全聲明、身份領取", "哪些資料你們會完全禁止輸入？"),
+      scenario("擔心 AI 或 Discord 牽涉個資。", ["資料安全與責任邊界"], "私密輸出、個資阻擋、安全聲明、正式核定提醒", "哪些資料你們會完全禁止輸入？"),
       scenario("個管師不知道怎麼寫專業目標或查專業資料。", ["家屬溝通與專業說明", "新人上手與知識保存"], "專業報告搜尋、查詢提示、邊界提醒", "比較需要專業關鍵字、範例目標，還是資料搜尋方向？")
     ];
 
     let activeModuleKey = "";
+    let activeValueName = "";
 
     function row(moduleKey, feature, scenarioText, pain, solution, values, question) {
       return {
@@ -904,20 +902,10 @@
       `).join("");
     }
 
-    function fillSelects() {
-      const valueFilter = document.getElementById("valueFilter");
-
-      valueFilter.innerHTML = `<option value="">全部幫助類型</option>` + valueCategories
-        .map((category) => `<option value="${escapeHtml(category.name)}">${escapeHtml(category.name)}</option>`)
-        .join("");
-    }
-
     function getFilteredRows() {
-      const valueValue = document.getElementById("valueFilter").value;
-
       return matrixRows.filter((item) => {
         return (!activeModuleKey || item.moduleKey === activeModuleKey)
-          && (!valueValue || item.values.includes(valueValue));
+          && (!activeValueName || item.values.includes(activeValueName));
       });
     }
 
@@ -941,9 +929,44 @@
       `).join("");
     }
 
+    function renderValueSwitch() {
+      const container = document.getElementById("matrixValueSwitch");
+      const rowsForCurrentModule = matrixRows.filter((item) => !activeModuleKey || item.moduleKey === activeModuleKey);
+      const items = [
+        { value: "", label: "全部", count: rowsForCurrentModule.length },
+        ...valueCategories.map((category) => ({
+          value: category.name,
+          label: category.name,
+          count: rowsForCurrentModule.filter((item) => item.values.includes(category.name)).length
+        }))
+      ];
+
+      container.innerHTML = items.map((item) => `
+        <button class="value-switch-btn${item.value === activeValueName ? " is-active" : ""}" type="button" data-value-key="${escapeHtml(item.value)}" aria-pressed="${item.value === activeValueName ? "true" : "false"}">
+          <span>${escapeHtml(item.label)}</span>
+          <span class="module-count">${item.count}</span>
+        </button>
+      `).join("");
+    }
+
     function setActiveModule(moduleKey) {
       activeModuleKey = moduleKey && moduleInfo.some((module) => module.key === moduleKey) ? moduleKey : "";
       renderModuleSwitch();
+      renderValueSwitch();
+      renderMatrix();
+    }
+
+    function setActiveValue(valueName) {
+      activeValueName = valueName && valueCategories.some((category) => category.name === valueName) ? valueName : "";
+      renderValueSwitch();
+      renderMatrix();
+    }
+
+    function clearFilters() {
+      activeModuleKey = "";
+      activeValueName = "";
+      renderModuleSwitch();
+      renderValueSwitch();
       renderMatrix();
     }
 
@@ -1096,12 +1119,7 @@
         button.addEventListener("click", () => setActiveView(button.dataset.viewTarget));
       });
 
-      document.getElementById("valueFilter").addEventListener("input", renderMatrix);
-
-      document.getElementById("clearFilters").addEventListener("click", () => {
-        document.getElementById("valueFilter").value = "";
-        setActiveModule("");
-      });
+      document.getElementById("clearFilters").addEventListener("click", clearFilters);
 
       document.getElementById("printPage").addEventListener("click", () => window.print());
 
@@ -1112,10 +1130,15 @@
           return;
         }
 
+        const valueButton = event.target.closest("[data-value-key]");
+        if (valueButton) {
+          setActiveValue(valueButton.dataset.valueKey);
+          return;
+        }
+
         const valueChip = event.target.closest("[data-value-chip]");
         if (valueChip) {
-          document.getElementById("valueFilter").value = valueChip.dataset.valueChip;
-          renderMatrix();
+          setActiveValue(valueChip.dataset.valueChip);
           setActiveView("matrix");
           return;
         }
@@ -1131,8 +1154,8 @@
 
     function init() {
       renderValueGrid();
-      fillSelects();
       renderModuleSwitch();
+      renderValueSwitch();
       renderMatrix();
       renderAccordion();
       renderScenarioGrid();

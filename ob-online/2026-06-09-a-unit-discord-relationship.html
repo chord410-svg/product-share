@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A 單位 Discord 關係搭建說明頁</title>
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --panel: #ffffff;
+      --panel-soft: #eef3ef;
+      --ink: #1f2925;
+      --muted: #66736e;
+      --line: #d8ded8;
+      --accent: #1f6f5d;
+      --accent-dark: #155041;
+      --accent-soft: #e1f0eb;
+      --warm: #a76633;
+      --warm-soft: #f6eadf;
+      --danger: #8e3c35;
+      --danger-soft: #f5e8e6;
+      --blue: #335f82;
+      --blue-soft: #e6eef5;
+      --shadow: 0 8px 24px rgba(35, 44, 40, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      margin: 0 0 6px;
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 880px;
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      margin: 12px 0 0;
+      max-width: 900px;
+      color: var(--muted);
+    }
+
+    .print-btn,
+    .copy-btn,
+    .ghost-btn,
+    .chip {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .print-btn {
+      padding: 10px 14px;
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .ghost-btn {
+      padding: 8px 12px;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .copy-btn {
+      padding: 7px 10px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: var(--panel-soft);
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .chip.warm {
+      background: var(--warm-soft);
+      color: var(--warm);
+    }
+
+    .chip.blue {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .chip.danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .chip:hover,
+    .ghost-btn:hover,
+    .copy-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .panel,
+    .value-card,
+    .phase-card,
+    .model-card,
+    .script-card,
+    .check-card,
+    .matrix-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 0;
+    }
+
+    .value-card {
+      padding: 14px;
+    }
+
+    .value-card h3,
+    .phase-card h3,
+    .model-card h3,
+    .script-card h3,
+    .check-card h3,
+    .matrix-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .value-card p,
+    .phase-card p,
+    .model-card p,
+    .script-card p,
+    .check-card p,
+    .matrix-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .view-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 -4px 22px;
+      padding: 10px 4px;
+      background: rgba(246, 247, 244, 0.95);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .view-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .view-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .view-tab.is-active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .view-panel[hidden] {
+      display: none !important;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.42rem;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .logic-grid,
+    .phase-grid,
+    .model-grid,
+    .script-grid,
+    .check-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .logic-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .phase-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .model-grid,
+    .script-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .check-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel,
+    .phase-card,
+    .model-card,
+    .script-card,
+    .check-card {
+      padding: 14px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 110px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      width: 14px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--accent-dark);
+      font-size: 0.95rem;
+    }
+
+    .flow-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .warning-list,
+    .field-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .warning-list li,
+    .field-list li {
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+    }
+
+    .warning-list li {
+      border-color: #ead0cc;
+      background: var(--danger-soft);
+    }
+
+    .warning-list strong,
+    .field-list strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+    }
+
+    .warning-list span,
+    .field-list span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .phase-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      margin-bottom: 8px;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: var(--warm-soft);
+      color: var(--warm);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .phase-card dl {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 0;
+    }
+
+    .phase-card dt,
+    .matrix-card dt {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .phase-card dd,
+    .matrix-card dd {
+      margin: 2px 0 0;
+      font-size: 0.94rem;
+    }
+
+    .quote-block {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .bad-quote {
+      border-left-color: var(--danger);
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 930px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #eef3ef;
+      color: #31413b;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    td {
+      font-size: 0.93rem;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .matrix-cards {
+      display: none;
+    }
+
+    .model-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .model-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .script-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+      color: var(--ink);
+      padding: 10px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Noto Sans Mono CJK TC", monospace;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .script-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footnote {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .check-card label {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+
+    .check-card input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .check-card strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .check-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .status-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .status-panel strong {
+      color: var(--accent-dark);
+    }
+
+    @media (max-width: 980px) {
+      .top-grid,
+      .phase-grid,
+      .check-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .logic-grid,
+      .model-grid,
+      .script-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 22px, 720px);
+        padding-top: 12px;
+      }
+
+      .topbar {
+        display: block;
+      }
+
+      .print-btn {
+        margin-top: 14px;
+        width: 100%;
+      }
+
+      .top-grid,
+      .phase-grid,
+      .model-grid,
+      .script-grid,
+      .check-grid,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .view-tabs {
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .view-tab {
+        flex: 1 1 40%;
+      }
+
+      .section-head,
+      .status-panel {
+        display: block;
+      }
+
+      .status-panel .ghost-btn {
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      .table-wrap {
+        display: none;
+      }
+
+      .matrix-cards {
+        display: grid;
+        gap: 10px;
+      }
+
+      .matrix-card {
+        padding: 14px;
+      }
+
+      .matrix-card h3 {
+        margin: 8px 0 8px;
+        font-size: 1.05rem;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+
+      .matrix-card dl {
+        margin: 0;
+      }
+
+      textarea {
+        min-height: 230px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        width: 100%;
+        padding: 0;
+      }
+
+      .view-tabs,
+      .print-btn,
+      .copy-btn,
+      .ghost-btn,
+      .script-actions,
+      .status-panel {
+        display: none !important;
+      }
+
+      .topbar,
+      section,
+      .panel,
+      .value-card,
+      .phase-card,
+      .model-card,
+      .script-card,
+      .check-card,
+      .matrix-card {
+        box-shadow: none;
+      }
+
+      .view-panel[hidden] {
+        display: block !important;
+      }
+
+      .table-wrap {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 0;
+        font-size: 10px;
+      }
+
+      th,
+      td {
+        padding: 6px;
+      }
+
+      textarea {
+        border: 0;
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div>
+        <p class="kicker">A 單位合作策略工作頁</p>
+        <h1>用 Discord 工具與 A 單位建立長期合作關係</h1>
+        <p class="summary">不是免費送工具，而是以共創試用換取實務回饋、信任與合作可能。這份頁面用來整理對 A 單位、督導與合作夥伴說明的邏輯，也作為內部判斷何時談合作與收費的檢核表。</p>
+      </div>
+      <button class="print-btn" id="printPage" type="button">列印 / 另存 PDF</button>
+    </header>
+
+    <div class="top-grid" aria-label="三個核心定位">
+      <article class="value-card">
+        <h3>先創造價值</h3>
+        <p>讓個管師在補助、輔具、資源整理、家屬說明與交接上先感覺真的省力。</p>
+      </article>
+      <article class="value-card">
+        <h3>再建立關係</h3>
+        <p>用回饋訪談、資源修正、情境交流與共同調整，理解 A 單位實際需求。</p>
+      </article>
+      <article class="value-card">
+        <h3>最後談合作/收費</h3>
+        <p>等價值穩定後，再依參與深度區分共創單位、合作單位、一般使用單位。</p>
+      </article>
+    </div>
+
+    <div class="view-tabs" role="tablist" aria-label="主要畫面切換">
+      <button class="view-tab is-active" type="button" role="tab" aria-selected="true" data-view-target="logic">整體邏輯</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="phases">三階段路線</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="exchange">價值交換矩陣</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="models">合作與收費模式</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="scripts">對外說法</button>
+      <button class="view-tab" type="button" role="tab" aria-selected="false" data-view-target="checklist">檢核表</button>
+    </div>
+
+    <section id="logic" class="view-panel is-active" data-view-panel>
+      <div class="section-head">
+        <div>
+          <h2>整體邏輯</h2>
+          <p class="section-note">核心不是請 A 單位幫忙測產品，而是先用工具解決實務痛點，再把回饋、信任與合作線索轉成長期關係。</p>
+        </div>
+      </div>
+
+      <div class="logic-grid">
+        <article class="panel">
+          <h3>關係搭建流程</h3>
+          <p class="footnote">每一步都要有明確交換，不做無條件免費，也不把派案當成第一句話。</p>
+          <div class="flow" aria-label="關係搭建流程">
+            <div class="flow-step">
+              <strong>工具價值</strong>
+              <span>先讓個管師感覺查資料、整理說明、產出資源包比較省力。</span>
+            </div>
+            <div class="flow-step">
+              <strong>實務回饋</strong>
+              <span>交換每月回饋、錯誤修正、匿名情境與使用感受。</span>
+            </div>
+            <div class="flow-step">
+              <strong>信任建立</strong>
+              <span>讓 A 單位知道你在意專業邊界、個資與現場需求。</span>
+            </div>
+            <div class="flow-step">
+              <strong>合作案</strong>
+              <span>從實際使用中找出復能、輔具、資源盤點或教育訓練機會。</span>
+            </div>
+            <div class="flow-step">
+              <strong>維護/收費</strong>
+              <span>依參與深度設計低維護費、月費、專案費或合作案回收。</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h3>該避免</h3>
+          <ul class="warning-list">
+            <li>
+              <strong>不要太早談派案</strong>
+              <span>派案是信任後的結果，不是試用工具的前提條件。</span>
+            </li>
+            <li>
+              <strong>不要無條件免費</strong>
+              <span>免費期也要換回饋、情境、資料修正、案例或介紹機會。</span>
+            </li>
+            <li>
+              <strong>不要突然收費</strong>
+              <span>早期共創單位要有夥伴權益，後進使用者才照一般方案。</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="phases" class="view-panel" data-view-panel hidden>
+      <div class="section-head">
+        <div>
+          <h2>三階段路線</h2>
+          <p class="section-note">先驗證價值，再找合作案，最後制度化。每個階段都要知道要說什麼、不要說什麼。</p>
+        </div>
+      </div>
+
+      <div class="phase-grid">
+        <article class="phase-card">
+          <span class="phase-tag">階段一｜創始試用期</span>
+          <h3>1 到 3 個月，先證明工具有用</h3>
+          <dl>
+            <div>
+              <dt>目的</dt>
+              <dd>判斷工具是否真的能減少個管師查找、整理、轉述資訊的時間。</dd>
+            </div>
+            <div>
+              <dt>我方提供</dt>
+              <dd>Discord 封閉空間、補助計算、輔具查詢、廠商整理、資源導航、基本教學。</dd>
+            </div>
+            <div>
+              <dt>A 單位提供</dt>
+              <dd>每月回饋、錯誤修正、匿名情境、不含個資的實務建議。</dd>
+            </div>
+            <div>
+              <dt>進入下一階段條件</dt>
+              <dd>至少有一組功能被個管師持續使用，且督導能說出具體幫助。</dd>
+            </div>
+          </dl>
+          <div class="quote-block bad-quote">不要說：免費給你們用，以後希望可以多派案。</div>
+          <div class="quote-block">建議說：先以共創試用方式確認工具是否真的能幫上現場。</div>
+        </article>
+
+        <article class="phase-card">
+          <span class="phase-tag">階段二｜共創合作期</span>
+          <h3>從使用情境中找合作案</h3>
+          <dl>
+            <div>
+              <dt>目的</dt>
+              <dd>理解 A 單位真正痛點，找出復能、輔具、資源盤點、教育訓練等合作可能。</dd>
+            </div>
+            <div>
+              <dt>我方提供</dt>
+              <dd>功能調整、資源包設計、專業諮詢提案、流程整理與合作草案。</dd>
+            </div>
+            <div>
+              <dt>A 單位提供</dt>
+              <dd>更深的流程交流、需求優先順序、可合作情境與內部決策窗口。</dd>
+            </div>
+            <div>
+              <dt>進入下一階段條件</dt>
+              <dd>雙方能明確指出一個可執行合作項目，並確認工具維護價值。</dd>
+            </div>
+          </dl>
+          <div class="quote-block bad-quote">不要說：你們用了 Discord，所以應該給我們案子。</div>
+          <div class="quote-block">建議說：如果這段流程對貴單位有幫助，我們可以一起設計固定合作方式。</div>
+        </article>
+
+        <article class="phase-card">
+          <span class="phase-tag">階段三｜穩定關係期</span>
+          <h3>把關係制度化與成本回收</h3>
+          <dl>
+            <div>
+              <dt>目的</dt>
+              <dd>把共創成果轉成長期合作、維護方案、專案服務或一般訂閱。</dd>
+            </div>
+            <div>
+              <dt>我方提供</dt>
+              <dd>穩定維護、資料更新、功能支援、教育訓練、客製專案。</dd>
+            </div>
+            <div>
+              <dt>A 單位提供</dt>
+              <dd>合作案、低維護費、月費/年費、專案費或持續回饋。</dd>
+            </div>
+            <div>
+              <dt>進入下一階段條件</dt>
+              <dd>工具價值已被確認，且雙方知道用哪種方式回收成本。</dd>
+            </div>
+          </dl>
+          <div class="quote-block bad-quote">不要說：沒有合作就要收比較貴。</div>
+          <div class="quote-block">建議說：不同參與深度會對應不同維護與合作方案。</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="exchange" class="view-panel" data-view-panel hidden>
+      <div class="section-head">
+        <div>
+          <h2>價值交換矩陣</h2>
+          <p class="section-note">用交換項目來說明「免費」背後的互惠條件，讓合作不變成單方面消耗。</p>
+        </div>
+      </div>
+
+      <div class="table-wrap" aria-label="桌機價值交換表格">
+        <table>
+          <thead>
+            <tr>
+              <th>交換項目</th>
+              <th>A 單位得到</th>
+              <th>我方得到</th>
+              <th>適合階段</th>
+              <th>風險提醒</th>
+            </tr>
+          </thead>
+          <tbody id="exchangeTableBody"></tbody>
+        </table>
+      </div>
+      <div class="matrix-cards" id="exchangeCards" aria-label="手機價值交換卡片"></div>
+    </section>
+
+    <section id="models" class="view-panel" data-view-panel hidden>
+      <div class="section-head">
+        <div>
+          <h2>合作與收費模式</h2>
+          <p class="section-note">不要用「有合作就便宜，沒合作就收錢」的語氣；改成依參與深度設計不同方案。</p>
+        </div>
+      </div>
+
+      <div class="model-grid" id="modelGrid"></div>
+    </section>
+
+    <section id="scripts" class="view-panel" data-view-panel hidden>
+      <div class="section-head">
+        <div>
+          <h2>對外說法</h2>
+          <p class="section-note">這些文字可以直接複製改寫。開場先講共創與價值，不把派案或收費放在第一句。</p>
+        </div>
+      </div>
+
+      <div class="script-grid" id="scriptGrid"></div>
+    </section>
+
+    <section id="checklist" class="view-panel" data-view-panel hidden>
+      <div class="section-head">
+        <div>
+          <h2>檢核表</h2>
+          <p class="section-note">每談一家 A 單位前後都檢查一次：是否真的有交換、是否避免壓力、是否記錄到下一步。</p>
+        </div>
+      </div>
+
+      <div class="status-panel">
+        <div>
+          <strong id="checkStatus">尚未完成檢核。</strong>
+          <span class="footnote" id="checkHint">先確認共創價值，再談合作或收費。</span>
+        </div>
+        <button class="ghost-btn" id="resetChecklist" type="button">清除勾選</button>
+      </div>
+      <div class="check-grid" id="checkGrid"></div>
+    </section>
+  </main>
+
+  <script>
+    const exchangeRows = [
+      {
+        item: "免費使用",
+        unitGets: "取得 Discord 工具、補助計算、輔具查詢、資源導航與基本教學。",
+        weGet: "真實使用情境、功能優先順序、使用阻力與價值判斷。",
+        phase: "創始試用期",
+        risk: "要說明這是共創試用，不是無期限免費。"
+      },
+      {
+        item: "回饋訪談",
+        unitGets: "工具可依個管師與督導需求調整，優先修正實務卡點。",
+        weGet: "知道哪個功能有價值、哪個功能只是好看但不會用。",
+        phase: "創始試用期",
+        risk: "回饋頻率要輕量，避免讓 A 單位覺得被增加工作。"
+      },
+      {
+        item: "資源修正",
+        unitGets: "單位常用資源逐步數位化，錯誤或過期資料可以被回報。",
+        weGet: "累積地方資源資料庫與更新機制。",
+        phase: "創始試用期 / 共創合作期",
+        risk: "不能把單位私有資料直接變成公共資料，要先約定可用範圍。"
+      },
+      {
+        item: "匿名情境",
+        unitGets: "工具會更貼近實際案家問題，但不需要提供個資。",
+        weGet: "可用於改善提示詞、資源包、輔具說明與合作提案。",
+        phase: "創始試用期 / 共創合作期",
+        risk: "必須明確禁止姓名、電話、地址、病歷號等個資。"
+      },
+      {
+        item: "介紹其他單位",
+        unitGets: "早期共創單位可被視為創始夥伴，未來享有較佳條件。",
+        weGet: "降低陌生開發成本，擴大使用樣本。",
+        phase: "共創合作期",
+        risk: "不能要求背書，只能在對方覺得有幫助時請求交流介紹。"
+      },
+      {
+        item: "共同合作案",
+        unitGets: "取得復能、輔具、家屬溝通、資源盤點或教育訓練支援。",
+        weGet: "建立 B2B2C 服務入口與治療師專業合作機會。",
+        phase: "共創合作期 / 穩定關係期",
+        risk: "不要讓對方覺得工具只是導案包裝，合作要以需求為起點。"
+      },
+      {
+        item: "低年費 / 維護費",
+        unitGets: "保留工具、資料更新、基本支援與創始夥伴優惠。",
+        weGet: "部分回收伺服器、AI、維護與客服成本。",
+        phase: "穩定關係期",
+        risk: "早期協助開發者應有優惠，不宜突然改成一般價格。"
+      },
+      {
+        item: "一般月費 / 年費",
+        unitGets: "使用穩定版工具，不需要參與共創也可取得支援。",
+        weGet: "建立可預期現金流。",
+        phase: "穩定關係期",
+        risk: "月費只能在價值穩定後談，不能在驗證前當主訴求。"
+      }
+    ];
+
+    const models = [
+      {
+        name: "創始共創單位",
+        label: "早期回饋者",
+        price: "永久優惠、低維護費或部分功能免費",
+        value: "參與工具早期調整，優先影響功能方向。",
+        condition: "願意試用、定期回饋、協助修正資源或提供匿名情境。",
+        risk: "要尊重早期投入，不要在產品成熟後突然用一般價格對待。"
+      },
+      {
+        name: "合作單位",
+        label: "有實際合作案",
+        price: "低年費、免月費或由合作案回收成本",
+        value: "可一起設計復能、輔具、資源盤點、家屬衛教或教育訓練流程。",
+        condition: "雙方已有具體合作項目，且工具能支援合作流程。",
+        risk: "收費說法要放在維護與合作支援，不要變成派案交換。"
+      },
+      {
+        name: "一般使用單位",
+        label: "只使用工具",
+        price: "一般月費或年費",
+        value: "取得穩定版 Discord 工具、基本維護與一般支援。",
+        condition: "不參與共創、不提供資料修正，也沒有合作案。",
+        risk: "需要等功能價值穩定後再推，不宜一開始就主打。"
+      },
+      {
+        name: "專案服務單位",
+        label: "需要客製導入",
+        price: "另行報價",
+        value: "客製資源庫、教育訓練、評鑑文件整理、內部資源冊數位化。",
+        condition: "需求超出標準工具，或需要我方投入整理與顧問時間。",
+        risk: "要清楚界定交付內容，避免無限修改與免費顧問化。"
+      }
+    ];
+
+    const scripts = [
+      {
+        title: "初次介紹版",
+        text: "我們目前正在整理一套給 A 單位與個管師使用的 Discord 輔助工具，重點不是請貴單位立刻採用，而是希望先透過實務交流，確認這些功能是否真的能減少查資料、整理資源、轉述給家屬的時間。"
+      },
+      {
+        title: "免費共創試用版",
+        text: "前期我們希望採共創試用方式進行，貴單位可以先免費或低成本使用工具；我們也希望透過每月簡短回饋、錯誤修正與匿名實務情境，讓工具更貼近第一線工作。這不是無條件免費，而是用工具價值交換實務經驗與共同調整。"
+      },
+      {
+        title: "後續合作討論版",
+        text: "如果使用一段時間後，貴單位覺得工具在資源整理、輔具說明、家屬溝通或復能相關需求上有幫助，我們可以再一起討論是否設計固定合作流程，例如專業諮詢、資源包共建、居家復能合作或教育訓練。"
+      },
+      {
+        title: "未來收費轉換版",
+        text: "未來若工具進入穩定維護階段，我們會依參與深度設計不同方案。早期協助共創的單位會保留夥伴優惠；有實際合作案的單位可採低維護費或合作回收；單純使用工具的一般單位則會採一般訂閱或維護方案。"
+      }
+    ];
+
+    const checks = [
+      {
+        title: "A 單位是否先感覺有價值",
+        detail: "至少能說出一個個管師會想用的情境，而不是只覺得概念有趣。"
+      },
+      {
+        title: "是否有明確回饋機制",
+        detail: "約定回饋頻率、回饋方式與要回收的重點，不讓試用變成模糊聊天。"
+      },
+      {
+        title: "是否記錄合作線索",
+        detail: "把復能、輔具、資源盤點、教育訓練或其他需求記下來。"
+      },
+      {
+        title: "是否避免導案壓力",
+        detail: "不把派案當成工具使用條件，先從需求與信任談起。"
+      },
+      {
+        title: "是否有創始夥伴優惠",
+        detail: "早期花時間幫忙的單位，未來不能被當成一般使用者收費。"
+      },
+      {
+        title: "是否有成本回收方式",
+        detail: "回收不只靠月費，也可包含維護費、合作案、專案服務或教育訓練。"
+      },
+      {
+        title: "是否禁止個資進入測試",
+        detail: "測試與回饋都應使用匿名情境，不收姓名、電話、地址、身分證等資訊。"
+      },
+      {
+        title: "是否區分共創與一般使用",
+        detail: "參與改善產品的單位與後續單純使用的單位，要有不同條件。"
+      },
+      {
+        title: "是否準備下一步說法",
+        detail: "每次交流結束都要能提出下一步：試用、回饋、示範、合作討論或暫緩。"
+      }
+    ];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderExchange() {
+      const body = document.getElementById("exchangeTableBody");
+      const cards = document.getElementById("exchangeCards");
+
+      body.innerHTML = exchangeRows.map((item) => `
+        <tr>
+          <td><strong>${escapeHtml(item.item)}</strong></td>
+          <td>${escapeHtml(item.unitGets)}</td>
+          <td>${escapeHtml(item.weGet)}</td>
+          <td><span class="chip warm">${escapeHtml(item.phase)}</span></td>
+          <td>${escapeHtml(item.risk)}</td>
+        </tr>
+      `).join("");
+
+      cards.innerHTML = exchangeRows.map((item) => `
+        <article class="matrix-card">
+          <h3>${escapeHtml(item.item)}</h3>
+          <dl>
+            <dt>A 單位得到</dt>
+            <dd>${escapeHtml(item.unitGets)}</dd>
+            <dt>我方得到</dt>
+            <dd>${escapeHtml(item.weGet)}</dd>
+            <dt>適合階段</dt>
+            <dd><span class="chip warm">${escapeHtml(item.phase)}</span></dd>
+            <dt>風險提醒</dt>
+            <dd>${escapeHtml(item.risk)}</dd>
+          </dl>
+        </article>
+      `).join("");
+    }
+
+    function renderModels() {
+      const grid = document.getElementById("modelGrid");
+      grid.innerHTML = models.map((item) => `
+        <article class="model-card">
+          <div>
+            <span class="chip blue">${escapeHtml(item.label)}</span>
+            <h3>${escapeHtml(item.name)}</h3>
+          </div>
+          <div class="model-meta">
+            <span class="chip warm">${escapeHtml(item.price)}</span>
+          </div>
+          <p><strong>主要價值：</strong>${escapeHtml(item.value)}</p>
+          <p><strong>適用條件：</strong>${escapeHtml(item.condition)}</p>
+          <p><strong>風險提醒：</strong>${escapeHtml(item.risk)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderScripts() {
+      const grid = document.getElementById("scriptGrid");
+      grid.innerHTML = scripts.map((item, index) => `
+        <article class="script-card">
+          <div class="script-actions">
+            <h3>${escapeHtml(item.title)}</h3>
+            <button class="copy-btn" type="button" data-copy-text="${escapeHtml(item.text)}">複製</button>
+          </div>
+          <textarea readonly id="script-${index}">${escapeHtml(item.text)}</textarea>
+        </article>
+      `).join("");
+    }
+
+    function renderChecklist() {
+      const grid = document.getElementById("checkGrid");
+      grid.innerHTML = checks.map((item, index) => `
+        <article class="check-card">
+          <label>
+            <input type="checkbox" data-check-index="${index}">
+            <span>
+              <strong>${escapeHtml(item.title)}</strong>
+              <span>${escapeHtml(item.detail)}</span>
+            </span>
+          </label>
+        </article>
+      `).join("");
+      updateCheckStatus();
+    }
+
+    function updateCheckStatus() {
+      const boxes = Array.from(document.querySelectorAll("[data-check-index]"));
+      const checked = boxes.filter((box) => box.checked).length;
+      const total = boxes.length;
+      const status = document.getElementById("checkStatus");
+      const hint = document.getElementById("checkHint");
+      status.textContent = `已完成 ${checked} / ${total} 項檢核。`;
+
+      if (checked === total) {
+        hint.textContent = "可以進入下一次 A 單位交流或方案討論。";
+      } else if (checked >= 6) {
+        hint.textContent = "基礎條件大致足夠，補齊剩餘風險會更穩。";
+      } else {
+        hint.textContent = "先確認共創價值，再談合作或收費。";
+      }
+    }
+
+    function setActiveView(targetId) {
+      const targetPanel = document.getElementById(targetId);
+      if (!targetPanel) return;
+
+      document.querySelectorAll("[data-view-panel]").forEach((panel) => {
+        const active = panel.id === targetId;
+        panel.hidden = !active;
+        panel.classList.toggle("is-active", active);
+      });
+
+      document.querySelectorAll("[data-view-target]").forEach((button) => {
+        const active = button.dataset.viewTarget === targetId;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    async function copyText(text, button) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          document.execCommand("copy");
+          field.remove();
+        }
+        if (button) {
+          const original = button.textContent;
+          button.textContent = "已複製";
+          window.setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        }
+      } catch (error) {
+        window.alert("複製失敗，請手動選取文字。");
+      }
+    }
+
+    function attachEvents() {
+      document.querySelectorAll("[data-view-target]").forEach((button) => {
+        button.addEventListener("click", () => setActiveView(button.dataset.viewTarget));
+      });
+
+      document.getElementById("printPage").addEventListener("click", () => window.print());
+
+      document.getElementById("resetChecklist").addEventListener("click", () => {
+        document.querySelectorAll("[data-check-index]").forEach((box) => {
+          box.checked = false;
+        });
+        updateCheckStatus();
+      });
+
+      document.body.addEventListener("click", (event) => {
+        const copyButton = event.target.closest("[data-copy-text]");
+        if (copyButton) {
+          copyText(copyButton.dataset.copyText, copyButton);
+        }
+      });
+
+      document.body.addEventListener("change", (event) => {
+        if (event.target.matches("[data-check-index]")) {
+          updateCheckStatus();
+        }
+      });
+    }
+
+    function init() {
+      renderExchange();
+      renderModels();
+      renderScripts();
+      renderChecklist();
+      attachEvents();
+      setActiveView("logic");
+    }
+
+    init();
+  </script>
+</body>
+</html>

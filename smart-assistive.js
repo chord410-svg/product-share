@@ -14,6 +14,37 @@ function lineList(items) {
   return items.map((item, index) => `${index + 1}. ${item}`).join('\n');
 }
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function safeUrl(value) {
+  try {
+    const parsed = new URL(String(value || ''));
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return parsed.href;
+  } catch (error) {
+    return '';
+  }
+  return '';
+}
+
+function renderSourceLinks(sources) {
+  if (!sources.length) return '<div class="source-item">尚無來源資料。</div>';
+  return sources.map((source, index) => {
+    const url = safeUrl(source.url);
+    const label = escapeHtml(source.label || `來源 ${index + 1}`);
+    const link = url
+      ? `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`
+      : '<span class="source-meta">未提供可開啟網址</span>';
+    return `<div class="source-item"><strong>${index + 1}. ${label}</strong>${link}</div>`;
+  }).join('');
+}
+
 function detectPrivacy(text) {
   const hits = [];
   if (/09\d{2}[-\s]?\d{3}[-\s]?\d{3}/.test(text) || /0\d{1,2}[-\s]?\d{6,8}/.test(text)) hits.push('電話');
@@ -106,14 +137,12 @@ function renderOutputs() {
     '行政提醒：',
     lineList(scenario.administrative_notes)
   ].join('\n');
-  qs('#sourceOutput').innerHTML = [
-    `可信度：${scenario.confidence}`,
-    `最後確認日：${scenario.last_checked_at}`,
-    '',
-    ...sources.map((source, index) => `${index + 1}. ${source.label}\n${source.url}`),
-    '',
-    '未確認的品牌、型號、價格平台與核銷流程只作待查線索，不進家屬版。'
-  ].join('\n');
+  qs('#sourceOutput').innerHTML = `
+    <div>可信度：${escapeHtml(scenario.confidence || '待確認')}</div>
+    <div>最後確認日：${escapeHtml(scenario.last_checked_at || '未標示')}</div>
+    <div class="source-list">${renderSourceLinks(sources)}</div>
+    <p class="source-meta">未確認的品牌、型號、價格平台與核銷流程只作待查線索，不進家屬版。</p>
+  `;
 }
 
 async function copyTarget(id) {
@@ -139,7 +168,7 @@ function officialSearch() {
 
 async function init() {
   try {
-    const response = await fetch('smart-assistive-scenarios.json?v=20260611-smart-assistive-v1', { cache: 'no-store' });
+    const response = await fetch('smart-assistive-scenarios.json?v=20260612-smart-assistive-v2', { cache: 'no-store' });
     state.data = await response.json();
     populateSelect();
     renderScenarioCards();

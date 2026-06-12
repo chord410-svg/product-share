@@ -247,7 +247,7 @@ function clearSelection() {
 
 async function init() {
   try {
-    const response = await fetch('smart-assistive-scenarios.json?v=20260612-smart-assistive-v3', { cache: 'no-store' });
+    const response = await fetch('smart-assistive-scenarios.json?v=20260612-smart-assistive-v4', { cache: 'no-store' });
     state.data = await response.json();
     renderScenarioCards();
     renderOutputs();

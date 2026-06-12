@@ -2,6 +2,7 @@
   "schema_version": 1,
   "updated_at": "2026-06-12",
   "title": "身障資源查證",
+  "status": "planning_only",
   "final_goal": "身障補助百科",
   "description": "協助長照個管師在遇到長照與身障資源交界問題時，整理查證路徑、電話確認問題、家屬版保守說明與相關 OB 工具入口。",
   "public_safety_rules": [
@@ -12,6 +13,11 @@
     "個管師內部提醒不得直接轉貼給家屬。",
     "不收集姓名、電話、身分證、完整地址或病歷號。"
   ],
+  "source_levels": {
+    "A": "政府、官方平台、法規、官方 PDF/表單。",
+    "B": "受託單位、基金會、協會、服務機構官網。",
+    "C": "新聞、部落格、整理文，只能當查證線索。"
+  },
   "scenarios": [
     {
       "scenario_id": "disability_assistive_subsidy_question",
@@ -41,20 +47,21 @@
         "若同時涉及長照輔具與身障輔具，需分開確認制度目的與文件要求。",
         "家屬版只說明查證方向，不寫成已可申請。"
       ],
-      "risk_flags": [
-        "do_not_promise_subsidy",
-        "official_check_required",
-        "vendor_claim_requires_verification"
-      ],
       "related_ob_tools": [
         "assistive",
         "vendor_map",
         "resource_nav"
       ],
+      "public_allowed": true,
+      "confidence": "spec_seed",
       "source_ids": [
         "ntpc_disability_welfare_directory"
       ],
-      "confidence": "spec_seed"
+      "risk_labels": [
+        "不承諾補助",
+        "需官方查證",
+        "廠商說法待確認"
+      ]
     },
     {
       "scenario_id": "longtermcare_budget_gap",
@@ -84,20 +91,21 @@
         "長照與身障不可簡化成二選一，可能需要分制度查證。",
         "若家屬急迫，先處理安全與照顧風險，再查補助。"
       ],
-      "risk_flags": [
-        "system_boundary_confusion",
-        "do_not_replace_formal_assessment"
-      ],
       "related_ob_tools": [
         "subsidy",
         "resource_nav",
         "assistive"
       ],
+      "public_allowed": true,
+      "confidence": "spec_seed",
       "source_ids": [
         "ltc1966_official",
         "ntpc_disability_welfare_directory"
       ],
-      "confidence": "spec_seed"
+      "risk_labels": [
+        "制度邊界易混淆",
+        "不取代正式評估"
+      ]
     },
     {
       "scenario_id": "home_accessibility",
@@ -127,19 +135,20 @@
         "施工前後證明、照片與核定時間很重要。",
         "家屬版不要承諾材料或工資一定可列。"
       ],
-      "risk_flags": [
-        "construction_before_approval_risk",
-        "document_required",
-        "home_environment_required"
-      ],
       "related_ob_tools": [
         "resource_nav",
         "vendor_map"
       ],
+      "public_allowed": true,
+      "confidence": "spec_seed",
       "source_ids": [
         "ntpc_disability_welfare_directory"
       ],
-      "confidence": "spec_seed"
+      "risk_labels": [
+        "施工前須確認",
+        "需文件或照片",
+        "需確認居家環境"
+      ]
     },
     {
       "scenario_id": "smart_or_special_device",
@@ -170,20 +179,21 @@
         "品牌、價格、商城頁只能當線索，不可當補助規則。",
         "若涉及安全、移位或樓梯，需提醒家屬評估風險。"
       ],
-      "risk_flags": [
-        "consumer_product_confusion",
-        "brand_claim_requires_verification",
-        "do_not_recommend_specific_brand"
-      ],
       "related_ob_tools": [
         "smart_assistive",
         "assistive",
         "vendor_map"
       ],
+      "public_allowed": true,
+      "confidence": "spec_seed",
       "source_ids": [
         "mohw_smart_assistive_table"
       ],
-      "confidence": "spec_seed"
+      "risk_labels": [
+        "商品與補助易混淆",
+        "品牌說法待確認",
+        "不推薦特定品牌"
+      ]
     },
     {
       "scenario_id": "disability_welfare_navigation",
@@ -213,17 +223,18 @@
         "避免把身障服務說成單一補助。",
         "若有急迫安全風險，先走保護或通報路徑。"
       ],
-      "risk_flags": [
-        "multi_system_coordination",
-        "do_not_over_simplify_disability_services"
-      ],
       "related_ob_tools": [
         "resource_nav"
       ],
+      "public_allowed": true,
+      "confidence": "spec_seed",
       "source_ids": [
         "ntpc_disability_welfare_directory"
       ],
-      "confidence": "spec_seed"
+      "risk_labels": [
+        "多系統需協調",
+        "do not over simplify disability services"
+      ]
     },
     {
       "scenario_id": "mental_disability_family_support",
@@ -253,41 +264,19 @@
         "若出現安全風險，需依既有通報或危機處理流程。",
         "家屬版以支持與下一步為主，不寫內部風險推測。"
       ],
-      "risk_flags": [
-        "safety_risk_screen_first",
-        "no_diagnosis_or_medical_advice"
-      ],
       "related_ob_tools": [
         "resource_nav",
         "professional_search"
       ],
+      "public_allowed": true,
+      "confidence": "spec_seed",
       "source_ids": [
         "ntpc_disability_welfare_directory"
       ],
-      "confidence": "spec_seed"
-    }
-  ],
-  "sources": [
-    {
-      "source_id": "ntpc_disability_welfare_directory",
-      "title": "新北市社會局身心障礙福利服務分類資訊",
-      "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953",
-      "source_level": "A",
-      "review_status": "seed_from_resource_nav"
-    },
-    {
-      "source_id": "ltc1966_official",
-      "title": "1966 長照服務專區",
-      "url": "https://1966.gov.tw/",
-      "source_level": "A",
-      "review_status": "seed_official_entry"
-    },
-    {
-      "source_id": "mohw_smart_assistive_table",
-      "title": "衛福部附件：照顧組合表-智慧科技輔具修正規定",
-      "url": "https://www.mohw.gov.tw/dl-95445-92498f44-52c3-42d2-b83b-67762092227b.html",
-      "source_level": "A",
-      "review_status": "seed_from_smart_assistive"
+      "risk_labels": [
+        "先篩安全風險",
+        "不做醫療建議"
+      ]
     }
   ]
 }

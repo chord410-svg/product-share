@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>智能輔具情境包</title>
-  <link rel="stylesheet" href="smart-assistive.css?v=20260611-smart-assistive-v1" />
-  <link rel="preload" href="smart-assistive-scenarios.json?v=20260611-smart-assistive-v1" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="smart-assistive.css?v=20260612-smart-assistive-v2" />
+  <link rel="preload" href="smart-assistive-scenarios.json?v=20260612-smart-assistive-v2" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="site-header">
@@ -20,14 +20,11 @@
   <main class="layout">
     <section class="panel controls" aria-labelledby="control-title">
       <div class="section-heading">
-        <p class="eyebrow">情境選擇</p>
-        <h2 id="control-title">先選問題，再產生工作包</h2>
+        <p class="eyebrow">快速整理</p>
+        <h2 id="control-title">點下方情境卡，快速產生工作包</h2>
+        <p class="section-note">情境卡是主要入口；下拉選單保留給需要精準切換時使用。</p>
       </div>
-      <div class="form-grid">
-        <label>
-          情境
-          <select id="scenarioSelect"></select>
-        </label>
+      <div class="form-grid compact-form">
         <label>
           主要用途
           <select id="purposeSelect">
@@ -38,6 +35,13 @@
           </select>
         </label>
       </div>
+      <details class="advanced-picker">
+        <summary>進階：用下拉選情境</summary>
+        <label>
+          情境
+          <select id="scenarioSelect"></select>
+        </label>
+      </details>
       <label class="wide-label">
         補充描述（只在本頁暫時使用，不會送出保存）
         <textarea id="caseText" rows="3" placeholder="例如：夜間常離床、家屬不會用 APP、家裡沒有 Wi-Fi"></textarea>
@@ -103,6 +107,6 @@
     </section>
   </main>
 
-  <script src="smart-assistive.js?v=20260611-smart-assistive-v1"></script>
+  <script src="smart-assistive.js?v=20260612-smart-assistive-v2"></script>
 </body>
 </html>

@@ -104,7 +104,7 @@ function renderScenarioCards() {
     card.className = `scenario-card${selected ? ' selected' : ''}`;
     card.setAttribute('aria-pressed', selected ? 'true' : 'false');
     const examples = (scenario.trigger_examples || []).slice(0, 2).join('、');
-    const tags = (scenario.risk_flags || []).slice(0, 3);
+    const tags = (scenario.risk_labels || []).slice(0, 3);
     card.innerHTML = `
       <div class="card-title">${escapeHtml(scenario.short_label || scenario.title)}</div>
       <div class="card-desc">${escapeHtml(examples || scenario.care_manager_goal || '')}</div>

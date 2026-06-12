@@ -177,7 +177,7 @@ function officialSearchUrl() {
 }
 
 async function init() {
-  const response = await fetch('disability-resource-scenarios.json?v=20260612-disability-resource-v1', { cache: 'no-store' });
+  const response = await fetch('disability-resource-scenarios.json?v=20260612-disability-resource-cnfix1', { cache: 'no-store' });
   state.data = await response.json();
   renderScenarioCards();
   renderOutputs();

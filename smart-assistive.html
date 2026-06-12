@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>智能輔具情境包</title>
+  <link rel="stylesheet" href="smart-assistive.css?v=20260611-smart-assistive-v1" />
+  <link rel="preload" href="smart-assistive-scenarios.json?v=20260611-smart-assistive-v1" as="fetch" crossorigin="anonymous" />
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">SMART ASSISTIVE SCENARIO PACK</p>
+      <h1>智能輔具情境包</h1>
+      <p class="lead">把智慧科技輔具政策轉成可跟家屬說明、可電話確認、可交接同事的保守工作包。</p>
+    </div>
+    <a class="ghost-link" href="resource-nav.html">返回長照資源導航站</a>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls" aria-labelledby="control-title">
+      <div class="section-heading">
+        <p class="eyebrow">情境選擇</p>
+        <h2 id="control-title">先選問題，再產生工作包</h2>
+      </div>
+      <div class="form-grid">
+        <label>
+          情境
+          <select id="scenarioSelect"></select>
+        </label>
+        <label>
+          主要用途
+          <select id="purposeSelect">
+            <option value="family">家屬說明</option>
+            <option value="phone">電話確認</option>
+            <option value="handoff">交接摘要</option>
+            <option value="admin">行政提醒</option>
+          </select>
+        </label>
+      </div>
+      <label class="wide-label">
+        補充描述（只在本頁暫時使用，不會送出保存）
+        <textarea id="caseText" rows="3" placeholder="例如：夜間常離床、家屬不會用 APP、家裡沒有 Wi-Fi"></textarea>
+      </label>
+      <div id="privacyWarning" class="privacy-warning" hidden></div>
+      <div class="action-row">
+        <button id="generateButton" class="primary-button" type="button">產生情境包</button>
+        <button id="officialSearchButton" class="secondary-button" type="button">查官方延伸搜尋</button>
+      </div>
+      <p class="small-note">本工具只做情境整理，不判定資格、不承諾補助、不推薦特定品牌。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="scenario-list-title">
+      <div class="section-heading">
+        <p class="eyebrow">已確認情境</p>
+        <h2 id="scenario-list-title">情境卡</h2>
+      </div>
+      <div id="scenarioCards" class="scenario-grid"></div>
+    </section>
+
+    <section id="resultPanel" class="result-panel" aria-live="polite">
+      <article class="output-card hero-output">
+        <div class="output-header">
+          <div>
+            <p class="eyebrow">家屬版</p>
+            <h2 id="resultTitle">請先選擇情境</h2>
+          </div>
+          <button class="copy-button" type="button" data-copy-target="familyOutput">複製家屬版</button>
+        </div>
+        <div id="familyOutput" class="output-text">選擇情境後，這裡會產生保守、可直接整理給家屬的說明。</div>
+      </article>
+
+      <div class="result-grid">
+        <article class="output-card">
+          <div class="output-header compact">
+            <h3>個管師提醒</h3>
+            <button class="copy-button" type="button" data-copy-target="cmOutput">複製提醒</button>
+          </div>
+          <div id="cmOutput" class="output-text"></div>
+        </article>
+        <article class="output-card">
+          <div class="output-header compact">
+            <h3>電話確認問題</h3>
+            <button class="copy-button" type="button" data-copy-target="phoneOutput">複製電話確認</button>
+          </div>
+          <div id="phoneOutput" class="output-text"></div>
+        </article>
+        <article class="output-card">
+          <div class="output-header compact">
+            <h3>行政與交接</h3>
+            <button class="copy-button" type="button" data-copy-target="handoffOutput">複製交接摘要</button>
+          </div>
+          <div id="handoffOutput" class="output-text"></div>
+        </article>
+        <article class="output-card">
+          <div class="output-header compact">
+            <h3>來源與限制</h3>
+            <button class="copy-button" type="button" data-copy-target="sourceOutput">複製來源</button>
+          </div>
+          <div id="sourceOutput" class="output-text"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="smart-assistive.js?v=20260611-smart-assistive-v1"></script>
+</body>
+</html>

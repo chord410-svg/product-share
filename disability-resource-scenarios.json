@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-06-12",
+  "title": "身障資源查證",
+  "final_goal": "身障補助百科",
+  "description": "協助長照個管師在遇到長照與身障資源交界問題時，整理查證路徑、電話確認問題、家屬版保守說明與相關 OB 工具入口。",
+  "public_safety_rules": [
+    "不做資格判定。",
+    "不承諾補助金額。",
+    "不把非官方或未確認來源當成正式規則。",
+    "家屬版只提供保守說明與查證方向。",
+    "個管師內部提醒不得直接轉貼給家屬。",
+    "不收集姓名、電話、身分證、完整地址或病歷號。"
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "disability_assistive_subsidy_question",
+      "title": "家屬說這個輔具有身障補助",
+      "short_label": "身障輔具查證",
+      "trigger_examples": [
+        "家屬說輪椅或電動輪椅有身障補助",
+        "廠商說這項輔具可以申請身障",
+        "長照輔具沒有列，想知道身障是否有"
+      ],
+      "care_manager_goal": "把家屬或廠商說法轉成可查證問題，確認應走長照、身障輔具、地方政府或輔具中心哪一路。",
+      "verification_routes": [
+        "確認個案是否已有身心障礙證明或正在申請。",
+        "確認需求是輔具品項、維修、租借、購置或評估。",
+        "先查官方身障福利與輔具服務入口，再電話確認承辦窗口。",
+        "必要時轉接輔具資源中心或地方社會局身障福利窗口。"
+      ],
+      "phone_check_questions": [
+        "這個品項在目前身障輔具服務中屬於哪一類？",
+        "需要身障證明、醫師診斷、輔具評估或其他文件嗎？",
+        "是否有購置前申請或核定前不得購買的限制？",
+        "長照已核定或已使用額度時，是否會影響此路徑？"
+      ],
+      "family_summary": "這個問題需要先查證目前官方身障輔具服務與地方承辦規則。可以先把品項、需求原因和是否已有身障證明整理好，再由個管師協助確認應洽哪個窗口。",
+      "internal_notes": [
+        "不要因廠商或家屬說法直接回覆可補助。",
+        "若同時涉及長照輔具與身障輔具，需分開確認制度目的與文件要求。",
+        "家屬版只說明查證方向，不寫成已可申請。"
+      ],
+      "risk_flags": [
+        "do_not_promise_subsidy",
+        "official_check_required",
+        "vendor_claim_requires_verification"
+      ],
+      "related_ob_tools": [
+        "assistive",
+        "vendor_map",
+        "resource_nav"
+      ],
+      "source_ids": [
+        "ntpc_disability_welfare_directory"
+      ],
+      "confidence": "spec_seed"
+    },
+    {
+      "scenario_id": "longtermcare_budget_gap",
+      "title": "長照額度不足或長照沒有這項服務",
+      "short_label": "長照身障銜接",
+      "trigger_examples": [
+        "長照輔具額度用完",
+        "長照沒有這個品項",
+        "家屬問能不能改走身障"
+      ],
+      "care_manager_goal": "協助個管師辨識這是長照制度內的額度/品項問題，還是需要延伸查證身障、社福或其他資源。",
+      "verification_routes": [
+        "確認長照目前核定內容、額度週期與已使用項目。",
+        "確認需求是否屬於安全、照顧負擔、移位、居家無障礙或醫療照護。",
+        "若長照無法處理，再查身障服務、輔具中心或社福資源。",
+        "必要時產生家屬版保守說明與電話確認清單。"
+      ],
+      "phone_check_questions": [
+        "長照目前已核定哪些輔具或居家無障礙項目？",
+        "額度是否仍在可使用期間？",
+        "此需求是否需要重新評估或補充文件？",
+        "若轉身障服務，是否需要另備身障證明或專業評估？"
+      ],
+      "family_summary": "如果長照目前無法處理某項需求，仍可再查是否有其他制度或資源可以協助。不同制度的目的、文件和申請流程不同，需要先確認後再安排下一步。",
+      "internal_notes": [
+        "此情境容易被誤解為一定可改走身障，回覆要保守。",
+        "長照與身障不可簡化成二選一，可能需要分制度查證。",
+        "若家屬急迫，先處理安全與照顧風險，再查補助。"
+      ],
+      "risk_flags": [
+        "system_boundary_confusion",
+        "do_not_replace_formal_assessment"
+      ],
+      "related_ob_tools": [
+        "subsidy",
+        "resource_nav",
+        "assistive"
+      ],
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_disability_welfare_directory"
+      ],
+      "confidence": "spec_seed"
+    },
+    {
+      "scenario_id": "home_accessibility",
+      "title": "浴室扶手、斜坡、門檻與居家無障礙",
+      "short_label": "居家無障礙",
+      "trigger_examples": [
+        "浴室扶手能不能申請",
+        "門檻太高需要改善",
+        "家屬問施工費或材料能不能補助"
+      ],
+      "care_manager_goal": "把施工、材料、工資、環境照片、評估與制度差異整理成查證問題，避免直接承諾補助或施工範圍。",
+      "verification_routes": [
+        "確認問題屬於輔具、居家無障礙改善、修繕或安全風險。",
+        "整理施工位置、照片、動線與跌倒風險。",
+        "查長照居家無障礙與身障相關服務是否有不同規則。",
+        "電話確認是否需事前評估、核定或指定廠商。"
+      ],
+      "phone_check_questions": [
+        "此項目屬於輔具、居家無障礙改善，還是一般修繕？",
+        "是否需要施工前拍照、評估或核定？",
+        "材料、工資、丈量、拆除或復原是否可列入？",
+        "是否有不得先施工或需指定流程的限制？"
+      ],
+      "family_summary": "居家無障礙通常需要先看家中動線和安全風險，也要確認是否須先評估或核定。建議先不要自行施工，先整理照片與需求，再由個管師協助查證流程。",
+      "internal_notes": [
+        "家屬常以為只要安全需要就可補助，需先查制度與流程。",
+        "施工前後證明、照片與核定時間很重要。",
+        "家屬版不要承諾材料或工資一定可列。"
+      ],
+      "risk_flags": [
+        "construction_before_approval_risk",
+        "document_required",
+        "home_environment_required"
+      ],
+      "related_ob_tools": [
+        "resource_nav",
+        "vendor_map"
+      ],
+      "source_ids": [
+        "ntpc_disability_welfare_directory"
+      ],
+      "confidence": "spec_seed"
+    },
+    {
+      "scenario_id": "smart_or_special_device",
+      "title": "拐杖椅、爬梯機、智能或特殊輔具",
+      "short_label": "特殊輔具待查",
+      "trigger_examples": [
+        "拐杖椅有沒有補助",
+        "爬梯機能不能申請",
+        "智能輔具是否可以補助",
+        "特殊品項不知道算不算輔具"
+      ],
+      "care_manager_goal": "將非典型產品需求拆成使用目的、風險、制度分類與官方查證問題，並連到智能輔具情境包或輔具查詢。",
+      "verification_routes": [
+        "先確認產品用途：移動、移位、上下樓、安全看視、沐浴排泄或照顧床。",
+        "查是否已有官方分類或智慧科技輔具情境。",
+        "若只有廠商頁或新聞，先列為待查線索，不輸出家屬版正式規則。",
+        "需要時改用智能輔具情境包產生家屬版說明。"
+      ],
+      "phone_check_questions": [
+        "這個產品是否在官方給付分類或身障輔具項目中？",
+        "是購置、租賃、維修，還是純自費商品？",
+        "是否需要專業評估或試用？",
+        "若是智能設備，是否有資料安全、APP、維修與售後限制？"
+      ],
+      "family_summary": "特殊或智能產品不一定等於可補助輔具。可以先確認它要解決的照顧問題，再查官方分類與評估流程；未確認前只能視為待查方向。",
+      "internal_notes": [
+        "此情境和智能輔具情境包高度相關，但不能混成同一個功能。",
+        "品牌、價格、商城頁只能當線索，不可當補助規則。",
+        "若涉及安全、移位或樓梯，需提醒家屬評估風險。"
+      ],
+      "risk_flags": [
+        "consumer_product_confusion",
+        "brand_claim_requires_verification",
+        "do_not_recommend_specific_brand"
+      ],
+      "related_ob_tools": [
+        "smart_assistive",
+        "assistive",
+        "vendor_map"
+      ],
+      "source_ids": [
+        "mohw_smart_assistive_table"
+      ],
+      "confidence": "spec_seed"
+    },
+    {
+      "scenario_id": "disability_welfare_navigation",
+      "title": "不確定該找哪一種身障福利或服務",
+      "short_label": "身障服務分流",
+      "trigger_examples": [
+        "身障家庭照顧壓力大",
+        "不確定找身障個管、短照、日照或福利服務",
+        "身障與長照需求同時存在"
+      ],
+      "care_manager_goal": "協助個管師從需求類型分流到身障服務、長照資源、家庭照顧者支持或社會福利窗口。",
+      "verification_routes": [
+        "先分辨主需求：照顧支持、經濟安全、交通、就業、日間照顧、短期照顧或權益保障。",
+        "查官方身障福利總入口或地方服務分類。",
+        "若同時有長照需求，確認長照與身障服務是否需分別申請。",
+        "整理可給家屬的轉介說明與電話問題。"
+      ],
+      "phone_check_questions": [
+        "主需求是哪一類身障服務？",
+        "是否需要身障個管或轉銜服務？",
+        "是否已有長照服務，兩邊如何銜接？",
+        "是否有照顧安全、家庭照顧者壓力或急迫風險？"
+      ],
+      "family_summary": "身障服務包含很多類型，包含照顧支持、交通、日間照顧、經濟安全與權益保障等。可以先把主要需求整理清楚，再由個管師協助找對應窗口。",
+      "internal_notes": [
+        "此情境可與長照資源導航互補。",
+        "避免把身障服務說成單一補助。",
+        "若有急迫安全風險，先走保護或通報路徑。"
+      ],
+      "risk_flags": [
+        "multi_system_coordination",
+        "do_not_over_simplify_disability_services"
+      ],
+      "related_ob_tools": [
+        "resource_nav"
+      ],
+      "source_ids": [
+        "ntpc_disability_welfare_directory"
+      ],
+      "confidence": "spec_seed"
+    },
+    {
+      "scenario_id": "mental_disability_family_support",
+      "title": "精神障礙或身障家庭照顧支持",
+      "short_label": "家庭支持",
+      "trigger_examples": [
+        "精神障礙家屬照顧壓力大",
+        "家屬不知道可以找誰支持",
+        "長照服務之外還需要身障家庭支持"
+      ],
+      "care_manager_goal": "協助個管師把照顧壓力、精神障礙支持、家庭照顧者資源與長照服務分開查證。",
+      "verification_routes": [
+        "先確認是否有立即安全風險。",
+        "確認需求偏向照顧喘息、心理支持、家庭支持、社區服務或醫療銜接。",
+        "查官方身障家庭照顧者支持或精神障礙相關資源。",
+        "產生家屬版安撫說明與個管師追問清單。"
+      ],
+      "phone_check_questions": [
+        "目前是否有自傷、傷人或照顧安全風險？",
+        "家屬需要喘息、諮詢、支持團體，還是服務轉介？",
+        "是否已有精神醫療或社區支持資源？",
+        "是否能同時連結長照與身障家庭支持？"
+      ],
+      "family_summary": "如果照顧壓力和身障或精神障礙有關，除了長照服務外，也可能需要家庭照顧者支持或身障相關服務。可以先把主要壓力和目前已使用資源整理給個管師。",
+      "internal_notes": [
+        "此情境要避免醫療建議與診斷語。",
+        "若出現安全風險，需依既有通報或危機處理流程。",
+        "家屬版以支持與下一步為主，不寫內部風險推測。"
+      ],
+      "risk_flags": [
+        "safety_risk_screen_first",
+        "no_diagnosis_or_medical_advice"
+      ],
+      "related_ob_tools": [
+        "resource_nav",
+        "professional_search"
+      ],
+      "source_ids": [
+        "ntpc_disability_welfare_directory"
+      ],
+      "confidence": "spec_seed"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "ntpc_disability_welfare_directory",
+      "title": "新北市社會局身心障礙福利服務分類資訊",
+      "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953",
+      "source_level": "A",
+      "review_status": "seed_from_resource_nav"
+    },
+    {
+      "source_id": "ltc1966_official",
+      "title": "1966 長照服務專區",
+      "url": "https://1966.gov.tw/",
+      "source_level": "A",
+      "review_status": "seed_official_entry"
+    },
+    {
+      "source_id": "mohw_smart_assistive_table",
+      "title": "衛福部附件：照顧組合表-智慧科技輔具修正規定",
+      "url": "https://www.mohw.gov.tw/dl-95445-92498f44-52c3-42d2-b83b-67762092227b.html",
+      "source_level": "A",
+      "review_status": "seed_from_smart_assistive"
+    }
+  ]
+}

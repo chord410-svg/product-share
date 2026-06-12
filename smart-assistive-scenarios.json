@@ -1,38 +1,45 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-06-11",
-  "title": "智能輔具情境包",
+  "updated_at": "2026-06-12",
+  "title": "智慧科技輔具情境判讀",
   "description": "協助個管師把智慧科技輔具政策轉成保守、可查證、可溝通的情境整理。",
   "public_safety_rules": [
     "不做資格核定。",
     "不承諾特定產品一定可申請。",
+    "不推薦特定品牌或型號。",
     "不輸出未確認規則或廠商宣傳語到家屬版。",
     "不收集姓名、電話、身分證、完整地址或病歷號。"
   ],
   "sources": [
     {
-      "source_id": "mohw_amendment_2026",
-      "label": "衛福部：長期照顧服務申請及給付辦法部分條文修正公告",
-      "url": "https://www.mohw.gov.tw/cp-18-82814-1.html",
-      "level": "A"
-    },
-    {
-      "source_id": "ltc1966_amendment_2026",
-      "label": "1966 長照服務專區：長期照顧服務申請及給付辦法部分條文修正",
+      "source_id": "ltc1966_policy_2026",
+      "label": "1966 長照專區：長照 3.0 新制與智慧科技輔具每 3 年 6 萬元",
       "url": "https://1966.gov.tw/LTC/cp-6440-82812-207.html",
       "level": "A"
     },
     {
-      "source_id": "mohw_smart_assistive_table",
-      "label": "衛福部附件：照顧組合表-智慧科技輔具修正規定",
-      "url": "https://www.mohw.gov.tw/dl-95445-92498f44-52c3-42d2-b83b-67762092227b.html",
+      "source_id": "mohw_dual_track_2026",
+      "label": "衛福部：科技輔具全租賃與既有輔具購買制度雙軌並行",
+      "url": "https://www.mohw.gov.tw/cp-2704-80148-1.html",
       "level": "A"
     },
     {
-      "source_id": "mohw_disinfection_manual",
-      "label": "衛福部：長照輔具租賃服務清潔消毒手冊",
-      "url": "https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html",
+      "source_id": "ltc1966_disinfection_guide",
+      "label": "1966 長照專區：長照輔具租賃服務清潔消毒指引手冊公告",
+      "url": "https://1966.gov.tw/LTC/cp-6440-83626-207.html",
       "level": "A"
+    },
+    {
+      "source_id": "taichung_assessment_report_notice",
+      "label": "臺中市衛生局轉知衛福部智慧科技輔具評估報告書公告",
+      "url": "https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287",
+      "level": "A-local"
+    },
+    {
+      "source_id": "ncsd_mohw_mirror",
+      "label": "行政院國家永續發展委員會轉載衛福部智慧科技輔具政策說明",
+      "url": "https://ncsd.ndc.gov.tw/Fore/News_detail/92467eaa-8115-4e77-a88c-5ecd73955129",
+      "level": "A-mirror"
     },
     {
       "source_id": "mol_job_redesign_2026",
@@ -41,10 +48,16 @@
       "level": "A"
     },
     {
-      "source_id": "ncsd_mohw_mirror",
-      "label": "行政院國家永續發展委員會轉載衛福部資料",
-      "url": "https://ncsd.ndc.gov.tw/Fore/News_detail/92467eaa-8115-4e77-a88c-5ecd73955129",
-      "level": "A-mirror"
+      "source_id": "oturoc_smart_assistive_training_2026",
+      "label": "職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練",
+      "url": "https://www.oturoc.org.tw/index.php?action=news_detail&id=338",
+      "level": "B-professional"
+    },
+    {
+      "source_id": "atlife_awards_2026",
+      "label": "ATLife 2026 臺灣租賃輔具精品獎獲獎名單",
+      "url": "https://www.chanchao.com.tw/atlife/newsDetail.asp?serno=5402",
+      "level": "B-industry"
     }
   ],
   "scenarios": [
@@ -61,26 +74,26 @@
       ],
       "need_tags": [
         "政策說明",
-        "資格確認",
-        "額度銜接"
+        "額度確認",
+        "不判定資格"
       ],
-      "family_summary": "長照 3.0 預計自 115 年 7 月 1 日新增智慧科技輔具給付，方向是透過感測、紀錄、傳輸、分析與回饋，協助居家照顧安全、減輕照顧負擔或即時介入。是否能申請，仍要經長照需求評估與輔具專業評估後確認。",
+      "family_summary": "目前官方方向是長照 3.0 自 115 年 7 月 1 日新增智慧科技輔具租賃給付，另有每 3 年 6 萬元額度，涵蓋移位、移動、沐浴排泄、居家照顧床與安全看視等五大面向。是否能申請，仍要經長照需求評估與輔具專業評估後確認。",
       "case_manager_notes": [
-        "不能直接承諾可補助。",
-        "制度新增不代表所有電子產品或智慧產品都可申請。",
-        "若個案已使用原第一組輔具額度，需確認三年期與銜接規則。"
+        "先確認家屬問的是政策方向、額度，還是特定產品能不能申請。",
+        "不要把「新增智慧科技輔具」回答成任何智慧產品都能補助。",
+        "若家屬已有原輔具或居家無障礙額度使用經驗，需另外確認三年期程與雙軌銜接。"
       ],
       "phone_check_questions": [
-        "個案目前是否已核定過原輔具及居家無障礙額度？",
-        "是否已完成長照需求評估？",
-        "是否需要甲類輔具評估人員評估？",
-        "需求屬於移位、移動、沐浴排泄、居家照顧床，還是安全看視？"
+        "個案是否已完成長照需求評估？",
+        "目前詢問的是五大智慧科技輔具面向中的哪一類？",
+        "是否需要甲類輔具評估人員出具智慧科技輔具評估報告書？",
+        "原輔具與居家無障礙額度目前是否已使用或仍在三年期內？"
       ],
       "administrative_notes": [
-        "確認長照等級與三年額度期程。",
-        "確認是否須使用官方智慧科技輔具評估報告書。"
+        "確認長照服務申請資格、評估流程與三年額度期程。",
+        "政策說明可給家屬，資格與核定不可由工具直接判定。"
       ],
-      "handoff_summary": "先確認長照評估與原額度使用狀態，再轉介輔具專業評估。不得以產品名稱直接判定補助。",
+      "handoff_summary": "先把家屬問題拆成政策、額度、品項與評估四件事；只說明官方方向，不承諾核定。",
       "risk_flags": [
         "do_not_promise_subsidy",
         "official_assessment_required"
@@ -88,12 +101,56 @@
       "confidence": "verified_official",
       "public_allowed": true,
       "source_ids": [
-        "mohw_amendment_2026",
-        "ltc1966_amendment_2026",
-        "mohw_smart_assistive_table",
+        "ltc1966_policy_2026",
+        "mohw_dual_track_2026",
         "ncsd_mohw_mirror"
       ],
-      "last_checked_at": "2026-06-11"
+      "last_checked_at": "2026-06-12"
+    },
+    {
+      "scenario_id": "dual_track_decision",
+      "title": "傳統輔具與智慧科技輔具怎麼選",
+      "short_label": "雙軌選擇",
+      "ei_categories": [
+        "EI01",
+        "EI02",
+        "EI03",
+        "EI04",
+        "EI05"
+      ],
+      "need_tags": [
+        "雙軌制度",
+        "租賃優先",
+        "需求判讀"
+      ],
+      "family_summary": "智慧科技輔具與既有輔具不是互相取代，而是依照需求、照顧情境與官方評估結果分流。一般輔具、居家無障礙改善與智慧科技輔具可能有不同額度、申請方式與服務內容，家屬可以先把實際照顧困難說清楚，再由專業評估確認適合方向。",
+      "case_manager_notes": [
+        "先問清楚困難是安全看視、移位移動、沐浴排泄、照顧床，還是一般輔具需求。",
+        "如果只是需要一般輔具或修繕，不一定要導向智慧科技輔具。",
+        "智慧科技輔具強調租賃與服務，應一併問安裝、維護、教育訓練與退租。"
+      ],
+      "phone_check_questions": [
+        "這個需求用一般輔具是否已足夠？",
+        "為什麼需要感測、傳輸、通知、紀錄或回饋？",
+        "租賃服務是否包含運送、安裝、使用教學、維護與追蹤？",
+        "若未核定智慧科技輔具，是否有一般輔具或其他制度可銜接？"
+      ],
+      "administrative_notes": [
+        "分清楚既有輔具、居家無障礙與智慧科技輔具的申請邏輯。",
+        "行政文件應以實際評估結果與主管機關核定為準。"
+      ],
+      "handoff_summary": "先用照顧問題決定方向，不用產品名稱決定制度；智慧科技輔具是雙軌中的一條，不是所有輔具的升級版。",
+      "risk_flags": [
+        "do_not_force_smart_device",
+        "dual_track_confirm_required"
+      ],
+      "confidence": "verified_official",
+      "public_allowed": true,
+      "source_ids": [
+        "mohw_dual_track_2026",
+        "ltc1966_policy_2026"
+      ],
+      "last_checked_at": "2026-06-12"
     },
     {
       "scenario_id": "fall_watch",
@@ -103,38 +160,38 @@
         "EI05"
       ],
       "need_tags": [
-        "夜間風險",
-        "跌倒",
-        "離床",
-        "照顧者通知"
+        "夜間離床",
+        "跌倒風險",
+        "照顧通知"
       ],
-      "family_summary": "如果主要問題是夜間離床、跌倒風險或照顧者無法即時發現，未來可能會對應到安全看視類智慧科技輔具方向。不過官方也明確排除手機、手錶、一般日常生活用品，所以仍要確認設備是否符合長照給付分類與評估結果。",
+      "family_summary": "如果主要問題是夜間離床、跌倒風險或照顧者無法即時發現，可能會往安全看視類智慧科技輔具方向確認。這類工具重點不是監視長輩，而是協助照顧者掌握風險與安排回應；仍需確認設備是否符合官方分類與專業評估結果。",
       "case_manager_notes": [
-        "先問清楚是跌倒史、離床頻率、夜間照顧人力不足，還是家屬焦慮。",
-        "安全看視不是把所有攝影機、手機、手錶都納入。",
-        "注意隱私、居家監看接受度與通知接收責任。"
+        "分辨是實際跌倒風險、夜間離床頻繁、照顧人力不足，還是家屬焦慮。",
+        "安全看視不等於所有攝影機、手機、手錶或一般消費電子產品。",
+        "需同步評估隱私接受度、誰收通知、誰負責回應與誤報處理。"
       ],
       "phone_check_questions": [
-        "安全看視設備是否屬於官方 EI05 類別？",
-        "是否需要網路、APP 或家屬手機配合？",
-        "APP 是否有資安檢測或安全等級說明？",
-        "設備故障、誤報、漏報時如何處理？"
+        "個案近期是否有跌倒、差點跌倒或夜間離床紀錄？",
+        "設備是否屬於安全看視類，還是一般消費電子產品？",
+        "通知由誰接收？是否可多人接收？",
+        "誤報、漏報、斷線或設備故障時如何處理？"
       ],
       "administrative_notes": [
-        "確認設備是否屬 EI05，而非一般生活用品。",
-        "確認隱私與通知責任已向家屬說明。"
+        "確認是否對應安全看視類智慧科技輔具。",
+        "隱私與通知責任應在家屬說明中先講清楚。"
       ],
-      "handoff_summary": "安全看視需求需區分風險事實與家屬焦慮，並確認設備分類、網路、APP、資安與誤報處理。",
+      "handoff_summary": "安全看視情境先確認風險事實、通知責任與隱私接受度，再看是否需要專業評估。",
       "risk_flags": [
-        "do_not_treat_consumer_device_as_ltc_device",
-        "privacy_acceptance_required"
+        "privacy_acceptance_required",
+        "do_not_treat_consumer_device_as_ltc_device"
       ],
       "confidence": "verified_official",
       "public_allowed": true,
       "source_ids": [
-        "mohw_smart_assistive_table"
+        "ltc1966_policy_2026",
+        "taichung_assessment_report_notice"
       ],
-      "last_checked_at": "2026-06-11"
+      "last_checked_at": "2026-06-12"
     },
     {
       "scenario_id": "transfer_mobility",
@@ -145,29 +202,27 @@
         "EI02"
       ],
       "need_tags": [
-        "上下床",
         "轉位",
-        "移動",
         "上下樓",
         "居家空間"
       ],
-      "family_summary": "如果照顧困難出現在上下床、轉位、搬移、上下樓或室內移動，未來可能要看移位類或移動類智慧科技輔具方向。這類需求通常需要專業人員評估居家環境、照顧者能力與安全風險。",
+      "family_summary": "如果困難出現在上下床、床椅轉位、搬移、上下樓或室內移動，可先往移位類或移動類智慧科技輔具方向整理。這類情境通常要同時看個案能力、照顧者能力與居家空間，不能只看產品功能。",
       "case_manager_notes": [
-        "先分辨是人員移位、室內移動、上下樓，還是外出交通。",
-        "需問住家樓層、空間、門寬、浴廁動線與照顧者人力。",
-        "若產品涉及電動、APP、感測或數據，需再確認是否符合智慧科技輔具定義。"
+        "先分辨是床椅轉位、室內移動、上下樓，還是外出交通需求。",
+        "確認門寬、床邊空間、浴廁動線、樓梯型態與照顧者人力。",
+        "涉及電動、感測或數據功能時，仍要確認是否符合智慧科技輔具分類。"
       ],
       "phone_check_questions": [
         "個案是完全臥床、部分可站立，還是可短距離移動？",
         "主要困難在床椅轉位、上下樓、浴廁移動，還是外出？",
-        "居家空間是否足夠放置或操作設備？",
-        "是否需甲類輔具評估人員到場評估？"
+        "居家空間是否足夠放置與操作設備？",
+        "是否需要甲類輔具評估人員到場評估？"
       ],
       "administrative_notes": [
-        "確認需求對應 EI01 或 EI02。",
-        "居家環境與照顧者能力需納入評估。"
+        "確認需求可能對應移位類或移動類。",
+        "居家環境條件與照顧者能力應納入評估紀錄。"
       ],
-      "handoff_summary": "移位/移動需求先釐清場景與居家條件，再安排專業評估；不得以產品名直接承諾補助。",
+      "handoff_summary": "移位/移動需求先釐清場景與空間，再安排專業評估；不要以產品名稱直接承諾補助。",
       "risk_flags": [
         "home_environment_required",
         "professional_assessment_required"
@@ -175,9 +230,10 @@
       "confidence": "verified_official",
       "public_allowed": true,
       "source_ids": [
-        "mohw_smart_assistive_table"
+        "ltc1966_policy_2026",
+        "taichung_assessment_report_notice"
       ],
-      "last_checked_at": "2026-06-11"
+      "last_checked_at": "2026-06-12"
     },
     {
       "scenario_id": "bathing_toileting_bedcare",
@@ -188,77 +244,73 @@
         "EI04"
       ],
       "need_tags": [
-        "洗澡",
-        "排泄",
-        "床上照顧",
-        "清潔消毒",
-        "租賃"
+        "洗澡排泄",
+        "照顧床",
+        "照顧操作"
       ],
-      "family_summary": "如果主要困難是洗澡、排泄、床上照顧或照顧床使用，未來可能會涉及沐浴排泄類或居家照顧床類智慧科技輔具。租賃智慧輔具除設備本身外，也要注意使用說明、調整配置、清潔消毒與後續追蹤。",
+      "family_summary": "如果主要困難是洗澡、排泄、床上照顧或照顧床使用，可先往沐浴排泄類或居家照顧床類智慧科技輔具方向整理。除了設備，也要同步確認照顧動線、感染風險、清潔消毒、安裝與後續維護。",
       "case_manager_notes": [
-        "需先確認家中浴廁動線、照顧者能力、感染與皮膚風險。",
-        "若是租賃品，應詢問清潔消毒與回收整備流程。",
-        "若涉及個人清潔衛生且無法清消再利用，需確認是否符合購置例外。"
+        "先確認浴廁動線、照顧者可操作程度、皮膚或感染風險。",
+        "租賃品需要問清楚清潔消毒、回收整備、維修與更換責任。",
+        "若涉及個人衛生且不適合重複租賃，需依官方與地方規定再確認。"
       ],
       "phone_check_questions": [
-        "設備是租賃還是購置？",
-        "租賃品清潔消毒如何執行？",
-        "若曾有疥瘡或感染疑慮，回收品如何隔離與消毒？",
-        "是否含運送、安裝、調整與追蹤？"
+        "設備是租賃、購置，還是搭配服務？",
+        "租賃品清潔消毒、包裝、儲存與回收整備如何執行？",
+        "是否包含運送、安裝、調整、教學與追蹤？",
+        "若個案有感染或皮膚風險，是否需要特殊處理？"
       ],
       "administrative_notes": [
-        "確認 EI03/EI04 分類。",
-        "租賃服務內容應含清潔消毒、運送、安裝、諮詢與追蹤等項目。"
+        "確認是否對應沐浴排泄類或居家照顧床類。",
+        "清潔消毒與維修責任是租賃品質的重要確認項目。"
       ],
-      "handoff_summary": "沐浴/床照情境需同步確認居家動線、感染風險、租賃清消與追蹤責任。",
+      "handoff_summary": "沐浴/床照情境要把照顧操作、空間、感染風險與租賃服務責任一起交接。",
       "risk_flags": [
         "disinfection_confirm_required",
-        "do_not_replace_infection_control_judgment"
+        "installation_followup_required"
       ],
       "confidence": "verified_official",
       "public_allowed": true,
       "source_ids": [
-        "mohw_smart_assistive_table",
-        "mohw_disinfection_manual"
+        "ltc1966_policy_2026",
+        "ltc1966_disinfection_guide",
+        "taichung_assessment_report_notice"
       ],
-      "last_checked_at": "2026-06-11"
+      "last_checked_at": "2026-06-12"
     },
     {
       "scenario_id": "app_network_literacy",
       "title": "家中沒有網路或家屬不會用 APP",
       "short_label": "數位條件",
       "ei_categories": [
-        "EI05",
         "EI01",
         "EI02",
         "EI03",
-        "EI04"
+        "EI04",
+        "EI05"
       ],
       "need_tags": [
         "網路",
         "APP",
-        "通知",
-        "資安",
-        "照顧者能力"
+        "通知責任"
       ],
-      "family_summary": "智慧科技輔具常牽涉感測、傳輸、APP 或數據回饋，因此不只要看設備，也要看家中網路、照顧者是否會操作、誰接收通知、設備故障時怎麼處理。",
+      "family_summary": "智慧科技輔具常牽涉感測、傳輸、APP 或數據回饋，因此不只要看設備，也要看家中網路、手機操作能力、通知接收者與備援方式。如果家屬不會用 APP 或家中網路不穩，可能會影響使用效果。",
       "case_manager_notes": [
-        "官方規範已把 APP 資安納入要求，表示數位環境和資料安全是重要議題。",
-        "評估時應問家中網路、手機使用、通知接收者、備援方式。",
-        "不要只看產品功能，忽略家屬操作能力。"
+        "數位條件是使用前提，不是獨立補助理由。",
+        "評估時應問網路、手機、通知接收者、帳號管理與備援方式。",
+        "不要只看產品功能，忽略家屬是否真的能接收和回應通知。"
       ],
       "phone_check_questions": [
-        "需要 Wi-Fi 或行動網路嗎？",
-        "主要照顧者是否會使用 APP？",
-        "通知是傳給誰？可否多人接收？",
-        "網路斷線或手機沒電時，設備還能不能發揮作用？",
-        "APP 是否有資安檢測說明？"
+        "需要 Wi-Fi、行動網路或藍牙嗎？",
+        "主要照顧者是否會使用 APP？是否需要教學？",
+        "通知傳給誰？是否支援多人接收或備援聯絡人？",
+        "網路斷線、手機沒電或 APP 登出時怎麼處理？"
       ],
       "administrative_notes": [
-        "資安與數位操作條件需納入評估。",
-        "APP/資料安全細節可留給個管師與廠商確認，不必在家屬版展開等級。"
+        "數位操作條件與資料安全需納入評估與家屬說明。",
+        "APP/資料安全細節可由個管師與廠商確認，不在家屬版展開技術等級。"
       ],
-      "handoff_summary": "智慧輔具不只看設備，還要確認網路、通知接收者、APP 操作與備援機制。",
+      "handoff_summary": "智慧輔具是否可用，常取決於網路、APP、通知與備援；這些條件要先問清楚。",
       "risk_flags": [
         "digital_literacy_required",
         "network_dependency"
@@ -266,60 +318,153 @@
       "confidence": "verified_official",
       "public_allowed": true,
       "source_ids": [
-        "mohw_smart_assistive_table"
+        "taichung_assessment_report_notice",
+        "ltc1966_policy_2026"
       ],
-      "last_checked_at": "2026-06-11"
+      "last_checked_at": "2026-06-12"
     },
     {
-      "scenario_id": "system_boundary",
-      "title": "長照、身障、勞政職務再設計容易混淆",
-      "short_label": "制度分流",
-      "ei_categories": [],
-      "need_tags": [
-        "制度分流",
-        "職務再設計",
-        "社政",
-        "勞政"
+      "scenario_id": "monitoring_acceptance",
+      "title": "長輩或家屬排斥被監測",
+      "short_label": "接受度",
+      "ei_categories": [
+        "EI05"
       ],
-      "family_summary": "不同制度有不同目的。長照智慧科技輔具主要是居家照顧支持；勞動部職務再設計則偏向就業、職場、職訓與工作環境支持。若同時涉及身障、工作或就業需求，需要分開確認可使用的制度。",
+      "need_tags": [
+        "隱私",
+        "同意",
+        "照顧溝通"
+      ],
+      "family_summary": "安全看視或感測設備可能讓長輩或家屬覺得被監視。這時要先把目的說清楚：重點是降低風險與協助照顧回應，不是取代人的照顧或無限制監控。若長輩明顯排斥，應回到照顧目標與替代方案討論。",
       "case_manager_notes": [
-        "勞動部職務再設計已修正適用對象與補助評估方式，但它不是長照補助。",
-        "若家屬問工作用設備能不能補助，要引導到勞政系統確認。",
-        "工具中應把長照補助與職務再設計分開顯示。"
+        "先確認長輩是否理解設備用途，以及家屬是否尊重其接受度。",
+        "避免把安全看視包裝成不需要人照顧。",
+        "可把監測範圍、通知對象、資料用途、關閉或調整方式列為電話確認重點。"
       ],
       "phone_check_questions": [
-        "需求發生在居家照顧，還是職場、職訓、就業？",
-        "目前是否已有社政補助？",
-        "是否需要向勞動部職務再設計窗口確認？"
+        "設備會收集哪些訊號或影像？是否可調整監測範圍？",
+        "誰可以看到資料或接收通知？",
+        "長輩排斥時是否有替代方案？",
+        "是否有明確的使用說明、同意與退租/停用方式？"
       ],
       "administrative_notes": [
-        "長照智慧科技輔具與勞政職務再設計不得混用同一套資格。",
-        "若牽涉就業需求，需另查勞政窗口。"
+        "隱私接受度與使用同意需先處理，避免後續家庭衝突。",
+        "這張卡只作溝通提醒，不代表某類設備一定可申請。"
       ],
-      "handoff_summary": "先分清楚居家照顧支持與職場支持，避免把勞政制度回答成長照補助。",
+      "handoff_summary": "如果排斥被監測，先處理同意、隱私、資料用途與替代方案，再談設備。",
       "risk_flags": [
-        "do_not_mix_ltc_and_labor_programs"
+        "privacy_acceptance_required",
+        "do_not_replace_care_relationship"
       ],
       "confidence": "verified_official",
       "public_allowed": true,
       "source_ids": [
-        "mol_job_redesign_2026"
+        "taichung_assessment_report_notice",
+        "ltc1966_policy_2026"
       ],
-      "last_checked_at": "2026-06-11"
+      "last_checked_at": "2026-06-12"
+    },
+    {
+      "scenario_id": "rental_maintenance_disinfection",
+      "title": "租賃、維修、清潔消毒與更換責任",
+      "short_label": "租賃維護",
+      "ei_categories": [
+        "EI01",
+        "EI02",
+        "EI03",
+        "EI04",
+        "EI05"
+      ],
+      "need_tags": [
+        "租賃服務",
+        "清潔消毒",
+        "維修更換"
+      ],
+      "family_summary": "智慧科技輔具以租賃服務為重要方向，因此不能只問設備價格或功能，也要問清楚誰負責清潔消毒、運送安裝、使用教學、維修、更換與退租。這些會直接影響家屬使用感受與安全。",
+      "case_manager_notes": [
+        "把租賃服務內容列為每次電話確認必問項。",
+        "清潔消毒指引已公告，表示租賃品質管理是正式議題。",
+        "若家屬很在意二手設備或感染風險，應提前說明清潔消毒與更換機制。"
+      ],
+      "phone_check_questions": [
+        "租賃是否含運送、安裝、調整、教學與追蹤？",
+        "設備故障時多久能維修或更換？",
+        "清潔消毒、檢查、包裝與儲存流程如何執行？",
+        "退租、換機、停用或搬家時如何處理？"
+      ],
+      "administrative_notes": [
+        "租賃品質、清消與維修責任需納入行政確認。",
+        "家屬版可說明「需向廠商確認服務內容」，不要替廠商承諾。"
+      ],
+      "handoff_summary": "租賃不是只借設備；清消、安裝、教學、維修、換機與退租都要一起確認。",
+      "risk_flags": [
+        "disinfection_confirm_required",
+        "maintenance_responsibility_required"
+      ],
+      "confidence": "verified_official",
+      "public_allowed": true,
+      "source_ids": [
+        "ltc1966_disinfection_guide",
+        "mohw_dual_track_2026"
+      ],
+      "last_checked_at": "2026-06-12"
+    },
+    {
+      "scenario_id": "system_boundary",
+      "title": "長照、身障、勞政職務再設計制度分流",
+      "short_label": "制度分流",
+      "ei_categories": [],
+      "need_tags": [
+        "長照",
+        "身障",
+        "勞政"
+      ],
+      "family_summary": "不同制度有不同目的。長照智慧科技輔具主要支持居家照顧；身障輔具與勞動部職務再設計則可能分別對應生活、就業、職場或職訓需求。若家屬同時提到工作、就業或身障補助，應分開確認，不要混成同一套資格。",
+      "case_manager_notes": [
+        "先問需求發生在居家照顧、日常生活、就業職場，還是職訓。",
+        "職務再設計不是長照補助，不能用長照規則回答就業設備。",
+        "若跨制度，個管師可先整理需求，再協助家屬向對應窗口確認。"
+      ],
+      "phone_check_questions": [
+        "這項需求是居家照顧，還是職場/就業/職訓？",
+        "是否已有身障輔具、社政補助或勞政資源？",
+        "是否需要向勞動部職務再設計窗口或地方輔具中心確認？"
+      ],
+      "administrative_notes": [
+        "制度分流是行政提醒，不代表可同時申請或可互相替代。",
+        "跨制度時需記錄已詢問窗口與待確認事項。"
+      ],
+      "handoff_summary": "先分清楚居家照顧、身障生活支持與就業職場支持，避免把不同制度混在一起回答。",
+      "risk_flags": [
+        "do_not_mix_ltc_and_labor_programs",
+        "cross_system_confirm_required"
+      ],
+      "confidence": "verified_official",
+      "public_allowed": true,
+      "source_ids": [
+        "mol_job_redesign_2026",
+        "mohw_dual_track_2026"
+      ],
+      "last_checked_at": "2026-06-12"
     }
   ],
   "pending_leads": [
     {
-      "lead_id": "product_brand_mapping",
-      "title": "特定品牌或型號是否列入智慧科技輔具",
-      "status": "unverified",
-      "public_allowed": false
+      "lead_id": "atlife_product_awards_mapping",
+      "title": "ATLife 精品獎獲獎產品與五大智慧輔具面向對照",
+      "status": "industry_reference_only",
+      "public_allowed": false,
+      "source_ids": [
+        "atlife_awards_2026"
+      ],
+      "note": "可作產品方向與市場線索，不作補助資格或品牌推薦。"
     },
     {
-      "lead_id": "hardware_origin_restriction",
-      "title": "是否官方排除特定產地硬體",
+      "lead_id": "brand_model_eligibility",
+      "title": "特定品牌或型號是否列入智慧科技輔具給付",
       "status": "unverified",
-      "public_allowed": false
+      "public_allowed": false,
+      "note": "需等待官方品項、地方流程或特約服務確認，不進家屬版。"
     },
     {
       "lead_id": "pricing_reimbursement_platform",
@@ -329,7 +474,13 @@
     },
     {
       "lead_id": "new_taipei_local_process",
-      "title": "新北市地方申請流程與品項細節",
+      "title": "新北市地方申請流程、線上申請與輔具中心實務",
+      "status": "pending_local_confirmation",
+      "public_allowed": false
+    },
+    {
+      "lead_id": "hardware_origin_or_security_restrictions",
+      "title": "硬體產地、APP 資安或資料保存限制的正式規則",
       "status": "unverified",
       "public_allowed": false
     }

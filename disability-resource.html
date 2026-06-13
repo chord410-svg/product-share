@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-nav-v6" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-nav-v6" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-nav-v6" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v7" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v7" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v7" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -46,6 +46,16 @@
         <button id="routeButton" class="primary-button" type="button">尋找知識卡</button>
         <p id="apiStatus" class="small-note inline-status">正在檢查後端服務。</p>
       </div>
+      <section class="generation-history-panel" aria-labelledby="generation-history-title">
+        <div class="history-head">
+          <div>
+            <p class="eyebrow">生成紀錄</p>
+            <h3 id="generation-history-title">最近查詢</h3>
+          </div>
+          <button id="clearHistoryButton" class="ghost-button compact-button" type="button">清除本頁紀錄</button>
+        </div>
+        <div id="generationHistory" class="generation-history-list"></div>
+      </section>
     </section>
 
     <section class="panel" aria-labelledby="direction-title">
@@ -191,6 +201,19 @@
     <strong>安全邊界：</strong>本頁不保存原始問題全文、不做資格核定、不承諾補助；C 級整理來源只作研究線索，家屬版需由 A/B 級官方或受託來源支撐。
   </footer>
 
-  <script src="disability-resource.js?v=20260613-knowledge-nav-v6"></script>
+  <div id="cardDetailOverlay" class="detail-overlay" hidden>
+    <article class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="cardDetailTitle">
+      <div class="detail-drawer-head">
+        <div>
+          <p class="eyebrow">詳細卡片資訊</p>
+          <h2 id="cardDetailTitle">知識卡資訊</h2>
+        </div>
+        <button id="closeCardDetailButton" class="ghost-button" type="button">關閉</button>
+      </div>
+      <div id="cardDetailContent" class="detail-drawer-body"></div>
+    </article>
+  </div>
+
+  <script src="disability-resource.js?v=20260614-knowledge-nav-v7"></script>
 </body>
 </html>

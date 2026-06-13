@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260613-knowledge-pack-v2';
+const CACHE_VERSION = '20260613-knowledge-nav-v3';
 
 const state = {
   scenarios: [],
@@ -12,6 +12,8 @@ const state = {
   sessionToken: '',
   apiReady: false,
   outputMode: 'family',
+  activeAttributeFilter: '',
+  currentKnowledgeCards: [],
 };
 
 const qs = (selector) => document.querySelector(selector);
@@ -86,6 +88,13 @@ const COMPARISON_GROUP_LABELS = {
   output_wording: '家屬版說法與輸出邊界',
 };
 
+const ATTRIBUTE_TYPE_LABELS = {
+  system_scope: '系統',
+  knowledge_type: '類型',
+  region_scope: '地區',
+  comparison_group: '同屬性',
+};
+
 function labelText(value) {
   const raw = String(value ?? '').trim();
   if (!raw) return '';
@@ -110,6 +119,64 @@ function comparisonGroup(card) {
 function comparisonGroupLabel(group, card = null) {
   const raw = String(group || comparisonGroup(card) || '').trim();
   return card?.comparison_group_label || COMPARISON_GROUP_LABELS[raw] || labelText(raw) || '未指定比較屬性';
+}
+
+function attributeKey(type, value) {
+  return `${type}:${String(value || '').trim()}`;
+}
+
+function cardAttributes(card) {
+  const attrs = [];
+  for (const value of asArray(card.system_scope)) attrs.push({ type: 'system_scope', value, label: labelText(value), key: attributeKey('system_scope', value) });
+  for (const value of asArray(card.knowledge_type)) attrs.push({ type: 'knowledge_type', value, label: labelText(value), key: attributeKey('knowledge_type', value) });
+  for (const value of asArray(card.region_scope)) attrs.push({ type: 'region_scope', value, label: labelText(value), key: attributeKey('region_scope', value) });
+  const group = comparisonGroup(card);
+  if (group) attrs.push({ type: 'comparison_group', value: group, label: comparisonGroupLabel(group, card), key: attributeKey('comparison_group', group) });
+  const seen = new Set();
+  return attrs.filter((attr) => {
+    if (!attr.value || seen.has(attr.key)) return false;
+    seen.add(attr.key);
+    return true;
+  });
+}
+
+function extractAttributeFilters(cards = []) {
+  const map = new Map();
+  for (const card of cards) {
+    for (const attr of cardAttributes(card)) {
+      if (!map.has(attr.key)) map.set(attr.key, { ...attr, count: 0 });
+      map.get(attr.key).count += 1;
+    }
+  }
+  return [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'zh-Hant'));
+}
+
+function renderAttributeFilters(cards = []) {
+  const container = qs('#attributeFilters');
+  if (!container) return;
+  const filters = extractAttributeFilters(cards);
+  if (!filters.length) {
+    container.innerHTML = '';
+    return;
+  }
+  if (state.activeAttributeFilter && !filters.some((attr) => attr.key === state.activeAttributeFilter)) {
+    state.activeAttributeFilter = '';
+  }
+  container.innerHTML = `
+    <span class="attribute-filter-label">快速篩選</span>
+    <button type="button" class="attribute-chip${state.activeAttributeFilter ? '' : ' is-active'}" data-attribute-key="">全部候選 ${cards.length}</button>
+    ${filters.map((attr) => `
+      <button type="button" class="attribute-chip${state.activeAttributeFilter === attr.key ? ' is-active' : ''}" data-attribute-key="${escapeHtml(attr.key)}">
+        <small>${escapeHtml(ATTRIBUTE_TYPE_LABELS[attr.type] || '屬性')}</small>${escapeHtml(attr.label)} <span>${attr.count}</span>
+      </button>
+    `).join('')}
+  `;
+  container.querySelectorAll('[data-attribute-key]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.activeAttributeFilter = button.dataset.attributeKey || '';
+      renderKnowledgeCards(state.currentKnowledgeCards || cards);
+    });
+  });
 }
 
 function hasComparison(card) {
@@ -218,7 +285,7 @@ async function loadData() {
 
 async function probeApi() {
   if (!state.apiBase) {
-    qs('#apiStatus').textContent = '目前沒有後端服務位址；可使用本頁知識卡手動整理，但不能儲存知識包。';
+    qs('#apiStatus').textContent = '目前沒有後端服務位址；可先瀏覽與挑選知識卡。';
     return;
   }
   try {
@@ -226,10 +293,10 @@ async function probeApi() {
     state.apiReady = response.ok;
     qs('#apiStatus').textContent = response.ok
       ? `後端服務已連線：${state.apiBase}`
-      : `後端服務暫時不可用：${state.apiBase}。可先用本頁知識卡手動整理。`;
+      : `後端服務暫時不可用：${state.apiBase}`;
   } catch (error) {
     state.apiReady = false;
-    qs('#apiStatus').textContent = `後端服務暫時不可用：${state.apiBase}。可先用本頁知識卡手動整理。`;
+    qs('#apiStatus').textContent = `後端服務暫時不可用：${state.apiBase}`;
   }
 }
 
@@ -278,7 +345,7 @@ function localKnowledgeSearch(query, directionIds = [], limit = 8) {
 function renderDirections(directions = []) {
   const container = qs('#directionCards');
   if (!directions.length) {
-    container.innerHTML = '<div class="empty-state">尚未分流。輸入問題後會顯示方向；後端服務不通時會用本地關鍵字保守排序。</div>';
+    container.innerHTML = '<div class="empty-state">輸入問題後會顯示方向；後端服務不通時仍可使用本頁知識卡。</div>';
     return;
   }
   container.innerHTML = directions.map((row) => {
@@ -296,11 +363,20 @@ function renderDirections(directions = []) {
 
 function renderKnowledgeCards(cards = []) {
   const container = qs('#knowledgeCards');
+  state.currentKnowledgeCards = cards;
+  renderAttributeFilters(cards);
   if (!cards.length) {
-    container.innerHTML = '<div class="empty-state">尚無知識卡候選。請換一種問法，或用官方延伸搜尋。</div>';
+    container.innerHTML = '<div class="empty-state">尚無知識卡候選。請換一種問法，或先從下方既有知識卡手動挑選。</div>';
     return;
   }
-  container.innerHTML = cards.map((card) => {
+  const visibleCards = state.activeAttributeFilter
+    ? cards.filter((card) => cardAttributes(card).some((attr) => attr.key === state.activeAttributeFilter))
+    : cards;
+  if (!visibleCards.length) {
+    container.innerHTML = '<div class="empty-state">這個屬性目前沒有符合的知識卡，請切回全部候選或改選其他屬性。</div>';
+    return;
+  }
+  container.innerHTML = visibleCards.map((card) => {
     const id = card.knowledge_id || card.id;
     const selected = state.selectedKnowledgeIds.has(id);
     return `
@@ -310,7 +386,7 @@ function renderKnowledgeCards(cards = []) {
             <p class="eyebrow">${escapeHtml(asArray(card.system_scope).join(' / ') || '知識卡')}</p>
             <h3>${escapeHtml(card.title || id)}</h3>
           </div>
-          <button class="toggle-card-button" type="button" data-card-id="${escapeHtml(id)}">${selected ? '移除' : '加入知識包'}</button>
+          <button class="toggle-card-button" type="button" data-card-id="${escapeHtml(id)}">${selected ? '移除' : '加入知識組合'}</button>
         </div>
         <p class="card-desc">${escapeHtml(card.match_reason || asArray(card.question_patterns).slice(0, 2).join('、') || card.family_safe_summary || '')}</p>
         <div class="card-tags">
@@ -447,11 +523,11 @@ function renderSavedPackages() {
     return;
   }
   if (!state.apiReady) {
-    container.innerHTML = '<div class="empty-state">後端服務暫時不可用；可先閱讀與組合知識卡，但無法載入已儲存知識包。</div>';
+    container.innerHTML = '<div class="empty-state">後端服務暫時不可用；可先閱讀與組合知識卡，但無法載入已儲存知識組合。</div>';
     return;
   }
   if (!state.savedPackages.length) {
-    container.innerHTML = '<div class="empty-state">目前尚未儲存知識包。選卡後可按「儲存草稿」。</div>';
+    container.innerHTML = '<div class="empty-state">目前尚未儲存知識組合。選卡後可按「儲存草稿」。</div>';
     return;
   }
   container.innerHTML = state.savedPackages.map((record) => {
@@ -460,7 +536,7 @@ function renderSavedPackages() {
     return `
       <article class="saved-package-card${active ? ' active' : ''}">
         <div>
-          <strong>${escapeHtml(record.name || '未命名知識包')}</strong>
+          <strong>${escapeHtml(record.name || '未命名知識組合')}</strong>
           <p class="small-note">${escapeHtml(statusLabel(record.status))}｜${count} 張知識卡｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
           <p class="saved-summary">${escapeHtml(record.question_summary || '未保存問題摘要')}</p>
         </div>
@@ -494,7 +570,7 @@ function applySavedPackage(packageId) {
     directions: asArray(record.direction_ids).map((id) => ({
       direction_id: id,
       short_label: scenarioById(id)?.short_label || id,
-      reason: '此方向來自已儲存的知識包。',
+      reason: '此方向來自已儲存的知識組合。',
     })),
     knowledge_cards: snapshots,
   };
@@ -502,7 +578,7 @@ function applySavedPackage(packageId) {
   renderKnowledgeCards(snapshots.length ? snapshots : state.knowledgeCards.slice(0, 8));
   renderSavedPackages();
   renderOutputs();
-  qs('#packageHint').textContent = `已載入「${record.name || '知識包'}」；輸出內容使用建立當時保存的知識卡副本。`;
+  qs('#packageHint').textContent = `已載入「${record.name || '知識組合'}」；輸出內容使用建立當時保存的知識卡副本。`;
 }
 
 async function loadSavedPackages({ quiet = false } = {}) {
@@ -515,12 +591,12 @@ async function loadSavedPackages({ quiet = false } = {}) {
     state.savedPackages = asArray(payload.packages);
     renderSavedPackages();
     if (!quiet && state.savedPackages.length) {
-      qs('#packageHint').textContent = `已載入 ${state.savedPackages.length} 筆你先前建立的知識包。`;
+      qs('#packageHint').textContent = `已載入 ${state.savedPackages.length} 筆你先前建立的知識組合。`;
     }
   } catch (error) {
     state.savedPackages = [];
     renderSavedPackages();
-    if (!quiet) qs('#packageHint').textContent = `載入既有知識包失敗：${error.message || error}`;
+    if (!quiet) qs('#packageHint').textContent = `載入既有知識組合失敗：${error.message || error}`;
   }
 }
 
@@ -564,7 +640,7 @@ function setupOutputModeTabs() {
 
 function renderSources(cards) {
   const refs = unique(cards.flatMap((card) => asArray(card.source_refs).map((ref) => JSON.stringify(ref))));
-  if (!refs.length) return '<div class="source-item">尚無來源；請改用官方延伸搜尋。</div>';
+  if (!refs.length) return '<div class="source-item">尚無來源；請依卡片內容回到官方窗口查證。</div>';
   return refs.map((raw, index) => {
     let ref = {};
     try { ref = JSON.parse(raw); } catch (error) { ref = {}; }
@@ -609,7 +685,7 @@ async function routeQuestion() {
     return;
   }
   if (privacyMessage()) return;
-  qs('#apiStatus').textContent = '正在分流與搜尋知識卡。';
+  qs('#apiStatus').textContent = '正在尋找知識卡。';
   if (state.apiBase && state.apiReady) {
     try {
       const payload = await fetchJson(apiPath('/api/v1/disability-knowledge/route'), {
@@ -620,7 +696,7 @@ async function routeQuestion() {
       state.routeResult = payload;
       renderDirections(payload.directions || []);
       renderKnowledgeCards(payload.knowledge_cards || []);
-      qs('#apiStatus').textContent = `已完成分流：${payload.status || 'ok'}。分流模型只做方向分類，知識卡由本地索引命中。`;
+      qs('#apiStatus').textContent = `已找到知識卡：${payload.status || 'ok'}。`;
       return;
     } catch (error) {
       qs('#apiStatus').textContent = `後端分流失敗，改用本頁本地知識卡：${error.message || error}`;
@@ -630,7 +706,7 @@ async function routeQuestion() {
   state.routeResult = { directions: [], knowledge_cards: localCards };
   renderDirections([]);
   renderKnowledgeCards(localCards);
-  qs('#apiStatus').textContent = '已使用本頁本地知識卡保守排序；不能視為分流模型結果。';
+  qs('#apiStatus').textContent = '已使用本頁知識卡保守排序。';
 }
 
 async function saveDraft() {
@@ -640,7 +716,7 @@ async function saveDraft() {
     return;
   }
   if (!state.apiBase || !state.apiReady) {
-    qs('#packageHint').textContent = '後端服務未連線，暫時不能儲存知識包。';
+    qs('#packageHint').textContent = '後端服務未連線，暫時不能儲存知識組合。';
     return;
   }
   if (!cards.length) {
@@ -648,7 +724,7 @@ async function saveDraft() {
     return;
   }
   const payload = {
-    name: '身障／長照知識包草稿',
+    name: '身障／長照知識組合草稿',
     question_summary: maskSensitiveText(questionText.value || ''),
     direction_ids: state.routeResult?.direction_ids || (state.routeResult?.directions || []).map((row) => row.direction_id).filter(Boolean),
     knowledge_ids: cards.map((card) => card.knowledge_id || card.id),
@@ -662,7 +738,7 @@ async function saveDraft() {
       body: JSON.stringify(payload),
     });
     state.activePackageId = saved.package?.package_id || state.activePackageId;
-    qs('#packageHint').textContent = `已儲存草稿：${saved.package?.name || saved.package?.package_id || '知識包'}。下次從 Discord 入口進來會看得到。`;
+    qs('#packageHint').textContent = `已儲存草稿：${saved.package?.name || saved.package?.package_id || '知識組合'}。下次從 Discord 入口進來會看得到。`;
     await loadSavedPackages({ quiet: true });
   } catch (error) {
     qs('#packageHint').textContent = `儲存失敗：${error.message || error}`;
@@ -678,7 +754,7 @@ async function copyTextFromNode(id) {
 
 async function copyPackage() {
   const text = [
-    '【身障／長照知識包】',
+    '【身障／長照知識組合】',
     qs('#familyOutput').innerText,
     '',
     '【查證路徑】',
@@ -691,7 +767,7 @@ async function copyPackage() {
     qs('#comparisonOutput').innerText,
   ].join('\n');
   await navigator.clipboard.writeText(text);
-  qs('#packageHint').textContent = '已複製知識包內容。';
+  qs('#packageHint').textContent = '已複製知識組合內容。';
 }
 
 function officialSearchUrl() {
@@ -711,23 +787,12 @@ async function init() {
   setupOutputModeTabs();
   renderDirections([]);
   renderKnowledgeCards(state.knowledgeCards.slice(0, 8));
+  const loginBadge = qs('#loginBadge');
+  if (loginBadge) loginBadge.textContent = state.sessionToken ? '已連結 Discord，可儲存' : '未連結 Discord，僅本頁暫存';
   renderOutputs();
   await loadSavedPackages({ quiet: true });
   questionText.addEventListener('input', privacyMessage);
   qs('#routeButton').addEventListener('click', routeQuestion);
-  qs('#clearSelectionButton').addEventListener('click', () => {
-    state.selectedKnowledgeIds.clear();
-    state.selectedCardSnapshots.clear();
-    state.routeResult = null;
-    state.activePackageId = '';
-    renderDirections([]);
-    renderKnowledgeCards(state.knowledgeCards.slice(0, 8));
-    renderSavedPackages();
-    renderOutputs();
-  });
-  qs('#officialSearchButton').addEventListener('click', () => {
-    window.open(officialSearchUrl(), '_blank', 'noopener,noreferrer');
-  });
   qs('#saveDraftButton').addEventListener('click', saveDraft);
   qs('#refreshPackagesButton').addEventListener('click', () => loadSavedPackages());
   qs('#copyPackageButton').addEventListener('click', copyPackage);

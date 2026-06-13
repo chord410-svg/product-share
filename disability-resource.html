@@ -4,16 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-nav-v3" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-nav-v3" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-nav-v3" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-nav-v4" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-nav-v4" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-nav-v4" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
     <div>
       <p class="eyebrow">登入狀態</p>
       <h1>身障／長照知識導航</h1>
-      <p class="lead">個管師輸入問題後，先看方向與候選知識卡；選取後到「我的知識組合」整理家屬版、電話確認與同屬性比較。</p>
     </div>
     <span id="loginBadge" class="tool-badge">檢查 Discord 連結中</span>
   </header>
@@ -26,20 +25,30 @@
 
   <main class="layout tab-panel is-active" id="knowledgeNavView" role="tabpanel" aria-labelledby="knowledgeNavTabButton">
     <section class="panel controls" aria-labelledby="control-title">
-      <div class="section-heading">
-        <p class="eyebrow">本案問題</p>
-        <h2 id="control-title">輸入問題，尋找知識卡</h2>
+      <div class="section-heading compact-heading">
+        <h2 id="control-title">輸入問題</h2>
       </div>
-      <label>
-        個管師問題
-        <textarea id="questionText" rows="5" placeholder="例如：家屬問爬梯機能不能申請補助，長照沒有列，身障路徑要怎麼查？"></textarea>
-      </label>
+      <div class="question-grid">
+        <label class="question-field">
+          <span>輸入問題</span>
+          <textarea id="questionText" rows="5" placeholder="例如：家屬問爬梯機能不能申請補助，長照沒有列，身障路徑要怎麼查？"></textarea>
+        </label>
+        <div class="region-field">
+          <span class="field-label">地區</span>
+          <button id="regionSelectButton" class="region-select-button" type="button" aria-expanded="false" aria-controls="regionSelectMenu">地區：新北市、中央共通</button>
+          <div id="regionSelectMenu" class="region-select-menu" hidden>
+            <label><input type="checkbox" name="regionScope" value="新北市" checked /> 新北市</label>
+            <label><input type="checkbox" name="regionScope" value="中央共通" checked /> 中央共通</label>
+            <label><input type="checkbox" name="regionScope" value="台北市" /> 台北市</label>
+            <label><input type="checkbox" name="regionScope" value="桃園市" /> 桃園市</label>
+          </div>
+        </div>
+      </div>
       <div id="privacyWarning" class="privacy-warning" hidden></div>
-      <div class="action-row">
+      <div class="action-row action-row-with-status">
         <button id="routeButton" class="primary-button" type="button">尋找知識卡</button>
+        <p id="apiStatus" class="small-note inline-status">正在檢查後端服務。</p>
       </div>
-      <p id="apiStatus" class="small-note">正在檢查後端服務與知識卡資料。</p>
-      <p class="small-note">請勿輸入姓名、電話、完整地址、身分證或病歷號；家屬版文字只提供保守說明。</p>
     </section>
 
     <section class="panel" aria-labelledby="direction-title">
@@ -182,6 +191,6 @@
     <strong>安全邊界：</strong>本頁不保存原始問題全文、不做資格核定、不承諾補助；C 級整理來源只作研究線索，家屬版需由 A/B 級官方或受託來源支撐。
   </footer>
 
-  <script src="disability-resource.js?v=20260613-knowledge-nav-v3"></script>
+  <script src="disability-resource.js?v=20260613-knowledge-nav-v4"></script>
 </body>
 </html>

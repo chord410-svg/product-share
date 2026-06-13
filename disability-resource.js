@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260613-knowledge-nav-v3';
+const CACHE_VERSION = '20260613-knowledge-nav-v4';
 
 const state = {
   scenarios: [],
@@ -11,6 +11,8 @@ const state = {
   apiBase: '',
   sessionToken: '',
   apiReady: false,
+  sessionUser: null,
+  selectedRegions: new Set(['新北市', '中央共通']),
   outputMode: 'family',
   activeAttributeFilter: '',
   currentKnowledgeCards: [],
@@ -241,6 +243,66 @@ function params() {
   return new URLSearchParams(window.location.search);
 }
 
+function selectedRegions() {
+  return [...state.selectedRegions].filter(Boolean);
+}
+
+function renderRegionSelectLabel() {
+  const button = qs('#regionSelectButton');
+  if (!button) return;
+  const regions = selectedRegions();
+  button.textContent = regions.length ? `地區：${regions.join('、')}` : '地區：不限';
+}
+
+function setupRegionSelector() {
+  const button = qs('#regionSelectButton');
+  const menu = qs('#regionSelectMenu');
+  if (!button || !menu) return;
+  const sync = () => {
+    const checked = [...menu.querySelectorAll('input[name="regionScope"]:checked')].map((input) => input.value);
+    state.selectedRegions = new Set(checked);
+    renderRegionSelectLabel();
+  };
+  menu.querySelectorAll('input[name="regionScope"]').forEach((input) => input.addEventListener('change', sync));
+  button.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const hidden = menu.hidden;
+    menu.hidden = !hidden;
+    button.setAttribute('aria-expanded', hidden ? 'true' : 'false');
+  });
+  document.addEventListener('click', (event) => {
+    if (menu.hidden) return;
+    if (menu.contains(event.target) || button.contains(event.target)) return;
+    menu.hidden = true;
+    button.setAttribute('aria-expanded', 'false');
+  });
+  sync();
+}
+
+async function probeSession() {
+  const badge = qs('#loginBadge');
+  if (!badge) return;
+  if (!state.sessionToken) {
+    badge.textContent = '未透過 Discord 入口開啟';
+    return;
+  }
+  if (!state.apiBase) {
+    badge.textContent = 'Discord 連結待驗證';
+    return;
+  }
+  try {
+    const payload = await fetchJson(apiPath(`/api/v1/resource/session?token=${encodeURIComponent(state.sessionToken)}`), { cache: 'no-store' });
+    const user = payload.user || {};
+    const userName = user.name || user.user_name || user.username || 'Discord 使用者';
+    const userId = user.id || user.user_id || '';
+    state.sessionUser = { name: userName, id: String(userId || '') };
+    badge.textContent = `已連結 Discord：${userName}${userId ? ` / ${userId}` : ''}`;
+  } catch (error) {
+    state.sessionUser = null;
+    badge.textContent = 'Discord 連結待重新驗證';
+  }
+}
+
 async function loadRuntime() {
   const query = params();
   state.sessionToken = query.get('session') || query.get('token') || '';
@@ -285,7 +347,7 @@ async function loadData() {
 
 async function probeApi() {
   if (!state.apiBase) {
-    qs('#apiStatus').textContent = '目前沒有後端服務位址；可先瀏覽與挑選知識卡。';
+    qs('#apiStatus').textContent = '後端服務未設定，可先瀏覽知識卡。';
     return;
   }
   try {
@@ -312,7 +374,7 @@ function selectedCards() {
   return cards;
 }
 
-function keywordScore(card, query, directionIds = []) {
+function keywordScore(card, query, directionIds = [], regionHints = []) {
   const text = [
     card.title,
     ...(card.directions || []),
@@ -330,12 +392,14 @@ function keywordScore(card, query, directionIds = []) {
     if (String(card.title || '').includes(term)) score += 4;
   }
   if ((card.directions || []).some((id) => directionIds.includes(id))) score += 6;
+  const regions = asArray(card.region_scope);
+  if (regionHints.length && regions.some((region) => regionHints.includes(region))) score += 3;
   return score;
 }
 
-function localKnowledgeSearch(query, directionIds = [], limit = 8) {
+function localKnowledgeSearch(query, directionIds = [], limit = 8, regionHints = selectedRegions()) {
   return state.knowledgeCards
-    .map((card) => ({ card, score: keywordScore(card, query, directionIds) }))
+    .map((card) => ({ card, score: keywordScore(card, query, directionIds, regionHints) }))
     .filter((row) => row.score > 0 || directionIds.some((id) => (row.card.directions || []).includes(id)))
     .sort((a, b) => b.score - a.score || String(a.card.title).localeCompare(String(b.card.title), 'zh-Hant'))
     .slice(0, limit)
@@ -681,7 +745,7 @@ function renderOutputs() {
 async function routeQuestion() {
   const question = (questionText.value || '').trim();
   if (!question) {
-    qs('#apiStatus').textContent = '請先輸入個管師問題。';
+    qs('#apiStatus').textContent = '請先輸入問題。';
     return;
   }
   if (privacyMessage()) return;
@@ -691,7 +755,7 @@ async function routeQuestion() {
       const payload = await fetchJson(apiPath('/api/v1/disability-knowledge/route'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, region_scope: selectedRegions(), region_hints: selectedRegions() }),
       });
       state.routeResult = payload;
       renderDirections(payload.directions || []);
@@ -702,7 +766,7 @@ async function routeQuestion() {
       qs('#apiStatus').textContent = `後端分流失敗，改用本頁本地知識卡：${error.message || error}`;
     }
   }
-  const localCards = localKnowledgeSearch(question, [], 8);
+  const localCards = localKnowledgeSearch(question, [], 8, selectedRegions());
   state.routeResult = { directions: [], knowledge_cards: localCards };
   renderDirections([]);
   renderKnowledgeCards(localCards);
@@ -783,12 +847,12 @@ async function init() {
   await loadRuntime();
   await loadData();
   await probeApi();
+  await probeSession();
   setupTabs();
   setupOutputModeTabs();
+  setupRegionSelector();
   renderDirections([]);
   renderKnowledgeCards(state.knowledgeCards.slice(0, 8));
-  const loginBadge = qs('#loginBadge');
-  if (loginBadge) loginBadge.textContent = state.sessionToken ? '已連結 Discord，可儲存' : '未連結 Discord，僅本頁暫存';
   renderOutputs();
   await loadSavedPackages({ quiet: true });
   questionText.addEventListener('input', privacyMessage);

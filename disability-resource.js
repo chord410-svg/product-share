@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260613-knowledge-pack-v1';
+const CACHE_VERSION = '20260613-knowledge-pack-v2';
 
 const state = {
   scenarios: [],
@@ -11,6 +11,7 @@ const state = {
   apiBase: '',
   sessionToken: '',
   apiReady: false,
+  outputMode: 'family',
 };
 
 const qs = (selector) => document.querySelector(selector);
@@ -69,6 +70,22 @@ const LABELS = {
   A: 'A 級官方來源',
 };
 
+const COMPARISON_GROUP_LABELS = {
+  assistive_stair_climber: '爬梯機／上下樓設備',
+  assistive_wheelchair: '輪椅與移動輔具',
+  home_accessibility_handrail: '居家扶手',
+  home_accessibility_bathroom: '浴室改造',
+  home_accessibility_ramp: '門檻／斜坡／動線改善',
+  special_assistive_device: '智能／特殊輔具',
+  process_preapproval: '事前核定與先購買風險',
+  system_eligibility_difference: '身障證明／長照資格／CMS 差異',
+  care_support_respite: '短期照顧與喘息支持',
+  transport_access: '交通服務與復康巴士',
+  family_support: '家庭照顧者支持',
+  official_window: '官方窗口與電話確認',
+  output_wording: '家屬版說法與輸出邊界',
+};
+
 function labelText(value) {
   const raw = String(value ?? '').trim();
   if (!raw) return '';
@@ -84,6 +101,20 @@ function cardId(card) {
 
 function cardById(id) {
   return state.knowledgeCards.find((card) => cardId(card) === id);
+}
+
+function comparisonGroup(card) {
+  return String(card?.comparison_group || '').trim();
+}
+
+function comparisonGroupLabel(group, card = null) {
+  const raw = String(group || comparisonGroup(card) || '').trim();
+  return card?.comparison_group_label || COMPARISON_GROUP_LABELS[raw] || labelText(raw) || '未指定比較屬性';
+}
+
+function hasComparison(card) {
+  const comparison = card?.comparison;
+  return Boolean(comparison && typeof comparison === 'object' && Object.keys(comparison).length);
 }
 
 function detectPrivacy(text) {
@@ -285,6 +316,7 @@ function renderKnowledgeCards(cards = []) {
         <div class="card-tags">
           ${asArray(card.knowledge_type).slice(0, 3).map((tag) => `<span class="tag">${escapeHtml(labelText(tag))}</span>`).join('')}
           ${asArray(card.region_scope).slice(0, 2).map((tag) => `<span class="tag region">${escapeHtml(labelText(tag))}</span>`).join('')}
+          ${comparisonGroup(card) ? `<span class="tag compare-tag">同屬性：${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</span>` : ''}
         </div>
       </article>
     `;
@@ -307,39 +339,75 @@ function renderKnowledgeCards(cards = []) {
   });
 }
 
-function comparisonRows(cards) {
-  const rows = [];
+function comparisonGroups(cards) {
+  const groups = new Map();
+  const notComparable = [];
   for (const card of cards) {
+    const group = comparisonGroup(card);
+    if (!group || !hasComparison(card)) {
+      notComparable.push(card);
+      continue;
+    }
     const comparison = card.comparison || {};
-    rows.push({
-      title: card.title,
+    if (!groups.has(group)) {
+      groups.set(group, {
+        group,
+        label: comparisonGroupLabel(group, card),
+        cards: [],
+      });
+    }
+    groups.get(group).cards.push({
+      title: card.title || cardId(card),
       ltc: comparison.ltc_side || {},
       disability: comparison.disability_side || {},
       risks: comparison.shared_risks || card.risk_flags || [],
       family: comparison.family_wording || card.family_safe_summary || '',
     });
   }
-  return rows;
+  return { groups: [...groups.values()], notComparable };
 }
 
 function renderComparison(cards) {
-  const rows = comparisonRows(cards);
   const container = qs('#comparisonOutput');
-  if (!rows.length) {
-    container.innerHTML = '<div class="empty-state">加入知識卡後，這裡會整理長照側、身障側與共同風險。</div>';
+  const { groups, notComparable } = comparisonGroups(cards);
+  if (!cards.length) {
+    container.innerHTML = '<div class="empty-state">加入知識卡後，這裡會依同屬性分組整理長照側、身障側與共同風險。</div>';
     return;
   }
-  container.innerHTML = rows.map((row) => `
+  if (!groups.length) {
+    container.innerHTML = `
+      <div class="empty-state">目前選取的知識卡沒有可比較欄位；仍可使用家屬版、電話確認與內部提醒。</div>
+      ${notComparable.length ? `<div class="not-comparable-list">${notComparable.map((card) => `<span>${escapeHtml(card.title || cardId(card))}</span>`).join('')}</div>` : ''}
+    `;
+    return;
+  }
+  const groupHtml = groups.map((group) => `
     <article class="comparison-card">
-      <h3>${escapeHtml(row.title)}</h3>
-      <div class="compare-columns">
-        <div><strong>長照側</strong><p>${escapeHtml(row.ltc.path || '先查長照服務項目與地方承辦流程。')}</p><p class="muted">${escapeHtml(row.ltc.window || '')}</p></div>
-        <div><strong>身障側</strong><p>${escapeHtml(row.disability.path || '再查身障福利、輔具中心或地方社會局窗口。')}</p><p class="muted">${escapeHtml(row.disability.window || '')}</p></div>
+      <div class="comparison-group-title">
+        <div>
+          <p class="eyebrow">同屬性比較</p>
+          <h3>${escapeHtml(group.label)}</h3>
+        </div>
+        <span class="tag compare-tag">${escapeHtml(group.group)}</span>
       </div>
-      <p><strong>共同風險：</strong>${escapeHtml(asArray(row.risks).map(labelText).join('、') || '需官方確認。')}</p>
-      <p><strong>家屬說法：</strong>${escapeHtml(row.family)}</p>
+      <p class="comparison-group-note">只合併 comparison_group 相同的知識卡；不同屬性的知識卡會分開顯示，避免把制度流程硬湊成一張表。</p>
+      ${group.cards.map((row) => `
+        <section class="comparison-item">
+          <h4>${escapeHtml(row.title)}</h4>
+          <div class="compare-columns">
+            <div><strong>長照側</strong><p>${escapeHtml(row.ltc.path || '先查長照服務項目與地方承辦流程。')}</p><p class="muted">${escapeHtml(row.ltc.window || '')}</p></div>
+            <div><strong>身障側</strong><p>${escapeHtml(row.disability.path || '再查身障福利、輔具中心或地方社會局窗口。')}</p><p class="muted">${escapeHtml(row.disability.window || '')}</p></div>
+          </div>
+          <p><strong>共同風險：</strong>${escapeHtml(asArray(row.risks).map(labelText).join('、') || '需官方確認。')}</p>
+          <p><strong>家屬說法：</strong>${escapeHtml(row.family || '請以官方窗口確認後，再提供保守說明。')}</p>
+        </section>
+      `).join('')}
     </article>
   `).join('');
+  const skippedHtml = notComparable.length
+    ? `<div class="empty-state">以下知識卡不適用長照 VS 身障比較：${notComparable.map((card) => escapeHtml(card.title || cardId(card))).join('、')}</div>`
+    : '';
+  container.innerHTML = groupHtml + skippedHtml;
 }
 
 function renderPackage(cards) {
@@ -456,6 +524,44 @@ async function loadSavedPackages({ quiet = false } = {}) {
   }
 }
 
+function setActiveView(viewName) {
+  document.querySelectorAll('[data-view]').forEach((button) => {
+    const active = button.dataset.view === viewName;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  document.querySelectorAll('.tab-panel').forEach((panel) => {
+    const active = panel.id === `${viewName}View`;
+    panel.hidden = !active;
+    panel.classList.toggle('is-active', active);
+  });
+}
+
+function setupTabs() {
+  document.querySelectorAll('[data-view]').forEach((button) => {
+    button.addEventListener('click', () => setActiveView(button.dataset.view));
+  });
+}
+
+function setOutputMode(mode) {
+  state.outputMode = mode || 'family';
+  document.querySelectorAll('[data-output-mode]').forEach((button) => {
+    const active = button.dataset.outputMode === state.outputMode;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  document.querySelectorAll('[data-output-section]').forEach((section) => {
+    const modes = String(section.dataset.outputSection || '').split(/\s+/).filter(Boolean);
+    section.hidden = !modes.includes(state.outputMode);
+  });
+}
+
+function setupOutputModeTabs() {
+  document.querySelectorAll('[data-output-mode]').forEach((button) => {
+    button.addEventListener('click', () => setOutputMode(button.dataset.outputMode));
+  });
+}
+
 function renderSources(cards) {
   const refs = unique(cards.flatMap((card) => asArray(card.source_refs).map((ref) => JSON.stringify(ref))));
   if (!refs.length) return '<div class="source-item">尚無來源；請改用官方延伸搜尋。</div>';
@@ -484,6 +590,7 @@ function renderOutputs() {
     qs('#phoneOutput').textContent = '';
     qs('#internalOutput').textContent = '';
     qs('#sourceOutput').innerHTML = '';
+    setOutputMode(state.outputMode || 'family');
     return;
   }
   qs('#resultTitle').textContent = `已組合 ${cards.length} 張知識卡`;
@@ -492,6 +599,7 @@ function renderOutputs() {
   qs('#phoneOutput').textContent = lineList(cards.flatMap((card) => card.phone_check_questions || []));
   qs('#internalOutput').textContent = lineList(cards.flatMap((card) => card.care_manager_notes || []));
   qs('#sourceOutput').innerHTML = renderSources(cards);
+  setOutputMode(state.outputMode || 'family');
 }
 
 async function routeQuestion() {
@@ -599,6 +707,8 @@ async function init() {
   await loadRuntime();
   await loadData();
   await probeApi();
+  setupTabs();
+  setupOutputModeTabs();
   renderDirections([]);
   renderKnowledgeCards(state.knowledgeCards.slice(0, 8));
   renderOutputs();

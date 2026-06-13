@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260613-knowledge-nav-v6';
+const CACHE_VERSION = '20260614-knowledge-nav-v7';
 
 const state = {
   scenarios: [],
@@ -18,6 +18,9 @@ const state = {
   activeAttributeGroup: 'system_scope',
   activeAttributeSelections: {},
   currentKnowledgeCards: [],
+  generationHistory: [],
+  activeGenerationId: '',
+  activeDetailCardId: '',
 };
 
 const qs = (selector) => document.querySelector(selector);
@@ -325,6 +328,102 @@ function formatDateTime(timestamp) {
   });
 }
 
+function historyStorageKey() {
+  const userId = state.sessionUser?.id || '';
+  if (userId) return `disability_knowledge_generations_user_${userId}`;
+  if (state.sessionToken) return `disability_knowledge_generations_session_${state.sessionToken.slice(0, 12)}`;
+  return 'disability_knowledge_generations_local';
+}
+
+function readGenerationHistory() {
+  try {
+    const raw = localStorage.getItem(historyStorageKey());
+    const rows = JSON.parse(raw || '[]');
+    state.generationHistory = Array.isArray(rows) ? rows.filter((row) => row && row.id).slice(0, 12) : [];
+  } catch (error) {
+    state.generationHistory = [];
+  }
+}
+
+function writeGenerationHistory() {
+  try {
+    localStorage.setItem(historyStorageKey(), JSON.stringify(state.generationHistory.slice(0, 12)));
+  } catch (error) {
+    console.info('generation history storage failed', error);
+  }
+}
+
+function cardIds(cards = []) {
+  return unique(cards.map((card) => cardId(card)).filter(Boolean));
+}
+
+function addGenerationRecord({ question, directions = [], cards = [], source = 'local' }) {
+  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  const directionIds = unique(directions.map((row) => row.direction_id || row.scenario_id || row.id).filter(Boolean));
+  const record = {
+    id,
+    createdAt: Math.floor(Date.now() / 1000),
+    questionSummary: maskSensitiveText(question || '未保存問題摘要'),
+    regionScope: selectedRegions(),
+    directionIds,
+    cardIds: cardIds(cards),
+    cardTitles: cards.slice(0, 3).map((card) => String(card.title || cardId(card))).filter(Boolean),
+    source,
+  };
+  state.activeGenerationId = id;
+  state.generationHistory = [record, ...state.generationHistory.filter((row) => row.id !== id)].slice(0, 12);
+  writeGenerationHistory();
+  renderGenerationHistory();
+}
+
+function generationCards(record) {
+  const ids = Array.isArray(record?.cardIds) ? record.cardIds : [];
+  return ids.map((id) => cardById(id)).filter(Boolean);
+}
+
+function generationDirections(record) {
+  const ids = Array.isArray(record?.directionIds) ? record.directionIds : [];
+  return ids.map((id) => ({
+    direction_id: id,
+    short_label: scenarioById(id)?.short_label || id,
+    reason: '此方向來自先前生成紀錄。',
+  }));
+}
+
+function renderGenerationHistory() {
+  const container = qs('#generationHistory');
+  if (!container) return;
+  if (!state.generationHistory.length) {
+    container.innerHTML = '<div class="empty-state">尚無生成紀錄。每次尋找知識卡後，這裡會保留最近紀錄，方便回到前一次結果。</div>';
+    return;
+  }
+  container.innerHTML = state.generationHistory.map((record) => {
+    const titles = Array.isArray(record.cardTitles) && record.cardTitles.length ? record.cardTitles.join('、') : '尚未命中知識卡';
+    const regions = Array.isArray(record.regionScope) && record.regionScope.length ? record.regionScope.join('、') : '地區不限';
+    return `
+      <button type="button" class="history-card${record.id === state.activeGenerationId ? ' is-active' : ''}" data-generation-id="${escapeHtml(record.id)}">
+        <strong>${escapeHtml(record.questionSummary || '未保存問題摘要')}</strong>
+        <span>${escapeHtml(formatDateTime(record.createdAt))}｜${escapeHtml(regions)}｜${escapeHtml(titles)}</span>
+      </button>
+    `;
+  }).join('');
+  container.querySelectorAll('[data-generation-id]').forEach((button) => {
+    button.addEventListener('click', () => applyGenerationRecord(button.dataset.generationId || ''));
+  });
+}
+
+function applyGenerationRecord(id) {
+  const record = state.generationHistory.find((row) => row.id === id);
+  if (!record) return;
+  const cards = generationCards(record);
+  const directions = generationDirections(record);
+  state.activeGenerationId = record.id;
+  state.routeResult = { directions, direction_ids: record.directionIds || [], knowledge_cards: cards };
+  renderDirections(directions);
+  renderKnowledgeCards(cards.length ? cards : state.knowledgeCards.slice(0, 8), { resetAttributes: true });
+  renderGenerationHistory();
+}
+
 function privacyMessage() {
   const hits = detectPrivacy(questionText.value || '');
   if (!hits.length) {
@@ -527,6 +626,118 @@ function renderDirections(directions = []) {
   }).join('');
 }
 
+function listHtml(items, fallback = '尚無資料。') {
+  const rows = unique(items);
+  if (!rows.length) return `<p class="muted">${escapeHtml(fallback)}</p>`;
+  return `<ol class="detail-list">${rows.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ol>`;
+}
+
+function valueHtml(value, fallback = '尚無資料。') {
+  const text = String(value || '').trim();
+  return text ? escapeHtml(text) : `<span class="muted">${escapeHtml(fallback)}</span>`;
+}
+
+function sourceRefs(card) {
+  return Array.isArray(card?.source_refs) ? card.source_refs.filter((ref) => ref && typeof ref === 'object') : [];
+}
+
+function comparisonDetailHtml(card) {
+  const comparison = card?.comparison || {};
+  if (!hasComparison(card)) return '<p class="muted">此卡尚未建立同屬性比較欄位。</p>';
+  const ltc = comparison.ltc_side || {};
+  const disability = comparison.disability_side || {};
+  return `
+    <div class="detail-grid">
+      <div class="detail-field"><strong>長照側</strong>${valueHtml(ltc.path || '', '先查長照服務項目與地方承辦流程。')}<br><span class="muted">${escapeHtml(ltc.window || '')}</span></div>
+      <div class="detail-field"><strong>身障側</strong>${valueHtml(disability.path || '', '再查身障福利、輔具中心或地方社會局窗口。')}<br><span class="muted">${escapeHtml(disability.window || '')}</span></div>
+      <div class="detail-field"><strong>共同風險</strong>${escapeHtml(asArray(comparison.shared_risks || card.risk_flags).map(labelText).join('、') || '需官方確認。')}</div>
+      <div class="detail-field"><strong>家屬說法</strong>${valueHtml(comparison.family_wording || card.family_safe_summary || '', '請以官方窗口確認後，再提供保守說明。')}</div>
+    </div>
+  `;
+}
+
+function sourceDetailHtml(card) {
+  const refs = sourceRefs(card);
+  if (!refs.length) return '<p class="muted">此卡尚未登錄來源；請依官方窗口補查。</p>';
+  return refs.map((ref, index) => {
+    const url = String(ref.url || '');
+    const link = /^https?:\/\//.test(url)
+      ? `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`
+      : '<span class="muted">未提供可開啟網址</span>';
+    return `
+      <div class="detail-field detail-source">
+        <strong>${index + 1}. ${escapeHtml(ref.title || ref.source_id || '來源')}</strong>
+        <span>來源等級：${escapeHtml(labelText(ref.source_level || '未分級'))}｜確認日：${escapeHtml(ref.last_checked_at || '待確認')}</span>
+        ${link}
+      </div>
+    `;
+  }).join('');
+}
+
+function openCardDetail(card) {
+  if (!card) return;
+  state.activeDetailCardId = cardId(card);
+  const overlay = qs('#cardDetailOverlay');
+  const title = qs('#cardDetailTitle');
+  const body = qs('#cardDetailContent');
+  title.textContent = card.title || cardId(card) || '知識卡資訊';
+  body.innerHTML = `
+    <section class="detail-section">
+      <p class="eyebrow">大要素</p>
+      <h3>這張卡在解決什麼問題</h3>
+      <div class="detail-grid">
+        <div class="detail-field"><strong>家屬版保守說明</strong>${valueHtml(card.family_safe_summary || '', '請先查證官方規定與地方承辦窗口，再提供家屬保守說明。')}</div>
+        <div class="detail-field"><strong>適用情境</strong>${listHtml(card.applies_when || [], '尚未標示適用情境。')}</div>
+        <div class="detail-field"><strong>不適用情境</strong>${listHtml(card.not_applies_when || [], '尚未標示排除情境。')}</div>
+        <div class="detail-field"><strong>同屬性比較群組</strong>${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</div>
+      </div>
+    </section>
+    <section class="detail-section">
+      <p class="eyebrow">中要素</p>
+      <h3>查證流程與比較內容</h3>
+      <div class="detail-grid">
+        <div class="detail-field"><strong>查證步驟</strong>${listHtml(card.verification_steps || [], '請先回官方窗口查證。')}</div>
+        <div class="detail-field"><strong>電話確認問題</strong>${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>
+      </div>
+      <div class="detail-field"><strong>長照 VS 身障比較</strong>${comparisonDetailHtml(card)}</div>
+    </section>
+    <section class="detail-section">
+      <p class="eyebrow">小要素</p>
+      <h3>來源、屬性與追蹤欄位</h3>
+      <div class="detail-grid">
+        <div class="detail-field"><strong>系統範圍</strong>${escapeHtml(asArray(card.system_scope).map(labelText).join('、') || '未標示')}</div>
+        <div class="detail-field"><strong>知識類型</strong>${escapeHtml(asArray(card.knowledge_type).map(labelText).join('、') || '未標示')}</div>
+        <div class="detail-field"><strong>地區</strong>${escapeHtml(asArray(card.region_scope).map(labelText).join('、') || '未標示')}</div>
+        <div class="detail-field"><strong>風險旗標</strong>${escapeHtml(asArray(card.risk_flags).map(labelText).join('、') || '尚無特殊提醒')}</div>
+        <div class="detail-field"><strong>卡片 ID</strong>${escapeHtml(cardId(card) || '未標示')}</div>
+        <div class="detail-field"><strong>公開輸出</strong>${card.public_allowed === false ? '僅內部查證，不進家屬版正式說明' : '可作家屬版保守說明素材'}</div>
+      </div>
+      <div class="detail-grid">${sourceDetailHtml(card)}</div>
+    </section>
+  `;
+  overlay.hidden = false;
+}
+
+function closeCardDetail() {
+  const overlay = qs('#cardDetailOverlay');
+  if (overlay) overlay.hidden = true;
+  state.activeDetailCardId = '';
+}
+
+function toggleKnowledgeCard(id, card) {
+  if (!id) return;
+  if (state.selectedKnowledgeIds.has(id)) {
+    state.selectedKnowledgeIds.delete(id);
+    state.selectedCardSnapshots.delete(id);
+  } else {
+    state.selectedKnowledgeIds.add(id);
+    const snapshot = card || cardById(id);
+    if (snapshot) state.selectedCardSnapshots.set(id, snapshot);
+  }
+  renderKnowledgeCards(state.currentKnowledgeCards || []);
+  renderOutputs();
+}
+
 function renderKnowledgeCards(cards = [], options = {}) {
   const container = qs('#knowledgeCards');
   state.currentKnowledgeCards = cards;
@@ -544,11 +755,9 @@ function renderKnowledgeCards(cards = [], options = {}) {
   container.innerHTML = visibleCards.map((card) => {
     const id = card.knowledge_id || card.id;
     const selected = state.selectedKnowledgeIds.has(id);
-    const verifyText = firstLine(card.verification_steps || [], '先確認官方窗口與地方承辦流程。');
-    const phoneText = firstLine(card.phone_check_questions || [], '電話確認承辦窗口、文件與是否需事前核定。');
     const summaryText = card.family_safe_summary || card.match_reason || asArray(card.question_patterns).slice(0, 2).join('、') || '此卡提供查證方向，仍需以官方窗口與電話確認為準。';
     return `
-      <article class="knowledge-card${selected ? ' selected' : ''}">
+      <article class="knowledge-card${selected ? ' selected' : ''}" data-card-id="${escapeHtml(id)}" role="button" tabindex="0" aria-pressed="${selected ? 'true' : 'false'}">
         <div class="card-head">
           <div>
             <div class="card-meta">
@@ -563,34 +772,30 @@ function renderKnowledgeCards(cards = [], options = {}) {
         <div class="tag-strip">
           ${asArray(card.knowledge_type).slice(0, 3).map((tag) => escapeHtml(labelText(tag))).join('、') || '類型待補'}
         </div>
-        <div class="card-tags">
-          ${asArray(card.region_scope).slice(0, 2).map((tag) => `<span class="tag region">${escapeHtml(labelText(tag))}</span>`).join('')}
-          ${comparisonGroup(card) ? `<span class="tag compare-tag">同屬性：${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</span>` : ''}
-        </div>
-        <dl>
-          <div><dt>查證路徑</dt><dd>${escapeHtml(verifyText)}</dd></div>
-          <div><dt>電話確認</dt><dd>${escapeHtml(phoneText)}</dd></div>
-        </dl>
         <div class="package-actions">
-          <button class="toggle-card-button" type="button" data-card-id="${escapeHtml(id)}">${selected ? '移除' : '加入知識組合'}</button>
+          <button class="detail-card-button" type="button" data-card-id="${escapeHtml(id)}">詳細卡片資訊</button>
         </div>
       </article>
     `;
   }).join('');
-  container.querySelectorAll('.toggle-card-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const id = button.dataset.cardId;
-      if (!id) return;
-      if (state.selectedKnowledgeIds.has(id)) {
-        state.selectedKnowledgeIds.delete(id);
-        state.selectedCardSnapshots.delete(id);
-      } else {
-        state.selectedKnowledgeIds.add(id);
-        const card = cardById(id) || visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id);
-        if (card) state.selectedCardSnapshots.set(id, card);
-      }
-      renderKnowledgeCards(cards);
-      renderOutputs();
+  container.querySelectorAll('.knowledge-card').forEach((node) => {
+    const id = node.dataset.cardId || '';
+    const card = visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id) || cardById(id);
+    node.addEventListener('click', (event) => {
+      if (event.target.closest('button, a, summary, details, input, select, textarea')) return;
+      toggleKnowledgeCard(id, card);
+    });
+    node.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      toggleKnowledgeCard(id, card);
+    });
+  });
+  container.querySelectorAll('.detail-card-button').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const id = button.dataset.cardId || '';
+      openCardDetail(visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id) || cardById(id));
     });
   });
 }
@@ -819,7 +1024,7 @@ function setupOutputModeTabs() {
 }
 
 function renderSources(cards) {
-  const refs = unique(cards.flatMap((card) => asArray(card.source_refs).map((ref) => JSON.stringify(ref))));
+  const refs = unique(cards.flatMap((card) => sourceRefs(card).map((ref) => JSON.stringify(ref))));
   if (!refs.length) return '<div class="source-item">尚無來源；請依卡片內容回到官方窗口查證。</div>';
   return refs.map((raw, index) => {
     let ref = {};
@@ -876,6 +1081,7 @@ async function routeQuestion() {
       state.routeResult = payload;
       renderDirections(payload.directions || []);
       renderKnowledgeCards(payload.knowledge_cards || [], { resetAttributes: true });
+      addGenerationRecord({ question, directions: payload.directions || [], cards: payload.knowledge_cards || [], source: 'api' });
       qs('#apiStatus').textContent = `已找到知識卡：${payload.status || 'ok'}。`;
       return;
     } catch (error) {
@@ -886,6 +1092,7 @@ async function routeQuestion() {
   state.routeResult = { directions: [], knowledge_cards: localCards };
   renderDirections([]);
   renderKnowledgeCards(localCards, { resetAttributes: true });
+  addGenerationRecord({ question, directions: [], cards: localCards, source: 'local' });
   qs('#apiStatus').textContent = '已使用本頁知識卡保守排序。';
 }
 
@@ -964,15 +1171,30 @@ async function init() {
   await loadData();
   await probeApi();
   await probeSession();
+  readGenerationHistory();
   setupTabs();
   setupOutputModeTabs();
   setupRegionSelector();
   renderDirections([]);
   renderKnowledgeCards(state.knowledgeCards.slice(0, 8), { resetAttributes: true });
+  renderGenerationHistory();
   renderOutputs();
   await loadSavedPackages({ quiet: true });
   questionText.addEventListener('input', privacyMessage);
   qs('#routeButton').addEventListener('click', routeQuestion);
+  qs('#clearHistoryButton').addEventListener('click', () => {
+    state.generationHistory = [];
+    state.activeGenerationId = '';
+    writeGenerationHistory();
+    renderGenerationHistory();
+  });
+  qs('#closeCardDetailButton').addEventListener('click', closeCardDetail);
+  qs('#cardDetailOverlay').addEventListener('click', (event) => {
+    if (event.target === qs('#cardDetailOverlay')) closeCardDetail();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeCardDetail();
+  });
   qs('#saveDraftButton').addEventListener('click', saveDraft);
   qs('#refreshPackagesButton').addEventListener('click', () => loadSavedPackages());
   qs('#copyPackageButton').addEventListener('click', copyPackage);

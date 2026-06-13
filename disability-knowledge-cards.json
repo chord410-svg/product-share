@@ -1,0 +1,2500 @@
+{
+  "knowledge_cards": [
+    {
+      "id": "assistive_assessment_medical_document_check",
+      "knowledge_id": "assistive_assessment_medical_document_check",
+      "title": "輔具評估、醫師文件與地方窗口",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "home_accessibility"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "地方窗口",
+        "文件需求",
+        "事前核定"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "要不要醫師證明",
+        "輔具評估要去哪裡做",
+        "申請輔具需要哪些文件"
+      ],
+      "applies_when": [
+        "家屬詢問申請輔具或無障礙改善需要哪些文件",
+        "個管師需要電話確認地方流程"
+      ],
+      "not_applies_when": [
+        "已取得正式核定文件，只問領款進度",
+        "純商品選購問題"
+      ],
+      "verification_steps": [
+        "先確認申請的是長照端、身障端或其他地方方案",
+        "詢問是否需輔具評估報告、醫師診斷、照片、報價單或身份文件",
+        "確認評估單位與受理窗口",
+        "提醒文件要求會因縣市與品項不同而不同"
+      ],
+      "phone_check_questions": [
+        "此品項需要輔具評估嗎？由哪個單位評估？",
+        "是否需要醫師診斷書或治療師建議？",
+        "申請時需檢附哪些照片、報價單或證明？",
+        "受理窗口與送件方式是什麼？"
+      ],
+      "family_safe_summary": "輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。",
+      "care_manager_notes": [
+        "電話確認時要問清楚「誰評估、何時評估、先核定或先購買」",
+        "文件要求不要憑經驗套用到不同縣市"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認申請的是長照端、身障端或其他地方方案",
+          "詢問是否需輔具評估報告、醫師診斷、照片、報價單或身份文件",
+          "確認評估單位與受理窗口",
+          "提醒文件要求會因縣市與品項不同而不同"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "此品項需要輔具評估嗎？由哪個單位評估？",
+          "是否需要醫師診斷書或治療師建議？",
+          "申請時需檢附哪些照片、報價單或證明？",
+          "受理窗口與送件方式是什麼？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "輔具評估、醫師文件與地方窗口 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_disability_welfare_directory",
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 輔具評估、醫師文件與地方窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "76b4c3022b943bceaa7e579cd00e8e98b4be28e9489027cf6db3058854d51536",
+      "knowledge_version": "2026-06-12-76b4c302",
+      "embedding_text": "輔具評估、醫師文件與地方窗口 disability_assistive_subsidy_question home_accessibility 身障 申請路徑 電話確認 地方窗口 文件需求 事前核定 中央共通 新北市 要不要醫師證明 輔具評估要去哪裡做 申請輔具需要哪些文件 家屬詢問申請輔具或無障礙改善需要哪些文件 個管師需要電話確認地方流程 已取得正式核定文件，只問領款進度 純商品選購問題 先確認申請的是長照端、身障端或其他地方方案 詢問是否需輔具評估報告、醫師診斷、照片、報價單或身份文件 確認評估單位與受理窗口 提醒文件要求會因縣市與品項不同而不同 此品項需要輔具評估嗎？由哪個單位評估？ 是否需要醫師診斷書或治療師建議？ 申請時需檢附哪些照片、報價單或證明？ 受理窗口與送件方式是什麼？ 輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。 電話確認時要問清楚「誰評估、何時評估、先核定或先購買」 文件要求不要憑經驗套用到不同縣市 {\"care_manager_focus\": [\"先確認申請的是長照端、身障端或其他地方方案\", \"詢問是否需輔具評估報告、醫師診斷、照片、報價單或身份文件\", \"確認評估單位與受理窗口\", \"提醒文件要求會因縣市與品項不同而不同\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"此品項需要輔具評估嗎？由哪個單位評估？\", \"是否需要醫師診斷書或治療師建議？\", \"申請時需檢附哪些照片、報價單或證明？\", \"受理窗口與送件方式是什麼？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"輔具評估、醫師文件與地方窗口 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 輔具評估、醫師文件與地方窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "assistive_resource_center_verification",
+      "knowledge_id": "assistive_resource_center_verification",
+      "title": "輔具資源中心如何協助查證",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "smart_or_special_device",
+        "home_accessibility"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "輔具中心可以問什麼",
+        "不確定品項要問誰",
+        "特殊輔具誰能評估"
+      ],
+      "applies_when": [
+        "品項模糊、特殊、廠商說法不明或需要評估建議",
+        "個管師需要非廠商的輔具專業查證"
+      ],
+      "not_applies_when": [
+        "單純查已核定案件進度",
+        "只需一般商品價格比較"
+      ],
+      "verification_steps": [
+        "先整理功能需求、使用環境與目前照顧困難",
+        "聯絡輔具資源中心詢問是否可評估、借用、示範或轉介",
+        "確認是否能提供品項分類、文件要求或替代方案建議",
+        "把輔具中心回覆與地方窗口規定分開記錄"
+      ],
+      "phone_check_questions": [
+        "此需求是否適合由輔具資源中心評估？",
+        "中心是否有示範、借用或轉介資源？",
+        "此類輔具可能歸在哪個官方分類？",
+        "是否需要先由地方政府窗口開案或轉介？"
+      ],
+      "family_safe_summary": "遇到特殊或不確定的輔具需求時，可先請輔具資源中心協助評估與查證。中心意見仍需配合地方承辦規定確認。",
+      "care_manager_notes": [
+        "輔具中心可降低廠商話術風險，但不等於核定單位",
+        "記錄中心建議時要保留「仍需承辦確認」"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先整理功能需求、使用環境與目前照顧困難",
+          "聯絡輔具資源中心詢問是否可評估、借用、示範或轉介",
+          "確認是否能提供品項分類、文件要求或替代方案建議",
+          "把輔具中心回覆與地方窗口規定分開記錄"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "遇到特殊或不確定的輔具需求時，可先請輔具資源中心協助評估與查證。中心意見仍需配合地方承辦規定確認。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "此需求是否適合由輔具資源中心評估？",
+          "中心是否有示範、借用或轉介資源？",
+          "此類輔具可能歸在哪個官方分類？",
+          "是否需要先由地方政府窗口開案或轉介？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "輔具資源中心如何協助查證 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_atrc_stair_climber",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_atrc_stair_climber",
+          "source_level": "A",
+          "title": "新北市輔具資源中心：爬梯機介紹",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Education/69"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "輔具查詢"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 輔具資源中心如何協助查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "fffc3bdbc4036ed7f8f54aba270248412af9526bd9a9dc283a1c1b03a336e4db",
+      "knowledge_version": "2026-06-12-fffc3bdb",
+      "embedding_text": "輔具資源中心如何協助查證 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 中央共通 新北市 輔具中心可以問什麼 不確定品項要問誰 特殊輔具誰能評估 品項模糊、特殊、廠商說法不明或需要評估建議 個管師需要非廠商的輔具專業查證 單純查已核定案件進度 只需一般商品價格比較 先整理功能需求、使用環境與目前照顧困難 聯絡輔具資源中心詢問是否可評估、借用、示範或轉介 確認是否能提供品項分類、文件要求或替代方案建議 把輔具中心回覆與地方窗口規定分開記錄 此需求是否適合由輔具資源中心評估？ 中心是否有示範、借用或轉介資源？ 此類輔具可能歸在哪個官方分類？ 是否需要先由地方政府窗口開案或轉介？ 遇到特殊或不確定的輔具需求時，可先請輔具資源中心協助評估與查證。中心意見仍需配合地方承辦規定確認。 輔具中心可降低廠商話術風險，但不等於核定單位 記錄中心建議時要保留「仍需承辦確認」 {\"care_manager_focus\": [\"先整理功能需求、使用環境與目前照顧困難\", \"聯絡輔具資源中心詢問是否可評估、借用、示範或轉介\", \"確認是否能提供品項分類、文件要求或替代方案建議\", \"把輔具中心回覆與地方窗口規定分開記錄\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"遇到特殊或不確定的輔具需求時，可先請輔具資源中心協助評估與查證。中心意見仍需配合地方承辦規定確認。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"此需求是否適合由輔具資源中心評估？\", \"中心是否有示範、借用或轉介資源？\", \"此類輔具可能歸在哪個官方分類？\", \"是否需要先由地方政府窗口開案或轉介？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"輔具資源中心如何協助查證 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 輔具資源中心如何協助查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "bathroom_renovation_preapproval_risk",
+      "knowledge_id": "bathroom_renovation_preapproval_risk",
+      "title": "浴室改造與施工前核定風險",
+      "directions": [
+        "home_accessibility"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "浴室改造可以補助嗎",
+        "浴室施工前要先核定嗎",
+        "防滑或門檻改善能不能申請"
+      ],
+      "applies_when": [
+        "個案家中浴室、門檻、防滑、淋浴或如廁環境需改善",
+        "家屬準備先找廠商施工"
+      ],
+      "not_applies_when": [
+        "純粹一般裝修美觀需求",
+        "已完成官方核定且只剩施工驗收"
+      ],
+      "verification_steps": [
+        "先確認改善項目是否屬於居家無障礙或長照輔具服務",
+        "請家屬先暫緩施工，保留現況照片與需求說明",
+        "電話詢問是否需事前評估、報價、照片、平面配置或治療師建議",
+        "確認核定、施工、驗收與付款順序"
+      ],
+      "phone_check_questions": [
+        "浴室改造項目是否須核定前不能施工？",
+        "需要哪些照片、報價單或評估文件？",
+        "是否有指定施工項目、金額上限或驗收規則？",
+        "若已施工，是否仍可補件或完全不能申請？"
+      ],
+      "family_safe_summary": "浴室改造多半要先確認是否屬於可申請項目，且常有施工前評估與核定要求。建議先暫緩施工，等官方流程確認後再處理。",
+      "care_manager_notes": [
+        "施工前核定是高風險提醒，應優先詢問",
+        "家屬常已找廠商報價，需清楚說明未核定前不要承諾補助"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認改善項目是否屬於居家無障礙或長照輔具服務",
+          "請家屬先暫緩施工，保留現況照片與需求說明",
+          "電話詢問是否需事前評估、報價、照片、平面配置或治療師建議",
+          "確認核定、施工、驗收與付款順序"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "浴室改造多半要先確認是否屬於可申請項目，且常有施工前評估與核定要求。建議先暫緩施工，等官方流程確認後再處理。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "浴室改造項目是否須核定前不能施工？",
+          "需要哪些照片、報價單或評估文件？",
+          "是否有指定施工項目、金額上限或驗收規則？",
+          "若已施工，是否仍可補件或完全不能申請？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "浴室改造與施工前核定風險 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "特約輔具地圖"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 浴室改造與施工前核定風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "1b9f601b7ccf39b67ccefa6f7a2cf96aeeedd620e018b054c9f96f4be80a8708",
+      "knowledge_version": "2026-06-12-1b9f601b",
+      "embedding_text": "浴室改造與施工前核定風險 home_accessibility 長照身障交界 申請路徑 電話確認 事前核定 地方窗口 中央共通 新北市 浴室改造可以補助嗎 浴室施工前要先核定嗎 防滑或門檻改善能不能申請 個案家中浴室、門檻、防滑、淋浴或如廁環境需改善 家屬準備先找廠商施工 純粹一般裝修美觀需求 已完成官方核定且只剩施工驗收 先確認改善項目是否屬於居家無障礙或長照輔具服務 請家屬先暫緩施工，保留現況照片與需求說明 電話詢問是否需事前評估、報價、照片、平面配置或治療師建議 確認核定、施工、驗收與付款順序 浴室改造項目是否須核定前不能施工？ 需要哪些照片、報價單或評估文件？ 是否有指定施工項目、金額上限或驗收規則？ 若已施工，是否仍可補件或完全不能申請？ 浴室改造多半要先確認是否屬於可申請項目，且常有施工前評估與核定要求。建議先暫緩施工，等官方流程確認後再處理。 施工前核定是高風險提醒，應優先詢問 家屬常已找廠商報價，需清楚說明未核定前不要承諾補助 {\"care_manager_focus\": [\"先確認改善項目是否屬於居家無障礙或長照輔具服務\", \"請家屬先暫緩施工，保留現況照片與需求說明\", \"電話詢問是否需事前評估、報價、照片、平面配置或治療師建議\", \"確認核定、施工、驗收與付款順序\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"浴室改造多半要先確認是否屬於可申請項目，且常有施工前評估與核定要求。建議先暫緩施工，等官方流程確認後再處理。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"浴室改造項目是否須核定前不能施工？\", \"需要哪些照片、報價單或評估文件？\", \"是否有指定施工項目、金額上限或驗收規則？\", \"若已施工，是否仍可補件或完全不能申請？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"浴室改造與施工前核定風險 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 浴室改造與施工前核定風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "care_manager_phone_check_template",
+      "knowledge_id": "care_manager_phone_check_template",
+      "title": "個管師電話確認清單模板",
+      "directions": [
+        "disability_welfare_navigation",
+        "disability_assistive_subsidy_question",
+        "home_accessibility",
+        "smart_or_special_device",
+        "longtermcare_budget_gap"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "電話確認要問什麼",
+        "身障資源查證電話清單",
+        "個管師確認補助窗口問題"
+      ],
+      "applies_when": [
+        "個管師準備打給長照、身障、輔具中心或地方窗口查證",
+        "需要把家屬問題轉成可問窗口的問題"
+      ],
+      "not_applies_when": [
+        "緊急危機、醫療急症或法定通報事件",
+        "已完成查證，只需輸出結果"
+      ],
+      "verification_steps": [
+        "先說明自己要確認的是制度路徑、品項分類、文件要求或核定順序",
+        "依序詢問適用條件、必要文件、申請窗口、時間順序與不可重複限制",
+        "最後確認若不是此窗口，應轉哪個單位",
+        "把回覆記錄成家屬版可說明與內部提醒兩層"
+      ],
+      "phone_check_questions": [
+        "這個需求應由哪個制度或窗口處理？",
+        "適用條件與必要文件是什麼？",
+        "是否需要事前評估或核定？",
+        "是否有不得重複申請、先購買失效或指定廠商限制？",
+        "若不是此窗口，請問應轉哪個單位？"
+      ],
+      "family_safe_summary": "電話確認時可先整理需求，再向官方窗口確認制度、文件、核定順序與轉介單位。回覆家屬時應保留「需官方確認」的語氣。",
+      "care_manager_notes": [
+        "這是通用模板，應搭配具體知識卡使用",
+        "電話結果要記錄來源、日期、窗口與是否可對家屬公開"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先說明自己要確認的是制度路徑、品項分類、文件要求或核定順序",
+          "依序詢問適用條件、必要文件、申請窗口、時間順序與不可重複限制",
+          "最後確認若不是此窗口，應轉哪個單位",
+          "把回覆記錄成家屬版可說明與內部提醒兩層"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "電話確認時可先整理需求，再向官方窗口確認制度、文件、核定順序與轉介單位。回覆家屬時應保留「需官方確認」的語氣。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "這個需求應由哪個制度或窗口處理？",
+          "適用條件與必要文件是什麼？",
+          "是否需要事前評估或核定？",
+          "是否有不得重複申請、先購買失效或指定廠商限制？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "個管師電話確認清單模板 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_disability_welfare_directory",
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "身障資源查證"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 個管師電話確認清單模板\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "7404b1feaba31913a038a8a0408f8465ecec1ad5d6ef99d4966ff6229517ef8d",
+      "knowledge_version": "2026-06-12-7404b1fe",
+      "embedding_text": "個管師電話確認清單模板 disability_welfare_navigation disability_assistive_subsidy_question home_accessibility smart_or_special_device longtermcare_budget_gap 身障 申請路徑 電話確認 事前核定 地方窗口 中央共通 新北市 電話確認要問什麼 身障資源查證電話清單 個管師確認補助窗口問題 個管師準備打給長照、身障、輔具中心或地方窗口查證 需要把家屬問題轉成可問窗口的問題 緊急危機、醫療急症或法定通報事件 已完成查證，只需輸出結果 先說明自己要確認的是制度路徑、品項分類、文件要求或核定順序 依序詢問適用條件、必要文件、申請窗口、時間順序與不可重複限制 最後確認若不是此窗口，應轉哪個單位 把回覆記錄成家屬版可說明與內部提醒兩層 這個需求應由哪個制度或窗口處理？ 適用條件與必要文件是什麼？ 是否需要事前評估或核定？ 是否有不得重複申請、先購買失效或指定廠商限制？ 若不是此窗口，請問應轉哪個單位？ 電話確認時可先整理需求，再向官方窗口確認制度、文件、核定順序與轉介單位。回覆家屬時應保留「需官方確認」的語氣。 這是通用模板，應搭配具體知識卡使用 電話結果要記錄來源、日期、窗口與是否可對家屬公開 {\"care_manager_focus\": [\"先說明自己要確認的是制度路徑、品項分類、文件要求或核定順序\", \"依序詢問適用條件、必要文件、申請窗口、時間順序與不可重複限制\", \"最後確認若不是此窗口，應轉哪個單位\", \"把回覆記錄成家屬版可說明與內部提醒兩層\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"電話確認時可先整理需求，再向官方窗口確認制度、文件、核定順序與轉介單位。回覆家屬時應保留「需官方確認」的語氣。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"這個需求應由哪個制度或窗口處理？\", \"適用條件與必要文件是什麼？\", \"是否需要事前評估或核定？\", \"是否有不得重複申請、先購買失效或指定廠商限制？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"個管師電話確認清單模板 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 個管師電話確認清單模板\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "disability_certificate_ltc_cms_difference",
+      "knowledge_id": "disability_certificate_ltc_cms_difference",
+      "title": "身障證明、長照資格、CMS 失能等級差異",
+      "directions": [
+        "disability_welfare_navigation",
+        "longtermcare_budget_gap"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "制度差異"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "有身障證明就有長照嗎",
+        "CMS 等級和身障等級差在哪",
+        "長照資格和身障福利能不能互通"
+      ],
+      "applies_when": [
+        "家屬混淆身心障礙證明、長照資格、CMS 失能等級",
+        "個管師需要用保守語言說明制度不同"
+      ],
+      "not_applies_when": [
+        "已在正式長照評估流程中，需要查個案核定結果",
+        "只問單一制度的申請表單"
+      ],
+      "verification_steps": [
+        "先分清楚身障福利與長照服務是不同制度",
+        "身心障礙證明不等於長照 CMS 等級，長照也不等於身障福利核定",
+        "依需求分別查長照窗口、社會局身障窗口或輔具中心",
+        "避免用單一資格推論另一制度權益"
+      ],
+      "phone_check_questions": [
+        "此問題應由長照窗口還是身障福利窗口確認？",
+        "身障證明類別或等級是否影響此服務？",
+        "長照 CMS 等級是否影響此服務？",
+        "是否需重新評估或另送申請？"
+      ],
+      "family_safe_summary": "身心障礙證明、長照資格與 CMS 失能等級是不同制度，不能互相直接推論。建議依需求分別向長照或身障窗口確認。",
+      "care_manager_notes": [
+        "這是常見家屬誤解，應優先用制度分流說明",
+        "不要說有身障就一定有長照，或有長照就一定有身障福利"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先分清楚身障福利與長照服務是不同制度",
+          "身心障礙證明不等於長照 CMS 等級，長照也不等於身障福利核定",
+          "依需求分別查長照窗口、社會局身障窗口或輔具中心",
+          "避免用單一資格推論另一制度權益"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "身心障礙證明、長照資格與 CMS 失能等級是不同制度，不能互相直接推論。建議依需求分別向長照或身障窗口確認。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "此問題應由長照窗口還是身障福利窗口確認？",
+          "身障證明類別或等級是否影響此服務？",
+          "長照 CMS 等級是否影響此服務？",
+          "是否需重新評估或另送申請？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "身障證明、長照資格、CMS 失能等級差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 身障證明、長照資格、CMS 失能等級差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "1cc0eae8ba85b7e67f18435c9e3748c9981ea40bffa94787bd91fdf7f19ccd81",
+      "knowledge_version": "2026-06-12-1cc0eae8",
+      "embedding_text": "身障證明、長照資格、CMS 失能等級差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 中央共通 新北市 有身障證明就有長照嗎 CMS 等級和身障等級差在哪 長照資格和身障福利能不能互通 家屬混淆身心障礙證明、長照資格、CMS 失能等級 個管師需要用保守語言說明制度不同 已在正式長照評估流程中，需要查個案核定結果 只問單一制度的申請表單 先分清楚身障福利與長照服務是不同制度 身心障礙證明不等於長照 CMS 等級，長照也不等於身障福利核定 依需求分別查長照窗口、社會局身障窗口或輔具中心 避免用單一資格推論另一制度權益 此問題應由長照窗口還是身障福利窗口確認？ 身障證明類別或等級是否影響此服務？ 長照 CMS 等級是否影響此服務？ 是否需重新評估或另送申請？ 身心障礙證明、長照資格與 CMS 失能等級是不同制度，不能互相直接推論。建議依需求分別向長照或身障窗口確認。 這是常見家屬誤解，應優先用制度分流說明 不要說有身障就一定有長照，或有長照就一定有身障福利 {\"care_manager_focus\": [\"先分清楚身障福利與長照服務是不同制度\", \"身心障礙證明不等於長照 CMS 等級，長照也不等於身障福利核定\", \"依需求分別查長照窗口、社會局身障窗口或輔具中心\", \"避免用單一資格推論另一制度權益\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"身心障礙證明、長照資格與 CMS 失能等級是不同制度，不能互相直接推論。建議依需求分別向長照或身障窗口確認。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"此問題應由長照窗口還是身障福利窗口確認？\", \"身障證明類別或等級是否影響此服務？\", \"長照 CMS 等級是否影響此服務？\", \"是否需重新評估或另送申請？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"身障證明、長照資格、CMS 失能等級差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 身障證明、長照資格、CMS 失能等級差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "disability_family_caregiver_support",
+      "knowledge_id": "disability_family_caregiver_support",
+      "title": "身障家庭照顧者支持",
+      "directions": [
+        "disability_welfare_navigation",
+        "mental_disability_family_support"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "身障家庭照顧者可以找什麼支持",
+        "照顧者壓力很大但不是長照個案",
+        "家屬需要支持資源"
+      ],
+      "applies_when": [
+        "家屬照顧身障者壓力大，需要喘息、諮詢、支持團體或服務轉介",
+        "個案不一定完全落在長照服務範圍"
+      ],
+      "not_applies_when": [
+        "緊急保護或危機處理，應走緊急通報或專業危機流程",
+        "純醫療治療安排"
+      ],
+      "verification_steps": [
+        "先確認是照顧壓力、家庭支持、經濟壓力、照顧替手或心理支持",
+        "查地方身障福利、家庭支持或民間受託單位入口",
+        "若涉及長照資格，也同步查長照服務可用性",
+        "給家屬保守說明時以「可協助查資源」為主，不承諾立即可用"
+      ],
+      "phone_check_questions": [
+        "本縣市是否有身障家庭照顧者支持服務或受託單位？",
+        "是否需要身障證明、戶籍或居住地條件？",
+        "服務內容包含諮詢、支持團體、短照或到宅支持嗎？",
+        "若同時符合長照資格，如何分流或轉介？"
+      ],
+      "family_safe_summary": "身障家庭照顧者若有壓力或支持需求，可先查地方身障福利與家庭支持資源；若也符合長照需求，再同步確認長照服務。",
+      "care_manager_notes": [
+        "家屬支持不是只有喘息，也可能包含諮詢、團體、照顧技巧與民間資源",
+        "注意不要把家屬心理危機當成一般資源查詢"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認是照顧壓力、家庭支持、經濟壓力、照顧替手或心理支持",
+          "查地方身障福利、家庭支持或民間受託單位入口",
+          "若涉及長照資格，也同步查長照服務可用性",
+          "給家屬保守說明時以「可協助查資源」為主，不承諾立即可用"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "身障家庭照顧者若有壓力或支持需求，可先查地方身障福利與家庭支持資源；若也符合長照需求，再同步確認長照服務。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "本縣市是否有身障家庭照顧者支持服務或受託單位？",
+          "是否需要身障證明、戶籍或居住地條件？",
+          "服務內容包含諮詢、支持團體、短照或到宅支持嗎？",
+          "若同時符合長照資格，如何分流或轉介？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "身障家庭照顧者支持 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_disability_welfare_directory",
+        "ltc1966_official"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 身障家庭照顧者支持\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "6ca9a6d2ad06c89bb1ab4c817c0febbb09f43603d7debe8d1da0b0f99430c69e",
+      "knowledge_version": "2026-06-12-6ca9a6d2",
+      "embedding_text": "身障家庭照顧者支持 disability_welfare_navigation mental_disability_family_support 身障 申請路徑 電話確認 中央共通 新北市 身障家庭照顧者可以找什麼支持 照顧者壓力很大但不是長照個案 家屬需要支持資源 家屬照顧身障者壓力大，需要喘息、諮詢、支持團體或服務轉介 個案不一定完全落在長照服務範圍 緊急保護或危機處理，應走緊急通報或專業危機流程 純醫療治療安排 先確認是照顧壓力、家庭支持、經濟壓力、照顧替手或心理支持 查地方身障福利、家庭支持或民間受託單位入口 若涉及長照資格，也同步查長照服務可用性 給家屬保守說明時以「可協助查資源」為主，不承諾立即可用 本縣市是否有身障家庭照顧者支持服務或受託單位？ 是否需要身障證明、戶籍或居住地條件？ 服務內容包含諮詢、支持團體、短照或到宅支持嗎？ 若同時符合長照資格，如何分流或轉介？ 身障家庭照顧者若有壓力或支持需求，可先查地方身障福利與家庭支持資源；若也符合長照需求，再同步確認長照服務。 家屬支持不是只有喘息，也可能包含諮詢、團體、照顧技巧與民間資源 注意不要把家屬心理危機當成一般資源查詢 {\"care_manager_focus\": [\"先確認是照顧壓力、家庭支持、經濟壓力、照顧替手或心理支持\", \"查地方身障福利、家庭支持或民間受託單位入口\", \"若涉及長照資格，也同步查長照服務可用性\", \"給家屬保守說明時以「可協助查資源」為主，不承諾立即可用\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"身障家庭照顧者若有壓力或支持需求，可先查地方身障福利與家庭支持資源；若也符合長照需求，再同步確認長照服務。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"本縣市是否有身障家庭照顧者支持服務或受託單位？\", \"是否需要身障證明、戶籍或居住地條件？\", \"服務內容包含諮詢、支持團體、短照或到宅支持嗎？\", \"若同時符合長照資格，如何分流或轉介？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"身障家庭照顧者支持 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 身障家庭照顧者支持\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "disability_short_term_care_vs_ltc_respite",
+      "knowledge_id": "disability_short_term_care_vs_ltc_respite",
+      "title": "身障臨時／短期照顧與長照喘息差異",
+      "directions": [
+        "disability_welfare_navigation",
+        "longtermcare_budget_gap"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "制度差異"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "身障短期照顧和長照喘息差在哪",
+        "家屬臨時照顧壓力怎麼找資源",
+        "身障臨托可以用嗎"
+      ],
+      "applies_when": [
+        "家屬有短期照顧、喘息、臨時托顧或照顧者負荷問題",
+        "身障與長照資源可能同時被提及"
+      ],
+      "not_applies_when": [
+        "已在長照喘息核定中只問派案進度",
+        "純住宿型機構入住問題"
+      ],
+      "verification_steps": [
+        "先確認個案主要資格與需求是長照喘息、身障短期照顧或家庭支持",
+        "查長照喘息服務與地方身障短期照顧入口",
+        "詢問是否能互補、是否有使用限制或需分開申請",
+        "向家屬說明要依承辦窗口確認，不直接承諾可用"
+      ],
+      "phone_check_questions": [
+        "這個需求適合長照喘息還是身障短期照顧？",
+        "是否需要身障證明、長照資格或其他評估？",
+        "可用時數、費用、排程與申請窗口是什麼？",
+        "是否有同時使用或不得重複使用限制？"
+      ],
+      "family_safe_summary": "短期照顧、臨托與長照喘息屬於不同資源路徑，是否可用要看資格、需求與地方規定。建議先由個管師協助分別查證。",
+      "care_manager_notes": [
+        "照顧者壓力問題不一定只靠長照喘息處理",
+        "身障短期照顧與長照喘息要分開問窗口"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認個案主要資格與需求是長照喘息、身障短期照顧或家庭支持",
+          "查長照喘息服務與地方身障短期照顧入口",
+          "詢問是否能互補、是否有使用限制或需分開申請",
+          "向家屬說明要依承辦窗口確認，不直接承諾可用"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "短期照顧、臨托與長照喘息屬於不同資源路徑，是否可用要看資格、需求與地方規定。建議先由個管師協助分別查證。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "這個需求適合長照喘息還是身障短期照顧？",
+          "是否需要身障證明、長照資格或其他評估？",
+          "可用時數、費用、排程與申請窗口是什麼？",
+          "是否有同時使用或不得重複使用限制？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "身障臨時／短期照顧與長照喘息差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_disability_short_term_care"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_short_term_care",
+          "source_level": "A",
+          "title": "新北市身心障礙短期照顧服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 身障臨時／短期照顧與長照喘息差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "641f374f7328cbe0ea84142fd70e7840867b3634a35a39b0f9b383ada6db415b",
+      "knowledge_version": "2026-06-12-641f374f",
+      "embedding_text": "身障臨時／短期照顧與長照喘息差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 中央共通 新北市 身障短期照顧和長照喘息差在哪 家屬臨時照顧壓力怎麼找資源 身障臨托可以用嗎 家屬有短期照顧、喘息、臨時托顧或照顧者負荷問題 身障與長照資源可能同時被提及 已在長照喘息核定中只問派案進度 純住宿型機構入住問題 先確認個案主要資格與需求是長照喘息、身障短期照顧或家庭支持 查長照喘息服務與地方身障短期照顧入口 詢問是否能互補、是否有使用限制或需分開申請 向家屬說明要依承辦窗口確認，不直接承諾可用 這個需求適合長照喘息還是身障短期照顧？ 是否需要身障證明、長照資格或其他評估？ 可用時數、費用、排程與申請窗口是什麼？ 是否有同時使用或不得重複使用限制？ 短期照顧、臨托與長照喘息屬於不同資源路徑，是否可用要看資格、需求與地方規定。建議先由個管師協助分別查證。 照顧者壓力問題不一定只靠長照喘息處理 身障短期照顧與長照喘息要分開問窗口 {\"care_manager_focus\": [\"先確認個案主要資格與需求是長照喘息、身障短期照顧或家庭支持\", \"查長照喘息服務與地方身障短期照顧入口\", \"詢問是否能互補、是否有使用限制或需分開申請\", \"向家屬說明要依承辦窗口確認，不直接承諾可用\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"短期照顧、臨托與長照喘息屬於不同資源路徑，是否可用要看資格、需求與地方規定。建議先由個管師協助分別查證。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"這個需求適合長照喘息還是身障短期照顧？\", \"是否需要身障證明、長照資格或其他評估？\", \"可用時數、費用、排程與申請窗口是什麼？\", \"是否有同時使用或不得重複使用限制？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"身障臨時／短期照顧與長照喘息差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 身障臨時／短期照顧與長照喘息差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "electric_wheelchair_ltc_disability_check",
+      "knowledge_id": "electric_wheelchair_ltc_disability_check",
+      "title": "電動輪椅：長照、身障與自費查證差異",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "smart_or_special_device"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "制度差異"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "電動輪椅可以補助嗎",
+        "長照有電動輪椅嗎",
+        "身障電動代步車或電動輪椅怎麼查"
+      ],
+      "applies_when": [
+        "個案需要電動輪椅、電動代步車或動力移動輔具",
+        "家屬或廠商聲稱可補助但個管師尚未查證"
+      ],
+      "not_applies_when": [
+        "只詢問一般輪椅租借且已明確走長照流程",
+        "只是在比較品牌價格，不需要制度查證"
+      ],
+      "verification_steps": [
+        "先分清楚是一般輪椅、電動輪椅、電動代步車或特殊移動輔具",
+        "查地方身障輔具補助項目與輔具中心是否需評估",
+        "查長照輔具品項是否有相近項目，但不要直接替代身障制度判斷",
+        "確認是否需醫師診斷、評估報告與事前核定"
+      ],
+      "phone_check_questions": [
+        "電動輪椅或電動代步車在本縣市屬於哪一類輔具補助或服務？",
+        "是否需身障證明類別、等級或輔具評估報告？",
+        "長照端是否有可用的替代品項或只適合轉身障窗口？",
+        "廠商報價前是否需先核定？"
+      ],
+      "family_safe_summary": "電動輪椅或電動代步車是否能補助，需要先查地方身障輔具規定與評估要求。長照與身障的路徑不同，建議先查證再採購。",
+      "care_manager_notes": [
+        "不要把一般輪椅與電動輪椅混成同一個補助路徑",
+        "若廠商主動說可補助，仍要請官方窗口確認品項與文件"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先分清楚是一般輪椅、電動輪椅、電動代步車或特殊移動輔具",
+          "查地方身障輔具補助項目與輔具中心是否需評估",
+          "查長照輔具品項是否有相近項目，但不要直接替代身障制度判斷",
+          "確認是否需醫師診斷、評估報告與事前核定"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "電動輪椅或電動代步車是否能補助，需要先查地方身障輔具規定與評估要求。長照與身障的路徑不同，建議先查證再採購。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "電動輪椅或電動代步車在本縣市屬於哪一類輔具補助或服務？",
+          "是否需身障證明類別、等級或輔具評估報告？",
+          "長照端是否有可用的替代品項或只適合轉身障窗口？",
+          "廠商報價前是否需先核定？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "電動輪椅：長照、身障與自費查證差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_disability_welfare_directory",
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "輔具查詢",
+        "補助計算"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 電動輪椅：長照、身障與自費查證差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "4d56697f22a1a8c1e17c35d7429553c63d38d5b0d62a09db95c9222eae475604",
+      "knowledge_version": "2026-06-12-4d56697f",
+      "embedding_text": "電動輪椅：長照、身障與自費查證差異 disability_assistive_subsidy_question smart_or_special_device 長照身障交界 申請路徑 電話確認 制度差異 中央共通 新北市 電動輪椅可以補助嗎 長照有電動輪椅嗎 身障電動代步車或電動輪椅怎麼查 個案需要電動輪椅、電動代步車或動力移動輔具 家屬或廠商聲稱可補助但個管師尚未查證 只詢問一般輪椅租借且已明確走長照流程 只是在比較品牌價格，不需要制度查證 先分清楚是一般輪椅、電動輪椅、電動代步車或特殊移動輔具 查地方身障輔具補助項目與輔具中心是否需評估 查長照輔具品項是否有相近項目，但不要直接替代身障制度判斷 確認是否需醫師診斷、評估報告與事前核定 電動輪椅或電動代步車在本縣市屬於哪一類輔具補助或服務？ 是否需身障證明類別、等級或輔具評估報告？ 長照端是否有可用的替代品項或只適合轉身障窗口？ 廠商報價前是否需先核定？ 電動輪椅或電動代步車是否能補助，需要先查地方身障輔具規定與評估要求。長照與身障的路徑不同，建議先查證再採購。 不要把一般輪椅與電動輪椅混成同一個補助路徑 若廠商主動說可補助，仍要請官方窗口確認品項與文件 {\"care_manager_focus\": [\"先分清楚是一般輪椅、電動輪椅、電動代步車或特殊移動輔具\", \"查地方身障輔具補助項目與輔具中心是否需評估\", \"查長照輔具品項是否有相近項目，但不要直接替代身障制度判斷\", \"確認是否需醫師診斷、評估報告與事前核定\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"電動輪椅或電動代步車是否能補助，需要先查地方身障輔具規定與評估要求。長照與身障的路徑不同，建議先查證再採購。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"電動輪椅或電動代步車在本縣市屬於哪一類輔具補助或服務？\", \"是否需身障證明類別、等級或輔具評估報告？\", \"長照端是否有可用的替代品項或只適合轉身障窗口？\", \"廠商報價前是否需先核定？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"電動輪椅：長照、身障與自費查證差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 電動輪椅：長照、身障與自費查證差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "family_safe_reply_rules",
+      "knowledge_id": "family_safe_reply_rules",
+      "title": "家屬版保守說明規則",
+      "directions": [
+        "disability_welfare_navigation",
+        "disability_assistive_subsidy_question",
+        "home_accessibility",
+        "smart_or_special_device"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "家屬版說明",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "怎麼跟家屬說才安全",
+        "家屬版不能寫什麼",
+        "不確定補助時怎麼回覆"
+      ],
+      "applies_when": [
+        "個管師需要把查證中或不確定的制度問題轉成家屬可理解文字",
+        "資料來源尚未完成官方確認"
+      ],
+      "not_applies_when": [
+        "已取得正式核定結果，要通知明確核定內容",
+        "內部交接備忘，不直接給家屬"
+      ],
+      "verification_steps": [
+        "先把查證狀態說清楚：需確認、可協助查、目前不能承諾",
+        "避免資格、金額、保證通過等確定語氣",
+        "家屬版只放官方或已確認來源，不放 internal notes 或 C 級線索",
+        "若需電話確認，列出要問的問題而不是替窗口下結論"
+      ],
+      "phone_check_questions": [
+        "這段話是否有承諾可補助或可核定？",
+        "是否包含未確認的廠商說法或內部註記？",
+        "是否把下一步查證窗口與需準備資訊說清楚？",
+        "是否避免個案姓名、電話、身分證、完整地址？"
+      ],
+      "family_safe_summary": "家屬版應使用保守語氣：目前需先查證官方規定與地方窗口，個管師可協助整理需求與下一步，不承諾資格、金額或核定結果。",
+      "care_manager_notes": [
+        "這張卡是輸出規則，不是單一福利資源",
+        "任何 C 級線索或 pending lead 都不能直接進家屬版"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先把查證狀態說清楚：需確認、可協助查、目前不能承諾",
+          "避免資格、金額、保證通過等確定語氣",
+          "家屬版只放官方或已確認來源，不放 internal notes 或 C 級線索",
+          "若需電話確認，列出要問的問題而不是替窗口下結論"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "家屬版應使用保守語氣：目前需先查證官方規定與地方窗口，個管師可協助整理需求與下一步，不承諾資格、金額或核定結果。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "這段話是否有承諾可補助或可核定？",
+          "是否包含未確認的廠商說法或內部註記？",
+          "是否把下一步查證窗口與需準備資訊說清楚？",
+          "是否避免個案姓名、電話、身分證、完整地址？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "家屬版保守說明規則 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "身障資源查證"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 家屬版保守說明規則\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "b8d663786bef9091904e7fc5a3fe1849de1e339bb4376be13647fb75420a8744",
+      "knowledge_version": "2026-06-12-b8d66378",
+      "embedding_text": "家屬版保守說明規則 disability_welfare_navigation disability_assistive_subsidy_question home_accessibility smart_or_special_device 身障 申請路徑 電話確認 家屬版說明 事前核定 地方窗口 中央共通 新北市 怎麼跟家屬說才安全 家屬版不能寫什麼 不確定補助時怎麼回覆 個管師需要把查證中或不確定的制度問題轉成家屬可理解文字 資料來源尚未完成官方確認 已取得正式核定結果，要通知明確核定內容 內部交接備忘，不直接給家屬 先把查證狀態說清楚：需確認、可協助查、目前不能承諾 避免資格、金額、保證通過等確定語氣 家屬版只放官方或已確認來源，不放 internal notes 或 C 級線索 若需電話確認，列出要問的問題而不是替窗口下結論 這段話是否有承諾可補助或可核定？ 是否包含未確認的廠商說法或內部註記？ 是否把下一步查證窗口與需準備資訊說清楚？ 是否避免個案姓名、電話、身分證、完整地址？ 家屬版應使用保守語氣：目前需先查證官方規定與地方窗口，個管師可協助整理需求與下一步，不承諾資格、金額或核定結果。 這張卡是輸出規則，不是單一福利資源 任何 C 級線索或 pending lead 都不能直接進家屬版 {\"care_manager_focus\": [\"先把查證狀態說清楚：需確認、可協助查、目前不能承諾\", \"避免資格、金額、保證通過等確定語氣\", \"家屬版只放官方或已確認來源，不放 internal notes 或 C 級線索\", \"若需電話確認，列出要問的問題而不是替窗口下結論\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"家屬版應使用保守語氣：目前需先查證官方規定與地方窗口，個管師可協助整理需求與下一步，不承諾資格、金額或核定結果。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"這段話是否有承諾可補助或可核定？\", \"是否包含未確認的廠商說法或內部註記？\", \"是否把下一步查證窗口與需準備資訊說清楚？\", \"是否避免個案姓名、電話、身分證、完整地址？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"家屬版保守說明規則 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 家屬版保守說明規則\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "home_handrail_ltc_disability_check",
+      "knowledge_id": "home_handrail_ltc_disability_check",
+      "title": "居家扶手：長照無障礙與身障服務差異",
+      "directions": [
+        "home_accessibility",
+        "longtermcare_budget_gap"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "制度差異",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "居家扶手可以補助嗎",
+        "扶手走長照還是身障",
+        "樓梯扶手或浴室扶手怎麼查"
+      ],
+      "applies_when": [
+        "家屬詢問浴室、走廊、床邊、樓梯扶手是否可補助",
+        "個管師需要確認長照居家無障礙與身障服務差異"
+      ],
+      "not_applies_when": [
+        "只是要找施工廠商且不涉及申請",
+        "已核定施工項目只剩排程"
+      ],
+      "verification_steps": [
+        "先確認是輔具購置、居家無障礙施工，或一般修繕",
+        "查長照居家無障礙服務是否涵蓋該項目",
+        "若與身障福利相關，查地方社會局或輔具中心是否有對應服務",
+        "施工前先確認是否需要事前評估與核定"
+      ],
+      "phone_check_questions": [
+        "扶手屬於長照居家無障礙服務還是其他身障服務？",
+        "施工前是否需評估人員到宅、照片或報價單？",
+        "已施工或已購買是否會影響申請？",
+        "是否需指定廠商或特約單位？"
+      ],
+      "family_safe_summary": "居家扶手可能屬於長照居家無障礙改善，也可能需要依地方身障服務查證。施工前建議先確認評估、報價與核定流程。",
+      "care_manager_notes": [
+        "扶手看似簡單，但施工前核定與照片紀錄常是風險點",
+        "避免讓家屬先施工後才問能否補助"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認是輔具購置、居家無障礙施工，或一般修繕",
+          "查長照居家無障礙服務是否涵蓋該項目",
+          "若與身障福利相關，查地方社會局或輔具中心是否有對應服務",
+          "施工前先確認是否需要事前評估與核定"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "居家扶手可能屬於長照居家無障礙改善，也可能需要依地方身障服務查證。施工前建議先確認評估、報價與核定流程。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "扶手屬於長照居家無障礙服務還是其他身障服務？",
+          "施工前是否需評估人員到宅、照片或報價單？",
+          "已施工或已購買是否會影響申請？",
+          "是否需指定廠商或特約單位？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "居家扶手：長照無障礙與身障服務差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_ltc_assistive_device",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "特約輔具地圖"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 居家扶手：長照無障礙與身障服務差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "76f495d6b900322d487d599e4cea0c718512ad446a7212313e4c76a90c16c193",
+      "knowledge_version": "2026-06-12-76f495d6",
+      "embedding_text": "居家扶手：長照無障礙與身障服務差異 home_accessibility longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 事前核定 地方窗口 中央共通 新北市 居家扶手可以補助嗎 扶手走長照還是身障 樓梯扶手或浴室扶手怎麼查 家屬詢問浴室、走廊、床邊、樓梯扶手是否可補助 個管師需要確認長照居家無障礙與身障服務差異 只是要找施工廠商且不涉及申請 已核定施工項目只剩排程 先確認是輔具購置、居家無障礙施工，或一般修繕 查長照居家無障礙服務是否涵蓋該項目 若與身障福利相關，查地方社會局或輔具中心是否有對應服務 施工前先確認是否需要事前評估與核定 扶手屬於長照居家無障礙服務還是其他身障服務？ 施工前是否需評估人員到宅、照片或報價單？ 已施工或已購買是否會影響申請？ 是否需指定廠商或特約單位？ 居家扶手可能屬於長照居家無障礙改善，也可能需要依地方身障服務查證。施工前建議先確認評估、報價與核定流程。 扶手看似簡單，但施工前核定與照片紀錄常是風險點 避免讓家屬先施工後才問能否補助 {\"care_manager_focus\": [\"先確認是輔具購置、居家無障礙施工，或一般修繕\", \"查長照居家無障礙服務是否涵蓋該項目\", \"若與身障福利相關，查地方社會局或輔具中心是否有對應服務\", \"施工前先確認是否需要事前評估與核定\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"居家扶手可能屬於長照居家無障礙改善，也可能需要依地方身障服務查證。施工前建議先確認評估、報價與核定流程。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"扶手屬於長照居家無障礙服務還是其他身障服務？\", \"施工前是否需評估人員到宅、照片或報價單？\", \"已施工或已購買是否會影響申請？\", \"是否需指定廠商或特約單位？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"居家扶手：長照無障礙與身障服務差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 居家扶手：長照無障礙與身障服務差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "local_social_affairs_disability_window",
+      "knowledge_id": "local_social_affairs_disability_window",
+      "title": "地方社會局身障福利窗口",
+      "directions": [
+        "disability_welfare_navigation"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "身障福利要問哪裡",
+        "社會局身障窗口可以查什麼",
+        "地方政府身障資源入口"
+      ],
+      "applies_when": [
+        "個管師需要找到身障福利、輔具、照顧支持或地方服務入口",
+        "長照問題需要轉向身障福利窗口"
+      ],
+      "not_applies_when": [
+        "純長照服務核定或照專流程",
+        "醫療院所轉診或醫療補助問題"
+      ],
+      "verification_steps": [
+        "先確認個案所在縣市與戶籍或居住地相關規則",
+        "查地方社會局身障福利官方入口",
+        "用需求類型詢問：輔具、交通、短照、家庭支持或其他福利",
+        "把窗口回覆整理成家屬版保守說明"
+      ],
+      "phone_check_questions": [
+        "這個需求應由社會局哪一科或哪個窗口處理？",
+        "是否看戶籍地、居住地或服務地？",
+        "需要哪些身障證明或文件？",
+        "若非此窗口，應轉哪裡？"
+      ],
+      "family_safe_summary": "身障福利多由地方社會局或相關受託單位承辦。建議先依所在縣市與需求類型查官方窗口，再確認文件與流程。",
+      "care_manager_notes": [
+        "地方窗口是分流樞紐，適合用來確認制度邊界",
+        "不要只靠網路整理文回覆家屬"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認個案所在縣市與戶籍或居住地相關規則",
+          "查地方社會局身障福利官方入口",
+          "用需求類型詢問：輔具、交通、短照、家庭支持或其他福利",
+          "把窗口回覆整理成家屬版保守說明"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "身障福利多由地方社會局或相關受託單位承辦。建議先依所在縣市與需求類型查官方窗口，再確認文件與流程。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "這個需求應由社會局哪一科或哪個窗口處理？",
+          "是否看戶籍地、居住地或服務地？",
+          "需要哪些身障證明或文件？",
+          "若非此窗口，應轉哪裡？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "地方社會局身障福利窗口 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 地方社會局身障福利窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "184674536ae64e72c1492dc1e37df6c063dcb3b911094dea45505e1c39b972e7",
+      "knowledge_version": "2026-06-12-18467453",
+      "embedding_text": "地方社會局身障福利窗口 disability_welfare_navigation 身障 申請路徑 電話確認 地方窗口 中央共通 新北市 身障福利要問哪裡 社會局身障窗口可以查什麼 地方政府身障資源入口 個管師需要找到身障福利、輔具、照顧支持或地方服務入口 長照問題需要轉向身障福利窗口 純長照服務核定或照專流程 醫療院所轉診或醫療補助問題 先確認個案所在縣市與戶籍或居住地相關規則 查地方社會局身障福利官方入口 用需求類型詢問：輔具、交通、短照、家庭支持或其他福利 把窗口回覆整理成家屬版保守說明 這個需求應由社會局哪一科或哪個窗口處理？ 是否看戶籍地、居住地或服務地？ 需要哪些身障證明或文件？ 若非此窗口，應轉哪裡？ 身障福利多由地方社會局或相關受託單位承辦。建議先依所在縣市與需求類型查官方窗口，再確認文件與流程。 地方窗口是分流樞紐，適合用來確認制度邊界 不要只靠網路整理文回覆家屬 {\"care_manager_focus\": [\"先確認個案所在縣市與戶籍或居住地相關規則\", \"查地方社會局身障福利官方入口\", \"用需求類型詢問：輔具、交通、短照、家庭支持或其他福利\", \"把窗口回覆整理成家屬版保守說明\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"身障福利多由地方社會局或相關受託單位承辦。建議先依所在縣市與需求類型查官方窗口，再確認文件與流程。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"這個需求應由社會局哪一科或哪個窗口處理？\", \"是否看戶籍地、居住地或服務地？\", \"需要哪些身障證明或文件？\", \"若非此窗口，應轉哪裡？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"地方社會局身障福利窗口 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 地方社會局身障福利窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "ltc_item_absent_check_disability_path",
+      "knowledge_id": "ltc_item_absent_check_disability_path",
+      "title": "長照沒有列入品項時如何查身障路徑",
+      "directions": [
+        "longtermcare_budget_gap",
+        "disability_assistive_subsidy_question"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "長照沒有這個品項怎麼辦",
+        "長照找不到可以走身障嗎",
+        "身障和長照補助怎麼接"
+      ],
+      "applies_when": [
+        "長照輔具或服務清單找不到家屬提出的需求",
+        "個管師需要轉向身障、輔具中心或其他資源查證"
+      ],
+      "not_applies_when": [
+        "需求明確屬於長照既有品項",
+        "只是費用不足但品項已核定"
+      ],
+      "verification_steps": [
+        "先確認長照端是否真的沒有相近品項或替代服務",
+        "整理需求功能，而非只用商品名稱查詢",
+        "查地方身障福利、輔具中心或其他民間資源是否可協助",
+        "提醒不同制度可能不可重複申請，需由窗口確認"
+      ],
+      "phone_check_questions": [
+        "長照端是否有相近品項或替代服務？",
+        "若長照端沒有，身障窗口或輔具中心能否協助評估？",
+        "此需求是否涉及自費、租借、民間資源或其他福利？",
+        "是否有不得重複申請的限制？"
+      ],
+      "family_safe_summary": "長照清單沒有某個品項時，不代表完全沒有資源，也不代表身障一定能補助。建議先整理功能需求，再由個管師協助查其他官方窗口。",
+      "care_manager_notes": [
+        "用功能需求查證，比直接用商品名稱更穩",
+        "這張卡是分流提醒，不是身障補助結論"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認長照端是否真的沒有相近品項或替代服務",
+          "整理需求功能，而非只用商品名稱查詢",
+          "查地方身障福利、輔具中心或其他民間資源是否可協助",
+          "提醒不同制度可能不可重複申請，需由窗口確認"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "長照清單沒有某個品項時，不代表完全沒有資源，也不代表身障一定能補助。建議先整理功能需求，再由個管師協助查其他官方窗口。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "長照端是否有相近品項或替代服務？",
+          "若長照端沒有，身障窗口或輔具中心能否協助評估？",
+          "此需求是否涉及自費、租借、民間資源或其他福利？",
+          "是否有不得重複申請的限制？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "長照沒有列入品項時如何查身障路徑 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_disability_welfare_directory",
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "輔具查詢"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 長照沒有列入品項時如何查身障路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "78d56eb3499488be1236477ffd11de101b782d99c0fd8c98ee72f52ba853e6bd",
+      "knowledge_version": "2026-06-12-78d56eb3",
+      "embedding_text": "長照沒有列入品項時如何查身障路徑 longtermcare_budget_gap disability_assistive_subsidy_question 長照身障交界 申請路徑 電話確認 中央共通 新北市 長照沒有這個品項怎麼辦 長照找不到可以走身障嗎 身障和長照補助怎麼接 長照輔具或服務清單找不到家屬提出的需求 個管師需要轉向身障、輔具中心或其他資源查證 需求明確屬於長照既有品項 只是費用不足但品項已核定 先確認長照端是否真的沒有相近品項或替代服務 整理需求功能，而非只用商品名稱查詢 查地方身障福利、輔具中心或其他民間資源是否可協助 提醒不同制度可能不可重複申請，需由窗口確認 長照端是否有相近品項或替代服務？ 若長照端沒有，身障窗口或輔具中心能否協助評估？ 此需求是否涉及自費、租借、民間資源或其他福利？ 是否有不得重複申請的限制？ 長照清單沒有某個品項時，不代表完全沒有資源，也不代表身障一定能補助。建議先整理功能需求，再由個管師協助查其他官方窗口。 用功能需求查證，比直接用商品名稱更穩 這張卡是分流提醒，不是身障補助結論 {\"care_manager_focus\": [\"先確認長照端是否真的沒有相近品項或替代服務\", \"整理需求功能，而非只用商品名稱查詢\", \"查地方身障福利、輔具中心或其他民間資源是否可協助\", \"提醒不同制度可能不可重複申請，需由窗口確認\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"長照清單沒有某個品項時，不代表完全沒有資源，也不代表身障一定能補助。建議先整理功能需求，再由個管師協助查其他官方窗口。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"長照端是否有相近品項或替代服務？\", \"若長照端沒有，身障窗口或輔具中心能否協助評估？\", \"此需求是否涉及自費、租借、民間資源或其他福利？\", \"是否有不得重複申請的限制？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"長照沒有列入品項時如何查身障路徑 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 長照沒有列入品項時如何查身障路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "manual_wheelchair_mobility_aid_check",
+      "knowledge_id": "manual_wheelchair_mobility_aid_check",
+      "title": "一般輪椅與移動輔具查證路徑",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "longtermcare_budget_gap"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "一般輪椅可以補助嗎",
+        "移位或移動輔具走長照還是身障",
+        "輪椅租借或購買怎麼查"
+      ],
+      "applies_when": [
+        "家屬詢問一般輪椅、助行器、移動輔具是否有補助或租借",
+        "個管師需要分流長照輔具、身障輔具或自費"
+      ],
+      "not_applies_when": [
+        "已確認是短期急用借用且不討論補助",
+        "純查商品尺寸或品牌"
+      ],
+      "verification_steps": [
+        "先確認需求是租借、購買、短期使用或長期使用",
+        "查長照輔具服務是否涵蓋相近品項與申請流程",
+        "若涉及身障補助，查地方社會局或輔具中心要求",
+        "提醒家屬不同制度不可自行假設可重複申請"
+      ],
+      "phone_check_questions": [
+        "這個移動輔具在長照端是否有可申請品項？",
+        "若走身障輔具補助，需哪些文件與評估？",
+        "是否可短期租借或借用，窗口在哪裡？",
+        "是否有不得重複補助或需先核定的限制？"
+      ],
+      "family_safe_summary": "一般輪椅與移動輔具可能有長照、身障或租借等不同路徑。建議先確認使用期間、用途與官方窗口要求，再決定申請方式。",
+      "care_manager_notes": [
+        "長照與身障資源可能互補也可能限制重複，需由窗口確認",
+        "先問使用期間與使用場景，比直接問金額更重要"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認需求是租借、購買、短期使用或長期使用",
+          "查長照輔具服務是否涵蓋相近品項與申請流程",
+          "若涉及身障補助，查地方社會局或輔具中心要求",
+          "提醒家屬不同制度不可自行假設可重複申請"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "一般輪椅與移動輔具可能有長照、身障或租借等不同路徑。建議先確認使用期間、用途與官方窗口要求，再決定申請方式。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "這個移動輔具在長照端是否有可申請品項？",
+          "若走身障輔具補助，需哪些文件與評估？",
+          "是否可短期租借或借用，窗口在哪裡？",
+          "是否有不得重複補助或需先核定的限制？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "一般輪椅與移動輔具查證路徑 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_ltc_assistive_device",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "輔具查詢",
+        "特約輔具地圖"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 一般輪椅與移動輔具查證路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "54a98088192d2fcd789d54490f8921dd873cd8311d80a7bb9179bd3eb5f83a30",
+      "knowledge_version": "2026-06-12-54a98088",
+      "embedding_text": "一般輪椅與移動輔具查證路徑 disability_assistive_subsidy_question longtermcare_budget_gap 身障 申請路徑 電話確認 中央共通 新北市 一般輪椅可以補助嗎 移位或移動輔具走長照還是身障 輪椅租借或購買怎麼查 家屬詢問一般輪椅、助行器、移動輔具是否有補助或租借 個管師需要分流長照輔具、身障輔具或自費 已確認是短期急用借用且不討論補助 純查商品尺寸或品牌 先確認需求是租借、購買、短期使用或長期使用 查長照輔具服務是否涵蓋相近品項與申請流程 若涉及身障補助，查地方社會局或輔具中心要求 提醒家屬不同制度不可自行假設可重複申請 這個移動輔具在長照端是否有可申請品項？ 若走身障輔具補助，需哪些文件與評估？ 是否可短期租借或借用，窗口在哪裡？ 是否有不得重複補助或需先核定的限制？ 一般輪椅與移動輔具可能有長照、身障或租借等不同路徑。建議先確認使用期間、用途與官方窗口要求，再決定申請方式。 長照與身障資源可能互補也可能限制重複，需由窗口確認 先問使用期間與使用場景，比直接問金額更重要 {\"care_manager_focus\": [\"先確認需求是租借、購買、短期使用或長期使用\", \"查長照輔具服務是否涵蓋相近品項與申請流程\", \"若涉及身障補助，查地方社會局或輔具中心要求\", \"提醒家屬不同制度不可自行假設可重複申請\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"一般輪椅與移動輔具可能有長照、身障或租借等不同路徑。建議先確認使用期間、用途與官方窗口要求，再決定申請方式。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"這個移動輔具在長照端是否有可申請品項？\", \"若走身障輔具補助，需哪些文件與評估？\", \"是否可短期租借或借用，窗口在哪裡？\", \"是否有不得重複補助或需先核定的限制？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"一般輪椅與移動輔具查證路徑 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 一般輪椅與移動輔具查證路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "mental_disability_family_support_boundary",
+      "knowledge_id": "mental_disability_family_support_boundary",
+      "title": "精神障礙家庭支持與長照邊界",
+      "directions": [
+        "mental_disability_family_support",
+        "disability_welfare_navigation"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "精神障礙家屬可以找什麼資源",
+        "精神障礙和長照有關嗎",
+        "家庭照顧壓力和安全風險怎麼分流"
+      ],
+      "applies_when": [
+        "家屬提到精神障礙、情緒行為、照顧壓力、家庭安全或照顧安排問題",
+        "個管師需要判斷是長照資源、身障資源、醫療或危機通報"
+      ],
+      "not_applies_when": [
+        "有立即自傷傷人、暴力或急性危機，應走緊急或醫療危機流程",
+        "只問一般復健或門診資訊"
+      ],
+      "verification_steps": [
+        "先辨識是否有立即安全風險；有風險時優先走緊急或專業危機流程",
+        "無立即危機時，查身障家庭支持、精神障礙相關社區資源與長照適用性",
+        "確認家屬需要的是照顧替手、諮詢、醫療銜接或安全計畫",
+        "家屬版說明避免診斷語言與過度承諾"
+      ],
+      "phone_check_questions": [
+        "目前是否有立即安全風險或需要緊急協助？",
+        "地方是否有精神障礙家庭支持或社區資源？",
+        "此需求是否屬長照服務範圍，或應由身障/衛政窗口協助？",
+        "家屬需要的是照顧服務、諮詢支持還是醫療銜接？"
+      ],
+      "family_safe_summary": "精神障礙家庭支持需要先確認安全風險與需求類型；可查身障、衛政或長照相關窗口，但不宜直接以長照服務概括所有問題。",
+      "care_manager_notes": [
+        "涉及安全風險時不要只用一般資源導航處理",
+        "回覆家屬時避免診斷或責備語言"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先辨識是否有立即安全風險；有風險時優先走緊急或專業危機流程",
+          "無立即危機時，查身障家庭支持、精神障礙相關社區資源與長照適用性",
+          "確認家屬需要的是照顧替手、諮詢、醫療銜接或安全計畫",
+          "家屬版說明避免診斷語言與過度承諾"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "精神障礙家庭支持需要先確認安全風險與需求類型；可查身障、衛政或長照相關窗口，但不宜直接以長照服務概括所有問題。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "目前是否有立即安全風險或需要緊急協助？",
+          "地方是否有精神障礙家庭支持或社區資源？",
+          "此需求是否屬長照服務範圍，或應由身障/衛政窗口協助？",
+          "家屬需要的是照顧服務、諮詢支持還是醫療銜接？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "精神障礙家庭支持與長照邊界 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_disability_welfare_directory",
+        "ltc1966_official"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 精神障礙家庭支持與長照邊界\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "8d756c9e15bbcb73226f0197ea1b123c89fc3412b69d08f15b720c0c215a9970",
+      "knowledge_version": "2026-06-12-8d756c9e",
+      "embedding_text": "精神障礙家庭支持與長照邊界 mental_disability_family_support disability_welfare_navigation 長照身障交界 申請路徑 電話確認 中央共通 新北市 精神障礙家屬可以找什麼資源 精神障礙和長照有關嗎 家庭照顧壓力和安全風險怎麼分流 家屬提到精神障礙、情緒行為、照顧壓力、家庭安全或照顧安排問題 個管師需要判斷是長照資源、身障資源、醫療或危機通報 有立即自傷傷人、暴力或急性危機，應走緊急或醫療危機流程 只問一般復健或門診資訊 先辨識是否有立即安全風險；有風險時優先走緊急或專業危機流程 無立即危機時，查身障家庭支持、精神障礙相關社區資源與長照適用性 確認家屬需要的是照顧替手、諮詢、醫療銜接或安全計畫 家屬版說明避免診斷語言與過度承諾 目前是否有立即安全風險或需要緊急協助？ 地方是否有精神障礙家庭支持或社區資源？ 此需求是否屬長照服務範圍，或應由身障/衛政窗口協助？ 家屬需要的是照顧服務、諮詢支持還是醫療銜接？ 精神障礙家庭支持需要先確認安全風險與需求類型；可查身障、衛政或長照相關窗口，但不宜直接以長照服務概括所有問題。 涉及安全風險時不要只用一般資源導航處理 回覆家屬時避免診斷或責備語言 {\"care_manager_focus\": [\"先辨識是否有立即安全風險；有風險時優先走緊急或專業危機流程\", \"無立即危機時，查身障家庭支持、精神障礙相關社區資源與長照適用性\", \"確認家屬需要的是照顧替手、諮詢、醫療銜接或安全計畫\", \"家屬版說明避免診斷語言與過度承諾\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"精神障礙家庭支持需要先確認安全風險與需求類型；可查身障、衛政或長照相關窗口，但不宜直接以長照服務概括所有問題。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"目前是否有立即安全風險或需要緊急協助？\", \"地方是否有精神障礙家庭支持或社區資源？\", \"此需求是否屬長照服務範圍，或應由身障/衛政窗口協助？\", \"家屬需要的是照顧服務、諮詢支持還是醫療銜接？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"精神障礙家庭支持與長照邊界 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 精神障礙家庭支持與長照邊界\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "purchase_before_approval_risk",
+      "knowledge_id": "purchase_before_approval_risk",
+      "title": "先購買再申請的風險",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "home_accessibility",
+        "smart_or_special_device"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "風險提醒",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "已經買了還能補助嗎",
+        "先買再申請可以嗎",
+        "廠商說買了再補件"
+      ],
+      "applies_when": [
+        "家屬準備先購買或已購買輔具、設備、施工服務",
+        "廠商建議先買再申請"
+      ],
+      "not_applies_when": [
+        "已明確走自費，不討論補助",
+        "已完成核定且照核定內容購買"
+      ],
+      "verification_steps": [
+        "先提醒家屬補助或施工常需事前核定或評估",
+        "確認已購買或已施工日期、品項、收據與是否曾核定",
+        "電話詢問窗口是否接受已購買補件或完全不能申請",
+        "未確認前不要承諾可追溯補助"
+      ],
+      "phone_check_questions": [
+        "此項目是否必須核定後才能購買或施工？",
+        "如果已購買，是否仍能補件？需要哪些文件？",
+        "收據日期、品項名稱、廠商資格是否會影響申請？",
+        "若不能補助，是否有其他租借或替代資源？"
+      ],
+      "family_safe_summary": "許多輔具或居家改善需要先評估或核定，先購買或施工可能影響申請。建議先向官方窗口確認，再決定是否購買。",
+      "care_manager_notes": [
+        "這張卡應在任何補助或施工問題中優先提醒",
+        "避免被廠商話術帶成保證補助"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先提醒家屬補助或施工常需事前核定或評估",
+          "確認已購買或已施工日期、品項、收據與是否曾核定",
+          "電話詢問窗口是否接受已購買補件或完全不能申請",
+          "未確認前不要承諾可追溯補助"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "許多輔具或居家改善需要先評估或核定，先購買或施工可能影響申請。建議先向官方窗口確認，再決定是否購買。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "此項目是否必須核定後才能購買或施工？",
+          "如果已購買，是否仍能補件？需要哪些文件？",
+          "收據日期、品項名稱、廠商資格是否會影響申請？",
+          "若不能補助，是否有其他租借或替代資源？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "先購買再申請的風險 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_ltc_assistive_device",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "補助計算",
+        "輔具查詢"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 先購買再申請的風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "34cd3c7fd3ea01b9fecd4030b4fc57437ff24ed51b2a8292e1a57c13655ce37c",
+      "knowledge_version": "2026-06-12-34cd3c7f",
+      "embedding_text": "先購買再申請的風險 disability_assistive_subsidy_question home_accessibility smart_or_special_device 身障 申請路徑 電話確認 事前核定 風險提醒 地方窗口 中央共通 新北市 已經買了還能補助嗎 先買再申請可以嗎 廠商說買了再補件 家屬準備先購買或已購買輔具、設備、施工服務 廠商建議先買再申請 已明確走自費，不討論補助 已完成核定且照核定內容購買 先提醒家屬補助或施工常需事前核定或評估 確認已購買或已施工日期、品項、收據與是否曾核定 電話詢問窗口是否接受已購買補件或完全不能申請 未確認前不要承諾可追溯補助 此項目是否必須核定後才能購買或施工？ 如果已購買，是否仍能補件？需要哪些文件？ 收據日期、品項名稱、廠商資格是否會影響申請？ 若不能補助，是否有其他租借或替代資源？ 許多輔具或居家改善需要先評估或核定，先購買或施工可能影響申請。建議先向官方窗口確認，再決定是否購買。 這張卡應在任何補助或施工問題中優先提醒 避免被廠商話術帶成保證補助 {\"care_manager_focus\": [\"先提醒家屬補助或施工常需事前核定或評估\", \"確認已購買或已施工日期、品項、收據與是否曾核定\", \"電話詢問窗口是否接受已購買補件或完全不能申請\", \"未確認前不要承諾可追溯補助\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"許多輔具或居家改善需要先評估或核定，先購買或施工可能影響申請。建議先向官方窗口確認，再決定是否購買。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"此項目是否必須核定後才能購買或施工？\", \"如果已購買，是否仍能補件？需要哪些文件？\", \"收據日期、品項名稱、廠商資格是否會影響申請？\", \"若不能補助，是否有其他租借或替代資源？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"先購買再申請的風險 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 先購買再申請的風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "rehab_bus_accessible_transport_ltc_difference",
+      "knowledge_id": "rehab_bus_accessible_transport_ltc_difference",
+      "title": "復康巴士、通用計程車、長照交通差異",
+      "directions": [
+        "disability_welfare_navigation",
+        "longtermcare_budget_gap"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "制度差異"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "復康巴士和長照交通差在哪",
+        "身障交通服務怎麼查",
+        "通用計程車可以協助嗎"
+      ],
+      "applies_when": [
+        "個案外出就醫、復健、社區活動或無障礙交通需求",
+        "家屬混淆復康巴士、長照交通接送與其他交通資源"
+      ],
+      "not_applies_when": [
+        "只需查一般計程車叫車資訊",
+        "已核定長照交通且只問預約時間"
+      ],
+      "verification_steps": [
+        "先確認交通目的、上下車協助需求、輪椅使用與地點",
+        "查長照交通服務與地方身障交通資源是否適用",
+        "詢問復康巴士或通用計程車的資格、預約方式與服務範圍",
+        "提醒不同交通資源規則與費用可能不同"
+      ],
+      "phone_check_questions": [
+        "此交通需求應走長照交通、復康巴士或其他交通資源？",
+        "是否需要身障證明、長照資格或陪同條件？",
+        "服務範圍、預約方式與費用如何計算？",
+        "輪椅或上下樓需求是否能承接？"
+      ],
+      "family_safe_summary": "復康巴士、長照交通與通用計程車是不同資源，適用資格、目的與預約方式不同。建議先確認交通目的與行動需求，再查官方窗口。",
+      "care_manager_notes": [
+        "交通問題常和上下樓、輪椅、陪同混在一起，要拆開問",
+        "不要把復康巴士直接當長照交通替代"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認交通目的、上下車協助需求、輪椅使用與地點",
+          "查長照交通服務與地方身障交通資源是否適用",
+          "詢問復康巴士或通用計程車的資格、預約方式與服務範圍",
+          "提醒不同交通資源規則與費用可能不同"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "復康巴士、長照交通與通用計程車是不同資源，適用資格、目的與預約方式不同。建議先確認交通目的與行動需求，再查官方窗口。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "此交通需求應走長照交通、復康巴士或其他交通資源？",
+          "是否需要身障證明、長照資格或陪同條件？",
+          "服務範圍、預約方式與費用如何計算？",
+          "輪椅或上下樓需求是否能承接？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "復康巴士、通用計程車、長照交通差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ltc1966_official",
+        "ntpc_rehab_bus"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ltc1966_official",
+          "source_level": "A",
+          "title": "衛福部 1966 長照服務官方入口",
+          "url": "https://1966.gov.tw/"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_rehab_bus",
+          "source_level": "A",
+          "title": "新北市復康巴士服務資訊入口",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 復康巴士、通用計程車、長照交通差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "bcd6fc9b89352425b0382daf59b6b650512acb5f8ffc71aebd9e165289a0a57f",
+      "knowledge_version": "2026-06-12-bcd6fc9b",
+      "embedding_text": "復康巴士、通用計程車、長照交通差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 中央共通 新北市 復康巴士和長照交通差在哪 身障交通服務怎麼查 通用計程車可以協助嗎 個案外出就醫、復健、社區活動或無障礙交通需求 家屬混淆復康巴士、長照交通接送與其他交通資源 只需查一般計程車叫車資訊 已核定長照交通且只問預約時間 先確認交通目的、上下車協助需求、輪椅使用與地點 查長照交通服務與地方身障交通資源是否適用 詢問復康巴士或通用計程車的資格、預約方式與服務範圍 提醒不同交通資源規則與費用可能不同 此交通需求應走長照交通、復康巴士或其他交通資源？ 是否需要身障證明、長照資格或陪同條件？ 服務範圍、預約方式與費用如何計算？ 輪椅或上下樓需求是否能承接？ 復康巴士、長照交通與通用計程車是不同資源，適用資格、目的與預約方式不同。建議先確認交通目的與行動需求，再查官方窗口。 交通問題常和上下樓、輪椅、陪同混在一起，要拆開問 不要把復康巴士直接當長照交通替代 {\"care_manager_focus\": [\"先確認交通目的、上下車協助需求、輪椅使用與地點\", \"查長照交通服務與地方身障交通資源是否適用\", \"詢問復康巴士或通用計程車的資格、預約方式與服務範圍\", \"提醒不同交通資源規則與費用可能不同\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"復康巴士、長照交通與通用計程車是不同資源，適用資格、目的與預約方式不同。建議先確認交通目的與行動需求，再查官方窗口。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"此交通需求應走長照交通、復康巴士或其他交通資源？\", \"是否需要身障證明、長照資格或陪同條件？\", \"服務範圍、預約方式與費用如何計算？\", \"輪椅或上下樓需求是否能承接？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"復康巴士、通用計程車、長照交通差異 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 復康巴士、通用計程車、長照交通差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "smart_special_assistive_device_classification",
+      "knowledge_id": "smart_special_assistive_device_classification",
+      "title": "智能／特殊輔具是否列入官方分類",
+      "directions": [
+        "smart_or_special_device",
+        "disability_assistive_subsidy_question"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "智能輔具可以補助嗎",
+        "特殊輔具官方有列嗎",
+        "新型輔具沒有在清單怎麼查"
+      ],
+      "applies_when": [
+        "家屬或廠商提出智能床墊、智慧感測、特殊輔具或新型設備",
+        "個管師不確定官方分類是否涵蓋"
+      ],
+      "not_applies_when": [
+        "只是想看智慧輔具情境介紹，不涉及申請查證",
+        "一般商品比較或行銷介紹"
+      ],
+      "verification_steps": [
+        "先不要讓模型或廠商直接判斷可申請",
+        "查官方智慧科技輔具或地方輔具補助分類是否有相近項目",
+        "詢問輔具中心是否能評估特殊需求與替代方案",
+        "若只是待查線索，標示為內部提醒，不輸出成家屬版結論"
+      ],
+      "phone_check_questions": [
+        "此類智能或特殊輔具是否列入官方分類或範例？",
+        "若未列入，是否可個案評估或只能自費？",
+        "需要哪些評估文件或官方表件？",
+        "是否有可替代的已列品項？"
+      ],
+      "family_safe_summary": "智能或特殊輔具是否能補助，不能只看商品名稱或廠商說法。需要先查官方分類、地方窗口與輔具中心評估後再說明。",
+      "care_manager_notes": [
+        "智能輔具容易被行銷語言帶偏，應以官方分類與窗口查證為準",
+        "未確認前不要把 pending lead 放進家屬版"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先不要讓模型或廠商直接判斷可申請",
+          "查官方智慧科技輔具或地方輔具補助分類是否有相近項目",
+          "詢問輔具中心是否能評估特殊需求與替代方案",
+          "若只是待查線索，標示為內部提醒，不輸出成家屬版結論"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "智能或特殊輔具是否能補助，不能只看商品名稱或廠商說法。需要先查官方分類、地方窗口與輔具中心評估後再說明。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "此類智能或特殊輔具是否列入官方分類或範例？",
+          "若未列入，是否可個案評估或只能自費？",
+          "需要哪些評估文件或官方表件？",
+          "是否有可替代的已列品項？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "智能／特殊輔具是否列入官方分類 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "mohw_smart_assistive_table",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "mohw_smart_assistive_table",
+          "source_level": "A",
+          "title": "衛福部智慧科技輔具範例表",
+          "url": "https://www.mohw.gov.tw/dl-95445-92498f44-52c3-42d2-b83b-67762092227b.html"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "智能輔具情境包",
+        "輔具查詢"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 智能／特殊輔具是否列入官方分類\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "2b3b6aadeadbaa5484d4f3445c8047577df643c38f83f8c4d5ec86de8ac4b62c",
+      "knowledge_version": "2026-06-12-2b3b6aad",
+      "embedding_text": "智能／特殊輔具是否列入官方分類 smart_or_special_device disability_assistive_subsidy_question 身障 申請路徑 電話確認 中央共通 新北市 智能輔具可以補助嗎 特殊輔具官方有列嗎 新型輔具沒有在清單怎麼查 家屬或廠商提出智能床墊、智慧感測、特殊輔具或新型設備 個管師不確定官方分類是否涵蓋 只是想看智慧輔具情境介紹，不涉及申請查證 一般商品比較或行銷介紹 先不要讓模型或廠商直接判斷可申請 查官方智慧科技輔具或地方輔具補助分類是否有相近項目 詢問輔具中心是否能評估特殊需求與替代方案 若只是待查線索，標示為內部提醒，不輸出成家屬版結論 此類智能或特殊輔具是否列入官方分類或範例？ 若未列入，是否可個案評估或只能自費？ 需要哪些評估文件或官方表件？ 是否有可替代的已列品項？ 智能或特殊輔具是否能補助，不能只看商品名稱或廠商說法。需要先查官方分類、地方窗口與輔具中心評估後再說明。 智能輔具容易被行銷語言帶偏，應以官方分類與窗口查證為準 未確認前不要把 pending lead 放進家屬版 {\"care_manager_focus\": [\"先不要讓模型或廠商直接判斷可申請\", \"查官方智慧科技輔具或地方輔具補助分類是否有相近項目\", \"詢問輔具中心是否能評估特殊需求與替代方案\", \"若只是待查線索，標示為內部提醒，不輸出成家屬版結論\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"智能或特殊輔具是否能補助，不能只看商品名稱或廠商說法。需要先查官方分類、地方窗口與輔具中心評估後再說明。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"此類智能或特殊輔具是否列入官方分類或範例？\", \"若未列入，是否可個案評估或只能自費？\", \"需要哪些評估文件或官方表件？\", \"是否有可替代的已列品項？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"智能／特殊輔具是否列入官方分類 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 智能／特殊輔具是否列入官方分類\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "stair_climber_disability_ltc_check",
+      "knowledge_id": "stair_climber_disability_ltc_check",
+      "title": "爬梯機／上下樓設備是否可查身障輔具",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "smart_or_special_device",
+        "home_accessibility"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "爬梯機能不能申請補助",
+        "上下樓設備身障可以補助嗎",
+        "長照沒有列爬梯機要走哪裡查"
+      ],
+      "applies_when": [
+        "家屬詢問爬梯機、樓梯升降或上下樓設備是否有身障或長照資源",
+        "長照常見品項未直接列出，個管師需要轉向身障或輔具中心查證"
+      ],
+      "not_applies_when": [
+        "已經完成地方政府核定且只是在確認廠商交付",
+        "只是要找搬運或臨時人力服務，不涉及輔具或設備查證"
+      ],
+      "verification_steps": [
+        "先確認需求是移動輔具、居家無障礙設備，還是短期借用服務",
+        "查地方社會局身障輔具補助或輔具資源中心是否有爬梯機相關說明",
+        "電話詢問是否需身心障礙證明、輔具評估、醫師文件或事前核定",
+        "未確認前不要請家屬先購買或承諾可補助"
+      ],
+      "phone_check_questions": [
+        "請問爬梯機或上下樓設備是否列在本縣市身障輔具補助或借用服務中？",
+        "是否需要身心障礙證明、輔具評估報告或醫師文件？",
+        "如果長照輔具未列此品項，是否可轉介輔具資源中心評估？",
+        "是否必須核定後才能購買或租借？"
+      ],
+      "family_safe_summary": "爬梯機是否能補助通常要看地方身障輔具規定、輔具中心評估與是否需事前核定。建議先由個管師協助向官方窗口查證，不要先購買。",
+      "care_manager_notes": [
+        "爬梯機容易被家屬理解成一般長照輔具，但實務上常需要轉向身障輔具或輔具中心查證",
+        "避免使用「一定能補助」或「長照沒有就是身障一定有」的說法"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認需求是移動輔具、居家無障礙設備，還是短期借用服務",
+          "查地方社會局身障輔具補助或輔具資源中心是否有爬梯機相關說明",
+          "電話詢問是否需身心障礙證明、輔具評估、醫師文件或事前核定",
+          "未確認前不要請家屬先購買或承諾可補助"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "爬梯機是否能補助通常要看地方身障輔具規定、輔具中心評估與是否需事前核定。建議先由個管師協助向官方窗口查證，不要先購買。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "請問爬梯機或上下樓設備是否列在本縣市身障輔具補助或借用服務中？",
+          "是否需要身心障礙證明、輔具評估報告或醫師文件？",
+          "如果長照輔具未列此品項，是否可轉介輔具資源中心評估？",
+          "是否必須核定後才能購買或租借？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "爬梯機／上下樓設備是否可查身障輔具 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_atrc_stair_climber",
+        "ntpc_disability_welfare_directory",
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_atrc_stair_climber",
+          "source_level": "A",
+          "title": "新北市輔具資源中心：爬梯機介紹",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Education/69"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "輔具查詢",
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 爬梯機／上下樓設備是否可查身障輔具\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "c66482db66a1a0b6ec4956863aa92291359ee5e4aca1bd14a17f910ff1e57be8",
+      "knowledge_version": "2026-06-12-c66482db",
+      "embedding_text": "爬梯機／上下樓設備是否可查身障輔具 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 中央共通 新北市 爬梯機能不能申請補助 上下樓設備身障可以補助嗎 長照沒有列爬梯機要走哪裡查 家屬詢問爬梯機、樓梯升降或上下樓設備是否有身障或長照資源 長照常見品項未直接列出，個管師需要轉向身障或輔具中心查證 已經完成地方政府核定且只是在確認廠商交付 只是要找搬運或臨時人力服務，不涉及輔具或設備查證 先確認需求是移動輔具、居家無障礙設備，還是短期借用服務 查地方社會局身障輔具補助或輔具資源中心是否有爬梯機相關說明 電話詢問是否需身心障礙證明、輔具評估、醫師文件或事前核定 未確認前不要請家屬先購買或承諾可補助 請問爬梯機或上下樓設備是否列在本縣市身障輔具補助或借用服務中？ 是否需要身心障礙證明、輔具評估報告或醫師文件？ 如果長照輔具未列此品項，是否可轉介輔具資源中心評估？ 是否必須核定後才能購買或租借？ 爬梯機是否能補助通常要看地方身障輔具規定、輔具中心評估與是否需事前核定。建議先由個管師協助向官方窗口查證，不要先購買。 爬梯機容易被家屬理解成一般長照輔具，但實務上常需要轉向身障輔具或輔具中心查證 避免使用「一定能補助」或「長照沒有就是身障一定有」的說法 {\"care_manager_focus\": [\"先確認需求是移動輔具、居家無障礙設備，還是短期借用服務\", \"查地方社會局身障輔具補助或輔具資源中心是否有爬梯機相關說明\", \"電話詢問是否需身心障礙證明、輔具評估、醫師文件或事前核定\", \"未確認前不要請家屬先購買或承諾可補助\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"爬梯機是否能補助通常要看地方身障輔具規定、輔具中心評估與是否需事前核定。建議先由個管師協助向官方窗口查證，不要先購買。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"請問爬梯機或上下樓設備是否列在本縣市身障輔具補助或借用服務中？\", \"是否需要身心障礙證明、輔具評估報告或醫師文件？\", \"如果長照輔具未列此品項，是否可轉介輔具資源中心評估？\", \"是否必須核定後才能購買或租借？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"爬梯機／上下樓設備是否可查身障輔具 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 爬梯機／上下樓設備是否可查身障輔具\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "threshold_ramp_home_accessibility_check",
+      "knowledge_id": "threshold_ramp_home_accessibility_check",
+      "title": "門檻、斜坡、動線改善查證",
+      "directions": [
+        "home_accessibility"
+      ],
+      "system_scope": [
+        "長照身障交界"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "門檻改善可以補助嗎",
+        "斜坡板或坡道能申請嗎",
+        "家裡動線改善要走哪個制度"
+      ],
+      "applies_when": [
+        "家中有門檻、坡道、通道寬度或輪椅動線問題",
+        "家屬想做斜坡或動線改善"
+      ],
+      "not_applies_when": [
+        "公共空間無障礙設施申訴",
+        "純建築法規諮詢"
+      ],
+      "verification_steps": [
+        "先確認問題發生在家中室內、社區公共空間或外出交通環境",
+        "家中改善先查長照居家無障礙服務與地方身障窗口",
+        "請家屬保留照片與尺寸資訊，不先施工",
+        "必要時請輔具中心或評估人員協助判斷"
+      ],
+      "phone_check_questions": [
+        "門檻或斜坡改善是否屬於長照居家無障礙項目？",
+        "社區公共空間是否不屬長照服務範圍，需找哪個窗口？",
+        "需不需要照片、尺寸、輪椅規格或動線描述？",
+        "是否可使用可移動式斜坡板或需固定施工？"
+      ],
+      "family_safe_summary": "門檻、斜坡與動線改善要先確認位置與服務範圍。家中改善可先查長照居家無障礙，若涉及身障或公共空間則需另問地方窗口。",
+      "care_manager_notes": [
+        "先問地點非常重要：家內、社區公設、公共道路處理窗口不同",
+        "避免把所有無障礙問題都直接歸到長照"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "先確認問題發生在家中室內、社區公共空間或外出交通環境",
+          "家中改善先查長照居家無障礙服務與地方身障窗口",
+          "請家屬保留照片與尺寸資訊，不先施工",
+          "必要時請輔具中心或評估人員協助判斷"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "門檻、斜坡與動線改善要先確認位置與服務範圍。家中改善可先查長照居家無障礙，若涉及身障或公共空間則需另問地方窗口。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "門檻或斜坡改善是否屬於長照居家無障礙項目？",
+          "社區公共空間是否不屬長照服務範圍，需找哪個窗口？",
+          "需不需要照片、尺寸、輪椅規格或動線描述？",
+          "是否可使用可移動式斜坡板或需固定施工？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "門檻、斜坡、動線改善查證 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_ltc_assistive_device",
+        "ntpc_disability_welfare_directory"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 門檻、斜坡、動線改善查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "7de64efe045a34fc837a671dd0546cf6d8035ecc2ac7f2842a1feac1ca063d2d",
+      "knowledge_version": "2026-06-12-7de64efe",
+      "embedding_text": "門檻、斜坡、動線改善查證 home_accessibility 長照身障交界 申請路徑 電話確認 事前核定 地方窗口 中央共通 新北市 門檻改善可以補助嗎 斜坡板或坡道能申請嗎 家裡動線改善要走哪個制度 家中有門檻、坡道、通道寬度或輪椅動線問題 家屬想做斜坡或動線改善 公共空間無障礙設施申訴 純建築法規諮詢 先確認問題發生在家中室內、社區公共空間或外出交通環境 家中改善先查長照居家無障礙服務與地方身障窗口 請家屬保留照片與尺寸資訊，不先施工 必要時請輔具中心或評估人員協助判斷 門檻或斜坡改善是否屬於長照居家無障礙項目？ 社區公共空間是否不屬長照服務範圍，需找哪個窗口？ 需不需要照片、尺寸、輪椅規格或動線描述？ 是否可使用可移動式斜坡板或需固定施工？ 門檻、斜坡與動線改善要先確認位置與服務範圍。家中改善可先查長照居家無障礙，若涉及身障或公共空間則需另問地方窗口。 先問地點非常重要：家內、社區公設、公共道路處理窗口不同 避免把所有無障礙問題都直接歸到長照 {\"care_manager_focus\": [\"先確認問題發生在家中室內、社區公共空間或外出交通環境\", \"家中改善先查長照居家無障礙服務與地方身障窗口\", \"請家屬保留照片與尺寸資訊，不先施工\", \"必要時請輔具中心或評估人員協助判斷\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"門檻、斜坡與動線改善要先確認位置與服務範圍。家中改善可先查長照居家無障礙，若涉及身障或公共空間則需另問地方窗口。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"門檻或斜坡改善是否屬於長照居家無障礙項目？\", \"社區公共空間是否不屬長照服務範圍，需找哪個窗口？\", \"需不需要照片、尺寸、輪椅規格或動線描述？\", \"是否可使用可移動式斜坡板或需固定施工？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"門檻、斜坡、動線改善查證 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 門檻、斜坡、動線改善查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    },
+    {
+      "id": "vendor_claim_subsidy_verification",
+      "knowledge_id": "vendor_claim_subsidy_verification",
+      "title": "廠商聲稱可補助時如何查證",
+      "directions": [
+        "disability_assistive_subsidy_question",
+        "smart_or_special_device",
+        "home_accessibility"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "申請路徑",
+        "電話確認",
+        "事前核定",
+        "地方窗口"
+      ],
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "廠商說這個可以補助是真的嗎",
+        "廠商說買了再申請",
+        "商城標示可申請補助"
+      ],
+      "applies_when": [
+        "廠商、商城或銷售人員宣稱某商品可補助",
+        "家屬被促銷資訊影響，要求個管師確認"
+      ],
+      "not_applies_when": [
+        "官方窗口已核定明確品項與廠商資格",
+        "純商品品質或售後服務問題"
+      ],
+      "verification_steps": [
+        "要求把廠商說法拆成品項、制度、文件、核定順序與窗口",
+        "用官方品項或地方窗口查證，不用廠商話術當結論",
+        "確認是否需特約廠商、報價單格式、核定前不得購買",
+        "將廠商資料視為線索，不直接輸出成家屬版承諾"
+      ],
+      "phone_check_questions": [
+        "這項商品是否在官方補助品項或分類中？",
+        "是否要求特約廠商或指定文件格式？",
+        "廠商提供的名稱是否和官方品項名稱一致？",
+        "是否必須核定後購買？"
+      ],
+      "family_safe_summary": "廠商說可補助只能當線索，仍要以官方品項、地方窗口與核定流程為準。建議先查證後再購買或施工。",
+      "care_manager_notes": [
+        "廠商聲稱是高風險來源，需標示來源等級與確認狀態",
+        "避免把商城或業務話術放進家屬版"
+      ],
+      "comparison": {
+        "care_manager_focus": [
+          "要求把廠商說法拆成品項、制度、文件、核定順序與窗口",
+          "用官方品項或地方窗口查證，不用廠商話術當結論",
+          "確認是否需特約廠商、報價單格式、核定前不得購買",
+          "將廠商資料視為線索，不直接輸出成家屬版承諾"
+        ],
+        "disability_side": {
+          "documents": "確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。",
+          "path": "再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。",
+          "risk": "身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。",
+          "window": "新北市社會局、輔具資源中心或身障福利承辦窗口。"
+        },
+        "family_wording": "廠商說可補助只能當線索，仍要以官方品項、地方窗口與核定流程為準。建議先查證後再購買或施工。",
+        "ltc_side": {
+          "documents": "依服務項目確認是否需照專、評估、核定文件或施工前資料。",
+          "path": "先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。",
+          "risk": "長照未列或地方流程不同時，不可直接承諾可申請。",
+          "window": "1966、新北長照管理中心或承辦單位。"
+        },
+        "phone_check_focus": [
+          "這項商品是否在官方補助品項或分類中？",
+          "是否要求特約廠商或指定文件格式？",
+          "廠商提供的名稱是否和官方品項名稱一致？",
+          "是否必須核定後購買？"
+        ],
+        "shared_risks": [
+          "official_check_required",
+          "do_not_promise_subsidy"
+        ],
+        "summary": "廠商聲稱可補助時如何查證 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。"
+      },
+      "source_ids": [
+        "ntpc_disability_welfare_directory",
+        "ntpc_ltc_assistive_device"
+      ],
+      "source_refs": [
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_disability_welfare_directory",
+          "source_level": "A",
+          "title": "新北市政府社會局身心障礙福利服務",
+          "url": "https://www.sw.ntpc.gov.tw/home.jsp?id=d4abdaae79035953"
+        },
+        {
+          "last_checked_at": "2026-06-12",
+          "public_allowed": true,
+          "source_id": "ntpc_ltc_assistive_device",
+          "source_level": "A",
+          "title": "新北市長期照顧輔具及居家無障礙環境改善服務",
+          "url": "https://www.health.ntpc.gov.tw/basic/?node=204743"
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_check_required",
+        "do_not_promise_subsidy"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "輔具查詢",
+        "特約輔具地圖"
+      ],
+      "last_checked_at": "2026-06-12",
+      "next_review_at": "2026-12-12",
+      "status": "active",
+      "confidence": "官方入口已登記，仍需地方窗口電話確認",
+      "body": "# 廠商聲稱可補助時如何查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。",
+      "content_hash": "75580b235958103e63e48e77712b49bd553b762433f7e83ff3971c6264e62132",
+      "knowledge_version": "2026-06-12-75580b23",
+      "embedding_text": "廠商聲稱可補助時如何查證 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 中央共通 新北市 廠商說這個可以補助是真的嗎 廠商說買了再申請 商城標示可申請補助 廠商、商城或銷售人員宣稱某商品可補助 家屬被促銷資訊影響，要求個管師確認 官方窗口已核定明確品項與廠商資格 純商品品質或售後服務問題 要求把廠商說法拆成品項、制度、文件、核定順序與窗口 用官方品項或地方窗口查證，不用廠商話術當結論 確認是否需特約廠商、報價單格式、核定前不得購買 將廠商資料視為線索，不直接輸出成家屬版承諾 這項商品是否在官方補助品項或分類中？ 是否要求特約廠商或指定文件格式？ 廠商提供的名稱是否和官方品項名稱一致？ 是否必須核定後購買？ 廠商說可補助只能當線索，仍要以官方品項、地方窗口與核定流程為準。建議先查證後再購買或施工。 廠商聲稱是高風險來源，需標示來源等級與確認狀態 避免把商城或業務話術放進家屬版 {\"care_manager_focus\": [\"要求把廠商說法拆成品項、制度、文件、核定順序與窗口\", \"用官方品項或地方窗口查證，不用廠商話術當結論\", \"確認是否需特約廠商、報價單格式、核定前不得購買\", \"將廠商資料視為線索，不直接輸出成家屬版承諾\"], \"disability_side\": {\"documents\": \"確認是否需身心障礙證明、輔具評估、醫師文件、報價或事前核定。\", \"path\": \"再查身障福利、身障輔具補助、輔具資源中心或地方社會局窗口。\", \"risk\": \"身障路徑常與證明類別、品項、地方規定有關，不能由 AI 或廠商說法代替官方確認。\", \"window\": \"新北市社會局、輔具資源中心或身障福利承辦窗口。\"}, \"family_wording\": \"廠商說可補助只能當線索，仍要以官方品項、地方窗口與核定流程為準。建議先查證後再購買或施工。\", \"ltc_side\": {\"documents\": \"依服務項目確認是否需照專、評估、核定文件或施工前資料。\", \"path\": \"先查長照服務項目、CMS/失能評估與新北長照輔具或居家無障礙服務是否涵蓋。\", \"risk\": \"長照未列或地方流程不同時，不可直接承諾可申請。\", \"window\": \"1966、新北長照管理中心或承辦單位。\"}, \"phone_check_focus\": [\"這項商品是否在官方補助品項或分類中？\", \"是否要求特約廠商或指定文件格式？\", \"廠商提供的名稱是否和官方品項名稱一致？\", \"是否必須核定後購買？\"], \"shared_risks\": [\"official_check_required\", \"do_not_promise_subsidy\"], \"summary\": \"廠商聲稱可補助時如何查證 需分開確認長照與身障制度邊界；本卡只提供查證導航，不做資格或金額判定。\"} official_check_required do_not_promise_subsidy # 廠商聲稱可補助時如何查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+    }
+  ]
+}

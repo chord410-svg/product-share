@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-nav-v4" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-nav-v4" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-nav-v4" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-nav-v5" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-nav-v5" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-nav-v5" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -25,16 +25,9 @@
 
   <main class="layout tab-panel is-active" id="knowledgeNavView" role="tabpanel" aria-labelledby="knowledgeNavTabButton">
     <section class="panel controls" aria-labelledby="control-title">
-      <div class="section-heading compact-heading">
+      <div class="section-heading compact-heading control-heading-row">
         <h2 id="control-title">輸入問題</h2>
-      </div>
-      <div class="question-grid">
-        <label class="question-field">
-          <span>輸入問題</span>
-          <textarea id="questionText" rows="5" placeholder="例如：家屬問爬梯機能不能申請補助，長照沒有列，身障路徑要怎麼查？"></textarea>
-        </label>
         <div class="region-field">
-          <span class="field-label">地區</span>
           <button id="regionSelectButton" class="region-select-button" type="button" aria-expanded="false" aria-controls="regionSelectMenu">地區：新北市、中央共通</button>
           <div id="regionSelectMenu" class="region-select-menu" hidden>
             <label><input type="checkbox" name="regionScope" value="新北市" checked /> 新北市</label>
@@ -44,6 +37,10 @@
           </div>
         </div>
       </div>
+      <label class="question-field">
+        <span class="sr-only">輸入問題</span>
+        <textarea id="questionText" rows="5" placeholder="例如：家屬問爬梯機能不能申請補助，長照沒有列，身障路徑要怎麼查？"></textarea>
+      </label>
       <div id="privacyWarning" class="privacy-warning" hidden></div>
       <div class="action-row action-row-with-status">
         <button id="routeButton" class="primary-button" type="button">尋找知識卡</button>
@@ -55,7 +52,10 @@
       <div class="section-heading scenario-heading">
         <div>
           <p class="eyebrow">查證方向</p>
-          <h2 id="direction-title">方向與知識卡候選</h2>
+          <div class="direction-title-row">
+            <h2 id="direction-title">方向與知識卡候選</h2>
+            <p id="directionStatus" class="small-note inline-status">輸入問題後會顯示方向；後端服務不通時仍可使用本頁知識卡。</p>
+          </div>
         </div>
         <span id="selectedCount" class="selection-count">已選 0 張知識卡</span>
       </div>
@@ -191,6 +191,6 @@
     <strong>安全邊界：</strong>本頁不保存原始問題全文、不做資格核定、不承諾補助；C 級整理來源只作研究線索，家屬版需由 A/B 級官方或受託來源支撐。
   </footer>
 
-  <script src="disability-resource.js?v=20260613-knowledge-nav-v4"></script>
+  <script src="disability-resource.js?v=20260613-knowledge-nav-v5"></script>
 </body>
 </html>

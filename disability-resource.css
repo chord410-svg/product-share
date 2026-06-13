@@ -70,6 +70,13 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .privacy-warning { border: 1px solid var(--danger-line); background: var(--danger-bg); color: #a21c1c; border-radius: 8px; padding: 10px; margin-top: 10px; line-height: 1.5; }
 .scenario-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .direction-grid, .knowledge-grid { display: grid; gap: 12px; }
+.attribute-filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 14px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: #f8fbfd; }
+.attribute-filter-label { color: var(--muted); font-weight: 800; font-size: 13px; margin-right: 2px; }
+.attribute-chip { display: inline-flex; align-items: center; gap: 5px; background: #eef5fb; color: #17324d; border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; font-size: 13px; }
+.attribute-chip small { color: var(--muted); font-weight: 800; }
+.attribute-chip span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 1px 6px; font-size: 12px; }
+.attribute-chip.is-active { background: var(--teal); color: #fff; border-color: var(--teal); }
+.attribute-chip.is-active small { color: #d9fffb; }
 .direction-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 14px; }
 .knowledge-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .direction-card, .knowledge-card { text-align: left; background: #f8fbfd; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); display: grid; gap: 8px; padding: 14px; }

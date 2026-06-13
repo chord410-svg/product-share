@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260613-knowledge-nav-v4';
+const CACHE_VERSION = '20260613-knowledge-nav-v5';
 
 const state = {
   scenarios: [],
@@ -15,6 +15,7 @@ const state = {
   selectedRegions: new Set(['新北市', '中央共通']),
   outputMode: 'family',
   activeAttributeFilter: '',
+  activeAttributeGroup: 'system_scope',
   currentKnowledgeCards: [],
 };
 
@@ -153,6 +154,15 @@ function extractAttributeFilters(cards = []) {
   return [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'zh-Hant'));
 }
 
+function groupAttributeFilters(filters = []) {
+  const groups = new Map();
+  for (const attr of filters) {
+    if (!groups.has(attr.type)) groups.set(attr.type, []);
+    groups.get(attr.type).push(attr);
+  }
+  return groups;
+}
+
 function renderAttributeFilters(cards = []) {
   const container = qs('#attributeFilters');
   if (!container) return;
@@ -161,18 +171,45 @@ function renderAttributeFilters(cards = []) {
     container.innerHTML = '';
     return;
   }
+  const grouped = groupAttributeFilters(filters);
+  if (!grouped.has(state.activeAttributeGroup)) {
+    state.activeAttributeGroup = grouped.has('system_scope') ? 'system_scope' : filters[0].type;
+    state.activeAttributeFilter = '';
+  }
   if (state.activeAttributeFilter && !filters.some((attr) => attr.key === state.activeAttributeFilter)) {
     state.activeAttributeFilter = '';
   }
+  const typeOrder = ['system_scope', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
+  const activeSubs = grouped.get(state.activeAttributeGroup) || [];
+  const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   container.innerHTML = `
-    <span class="attribute-filter-label">快速篩選</span>
-    <button type="button" class="attribute-chip${state.activeAttributeFilter ? '' : ' is-active'}" data-attribute-key="">全部候選 ${cards.length}</button>
-    ${filters.map((attr) => `
-      <button type="button" class="attribute-chip${state.activeAttributeFilter === attr.key ? ' is-active' : ''}" data-attribute-key="${escapeHtml(attr.key)}">
-        <small>${escapeHtml(ATTRIBUTE_TYPE_LABELS[attr.type] || '屬性')}</small>${escapeHtml(attr.label)} <span>${attr.count}</span>
-      </button>
-    `).join('')}
+    <div class="attribute-filter-head">
+      <span class="attribute-filter-label">屬性分類</span>
+      <span class="small-note">${escapeHtml(activeLabel)}：${activeSubs.length} 個子屬性命中</span>
+    </div>
+    <div class="attribute-main-tabs" aria-label="主屬性分類">
+      ${typeOrder.map((type) => `
+        <button type="button" class="attribute-main-button${state.activeAttributeGroup === type ? ' is-active' : ''}" data-attribute-type="${escapeHtml(type)}">
+          ${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)} <span>${(grouped.get(type) || []).length}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
+      <button type="button" class="attribute-chip${state.activeAttributeFilter ? '' : ' is-active'}" data-attribute-key="">全部 ${cards.length}</button>
+      ${activeSubs.map((attr) => `
+        <button type="button" class="attribute-chip${state.activeAttributeFilter === attr.key ? ' is-active' : ''}" data-attribute-key="${escapeHtml(attr.key)}">
+          ${escapeHtml(attr.label)} <span>${attr.count}</span>
+        </button>
+      `).join('')}
+    </div>
   `;
+  container.querySelectorAll('[data-attribute-type]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.activeAttributeGroup = button.dataset.attributeType || state.activeAttributeGroup;
+      state.activeAttributeFilter = '';
+      renderKnowledgeCards(state.currentKnowledgeCards || cards);
+    });
+  });
   container.querySelectorAll('[data-attribute-key]').forEach((button) => {
     button.addEventListener('click', () => {
       state.activeAttributeFilter = button.dataset.attributeKey || '';
@@ -408,10 +445,13 @@ function localKnowledgeSearch(query, directionIds = [], limit = 8, regionHints =
 
 function renderDirections(directions = []) {
   const container = qs('#directionCards');
+  const status = qs('#directionStatus');
   if (!directions.length) {
-    container.innerHTML = '<div class="empty-state">輸入問題後會顯示方向；後端服務不通時仍可使用本頁知識卡。</div>';
+    if (status) status.textContent = '輸入問題後會顯示方向；後端服務不通時仍可使用本頁知識卡。';
+    container.innerHTML = '';
     return;
   }
+  if (status) status.textContent = `已找到 ${directions.length} 個方向，請從下方候選知識卡挑選。`;
   container.innerHTML = directions.map((row) => {
     const id = row.direction_id || row.scenario_id;
     const scenario = scenarioById(id) || {};

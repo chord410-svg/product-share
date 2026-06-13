@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>身障／長照知識包導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-pack-v2" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-pack-v2" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-pack-v2" as="fetch" crossorigin="anonymous" />
+  <title>身障／長照知識導航</title>
+  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-nav-v3" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-nav-v3" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-nav-v3" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
     <div>
-      <p class="eyebrow">身障與長照交界查證</p>
-      <h1>身障／長照知識包導航</h1>
-      <p class="lead">個管師先輸入問題或手動挑選知識卡，再到「我的知識包」整理家屬版、電話確認與同屬性比較。</p>
+      <p class="eyebrow">登入狀態</p>
+      <h1>身障／長照知識導航</h1>
+      <p class="lead">個管師輸入問題後，先看方向與候選知識卡；選取後到「我的知識組合」整理家屬版、電話確認與同屬性比較。</p>
     </div>
-    <span class="tool-badge">知識卡 → 知識包</span>
+    <span id="loginBadge" class="tool-badge">檢查 Discord 連結中</span>
   </header>
 
-  <nav class="view-tabs" role="tablist" aria-label="身障與長照知識包分頁">
+  <nav class="view-tabs" role="tablist" aria-label="身障與長照知識導航分頁">
     <button type="button" class="view-tab is-active" id="knowledgeNavTabButton" data-view="knowledgeNav" role="tab" aria-selected="true" aria-controls="knowledgeNavView">知識導航</button>
-    <button type="button" class="view-tab" id="knowledgePackTabButton" data-view="knowledgePack" role="tab" aria-selected="false" aria-controls="knowledgePackView">我的知識包</button>
+    <button type="button" class="view-tab" id="knowledgePackTabButton" data-view="knowledgePack" role="tab" aria-selected="false" aria-controls="knowledgePackView">我的知識組合</button>
     <button type="button" class="view-tab" id="knowledgeExchangeTabButton" data-view="knowledgeExchange" role="tab" aria-selected="false" aria-controls="knowledgeExchangeView">知識副本</button>
   </nav>
 
@@ -28,8 +28,7 @@
     <section class="panel controls" aria-labelledby="control-title">
       <div class="section-heading">
         <p class="eyebrow">本案問題</p>
-        <h2 id="control-title">輸入問題，先分流再挑知識卡</h2>
-        <p class="section-note">分流模型只回方向，不選卡、不判定資格、不承諾補助。後端服務暫時不可用時，可先用本頁知識卡手動整理。</p>
+        <h2 id="control-title">輸入問題，尋找知識卡</h2>
       </div>
       <label>
         個管師問題
@@ -37,9 +36,7 @@
       </label>
       <div id="privacyWarning" class="privacy-warning" hidden></div>
       <div class="action-row">
-        <button id="routeButton" class="primary-button" type="button">分流並找知識卡</button>
-        <button id="officialSearchButton" class="secondary-button" type="button">官方延伸搜尋</button>
-        <button id="clearSelectionButton" class="ghost-button" type="button">清除選取</button>
+        <button id="routeButton" class="primary-button" type="button">尋找知識卡</button>
       </div>
       <p id="apiStatus" class="small-note">正在檢查後端服務與知識卡資料。</p>
       <p class="small-note">請勿輸入姓名、電話、完整地址、身分證或病歷號；家屬版文字只提供保守說明。</p>
@@ -48,12 +45,13 @@
     <section class="panel" aria-labelledby="direction-title">
       <div class="section-heading scenario-heading">
         <div>
-          <p class="eyebrow">向量化方向</p>
-          <h2 id="direction-title">分流方向與知識卡候選</h2>
+          <p class="eyebrow">查證方向</p>
+          <h2 id="direction-title">方向與知識卡候選</h2>
         </div>
         <span id="selectedCount" class="selection-count">已選 0 張知識卡</span>
       </div>
       <div id="directionCards" class="direction-grid"></div>
+      <div id="attributeFilters" class="attribute-filter-row" aria-label="知識卡屬性篩選"></div>
       <div id="knowledgeCards" class="knowledge-grid"></div>
     </section>
   </main>
@@ -61,9 +59,9 @@
   <section class="workbench-shell tab-panel" id="knowledgePackView" role="tabpanel" aria-labelledby="knowledgePackTabButton" hidden>
     <div class="workbench-head">
       <div>
-        <p class="eyebrow">My Knowledge Packs</p>
-        <h2>我的知識包</h2>
-        <p class="muted-text">選好的知識卡會在這裡組合。長照 VS 身障比較只會依同屬性 comparison group 分組顯示。</p>
+        <p class="eyebrow">我的知識組合</p>
+        <h2>我的知識組合</h2>
+        <p class="muted-text">選好的知識卡會在這裡組合。長照 VS 身障比較只會依同屬性分組顯示。</p>
       </div>
       <button id="refreshPackagesButton" class="ghost-button" type="button">重新載入</button>
     </div>
@@ -71,12 +69,12 @@
     <section class="panel package-panel" aria-labelledby="package-title">
       <div class="output-header">
         <div>
-          <p class="eyebrow">目前編輯中的知識包</p>
+          <p class="eyebrow">目前編輯中的知識組合</p>
           <h2 id="package-title">挑選後組合給個管師使用</h2>
         </div>
         <div class="action-row compact-actions">
           <button id="saveDraftButton" class="secondary-button" type="button">儲存草稿</button>
-          <button id="copyPackageButton" class="copy-button" type="button">複製知識包</button>
+          <button id="copyPackageButton" class="copy-button" type="button">複製知識組合</button>
         </div>
       </div>
       <div id="packageHint" class="small-note"></div>
@@ -86,8 +84,8 @@
     <section class="saved-package-area panel">
       <div class="saved-package-header">
         <div>
-          <p class="eyebrow">Saved Knowledge Packs</p>
-          <h2>已儲存的知識包</h2>
+          <p class="eyebrow">已儲存項目</p>
+          <h2>已儲存的知識組合</h2>
           <p class="small-note">從 Discord 入口進入時，這裡會載入你先前建立的草稿或結果。</p>
         </div>
       </div>
@@ -95,13 +93,13 @@
     </section>
 
     <section id="resultPanel" class="result-panel" aria-live="polite">
-      <div class="result-output-switcher" aria-label="知識包輸出格式">
+      <div class="result-output-switcher" aria-label="知識組合輸出格式">
         <div>
           <p class="eyebrow">輸出格式</p>
-          <h2>選擇這份知識包要怎麼使用</h2>
+          <h2>選擇這份知識組合要怎麼使用</h2>
           <p class="small-note">比較只會合併同屬性的知識卡；不同屬性會分開成不同比較組。</p>
         </div>
-        <div class="result-mode-tabs" role="tablist" aria-label="知識包輸出格式">
+        <div class="result-mode-tabs" role="tablist" aria-label="知識組合輸出格式">
           <button type="button" data-output-mode="family" class="is-active" role="tab">家屬版</button>
           <button type="button" data-output-mode="phone" role="tab">電話確認</button>
           <button type="button" data-output-mode="comparison" role="tab">長照 VS 身障比較</button>
@@ -169,14 +167,14 @@
   <section class="exchange-shell tab-panel" id="knowledgeExchangeView" role="tabpanel" aria-labelledby="knowledgeExchangeTabButton" hidden>
     <div class="workbench-head">
       <div>
-        <p class="eyebrow">Knowledge Pack Exchange</p>
+        <p class="eyebrow">知識副本</p>
         <h2>知識副本</h2>
-        <p class="muted-text">第一版先保留匯出／匯入工作區位置；正式 knowledgepack JSON 匯入匯出會沿用長照資源副本的安全規則。</p>
+        <p class="muted-text">第一版先保留匯出／匯入工作區位置；正式知識副本 JSON 匯入匯出會沿用長照資源副本的安全規則。</p>
       </div>
     </div>
     <section class="panel">
       <h2>知識副本功能準備中</h2>
-      <p class="section-note">目前可先用「我的知識包」中的複製功能備份內容；後續會支援含 snapshot 與 content hash 的 knowledgepack JSON。</p>
+      <p class="section-note">目前可先用「我的知識組合」中的複製功能備份內容；後續會支援含卡片副本與內容雜湊的知識副本 JSON。</p>
     </section>
   </section>
 
@@ -184,6 +182,6 @@
     <strong>安全邊界：</strong>本頁不保存原始問題全文、不做資格核定、不承諾補助；C 級整理來源只作研究線索，家屬版需由 A/B 級官方或受託來源支撐。
   </footer>
 
-  <script src="disability-resource.js?v=20260613-knowledge-pack-v2"></script>
+  <script src="disability-resource.js?v=20260613-knowledge-nav-v3"></script>
 </body>
 </html>

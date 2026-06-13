@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260613-knowledge-nav-v5';
+const CACHE_VERSION = '20260613-knowledge-nav-v6';
 
 const state = {
   scenarios: [],
@@ -16,6 +16,7 @@ const state = {
   outputMode: 'family',
   activeAttributeFilter: '',
   activeAttributeGroup: 'system_scope',
+  activeAttributeSelections: {},
   currentKnowledgeCards: [],
 };
 
@@ -147,11 +148,15 @@ function extractAttributeFilters(cards = []) {
   const map = new Map();
   for (const card of cards) {
     for (const attr of cardAttributes(card)) {
-      if (!map.has(attr.key)) map.set(attr.key, { ...attr, count: 0 });
-      map.get(attr.key).count += 1;
+      if (!map.has(attr.key)) map.set(attr.key, { ...attr, totalCount: 0, hitCount: 0 });
+      map.get(attr.key).totalCount += 1;
     }
   }
-  return [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'zh-Hant'));
+  return [...map.values()].sort((a, b) => b.totalCount - a.totalCount || a.label.localeCompare(b.label, 'zh-Hant'));
+}
+
+function attributeCatalog() {
+  return extractAttributeFilters(state.knowledgeCards || []);
 }
 
 function groupAttributeFilters(filters = []) {
@@ -163,42 +168,97 @@ function groupAttributeFilters(filters = []) {
   return groups;
 }
 
+function attributeHitMap(cards = []) {
+  const hits = new Map();
+  for (const card of cards) {
+    for (const attr of cardAttributes(card)) {
+      hits.set(attr.key, (hits.get(attr.key) || 0) + 1);
+    }
+  }
+  return hits;
+}
+
+function selectedAttributeSet(type) {
+  if (!state.activeAttributeSelections[type]) state.activeAttributeSelections[type] = new Set();
+  return state.activeAttributeSelections[type];
+}
+
+function resetAttributeSelections(cards = []) {
+  const hits = attributeHitMap(cards);
+  const catalog = groupAttributeFilters(attributeCatalog());
+  state.activeAttributeSelections = {};
+  for (const [type, attrs] of catalog.entries()) {
+    const selected = new Set(attrs.filter((attr) => hits.has(attr.key)).map((attr) => attr.key));
+    if (selected.size) state.activeAttributeSelections[type] = selected;
+  }
+}
+
+function cardsForAttributeSelection(fallbackCards = []) {
+  const selected = selectedAttributeSet(state.activeAttributeGroup);
+  if (!selected.size) return fallbackCards;
+  const selectedKeys = new Set(selected);
+  const seedIds = new Set(fallbackCards.map(cardId));
+  return (state.knowledgeCards || [])
+    .filter((card) => cardAttributes(card).some((attr) => selectedKeys.has(attr.key)))
+    .sort((a, b) => {
+      const seedDelta = Number(seedIds.has(cardId(b))) - Number(seedIds.has(cardId(a)));
+      if (seedDelta) return seedDelta;
+      return String(a.title || '').localeCompare(String(b.title || ''), 'zh-Hant');
+    });
+}
+
+function sourceLevelSummary(card) {
+  const refs = Array.isArray(card?.source_refs) ? card.source_refs : [];
+  const levels = unique(refs.map((ref) => ref && ref.source_level).filter(Boolean));
+  if (!levels.length) return '來源待補';
+  return levels.map(labelText).join('、');
+}
+
+function firstLine(items, fallback = '待補查證內容') {
+  const rows = unique(items);
+  return rows[0] || fallback;
+}
+
 function renderAttributeFilters(cards = []) {
   const container = qs('#attributeFilters');
   if (!container) return;
-  const filters = extractAttributeFilters(cards);
-  if (!filters.length) {
+  const catalog = attributeCatalog();
+  if (!catalog.length) {
     container.innerHTML = '';
     return;
   }
-  const grouped = groupAttributeFilters(filters);
+  const hits = attributeHitMap(cards);
+  const grouped = groupAttributeFilters(catalog.map((attr) => ({ ...attr, hitCount: hits.get(attr.key) || 0 })));
   if (!grouped.has(state.activeAttributeGroup)) {
-    state.activeAttributeGroup = grouped.has('system_scope') ? 'system_scope' : filters[0].type;
-    state.activeAttributeFilter = '';
-  }
-  if (state.activeAttributeFilter && !filters.some((attr) => attr.key === state.activeAttributeFilter)) {
-    state.activeAttributeFilter = '';
+    state.activeAttributeGroup = grouped.has('system_scope') ? 'system_scope' : catalog[0].type;
   }
   const typeOrder = ['system_scope', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
   const activeSubs = grouped.get(state.activeAttributeGroup) || [];
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
+  const selected = selectedAttributeSet(state.activeAttributeGroup);
+  const selectedCount = activeSubs.filter((attr) => selected.has(attr.key)).length;
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>
-      <span class="small-note">${escapeHtml(activeLabel)}：${activeSubs.length} 個子屬性命中</span>
+      <span class="small-note">${escapeHtml(activeLabel)}：${selectedCount}/${activeSubs.length} 子屬性</span>
     </div>
-    <div class="attribute-main-tabs" aria-label="主屬性分類">
-      ${typeOrder.map((type) => `
-        <button type="button" class="attribute-main-button${state.activeAttributeGroup === type ? ' is-active' : ''}" data-attribute-type="${escapeHtml(type)}">
-          ${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)} <span>${(grouped.get(type) || []).length}</span>
-        </button>
-      `).join('')}
+    <div class="attribute-main-tabs" data-count="${typeOrder.length}" aria-label="主屬性分類">
+      ${typeOrder.map((type) => {
+        const attrs = grouped.get(type) || [];
+        const typeSelected = selectedAttributeSet(type);
+        const typeSelectedCount = attrs.filter((attr) => typeSelected.has(attr.key)).length;
+        return `
+          <button type="button" class="attribute-main-button${state.activeAttributeGroup === type ? ' is-active' : ''}" data-attribute-type="${escapeHtml(type)}">
+            <strong>${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)}</strong>
+            <span>${typeSelectedCount}/${attrs.length} 子屬性</span>
+          </button>
+        `;
+      }).join('')}
     </div>
     <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
-      <button type="button" class="attribute-chip${state.activeAttributeFilter ? '' : ' is-active'}" data-attribute-key="">全部 ${cards.length}</button>
       ${activeSubs.map((attr) => `
-        <button type="button" class="attribute-chip${state.activeAttributeFilter === attr.key ? ' is-active' : ''}" data-attribute-key="${escapeHtml(attr.key)}">
-          ${escapeHtml(attr.label)} <span>${attr.count}</span>
+        <button type="button" class="attribute-chip${selected.has(attr.key) ? ' is-active' : ''}${attr.hitCount ? ' is-hit' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${selected.has(attr.key) ? 'true' : 'false'}">
+          ${escapeHtml(attr.label)} <span>${attr.hitCount ? `${attr.hitCount}/${attr.totalCount}` : attr.totalCount}</span>
         </button>
       `).join('')}
     </div>
@@ -206,13 +266,15 @@ function renderAttributeFilters(cards = []) {
   container.querySelectorAll('[data-attribute-type]').forEach((button) => {
     button.addEventListener('click', () => {
       state.activeAttributeGroup = button.dataset.attributeType || state.activeAttributeGroup;
-      state.activeAttributeFilter = '';
       renderKnowledgeCards(state.currentKnowledgeCards || cards);
     });
   });
   container.querySelectorAll('[data-attribute-key]').forEach((button) => {
     button.addEventListener('click', () => {
-      state.activeAttributeFilter = button.dataset.attributeKey || '';
+      const key = button.dataset.attributeKey || '';
+      if (!key) return;
+      const set = selectedAttributeSet(state.activeAttributeGroup);
+      if (set.has(key)) set.delete(key); else set.add(key);
       renderKnowledgeCards(state.currentKnowledgeCards || cards);
     });
   });
@@ -465,38 +527,52 @@ function renderDirections(directions = []) {
   }).join('');
 }
 
-function renderKnowledgeCards(cards = []) {
+function renderKnowledgeCards(cards = [], options = {}) {
   const container = qs('#knowledgeCards');
   state.currentKnowledgeCards = cards;
+  if (options.resetAttributes) resetAttributeSelections(cards);
   renderAttributeFilters(cards);
   if (!cards.length) {
     container.innerHTML = '<div class="empty-state">尚無知識卡候選。請換一種問法，或先從下方既有知識卡手動挑選。</div>';
     return;
   }
-  const visibleCards = state.activeAttributeFilter
-    ? cards.filter((card) => cardAttributes(card).some((attr) => attr.key === state.activeAttributeFilter))
-    : cards;
+  const visibleCards = cardsForAttributeSelection(cards);
   if (!visibleCards.length) {
-    container.innerHTML = '<div class="empty-state">這個屬性目前沒有符合的知識卡，請切回全部候選或改選其他屬性。</div>';
+    container.innerHTML = '<div class="empty-state">目前選取的子屬性沒有知識卡；請點選其他子屬性擴大範圍。</div>';
     return;
   }
   container.innerHTML = visibleCards.map((card) => {
     const id = card.knowledge_id || card.id;
     const selected = state.selectedKnowledgeIds.has(id);
+    const verifyText = firstLine(card.verification_steps || [], '先確認官方窗口與地方承辦流程。');
+    const phoneText = firstLine(card.phone_check_questions || [], '電話確認承辦窗口、文件與是否需事前核定。');
+    const summaryText = card.family_safe_summary || card.match_reason || asArray(card.question_patterns).slice(0, 2).join('、') || '此卡提供查證方向，仍需以官方窗口與電話確認為準。';
     return `
       <article class="knowledge-card${selected ? ' selected' : ''}">
-        <div class="card-topline">
+        <div class="card-head">
           <div>
-            <p class="eyebrow">${escapeHtml(asArray(card.system_scope).join(' / ') || '知識卡')}</p>
+            <div class="card-meta">
+              <span class="category">${escapeHtml(asArray(card.system_scope).join(' / ') || '知識卡')}</span>
+              <span class="checked-at-inline">${escapeHtml(sourceLevelSummary(card))}</span>
+            </div>
             <h3>${escapeHtml(card.title || id)}</h3>
           </div>
-          <button class="toggle-card-button" type="button" data-card-id="${escapeHtml(id)}">${selected ? '移除' : '加入知識組合'}</button>
+          <span class="confidence">${selected ? '已加入' : '候選卡'}</span>
         </div>
-        <p class="card-desc">${escapeHtml(card.match_reason || asArray(card.question_patterns).slice(0, 2).join('、') || card.family_safe_summary || '')}</p>
+        <p class="summary">${escapeHtml(summaryText)}</p>
+        <div class="tag-strip">
+          ${asArray(card.knowledge_type).slice(0, 3).map((tag) => escapeHtml(labelText(tag))).join('、') || '類型待補'}
+        </div>
         <div class="card-tags">
-          ${asArray(card.knowledge_type).slice(0, 3).map((tag) => `<span class="tag">${escapeHtml(labelText(tag))}</span>`).join('')}
           ${asArray(card.region_scope).slice(0, 2).map((tag) => `<span class="tag region">${escapeHtml(labelText(tag))}</span>`).join('')}
           ${comparisonGroup(card) ? `<span class="tag compare-tag">同屬性：${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</span>` : ''}
+        </div>
+        <dl>
+          <div><dt>查證路徑</dt><dd>${escapeHtml(verifyText)}</dd></div>
+          <div><dt>電話確認</dt><dd>${escapeHtml(phoneText)}</dd></div>
+        </dl>
+        <div class="package-actions">
+          <button class="toggle-card-button" type="button" data-card-id="${escapeHtml(id)}">${selected ? '移除' : '加入知識組合'}</button>
         </div>
       </article>
     `;
@@ -510,7 +586,7 @@ function renderKnowledgeCards(cards = []) {
         state.selectedCardSnapshots.delete(id);
       } else {
         state.selectedKnowledgeIds.add(id);
-        const card = cards.find((row) => cardId(row) === id) || cardById(id);
+        const card = cardById(id) || visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id);
         if (card) state.selectedCardSnapshots.set(id, card);
       }
       renderKnowledgeCards(cards);
@@ -679,7 +755,7 @@ function applySavedPackage(packageId) {
     knowledge_cards: snapshots,
   };
   renderDirections(state.routeResult.directions);
-  renderKnowledgeCards(snapshots.length ? snapshots : state.knowledgeCards.slice(0, 8));
+  renderKnowledgeCards(snapshots.length ? snapshots : state.knowledgeCards.slice(0, 8), { resetAttributes: true });
   renderSavedPackages();
   renderOutputs();
   qs('#packageHint').textContent = `已載入「${record.name || '知識組合'}」；輸出內容使用建立當時保存的知識卡副本。`;
@@ -799,7 +875,7 @@ async function routeQuestion() {
       });
       state.routeResult = payload;
       renderDirections(payload.directions || []);
-      renderKnowledgeCards(payload.knowledge_cards || []);
+      renderKnowledgeCards(payload.knowledge_cards || [], { resetAttributes: true });
       qs('#apiStatus').textContent = `已找到知識卡：${payload.status || 'ok'}。`;
       return;
     } catch (error) {
@@ -809,7 +885,7 @@ async function routeQuestion() {
   const localCards = localKnowledgeSearch(question, [], 8, selectedRegions());
   state.routeResult = { directions: [], knowledge_cards: localCards };
   renderDirections([]);
-  renderKnowledgeCards(localCards);
+  renderKnowledgeCards(localCards, { resetAttributes: true });
   qs('#apiStatus').textContent = '已使用本頁知識卡保守排序。';
 }
 
@@ -892,7 +968,7 @@ async function init() {
   setupOutputModeTabs();
   setupRegionSelector();
   renderDirections([]);
-  renderKnowledgeCards(state.knowledgeCards.slice(0, 8));
+  renderKnowledgeCards(state.knowledgeCards.slice(0, 8), { resetAttributes: true });
   renderOutputs();
   await loadSavedPackages({ quiet: true });
   questionText.addEventListener('input', privacyMessage);

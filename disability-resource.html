@@ -3,60 +3,100 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>身障資源查證</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260612-disability-resource-cnfix1" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260612-disability-resource-cnfix1" as="fetch" crossorigin="anonymous" />
+  <title>身障／長照知識包導航</title>
+  <link rel="stylesheet" href="disability-resource.css?v=20260613-knowledge-pack-v1" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260613-knowledge-pack-v1" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260613-knowledge-pack-v1" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="site-header">
     <div>
       <p class="eyebrow">身障與長照交界查證</p>
-      <h1>身障資源查證</h1>
-      <p class="lead">協助個管師把長照與身障交界問題整理成查證路徑、電話確認問題、家屬版保守說明與內部提醒。</p>
+      <h1>身障／長照知識包導航</h1>
+      <p class="lead">個管師輸入問題後，系統只做方向分流；查證路徑、比較表、家屬版說明與電話確認問題都來自本地知識卡。</p>
     </div>
-    <span class="tool-badge">獨立工具｜查證助手</span>
+    <span class="tool-badge">知識卡 → 知識包</span>
   </header>
 
   <main class="layout">
     <section class="panel controls" aria-labelledby="control-title">
       <div class="section-heading">
-        <p class="eyebrow">本案補充</p>
-        <h2 id="control-title">先選情境，再整理查證摘要</h2>
-        <p class="section-note">第一版只做查證引導；不判定資格、不承諾補助金額、不保存輸入。</p>
+        <p class="eyebrow">本案問題</p>
+        <h2 id="control-title">輸入問題，先分流再挑知識卡</h2>
+        <p class="section-note">分流模型只回方向，不選卡、不判定資格、不承諾補助。後端服務暫時不可用時，可先用本頁知識卡手動整理。</p>
       </div>
       <label>
-        可選填：本案狀況（只在本頁暫時使用，不會送出保存）
-        <textarea id="caseText" rows="3" placeholder="例如：家屬問爬梯機、居家扶手、長照沒有列的特殊輔具是否能找身障資源"></textarea>
+        個管師問題
+        <textarea id="questionText" rows="5" placeholder="例如：家屬問爬梯機能不能申請補助，長照沒有列，身障路徑要怎麼查？"></textarea>
       </label>
       <div id="privacyWarning" class="privacy-warning" hidden></div>
       <div class="action-row">
-        <button id="officialSearchButton" class="secondary-button" type="button">查官方延伸搜尋</button>
+        <button id="routeButton" class="primary-button" type="button">分流並找知識卡</button>
+        <button id="officialSearchButton" class="secondary-button" type="button">官方延伸搜尋</button>
         <button id="clearSelectionButton" class="ghost-button" type="button">清除選取</button>
       </div>
-      <p class="small-note">請勿輸入姓名、電話、地址、身分證或病歷號；家屬版文字只提供保守說明。</p>
+      <p id="apiStatus" class="small-note">正在檢查後端服務與知識卡資料。</p>
+      <p class="small-note">請勿輸入姓名、電話、完整地址、身分證或病歷號；家屬版文字只提供保守說明。</p>
     </section>
 
-    <section class="panel" aria-labelledby="scenario-list-title">
+    <section class="panel" aria-labelledby="direction-title">
       <div class="section-heading scenario-heading">
         <div>
-          <p class="eyebrow">常見身障資源交界情境</p>
-          <h2 id="scenario-list-title">選擇本案需要查證的問題</h2>
+          <p class="eyebrow">向量化方向</p>
+          <h2 id="direction-title">分流方向與知識卡候選</h2>
         </div>
-        <span id="selectedCount" class="selection-count">已選 0/0 個情境</span>
+        <span id="selectedCount" class="selection-count">已選 0 張知識卡</span>
       </div>
-      <div id="scenarioCards" class="scenario-grid"></div>
+      <div id="directionCards" class="direction-grid"></div>
+      <div id="knowledgeCards" class="knowledge-grid"></div>
+    </section>
+
+    <section class="panel comparison-panel" aria-labelledby="comparison-title">
+      <div class="output-header">
+        <div>
+          <p class="eyebrow">比較區</p>
+          <h2 id="comparison-title">長照 VS 身障</h2>
+        </div>
+        <button class="copy-button" type="button" data-copy-target="comparisonOutput">複製比較</button>
+      </div>
+      <div id="comparisonOutput" class="comparison-grid"></div>
+    </section>
+
+    <section class="panel package-panel" aria-labelledby="package-title">
+      <div class="output-header">
+        <div>
+          <p class="eyebrow">我的知識包</p>
+          <h2 id="package-title">挑選後組合給個管師使用</h2>
+        </div>
+        <div class="action-row compact-actions">
+          <button id="saveDraftButton" class="secondary-button" type="button">儲存草稿</button>
+          <button id="copyPackageButton" class="copy-button" type="button">複製知識包</button>
+        </div>
+      </div>
+      <div id="packageHint" class="small-note"></div>
+      <div class="saved-package-area">
+        <div class="saved-package-header">
+          <div>
+            <h3>已儲存的知識包</h3>
+            <p class="small-note">從 Discord 入口進入時，這裡會載入你先前建立的草稿或結果。</p>
+          </div>
+          <button id="refreshPackagesButton" class="ghost-button" type="button">重新載入</button>
+        </div>
+        <div id="savedPackages" class="saved-package-list"></div>
+      </div>
+      <div id="packageCards" class="package-list"></div>
     </section>
 
     <section id="resultPanel" class="result-panel" aria-live="polite">
       <article class="output-card hero-output">
         <div class="output-header">
           <div>
-            <p class="eyebrow">綜合摘要</p>
-            <h2 id="resultTitle">請先選擇一個或多個情境</h2>
+            <p class="eyebrow">家屬版保守說明</p>
+            <h2 id="resultTitle">請先輸入問題或選擇知識卡</h2>
           </div>
-          <button class="copy-button" type="button" data-copy-target="summaryOutput">複製摘要</button>
+          <button class="copy-button" type="button" data-copy-target="familyOutput">複製家屬說明</button>
         </div>
-        <div id="summaryOutput" class="output-text">請先選擇情境，這裡會產生查證摘要。</div>
+        <div id="familyOutput" class="output-text">這裡會依已選知識卡整理可給家屬看的保守說明。</div>
       </article>
 
       <div class="result-grid">
@@ -74,13 +114,6 @@
           </div>
           <div id="phoneOutput" class="output-text"></div>
         </article>
-        <article class="output-card">
-          <div class="output-header compact">
-            <h3>家屬版保守說明</h3>
-            <button class="copy-button" type="button" data-copy-target="familyOutput">複製家屬說明</button>
-          </div>
-          <div id="familyOutput" class="output-text"></div>
-        </article>
         <article class="output-card internal-card">
           <div class="output-header compact">
             <h3>個管師內部提醒</h3>
@@ -88,22 +121,21 @@
           </div>
           <div id="internalOutput" class="output-text"></div>
         </article>
+        <article class="output-card">
+          <div class="output-header compact">
+            <h3>來源與追蹤</h3>
+            <button class="copy-button" type="button" data-copy-target="sourceOutput">複製來源</button>
+          </div>
+          <div id="sourceOutput" class="source-list"></div>
+        </article>
       </div>
-
-      <article class="output-card">
-        <div class="output-header compact">
-          <h3>來源與延伸查證</h3>
-          <button class="copy-button" type="button" data-copy-target="sourceOutput">複製來源</button>
-        </div>
-        <div id="sourceOutput" class="source-list"></div>
-      </article>
     </section>
   </main>
 
   <footer class="page-footer">
-    <strong>安全邊界：</strong>本頁不保存資料、不做資格核定、不承諾補助；未確認來源只作內部待查線索，不輸出成家屬版正式規則。
+    <strong>安全邊界：</strong>本頁不保存原始問題全文、不做資格核定、不承諾補助；C 級整理來源只作研究線索，家屬版需由 A/B 級官方或受託來源支撐。
   </footer>
 
-  <script src="disability-resource.js?v=20260612-disability-resource-cnfix1"></script>
+  <script src="disability-resource.js?v=20260613-knowledge-pack-v1"></script>
 </body>
 </html>

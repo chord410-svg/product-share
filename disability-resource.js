@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v12';
+const CACHE_VERSION = '20260614-knowledge-nav-v13';
 
 const state = {
   scenarios: [],
@@ -726,19 +726,73 @@ function sourceRefs(card) {
   return Array.isArray(card?.source_refs) ? card.source_refs.filter((ref) => ref && typeof ref === 'object') : [];
 }
 
-function comparisonDetailHtml(card) {
-  const comparison = card?.comparison || {};
-  if (!hasComparison(card)) return '<p class="muted">此卡尚未建立同屬性比較欄位。</p>';
-  const ltc = comparison.ltc_side || {};
-  const disability = comparison.disability_side || {};
-  return `
-    <div class="detail-grid">
-      <div class="detail-field"><strong>長照側</strong>${valueHtml(ltc.path || '', '先查長照服務項目與地方承辦流程。')}<br><span class="muted">${escapeHtml(ltc.window || '')}</span></div>
-      <div class="detail-field"><strong>身障側</strong>${valueHtml(disability.path || '', '再查身障福利、輔具中心或地方社會局窗口。')}<br><span class="muted">${escapeHtml(disability.window || '')}</span></div>
-      <div class="detail-field"><strong>共同風險</strong>${escapeHtml(asArray(comparison.shared_risks || card.risk_flags).map(labelText).join('、') || '需官方確認。')}</div>
-      <div class="detail-field"><strong>家屬說法</strong>${valueHtml(comparison.family_wording || card.family_safe_summary || '', '請以官方窗口確認後，再提供保守說明。')}</div>
-    </div>
-  `;
+const SOURCE_LEVEL_LABELS = {
+  A: 'A級官方來源',
+  B: 'B級機構來源',
+  C: 'C級研究線索',
+};
+
+function sourceLevelLabel(level) {
+  const key = String(level || '').trim().toUpperCase();
+  return SOURCE_LEVEL_LABELS[key] || labelText(level || '未分級來源');
+}
+
+function sourceRank(ref) {
+  const key = String(ref?.source_level || '').trim().toUpperCase();
+  const base = key === 'A' ? 0 : key === 'B' ? 1 : key === 'C' ? 2 : 3;
+  return base + (ref?.public_allowed === false ? 10 : 0);
+}
+
+function bestSourceRef(card) {
+  const refs = sourceRefs(card);
+  if (!refs.length) return null;
+  return [...refs].sort((a, b) => {
+    const rankDelta = sourceRank(a) - sourceRank(b);
+    if (rankDelta) return rankDelta;
+    return String(a.title || a.source_id || '').localeCompare(String(b.title || b.source_id || ''), 'zh-Hant');
+  })[0];
+}
+
+function sourceDisplaySummary(card) {
+  const refs = sourceRefs(card);
+  const best = bestSourceRef(card);
+  if (!best) return '來源：待補官方來源｜僅供內部查證';
+  const sourceName = best.title || best.source_id || '未命名來源';
+  const otherCount = Math.max(0, refs.length - 1);
+  const suffix = otherCount ? `｜另有 ${otherCount} 筆來源` : '';
+  return `來源：${sourceName}｜${sourceLevelLabel(best.source_level)}${suffix}`;
+}
+
+function sourceLinkHtml(ref) {
+  const title = ref?.title || ref?.source_id || '官方來源';
+  const url = String(ref?.url || '');
+  if (/^https?:\/\//.test(url)) {
+    return `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`;
+  }
+  return escapeHtml(title);
+}
+
+function listCardSummary(card) {
+  const raw = card.knowledge_brief
+    || card.public_summary
+    || card.family_safe_summary
+    || card.match_reason
+    || asArray(card.question_patterns).slice(0, 2).join('、');
+  const text = compactSentence(raw);
+  if (!text) return '此卡提供查證方向；正式說明仍需回到官方來源或承辦窗口確認。';
+  return text.length > 96 ? `${text.slice(0, 94)}…` : text;
+}
+
+function detailHeaderTags(card) {
+  const regions = asArray(card.region_scope).map(labelText).filter(Boolean);
+  const subtypes = asArray(card.knowledge_type).map(labelText).filter(Boolean);
+  const source = bestSourceRef(card);
+  const labels = unique([
+    regions[0] || '',
+    subtypes[0] || comparisonGroupLabel(comparisonGroup(card), card),
+    source ? sourceLevelLabel(source.source_level) : '來源待補',
+  ].filter(Boolean)).slice(0, 3);
+  return labels.map((label) => `<span class="mini-source-pill">${escapeHtml(label)}</span>`).join('');
 }
 
 function sourceDetailHtml(card) {
@@ -752,7 +806,7 @@ function sourceDetailHtml(card) {
     return `
       <div class="detail-field detail-source">
         <strong>${index + 1}. ${escapeHtml(ref.title || ref.source_id || '來源')}</strong>
-        <span>來源等級：${escapeHtml(labelText(ref.source_level || '未分級'))}｜確認日：${escapeHtml(ref.last_checked_at || '待確認')}</span>
+        <span>來源等級：${escapeHtml(sourceLevelLabel(ref.source_level))}｜確認日：${escapeHtml(ref.last_checked_at || '待確認')}</span>
         ${link}
       </div>
     `;
@@ -767,35 +821,22 @@ function firstText(items, fallback = '') {
   return compactSentence(asArray(items)[0] || fallback);
 }
 
-function knowledgeBriefHtml(card) {
-  const explicit = compactSentence(card.knowledge_brief || card.care_manager_explanation || '');
+function knowledgeExplanationHtml(card) {
+  const explicit = compactSentence(card.care_manager_explanation || card.knowledge_brief || '');
   if (explicit) return `<p>${escapeHtml(explicit)}</p>`;
 
+  const source = bestSourceRef(card);
+  const sourceLead = source ? `根據 ${sourceLinkHtml(source)}，` : '依目前卡片資料，';
   const comparison = card?.comparison || {};
   const family = compactSentence(card.family_safe_summary || comparison.family_wording || '');
-  const applies = firstText(card.applies_when, '遇到家屬或個案詢問此類需求時，先把需求拆成制度、文件、窗口與風險來查證。');
-  const notApplies = firstText(card.not_applies_when, '');
-  const risks = unique(asArray(comparison.shared_risks || card.risk_flags).map(labelText)).join('、');
-
-  const paragraphs = [
-    `這張卡用來處理「${card.title || cardId(card) || '此類問題'}」：${applies}`,
-    family || '這類問題不適合直接回答能不能補助，應先查證官方品項、地方承辦流程與必要文件。',
-  ];
-  if (notApplies) paragraphs.push(`不適合套用的情況：${notApplies}`);
-  if (risks) paragraphs.push(`個管師提醒：${risks}。`);
-  paragraphs.push('如果需要長照與身障並排比較，請先選取同屬性知識卡，再到「我的知識組合」的比較結果中查看。');
-
-  return paragraphs.map((row) => `<p>${escapeHtml(row)}</p>`).join('');
-}
-
-function detailBlock(title, content, options = {}) {
-  const isOpen = options.open ? ' open' : '';
-  const extra = options.className ? ` ${options.className}` : '';
+  const main = family || '這類問題需先回到官方品項、地方承辦流程、必要文件與窗口確認，不能直接下資格或金額結論。';
+  const operation = compactSentence(firstText(
+    card.care_manager_notes || card.internal_notes || card.verification_steps,
+    '個管師可先整理需求情境，再依官方窗口確認是否需事前核定、評估文件或地方承辦流程。'
+  ));
   return `
-    <details class="detail-accordion${extra}"${isOpen}>
-      <summary>${escapeHtml(title)}</summary>
-      <div class="detail-accordion-body">${content}</div>
-    </details>
+    <p>${sourceLead}${escapeHtml(main)}</p>
+    <p>${escapeHtml(operation)}</p>
   `;
 }
 
@@ -804,8 +845,6 @@ function applicabilityHtml(card) {
     <div class="detail-grid">
       <div class="detail-field"><strong>適用情境</strong>${listHtml(card.applies_when || [], '尚未標示適用情境。')}</div>
       <div class="detail-field"><strong>不適用情境</strong>${listHtml(card.not_applies_when || [], '尚未標示排除情境。')}</div>
-      <div class="detail-field"><strong>家屬版保守說明</strong>${valueHtml(card.family_safe_summary || '', '請先查證官方規定與地方承辦窗口，再提供家屬保守說明。')}</div>
-      <div class="detail-field"><strong>同屬性比較群組</strong>${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</div>
     </div>
   `;
 }
@@ -823,17 +862,60 @@ function phoneDetailHtml(card) {
   return `<div class="detail-field">${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>`;
 }
 
-function attributeDetailHtml(card) {
+function sourceTrackingHtml(card) {
   return `
     <div class="detail-grid">
-      <div class="detail-field"><strong>系統範圍</strong>${escapeHtml(asArray(card.system_scope).map(labelText).join('、') || '未標示')}</div>
-      <div class="detail-field"><strong>知識類型</strong>${escapeHtml(asArray(card.knowledge_type).map(labelText).join('、') || '未標示')}</div>
-      <div class="detail-field"><strong>地區</strong>${escapeHtml(asArray(card.region_scope).map(labelText).join('、') || '未標示')}</div>
-      <div class="detail-field"><strong>風險旗標</strong>${escapeHtml(asArray(card.risk_flags).map(labelText).join('、') || '尚無特殊提醒')}</div>
+      ${sourceDetailHtml(card)}
       <div class="detail-field"><strong>卡片 ID</strong>${escapeHtml(cardId(card) || '未標示')}</div>
       <div class="detail-field"><strong>公開輸出</strong>${card.public_allowed === false ? '僅內部查證，不進家屬版正式說明' : '可作家屬版保守說明素材'}</div>
     </div>
   `;
+}
+
+function detailTabButton(id, label, active = false) {
+  return `<button class="detail-tab-button${active ? ' is-active' : ''}" type="button" data-detail-tab="${escapeHtml(id)}">${escapeHtml(label)}</button>`;
+}
+
+function detailTabPanel(id, content, active = false) {
+  return `<section class="detail-tab-panel" data-detail-panel="${escapeHtml(id)}"${active ? '' : ' hidden'}>${content}</section>`;
+}
+
+function detailTabsHtml(card) {
+  const tabs = [
+    ['summary', '知識整理', `
+      <section class="detail-section detail-brief-section">
+        <p class="eyebrow">知識整理</p>
+        <h3>政策、做法與條件邊界</h3>
+        <div class="detail-brief">${knowledgeExplanationHtml(card)}</div>
+      </section>
+    `],
+    ['applicability', '適用／不適用', applicabilityHtml(card)],
+    ['verification', '查證路徑', verificationDetailHtml(card)],
+    ['phone', '電話確認', phoneDetailHtml(card)],
+    ['sources', '來源', sourceTrackingHtml(card)],
+  ];
+  return `
+    <div class="detail-tab-list" role="tablist" aria-label="詳細卡片資訊分類">
+      ${tabs.map(([id, label], index) => detailTabButton(id, label, index === 0)).join('')}
+    </div>
+    <div class="detail-tab-panels">
+      ${tabs.map(([id, , content], index) => detailTabPanel(id, content, index === 0)).join('')}
+    </div>
+  `;
+}
+
+function bindDetailTabs(container) {
+  container.querySelectorAll('.detail-tab-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const tab = button.dataset.detailTab || '';
+      container.querySelectorAll('.detail-tab-button').forEach((node) => {
+        node.classList.toggle('is-active', node === button);
+      });
+      container.querySelectorAll('.detail-tab-panel').forEach((panel) => {
+        panel.hidden = panel.dataset.detailPanel !== tab;
+      });
+    });
+  });
 }
 
 function openCardDetail(card) {
@@ -842,19 +924,12 @@ function openCardDetail(card) {
   const overlay = qs('#cardDetailOverlay');
   const title = qs('#cardDetailTitle');
   const body = qs('#cardDetailContent');
-  title.textContent = card.title || cardId(card) || '知識卡資訊';
-  body.innerHTML = `
-    <section class="detail-section detail-brief-section">
-      <p class="eyebrow">知識整理與解釋</p>
-      <h3>政策、做法與條件邊界</h3>
-      <div class="detail-brief">${knowledgeBriefHtml(card)}</div>
-    </section>
-    ${detailBlock('適用與不適用', applicabilityHtml(card), { open: true })}
-    ${detailBlock('查證路徑', verificationDetailHtml(card))}
-    ${detailBlock('電話確認問題', phoneDetailHtml(card))}
-    ${detailBlock('來源與追蹤', `<div class="detail-grid">${sourceDetailHtml(card)}</div>`)}
-    ${detailBlock('卡片屬性', attributeDetailHtml(card))}
+  title.innerHTML = `
+    <span>${escapeHtml(card.title || cardId(card) || '知識卡資訊')}</span>
+    <span class="detail-title-tags">${detailHeaderTags(card)}</span>
   `;
+  body.innerHTML = detailTabsHtml(card);
+  bindDetailTabs(body);
   overlay.hidden = false;
 }
 
@@ -895,23 +970,17 @@ function renderKnowledgeCards(cards = [], options = {}) {
   container.innerHTML = visibleCards.map((card) => {
     const id = card.knowledge_id || card.id;
     const selected = state.selectedKnowledgeIds.has(id);
-    const summaryText = card.family_safe_summary || card.match_reason || asArray(card.question_patterns).slice(0, 2).join('、') || '此卡提供查證方向，仍需以官方窗口與電話確認為準。';
+    const summaryText = listCardSummary(card);
     return `
       <article class="knowledge-card${selected ? ' selected' : ''}" data-card-id="${escapeHtml(id)}" role="button" tabindex="0" aria-pressed="${selected ? 'true' : 'false'}">
         <div class="card-head">
           <div>
-            <div class="card-meta">
-              <span class="category">${escapeHtml(asArray(card.system_scope).join(' / ') || '知識卡')}</span>
-              <span class="checked-at-inline">${escapeHtml(sourceLevelSummary(card))}</span>
-            </div>
             <h3>${escapeHtml(card.title || id)}</h3>
           </div>
           <span class="confidence">${selected ? '已加入' : '候選卡'}</span>
         </div>
         <p class="summary">${escapeHtml(summaryText)}</p>
-        <div class="tag-strip">
-          ${asArray(card.knowledge_type).slice(0, 3).map((tag) => escapeHtml(labelText(tag))).join('、') || '類型待補'}
-        </div>
+        <p class="source-summary">${escapeHtml(sourceDisplaySummary(card))}</p>
         <div class="package-actions">
           <button class="detail-card-button" type="button" data-card-id="${escapeHtml(id)}">詳細卡片資訊</button>
         </div>

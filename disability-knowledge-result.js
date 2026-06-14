@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260614-knowledge-nav-v23';
+  const CACHE_VERSION = '20260614-knowledge-nav-v24';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];

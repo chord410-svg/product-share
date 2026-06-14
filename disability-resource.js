@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v14';
+const CACHE_VERSION = '20260614-knowledge-nav-v15';
 
 const state = {
   scenarios: [],
@@ -395,11 +395,13 @@ function setSelectedCards(cards = []) {
 
 function renderDraftContext(message = '') {
   const input = qs('#draftNameInput');
+  const display = qs('#draftNameDisplay');
   const status = qs('#draftStatus');
+  const name = state.currentDraftName || '尚未產生知識副本';
   if (input) {
-    const name = state.currentDraftName || '尚未產生知識副本';
     if (document.activeElement !== input) input.value = name;
   }
+  if (display) display.textContent = name;
   if (status) {
     const cards = selectedCards();
     const base = cards.length
@@ -1430,6 +1432,7 @@ async function init() {
   qs('#clearDraftButton').addEventListener('click', clearCurrentDraft);
   qs('#draftNameInput').addEventListener('input', (event) => {
     state.currentDraftName = String(event.target.value || '').trim();
+    renderDraftContext();
   });
   qs('#refreshPackagesButton').addEventListener('click', () => loadSavedPackages());
   qs('#copyPackageButton').addEventListener('click', copyPackage);

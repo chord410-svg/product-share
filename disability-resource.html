@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v8" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v8" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v8" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v9" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v9" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v9" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -208,12 +208,12 @@
           <p class="eyebrow">詳細卡片資訊</p>
           <h2 id="cardDetailTitle">知識卡資訊</h2>
         </div>
-        <button id="closeCardDetailButton" class="ghost-button" type="button">關閉</button>
+        <button id="closeCardDetailButton" class="detail-close-button" type="button" aria-label="關閉詳細卡片資訊">×</button>
       </div>
       <div id="cardDetailContent" class="detail-drawer-body"></div>
     </article>
   </div>
 
-  <script src="disability-resource.js?v=20260614-knowledge-nav-v8"></script>
+  <script src="disability-resource.js?v=20260614-knowledge-nav-v9"></script>
 </body>
 </html>

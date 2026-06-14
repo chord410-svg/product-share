@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>知識組合結果</title>
+  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v22" />
+</head>
+<body>
+  <header class="hero result-hero">
+    <div class="brand-block">
+      <p class="eyebrow">KNOWLEDGE PACKAGE RESULT</p>
+      <h1>知識組合結果</h1>
+    </div>
+    <div class="action-row compact-actions">
+      <a class="nav-link-pill" href="./disability-resource.html?v=20260614-knowledge-nav-v22">返回知識導航</a>
+      <button type="button" class="nav-link-pill result-print-pill" id="printResultButton">列印 / 另存 PDF</button>
+    </div>
+  </header>
+
+  <main class="result-page-layout">
+    <section class="panel result-summary-card">
+      <p class="eyebrow">知識組合</p>
+      <h2 id="resultPackageTitle">正在載入知識組合</h2>
+      <p id="resultPackageMeta" class="muted-text">請稍候。</p>
+      <p class="small-note">此頁使用建立當下保存的知識卡副本；不做資格核定、不承諾補助金額。</p>
+    </section>
+
+    <section class="panel result-output-switcher">
+      <div>
+        <p class="eyebrow">輸出格式</p>
+        <h2>選擇這份知識組合要怎麼使用</h2>
+        <p class="small-note">比較只會合併同屬性的知識卡；不同屬性會分開成不同比較組。</p>
+      </div>
+      <div class="result-mode-tabs" role="tablist" aria-label="知識組合輸出格式">
+        <button type="button" data-output-mode="family" class="is-active" role="tab">家屬版</button>
+        <button type="button" data-output-mode="boundary" role="tab">判斷邊界</button>
+        <button type="button" data-output-mode="action" role="tab">查證與提醒</button>
+        <button type="button" data-output-mode="comparison" role="tab">長照 VS 身障比較</button>
+        <button type="button" data-output-mode="full" role="tab">完整資料</button>
+      </div>
+    </section>
+
+    <section id="resultMissing" class="panel empty-state" hidden>找不到知識組合資料。請回知識導航重新開啟或重新儲存副本。</section>
+
+    <section class="output-card hero-output" data-output-section="family full">
+      <div class="output-header">
+        <div>
+          <p class="eyebrow">家屬版保守說明</p>
+          <h2>可轉成家屬說明的整理</h2>
+        </div>
+        <button class="copy-button" type="button" data-copy-target="familyOutput">複製家屬說明</button>
+      </div>
+      <div id="familyOutput" class="output-text"></div>
+    </section>
+
+    <section class="output-card" data-output-section="boundary full">
+      <div class="output-header compact">
+        <h3>判斷邊界</h3>
+        <button class="copy-button" type="button" data-copy-target="boundaryOutput">複製判斷邊界</button>
+      </div>
+      <div id="boundaryOutput" class="output-text"></div>
+    </section>
+
+    <section class="output-card" data-output-section="action full">
+      <div class="output-header compact">
+        <h3>查證與提醒</h3>
+        <button class="copy-button" type="button" data-copy-target="actionOutput">複製查證與提醒</button>
+      </div>
+      <div id="actionOutput" class="output-text"></div>
+    </section>
+
+    <section class="output-card comparison-panel" data-output-section="comparison full">
+      <div class="output-header">
+        <div>
+          <p class="eyebrow">同屬性比較</p>
+          <h3>長照 VS 身障</h3>
+        </div>
+        <button class="copy-button" type="button" data-copy-target="comparisonOutput">複製比較</button>
+      </div>
+      <div id="comparisonOutput" class="comparison-grid"></div>
+    </section>
+
+    <section class="output-card" data-output-section="full">
+      <div class="output-header compact">
+        <h3>完整資料</h3>
+        <button class="copy-button" type="button" data-copy-target="fullOutput">複製完整資料</button>
+      </div>
+      <div id="fullOutput" class="source-list"></div>
+    </section>
+  </main>
+
+  <textarea id="resultCopyScratch" class="sr-only" aria-hidden="true"></textarea>
+  <script src="./disability-knowledge-result.js?v=20260614-knowledge-nav-v22"></script>
+</body>
+</html>

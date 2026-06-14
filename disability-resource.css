@@ -915,6 +915,228 @@ button:active {
   border-radius: 999px;
 }
 
+.current-pack-panel {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.package-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.package-count {
+  margin: 0;
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: #e9fbf8;
+  color: var(--teal-dark);
+  font-weight: 780;
+  white-space: nowrap;
+}
+
+.current-package-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 280px);
+  gap: 16px;
+  align-items: end;
+}
+
+.current-package-main {
+  display: grid;
+  gap: 8px;
+}
+
+.current-package-main .field {
+  display: grid;
+  gap: 6px;
+}
+
+.current-package-main .field span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.current-package-main input {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 9px 11px;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.current-package-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.current-package-actions .secondary-button {
+  min-height: 46px;
+  font-size: 16px;
+}
+
+.output-moved-note {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.workbench-empty,
+.empty-state {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+  padding: 18px;
+  color: var(--muted);
+}
+
+.workbench-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.workbench-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  display: grid;
+  gap: 12px;
+  transition: border-color .12s ease, box-shadow .12s ease, background .12s ease, transform .12s ease;
+}
+
+.workbench-card:hover {
+  border-color: #b7c7d8;
+  box-shadow: 0 14px 34px rgba(24, 39, 75, .12);
+  transform: translateY(-1px);
+}
+
+.workbench-card:active {
+  transform: translateY(1px);
+}
+
+.workbench-card.active {
+  border-color: var(--teal);
+  background: #f6fffd;
+  box-shadow: inset 0 0 0 1px rgba(8, 127, 122, .18), var(--shadow);
+}
+
+.workbench-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.workbench-card-head h3 {
+  margin: 3px 0 0;
+  line-height: 1.35;
+}
+
+.workbench-meta,
+.saved-summary {
+  margin: 0;
+}
+
+.saved-summary {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.status-badge {
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #e9fbf8;
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.status-badge.local-cache {
+  background: #fff5dd;
+  color: #8a5a00;
+}
+
+.workbench-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.workbench-actions button {
+  width: 100%;
+  min-height: 40px;
+}
+
+.workbench-actions .primary-action {
+  border-color: #a9dfb7;
+  background: #edfff2;
+  color: #0f6b2e;
+}
+
+.workbench-actions .copy-action {
+  border-color: #f0c56a;
+  background: #fff8e7;
+  color: #9a6200;
+}
+
+.workbench-actions .danger-action {
+  border-color: #f1b3b3;
+  background: #fff5f5;
+  color: #b42424;
+}
+
+.workbench-expanded {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.workbench-expanded h4 {
+  margin: 0 0 8px;
+  color: var(--teal);
+  font-size: 13px;
+  letter-spacing: .02em;
+}
+
+.workbench-resource-list {
+  display: grid;
+  gap: 8px;
+}
+
+.workbench-resource-row {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #f8fafc;
+  padding: 10px;
+}
+
+.workbench-resource-row strong {
+  display: block;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.workbench-resource-row span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.workbench-expanded-empty {
+  margin: 0;
+  color: var(--muted);
+}
+
 @media (max-width: 880px) {
   .hero {
     display: grid;
@@ -955,6 +1177,15 @@ button:active {
   }
 
   .knowledge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .current-package-layout,
+  .workbench-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workbench-actions {
     grid-template-columns: 1fr;
   }
 }

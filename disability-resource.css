@@ -204,15 +204,114 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .saved-package-area { border-top: 1px solid var(--line); margin: 12px 0; padding-top: 12px; }
 .saved-package-header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
 .saved-package-header h3 { margin: 0; }
-.saved-package-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-bottom: 12px; }
-.saved-package-card { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: #f8fbfd; }
+.saved-package-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 12px; }
+.saved-package-card {
+  display: grid;
+  gap: 12px;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #f8fbfd;
+}
 .saved-package-card.active { border-color: var(--teal); background: #e7f6f3; box-shadow: inset 0 0 0 2px rgba(15, 118, 110, 0.1); }
+.workbench-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+.workbench-card-head h3 { margin: 0; }
+.workbench-meta { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.workbench-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.workbench-actions button { min-height: 42px; }
+.status-badge {
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: #eef5fb;
+  color: #17324d;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.status-badge.draft { background: #eef5fb; color: #17324d; }
+.status-badge.ready,
+.status-badge.result-ready { background: #e7f6f3; color: var(--teal-dark); }
+.status-badge.local-cache { background: #fff7df; color: #8a5a00; }
+.status-badge.sync-failed,
+.status-badge.failed { background: var(--danger-bg); color: #b42318; }
+.edit-action,
+.primary-action,
+.copy-action,
+.danger-action,
+.link-action,
+.qr-action,
+.print-action {
+  border: 1px solid var(--line);
+  background: #eef5fb;
+  color: #17324d;
+}
+.primary-action { border-color: #a6d7b8; background: #effdf4; color: #166534; }
+.copy-action { border-color: #f0c36a; background: #fff7e5; color: #9a5a00; }
+.danger-action { border-color: #f3b1ac; background: #fff5f5; color: #b42318; }
+.link-action { border-color: #b8cff2; background: #edf5ff; color: #1d4ed8; }
+.qr-action,
+.print-action { border-color: #b9dcd8; background: #eefbf8; color: var(--teal-dark); }
+button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+  filter: grayscale(.18);
+}
 .saved-summary { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
 .load-package-button { background: #e6f3f1; color: var(--teal-dark); border: 1px solid #b7d8d4; padding: 8px 12px; white-space: nowrap; }
 .source-list { display: grid; gap: 8px; line-height: 1.55; }
 .source-item { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #f8fbfd; }
 .source-link { display: block; margin-top: 4px; word-break: break-all; color: #1d4ed8; }
 .page-footer { padding: 0 min(5vw, 56px) 28px; color: var(--muted); line-height: 1.6; }
+
+.result-hero { align-items: center; }
+.result-page-layout {
+  display: grid;
+  gap: 16px;
+  padding: 18px min(5vw, 56px) 32px;
+}
+.nav-link-pill,
+.result-print-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #fff;
+  color: #17324d;
+  text-decoration: none;
+  font-weight: 800;
+}
+.result-print-pill { cursor: pointer; }
+.result-mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.result-mode-tabs button {
+  border: 1px solid #b8cff2;
+  background: #fff;
+  color: #17324d;
+  border-radius: 999px;
+}
+.result-mode-tabs button.is-active {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #fff;
+}
+.result-summary-card h2 { font-size: clamp(24px, 3vw, 34px); }
 
 .generation-history-panel {
   border: 1px solid var(--line);

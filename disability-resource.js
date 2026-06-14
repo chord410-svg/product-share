@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v16';
+const CACHE_VERSION = '20260614-knowledge-nav-v17';
 
 const state = {
   scenarios: [],
@@ -270,7 +270,9 @@ function renderAttributeFilters(cards = []) {
     <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
       ${sortedActiveSubs.map((attr) => {
         const isSelected = selected.has(attr.key);
-        const countText = attr.hitCount ? `${attr.hitCount} 張` : `可擴 ${attr.totalCount} 張`;
+        const hitCount = Number(attr.hitCount || 0);
+        const totalCount = Math.max(Number(attr.totalCount || 0), hitCount);
+        const countText = `${hitCount}/${totalCount}`;
         return `
           <button type="button" class="attribute-chip${isSelected ? ' is-active' : ''}${attr.hitCount ? ' is-hit' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isSelected ? 'true' : 'false'}">
             <strong>${escapeHtml(attr.label)}</strong>

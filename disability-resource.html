@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v24" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v24" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v24" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v25" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v25" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v25" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -97,7 +97,7 @@
         <div>
           <p class="eyebrow">Current Knowledge Pack</p>
           <h2 id="package-title">目前編輯中的知識組合</h2>
-          <p class="muted-text" id="loginStatus">請從 Discord 身障／長照知識導航按鈕開啟，才能儲存並建立知識組合結果。</p>
+          <p class="muted-text compact-helper" id="loginStatus">從 Discord 入口開啟後可同步儲存。</p>
         </div>
         <p class="package-count" id="packageCount">0 張</p>
       </div>
@@ -107,12 +107,12 @@
             <span>知識組合名稱</span>
             <input id="workbenchDraftNameInput" type="text" placeholder="例如：新北市／爬梯機申請查證">
           </label>
-          <p class="privacy-hint">請勿填姓名、電話、身分證、完整地址。</p>
+          <p class="privacy-hint compact-helper">勿填姓名、電話、身分證、完整地址。</p>
           <p class="muted-text" id="packageStatus">尚未加入知識卡。</p>
           <div id="packageCards" class="current-package-selected-summary" hidden></div>
         </div>
         <div class="current-package-actions">
-          <p class="muted-text output-moved-note">輸出格式已移到知識組合結果頁，可在結果頁切換家屬版、判斷邊界、查證與提醒、長照 VS 身障比較與完整資料。</p>
+          <p class="muted-text output-moved-note">結果頁可切換家屬版、判斷邊界、查證提醒、長照 VS 身障比較與完整資料。</p>
           <button id="saveDraftButton" class="secondary-button" type="button">更新儲存</button>
           <button id="viewCurrentResultButton" class="ghost-button current-result-button" type="button" hidden>查看目前結果</button>
         </div>
@@ -166,6 +166,6 @@
     </article>
   </div>
 
-  <script src="disability-resource.js?v=20260614-knowledge-nav-v24"></script>
+  <script src="disability-resource.js?v=20260614-knowledge-nav-v25"></script>
 </body>
 </html>

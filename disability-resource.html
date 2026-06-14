@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v21" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v21" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v21" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v22" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v22" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v22" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -87,31 +87,21 @@
       <div>
         <p class="eyebrow">我的知識組合</p>
         <h2>我的知識組合</h2>
-        <p class="muted-text">選好的知識卡會在這裡組合。長照 VS 身障比較只會依同屬性分組顯示。</p>
+        <p class="muted-text">目前副本與已儲存知識組合會在這裡管理；家屬版、電話確認與比較請從「查看結果」開啟。</p>
       </div>
       <button id="refreshPackagesButton" class="ghost-button" type="button">重新載入</button>
     </div>
-
-    <section class="generation-history-panel" aria-labelledby="generation-history-title">
-      <div class="history-head">
-        <div>
-          <p class="eyebrow">生成紀錄</p>
-          <h3 id="generation-history-title">最近查詢</h3>
-        </div>
-        <button id="clearHistoryButton" class="ghost-button compact-button" type="button">清除本頁紀錄</button>
-      </div>
-      <div id="generationHistory" class="generation-history-list"></div>
-    </section>
 
     <section class="panel package-panel" aria-labelledby="package-title">
       <div class="output-header">
         <div>
           <p class="eyebrow">目前編輯中的知識組合</p>
-          <h2 id="package-title">挑選後組合給個管師使用</h2>
+          <h2 id="package-title">目前編輯中的知識組合</h2>
+          <p class="small-note">草稿與結果會保存到你的知識組合工作台；結果頁才顯示家屬版、電話確認與長照 VS 身障比較。</p>
         </div>
         <div class="action-row compact-actions">
           <button id="saveDraftButton" class="secondary-button" type="button">儲存草稿</button>
-          <button id="copyPackageButton" class="copy-button" type="button">複製知識組合</button>
+          <button id="viewCurrentResultButton" class="primary-button" type="button">查看目前結果</button>
         </div>
       </div>
       <div id="packageHint" class="small-note"></div>
@@ -127,77 +117,6 @@
         </div>
       </div>
       <div id="savedPackages" class="saved-package-list"></div>
-    </section>
-
-    <section id="resultPanel" class="result-panel" aria-live="polite">
-      <div class="result-output-switcher" aria-label="知識組合輸出格式">
-        <div>
-          <p class="eyebrow">輸出格式</p>
-          <h2>選擇這份知識組合要怎麼使用</h2>
-          <p class="small-note">比較只會合併同屬性的知識卡；不同屬性會分開成不同比較組。</p>
-        </div>
-        <div class="result-mode-tabs" role="tablist" aria-label="知識組合輸出格式">
-          <button type="button" data-output-mode="family" class="is-active" role="tab">家屬版</button>
-          <button type="button" data-output-mode="phone" role="tab">電話確認</button>
-          <button type="button" data-output-mode="comparison" role="tab">長照 VS 身障比較</button>
-          <button type="button" data-output-mode="internal" role="tab">內部提醒</button>
-          <button type="button" data-output-mode="full" role="tab">完整資料</button>
-        </div>
-      </div>
-
-      <article class="output-card hero-output" data-output-section="family full">
-        <div class="output-header">
-          <div>
-            <p class="eyebrow">家屬版保守說明</p>
-            <h2 id="resultTitle">請先輸入問題或選擇知識卡</h2>
-          </div>
-          <button class="copy-button" type="button" data-copy-target="familyOutput">複製家屬說明</button>
-        </div>
-        <div id="familyOutput" class="output-text">這裡會依已選知識卡整理可給家屬看的保守說明。</div>
-      </article>
-
-      <article class="output-card" data-output-section="phone full">
-        <div class="output-header compact">
-          <h3>電話確認問題</h3>
-          <button class="copy-button" type="button" data-copy-target="phoneOutput">複製電話確認</button>
-        </div>
-        <div id="phoneOutput" class="output-text"></div>
-      </article>
-
-      <article class="output-card comparison-panel" data-output-section="comparison full" aria-labelledby="comparison-title">
-        <div class="output-header">
-          <div>
-            <p class="eyebrow">同屬性比較</p>
-            <h3 id="comparison-title">長照 VS 身障</h3>
-          </div>
-          <button class="copy-button" type="button" data-copy-target="comparisonOutput">複製比較</button>
-        </div>
-        <div id="comparisonOutput" class="comparison-grid"></div>
-      </article>
-
-      <article class="output-card internal-card" data-output-section="internal full">
-        <div class="output-header compact">
-          <h3>個管師內部提醒</h3>
-          <button class="copy-button" type="button" data-copy-target="internalOutput">複製內部提醒</button>
-        </div>
-        <div id="internalOutput" class="output-text"></div>
-      </article>
-
-      <article class="output-card" data-output-section="full">
-        <div class="output-header compact">
-          <h3>查證路徑</h3>
-          <button class="copy-button" type="button" data-copy-target="routeOutput">複製查證路徑</button>
-        </div>
-        <div id="routeOutput" class="output-text"></div>
-      </article>
-
-      <article class="output-card" data-output-section="full">
-        <div class="output-header compact">
-          <h3>來源與追蹤</h3>
-          <button class="copy-button" type="button" data-copy-target="sourceOutput">複製來源</button>
-        </div>
-        <div id="sourceOutput" class="source-list"></div>
-      </article>
     </section>
   </section>
 
@@ -232,6 +151,6 @@
     </article>
   </div>
 
-  <script src="disability-resource.js?v=20260614-knowledge-nav-v21"></script>
+  <script src="disability-resource.js?v=20260614-knowledge-nav-v22"></script>
 </body>
 </html>

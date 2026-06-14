@@ -122,11 +122,17 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .knowledge-card { display: flex; flex-direction: column; min-height: 220px; padding: 12px; gap: 0; cursor: pointer; }
 .knowledge-card:hover { border-color: var(--teal); transform: translateY(-1px); }
 .knowledge-card.selected { background: #e7f6f3; border-color: var(--teal); box-shadow: inset 0 0 0 2px rgba(15, 118, 110, 0.12); }
+.knowledge-card.is-route-hit { border-color: #99d7cd; }
+.knowledge-card.is-attribute-extension:not(.selected) { border-style: dashed; }
 .card-head { display: flex; justify-content: space-between; gap: 12px; }
+.card-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
 .card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 2px; }
 .category { color: var(--teal); font-size: 12px; font-weight: 740; }
 .checked-at-inline { color: var(--muted); font-size: 12px; }
 .confidence { align-self: flex-start; border-radius: 999px; padding: 5px 9px; background: var(--soft); color: var(--teal); font-size: 12px; white-space: nowrap; }
+.hit-state-badge { background: #e7f6f3; color: var(--teal-dark); }
+.knowledge-card.is-attribute-extension .hit-state-badge { background: #eef5fb; color: #314761; }
+.selected-badge { background: var(--teal); color: #fff; }
 .summary { margin: 8px 0 0; color: #26313d; font-size: 14px; line-height: 1.55; }
 .source-summary { margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .tag-strip { margin-top: 10px; color: var(--muted); font-size: 12px; }
@@ -688,6 +694,14 @@ button:active {
   box-shadow: inset 0 0 0 1px rgba(8, 127, 122, .2), var(--shadow);
 }
 
+.knowledge-card.is-route-hit {
+  border-color: #99d7cd;
+}
+
+.knowledge-card.is-attribute-extension:not(.selected) {
+  border-style: dashed;
+}
+
 .knowledge-card h3 {
   margin: 0;
   font-size: 18px;
@@ -716,6 +730,24 @@ button:active {
   white-space: nowrap;
 }
 
+.knowledge-card .card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.knowledge-card .hit-state-badge {
+  background: #e7f6f3;
+  color: var(--teal-dark);
+}
+
+.knowledge-card.is-attribute-extension .hit-state-badge {
+  background: #eef5fb;
+  color: #314761;
+}
+
+.knowledge-card .selected-badge,
 .knowledge-card.selected .confidence {
   background: var(--teal);
   color: #fff;

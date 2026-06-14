@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v23';
+const CACHE_VERSION = '20260614-knowledge-nav-v24';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 
 const state = {

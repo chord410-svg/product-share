@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v20';
+const CACHE_VERSION = '20260614-knowledge-nav-v21';
 
 const state = {
   scenarios: [],
@@ -254,13 +254,7 @@ function renderAttributeFilters(cards = []) {
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
   const selectedSubCount = activeSubs.filter((attr) => attr.selectedCount).length;
-  const sortedActiveSubs = [...activeSubs].sort((a, b) => {
-    const selectedDelta = Number(selected.has(b.key)) - Number(selected.has(a.key));
-    if (selectedDelta) return selectedDelta;
-    const selectedCountDelta = Number(Boolean(b.selectedCount)) - Number(Boolean(a.selectedCount));
-    if (selectedCountDelta) return selectedCountDelta;
-    return String(a.label || '').localeCompare(String(b.label || ''), 'zh-Hant');
-  });
+  const sortedActiveSubs = [...activeSubs];
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v11';
+const CACHE_VERSION = '20260614-knowledge-nav-v12';
 
 const state = {
   scenarios: [],

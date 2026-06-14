@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v25';
+const CACHE_VERSION = '20260615-knowledge-nav-v26';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 
 const state = {
@@ -100,7 +100,13 @@ const COMPARISON_GROUP_LABELS = {
   output_wording: '家屬版說法與輸出邊界',
 };
 
+const DOMAIN_LABELS = {
+  smart_assistive: '智慧輔具',
+  disability_knowledge: '身障／長照知識',
+};
+
 const ATTRIBUTE_TYPE_LABELS = {
+  domain: '知識領域',
   system_scope: '系統',
   knowledge_type: '類型',
   region_scope: '地區',
@@ -133,12 +139,19 @@ function comparisonGroupLabel(group, card = null) {
   return card?.comparison_group_label || COMPARISON_GROUP_LABELS[raw] || labelText(raw) || '未指定比較屬性';
 }
 
+function domainLabel(value) {
+  const raw = String(value || '').trim();
+  return DOMAIN_LABELS[raw] || labelText(raw);
+}
+
 function attributeKey(type, value) {
   return `${type}:${String(value || '').trim()}`;
 }
 
 function cardAttributes(card) {
   const attrs = [];
+  const domain = String(card.domain || '').trim();
+  if (domain) attrs.push({ type: 'domain', value: domain, label: domainLabel(domain), key: attributeKey('domain', domain) });
   for (const value of asArray(card.system_scope)) attrs.push({ type: 'system_scope', value, label: labelText(value), key: attributeKey('system_scope', value) });
   for (const value of asArray(card.knowledge_type)) attrs.push({ type: 'knowledge_type', value, label: labelText(value), key: attributeKey('knowledge_type', value) });
   for (const value of asArray(card.region_scope)) attrs.push({ type: 'region_scope', value, label: labelText(value), key: attributeKey('region_scope', value) });
@@ -252,7 +265,7 @@ function renderAttributeFilters(cards = []) {
   if (!grouped.has(state.activeAttributeGroup)) {
     state.activeAttributeGroup = grouped.has('system_scope') ? 'system_scope' : catalog[0].type;
   }
-  const typeOrder = ['system_scope', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
+  const typeOrder = ['system_scope', 'domain', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
   const activeSubs = grouped.get(state.activeAttributeGroup) || [];
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
@@ -943,11 +956,13 @@ function detailHeaderTags(card) {
   const regions = asArray(card.region_scope).map(labelText).filter(Boolean);
   const subtypes = asArray(card.knowledge_type).map(labelText).filter(Boolean);
   const source = bestSourceRef(card);
+  const domain = String(card.domain || '').trim();
   const labels = unique([
+    domain ? domainLabel(domain) : '',
     regions[0] || '',
     subtypes[0] || comparisonGroupLabel(comparisonGroup(card), card),
     source ? sourceLevelLabel(source.source_level) : '來源待補',
-  ].filter(Boolean)).slice(0, 3);
+  ].filter(Boolean)).slice(0, 4);
   return labels.map((label) => `<span class="mini-source-pill">${escapeHtml(label)}</span>`).join('');
 }
 
@@ -996,6 +1011,23 @@ function knowledgeExplanationHtml(card) {
   `;
 }
 
+function packageBoundarySummary(card) {
+  const domain = String(card.domain || '').trim();
+  const knowledgeOutputs = asArray(card.knowledge_package_outputs).map(labelText);
+  const resourceCandidates = asArray(card.resource_package_candidates).map(labelText);
+  const mergeNote = compactSentence(card.card_merge_note || '');
+  const parts = [];
+  if (domain) parts.push(`知識領域：${domainLabel(domain)}`);
+  if (knowledgeOutputs.length) parts.push(`知識包輸出：${knowledgeOutputs.join('、')}`);
+  if (resourceCandidates.length) {
+    parts.push(`資源包候選：${resourceCandidates.join('、')}`);
+  } else if (domain === 'smart_assistive') {
+    parts.push('資源包候選：需另轉成具體窗口、申請頁或服務資源，不直接用政策卡取代資源卡');
+  }
+  if (mergeNote) parts.push(`合併規則：${mergeNote}`);
+  return parts.join('。');
+}
+
 function boundaryDetailHtml(card) {
   const digest = comparisonDigest(card);
   const boundary = digest?.boundary || {};
@@ -1019,12 +1051,14 @@ function actionReminderHtml(card) {
     ...looseArray(action.reminders),
     ...looseArray(card.care_manager_notes || card.internal_notes),
   ]);
+  const packageBoundary = packageBoundarySummary(card);
   return `
     <div class="detail-grid">
       <div class="detail-field"><strong>長照側查證</strong>${valueHtml(action.ltc, '詢問 1966、長照管理中心或地方承辦單位是否有可用服務路徑與文件要求。')}</div>
       <div class="detail-field"><strong>身障側查證</strong>${valueHtml(action.disability, '詢問社會局、輔具資源中心或身障福利窗口是否有品項、評估與事前核定要求。')}</div>
       <div class="detail-field detail-field-wide"><strong>共同提醒</strong>${listHtml(reminders, '請依官方窗口與地方承辦規定確認。')}</div>
       <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>
+      <div class="detail-field detail-field-wide"><strong>知識包／資源包邊界</strong>${valueHtml(packageBoundary, '尚待補齊知識包／資源包邊界。')}</div>
     </div>
   `;
 }

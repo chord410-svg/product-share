@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v15';
+const CACHE_VERSION = '20260614-knowledge-nav-v16';
 
 const state = {
   scenarios: [],
@@ -299,7 +299,62 @@ function renderAttributeFilters(cards = []) {
 
 function hasComparison(card) {
   const comparison = card?.comparison;
-  return Boolean(comparison && typeof comparison === 'object' && Object.keys(comparison).length);
+  const digest = card?.comparison_digest;
+  return Boolean(
+    (digest && typeof digest === 'object' && Object.keys(digest).length)
+    || (comparison && typeof comparison === 'object' && Object.keys(comparison).length)
+  );
+}
+
+function looseArray(value) {
+  if (Array.isArray(value)) return value.filter((item) => String(item ?? '').trim());
+  const text = compactSentence(value);
+  return text ? [text] : [];
+}
+
+function firstCompareText(values, fallback = '') {
+  for (const value of values) {
+    const text = compactSentence(Array.isArray(value) ? value.join('、') : value);
+    if (text) return text;
+  }
+  return fallback;
+}
+
+function comparisonDigest(card) {
+  const explicit = card?.comparison_digest && typeof card.comparison_digest === 'object' ? card.comparison_digest : null;
+  const comparison = card?.comparison && typeof card.comparison === 'object' ? card.comparison : null;
+  if (!explicit && !comparison) return null;
+
+  const group = String(explicit?.comparison_group || comparisonGroup(card) || '').trim();
+  if (!group) return null;
+
+  const ltc = comparison?.ltc_side || {};
+  const disability = comparison?.disability_side || {};
+  const boundary = explicit?.boundary || {};
+  const action = explicit?.action || {};
+  const reminders = unique([
+    ...looseArray(action.reminders),
+    ...looseArray(comparison?.shared_risks).map(labelText),
+    ...looseArray(card?.risk_flags).map(labelText),
+    ...looseArray(card?.care_manager_notes || card?.internal_notes).slice(0, 1),
+  ]);
+
+  return {
+    group,
+    label: explicit?.group_label || comparisonGroupLabel(group, card),
+    title: explicit?.compare_title || card?.title || cardId(card),
+    boundary: {
+      ltc: firstCompareText([boundary.ltc, ltc.boundary, ltc.risk, ltc.path], '長照側需先確認是否有對應服務、品項、評估或地方承辦流程。'),
+      disability: firstCompareText([boundary.disability, disability.boundary, disability.risk, disability.path], '身障側需查地方身障福利、輔具資源中心或社會局窗口，不能以商品名稱直接判定。'),
+      shared: firstCompareText([boundary.shared, comparison?.summary], '未經官方窗口確認前，不判定資格、不承諾金額，也不請家屬先購買或施工。'),
+    },
+    action: {
+      ltc: firstCompareText([action.ltc, ltc.action, ltc.window, ltc.documents, ltc.path], '詢問 1966、長照管理中心或地方承辦單位是否有可用服務路徑與文件要求。'),
+      disability: firstCompareText([action.disability, disability.action, disability.window, disability.documents, disability.path], '詢問社會局、輔具資源中心或身障福利窗口是否有品項、評估與事前核定要求。'),
+      reminders,
+    },
+    family_wording: compactSentence(explicit?.family_wording || comparison?.family_wording || card?.family_safe_summary || '這類需求需先確認長照與身障兩側官方路徑，再提供家屬保守說明。'),
+  };
 }
 
 function detectPrivacy(text) {
@@ -825,10 +880,10 @@ function firstText(items, fallback = '') {
 
 function knowledgeExplanationHtml(card) {
   const explicit = compactSentence(card.care_manager_explanation || card.knowledge_brief || '');
-  if (explicit) return `<p>${escapeHtml(explicit)}</p>`;
-
   const source = bestSourceRef(card);
   const sourceLead = source ? `根據 ${sourceLinkHtml(source)}，` : '依目前卡片資料，';
+  if (explicit) return `<p>${sourceLead}${escapeHtml(explicit)}</p>`;
+
   const comparison = card?.comparison || {};
   const family = compactSentence(card.family_safe_summary || comparison.family_wording || '');
   const main = family || '這類問題需先回到官方品項、地方承辦流程、必要文件與窗口確認，不能直接下資格或金額結論。';
@@ -842,20 +897,35 @@ function knowledgeExplanationHtml(card) {
   `;
 }
 
-function applicabilityHtml(card) {
+function boundaryDetailHtml(card) {
+  const digest = comparisonDigest(card);
+  const boundary = digest?.boundary || {};
+  const applies = unique(card.applies_when || []);
+  const notApplies = unique(card.not_applies_when || []);
   return `
     <div class="detail-grid">
-      <div class="detail-field"><strong>適用情境</strong>${listHtml(card.applies_when || [], '尚未標示適用情境。')}</div>
-      <div class="detail-field"><strong>不適用情境</strong>${listHtml(card.not_applies_when || [], '尚未標示排除情境。')}</div>
+      <div class="detail-field"><strong>長照側</strong>${valueHtml(boundary.ltc, '長照側需先確認是否有對應服務、品項、評估或地方承辦流程。')}</div>
+      <div class="detail-field"><strong>身障側</strong>${valueHtml(boundary.disability, '身障側需查地方身障福利、輔具資源中心或社會局窗口。')}</div>
+      <div class="detail-field detail-field-wide"><strong>共同限制</strong>${valueHtml(boundary.shared, '未經官方窗口確認前，不判定資格、不承諾金額。')}</div>
+      <div class="detail-field"><strong>適用情境</strong>${listHtml(applies, '尚未標示適用情境。')}</div>
+      <div class="detail-field"><strong>不適用情境</strong>${listHtml(notApplies, '尚未標示排除情境。')}</div>
     </div>
   `;
 }
 
-function verificationDetailHtml(card) {
+function actionReminderHtml(card) {
+  const digest = comparisonDigest(card);
+  const action = digest?.action || {};
+  const reminders = unique([
+    ...looseArray(action.reminders),
+    ...looseArray(card.care_manager_notes || card.internal_notes),
+  ]);
   return `
     <div class="detail-grid">
-      <div class="detail-field"><strong>查證步驟</strong>${listHtml(card.verification_steps || [], '請先回官方窗口查證。')}</div>
-      <div class="detail-field"><strong>承辦／窗口提示</strong>${valueHtml(card.care_manager_notes || card.internal_notes || '', '請依官方窗口與地方承辦規定確認。')}</div>
+      <div class="detail-field"><strong>長照側查證</strong>${valueHtml(action.ltc, '詢問 1966、長照管理中心或地方承辦單位是否有可用服務路徑與文件要求。')}</div>
+      <div class="detail-field"><strong>身障側查證</strong>${valueHtml(action.disability, '詢問社會局、輔具資源中心或身障福利窗口是否有品項、評估與事前核定要求。')}</div>
+      <div class="detail-field detail-field-wide"><strong>共同提醒</strong>${listHtml(reminders, '請依官方窗口與地方承辦規定確認。')}</div>
+      <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>
     </div>
   `;
 }
@@ -884,17 +954,15 @@ function detailTabPanel(id, content, active = false) {
 
 function detailTabsHtml(card) {
   const tabs = [
-    ['summary', '知識整理', `
+    ['summary', '知識整理與解釋', `
       <section class="detail-section detail-brief-section">
-        <p class="eyebrow">知識整理</p>
+        <p class="eyebrow">知識整理與解釋</p>
         <h3>政策、做法與條件邊界</h3>
         <div class="detail-brief">${knowledgeExplanationHtml(card)}</div>
       </section>
     `],
-    ['applicability', '適用／不適用', applicabilityHtml(card)],
-    ['verification', '查證路徑', verificationDetailHtml(card)],
-    ['phone', '電話確認', phoneDetailHtml(card)],
-    ['sources', '來源', sourceTrackingHtml(card)],
+    ['boundary', '判斷邊界', boundaryDetailHtml(card)],
+    ['action', '查證與提醒', actionReminderHtml(card)],
   ];
   return `
     <div class="detail-tab-list" role="tablist" aria-label="詳細卡片資訊分類">
@@ -1015,25 +1083,24 @@ function comparisonGroups(cards) {
   const groups = new Map();
   const notComparable = [];
   for (const card of cards) {
-    const group = comparisonGroup(card);
-    if (!group || !hasComparison(card)) {
+    const digest = comparisonDigest(card);
+    const group = digest?.group || '';
+    if (!group || !digest) {
       notComparable.push(card);
       continue;
     }
-    const comparison = card.comparison || {};
     if (!groups.has(group)) {
       groups.set(group, {
         group,
-        label: comparisonGroupLabel(group, card),
+        label: digest.label,
         cards: [],
       });
     }
     groups.get(group).cards.push({
-      title: card.title || cardId(card),
-      ltc: comparison.ltc_side || {},
-      disability: comparison.disability_side || {},
-      risks: comparison.shared_risks || card.risk_flags || [],
-      family: comparison.family_wording || card.family_safe_summary || '',
+      title: digest.title,
+      boundary: digest.boundary,
+      action: digest.action,
+      family: digest.family_wording,
     });
   }
   return { groups: [...groups.values()], notComparable };
@@ -1066,12 +1133,30 @@ function renderComparison(cards) {
       ${group.cards.map((row) => `
         <section class="comparison-item">
           <h4>${escapeHtml(row.title)}</h4>
-          <div class="compare-columns">
-            <div><strong>長照側</strong><p>${escapeHtml(row.ltc.path || '先查長照服務項目與地方承辦流程。')}</p><p class="muted">${escapeHtml(row.ltc.window || '')}</p></div>
-            <div><strong>身障側</strong><p>${escapeHtml(row.disability.path || '再查身障福利、輔具中心或地方社會局窗口。')}</p><p class="muted">${escapeHtml(row.disability.window || '')}</p></div>
+          <div class="compare-table" role="table" aria-label="${escapeHtml(row.title)}長照與身障比較">
+            <div class="compare-row compare-head" role="row">
+              <strong role="columnheader">面向</strong>
+              <strong role="columnheader">長照側</strong>
+              <strong role="columnheader">身障側</strong>
+              <strong role="columnheader">共同提醒</strong>
+            </div>
+            <div class="compare-row" role="row">
+              <span role="cell">判斷邊界</span>
+              <p role="cell">${escapeHtml(row.boundary.ltc)}</p>
+              <p role="cell">${escapeHtml(row.boundary.disability)}</p>
+              <p role="cell">${escapeHtml(row.boundary.shared)}</p>
+            </div>
+            <div class="compare-row" role="row">
+              <span role="cell">查證與提醒</span>
+              <p role="cell">${escapeHtml(row.action.ltc)}</p>
+              <p role="cell">${escapeHtml(row.action.disability)}</p>
+              <p role="cell">${escapeHtml(row.action.reminders.length ? row.action.reminders.join('、') : '需官方確認。')}</p>
+            </div>
+            <div class="compare-row" role="row">
+              <span role="cell">家屬保守說法</span>
+              <p role="cell" class="compare-family">${escapeHtml(row.family)}</p>
+            </div>
           </div>
-          <p><strong>共同風險：</strong>${escapeHtml(asArray(row.risks).map(labelText).join('、') || '需官方確認。')}</p>
-          <p><strong>家屬說法：</strong>${escapeHtml(row.family || '請以官方窗口確認後，再提供保守說明。')}</p>
         </section>
       `).join('')}
     </article>

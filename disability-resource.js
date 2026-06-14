@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v22';
+const CACHE_VERSION = '20260614-knowledge-nav-v23';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 
 const state = {
@@ -25,6 +25,7 @@ const state = {
   activeDetailCardId: '',
   currentDraftName: '',
   currentQuestionSummary: '',
+  expandedPackageIds: new Set(),
 };
 
 const qs = (selector) => document.querySelector(selector);
@@ -1270,25 +1271,37 @@ function renderComparison(cards) {
 function renderPackage(cards) {
   const container = qs('#packageCards');
   qs('#selectedCount').textContent = `已選 ${cards.length} 張知識卡`;
-  if (!cards.length) {
-    container.innerHTML = '<div class="empty-state">尚未加入知識卡。可從上方候選卡加入。</div>';
-    return;
+  const packageCount = qs('#packageCount');
+  const packageStatus = qs('#packageStatus');
+  const loginStatus = qs('#loginStatus');
+  const workbenchName = qs('#workbenchDraftNameInput');
+  if (packageCount) packageCount.textContent = `${cards.length} 張`;
+  if (workbenchName && document.activeElement !== workbenchName) {
+    workbenchName.value = currentDraftName();
   }
-  container.innerHTML = cards.map((card, index) => `
-    <div class="package-item">
-      <span>${index + 1}. ${escapeHtml(card.title || card.knowledge_id)}</span>
-      <button class="remove-package-button" type="button" data-card-id="${escapeHtml(card.knowledge_id || card.id)}">移除</button>
-    </div>
-  `).join('');
-  container.querySelectorAll('.remove-package-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      state.selectedKnowledgeIds.delete(button.dataset.cardId);
-      state.selectedCardSnapshots.delete(button.dataset.cardId);
-      renderKnowledgeCards(state.routeResult?.knowledge_cards || localKnowledgeSearch(questionText.value));
-      renderOutputs();
-      renderDraftContext();
-    });
-  });
+  if (loginStatus) {
+    if (state.sessionUser) {
+      const user = state.sessionUser.username || state.sessionUser.name || 'Discord 使用者';
+      const id = state.sessionUser.discord_id || state.sessionUser.id || '';
+      loginStatus.textContent = `已連結 Discord：${user}${id ? ` / ${id}` : ''}。草稿與結果會保存到你的知識組合工作台。`;
+    } else if (state.sessionToken) {
+      loginStatus.textContent = '已透過 Discord 入口開啟，正在確認身份與後端同步狀態。';
+    } else {
+      loginStatus.textContent = '請從 Discord 身障／長照知識導航按鈕開啟，才能儲存並建立知識組合結果。';
+    }
+  }
+  if (packageStatus) {
+    const saveHint = state.sessionToken && state.apiReady
+      ? '草稿會保存到我的知識組合。'
+      : '目前只能使用本機暫存；請從 Discord 入口開啟並確認後端可用後再同步。';
+    packageStatus.textContent = cards.length
+      ? `已加入 ${cards.length} 張知識卡，可在下方知識組合卡片展開查看。 ${saveHint}`
+      : `尚未加入知識卡。 ${saveHint}`;
+  }
+  if (container) {
+    container.hidden = true;
+    container.innerHTML = '';
+  }
 }
 
 function packageSnapshots(record) {
@@ -1332,9 +1345,40 @@ function duplicatePackage(record) {
   applySavedPackage(duplicate.package_id);
 }
 
+function packageDirectionText(record) {
+  const ids = asArray(record.direction_ids);
+  const labels = ids.map((id) => scenarioById(id)?.short_label || scenarioById(id)?.title || id).filter(Boolean);
+  return labels.length ? labels.join('、') : '未指定方向';
+}
+
+function packageRegionText(record) {
+  const regions = unique([
+    ...asArray(record.region_scope),
+    ...packageSnapshots(record).flatMap((card) => asArray(card.region_scope)),
+  ]);
+  return regions.length ? regions.slice(0, 2).join('、') : (selectedRegions()[0] || '未指定地區');
+}
+
+function packageCardRows(record) {
+  const snapshots = packageSnapshots(record);
+  if (!snapshots.length) {
+    return '<p class="workbench-expanded-empty">這個知識組合尚未加入知識卡。</p>';
+  }
+  return snapshots.map((card, index) => `
+    <div class="workbench-resource-row">
+      <div>
+        <strong>${index + 1}. ${escapeHtml(card.title || cardId(card))}</strong>
+        <span>${escapeHtml(sourceDisplaySummary(card))}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
 function renderSavedPackages() {
   const container = qs('#savedPackages');
   if (!container) return;
+  const status = qs('#workbenchStatus');
+  const empty = qs('#workbenchEmpty');
   const cached = readCachedKnowledgePackages();
   const merged = new Map(cached.map((record) => [String(record.package_id || record.id), normalizePackageRecord(record)]));
   state.savedPackages.forEach((record) => {
@@ -1342,6 +1386,25 @@ function renderSavedPackages() {
     merged.set(normalized.package_id, normalized);
   });
   const records = [...merged.values()].sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0));
+  if (status) {
+    if (state.sessionUser) {
+      const user = state.sessionUser.username || state.sessionUser.name || 'Discord 使用者';
+      const id = state.sessionUser.discord_id || state.sessionUser.id || '';
+      status.textContent = `目前查看 ${user}${id ? ` / ${id}` : ''} 的知識組合。`;
+    } else if (state.sessionToken) {
+      status.textContent = '已透過 Discord 入口開啟；若後端同步失敗，會先顯示本機暫存。';
+    } else {
+      status.textContent = records.length
+        ? '目前顯示本機暫存；請從 Discord 入口重新開啟，才能讀取個人知識組合。'
+        : '未連結 Discord，請回 Discord 重新開啟入口。';
+    }
+  }
+  if (empty) {
+    empty.hidden = records.length > 0;
+    empty.textContent = state.sessionToken
+      ? '目前還沒有知識組合。回到知識導航，尋找並點選知識卡後會先建立草稿。'
+      : '目前是未登入瀏覽，只能使用本機暫存，不能讀取個人知識組合。';
+  }
   if (!records.length) {
     const reason = state.sessionToken
       ? '目前尚未儲存知識組合。選卡後可按「儲存草稿」。'
@@ -1353,16 +1416,20 @@ function renderSavedPackages() {
     const count = packageCount(record);
     const active = state.activePackageId === record.package_id;
     const hasShare = Boolean(record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url);
+    const expanded = state.expandedPackageIds.has(record.package_id);
+    const itemList = packageCardRows(record);
+    const regionText = packageRegionText(record);
+    const status = String(record.status || 'draft').replaceAll('_', '-');
     return `
-      <article class="saved-package-card workbench-card${active ? ' active is-expanded' : ''}">
+      <article class="workbench-card${active ? ' active' : ''}${expanded ? ' is-expanded' : ''}" data-package-card-id="${escapeHtml(record.package_id)}" tabindex="0" role="button" aria-expanded="${expanded ? 'true' : 'false'}">
         <div class="workbench-card-head">
           <div>
-            <p class="eyebrow">知識組合</p>
+            <p class="eyebrow">知識組合｜${escapeHtml(regionText)}</p>
             <h3>${escapeHtml(record.name || '未命名知識組合')}</h3>
           </div>
-          <span class="status-badge ${escapeHtml(String(record.status || 'draft').replaceAll('_', '-'))}">${escapeHtml(statusLabel(record.status))}</span>
+          <span class="status-badge ${escapeHtml(status)}">${escapeHtml(statusLabel(record.status))}</span>
         </div>
-        <p class="workbench-meta">${count} 張知識卡｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
+        <p class="workbench-meta">${escapeHtml(packageDirectionText(record))}｜知識 ${count} 張｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
         <p class="saved-summary">${escapeHtml(record.question_summary || '未保存問題摘要')}</p>
         <div class="workbench-actions">
           <button class="edit-action" type="button" data-action="edit" data-package-id="${escapeHtml(record.package_id)}">繼續編輯</button>
@@ -1375,9 +1442,30 @@ function renderSavedPackages() {
             <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
           ` : ''}
         </div>
+        <div class="workbench-expanded" ${expanded ? '' : 'hidden'}>
+          <h4>已選知識卡</h4>
+          <div class="workbench-resource-list">${itemList}</div>
+        </div>
       </article>
     `;
   }).join('');
+  container.querySelectorAll('[data-package-card-id]').forEach((card) => {
+    const packageId = card.dataset.packageCardId || '';
+    const toggle = () => {
+      if (state.expandedPackageIds.has(packageId)) state.expandedPackageIds.delete(packageId);
+      else state.expandedPackageIds.add(packageId);
+      renderSavedPackages();
+    };
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('button, a, input, select, textarea')) return;
+      toggle();
+    });
+    card.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      toggle();
+    });
+  });
   container.querySelectorAll('[data-action]').forEach((button) => {
     button.addEventListener('click', async () => {
       const packageId = button.dataset.packageId || '';
@@ -1471,6 +1559,13 @@ function setActiveView(viewName) {
     panel.hidden = !active;
     panel.classList.toggle('is-active', active);
   });
+  if (viewName === 'knowledgePack') {
+    renderOutputs();
+    renderSavedPackages();
+    if (state.sessionToken && state.apiBase && state.apiReady) {
+      void loadSavedPackages({ quiet: true });
+    }
+  }
 }
 
 function setupTabs() {
@@ -1670,6 +1765,16 @@ async function init() {
     state.currentDraftName = String(event.target.value || '').trim();
     renderDraftContext();
   });
+  const workbenchNameInput = qs('#workbenchDraftNameInput');
+  if (workbenchNameInput) {
+    workbenchNameInput.addEventListener('input', (event) => {
+      state.currentDraftName = String(event.target.value || '').trim();
+      const hiddenInput = qs('#draftNameInput');
+      if (hiddenInput) hiddenInput.value = state.currentDraftName;
+      renderDraftContext();
+      renderPackage(selectedCards());
+    });
+  }
   qs('#refreshPackagesButton').addEventListener('click', () => loadSavedPackages());
   document.querySelectorAll('.copy-button[data-copy-target]').forEach((button) => {
     button.addEventListener('click', async () => {

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v8';
+const CACHE_VERSION = '20260614-knowledge-nav-v9';
 
 const state = {
   scenarios: [],
@@ -240,6 +240,13 @@ function renderAttributeFilters(cards = []) {
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
   const selectedCount = activeSubs.filter((attr) => selected.has(attr.key)).length;
+  const sortedActiveSubs = [...activeSubs].sort((a, b) => {
+    const selectedDelta = Number(selected.has(b.key)) - Number(selected.has(a.key));
+    if (selectedDelta) return selectedDelta;
+    const hitDelta = Number(Boolean(b.hitCount)) - Number(Boolean(a.hitCount));
+    if (hitDelta) return hitDelta;
+    return String(a.label || '').localeCompare(String(b.label || ''), 'zh-Hant');
+  });
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>
@@ -259,11 +266,16 @@ function renderAttributeFilters(cards = []) {
       }).join('')}
     </div>
     <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
-      ${activeSubs.map((attr) => `
-        <button type="button" class="attribute-chip${selected.has(attr.key) ? ' is-active' : ''}${attr.hitCount ? ' is-hit' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${selected.has(attr.key) ? 'true' : 'false'}">
-          ${escapeHtml(attr.label)} <span>${attr.hitCount ? `${attr.hitCount}/${attr.totalCount}` : attr.totalCount}</span>
-        </button>
-      `).join('')}
+      ${sortedActiveSubs.map((attr) => {
+        const isSelected = selected.has(attr.key);
+        const ratioText = isSelected ? `${attr.totalCount}/${attr.totalCount}` : `0/${attr.totalCount}`;
+        return `
+          <button type="button" class="attribute-chip${isSelected ? ' is-active' : ''}${attr.hitCount ? ' is-hit' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isSelected ? 'true' : 'false'}">
+            <strong>${escapeHtml(attr.label)}</strong>
+            <span>${ratioText}</span>
+          </button>
+        `;
+      }).join('')}
     </div>
   `;
   container.querySelectorAll('[data-attribute-type]').forEach((button) => {
@@ -687,24 +699,18 @@ function knowledgeBriefHtml(card) {
   if (explicit) return `<p>${escapeHtml(explicit)}</p>`;
 
   const comparison = card?.comparison || {};
-  const ltc = comparison.ltc_side || {};
-  const disability = comparison.disability_side || {};
   const family = compactSentence(card.family_safe_summary || comparison.family_wording || '');
   const applies = firstText(card.applies_when, '遇到家屬或個案詢問此類需求時，先把需求拆成制度、文件、窗口與風險來查證。');
   const notApplies = firstText(card.not_applies_when, '');
-  const ltcPath = compactSentence(ltc.path || '');
-  const disabilityPath = compactSentence(disability.path || '');
   const risks = unique(asArray(comparison.shared_risks || card.risk_flags).map(labelText)).join('、');
 
   const paragraphs = [
     `這張卡用來處理「${card.title || cardId(card) || '此類問題'}」：${applies}`,
     family || '這類問題不適合直接回答能不能補助，應先查證官方品項、地方承辦流程與必要文件。',
   ];
-  if (ltcPath || disabilityPath) {
-    paragraphs.push(`查證時先分清楚制度路徑：${ltcPath ? `長照側可先看 ${ltcPath}` : '長照側需回到長照服務項目確認'}；${disabilityPath ? `身障側可再看 ${disabilityPath}` : '身障側需回到地方社會局、輔具資源中心或官方窗口確認'}。`);
-  }
   if (notApplies) paragraphs.push(`不適合套用的情況：${notApplies}`);
   if (risks) paragraphs.push(`個管師提醒：${risks}。`);
+  paragraphs.push('如果需要長照與身障並排比較，請先選取同屬性知識卡，再到「我的知識組合」的比較結果中查看。');
 
   return paragraphs.map((row) => `<p>${escapeHtml(row)}</p>`).join('');
 }
@@ -766,12 +772,11 @@ function openCardDetail(card) {
   title.textContent = card.title || cardId(card) || '知識卡資訊';
   body.innerHTML = `
     <section class="detail-section detail-brief-section">
-      <p class="eyebrow">知識整理</p>
-      <h3>這張卡怎麼解釋</h3>
+      <p class="eyebrow">知識整理與解釋</p>
+      <h3>政策、做法與條件邊界</h3>
       <div class="detail-brief">${knowledgeBriefHtml(card)}</div>
     </section>
     ${detailBlock('適用與不適用', applicabilityHtml(card), { open: true })}
-    ${hasComparison(card) ? detailBlock('長照 VS 身障比較', comparisonDetailHtml(card), { open: true }) : detailBlock('長照 VS 身障比較', '<p class="muted">此卡不適用比較，請改看查證路徑與來源。</p>')}
     ${detailBlock('查證路徑', verificationDetailHtml(card))}
     ${detailBlock('電話確認問題', phoneDetailHtml(card))}
     ${detailBlock('來源與追蹤', `<div class="detail-grid">${sourceDetailHtml(card)}</div>`)}

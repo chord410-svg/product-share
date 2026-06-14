@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v19';
+const CACHE_VERSION = '20260614-knowledge-nav-v20';
 
 const state = {
   scenarios: [],
@@ -264,14 +264,15 @@ function renderAttributeFilters(cards = []) {
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>
-      <span class="small-note">${escapeHtml(activeLabel)}：目前副本已加入 ${selectedSubCount}/${activeSubs.length} 子屬性。</span>
+      <span class="small-note">${escapeHtml(activeLabel)}：目前副本已加入 ${selectedSubCount}/${activeSubs.length} 子屬性。點屬性篩選卡片；點卡片加入或移出目前副本。</span>
     </div>
     <div class="attribute-main-tabs" data-count="${typeOrder.length}" aria-label="主屬性分類">
       ${typeOrder.map((type) => {
         const attrs = grouped.get(type) || [];
         const typeSelectedCount = attrs.filter((attr) => attr.selectedCount).length;
+        const isActive = state.activeAttributeGroup === type;
         return `
-          <button type="button" class="attribute-main-button${state.activeAttributeGroup === type ? ' is-active' : ''}" data-attribute-type="${escapeHtml(type)}">
+          <button type="button" class="attribute-main-button${isActive ? ' is-active' : ''}${typeSelectedCount ? ' has-selected-cards' : ''}" data-attribute-type="${escapeHtml(type)}">
             <strong>${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)}</strong>
             <span>${typeSelectedCount}/${attrs.length} 已選</span>
           </button>
@@ -280,12 +281,12 @@ function renderAttributeFilters(cards = []) {
     </div>
     <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
       ${sortedActiveSubs.map((attr) => {
-        const isSelected = selected.has(attr.key);
+        const isFilterActive = selected.has(attr.key);
         const selectedCount = Number(attr.selectedCount || 0);
         const totalCount = Math.max(Number(attr.totalCount || 0), selectedCount);
         const countText = `${selectedCount}/${totalCount}`;
         return `
-          <button type="button" class="attribute-chip${isSelected ? ' is-active' : ''}${selectedCount ? ' has-selected-cards' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isSelected ? 'true' : 'false'}">
+          <button type="button" class="attribute-chip${isFilterActive ? ' is-filter-active' : ''}${selectedCount ? ' has-selected-cards' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isFilterActive ? 'true' : 'false'}">
             <strong>${escapeHtml(attr.label)}</strong>
             <span>${escapeHtml(countText)}</span>
           </button>

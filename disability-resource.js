@@ -1,4 +1,5 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v21';
+const CACHE_VERSION = '20260614-knowledge-nav-v22';
+const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 
 const state = {
   scenarios: [],
@@ -8,6 +9,7 @@ const state = {
   selectedCardSnapshots: new Map(),
   savedPackages: [],
   activePackageId: '',
+  currentLocalPackageId: '',
   apiBase: '',
   sessionToken: '',
   apiReady: false,
@@ -390,6 +392,8 @@ function statusLabel(status) {
     result_pending: '結果產生中',
     result_ready: '已產生結果',
     result_failed: '結果失敗',
+    local_cache: '本機暫存',
+    sync_failed: '同步失敗',
   };
   return labels[String(status || '').trim()] || '狀態待確認';
 }
@@ -428,6 +432,91 @@ function writeGenerationHistory() {
   } catch (error) {
     console.info('generation history storage failed', error);
   }
+}
+
+function readCachedKnowledgePackages() {
+  try {
+    const rows = JSON.parse(localStorage.getItem(PACKAGE_STORAGE_KEY) || '[]');
+    return Array.isArray(rows) ? rows.filter((row) => row && (row.package_id || row.id)) : [];
+  } catch (error) {
+    console.info('knowledge package cache unreadable', error);
+    return [];
+  }
+}
+
+function writeCachedKnowledgePackages(packages) {
+  try {
+    localStorage.setItem(PACKAGE_STORAGE_KEY, JSON.stringify(packages.slice(0, 80)));
+  } catch (error) {
+    console.info('knowledge package cache write failed', error);
+  }
+}
+
+function normalizePackageRecord(record = {}) {
+  const id = String(record.package_id || record.id || `local_${Date.now()}`).trim();
+  const items = asArray(record.items).map((item, index) => {
+    const snapshot = item.knowledge_snapshot || item.snapshot || item;
+    const knowledgeId = item.knowledge_id || cardId(snapshot);
+    return {
+      knowledge_id: knowledgeId,
+      knowledge_snapshot: snapshot,
+      sort_order: Number(item.sort_order ?? index),
+      added_at: item.added_at || Math.floor(Date.now() / 1000),
+    };
+  }).filter((item) => item.knowledge_id && item.knowledge_snapshot);
+  const knowledgeIds = asArray(record.knowledge_ids).length
+    ? asArray(record.knowledge_ids)
+    : items.map((item) => item.knowledge_id);
+  return {
+    ...record,
+    package_id: id,
+    id,
+    name: String(record.name || state.currentDraftName || '未命名知識組合'),
+    question_summary: String(record.question_summary || state.currentQuestionSummary || ''),
+    direction_ids: asArray(record.direction_ids),
+    knowledge_ids: knowledgeIds,
+    items,
+    outputs: asArray(record.outputs),
+    status: record.status || 'draft',
+    output_mode: record.output_mode || 'family',
+    created_at: Number(record.created_at || Math.floor(Date.now() / 1000)),
+    updated_at: Number(record.updated_at || Math.floor(Date.now() / 1000)),
+  };
+}
+
+function cacheKnowledgePackages(records) {
+  const merged = new Map(readCachedKnowledgePackages().map((row) => [String(row.package_id || row.id), row]));
+  asArray(records).forEach((record) => {
+    const normalized = normalizePackageRecord(record);
+    merged.set(normalized.package_id, normalized);
+  });
+  writeCachedKnowledgePackages([...merged.values()].sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0)));
+}
+
+function currentPackageRecord(overrides = {}) {
+  const now = Math.floor(Date.now() / 1000);
+  const cards = selectedCards();
+  if (!state.activePackageId && !state.currentLocalPackageId) {
+    state.currentLocalPackageId = `local_${now}`;
+  }
+  const packageId = overrides.package_id || state.activePackageId || state.currentLocalPackageId;
+  return normalizePackageRecord({
+    package_id: packageId,
+    name: state.currentDraftName || currentDraftName(),
+    question_summary: state.currentQuestionSummary || maskSensitiveText(questionText.value || ''),
+    direction_ids: state.routeResult?.direction_ids || (state.routeResult?.directions || []).map((row) => row.direction_id).filter(Boolean),
+    knowledge_ids: cards.map((card) => cardId(card)),
+    items: cards.map((card, index) => ({
+      knowledge_id: cardId(card),
+      knowledge_snapshot: card,
+      sort_order: index,
+      added_at: now,
+    })),
+    status: state.activePackageId ? 'draft' : 'local_cache',
+    created_at: now,
+    updated_at: now,
+    ...overrides,
+  });
 }
 
 function cardIds(cards = []) {
@@ -482,10 +571,10 @@ function currentDraftName() {
 
 function startCurrentDraft({ question, directions = [], cards = [], source = 'local' }) {
   state.activePackageId = '';
+  state.currentLocalPackageId = `local_${Date.now()}`;
   state.currentQuestionSummary = maskSensitiveText(question || '');
   state.currentDraftName = defaultDraftName(question);
   setSelectedCards(cards);
-  addGenerationRecord({ question, directions, cards, source });
   renderDraftContext(`已產生目前副本：${state.currentDraftName}，並自動加入 ${cards.length} 張知識卡。`);
   renderOutputs();
 }
@@ -494,11 +583,12 @@ function clearCurrentDraft() {
   state.selectedKnowledgeIds.clear();
   state.selectedCardSnapshots.clear();
   state.activePackageId = '';
+  state.currentLocalPackageId = '';
   state.currentDraftName = '';
   state.currentQuestionSummary = '';
   renderKnowledgeCards(state.currentKnowledgeCards || []);
   renderOutputs();
-  renderDraftContext('已清除目前副本；最近查詢紀錄仍保留在我的知識組合。');
+  renderDraftContext('已清除目前副本；可重新輸入問題建立新的知識副本。');
 }
 
 function addGenerationRecord({ question, directions = [], cards = [], source = 'local' }) {
@@ -1207,44 +1297,117 @@ function packageSnapshots(record) {
     .filter((snapshot) => snapshot && (snapshot.knowledge_id || snapshot.id));
 }
 
+function packageCount(record) {
+  return packageSnapshots(record).length || asArray(record.knowledge_ids).length || 0;
+}
+
+function openKnowledgeResult(record, options = {}) {
+  const normalized = normalizePackageRecord(record);
+  cacheKnowledgePackages([normalized]);
+  const query = new URLSearchParams({
+    package_id: normalized.package_id,
+    source: 'knowledge-nav',
+    v: CACHE_VERSION,
+  });
+  if (options.print) query.set('print', '1');
+  window.location.href = `./disability-knowledge-result.html?${query.toString()}`;
+}
+
+function duplicatePackage(record) {
+  const normalized = normalizePackageRecord(record);
+  const now = Math.floor(Date.now() / 1000);
+  const duplicate = normalizePackageRecord({
+    ...normalized,
+    package_id: `local_${now}`,
+    name: `${normalized.name || '知識組合'} 副本`,
+    status: 'local_cache',
+    share_url: '',
+    share_page_id: '',
+    outputs: [],
+    created_at: now,
+    updated_at: now,
+  });
+  cacheKnowledgePackages([duplicate]);
+  state.savedPackages = [duplicate, ...state.savedPackages.filter((row) => String(row.package_id || row.id) !== duplicate.package_id)];
+  applySavedPackage(duplicate.package_id);
+}
+
 function renderSavedPackages() {
   const container = qs('#savedPackages');
   if (!container) return;
-  if (!state.sessionToken) {
-    container.innerHTML = '<div class="empty-state">從 Discord 面板開啟後，這裡會顯示你的草稿與已產生結果。</div>';
+  const cached = readCachedKnowledgePackages();
+  const merged = new Map(cached.map((record) => [String(record.package_id || record.id), normalizePackageRecord(record)]));
+  state.savedPackages.forEach((record) => {
+    const normalized = normalizePackageRecord(record);
+    merged.set(normalized.package_id, normalized);
+  });
+  const records = [...merged.values()].sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0));
+  if (!records.length) {
+    const reason = state.sessionToken
+      ? '目前尚未儲存知識組合。選卡後可按「儲存草稿」。'
+      : '從 Discord 面板開啟後，這裡會顯示你的草稿與已產生結果；目前只能使用本機暫存。';
+    container.innerHTML = `<div class="empty-state">${escapeHtml(reason)}</div>`;
     return;
   }
-  if (!state.apiReady) {
-    container.innerHTML = '<div class="empty-state">後端服務暫時不可用；可先閱讀與組合知識卡，但無法載入已儲存知識組合。</div>';
-    return;
-  }
-  if (!state.savedPackages.length) {
-    container.innerHTML = '<div class="empty-state">目前尚未儲存知識組合。選卡後可按「儲存草稿」。</div>';
-    return;
-  }
-  container.innerHTML = state.savedPackages.map((record) => {
-    const count = asArray(record.items).length || asArray(record.knowledge_ids).length;
+  container.innerHTML = records.map((record) => {
+    const count = packageCount(record);
     const active = state.activePackageId === record.package_id;
+    const hasShare = Boolean(record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url);
     return `
-      <article class="saved-package-card${active ? ' active' : ''}">
-        <div>
-          <strong>${escapeHtml(record.name || '未命名知識組合')}</strong>
-          <p class="small-note">${escapeHtml(statusLabel(record.status))}｜${count} 張知識卡｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
-          <p class="saved-summary">${escapeHtml(record.question_summary || '未保存問題摘要')}</p>
+      <article class="saved-package-card workbench-card${active ? ' active is-expanded' : ''}">
+        <div class="workbench-card-head">
+          <div>
+            <p class="eyebrow">知識組合</p>
+            <h3>${escapeHtml(record.name || '未命名知識組合')}</h3>
+          </div>
+          <span class="status-badge ${escapeHtml(String(record.status || 'draft').replaceAll('_', '-'))}">${escapeHtml(statusLabel(record.status))}</span>
         </div>
-        <button class="load-package-button" type="button" data-package-id="${escapeHtml(record.package_id)}">載入</button>
+        <p class="workbench-meta">${count} 張知識卡｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
+        <p class="saved-summary">${escapeHtml(record.question_summary || '未保存問題摘要')}</p>
+        <div class="workbench-actions">
+          <button class="edit-action" type="button" data-action="edit" data-package-id="${escapeHtml(record.package_id)}">繼續編輯</button>
+          <button class="primary-action" type="button" data-action="view" data-package-id="${escapeHtml(record.package_id)}">查看結果</button>
+          <button class="copy-action" type="button" data-action="duplicate" data-package-id="${escapeHtml(record.package_id)}">複製此副本</button>
+          <button class="danger-action" type="button" disabled title="第一版後端尚未開放刪除知識組合。">刪除</button>
+          ${hasShare ? `
+            <button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}">複製連結</button>
+            <button class="qr-action" type="button" disabled title="QR Code 會在正式分享服務接上後提供。">查看 QR CODE</button>
+            <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
+          ` : ''}
+        </div>
       </article>
     `;
   }).join('');
-  container.querySelectorAll('.load-package-button').forEach((button) => {
-    button.addEventListener('click', () => applySavedPackage(button.dataset.packageId));
+  container.querySelectorAll('[data-action]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const packageId = button.dataset.packageId || '';
+      const record = records.find((item) => String(item.package_id || item.id) === packageId);
+      if (!record) return;
+      if (button.dataset.action === 'edit') {
+        applySavedPackage(packageId);
+        setActiveView('knowledgeNav');
+      } else if (button.dataset.action === 'view') {
+        openKnowledgeResult(record);
+      } else if (button.dataset.action === 'duplicate') {
+        duplicatePackage(record);
+        setActiveView('knowledgeNav');
+      } else if (button.dataset.action === 'copy-link') {
+        const url = record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url || '';
+        if (url) await navigator.clipboard.writeText(url);
+        button.textContent = '已複製';
+        setTimeout(() => { button.textContent = '複製連結'; }, 1200);
+      } else if (button.dataset.action === 'print') {
+        openKnowledgeResult(record, { print: true });
+      }
+    });
   });
 }
 
 function applySavedPackage(packageId) {
-  const record = state.savedPackages.find((item) => item.package_id === packageId);
+  const record = [...state.savedPackages, ...readCachedKnowledgePackages()].find((item) => String(item.package_id || item.id) === String(packageId));
   if (!record) return;
-  const snapshots = packageSnapshots(record);
+  const normalized = normalizePackageRecord(record);
+  const snapshots = packageSnapshots(normalized);
   state.selectedKnowledgeIds.clear();
   state.selectedCardSnapshots.clear();
   for (const snapshot of snapshots) {
@@ -1253,15 +1416,16 @@ function applySavedPackage(packageId) {
     state.selectedKnowledgeIds.add(id);
     state.selectedCardSnapshots.set(id, snapshot);
   }
-  state.activePackageId = record.package_id;
-  state.currentDraftName = record.name || '未命名知識組合';
-  state.currentQuestionSummary = record.question_summary || '';
-  if (record.question_summary && !questionText.value.trim()) {
-    questionText.value = record.question_summary;
+  state.activePackageId = normalized.package_id;
+  state.currentLocalPackageId = normalized.package_id.startsWith('local_') ? normalized.package_id : '';
+  state.currentDraftName = normalized.name || '未命名知識組合';
+  state.currentQuestionSummary = normalized.question_summary || '';
+  if (normalized.question_summary && !questionText.value.trim()) {
+    questionText.value = normalized.question_summary;
   }
   state.routeResult = {
-    direction_ids: asArray(record.direction_ids),
-    directions: asArray(record.direction_ids).map((id) => ({
+    direction_ids: asArray(normalized.direction_ids),
+    directions: asArray(normalized.direction_ids).map((id) => ({
       direction_id: id,
       short_label: scenarioById(id)?.short_label || id,
       reason: '此方向來自已儲存的知識組合。',
@@ -1272,8 +1436,8 @@ function applySavedPackage(packageId) {
   renderKnowledgeCards(snapshots.length ? snapshots : state.knowledgeCards.slice(0, 8), { resetAttributes: true });
   renderSavedPackages();
   renderOutputs();
-  renderDraftContext(`已載入「${record.name || '知識組合'}」；目前正在編輯這份副本。`);
-  qs('#packageHint').textContent = `已載入「${record.name || '知識組合'}」；輸出內容使用建立當時保存的知識卡副本。`;
+  renderDraftContext(`已載入「${normalized.name || '知識組合'}」；目前正在編輯這份副本。`);
+  qs('#packageHint').textContent = `已載入「${normalized.name || '知識組合'}」；結果頁會使用建立當時保存的知識卡副本。`;
 }
 
 async function loadSavedPackages({ quiet = false } = {}) {
@@ -1284,6 +1448,7 @@ async function loadSavedPackages({ quiet = false } = {}) {
   try {
     const payload = await fetchJson(`${apiPath('/api/v1/disability-knowledge/packages')}?session=${encodeURIComponent(state.sessionToken)}`);
     state.savedPackages = asArray(payload.packages);
+    cacheKnowledgePackages(state.savedPackages);
     renderSavedPackages();
     if (!quiet && state.savedPackages.length) {
       qs('#packageHint').textContent = `已載入 ${state.savedPackages.length} 筆你先前建立的知識組合。`;
@@ -1349,28 +1514,14 @@ function renderSources(cards) {
 
 function renderOutputs() {
   const cards = selectedCards();
-  renderComparison(cards);
   renderPackage(cards);
-  qs('#packageHint').textContent = state.sessionToken
-    ? '已從 Discord 入口取得身份連結，可儲存草稿。'
-    : '目前沒有 Discord 身份連結，只能在本頁暫時組合；請從 Discord 入口重新開啟才能儲存。';
-  if (!cards.length) {
-    qs('#resultTitle').textContent = '請先輸入問題或選擇知識卡';
-    qs('#familyOutput').textContent = '這裡會依已選知識卡整理可給家屬看的保守說明。';
-    qs('#routeOutput').textContent = '';
-    qs('#phoneOutput').textContent = '';
-    qs('#internalOutput').textContent = '';
-    qs('#sourceOutput').innerHTML = '';
-    setOutputMode(state.outputMode || 'family');
-    return;
-  }
-  qs('#resultTitle').textContent = `已組合 ${cards.length} 張知識卡`;
-  qs('#familyOutput').textContent = cards.map((card, index) => `${index + 1}. ${card.family_safe_summary || '請先查證官方規定與地方承辦窗口，再提供家屬保守說明。'}`).join('\n\n');
-  qs('#routeOutput').textContent = lineList(cards.flatMap((card) => card.verification_steps || []));
-  qs('#phoneOutput').textContent = lineList(cards.flatMap((card) => card.phone_check_questions || []));
-  qs('#internalOutput').textContent = lineList(cards.flatMap((card) => card.care_manager_notes || []));
-  qs('#sourceOutput').innerHTML = renderSources(cards);
-  setOutputMode(state.outputMode || 'family');
+  const hint = state.sessionToken
+    ? '已從 Discord 入口取得身份連結，可儲存草稿；輸出內容請按「查看目前結果」。'
+    : '目前沒有 Discord 身份連結，只能使用本頁暫存；請從 Discord 入口重新開啟才能同步到個人工作台。';
+  qs('#packageHint').textContent = cards.length
+    ? `${hint} 目前副本含 ${cards.length} 張知識卡。`
+    : '尚未加入知識卡。請回到知識導航輸入問題或點選候選卡。';
+  if (cards.length) cacheKnowledgePackages([currentPackageRecord({ status: state.activePackageId ? 'draft' : 'local_cache' })]);
 }
 
 async function routeQuestion() {
@@ -1450,6 +1601,7 @@ async function saveDraft(options = {}) {
       body: JSON.stringify(payload),
     });
     state.activePackageId = saved.package?.package_id || state.activePackageId;
+    state.currentLocalPackageId = '';
     state.currentDraftName = saved.package?.name || state.currentDraftName;
     setDraftMessage(`${auto ? '已自動儲存' : '已儲存'}草稿：${saved.package?.name || saved.package?.package_id || '知識組合'}。下次從 Discord 入口進來會看得到。`);
     await loadSavedPackages({ quiet: true });
@@ -1466,19 +1618,7 @@ async function copyTextFromNode(id) {
 }
 
 async function copyPackage() {
-  const text = [
-    '【身障／長照知識組合】',
-    qs('#familyOutput').innerText,
-    '',
-    '【查證路徑】',
-    qs('#routeOutput').innerText,
-    '',
-    '【電話確認】',
-    qs('#phoneOutput').innerText,
-    '',
-    '【長照 VS 身障】',
-    qs('#comparisonOutput').innerText,
-  ].join('\n');
+  const text = selectedCards().map((card, index) => `${index + 1}. ${card.title || cardId(card)}\n${card.family_safe_summary || ''}`).join('\n\n');
   await navigator.clipboard.writeText(text);
   qs('#packageHint').textContent = '已複製知識組合內容。';
 }
@@ -1499,7 +1639,6 @@ async function init() {
   await probeSession();
   readGenerationHistory();
   setupTabs();
-  setupOutputModeTabs();
   setupRegionSelector();
   renderDirections([]);
   renderKnowledgeCards(state.knowledgeCards.slice(0, 8), { resetAttributes: true });
@@ -1509,12 +1648,6 @@ async function init() {
   await loadSavedPackages({ quiet: true });
   questionText.addEventListener('input', privacyMessage);
   qs('#routeButton').addEventListener('click', routeQuestion);
-  qs('#clearHistoryButton').addEventListener('click', () => {
-    state.generationHistory = [];
-    state.activeGenerationId = '';
-    writeGenerationHistory();
-    renderGenerationHistory();
-  });
   qs('#closeCardDetailButton').addEventListener('click', closeCardDetail);
   qs('#cardDetailOverlay').addEventListener('click', (event) => {
     if (event.target === qs('#cardDetailOverlay')) closeCardDetail();
@@ -1524,13 +1657,20 @@ async function init() {
   });
   qs('#saveDraftButton').addEventListener('click', saveDraft);
   qs('#saveDraftInlineButton').addEventListener('click', saveDraft);
+  qs('#viewCurrentResultButton').addEventListener('click', () => {
+    const cards = selectedCards();
+    if (!cards.length) {
+      qs('#packageHint').textContent = '請先加入至少一張知識卡，再查看結果。';
+      return;
+    }
+    openKnowledgeResult(currentPackageRecord({ status: state.activePackageId ? 'draft' : 'local_cache' }));
+  });
   qs('#clearDraftButton').addEventListener('click', clearCurrentDraft);
   qs('#draftNameInput').addEventListener('input', (event) => {
     state.currentDraftName = String(event.target.value || '').trim();
     renderDraftContext();
   });
   qs('#refreshPackagesButton').addEventListener('click', () => loadSavedPackages());
-  qs('#copyPackageButton').addEventListener('click', copyPackage);
   document.querySelectorAll('.copy-button[data-copy-target]').forEach((button) => {
     button.addEventListener('click', async () => {
       await copyTextFromNode(button.dataset.copyTarget);

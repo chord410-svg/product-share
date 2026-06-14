@@ -166,6 +166,29 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .not-comparable-list span { border-radius: 999px; background: #eef5fb; padding: 4px 8px; color: #17324d; font-size: 12px; font-weight: 700; }
 .compare-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 10px 0; }
 .compare-columns > div { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.compare-table {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+.compare-row {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.75fr) repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.compare-row:first-child { border-top: 0; }
+.compare-row > * {
+  margin: 0;
+  padding: 10px;
+  line-height: 1.55;
+  border-left: 1px solid var(--line);
+}
+.compare-row > *:first-child { border-left: 0; background: #f4faf9; color: var(--teal-dark); font-weight: 800; }
+.compare-head > * { background: #e7f6f3; color: var(--teal-dark); }
+.compare-family { grid-column: span 3; }
 .muted { color: var(--muted); }
 .package-list { display: grid; gap: 8px; }
 .package-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #f8fbfd; }
@@ -337,6 +360,7 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
   line-height: 1.55;
 }
 .detail-field strong { display: block; margin-bottom: 4px; color: var(--teal-dark); }
+.detail-field-wide { grid-column: 1 / -1; }
 .detail-list { margin: 0; padding-left: 1.2em; line-height: 1.65; }
 .detail-source { word-break: break-word; }
 
@@ -348,6 +372,10 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
   .panel { margin-bottom: 14px; }
   .controls { position: static; }
   .result-grid, .compare-columns { grid-template-columns: 1fr; }
+  .compare-row { grid-template-columns: 1fr; }
+  .compare-row > * { border-left: 0; border-top: 1px solid var(--line); }
+  .compare-row > *:first-child { border-top: 0; }
+  .compare-family { grid-column: auto; }
   .control-heading-row { align-items: flex-start; }
   .region-field { min-width: 145px; }
   .draft-context-panel, .draft-context-inline { grid-template-columns: 1fr; }

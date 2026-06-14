@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v24';
+const CACHE_VERSION = '20260614-knowledge-nav-v25';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 
 const state = {
@@ -1430,7 +1430,7 @@ function renderSavedPackages() {
           <span class="status-badge ${escapeHtml(status)}">${escapeHtml(statusLabel(record.status))}</span>
         </div>
         <p class="workbench-meta">${escapeHtml(packageDirectionText(record))}｜知識 ${count} 張｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
-        <p class="saved-summary">${escapeHtml(record.question_summary || '未保存問題摘要')}</p>
+        ${record.question_summary ? `<p class="saved-summary">${escapeHtml(record.question_summary)}</p>` : ''}
         <div class="workbench-actions">
           <button class="edit-action" type="button" data-action="edit" data-package-id="${escapeHtml(record.package_id)}">繼續編輯</button>
           <button class="primary-action" type="button" data-action="view" data-package-id="${escapeHtml(record.package_id)}">查看結果</button>

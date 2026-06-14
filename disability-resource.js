@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v7';
+const CACHE_VERSION = '20260614-knowledge-nav-v8';
 
 const state = {
   scenarios: [],
@@ -674,6 +674,89 @@ function sourceDetailHtml(card) {
   }).join('');
 }
 
+function compactSentence(value) {
+  return String(value || '').trim().replace(/\s+/g, ' ');
+}
+
+function firstText(items, fallback = '') {
+  return compactSentence(asArray(items)[0] || fallback);
+}
+
+function knowledgeBriefHtml(card) {
+  const explicit = compactSentence(card.knowledge_brief || card.care_manager_explanation || '');
+  if (explicit) return `<p>${escapeHtml(explicit)}</p>`;
+
+  const comparison = card?.comparison || {};
+  const ltc = comparison.ltc_side || {};
+  const disability = comparison.disability_side || {};
+  const family = compactSentence(card.family_safe_summary || comparison.family_wording || '');
+  const applies = firstText(card.applies_when, '遇到家屬或個案詢問此類需求時，先把需求拆成制度、文件、窗口與風險來查證。');
+  const notApplies = firstText(card.not_applies_when, '');
+  const ltcPath = compactSentence(ltc.path || '');
+  const disabilityPath = compactSentence(disability.path || '');
+  const risks = unique(asArray(comparison.shared_risks || card.risk_flags).map(labelText)).join('、');
+
+  const paragraphs = [
+    `這張卡用來處理「${card.title || cardId(card) || '此類問題'}」：${applies}`,
+    family || '這類問題不適合直接回答能不能補助，應先查證官方品項、地方承辦流程與必要文件。',
+  ];
+  if (ltcPath || disabilityPath) {
+    paragraphs.push(`查證時先分清楚制度路徑：${ltcPath ? `長照側可先看 ${ltcPath}` : '長照側需回到長照服務項目確認'}；${disabilityPath ? `身障側可再看 ${disabilityPath}` : '身障側需回到地方社會局、輔具資源中心或官方窗口確認'}。`);
+  }
+  if (notApplies) paragraphs.push(`不適合套用的情況：${notApplies}`);
+  if (risks) paragraphs.push(`個管師提醒：${risks}。`);
+
+  return paragraphs.map((row) => `<p>${escapeHtml(row)}</p>`).join('');
+}
+
+function detailBlock(title, content, options = {}) {
+  const isOpen = options.open ? ' open' : '';
+  const extra = options.className ? ` ${options.className}` : '';
+  return `
+    <details class="detail-accordion${extra}"${isOpen}>
+      <summary>${escapeHtml(title)}</summary>
+      <div class="detail-accordion-body">${content}</div>
+    </details>
+  `;
+}
+
+function applicabilityHtml(card) {
+  return `
+    <div class="detail-grid">
+      <div class="detail-field"><strong>適用情境</strong>${listHtml(card.applies_when || [], '尚未標示適用情境。')}</div>
+      <div class="detail-field"><strong>不適用情境</strong>${listHtml(card.not_applies_when || [], '尚未標示排除情境。')}</div>
+      <div class="detail-field"><strong>家屬版保守說明</strong>${valueHtml(card.family_safe_summary || '', '請先查證官方規定與地方承辦窗口，再提供家屬保守說明。')}</div>
+      <div class="detail-field"><strong>同屬性比較群組</strong>${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</div>
+    </div>
+  `;
+}
+
+function verificationDetailHtml(card) {
+  return `
+    <div class="detail-grid">
+      <div class="detail-field"><strong>查證步驟</strong>${listHtml(card.verification_steps || [], '請先回官方窗口查證。')}</div>
+      <div class="detail-field"><strong>承辦／窗口提示</strong>${valueHtml(card.care_manager_notes || card.internal_notes || '', '請依官方窗口與地方承辦規定確認。')}</div>
+    </div>
+  `;
+}
+
+function phoneDetailHtml(card) {
+  return `<div class="detail-field">${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>`;
+}
+
+function attributeDetailHtml(card) {
+  return `
+    <div class="detail-grid">
+      <div class="detail-field"><strong>系統範圍</strong>${escapeHtml(asArray(card.system_scope).map(labelText).join('、') || '未標示')}</div>
+      <div class="detail-field"><strong>知識類型</strong>${escapeHtml(asArray(card.knowledge_type).map(labelText).join('、') || '未標示')}</div>
+      <div class="detail-field"><strong>地區</strong>${escapeHtml(asArray(card.region_scope).map(labelText).join('、') || '未標示')}</div>
+      <div class="detail-field"><strong>風險旗標</strong>${escapeHtml(asArray(card.risk_flags).map(labelText).join('、') || '尚無特殊提醒')}</div>
+      <div class="detail-field"><strong>卡片 ID</strong>${escapeHtml(cardId(card) || '未標示')}</div>
+      <div class="detail-field"><strong>公開輸出</strong>${card.public_allowed === false ? '僅內部查證，不進家屬版正式說明' : '可作家屬版保守說明素材'}</div>
+    </div>
+  `;
+}
+
 function openCardDetail(card) {
   if (!card) return;
   state.activeDetailCardId = cardId(card);
@@ -682,38 +765,17 @@ function openCardDetail(card) {
   const body = qs('#cardDetailContent');
   title.textContent = card.title || cardId(card) || '知識卡資訊';
   body.innerHTML = `
-    <section class="detail-section">
-      <p class="eyebrow">大要素</p>
-      <h3>這張卡在解決什麼問題</h3>
-      <div class="detail-grid">
-        <div class="detail-field"><strong>家屬版保守說明</strong>${valueHtml(card.family_safe_summary || '', '請先查證官方規定與地方承辦窗口，再提供家屬保守說明。')}</div>
-        <div class="detail-field"><strong>適用情境</strong>${listHtml(card.applies_when || [], '尚未標示適用情境。')}</div>
-        <div class="detail-field"><strong>不適用情境</strong>${listHtml(card.not_applies_when || [], '尚未標示排除情境。')}</div>
-        <div class="detail-field"><strong>同屬性比較群組</strong>${escapeHtml(comparisonGroupLabel(comparisonGroup(card), card))}</div>
-      </div>
+    <section class="detail-section detail-brief-section">
+      <p class="eyebrow">知識整理</p>
+      <h3>這張卡怎麼解釋</h3>
+      <div class="detail-brief">${knowledgeBriefHtml(card)}</div>
     </section>
-    <section class="detail-section">
-      <p class="eyebrow">中要素</p>
-      <h3>查證流程與比較內容</h3>
-      <div class="detail-grid">
-        <div class="detail-field"><strong>查證步驟</strong>${listHtml(card.verification_steps || [], '請先回官方窗口查證。')}</div>
-        <div class="detail-field"><strong>電話確認問題</strong>${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>
-      </div>
-      <div class="detail-field"><strong>長照 VS 身障比較</strong>${comparisonDetailHtml(card)}</div>
-    </section>
-    <section class="detail-section">
-      <p class="eyebrow">小要素</p>
-      <h3>來源、屬性與追蹤欄位</h3>
-      <div class="detail-grid">
-        <div class="detail-field"><strong>系統範圍</strong>${escapeHtml(asArray(card.system_scope).map(labelText).join('、') || '未標示')}</div>
-        <div class="detail-field"><strong>知識類型</strong>${escapeHtml(asArray(card.knowledge_type).map(labelText).join('、') || '未標示')}</div>
-        <div class="detail-field"><strong>地區</strong>${escapeHtml(asArray(card.region_scope).map(labelText).join('、') || '未標示')}</div>
-        <div class="detail-field"><strong>風險旗標</strong>${escapeHtml(asArray(card.risk_flags).map(labelText).join('、') || '尚無特殊提醒')}</div>
-        <div class="detail-field"><strong>卡片 ID</strong>${escapeHtml(cardId(card) || '未標示')}</div>
-        <div class="detail-field"><strong>公開輸出</strong>${card.public_allowed === false ? '僅內部查證，不進家屬版正式說明' : '可作家屬版保守說明素材'}</div>
-      </div>
-      <div class="detail-grid">${sourceDetailHtml(card)}</div>
-    </section>
+    ${detailBlock('適用與不適用', applicabilityHtml(card), { open: true })}
+    ${hasComparison(card) ? detailBlock('長照 VS 身障比較', comparisonDetailHtml(card), { open: true }) : detailBlock('長照 VS 身障比較', '<p class="muted">此卡不適用比較，請改看查證路徑與來源。</p>')}
+    ${detailBlock('查證路徑', verificationDetailHtml(card))}
+    ${detailBlock('電話確認問題', phoneDetailHtml(card))}
+    ${detailBlock('來源與追蹤', `<div class="detail-grid">${sourceDetailHtml(card)}</div>`)}
+    ${detailBlock('卡片屬性', attributeDetailHtml(card))}
   `;
   overlay.hidden = false;
 }

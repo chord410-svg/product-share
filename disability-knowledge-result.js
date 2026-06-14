@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260614-knowledge-nav-v22';
+  const CACHE_VERSION = '20260614-knowledge-nav-v23';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];
@@ -291,7 +291,7 @@
     });
     const printButton = $('printResultButton');
     if (printButton) printButton.addEventListener('click', () => window.print());
-    document.querySelectorAll('a[href="./disability-resource.html?v=20260614-knowledge-nav-v22"]').forEach((link) => {
+    document.querySelectorAll('a[href^="./disability-resource.html?v="]').forEach((link) => {
       link.href = `./disability-resource.html?v=${encodeURIComponent(CACHE_VERSION)}`;
     });
     render();

@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v22" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v22" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v22" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260614-knowledge-nav-v23" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260614-knowledge-nav-v23" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260614-knowledge-nav-v23" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -85,38 +85,53 @@
   <section class="workbench-shell tab-panel" id="knowledgePackView" role="tabpanel" aria-labelledby="knowledgePackTabButton" hidden>
     <div class="workbench-head">
       <div>
-        <p class="eyebrow">我的知識組合</p>
+        <p class="eyebrow">My Knowledge Packs</p>
         <h2>我的知識組合</h2>
-        <p class="muted-text">目前副本與已儲存知識組合會在這裡管理；家屬版、電話確認與比較請從「查看結果」開啟。</p>
+        <p class="muted-text" id="workbenchStatus">請從 Discord 入口連結身份後查看自己的知識組合。</p>
       </div>
-      <button id="refreshPackagesButton" class="ghost-button" type="button">重新載入</button>
+      <button id="refreshPackagesButton" class="ghost-button" type="button">刷新紀錄</button>
     </div>
 
-    <section class="panel package-panel" aria-labelledby="package-title">
-      <div class="output-header">
+    <section class="current-pack-panel panel" aria-label="目前編輯中的知識組合">
+      <div class="package-head">
         <div>
-          <p class="eyebrow">目前編輯中的知識組合</p>
+          <p class="eyebrow">Current Knowledge Pack</p>
           <h2 id="package-title">目前編輯中的知識組合</h2>
-          <p class="small-note">草稿與結果會保存到你的知識組合工作台；結果頁才顯示家屬版、電話確認與長照 VS 身障比較。</p>
+          <p class="muted-text" id="loginStatus">請從 Discord 身障／長照知識導航按鈕開啟，才能儲存並建立知識組合結果。</p>
         </div>
-        <div class="action-row compact-actions">
-          <button id="saveDraftButton" class="secondary-button" type="button">儲存草稿</button>
-          <button id="viewCurrentResultButton" class="primary-button" type="button">查看目前結果</button>
+        <p class="package-count" id="packageCount">0 張</p>
+      </div>
+      <div class="current-package-layout">
+        <div class="current-package-main">
+          <label class="field">
+            <span>知識組合名稱</span>
+            <input id="workbenchDraftNameInput" type="text" placeholder="例如：新北市／爬梯機申請查證">
+          </label>
+          <p class="privacy-hint">請勿填姓名、電話、身分證、完整地址。</p>
+          <p class="muted-text" id="packageStatus">尚未加入知識卡。</p>
+          <div id="packageCards" class="current-package-selected-summary" hidden></div>
+        </div>
+        <div class="current-package-actions">
+          <p class="muted-text output-moved-note">輸出格式已移到知識組合結果頁，可在結果頁切換家屬版、判斷邊界、查證與提醒、長照 VS 身障比較與完整資料。</p>
+          <button id="saveDraftButton" class="secondary-button" type="button">更新儲存</button>
+          <button id="viewCurrentResultButton" class="ghost-button current-result-button" type="button" hidden>查看目前結果</button>
         </div>
       </div>
       <div id="packageHint" class="small-note"></div>
-      <div id="packageCards" class="package-list"></div>
     </section>
 
-    <section class="saved-package-area panel">
+    <div class="workbench-empty" id="workbenchEmpty" hidden>
+      目前還沒有知識組合。回到知識導航，尋找並點選知識卡後會先建立草稿。
+    </div>
+    <section class="saved-package-area panel" aria-label="已儲存的知識組合">
       <div class="saved-package-header">
         <div>
-          <p class="eyebrow">已儲存項目</p>
+          <p class="eyebrow">Saved Knowledge Packs</p>
           <h2>已儲存的知識組合</h2>
           <p class="small-note">從 Discord 入口進入時，這裡會載入你先前建立的草稿或結果。</p>
         </div>
       </div>
-      <div id="savedPackages" class="saved-package-list"></div>
+      <div id="savedPackages" class="workbench-grid"></div>
     </section>
   </section>
 
@@ -151,6 +166,6 @@
     </article>
   </div>
 
-  <script src="disability-resource.js?v=20260614-knowledge-nav-v22"></script>
+  <script src="disability-resource.js?v=20260614-knowledge-nav-v23"></script>
 </body>
 </html>

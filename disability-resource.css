@@ -917,8 +917,8 @@ button:active {
 
 .current-pack-panel {
   display: grid;
-  gap: 14px;
-  padding: 16px;
+  gap: 10px;
+  padding: 14px;
 }
 
 .package-head {
@@ -931,23 +931,24 @@ button:active {
 .package-count {
   margin: 0;
   border-radius: 999px;
-  padding: 7px 12px;
+  padding: 6px 10px;
   background: #e9fbf8;
   color: var(--teal-dark);
   font-weight: 780;
+  font-size: 13px;
   white-space: nowrap;
 }
 
 .current-package-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 280px);
-  gap: 16px;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  gap: 14px;
+  align-items: center;
 }
 
 .current-package-main {
   display: grid;
-  gap: 8px;
+  gap: 7px;
 }
 
 .current-package-main .field {
@@ -962,27 +963,28 @@ button:active {
 }
 
 .current-package-main input {
-  min-height: 42px;
+  min-height: 36px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  padding: 9px 11px;
+  padding: 7px 10px;
   color: var(--ink);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .current-package-actions {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .current-package-actions .secondary-button {
-  min-height: 46px;
-  font-size: 16px;
+  min-height: 40px;
+  font-size: 15px;
 }
 
 .output-moved-note {
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.45;
+  font-size: 12px;
 }
 
 .workbench-empty,
@@ -996,19 +998,19 @@ button:active {
 
 .workbench-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(280px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
 }
 
 .workbench-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
-  padding: 14px;
+  padding: 12px;
   box-shadow: var(--shadow);
   cursor: pointer;
   display: grid;
-  gap: 12px;
+  gap: 8px;
   transition: border-color .12s ease, box-shadow .12s ease, background .12s ease, transform .12s ease;
 }
 
@@ -1031,13 +1033,14 @@ button:active {
 .workbench-card-head {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
 }
 
 .workbench-card-head h3 {
-  margin: 3px 0 0;
-  line-height: 1.35;
+  margin: 2px 0 0;
+  font-size: 16px;
+  line-height: 1.3;
 }
 
 .workbench-meta,
@@ -1047,12 +1050,13 @@ button:active {
 
 .saved-summary {
   color: var(--muted);
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.35;
 }
 
 .status-badge {
   border-radius: 999px;
-  padding: 6px 10px;
+  padding: 5px 9px;
   background: #e9fbf8;
   color: var(--teal-dark);
   font-size: 12px;
@@ -1068,12 +1072,14 @@ button:active {
 .workbench-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 7px;
 }
 
 .workbench-actions button {
   width: 100%;
-  min-height: 40px;
+  min-height: 34px;
+  padding: 7px 9px;
+  font-size: 13px;
 }
 
 .workbench-actions .primary-action {
@@ -1096,7 +1102,7 @@ button:active {
 
 .workbench-expanded {
   border-top: 1px solid var(--line);
-  padding-top: 12px;
+  padding-top: 9px;
 }
 
 .workbench-expanded h4 {
@@ -1108,14 +1114,14 @@ button:active {
 
 .workbench-resource-list {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .workbench-resource-row {
   border: 1px solid var(--line);
   border-radius: 7px;
   background: #f8fafc;
-  padding: 10px;
+  padding: 8px;
 }
 
 .workbench-resource-row strong {
@@ -1126,10 +1132,16 @@ button:active {
 
 .workbench-resource-row span {
   display: block;
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.35;
+}
+
+@media (min-width: 1280px) {
+  .workbench-grid {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+  }
 }
 
 .workbench-expanded-empty {

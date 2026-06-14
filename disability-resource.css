@@ -112,7 +112,7 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .attribute-subchips { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 8px; }
 .attribute-chip { display: flex; align-items: center; justify-content: space-between; gap: 6px; background: #eef5fb; color: #17324d; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; text-align: left; }
 .attribute-chip strong { font-size: 13px; line-height: 1.35; }
-.attribute-chip.is-hit { border-color: #9bd4ca; box-shadow: inset 4px 0 0 rgba(15, 118, 110, 0.32); }
+.attribute-chip.has-selected-cards { border-color: #9bd4ca; box-shadow: inset 4px 0 0 rgba(15, 118, 110, 0.32); }
 .attribute-chip.is-active { background: var(--teal); color: #fff; border-color: var(--teal); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18); }
 .attribute-chip.is-active span { color: var(--teal-dark); }
 .direction-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 14px; }
@@ -122,17 +122,14 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .knowledge-card { display: flex; flex-direction: column; min-height: 220px; padding: 12px; gap: 0; cursor: pointer; }
 .knowledge-card:hover { border-color: var(--teal); transform: translateY(-1px); }
 .knowledge-card.selected { background: #e7f6f3; border-color: var(--teal); box-shadow: inset 0 0 0 2px rgba(15, 118, 110, 0.12); }
-.knowledge-card.is-route-hit { border-color: #99d7cd; }
-.knowledge-card.is-attribute-extension:not(.selected) { border-style: dashed; }
 .card-head { display: flex; justify-content: space-between; gap: 12px; }
 .card-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
 .card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 2px; }
 .category { color: var(--teal); font-size: 12px; font-weight: 740; }
 .checked-at-inline { color: var(--muted); font-size: 12px; }
 .confidence { align-self: flex-start; border-radius: 999px; padding: 5px 9px; background: var(--soft); color: var(--teal); font-size: 12px; white-space: nowrap; }
-.hit-state-badge { background: #e7f6f3; color: var(--teal-dark); }
-.knowledge-card.is-attribute-extension .hit-state-badge { background: #eef5fb; color: #314761; }
 .selected-badge { background: var(--teal); color: #fff; }
+.candidate-badge { background: #eef5fb; color: #314761; }
 .summary { margin: 8px 0 0; color: #26313d; font-size: 14px; line-height: 1.55; }
 .source-summary { margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .tag-strip { margin-top: 10px; color: var(--muted); font-size: 12px; }
@@ -640,24 +637,24 @@ button:active {
   color: #fff;
 }
 
-.attribute-chip.is-hit {
+.attribute-chip.has-selected-cards {
   border-color: #99d7cd;
   background: #eefbf8;
   box-shadow: inset 4px 0 0 rgba(8, 127, 122, .28);
 }
 
-.attribute-chip.is-active.is-hit {
+.attribute-chip.is-active.has-selected-cards {
   border-color: var(--teal);
   background: #e5f4f2;
   color: var(--teal-dark);
   box-shadow: inset 4px 0 0 rgba(8, 127, 122, .45), inset 0 0 0 1px rgba(8, 127, 122, .16);
 }
 
-.attribute-chip.is-active.is-hit strong {
+.attribute-chip.is-active.has-selected-cards strong {
   color: var(--teal-dark);
 }
 
-.attribute-chip.is-active.is-hit span {
+.attribute-chip.is-active.has-selected-cards span {
   border-color: #99d7cd;
   background: #fff;
   color: var(--teal-dark);
@@ -692,14 +689,6 @@ button:active {
   border-color: var(--teal);
   background: #f6fffd;
   box-shadow: inset 0 0 0 1px rgba(8, 127, 122, .2), var(--shadow);
-}
-
-.knowledge-card.is-route-hit {
-  border-color: #99d7cd;
-}
-
-.knowledge-card.is-attribute-extension:not(.selected) {
-  border-style: dashed;
 }
 
 .knowledge-card h3 {
@@ -737,20 +726,15 @@ button:active {
   gap: 6px;
 }
 
-.knowledge-card .hit-state-badge {
-  background: #e7f6f3;
-  color: var(--teal-dark);
-}
-
-.knowledge-card.is-attribute-extension .hit-state-badge {
-  background: #eef5fb;
-  color: #314761;
-}
-
 .knowledge-card .selected-badge,
 .knowledge-card.selected .confidence {
   background: var(--teal);
   color: #fff;
+}
+
+.knowledge-card .candidate-badge {
+  background: #eef5fb;
+  color: #314761;
 }
 
 .knowledge-card .summary {

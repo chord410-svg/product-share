@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v18';
+const CACHE_VERSION = '20260614-knowledge-nav-v19';
 
 const state = {
   scenarios: [],
@@ -183,6 +183,18 @@ function attributeHitMap(cards = []) {
   return hits;
 }
 
+function selectedAttributeCountMap() {
+  const counts = new Map();
+  for (const id of state.selectedKnowledgeIds) {
+    const card = state.selectedCardSnapshots.get(id) || cardById(id);
+    if (!card) continue;
+    for (const attr of cardAttributes(card)) {
+      counts.set(attr.key, (counts.get(attr.key) || 0) + 1);
+    }
+  }
+  return counts;
+}
+
 function selectedAttributeSet(type) {
   if (!state.activeAttributeSelections[type]) state.activeAttributeSelections[type] = new Set();
   return state.activeAttributeSelections[type];
@@ -232,8 +244,8 @@ function renderAttributeFilters(cards = []) {
     container.innerHTML = '';
     return;
   }
-  const hits = attributeHitMap(cards);
-  const grouped = groupAttributeFilters(catalog.map((attr) => ({ ...attr, hitCount: hits.get(attr.key) || 0 })));
+  const selectedCounts = selectedAttributeCountMap();
+  const grouped = groupAttributeFilters(catalog.map((attr) => ({ ...attr, selectedCount: selectedCounts.get(attr.key) || 0 })));
   if (!grouped.has(state.activeAttributeGroup)) {
     state.activeAttributeGroup = grouped.has('system_scope') ? 'system_scope' : catalog[0].type;
   }
@@ -241,27 +253,27 @@ function renderAttributeFilters(cards = []) {
   const activeSubs = grouped.get(state.activeAttributeGroup) || [];
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
-  const hitSubCount = activeSubs.filter((attr) => attr.hitCount).length;
+  const selectedSubCount = activeSubs.filter((attr) => attr.selectedCount).length;
   const sortedActiveSubs = [...activeSubs].sort((a, b) => {
     const selectedDelta = Number(selected.has(b.key)) - Number(selected.has(a.key));
     if (selectedDelta) return selectedDelta;
-    const hitDelta = Number(Boolean(b.hitCount)) - Number(Boolean(a.hitCount));
-    if (hitDelta) return hitDelta;
+    const selectedCountDelta = Number(Boolean(b.selectedCount)) - Number(Boolean(a.selectedCount));
+    if (selectedCountDelta) return selectedCountDelta;
     return String(a.label || '').localeCompare(String(b.label || ''), 'zh-Hant');
   });
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>
-      <span class="small-note">${escapeHtml(activeLabel)}：命中 ${hitSubCount}/${activeSubs.length} 子屬性；點卡片只會加入副本，不會改變命中數。</span>
+      <span class="small-note">${escapeHtml(activeLabel)}：目前副本已加入 ${selectedSubCount}/${activeSubs.length} 子屬性。</span>
     </div>
     <div class="attribute-main-tabs" data-count="${typeOrder.length}" aria-label="主屬性分類">
       ${typeOrder.map((type) => {
         const attrs = grouped.get(type) || [];
-        const typeHitCount = attrs.filter((attr) => attr.hitCount).length;
+        const typeSelectedCount = attrs.filter((attr) => attr.selectedCount).length;
         return `
           <button type="button" class="attribute-main-button${state.activeAttributeGroup === type ? ' is-active' : ''}" data-attribute-type="${escapeHtml(type)}">
             <strong>${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)}</strong>
-            <span>命中 ${typeHitCount}/${attrs.length}</span>
+            <span>${typeSelectedCount}/${attrs.length} 已選</span>
           </button>
         `;
       }).join('')}
@@ -269,11 +281,11 @@ function renderAttributeFilters(cards = []) {
     <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
       ${sortedActiveSubs.map((attr) => {
         const isSelected = selected.has(attr.key);
-        const hitCount = Number(attr.hitCount || 0);
-        const totalCount = Math.max(Number(attr.totalCount || 0), hitCount);
-        const countText = `命中 ${hitCount}/${totalCount}`;
+        const selectedCount = Number(attr.selectedCount || 0);
+        const totalCount = Math.max(Number(attr.totalCount || 0), selectedCount);
+        const countText = `${selectedCount}/${totalCount}`;
         return `
-          <button type="button" class="attribute-chip${isSelected ? ' is-active' : ''}${attr.hitCount ? ' is-hit' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isSelected ? 'true' : 'false'}">
+          <button type="button" class="attribute-chip${isSelected ? ' is-active' : ''}${selectedCount ? ' has-selected-cards' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isSelected ? 'true' : 'false'}">
             <strong>${escapeHtml(attr.label)}</strong>
             <span>${escapeHtml(countText)}</span>
           </button>
@@ -1038,21 +1050,18 @@ function renderKnowledgeCards(cards = [], options = {}) {
     container.innerHTML = '<div class="empty-state">目前選取的子屬性沒有知識卡；請點選其他子屬性擴大範圍。</div>';
     return;
   }
-  const routeHitIds = new Set(cards.map(cardId));
   container.innerHTML = visibleCards.map((card) => {
     const id = card.knowledge_id || card.id;
     const selected = state.selectedKnowledgeIds.has(id);
-    const isRouteHit = routeHitIds.has(id);
     const summaryText = listCardSummary(card);
     return `
-      <article class="knowledge-card${selected ? ' selected' : ''}${isRouteHit ? ' is-route-hit' : ' is-attribute-extension'}" data-card-id="${escapeHtml(id)}" role="button" tabindex="0" aria-pressed="${selected ? 'true' : 'false'}">
+      <article class="knowledge-card${selected ? ' selected' : ' is-candidate-card'}" data-card-id="${escapeHtml(id)}" role="button" tabindex="0" aria-pressed="${selected ? 'true' : 'false'}">
         <div class="card-head">
           <div>
             <h3>${escapeHtml(card.title || id)}</h3>
           </div>
           <div class="card-badges" aria-label="卡片狀態">
-            ${selected ? '<span class="confidence selected-badge">已加入</span>' : ''}
-            <span class="confidence hit-state-badge">${isRouteHit ? '命中卡' : '延伸卡'}</span>
+            <span class="confidence ${selected ? 'selected-badge' : 'candidate-badge'}">${selected ? '已加入' : '候選卡'}</span>
           </div>
         </div>
         <p class="summary">${escapeHtml(summaryText)}</p>

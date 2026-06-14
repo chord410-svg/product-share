@@ -88,10 +88,14 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .direction-grid, .knowledge-grid { display: grid; gap: 12px; }
 .attribute-filter-row { display: grid; gap: 10px; margin: 0 0 14px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: #f8fbfd; }
 .draft-context-panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; border: 1px solid var(--line); border-radius: 8px; background: #f8fbfd; padding: 12px; margin: 0 0 14px; }
+.draft-context-inline { grid-template-columns: minmax(0, 1fr) auto; align-items: center; margin: 10px 0 0; background: #fff; }
 .draft-name-field { display: grid; gap: 6px; min-width: 0; }
+.draft-context-inline .draft-name-field { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; color: var(--muted); }
+.draft-inline-label { white-space: nowrap; font-size: 13px; font-weight: 900; color: var(--teal-dark); }
 .draft-name-field input { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font: inherit; font-weight: 800; color: var(--ink); background: #fff; }
 .draft-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .draft-actions button { min-width: 84px; }
+.draft-status-note { grid-column: 1 / -1; margin: 0; }
 .attribute-filter-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .attribute-filter-label { color: var(--muted); font-weight: 800; font-size: 13px; margin-right: 2px; }
 .attribute-main-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
@@ -342,7 +346,8 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
   .result-grid, .compare-columns { grid-template-columns: 1fr; }
   .control-heading-row { align-items: flex-start; }
   .region-field { min-width: 145px; }
-  .draft-context-panel { grid-template-columns: 1fr; }
+  .draft-context-panel, .draft-context-inline { grid-template-columns: 1fr; }
+  .draft-context-inline .draft-name-field { grid-template-columns: 1fr; }
   .draft-actions { justify-content: stretch; }
   .draft-actions button { flex: 1 1 120px; }
   .attribute-main-tabs, .attribute-main-tabs[data-count="5"], .attribute-main-tabs[data-count="6"], .attribute-main-tabs[data-count="7"], .attribute-main-tabs[data-count="8"], .attribute-main-tabs[data-count="9"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260614-knowledge-nav-v17';
+const CACHE_VERSION = '20260614-knowledge-nav-v18';
 
 const state = {
   scenarios: [],
@@ -241,7 +241,7 @@ function renderAttributeFilters(cards = []) {
   const activeSubs = grouped.get(state.activeAttributeGroup) || [];
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
-  const selectedCount = activeSubs.filter((attr) => selected.has(attr.key)).length;
+  const hitSubCount = activeSubs.filter((attr) => attr.hitCount).length;
   const sortedActiveSubs = [...activeSubs].sort((a, b) => {
     const selectedDelta = Number(selected.has(b.key)) - Number(selected.has(a.key));
     if (selectedDelta) return selectedDelta;
@@ -252,17 +252,16 @@ function renderAttributeFilters(cards = []) {
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>
-      <span class="small-note">${escapeHtml(activeLabel)}：${selectedCount}/${activeSubs.length} 已選子屬性</span>
+      <span class="small-note">${escapeHtml(activeLabel)}：命中 ${hitSubCount}/${activeSubs.length} 子屬性；點卡片只會加入副本，不會改變命中數。</span>
     </div>
     <div class="attribute-main-tabs" data-count="${typeOrder.length}" aria-label="主屬性分類">
       ${typeOrder.map((type) => {
         const attrs = grouped.get(type) || [];
-        const typeSelected = selectedAttributeSet(type);
-        const typeSelectedCount = attrs.filter((attr) => typeSelected.has(attr.key)).length;
+        const typeHitCount = attrs.filter((attr) => attr.hitCount).length;
         return `
           <button type="button" class="attribute-main-button${state.activeAttributeGroup === type ? ' is-active' : ''}" data-attribute-type="${escapeHtml(type)}">
             <strong>${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)}</strong>
-            <span>${typeSelectedCount}/${attrs.length} 已選</span>
+            <span>命中 ${typeHitCount}/${attrs.length}</span>
           </button>
         `;
       }).join('')}
@@ -272,7 +271,7 @@ function renderAttributeFilters(cards = []) {
         const isSelected = selected.has(attr.key);
         const hitCount = Number(attr.hitCount || 0);
         const totalCount = Math.max(Number(attr.totalCount || 0), hitCount);
-        const countText = `${hitCount}/${totalCount}`;
+        const countText = `命中 ${hitCount}/${totalCount}`;
         return `
           <button type="button" class="attribute-chip${isSelected ? ' is-active' : ''}${attr.hitCount ? ' is-hit' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isSelected ? 'true' : 'false'}">
             <strong>${escapeHtml(attr.label)}</strong>
@@ -1039,17 +1038,22 @@ function renderKnowledgeCards(cards = [], options = {}) {
     container.innerHTML = '<div class="empty-state">目前選取的子屬性沒有知識卡；請點選其他子屬性擴大範圍。</div>';
     return;
   }
+  const routeHitIds = new Set(cards.map(cardId));
   container.innerHTML = visibleCards.map((card) => {
     const id = card.knowledge_id || card.id;
     const selected = state.selectedKnowledgeIds.has(id);
+    const isRouteHit = routeHitIds.has(id);
     const summaryText = listCardSummary(card);
     return `
-      <article class="knowledge-card${selected ? ' selected' : ''}" data-card-id="${escapeHtml(id)}" role="button" tabindex="0" aria-pressed="${selected ? 'true' : 'false'}">
+      <article class="knowledge-card${selected ? ' selected' : ''}${isRouteHit ? ' is-route-hit' : ' is-attribute-extension'}" data-card-id="${escapeHtml(id)}" role="button" tabindex="0" aria-pressed="${selected ? 'true' : 'false'}">
         <div class="card-head">
           <div>
             <h3>${escapeHtml(card.title || id)}</h3>
           </div>
-          <span class="confidence">${selected ? '已加入' : '候選卡'}</span>
+          <div class="card-badges" aria-label="卡片狀態">
+            ${selected ? '<span class="confidence selected-badge">已加入</span>' : ''}
+            <span class="confidence hit-state-badge">${isRouteHit ? '命中卡' : '延伸卡'}</span>
+          </div>
         </div>
         <p class="summary">${escapeHtml(summaryText)}</p>
         <p class="source-summary">${escapeHtml(sourceDisplaySummary(card))}</p>

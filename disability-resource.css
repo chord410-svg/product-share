@@ -202,10 +202,10 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .muted { color: var(--muted); }
 .package-list { display: grid; gap: 8px; }
 .package-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #f8fbfd; }
-.saved-package-area { border-top: 1px solid var(--line); margin: 12px 0; padding-top: 12px; }
+.saved-package-area { display: grid; gap: 12px; border-top: 1px solid var(--line); margin: 12px 0; padding-top: 12px; }
 .saved-package-header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
 .saved-package-header h3 { margin: 0; }
-.saved-package-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 12px; }
+.saved-package-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 340px)); justify-content: start; align-items: start; gap: 12px; margin-bottom: 12px; }
 .saved-package-card {
   display: grid;
   gap: 12px;
@@ -1000,19 +1000,24 @@ button:active {
 
 .workbench-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
+  justify-content: start;
+  align-items: start;
+  gap: 12px;
 }
 
 .workbench-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
-  padding: 10px;
+  padding: 12px;
   box-shadow: 0 8px 20px rgba(16, 32, 51, 0.05);
   cursor: pointer;
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+  max-width: 340px;
   transition: border-color .12s ease, box-shadow .12s ease, background .12s ease, transform .12s ease;
 }
 
@@ -1053,7 +1058,11 @@ button:active {
 .saved-summary {
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.3;
+  line-height: 1.38;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .status-badge {
@@ -1079,9 +1088,14 @@ button:active {
 
 .workbench-actions button {
   width: 100%;
-  min-height: 30px;
-  padding: 6px 8px;
+  min-height: 38px;
+  padding: 7px 8px;
+  border-radius: 7px;
   font-size: 12px;
+}
+
+.workbench-actions .print-action {
+  grid-column: 1 / -1;
 }
 
 .workbench-actions .primary-action {
@@ -1142,7 +1156,7 @@ button:active {
 
 @media (min-width: 1280px) {
   .workbench-grid {
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
   }
 }
 

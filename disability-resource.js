@@ -1,5 +1,7 @@
-const CACHE_VERSION = '20260615-knowledge-nav-v29';
+const CACHE_VERSION = '20260616-router-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
+const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
+const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
 
 const state = {
   scenarios: [],
@@ -55,6 +57,46 @@ function unique(items) {
     out.push(value);
   }
   return out;
+}
+
+function stableStringify(value) {
+  if (Array.isArray(value)) {
+    return `[${value.map((item) => stableStringify(item)).join(',')}]`;
+  }
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+async function stableHash(payload) {
+  const copy = { ...payload };
+  delete copy.content_hash;
+  const material = stableStringify(copy);
+  if (!window.crypto?.subtle) return `local-${material.length}`;
+  const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(material));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+function downloadTextFile(filename, mimeType, text) {
+  const blob = new Blob([text], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function safeFilename(value, suffix) {
+  const base = String(value || 'knowledge-pack')
+    .replace(/[\\/:*?"<>|]+/g, '-')
+    .replace(/\s+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80) || 'knowledge-pack';
+  return `${base}.${suffix}`;
 }
 
 function lineList(items) {
@@ -468,6 +510,16 @@ function writeCachedKnowledgePackages(packages) {
   }
 }
 
+function isLocalPackageRecord(record = {}) {
+  const id = String(record.package_id || record.id || '');
+  return id.startsWith('local_') || String(record.status || '').replaceAll('_', '-') === 'local-cache';
+}
+
+function removeCachedKnowledgePackage(packageId) {
+  const id = String(packageId || '');
+  writeCachedKnowledgePackages(readCachedKnowledgePackages().filter((row) => String(row.package_id || row.id) !== id));
+}
+
 function normalizePackageRecord(record = {}) {
   const id = String(record.package_id || record.id || `local_${Date.now()}`).trim();
   const items = asArray(record.items).map((item, index) => {
@@ -585,13 +637,33 @@ function currentDraftName() {
   return value && value !== '尚未產生知識副本' ? value : (state.currentDraftName || defaultDraftName(questionText.value || ''));
 }
 
-function startCurrentDraft({ question, directions = [], cards = [], source = 'local' }) {
+function routeStatusText(meta = {}, cardCount = 0, source = 'local') {
+  if (source === 'local') {
+    return cardCount ? `本地查詢：已先加入 ${cardCount} 張知識卡` : '本地查詢：尚未找到候選卡';
+  }
+  const confidence = Number(meta.confidence || 0);
+  const confidenceText = confidence ? `，信心 ${Math.round(confidence * 100)}%` : '';
+  const manual = meta.needs_manual_direction_choice ? '需人工選方向' : '已分流';
+  return `${manual}：已先加入 ${cardCount} 張知識卡${confidenceText}`;
+}
+
+function renderQuestionRouteStatus(meta = {}, cardCount = 0, source = 'local') {
+  const routeStatus = qs('#questionRouteStatus');
+  if (routeStatus) routeStatus.textContent = routeStatusText(meta, cardCount, source);
+  const missing = asArray(meta.missing_questions || meta.missing_slots);
+  if (missing.length) {
+    renderDraftContext(`建議補充：${missing.slice(0, 3).join('、')}。目前仍可先用已選知識卡整理副本。`);
+  }
+}
+
+function startCurrentDraft({ question, directions = [], cards = [], source = 'local', routeMeta = {} }) {
   state.activePackageId = '';
   state.currentLocalPackageId = `local_${Date.now()}`;
   state.currentQuestionSummary = maskSensitiveText(question || '');
   state.currentDraftName = defaultDraftName(question);
   setSelectedCards(cards);
   renderDraftContext(`已產生目前副本：${state.currentDraftName}，並自動加入 ${cards.length} 張知識卡。`);
+  renderQuestionRouteStatus(routeMeta, cards.length, source);
   renderOutputs();
 }
 
@@ -851,7 +923,7 @@ function keywordScore(card, query, directionIds = [], regionHints = []) {
   return score;
 }
 
-function localKnowledgeSearch(query, directionIds = [], limit = 8, regionHints = selectedRegions()) {
+function localKnowledgeSearch(query, directionIds = [], limit = 12, regionHints = selectedRegions()) {
   return state.knowledgeCards
     .map((card) => ({ card, score: keywordScore(card, query, directionIds, regionHints) }))
     .filter((row) => row.score > 0 || directionIds.some((id) => (row.card.directions || []).includes(id)))
@@ -1353,13 +1425,30 @@ function packageCount(record) {
 function openKnowledgeResult(record, options = {}) {
   const normalized = normalizePackageRecord(record);
   cacheKnowledgePackages([normalized]);
+  window.location.href = resultLinkForPackage(normalized, options);
+}
+
+function resultLinkForPackage(record, options = {}) {
+  const normalized = normalizePackageRecord(record);
   const query = new URLSearchParams({
     package_id: normalized.package_id,
     source: 'knowledge-nav',
     v: CACHE_VERSION,
   });
   if (options.print) query.set('print', '1');
-  window.location.href = `./disability-knowledge-result.html?${query.toString()}`;
+  const url = new URL('./disability-knowledge-result.html', window.location.href);
+  url.search = query.toString();
+  return url.href;
+}
+
+function resultShareUrl(record) {
+  return record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url || '';
+}
+
+function hasReadyOutput(record) {
+  const status = String(record.status || '').toLowerCase();
+  const output = asArray(record.outputs).find((item) => String(item.status || '').toLowerCase() === 'ready');
+  return status === 'result_ready' || Boolean(output) || Boolean(resultShareUrl(record));
 }
 
 function duplicatePackage(record) {
@@ -1379,6 +1468,65 @@ function duplicatePackage(record) {
   cacheKnowledgePackages([duplicate]);
   state.savedPackages = [duplicate, ...state.savedPackages.filter((row) => String(row.package_id || row.id) !== duplicate.package_id)];
   applySavedPackage(duplicate.package_id);
+}
+
+function removePackageFromState(packageId) {
+  const id = String(packageId || '');
+  state.savedPackages = state.savedPackages.filter((row) => String(row.package_id || row.id) !== id);
+  removeCachedKnowledgePackage(id);
+  state.expandedPackageIds.delete(id);
+  if (state.activePackageId === id || state.currentLocalPackageId === id) {
+    state.selectedKnowledgeIds.clear();
+    state.selectedCardSnapshots.clear();
+    state.activePackageId = '';
+    state.currentLocalPackageId = '';
+    state.currentDraftName = '';
+    state.currentQuestionSummary = '';
+    renderKnowledgeCards(state.currentKnowledgeCards || []);
+    renderOutputs();
+    renderDraftContext('已刪除目前知識副本；可重新輸入問題建立新的知識副本。');
+  }
+}
+
+async function deleteKnowledgePackage(record, button) {
+  const normalized = normalizePackageRecord(record);
+  const packageId = normalized.package_id;
+  const confirmed = window.confirm(`確定刪除「${normalized.name || '這個知識組合'}」？\n\n這只會刪除你的工作副本，不會刪除正式知識卡。`);
+  if (!confirmed) return;
+
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.classList.add('is-busy');
+  button.textContent = '刪除中...';
+
+  try {
+    if (isLocalPackageRecord(normalized)) {
+      removePackageFromState(packageId);
+      renderSavedPackages();
+      qs('#packageHint').textContent = '已刪除本機暫存知識組合。';
+      return;
+    }
+
+    if (!state.sessionToken) {
+      throw new Error('請從 Discord 入口重新開啟後再刪除後端知識組合。');
+    }
+
+    const payload = await fetchJson(`${apiPath(`/api/v1/disability-knowledge/packages/${encodeURIComponent(packageId)}`)}?session=${encodeURIComponent(state.sessionToken)}`, {
+      method: 'DELETE',
+    });
+    if (!payload.deleted) {
+      throw new Error('找不到可刪除的知識組合，或你沒有刪除權限。');
+    }
+
+    removePackageFromState(packageId);
+    renderSavedPackages();
+    qs('#packageHint').textContent = '已刪除知識組合。';
+  } catch (error) {
+    button.disabled = false;
+    button.classList.remove('is-busy');
+    button.textContent = originalText;
+    qs('#packageHint').textContent = `刪除失敗：${error.message || error}`;
+  }
 }
 
 function packageDirectionText(record) {
@@ -1451,7 +1599,8 @@ function renderSavedPackages() {
   container.innerHTML = records.map((record) => {
     const count = packageCount(record);
     const active = state.activePackageId === record.package_id;
-    const hasShare = Boolean(record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url);
+    const readyOutput = hasReadyOutput(record);
+    const shareUrl = resultShareUrl(record);
     const expanded = state.expandedPackageIds.has(record.package_id);
     const itemList = packageCardRows(record);
     const regionText = packageRegionText(record);
@@ -1471,10 +1620,10 @@ function renderSavedPackages() {
           <button class="edit-action" type="button" data-action="edit" data-package-id="${escapeHtml(record.package_id)}">繼續編輯</button>
           <button class="primary-action" type="button" data-action="view" data-package-id="${escapeHtml(record.package_id)}">查看結果</button>
           <button class="copy-action" type="button" data-action="duplicate" data-package-id="${escapeHtml(record.package_id)}">複製此副本</button>
-          <button class="danger-action" type="button" disabled title="第一版後端尚未開放刪除知識組合。">刪除</button>
-          ${hasShare ? `
+          <button class="danger-action" type="button" data-action="delete" data-package-id="${escapeHtml(record.package_id)}"${(!isLocalPackageRecord(record) && !state.sessionToken) ? ' disabled title="請從 Discord 入口重新開啟後再刪除後端知識組合。"' : ''}>刪除</button>
+          ${readyOutput ? `
             <button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}">複製連結</button>
-            <button class="qr-action" type="button" disabled title="QR Code 會在正式分享服務接上後提供。">查看 QR CODE</button>
+            <button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}"${shareUrl ? '' : ' data-degraded="1" title="正式分享 URL 尚未建立；目前保留本機結果頁與列印。"' }>查看 QR CODE</button>
             <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
           ` : ''}
         </div>
@@ -1503,7 +1652,9 @@ function renderSavedPackages() {
     });
   });
   container.querySelectorAll('[data-action]').forEach((button) => {
-    button.addEventListener('click', async () => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
       const packageId = button.dataset.packageId || '';
       const record = records.find((item) => String(item.package_id || item.id) === packageId);
       if (!record) return;
@@ -1515,11 +1666,22 @@ function renderSavedPackages() {
       } else if (button.dataset.action === 'duplicate') {
         duplicatePackage(record);
         setActiveView('knowledgeNav');
+      } else if (button.dataset.action === 'delete') {
+        await deleteKnowledgePackage(record, button);
       } else if (button.dataset.action === 'copy-link') {
-        const url = record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url || '';
+        const url = resultShareUrl(record) || resultLinkForPackage(record);
         if (url) await navigator.clipboard.writeText(url);
         button.textContent = '已複製';
         setTimeout(() => { button.textContent = '複製連結'; }, 1200);
+      } else if (button.dataset.action === 'qr') {
+        const url = resultShareUrl(record);
+        if (!url) {
+          qs('#packageHint').textContent = '正式分享 URL / QR 尚未建立；可先用「查看結果」或「列印 / 另存 PDF」。';
+          button.textContent = 'QR 尚未建立';
+          setTimeout(() => { button.textContent = '查看 QR CODE'; }, 1400);
+          return;
+        }
+        qs('#packageHint').textContent = '這份知識組合已有結果連結；QR 服務接上後會在此顯示。';
       } else if (button.dataset.action === 'print') {
         openKnowledgeResult(record, { print: true });
       }
@@ -1584,6 +1746,317 @@ async function loadSavedPackages({ quiet = false } = {}) {
   }
 }
 
+function sourceRefsFromSnapshots(snapshots) {
+  const refs = new Map();
+  snapshots.forEach((snapshot) => {
+    sourceRefs(snapshot).forEach((ref) => {
+      const key = ref.source_id || ref.url || ref.label || JSON.stringify(ref);
+      if (key && !refs.has(key)) refs.set(key, ref);
+    });
+  });
+  return [...refs.values()];
+}
+
+async function buildLocalKnowledgePack(record) {
+  const normalized = normalizePackageRecord(record);
+  const snapshots = packageSnapshots(normalized);
+  const payload = {
+    schema_version: KNOWLEDGE_PACK_SCHEMA_VERSION,
+    export_id: `local-kpex-${Date.now().toString(36)}`,
+    exported_at: Date.now() / 1000,
+    source_app_version: `disability-knowledge-nav-${CACHE_VERSION}`,
+    package_metadata: {
+      original_package_id: normalized.package_id,
+      name: normalized.name || '知識組合',
+      question_summary: normalized.question_summary || '',
+      direction_ids: asArray(normalized.direction_ids),
+      knowledge_ids: snapshots.map((card) => cardId(card)).filter(Boolean),
+      output_mode: normalized.output_mode || 'family',
+      status: normalized.status || 'local_cache',
+      created_at: normalized.created_at || Math.floor(Date.now() / 1000),
+      updated_at: normalized.updated_at || Math.floor(Date.now() / 1000),
+      created_by: {
+        discord_user_id: state.sessionUser?.id || state.sessionUser?.discord_id || '',
+        discord_user_name: state.sessionUser?.name || state.sessionUser?.username || '',
+      },
+    },
+    knowledge_snapshots: snapshots,
+    comparison_digests: snapshots.map((card) => comparisonDigest(card)).filter((digest) => digest?.comparison_group),
+    source_refs: sourceRefsFromSnapshots(snapshots),
+    output_history: asArray(normalized.outputs).map((output) => ({
+      output_id: output.output_id || output.id || '',
+      output_mode: output.output_mode || output.mode || '',
+      status: output.status || '',
+      share_url: output.share_url || '',
+      share_page_id: output.share_page_id || '',
+      created_at: output.created_at || '',
+      updated_at: output.updated_at || '',
+    })),
+    signature_status: 'unsigned-local',
+  };
+  payload.content_hash = await stableHash(payload);
+  return payload;
+}
+
+function knowledgePackToMarkdown(pack) {
+  const metadata = pack.package_metadata || {};
+  const snapshots = asArray(pack.knowledge_snapshots);
+  const lines = [
+    `# ${metadata.name || '知識組合封包'}`,
+    '',
+    `- 匯出時間：${pack.exported_at || ''}`,
+    `- 方向：${asArray(metadata.direction_ids).join('、') || '未指定'}`,
+    `- 知識卡數：${snapshots.length}`,
+    `- 封包版本：${pack.schema_version || KNOWLEDGE_PACK_SCHEMA_VERSION}`,
+    '',
+    '## 已選知識卡',
+    '',
+  ];
+  snapshots.forEach((snapshot, index) => {
+    lines.push(`${index + 1}. ${snapshot.title || cardId(snapshot)}`);
+    lines.push(`   - 摘要：${snapshot.family_safe_summary || snapshot.knowledge_brief || ''}`);
+    lines.push(`   - 來源：${sourceDisplaySummary(snapshot)}`);
+    lines.push(`   - 最後確認：${snapshot.last_checked_at || '待確認'}`);
+  });
+  lines.push('');
+  lines.push(`<!-- ${KNOWLEDGE_PACK_MANIFEST_MARKER}`);
+  lines.push('```json');
+  lines.push(JSON.stringify(pack, null, 2));
+  lines.push('```');
+  lines.push(`${KNOWLEDGE_PACK_MANIFEST_MARKER} -->`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+function extractKnowledgePackPayload(text) {
+  const raw = String(text || '').trim();
+  if (!raw) throw new Error('請先選擇檔案或貼上知識副本內容。');
+  if (raw.startsWith('{')) {
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') throw new Error('封包 JSON 格式不正確。');
+    return parsed;
+  }
+  const pattern = new RegExp(`${KNOWLEDGE_PACK_MANIFEST_MARKER}\\s*\`\`\`json\\s*([\\s\\S]*?)\\s*\`\`\`\\s*${KNOWLEDGE_PACK_MANIFEST_MARKER}`);
+  const match = raw.match(pattern);
+  if (!match) throw new Error('找不到 KNOWLEDGE_PACK_MANIFEST 區塊。');
+  return JSON.parse(match[1]);
+}
+
+function validateLocalKnowledgePack(pack) {
+  if (!pack || typeof pack !== 'object') throw new Error('封包格式不正確。');
+  if (pack.schema_version !== KNOWLEDGE_PACK_SCHEMA_VERSION) throw new Error(`不支援的封包版本：${pack.schema_version || '未指定'}`);
+  const snapshots = asArray(pack.knowledge_snapshots).filter((snapshot) => cardId(snapshot));
+  if (!snapshots.length) throw new Error('封包內沒有可匯入的知識卡 snapshot。');
+  return snapshots;
+}
+
+function importKnowledgePackLocally(pack) {
+  const snapshots = validateLocalKnowledgePack(pack);
+  const metadata = pack.package_metadata || {};
+  const now = Math.floor(Date.now() / 1000);
+  const record = normalizePackageRecord({
+    package_id: `local_import_${Date.now()}`,
+    name: `${metadata.name || '知識組合'} 匯入副本`,
+    question_summary: metadata.question_summary || '',
+    direction_ids: asArray(metadata.direction_ids),
+    knowledge_ids: snapshots.map((card) => cardId(card)),
+    items: snapshots.map((snapshot, index) => ({
+      knowledge_id: cardId(snapshot),
+      knowledge_snapshot: snapshot,
+      sort_order: index,
+      added_at: now,
+    })),
+    output_mode: metadata.output_mode || 'family',
+    status: 'local_cache',
+    created_at: now,
+    updated_at: now,
+  });
+  cacheKnowledgePackages([record]);
+  state.savedPackages = [record, ...state.savedPackages.filter((row) => String(row.package_id || row.id) !== record.package_id)];
+  applySavedPackage(record.package_id);
+  return record;
+}
+
+async function exportKnowledgePackage(record, format, button = null) {
+  const normalized = normalizePackageRecord(record);
+  const originalText = button?.textContent || '';
+  if (button) {
+    button.disabled = true;
+    button.classList.add('is-busy');
+    button.textContent = '匯出中...';
+  }
+  try {
+    let text = '';
+    let filename = '';
+    let mimeType = '';
+    const fmt = format === 'markdown' ? 'markdown' : 'json';
+    if (!isLocalPackageRecord(normalized) && state.sessionToken && state.apiBase && state.apiReady) {
+      const url = `${apiPath(`/api/v1/disability-knowledge/packages/${encodeURIComponent(normalized.package_id)}/export`)}?session=${encodeURIComponent(state.sessionToken)}&format=${fmt}`;
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.error || `HTTP ${response.status}`);
+      }
+      text = await response.text();
+      filename = safeFilename(normalized.name, fmt === 'markdown' ? 'knowledgepack.md' : 'knowledgepack.json');
+      mimeType = fmt === 'markdown' ? 'text/markdown;charset=utf-8' : 'application/json;charset=utf-8';
+    } else {
+      const pack = await buildLocalKnowledgePack(normalized);
+      text = fmt === 'markdown' ? knowledgePackToMarkdown(pack) : JSON.stringify(pack, null, 2);
+      filename = safeFilename(normalized.name, fmt === 'markdown' ? 'knowledgepack.md' : 'knowledgepack.json');
+      mimeType = fmt === 'markdown' ? 'text/markdown;charset=utf-8' : 'application/json;charset=utf-8';
+    }
+    downloadTextFile(filename, mimeType, text);
+    if (button) {
+      button.classList.remove('is-busy');
+      button.classList.add('is-done');
+      button.textContent = '已匯出';
+      setTimeout(() => {
+        button.disabled = false;
+        button.classList.remove('is-done');
+        button.textContent = originalText;
+      }, 1200);
+    }
+  } catch (error) {
+    if (button) {
+      button.disabled = false;
+      button.classList.remove('is-busy');
+      button.textContent = originalText;
+    }
+    const status = qs('#knowledgeExchangeStatus') || qs('#packageHint');
+    if (status) status.textContent = `匯出失敗：${error.message || error}`;
+  }
+}
+
+async function importKnowledgePackPayload(payload, button = null) {
+  const originalText = button?.textContent || '';
+  if (button) {
+    button.disabled = true;
+    button.classList.add('is-busy');
+    button.textContent = '匯入中...';
+  }
+  const status = qs('#importKnowledgePackStatus');
+  try {
+    let importedRecord = null;
+    if (state.sessionToken && state.apiBase && state.apiReady) {
+      const response = await fetch(`${apiPath('/api/v1/disability-knowledge/packages/import')}?session=${encodeURIComponent(state.sessionToken)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ knowledge_pack: payload }),
+      });
+      const body = await response.json().catch(() => ({}));
+      if (response.status === 409 && body.error === 'personal_data_warning') {
+        const allow = window.confirm(`匯入內容可能包含敏感資訊：${asArray(body.warnings).join('、') || '未列出'}。\n\n仍要以目前 Discord 使用者建立草稿嗎？`);
+        if (!allow) throw new Error('已取消匯入。');
+        const retry = await fetch(`${apiPath('/api/v1/disability-knowledge/packages/import')}?session=${encodeURIComponent(state.sessionToken)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ knowledge_pack: payload, allowPersonalData: true }),
+        });
+        const retryBody = await retry.json().catch(() => ({}));
+        if (!retry.ok || retryBody.ok === false) throw new Error(retryBody.error || `HTTP ${retry.status}`);
+        importedRecord = normalizePackageRecord(retryBody.package);
+      } else {
+        if (!response.ok || body.ok === false) throw new Error(body.error || `HTTP ${response.status}`);
+        importedRecord = normalizePackageRecord(body.package);
+      }
+      cacheKnowledgePackages([importedRecord]);
+      state.savedPackages = [importedRecord, ...state.savedPackages.filter((row) => String(row.package_id || row.id) !== importedRecord.package_id)];
+    } else {
+      importedRecord = importKnowledgePackLocally(payload);
+    }
+    if (status) status.textContent = `已匯入「${importedRecord.name || '知識組合'}」，並建立新的草稿。`;
+    applySavedPackage(importedRecord.package_id);
+    renderSavedPackages();
+    renderKnowledgeExchange();
+    setActiveView('knowledgePack');
+  } catch (error) {
+    if (status) status.textContent = `匯入失敗：${error.message || error}`;
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.classList.remove('is-busy');
+      button.textContent = originalText;
+    }
+  }
+}
+
+async function importKnowledgePackFromInputs(button = null) {
+  const fileInput = qs('#knowledgePackFileInput');
+  const pasteInput = qs('#knowledgePackPasteInput');
+  const file = fileInput?.files?.[0] || null;
+  const text = file ? await file.text() : (pasteInput?.value || '');
+  const payload = extractKnowledgePackPayload(text);
+  await importKnowledgePackPayload(payload, button);
+}
+
+function exchangeRecordRows() {
+  const cached = readCachedKnowledgePackages();
+  const merged = new Map(cached.map((record) => [String(record.package_id || record.id), normalizePackageRecord(record)]));
+  state.savedPackages.forEach((record) => {
+    const normalized = normalizePackageRecord(record);
+    merged.set(normalized.package_id, normalized);
+  });
+  return [...merged.values()].sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0));
+}
+
+function renderKnowledgeExchange() {
+  const list = qs('#knowledgeExchangeExportList');
+  const empty = qs('#knowledgeExchangeEmpty');
+  const status = qs('#knowledgeExchangeStatus');
+  if (!list) return;
+  const records = exchangeRecordRows();
+  if (status) {
+    if (state.sessionUser) {
+      const user = state.sessionUser.username || state.sessionUser.name || 'Discord 使用者';
+      status.textContent = `目前可匯入／匯出 ${user} 的知識組合；後端不可用時仍可匯出本機暫存封包。`;
+    } else {
+      status.textContent = '未連結 Discord 時可處理本機暫存副本；後端草稿需從 Discord 入口重新開啟後同步。';
+    }
+  }
+  if (empty) empty.hidden = records.length > 0;
+  if (!records.length) {
+    list.innerHTML = '<div class="empty-state">目前沒有可匯出的知識組合。回到知識導航建立副本後，這裡會出現匯出選項。</div>';
+    return;
+  }
+  list.innerHTML = records.map((record) => {
+    const count = packageCount(record);
+    const regionText = packageRegionText(record);
+    const statusClass = String(record.status || 'draft').replaceAll('_', '-');
+    return `
+      <article class="workbench-card exchange-card" data-exchange-card-id="${escapeHtml(record.package_id)}">
+        <div class="workbench-card-head">
+          <div>
+            <p class="eyebrow">知識組合｜${escapeHtml(regionText)}</p>
+            <h3>${escapeHtml(record.name || '未命名知識組合')}</h3>
+          </div>
+          <span class="status-badge ${escapeHtml(statusClass)}">${escapeHtml(statusLabel(record.status))}</span>
+        </div>
+        <p class="workbench-meta">${escapeHtml(packageDirectionText(record))}｜知識 ${count} 張｜更新 ${escapeHtml(formatDateTime(record.updated_at))}</p>
+        ${record.question_summary ? `<p class="saved-summary">${escapeHtml(record.question_summary)}</p>` : ''}
+        <div class="workbench-actions exchange-actions">
+          <button class="edit-action" type="button" data-exchange-action="export-json" data-package-id="${escapeHtml(record.package_id)}">匯出封包 JSON</button>
+          <button class="link-action" type="button" data-exchange-action="export-markdown" data-package-id="${escapeHtml(record.package_id)}">匯出 Markdown</button>
+          <button class="print-action" type="button" data-exchange-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
+        </div>
+      </article>
+    `;
+  }).join('');
+  list.querySelectorAll('[data-exchange-action]').forEach((button) => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const packageId = button.dataset.packageId || '';
+      const record = records.find((item) => String(item.package_id || item.id) === packageId);
+      if (!record) return;
+      const action = button.dataset.exchangeAction;
+      if (action === 'export-json') await exportKnowledgePackage(record, 'json', button);
+      else if (action === 'export-markdown') await exportKnowledgePackage(record, 'markdown', button);
+      else if (action === 'print') openKnowledgeResult(record, { print: true });
+    });
+  });
+}
+
 function setActiveView(viewName) {
   document.querySelectorAll('[data-view]').forEach((button) => {
     const active = button.dataset.view === viewName;
@@ -1600,6 +2073,11 @@ function setActiveView(viewName) {
     renderSavedPackages();
     if (state.sessionToken && state.apiBase && state.apiReady) {
       void loadSavedPackages({ quiet: true });
+    }
+  } else if (viewName === 'knowledgeExchange') {
+    renderKnowledgeExchange();
+    if (state.sessionToken && state.apiBase && state.apiReady) {
+      void loadSavedPackages({ quiet: true }).then(() => renderKnowledgeExchange());
     }
   }
 }
@@ -1673,19 +2151,19 @@ async function routeQuestion() {
       const cards = payload.knowledge_cards || [];
       const directions = payload.directions || [];
       state.routeResult = payload;
-      startCurrentDraft({ question, directions, cards, source: 'api' });
+      startCurrentDraft({ question, directions, cards, source: 'api', routeMeta: payload });
       renderDirections(directions);
       renderKnowledgeCards(cards, { resetAttributes: true });
       void autoSaveDraft();
-      qs('#apiStatus').textContent = `已找到知識卡：${payload.status || 'ok'}。`;
+      qs('#apiStatus').textContent = `已找到 ${cards.length} 張知識卡：${payload.status || 'ok'}。`;
       return;
     } catch (error) {
       qs('#apiStatus').textContent = `後端分流失敗，改用本頁本地知識卡：${error.message || error}`;
     }
   }
-  const localCards = localKnowledgeSearch(question, [], 8, selectedRegions());
+  const localCards = localKnowledgeSearch(question, [], 12, selectedRegions());
   state.routeResult = { directions: [], knowledge_cards: localCards };
-  startCurrentDraft({ question, directions: [], cards: localCards, source: 'local' });
+  startCurrentDraft({ question, directions: [], cards: localCards, source: 'local', routeMeta: {} });
   renderDirections([]);
   renderKnowledgeCards(localCards, { resetAttributes: true });
   qs('#apiStatus').textContent = '已使用本頁知識卡保守排序。';
@@ -1812,6 +2290,19 @@ async function init() {
     });
   }
   qs('#refreshPackagesButton').addEventListener('click', () => loadSavedPackages());
+  qs('#importKnowledgePackButton')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    void importKnowledgePackFromInputs(event.currentTarget);
+  });
+  qs('#clearImportKnowledgePackButton')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    const fileInput = qs('#knowledgePackFileInput');
+    const pasteInput = qs('#knowledgePackPasteInput');
+    if (fileInput) fileInput.value = '';
+    if (pasteInput) pasteInput.value = '';
+    const status = qs('#importKnowledgePackStatus');
+    if (status) status.textContent = '已清除匯入內容。';
+  });
   document.querySelectorAll('.copy-button[data-copy-target]').forEach((button) => {
     button.addEventListener('click', async () => {
       await copyTextFromNode(button.dataset.copyTarget);

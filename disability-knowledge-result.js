@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260615-knowledge-nav-v27';
+  const CACHE_VERSION = '20260616-router-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];
@@ -173,8 +173,13 @@
       return;
     }
     container.innerHTML = groups.map((group) => {
-      const primary = group.rows[0];
+      const boundaryLtc = unique(group.rows.map((row) => row.boundary.ltc));
+      const boundaryDisability = unique(group.rows.map((row) => row.boundary.disability));
+      const boundaryShared = unique(group.rows.map((row) => row.boundary.shared));
+      const actionLtc = unique(group.rows.map((row) => row.action.ltc));
+      const actionDisability = unique(group.rows.map((row) => row.action.disability));
       const reminders = unique(group.rows.flatMap((row) => row.action.reminders));
+      const family = unique(group.rows.map((row) => row.family));
       return `
         <article class="compare-table">
           <h4>${escapeHtml(group.label)} <span>${group.cards.length} 張知識卡</span></h4>
@@ -186,19 +191,19 @@
           </div>
           <div class="compare-row" role="row">
             <span role="cell">判斷邊界</span>
-            <p role="cell">${escapeHtml(primary.boundary.ltc)}</p>
-            <p role="cell">${escapeHtml(primary.boundary.disability)}</p>
-            <p role="cell">${escapeHtml(primary.boundary.shared)}</p>
+            <p role="cell">${escapeHtml(boundaryLtc.join('；'))}</p>
+            <p role="cell">${escapeHtml(boundaryDisability.join('；'))}</p>
+            <p role="cell">${escapeHtml(boundaryShared.join('；'))}</p>
           </div>
           <div class="compare-row" role="row">
             <span role="cell">查證與提醒</span>
-            <p role="cell">${escapeHtml(primary.action.ltc)}</p>
-            <p role="cell">${escapeHtml(primary.action.disability)}</p>
+            <p role="cell">${escapeHtml(actionLtc.join('；'))}</p>
+            <p role="cell">${escapeHtml(actionDisability.join('；'))}</p>
             <p role="cell">${escapeHtml(reminders.length ? reminders.join('、') : '需官方確認。')}</p>
           </div>
           <div class="compare-row" role="row">
             <span role="cell">家屬保守說法</span>
-            <p role="cell" class="compare-family">${escapeHtml(primary.family)}</p>
+            <p role="cell" class="compare-family">${escapeHtml(family.join('；'))}</p>
           </div>
         </article>
       `;

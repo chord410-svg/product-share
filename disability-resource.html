@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260615-knowledge-nav-v29" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260615-knowledge-nav-v29" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260615-knowledge-nav-v29" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260616-router-v1" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260616-router-v1" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260616-router-v1" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
@@ -45,7 +45,7 @@
       <div id="draftContextPanel" class="draft-context-panel draft-context-inline">
         <div class="draft-context-item">
           <span class="draft-inline-label">輸入問題</span>
-          <strong>準備查證</strong>
+          <strong id="questionRouteStatus">準備查證</strong>
         </div>
         <div class="draft-context-item">
           <span class="draft-inline-label">副本名稱</span>
@@ -124,13 +124,6 @@
       目前還沒有知識組合。回到知識導航，尋找並點選知識卡後會先建立草稿。
     </div>
     <section class="saved-package-area panel" aria-label="已儲存的知識組合">
-      <div class="saved-package-header">
-        <div>
-          <p class="eyebrow">Saved Knowledge Packs</p>
-          <h2>已儲存的知識組合</h2>
-          <p class="small-note">從 Discord 入口進入時，這裡會載入你先前建立的草稿或結果。</p>
-        </div>
-      </div>
       <div id="savedPackages" class="workbench-grid"></div>
     </section>
   </section>
@@ -138,14 +131,45 @@
   <section class="exchange-shell tab-panel" id="knowledgeExchangeView" role="tabpanel" aria-labelledby="knowledgeExchangeTabButton" hidden>
     <div class="workbench-head">
       <div>
-        <p class="eyebrow">知識副本</p>
+        <p class="eyebrow">Knowledge Pack Exchange</p>
         <h2>知識副本</h2>
-        <p class="muted-text">第一版先保留匯出／匯入工作區位置；正式知識副本 JSON 匯入匯出會沿用長照資源副本的安全規則。</p>
+        <p class="muted-text" id="knowledgeExchangeStatus">匯入或匯出知識副本封包，方便交接、備份、跨裝置重建草稿。</p>
       </div>
     </div>
-    <section class="panel">
-      <h2>知識副本功能準備中</h2>
-      <p class="section-note">目前可先用「我的知識組合」中的複製功能備份內容；後續會支援含卡片副本與內容雜湊的知識副本 JSON。</p>
+    <section class="import-pack-panel panel" aria-label="匯入知識副本">
+      <div class="import-pack-head">
+        <div>
+          <p class="eyebrow">Import Knowledge Pack</p>
+          <h2>匯入知識副本</h2>
+          <p class="muted-text">支援 .knowledgepack.json、含封包區塊的 Markdown，匯入後會建立新的草稿，不覆蓋原本紀錄。</p>
+        </div>
+      </div>
+      <div class="import-pack-grid">
+        <label class="field">
+          <span>上傳封包或 Markdown</span>
+          <input id="knowledgePackFileInput" type="file" accept=".json,.knowledgepack.json,.md,.markdown,application/json,text/markdown">
+        </label>
+      </div>
+      <label class="field">
+        <span>貼上封包 JSON 或 Markdown manifest</span>
+        <textarea id="knowledgePackPasteInput" rows="4" placeholder="可貼上 .knowledgepack.json 內容，或 Markdown 裡的 KNOWLEDGE_PACK_MANIFEST 區塊"></textarea>
+      </label>
+      <div class="import-pack-actions">
+        <button type="button" id="importKnowledgePackButton">匯入知識副本</button>
+        <button type="button" id="clearImportKnowledgePackButton">清除匯入內容</button>
+        <p class="muted-text" id="importKnowledgePackStatus" aria-live="polite">匯入會建立新的知識組合草稿。</p>
+      </div>
+    </section>
+    <section class="exchange-export-panel panel" aria-label="匯出知識副本">
+      <div class="import-pack-head">
+        <div>
+          <p class="eyebrow">Export Knowledge Packs</p>
+          <h2>匯出既有知識組合</h2>
+          <p class="muted-text">選擇自己的知識組合，匯出可再匯入的 JSON 封包，或可閱讀的 Markdown 備份。</p>
+        </div>
+      </div>
+      <div class="exchange-empty" id="knowledgeExchangeEmpty" hidden>目前沒有可匯出的知識組合。</div>
+      <div class="exchange-export-list" id="knowledgeExchangeExportList" aria-live="polite"></div>
     </section>
   </section>
 
@@ -166,6 +190,6 @@
     </article>
   </div>
 
-  <script src="disability-resource.js?v=20260615-knowledge-nav-v29"></script>
+  <script src="disability-resource.js?v=20260616-router-v1"></script>
 </body>
 </html>

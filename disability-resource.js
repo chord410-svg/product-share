@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260615-knowledge-nav-v27';
+const CACHE_VERSION = '20260615-knowledge-nav-v28';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 
 const state = {
@@ -17,7 +17,7 @@ const state = {
   selectedRegions: new Set(['新北市', '中央共通']),
   outputMode: 'family',
   activeAttributeFilter: '',
-  activeAttributeGroup: 'system_scope',
+  activeAttributeGroup: 'domain',
   activeAttributeSelections: {},
   currentKnowledgeCards: [],
   generationHistory: [],
@@ -106,11 +106,11 @@ const DOMAIN_LABELS = {
 };
 
 const ATTRIBUTE_TYPE_LABELS = {
-  domain: '知識領域',
+  domain: '主題',
   system_scope: '系統',
   knowledge_type: '類型',
   region_scope: '地區',
-  comparison_group: '同屬性',
+  comparison_group: '比較',
 };
 
 function labelText(value) {
@@ -224,6 +224,8 @@ function resetAttributeSelections(cards = []) {
     const selected = new Set(attrs.filter((attr) => hits.has(attr.key)).map((attr) => attr.key));
     if (selected.size) state.activeAttributeSelections[type] = selected;
   }
+  const preferredOrder = ['domain', 'system_scope', 'knowledge_type', 'region_scope', 'comparison_group'];
+  state.activeAttributeGroup = preferredOrder.find((type) => state.activeAttributeSelections[type]?.size) || 'system_scope';
 }
 
 function cardsForAttributeSelection(fallbackCards = []) {
@@ -263,9 +265,9 @@ function renderAttributeFilters(cards = []) {
   const selectedCounts = selectedAttributeCountMap();
   const grouped = groupAttributeFilters(catalog.map((attr) => ({ ...attr, selectedCount: selectedCounts.get(attr.key) || 0 })));
   if (!grouped.has(state.activeAttributeGroup)) {
-    state.activeAttributeGroup = grouped.has('system_scope') ? 'system_scope' : catalog[0].type;
+    state.activeAttributeGroup = grouped.has('domain') ? 'domain' : (grouped.has('system_scope') ? 'system_scope' : catalog[0].type);
   }
-  const typeOrder = ['system_scope', 'domain', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
+  const typeOrder = ['domain', 'system_scope', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
   const activeSubs = grouped.get(state.activeAttributeGroup) || [];
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);

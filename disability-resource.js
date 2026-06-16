@@ -417,7 +417,7 @@ function comparisonDigest(card) {
       shared: firstCompareText([boundary.shared, comparison?.summary], '未經官方窗口確認前，不判定資格、不承諾金額，也不請家屬先購買或施工。'),
     },
     action: {
-      ltc: firstCompareText([action.ltc, ltc.action, ltc.window, ltc.documents, ltc.path], '詢問 1966、長照管理中心或地方承辦單位是否有可用服務路徑與文件要求。'),
+      ltc: firstCompareText([action.ltc, ltc.action, ltc.window, ltc.documents, ltc.path], '詢問地方照管中心、長照承辦窗口或特約輔具服務單位是否有可用服務路徑與文件要求。'),
       disability: firstCompareText([action.disability, disability.action, disability.window, disability.documents, disability.path], '詢問社會局、輔具資源中心或身障福利窗口是否有品項、評估與事前核定要求。'),
       reminders,
     },
@@ -1148,60 +1148,96 @@ function sourceExtractsHtml(card) {
   `;
 }
 
-function packageBoundarySummary(card) {
-  const domain = String(card.domain || '').trim();
-  const knowledgeOutputs = asArray(card.knowledge_package_outputs).map(labelText);
-  const resourceCandidates = asArray(card.resource_package_candidates).map(labelText);
-  const mergeNote = compactSentence(card.card_merge_note || '');
-  const parts = [];
-  if (domain) parts.push(`知識領域：${domainLabel(domain)}`);
-  if (knowledgeOutputs.length) parts.push(`知識包輸出：${knowledgeOutputs.join('、')}`);
-  if (resourceCandidates.length) {
-    parts.push(`資源包候選：${resourceCandidates.join('、')}`);
-  } else if (domain === 'smart_assistive') {
-    parts.push('資源包候選：需另轉成具體窗口、申請頁或服務資源，不直接用政策卡取代資源卡');
+function sanitizeCaseManagerContact(text) {
+  return compactSentence(text)
+    .replace(/問\s*1966\s*或/g, '問')
+    .replace(/詢問\s*1966\s*、/g, '詢問')
+    .replace(/1966、/g, '')
+    .replace(/1966/g, '地方照管中心或地方長照承辦窗口')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function suggestedContactRows(card) {
+  const explicitContacts = asArray(card.suggested_contacts || card.contact_windows || card.check_contacts);
+  if (explicitContacts.length) {
+    return explicitContacts.map((contact) => {
+      if (contact && typeof contact === 'object') {
+        const name = contact.name || contact.title || contact.window || contact.label || '查證窗口';
+        const purpose = contact.purpose || contact.reason || contact.note || '';
+        const phone = contact.phone ? `｜${contact.phone}` : '';
+        const url = contact.url && /^https?:\/\//.test(String(contact.url))
+          ? `｜<a class="source-link" href="${escapeHtml(contact.url)}" target="_blank" rel="noopener noreferrer">官方連結</a>`
+          : '';
+        return `${escapeHtml(name)}${phone}${url}${purpose ? `：${escapeHtml(purpose)}` : ''}`;
+      }
+      return escapeHtml(sanitizeCaseManagerContact(contact));
+    }).filter(Boolean);
   }
-  if (mergeNote) parts.push(`合併規則：${mergeNote}`);
-  return parts.join('。');
+
+  const digest = comparisonDigest(card);
+  const comparison = card?.comparison || {};
+  const ltcWindow = sanitizeCaseManagerContact(digest?.action?.ltc || comparison?.ltc_side?.window || '');
+  const disabilityWindow = sanitizeCaseManagerContact(digest?.action?.disability || comparison?.disability_side?.window || '');
+  const contacts = [];
+  if (ltcWindow) contacts.push(`長照側：${escapeHtml(ltcWindow)}`);
+  if (disabilityWindow) contacts.push(`身障側：${escapeHtml(disabilityWindow)}`);
+  if (!contacts.length) {
+    contacts.push('尚未建立明確查證窗口；可先依來源中的地方承辦單位、輔具資源中心或特約服務單位補查。');
+  }
+  return contacts;
 }
 
-function boundaryDetailHtml(card) {
-  const digest = comparisonDigest(card);
-  const boundary = digest?.boundary || {};
-  const applies = unique(card.applies_when || []);
-  const notApplies = unique(card.not_applies_when || []);
+function resourceHintHtml(card) {
+  const ids = asArray(card.related_resource_ids).map(compactSentence).filter(Boolean);
+  if (!ids.length) return '<p class="muted">對應資源卡：待建立。此卡先作制度與查證知識使用。</p>';
+  return `<p>對應資源卡：${ids.map((id) => `<code>${escapeHtml(id)}</code>`).join('、')}</p>`;
+}
+
+function actionDetailHtml(card) {
+  const contacts = suggestedContactRows(card);
+  const questions = unique(card.phone_check_questions || []);
   return `
     <div class="detail-grid">
-      <div class="detail-field"><strong>長照側</strong>${valueHtml(boundary.ltc, '長照側需先確認是否有對應服務、品項、評估或地方承辦流程。')}</div>
-      <div class="detail-field"><strong>身障側</strong>${valueHtml(boundary.disability, '身障側需查地方身障福利、輔具資源中心或社會局窗口。')}</div>
-      <div class="detail-field detail-field-wide"><strong>共同限制</strong>${valueHtml(boundary.shared, '未經官方窗口確認前，不判定資格、不承諾金額。')}</div>
-      <div class="detail-field"><strong>適用情境</strong>${listHtml(applies, '尚未標示適用情境。')}</div>
-      <div class="detail-field"><strong>不適用情境</strong>${listHtml(notApplies, '尚未標示排除情境。')}</div>
+      <div class="detail-field detail-field-wide"><strong>建議查證窗口</strong>${listHtml(contacts, '尚未建立明確查證窗口。')}</div>
+      <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(questions, '尚未整理電話確認問題；請先確認窗口、文件、是否需事前核定或租賃服務責任。')}</div>
+      <div class="detail-field detail-field-wide"><strong>對應資源卡</strong>${resourceHintHtml(card)}</div>
     </div>
   `;
 }
 
-function actionReminderHtml(card) {
+function singleCardComparisonHtml(card) {
   const digest = comparisonDigest(card);
-  const action = digest?.action || {};
-  const reminders = unique([
-    ...looseArray(action.reminders),
-    ...looseArray(card.care_manager_notes || card.internal_notes),
-  ]);
-  const packageBoundary = packageBoundarySummary(card);
+  if (!digest) {
+    return '<div class="empty-state">此卡尚未設定同屬性比較資料；可先用「知識整理與解釋」與「查證行動」。</div>';
+  }
+  const side = String(card.system_side || card.side || '').trim();
+  const sideLabel = side === 'ltc'
+    ? '長照側'
+    : side === 'disability'
+      ? '身障側'
+      : side === 'shared'
+        ? '共同提醒'
+        : '未指定側別';
+  const sideBoundary = side === 'ltc'
+    ? digest.boundary.ltc
+    : side === 'disability'
+      ? digest.boundary.disability
+      : digest.boundary.shared;
+  const sideAction = side === 'ltc'
+    ? digest.action.ltc
+    : side === 'disability'
+      ? digest.action.disability
+      : digest.action.reminders.join('、');
   return `
     <div class="detail-grid">
-      <div class="detail-field"><strong>長照側查證</strong>${valueHtml(action.ltc, '詢問 1966、長照管理中心或地方承辦單位是否有可用服務路徑與文件要求。')}</div>
-      <div class="detail-field"><strong>身障側查證</strong>${valueHtml(action.disability, '詢問社會局、輔具資源中心或身障福利窗口是否有品項、評估與事前核定要求。')}</div>
-      <div class="detail-field detail-field-wide"><strong>共同提醒</strong>${listHtml(reminders, '請依官方窗口與地方承辦規定確認。')}</div>
-      <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>
-      <div class="detail-field detail-field-wide"><strong>知識包／資源包邊界</strong>${valueHtml(packageBoundary, '尚待補齊知識包／資源包邊界。')}</div>
+      <div class="detail-field"><strong>同屬性</strong>${escapeHtml(digest.label || digest.group)}</div>
+      <div class="detail-field"><strong>本卡側別</strong>${escapeHtml(sideLabel)}</div>
+      <div class="detail-field detail-field-wide"><strong>本卡比較摘要</strong>${valueHtml(sideBoundary, '此卡尚未整理本側比較摘要。')}</div>
+      <div class="detail-field detail-field-wide"><strong>本卡查證摘要</strong>${valueHtml(sideAction, '此卡尚未整理本側查證摘要。')}</div>
+      <div class="detail-field detail-field-wide"><strong>完整比較位置</strong><p>完整左右比較請到「我的知識組合」選好同屬性卡片後，按「查看結果」。若只加入一側，另一側會顯示待補或未收錄，不會由系統推論。</p></div>
     </div>
   `;
-}
-
-function phoneDetailHtml(card) {
-  return `<div class="detail-field">${listHtml(card.phone_check_questions || [], '請確認承辦窗口、文件、是否需事前核定。')}</div>`;
 }
 
 function sourceTrackingHtml(card) {
@@ -1252,9 +1288,11 @@ function detailTabsHtml(card) {
         ${knowledgeSummaryPanelHtml(card)}
       </section>
     `],
-    ['boundary', '判斷邊界', boundaryDetailHtml(card)],
-    ['action', '查證與提醒', actionReminderHtml(card)],
+    ['action', '查證行動', actionDetailHtml(card)],
   ];
+  if (comparisonDigest(card)) {
+    tabs.push(['comparison', '長照／身障比較', singleCardComparisonHtml(card)]);
+  }
   return `
     <div class="detail-tab-list" role="tablist" aria-label="詳細卡片資訊分類">
       ${tabs.map(([id, label], index) => detailTabButton(id, label, index === 0)).join('')}

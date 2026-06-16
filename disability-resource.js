@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260616-router-v1';
+const CACHE_VERSION = '20260616-smart-knowledge-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1062,14 +1062,32 @@ function compactSentence(value) {
   return String(value || '').trim().replace(/\s+/g, ' ');
 }
 
+function paragraphsHtml(value, fallback = '尚待補齊內容。') {
+  const text = String(value || '').trim();
+  if (!text) return `<p>${escapeHtml(fallback)}</p>`;
+  return text
+    .split(/\n{2,}/)
+    .map((part) => compactSentence(part))
+    .filter(Boolean)
+    .map((part) => `<p>${escapeHtml(part)}</p>`)
+    .join('');
+}
+
 function firstText(items, fallback = '') {
   return compactSentence(asArray(items)[0] || fallback);
 }
 
 function knowledgeExplanationHtml(card) {
   const explicit = compactSentence(card.care_manager_explanation || card.knowledge_brief || '');
+  const integrated = String(card.integrated_content || '').trim();
   const source = bestSourceRef(card);
   const sourceLead = source ? `根據 ${sourceLinkHtml(source)}，` : '依目前卡片資料，';
+  if (integrated) {
+    return `
+      ${explicit ? `<p><strong>摘要。</strong>${escapeHtml(explicit)}</p>` : ''}
+      <div class="integrated-content">${paragraphsHtml(integrated)}</div>
+    `;
+  }
   if (explicit) return `<p>${sourceLead}${escapeHtml(explicit)}</p>`;
 
   const comparison = card?.comparison || {};
@@ -1082,6 +1100,51 @@ function knowledgeExplanationHtml(card) {
   return `
     <p>${sourceLead}${escapeHtml(main)}</p>
     <p>${escapeHtml(operation)}</p>
+  `;
+}
+
+function sourceExtracts(card) {
+  return Array.isArray(card?.source_extracts)
+    ? card.source_extracts.filter((row) => row && typeof row === 'object')
+    : [];
+}
+
+function sourceExtractContentHtml(extract) {
+  const content = Array.isArray(extract.content)
+    ? extract.content
+    : String(extract.content || '').split(/\n+/);
+  const rows = content.map((row) => compactSentence(row)).filter(Boolean);
+  if (!rows.length) return '<p class="muted">此來源尚待補齊資料本體整理。</p>';
+  return rows.map((row) => `<p>${escapeHtml(row)}</p>`).join('');
+}
+
+function sourceExtractsHtml(card) {
+  const extracts = sourceExtracts(card);
+  if (!extracts.length) {
+    return '<p class="muted">此卡尚未建立資料本體整理；請先回來源連結人工查閱。</p>';
+  }
+  return `
+    <div class="source-extract-list">
+      ${extracts.map((extract, index) => {
+        const url = String(extract.url || '');
+        const title = extract.source_title || extract.title || extract.source_id || `來源 ${index + 1}`;
+        const sourceLink = /^https?:\/\//.test(url)
+          ? `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
+          : escapeHtml(title);
+        return `
+          <article class="source-extract-card">
+            <div class="source-extract-meta">
+              <span>來源屬性：${escapeHtml(sourceLevelLabel(extract.source_level))}</span>
+              <span>資料來源：${escapeHtml(extract.agency || '待補')}</span>
+              <span>建檔日期：${escapeHtml(extract.created_at || '待確認')}</span>
+              <span>更新時間：${escapeHtml(extract.updated_at || extract.last_checked_at || '待確認')}</span>
+            </div>
+            <h4>${sourceLink}</h4>
+            <div class="source-extract-content">${sourceExtractContentHtml(extract)}</div>
+          </article>
+        `;
+      }).join('')}
+    </div>
   `;
 }
 
@@ -1159,13 +1222,34 @@ function detailTabPanel(id, content, active = false) {
   return `<section class="detail-tab-panel" data-detail-panel="${escapeHtml(id)}"${active ? '' : ' hidden'}>${content}</section>`;
 }
 
+function knowledgeModeButton(id, label, active = false) {
+  return `<button class="knowledge-mode-button${active ? ' is-active' : ''}" type="button" data-knowledge-detail-mode="${escapeHtml(id)}">${escapeHtml(label)}</button>`;
+}
+
+function knowledgeModePanel(id, content, active = false) {
+  return `<div class="knowledge-mode-panel" data-knowledge-detail-panel="${escapeHtml(id)}"${active ? '' : ' hidden'}>${content}</div>`;
+}
+
+function knowledgeSummaryPanelHtml(card) {
+  return `
+    <div class="knowledge-mode-switch" role="tablist" aria-label="知識整理顯示模式">
+      ${knowledgeModeButton('integrated', '摘要與內容整合', true)}
+      ${knowledgeModeButton('sources', '資料本體整理')}
+    </div>
+    <div class="knowledge-mode-panels">
+      ${knowledgeModePanel('integrated', `<div class="detail-brief">${knowledgeExplanationHtml(card)}</div>`, true)}
+      ${knowledgeModePanel('sources', sourceExtractsHtml(card))}
+    </div>
+  `;
+}
+
 function detailTabsHtml(card) {
   const tabs = [
     ['summary', '知識整理與解釋', `
       <section class="detail-section detail-brief-section">
         <p class="eyebrow">知識整理與解釋</p>
         <h3>政策、做法與條件邊界</h3>
-        <div class="detail-brief">${knowledgeExplanationHtml(card)}</div>
+        ${knowledgeSummaryPanelHtml(card)}
       </section>
     `],
     ['boundary', '判斷邊界', boundaryDetailHtml(card)],
@@ -1190,6 +1274,17 @@ function bindDetailTabs(container) {
       });
       container.querySelectorAll('.detail-tab-panel').forEach((panel) => {
         panel.hidden = panel.dataset.detailPanel !== tab;
+      });
+    });
+  });
+  container.querySelectorAll('.knowledge-mode-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const mode = button.dataset.knowledgeDetailMode || '';
+      container.querySelectorAll('.knowledge-mode-button').forEach((node) => {
+        node.classList.toggle('is-active', node === button);
+      });
+      container.querySelectorAll('.knowledge-mode-panel').forEach((panel) => {
+        panel.hidden = panel.dataset.knowledgeDetailPanel !== mode;
       });
     });
   });

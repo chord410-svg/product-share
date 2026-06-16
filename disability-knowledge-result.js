@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260616-smart-knowledge-v1';
+  const CACHE_VERSION = '20260617-comparison-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];
@@ -66,7 +66,7 @@
   }
 
   function lineList(items, fallback = '尚待補齊，請先回官方窗口查證。') {
-    const rows = unique(items);
+    const rows = unique(asList(items));
     if (!rows.length) return fallback;
     return rows.map((item, index) => `${index + 1}. ${item}`).join('\n');
   }
@@ -87,20 +87,42 @@
     }).join('\n');
   }
 
+  function normalizeSystemSide(value) {
+    const raw = String(value || '').trim().toLowerCase();
+    if (['ltc', 'long_term_care', 'longtermcare', '長照'].includes(raw)) return 'ltc';
+    if (['disability', '身障', 'disabled'].includes(raw)) return 'disability';
+    if (['shared', '共同'].includes(raw)) return 'shared';
+    return '';
+  }
+
+  function cardSystemSide(card) {
+    const explicit = normalizeSystemSide(card?.comparison_digest?.system_side || card?.system_side || card?.side);
+    if (explicit) return explicit;
+    const scopes = asList(card?.system_scope).map((item) => String(item));
+    const hasLtc = scopes.some((item) => item.includes('長照'));
+    const hasDisability = scopes.some((item) => item.includes('身障'));
+    if (hasLtc && !hasDisability) return 'ltc';
+    if (hasDisability && !hasLtc) return 'disability';
+    return 'unknown';
+  }
+
   function comparisonDigest(card) {
+    const side = cardSystemSide(card);
     const digest = card.comparison_digest || {};
     if (digest.boundary || digest.action) {
       return {
         group: digest.comparison_group || card.comparison_group || '',
         label: digest.group_label || card.comparison_group_label || card.title || cardId(card),
+        side,
+        card_title: card.title || cardId(card),
         boundary: {
-          ltc: digest.boundary?.ltc || '長照側需依官方服務項目與地方承辦流程查證。',
-          disability: digest.boundary?.disability || '身障側需依地方身障福利、輔具中心或社會局窗口查證。',
+          ltc: digest.boundary?.ltc || '',
+          disability: digest.boundary?.disability || '',
           shared: digest.boundary?.shared || '未經官方確認前，不判定資格、不承諾補助金額。',
         },
         action: {
-          ltc: digest.action?.ltc || '詢問 1966、長照中心或地方承辦單位。',
-          disability: digest.action?.disability || '詢問社會局、輔具資源中心或身障福利窗口。',
+          ltc: digest.action?.ltc || '',
+          disability: digest.action?.disability || '',
           reminders: asList(digest.action?.reminders),
         },
         family: digest.family_wording || card.family_safe_summary || '請先查證官方路徑，再提供家屬保守說明。',
@@ -112,14 +134,16 @@
     return {
       group,
       label: comparison.group_label || card.comparison_group_label || card.title || cardId(card),
+      side,
+      card_title: card.title || cardId(card),
       boundary: {
-        ltc: comparison.ltc_side || '長照側需依官方服務項目與地方承辦流程查證。',
-        disability: comparison.disability_side || '身障側需依地方身障福利、輔具中心或社會局窗口查證。',
+        ltc: comparison.ltc_side || '',
+        disability: comparison.disability_side || '',
         shared: comparison.shared_boundary || '未經官方確認前，不判定資格、不承諾補助金額。',
       },
       action: {
-        ltc: comparison.ltc_action || '詢問 1966、長照中心或地方承辦單位。',
-        disability: comparison.disability_action || '詢問社會局、輔具資源中心或身障福利窗口。',
+        ltc: comparison.ltc_action || '',
+        disability: comparison.disability_action || '',
         reminders: asList(comparison.shared_risks || card.care_manager_notes),
       },
       family: comparison.family_wording || card.family_safe_summary || '請先查證官方路徑，再提供家屬保守說明。',
@@ -136,10 +160,23 @@
         return;
       }
       if (!groups.has(digest.group)) {
-        groups.set(digest.group, { label: digest.label, rows: [], cards: [] });
+        groups.set(digest.group, {
+          label: digest.label,
+          rows: [],
+          cards: [],
+          ltcRows: [],
+          disabilityRows: [],
+          sharedRows: [],
+          unknownRows: [],
+        });
       }
-      groups.get(digest.group).rows.push(digest);
-      groups.get(digest.group).cards.push(card);
+      const group = groups.get(digest.group);
+      group.rows.push(digest);
+      group.cards.push(card);
+      if (digest.side === 'ltc') group.ltcRows.push(digest);
+      else if (digest.side === 'disability') group.disabilityRows.push(digest);
+      else if (digest.side === 'shared') group.sharedRows.push(digest);
+      else group.unknownRows.push(digest);
     });
     return { groups: [...groups.values()], skipped };
   }
@@ -165,6 +202,19 @@
     ].join('\n')).join('\n\n') || '尚未加入知識卡。';
   }
 
+  function joinedCell(items, fallback) {
+    const rows = unique(items);
+    return rows.length ? rows.join('；') : fallback;
+  }
+
+  function sideBoundary(rows, side, fallback) {
+    return joinedCell(rows.map((row) => row.boundary?.[side]), fallback);
+  }
+
+  function sideAction(rows, side, fallback) {
+    return joinedCell(rows.map((row) => row.action?.[side]), fallback);
+  }
+
   function renderComparison() {
     const container = $('comparisonOutput');
     const { groups, skipped } = groupedComparisons();
@@ -173,16 +223,19 @@
       return;
     }
     container.innerHTML = groups.map((group) => {
-      const boundaryLtc = unique(group.rows.map((row) => row.boundary.ltc));
-      const boundaryDisability = unique(group.rows.map((row) => row.boundary.disability));
-      const boundaryShared = unique(group.rows.map((row) => row.boundary.shared));
-      const actionLtc = unique(group.rows.map((row) => row.action.ltc));
-      const actionDisability = unique(group.rows.map((row) => row.action.disability));
+      const boundaryLtc = sideBoundary(group.ltcRows, 'ltc', '尚未加入同屬性的長照側知識卡；請回知識導航加入長照側資料，或標示目前未收錄。');
+      const boundaryDisability = sideBoundary(group.disabilityRows, 'disability', '尚未加入同屬性的身障側知識卡；請回知識導航加入身障側資料，或標示目前未收錄。');
+      const boundaryShared = joinedCell(group.rows.map((row) => row.boundary.shared), '未經官方確認前，不判定資格、不承諾補助金額。');
+      const actionLtc = sideAction(group.ltcRows, 'ltc', '尚未加入長照側查證行動；不得代替長照側推論。');
+      const actionDisability = sideAction(group.disabilityRows, 'disability', '尚未加入身障側查證行動；不得代替身障側推論。');
       const reminders = unique(group.rows.flatMap((row) => row.action.reminders));
       const family = unique(group.rows.map((row) => row.family));
+      const unknownNote = group.unknownRows.length
+        ? `<div class="empty-state">${escapeHtml(group.unknownRows.map((row) => row.card_title).join('、'))} 缺 system_side，已列入此比較群組但未放入長照/身障任一側。</div>`
+        : '';
       return `
         <article class="compare-table">
-          <h4>${escapeHtml(group.label)} <span>${group.cards.length} 張知識卡</span></h4>
+          <h4>${escapeHtml(group.label)} <span>${group.cards.length} 張知識卡｜長照 ${group.ltcRows.length}｜身障 ${group.disabilityRows.length}</span></h4>
           <div class="compare-row compare-head" role="row">
             <span role="columnheader">面向</span>
             <span role="columnheader">長照側</span>
@@ -191,20 +244,21 @@
           </div>
           <div class="compare-row" role="row">
             <span role="cell">判斷邊界</span>
-            <p role="cell">${escapeHtml(boundaryLtc.join('；'))}</p>
-            <p role="cell">${escapeHtml(boundaryDisability.join('；'))}</p>
-            <p role="cell">${escapeHtml(boundaryShared.join('；'))}</p>
+            <p role="cell">${escapeHtml(boundaryLtc)}</p>
+            <p role="cell">${escapeHtml(boundaryDisability)}</p>
+            <p role="cell">${escapeHtml(boundaryShared)}</p>
           </div>
           <div class="compare-row" role="row">
             <span role="cell">查證與提醒</span>
-            <p role="cell">${escapeHtml(actionLtc.join('；'))}</p>
-            <p role="cell">${escapeHtml(actionDisability.join('；'))}</p>
+            <p role="cell">${escapeHtml(actionLtc)}</p>
+            <p role="cell">${escapeHtml(actionDisability)}</p>
             <p role="cell">${escapeHtml(reminders.length ? reminders.join('、') : '需官方確認。')}</p>
           </div>
           <div class="compare-row" role="row">
             <span role="cell">家屬保守說法</span>
-            <p role="cell" class="compare-family">${escapeHtml(family.join('；'))}</p>
+            <p role="cell" class="compare-family">${escapeHtml(family.join('；') || '請先查證官方路徑，再提供家屬保守說明。')}</p>
           </div>
+          ${unknownNote}
         </article>
       `;
     }).join('') + (skipped.length ? `<div class="empty-state">以下知識卡不適用比較：${skipped.map((card) => escapeHtml(card.title || cardId(card))).join('、')}</div>` : '');

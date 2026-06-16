@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260616-smart-knowledge-v1';
+const CACHE_VERSION = '20260617-comparison-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -637,14 +637,14 @@ function currentDraftName() {
   return value && value !== '尚未產生知識副本' ? value : (state.currentDraftName || defaultDraftName(questionText.value || ''));
 }
 
+function glmStatusText(meta = {}, source = 'local') {
+  return source === 'api' && meta.status === 'ai'
+    ? 'GLM狀態：上線'
+    : 'GLM狀態：斷線／採本地簡易搜索';
+}
+
 function routeStatusText(meta = {}, cardCount = 0, source = 'local') {
-  if (source === 'local') {
-    return cardCount ? `本地查詢：已先加入 ${cardCount} 張知識卡` : '本地查詢：尚未找到候選卡';
-  }
-  const confidence = Number(meta.confidence || 0);
-  const confidenceText = confidence ? `，信心 ${Math.round(confidence * 100)}%` : '';
-  const manual = meta.needs_manual_direction_choice ? '需人工選方向' : '已分流';
-  return `${manual}：已先加入 ${cardCount} 張知識卡${confidenceText}`;
+  return glmStatusText(meta, source);
 }
 
 function renderQuestionRouteStatus(meta = {}, cardCount = 0, source = 'local') {
@@ -2288,10 +2288,10 @@ async function routeQuestion() {
       renderDirections(directions);
       renderKnowledgeCards(cards, { resetAttributes: true });
       void autoSaveDraft();
-      qs('#apiStatus').textContent = `已找到 ${cards.length} 張知識卡：${payload.status || 'ok'}。`;
+      qs('#apiStatus').textContent = glmStatusText(payload, 'api');
       return;
     } catch (error) {
-      qs('#apiStatus').textContent = `後端分流失敗，改用本頁本地知識卡：${error.message || error}`;
+      qs('#apiStatus').textContent = 'GLM狀態：斷線／採本地簡易搜索';
     }
   }
   const localCards = localKnowledgeSearch(question, [], 12, selectedRegions());
@@ -2299,7 +2299,7 @@ async function routeQuestion() {
   startCurrentDraft({ question, directions: [], cards: localCards, source: 'local', routeMeta: {} });
   renderDirections([]);
   renderKnowledgeCards(localCards, { resetAttributes: true });
-  qs('#apiStatus').textContent = '已使用本頁知識卡保守排序。';
+  qs('#apiStatus').textContent = 'GLM狀態：斷線／採本地簡易搜索';
 }
 
 async function autoSaveDraft() {

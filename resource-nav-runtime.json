@@ -1,9 +1,9 @@
 {
   "api_base": "https://api-dev.pt-sync.top",
   "version": "20260531-print-output",
-  "generated_at": "2026-06-15T13:01:43+00:00",
+  "generated_at": "2026-06-16T15:42:35+00:00",
   "tunnel_type": "configured",
-  "health_checked_at": "2026-06-15T13:01:43+00:00",
+  "health_checked_at": "2026-06-16T15:42:35+00:00",
   "health_ok": false,
   "health_reason": "api_session_unexpected_status:502"
 }

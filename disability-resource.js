@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-detail-side-v1';
+const CACHE_VERSION = '20260617-output-clean-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1341,16 +1341,9 @@ function resourceHintHtml(card) {
 
 function actionDetailHtml(card) {
   const contacts = suggestedContactRows(card);
-  const questions = unique(card.phone_check_questions || []);
-  const answerable = unique([
-    ...asArray(card.answerable_questions),
-    ...asArray(card.question_patterns),
-  ]).filter(Boolean);
   return `
     <div class="detail-grid">
-      <div class="detail-field detail-field-wide"><strong>這個知識可以解決什麼問題</strong>${listHtml(answerable, '尚未整理可回答問題；請先依標題與資料本體判斷。')}</div>
-      <div class="detail-field detail-field-wide"><strong>誰可以解決什麼問題</strong>${listHtml(contacts, '尚未建立明確查證窗口。')}</div>
-      <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(questions, '尚未整理電話確認問題；請把知識內容反向整理成可問承辦窗口的問題。')}</div>
+      <div class="detail-field detail-field-wide"><strong>對應單位／窗口／聯絡方式</strong>${listHtml(contacts, '尚未建立明確查證窗口。')}</div>
     </div>
   `;
 }

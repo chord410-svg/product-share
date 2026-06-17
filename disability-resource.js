@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-comparison-v1';
+const CACHE_VERSION = '20260617-copy-labels-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -163,6 +163,21 @@ const CHECK_TYPE_LABELS = {
   item_scope: '品項範圍',
 };
 
+const DIRECTION_LABELS = {
+  smart_assistive: '智慧輔具',
+  smart_assistive_policy: '智慧輔具政策',
+  smart_assistive_item_scope: '智慧輔具品項範圍',
+  smart_assistive_assessment: '智慧輔具評估',
+  smart_assistive_operation: '操作準備',
+  smart_assistive_rental: '租賃維護',
+  smart_assistive_product_leads: '產品線索',
+  home_accessibility: '居家無障礙',
+  transport_access: '交通接送',
+  family_support: '家庭支持',
+  disability_services: '身障服務',
+  assistive_device: '輔具查證',
+};
+
 const KNOWLEDGE_TYPE_TO_CHECK_TYPE = {
   '申請路徑': 'application_path',
   '地方流程': 'application_path',
@@ -241,6 +256,12 @@ function comparisonGroupLabel(group, card = null) {
 function domainLabel(value) {
   const raw = String(value || '').trim();
   return DOMAIN_LABELS[raw] || labelText(raw);
+}
+
+function directionLabel(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  return DIRECTION_LABELS[raw] || scenarioById(raw)?.short_label || scenarioById(raw)?.title || labelText(raw);
 }
 
 function systemScopeLabel(value) {
@@ -1737,9 +1758,20 @@ async function deleteKnowledgePackage(record, button) {
 }
 
 function packageDirectionText(record) {
+  const snapshots = packageSnapshots(record);
+  const domains = unique(snapshots.map((card) => domainLabel(card.domain)).filter(Boolean));
+  const checkTypes = unique(snapshots.flatMap((card) => cardAttributes(card)
+    .filter((attr) => attr.type === 'check_type')
+    .map((attr) => attr.label))
+    .filter(Boolean));
+  if (domains.length || checkTypes.length) {
+    const domainText = domains.slice(0, 2).join('、') || '未指定主題';
+    const typeText = checkTypes.slice(0, 3).join('、');
+    return typeText ? `${domainText}｜${typeText}` : domainText;
+  }
   const ids = asArray(record.direction_ids);
-  const labels = ids.map((id) => scenarioById(id)?.short_label || scenarioById(id)?.title || id).filter(Boolean);
-  return labels.length ? labels.join('、') : '未指定方向';
+  const labels = unique(ids.map(directionLabel).filter(Boolean));
+  return labels.length ? labels.slice(0, 3).join('、') : '未指定方向';
 }
 
 function packageRegionText(record) {

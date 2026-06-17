@@ -105,6 +105,14 @@ function lineList(items) {
   return rows.map((item, index) => `${index + 1}. ${item}`).join('\n');
 }
 
+function sideDisplayLabel(side) {
+  const value = String(side || '').trim();
+  if (value === 'ltc') return '長照側';
+  if (value === 'disability') return '身障側';
+  if (value === 'shared') return '共同資料';
+  return '未指定側別';
+}
+
 const LABELS = {
   official_check_required: '需官方窗口查證',
   do_not_promise_subsidy: '不可承諾補助',
@@ -1210,29 +1218,20 @@ function firstText(items, fallback = '') {
 }
 
 function knowledgeExplanationHtml(card) {
-  const explicit = compactSentence(card.care_manager_explanation || card.knowledge_brief || '');
+  const explicit = compactSentence(card.knowledge_brief || card.public_summary || '');
   const integrated = String(card.integrated_content || '').trim();
-  const source = bestSourceRef(card);
-  const sourceLead = source ? `根據 ${sourceLinkHtml(source)}，` : '依目前卡片資料，';
   if (integrated) {
     return `
-      ${explicit ? `<p><strong>摘要。</strong>${escapeHtml(explicit)}</p>` : ''}
+      ${explicit ? `<p><strong>摘要：</strong>${escapeHtml(explicit)}</p>` : ''}
       <div class="integrated-content">${paragraphsHtml(integrated)}</div>
     `;
   }
-  if (explicit) return `<p>${sourceLead}${escapeHtml(explicit)}</p>`;
+  if (explicit) return `<p>${escapeHtml(explicit)}</p>`;
 
-  const comparison = card?.comparison || {};
-  const family = compactSentence(card.family_safe_summary || comparison.family_wording || '');
-  const main = family || '這類問題需先回到官方品項、地方承辦流程、必要文件與窗口確認，不能直接下資格或金額結論。';
-  const operation = compactSentence(firstText(
-    card.care_manager_notes || card.internal_notes || card.verification_steps,
-    '個管師可先整理需求情境，再依官方窗口確認是否需事前核定、評估文件或地方承辦流程。'
-  ));
-  return `
-    <p>${sourceLead}${escapeHtml(main)}</p>
-    <p>${escapeHtml(operation)}</p>
-  `;
+  const extracts = sourceExtracts(card);
+  const firstExtract = extracts.length ? compactSentence(asArray(extracts[0].content).join(' ')) : '';
+  if (firstExtract) return `<p>${escapeHtml(firstExtract)}</p>`;
+  return '<p>此卡尚待補齊資料濃縮內容；請先打開「資料本體整理」查看來源。</p>';
 }
 
 function sourceExtracts(card) {
@@ -1258,7 +1257,7 @@ function sourceExtractsHtml(card) {
   return `
     <div class="source-extract-list">
       ${extracts.map((extract, index) => {
-        const url = String(extract.url || '');
+        const url = String(extract.url || extract.source_url || '');
         const title = extract.source_title || extract.title || extract.source_id || `來源 ${index + 1}`;
         const sourceLink = /^https?:\/\//.test(url)
           ? `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
@@ -1299,9 +1298,9 @@ function suggestedContactRows(card) {
         const purpose = contact.purpose || contact.reason || contact.note || '';
         const phone = contact.phone ? `｜${contact.phone}` : '';
         const url = contact.url && /^https?:\/\//.test(String(contact.url))
-          ? `｜<a class="source-link" href="${escapeHtml(contact.url)}" target="_blank" rel="noopener noreferrer">官方連結</a>`
+          ? `｜${contact.url}`
           : '';
-        return `${escapeHtml(name)}${phone}${url}${purpose ? `：${escapeHtml(purpose)}` : ''}`;
+        return `${name}${phone}${url}${purpose ? `：${purpose}` : ''}`;
       }
       return escapeHtml(sanitizeCaseManagerContact(contact));
     }).filter(Boolean);
@@ -1329,19 +1328,37 @@ function resourceHintHtml(card) {
 function actionDetailHtml(card) {
   const contacts = suggestedContactRows(card);
   const questions = unique(card.phone_check_questions || []);
+  const answerable = unique([
+    ...asArray(card.answerable_questions),
+    ...asArray(card.question_patterns),
+  ]).filter(Boolean);
   return `
     <div class="detail-grid">
-      <div class="detail-field detail-field-wide"><strong>建議查證窗口</strong>${listHtml(contacts, '尚未建立明確查證窗口。')}</div>
-      <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(questions, '尚未整理電話確認問題；請先確認窗口、文件、是否需事前核定或租賃服務責任。')}</div>
-      <div class="detail-field detail-field-wide"><strong>對應資源卡</strong>${resourceHintHtml(card)}</div>
+      <div class="detail-field detail-field-wide"><strong>這個知識可以解決什麼問題</strong>${listHtml(answerable, '尚未整理可回答問題；請先依標題與資料本體判斷。')}</div>
+      <div class="detail-field detail-field-wide"><strong>誰可以解決什麼問題</strong>${listHtml(contacts, '尚未建立明確查證窗口。')}</div>
+      <div class="detail-field detail-field-wide"><strong>電話確認問題</strong>${listHtml(questions, '尚未整理電話確認問題；請把知識內容反向整理成可問承辦窗口的問題。')}</div>
     </div>
   `;
 }
 
 function singleCardComparisonHtml(card) {
+  const profile = card?.comparison_profile && typeof card.comparison_profile === 'object' ? card.comparison_profile : null;
   const digest = comparisonDigest(card);
-  if (!digest) {
+  if (!profile && !digest) {
     return '<div class="empty-state">此卡尚未設定同屬性比較資料；可先用「知識整理與解釋」與「查證行動」。</div>';
+  }
+  if (profile) {
+    const facts = asArray(profile.facts).filter((row) => row && typeof row === 'object');
+    return `
+      <div class="detail-grid">
+        <div class="detail-field"><strong>同屬性</strong>${escapeHtml(comparisonGroupLabel(profile.comparison_group || comparisonGroup(card), card))}</div>
+        <div class="detail-field"><strong>本卡側別</strong>${escapeHtml(sideDisplayLabel(profile.system_side || card.system_side || ''))}</div>
+        <div class="detail-field detail-field-wide">
+          <strong>本卡比較重點</strong>
+          ${facts.length ? `<ul class="detail-list">${facts.map((fact) => `<li><strong>${escapeHtml(fact.label || '項目')}：</strong>${escapeHtml(fact.value || '待補')}</li>`).join('')}</ul>` : '<p>此卡尚未整理比較重點。</p>'}
+        </div>
+      </div>
+    `;
   }
   const side = String(card.system_side || card.side || '').trim();
   const sideLabel = side === 'ltc'
@@ -1416,13 +1433,13 @@ function detailTabsHtml(card) {
     ['summary', '知識整理與解釋', `
       <section class="detail-section detail-brief-section">
         <p class="eyebrow">知識整理與解釋</p>
-        <h3>政策、做法與條件邊界</h3>
+        <h3>摘要與資料濃縮</h3>
         ${knowledgeSummaryPanelHtml(card)}
       </section>
     `],
     ['action', '查證行動', actionDetailHtml(card)],
   ];
-  if (comparisonDigest(card)) {
+  if (card?.comparison_profile || comparisonDigest(card)) {
     tabs.push(['comparison', '長照／身障比較', singleCardComparisonHtml(card)]);
   }
   return `
@@ -1547,6 +1564,7 @@ function renderKnowledgeCards(cards = [], options = {}) {
   container.querySelectorAll('.detail-card-button').forEach((button) => {
     button.addEventListener('click', (event) => {
       event.stopPropagation();
+      event.preventDefault();
       const id = button.dataset.cardId || '';
       openCardDetail(visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id) || cardById(id));
     });

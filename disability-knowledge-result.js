@@ -1,7 +1,8 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260617-detail-side-v1';
+  const CACHE_VERSION = '20260617-output-clean-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
+  if (activeMode === 'boundary') activeMode = 'family';
   let activePackage = null;
   let cards = [];
 
@@ -120,6 +121,10 @@
     return rows.map((item, index) => `${index + 1}. ${item}`).join('\n');
   }
 
+  function compactText(value) {
+    return String(value || '').trim().replace(/\s+/g, ' ');
+  }
+
   function sourceRefs(card) {
     return asList(card.source_refs || card.sources || []).map((ref) => typeof ref === 'string' ? { title: ref } : ref);
   }
@@ -134,6 +139,77 @@
       const url = ref.url || '';
       return `${index + 1}. ${title}｜${level}｜最後確認：${checked}${url ? `｜${url}` : ''}`;
     }).join('\n');
+  }
+
+  function sourceExtractRefs(card) {
+    const extracts = Array.isArray(card?.source_extracts) ? card.source_extracts : [];
+    return extracts.map((extract) => ({
+      source_id: extract.source_id || '',
+      title: extract.source_title || extract.title || extract.source_id || '來源',
+      source_level: extract.source_level || '待確認',
+      url: extract.url || extract.source_url || '',
+      last_checked_at: extract.updated_at || extract.last_checked_at || '待確認',
+    }));
+  }
+
+  function cardSources(card) {
+    const refs = [
+      ...sourceRefs(card),
+      ...sourceExtractRefs(card),
+    ].map(normalizeSourceRef).filter(Boolean);
+    const seen = new Set();
+    return refs.filter((ref) => {
+      const key = sourceKey(ref);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function cardContacts(card) {
+    const raw = asList(card.suggested_contacts || card.contact_windows || card.check_contacts);
+    return raw.map((contact) => {
+      if (contact && typeof contact === 'object') {
+        return {
+          label: contact.label || contact.name || contact.title || contact.window || '查證窗口',
+          role: contact.role || contact.purpose || contact.reason || '',
+          phone: contact.phone || '',
+          url: contact.url || '',
+        };
+      }
+      return { label: String(contact || '').trim(), role: '', phone: '', url: '' };
+    }).filter((contact) => contact.label);
+  }
+
+  function contactHtml(contact) {
+    const phone = String(contact.phone || '').trim();
+    const url = String(contact.url || '').trim();
+    const phoneHtml = phone && !phone.includes('依地方公告')
+      ? `<a href="tel:${escapeHtml(phone.replace(/\s+/g, ''))}">${escapeHtml(phone)}</a>`
+      : (phone ? `<span>${escapeHtml(phone)}</span>` : '');
+    const urlHtml = /^https?:\/\//.test(url)
+      ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`
+      : '';
+    return `
+      <li>
+        <strong>${escapeHtml(contact.label)}</strong>
+        ${contact.role ? `<span>${escapeHtml(contact.role)}</span>` : ''}
+        ${phoneHtml || urlHtml ? `<small>${[phoneHtml, urlHtml].filter(Boolean).join('｜')}</small>` : ''}
+      </li>
+    `;
+  }
+
+  function sourceLinkListHtml(sources) {
+    if (!sources.length) return '<p class="muted-text">來源連結待補。</p>';
+    return `<ul class="result-link-list">${sources.map((ref) => {
+      const title = ref.title || ref.source_id || '來源';
+      const level = ref.source_level || ref.level || '待確認';
+      const checked = ref.last_checked_at || '待確認';
+      const titleHtml = ref.url
+        ? `<a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
+        : escapeHtml(title);
+      return `<li>${titleHtml}<span>${escapeHtml(level)}｜最後確認：${escapeHtml(checked)}</span></li>`;
+    }).join('')}</ul>`;
   }
 
   function normalizeSystemSide(value) {
@@ -259,25 +335,38 @@
     return { groups: [...groups.values()], skipped };
   }
 
+  function familySummaryForCard(card) {
+    return compactText(card.integrated_content || card.knowledge_brief || card.family_safe_summary || '');
+  }
+
   function buildFamilyText() {
-    return cards.map((card, index) => `${index + 1}. ${card.family_safe_summary || '請先查證官方規定與地方承辦窗口，再提供家屬保守說明。'}`).join('\n\n') || '尚未加入知識卡。';
+    return cards.map((card, index) => {
+      const body = familySummaryForCard(card) || '此卡尚待補齊摘要與內容整合。';
+      return `${index + 1}. ${card.title || cardId(card)}\n${body}`;
+    }).join('\n\n') || '尚未加入知識卡。';
   }
 
-  function buildBoundaryText() {
-    return cards.map((card, index) => [
-      `${index + 1}. ${card.title || cardId(card)}`,
-      `適用：${asList(card.applies_when).join('；') || '尚待補齊'}`,
-      `不適用：${asList(card.not_applies_when).join('；') || '尚待補齊'}`,
-    ].join('\n')).join('\n\n') || '尚未加入知識卡。';
-  }
-
-  function buildActionText() {
-    return cards.map((card, index) => [
-      `${index + 1}. ${card.title || cardId(card)}`,
-      `查證：${lineList(card.verification_steps, '尚待補齊')}`,
-      `電話確認：${lineList(card.phone_check_questions, '尚待補齊')}`,
-      `提醒：${lineList(card.care_manager_notes, '尚待補齊')}`,
-    ].join('\n')).join('\n\n') || '尚未加入知識卡。';
+  function buildActionHtml() {
+    if (!cards.length) return '<div class="empty-state">尚未加入知識卡。</div>';
+    return cards.map((card, index) => {
+      const contacts = cardContacts(card);
+      const sources = cardSources(card);
+      return `
+        <article class="source-item result-action-item">
+          <strong>${index + 1}. ${escapeHtml(card.title || cardId(card))}</strong>
+          <section>
+            <h4>對應單位／窗口／聯絡方式</h4>
+            ${contacts.length
+              ? `<ul class="result-contact-list">${contacts.map(contactHtml).join('')}</ul>`
+              : '<p class="muted-text">待補明確窗口／聯絡方式。</p>'}
+          </section>
+          <section>
+            <h4>來源連結</h4>
+            ${sourceLinkListHtml(sources)}
+          </section>
+        </article>
+      `;
+    }).join('');
   }
 
   function profileFactsByLabel(profiles) {
@@ -390,13 +479,16 @@
       container.innerHTML = '<div class="empty-state">尚未加入知識卡。</div>';
       return;
     }
-    container.innerHTML = cards.map((card, index) => `
+    container.innerHTML = `
       <article class="source-item">
-        <strong>${index + 1}. ${escapeHtml(card.title || cardId(card))}</strong>
-        <p>${escapeHtml(card.family_safe_summary || '')}</p>
-        <pre>${escapeHtml(sourceText(card))}</pre>
+        <strong>家屬版</strong>
+        <pre>${escapeHtml(buildFamilyText())}</pre>
       </article>
-    `).join('');
+      <article class="source-item">
+        <strong>查證行動</strong>
+        ${buildActionHtml()}
+      </article>
+    `;
   }
 
   function setMode(mode) {
@@ -433,8 +525,7 @@
       activePackage.question_summary ? `問題摘要：${activePackage.question_summary}` : '',
     ].filter(Boolean).join('｜');
     $('familyOutput').textContent = buildFamilyText();
-    $('boundaryOutput').textContent = buildBoundaryText();
-    $('actionOutput').textContent = buildActionText();
+    $('actionOutput').innerHTML = buildActionHtml();
     renderComparison();
     renderFullData();
     setMode(activeMode);

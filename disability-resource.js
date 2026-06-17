@@ -147,13 +147,57 @@ const DOMAIN_LABELS = {
   disability_knowledge: '身障／長照知識',
 };
 
+const SYSTEM_SCOPE_LABELS = {
+  長照: '長照',
+  身障: '身障',
+  長照身障交界: '長照身障交界',
+};
+
+const CHECK_TYPE_LABELS = {
+  application_path: '申請路徑',
+  system_boundary: '制度差異',
+  document_assessment: '文件／評估',
+  preapproval: '事前核定',
+  contact_check: '窗口／電話',
+  operation_maintenance: '操作維護',
+  item_scope: '品項範圍',
+};
+
+const KNOWLEDGE_TYPE_TO_CHECK_TYPE = {
+  '申請路徑': 'application_path',
+  '地方流程': 'application_path',
+  '官方項目': 'application_path',
+  '上路時程': 'application_path',
+  '政策說明': 'application_path',
+  '制度差異': 'system_boundary',
+  '家屬版說明': 'system_boundary',
+  '文件需求': 'document_assessment',
+  '專業評估': 'document_assessment',
+  '事前核定': 'preapproval',
+  '風險提醒': 'preapproval',
+  '查證流程': 'contact_check',
+  '電話確認': 'contact_check',
+  '地方窗口': 'contact_check',
+  '操作準備': 'operation_maintenance',
+  '照顧者承接': 'operation_maintenance',
+  'APP／網路': 'operation_maintenance',
+  '租賃服務': 'operation_maintenance',
+  '租賃維護': 'operation_maintenance',
+  '清潔消毒': 'operation_maintenance',
+  '退租責任': 'operation_maintenance',
+  '購置／租賃判斷': 'item_scope',
+  '品項查證': 'item_scope',
+  '功能分類': 'item_scope',
+};
+
 const ATTRIBUTE_TYPE_LABELS = {
   domain: '主題',
-  system_scope: '系統',
-  knowledge_type: '類型',
-  region_scope: '地區',
-  comparison_group: '比較',
+  system_scope: '制度側',
+  check_type: '查證類型',
 };
+
+const ACTIVE_CARD_STATUSES = new Set(['active', 'ready', 'formal']);
+const RETIRED_CARD_STATUSES = new Set(['deprecated', 'archived', 'retired', 'alias_only']);
 
 function labelText(value) {
   const raw = String(value ?? '').trim();
@@ -172,6 +216,19 @@ function cardById(id) {
   return state.knowledgeCards.find((card) => cardId(card) === id);
 }
 
+function flagDisabled(value) {
+  if (value === false) return true;
+  if (typeof value === 'string') return ['false', '0', 'no', 'n', '否'].includes(value.trim().toLowerCase());
+  return false;
+}
+
+function isFrontVisibleCard(card) {
+  const status = String(card?.status || 'active').trim().toLowerCase();
+  if (!ACTIVE_CARD_STATUSES.has(status) || RETIRED_CARD_STATUSES.has(status)) return false;
+  if (flagDisabled(card?.front_visible) || flagDisabled(card?.searchable)) return false;
+  return true;
+}
+
 function comparisonGroup(card) {
   return String(card?.comparison_group || '').trim();
 }
@@ -186,6 +243,19 @@ function domainLabel(value) {
   return DOMAIN_LABELS[raw] || labelText(raw);
 }
 
+function systemScopeLabel(value) {
+  const raw = String(value || '').trim();
+  return SYSTEM_SCOPE_LABELS[raw] || '';
+}
+
+function checkTypeKey(value) {
+  return KNOWLEDGE_TYPE_TO_CHECK_TYPE[String(value || '').trim()] || '';
+}
+
+function checkTypeLabel(key) {
+  return CHECK_TYPE_LABELS[String(key || '').trim()] || '';
+}
+
 function attributeKey(type, value) {
   return `${type}:${String(value || '').trim()}`;
 }
@@ -194,14 +264,18 @@ function cardAttributes(card) {
   const attrs = [];
   const domain = String(card.domain || '').trim();
   if (domain) attrs.push({ type: 'domain', value: domain, label: domainLabel(domain), key: attributeKey('domain', domain) });
-  for (const value of asArray(card.system_scope)) attrs.push({ type: 'system_scope', value, label: labelText(value), key: attributeKey('system_scope', value) });
-  for (const value of asArray(card.knowledge_type)) attrs.push({ type: 'knowledge_type', value, label: labelText(value), key: attributeKey('knowledge_type', value) });
-  for (const value of asArray(card.region_scope)) attrs.push({ type: 'region_scope', value, label: labelText(value), key: attributeKey('region_scope', value) });
-  const group = comparisonGroup(card);
-  if (group) attrs.push({ type: 'comparison_group', value: group, label: comparisonGroupLabel(group, card), key: attributeKey('comparison_group', group) });
+  for (const value of asArray(card.system_scope)) {
+    const label = systemScopeLabel(value);
+    if (label) attrs.push({ type: 'system_scope', value, label, key: attributeKey('system_scope', value) });
+  }
+  for (const value of asArray(card.knowledge_type)) {
+    const mappedKey = checkTypeKey(value);
+    const label = checkTypeLabel(mappedKey);
+    if (mappedKey && label) attrs.push({ type: 'check_type', value: mappedKey, label, key: attributeKey('check_type', mappedKey) });
+  }
   const seen = new Set();
   return attrs.filter((attr) => {
-    if (!attr.value || seen.has(attr.key)) return false;
+    if (!attr.value || !attr.label || seen.has(attr.key)) return false;
     seen.add(attr.key);
     return true;
   });
@@ -266,7 +340,7 @@ function resetAttributeSelections(cards = []) {
     const selected = new Set(attrs.filter((attr) => hits.has(attr.key)).map((attr) => attr.key));
     if (selected.size) state.activeAttributeSelections[type] = selected;
   }
-  const preferredOrder = ['domain', 'system_scope', 'knowledge_type', 'region_scope', 'comparison_group'];
+  const preferredOrder = ['domain', 'system_scope', 'check_type'];
   state.activeAttributeGroup = preferredOrder.find((type) => state.activeAttributeSelections[type]?.size) || 'system_scope';
 }
 
@@ -309,7 +383,7 @@ function renderAttributeFilters(cards = []) {
   if (!grouped.has(state.activeAttributeGroup)) {
     state.activeAttributeGroup = grouped.has('domain') ? 'domain' : (grouped.has('system_scope') ? 'system_scope' : catalog[0].type);
   }
-  const typeOrder = ['domain', 'system_scope', 'knowledge_type', 'region_scope', 'comparison_group'].filter((type) => grouped.has(type));
+  const typeOrder = ['domain', 'system_scope', 'check_type'].filter((type) => grouped.has(type));
   const activeSubs = grouped.get(state.activeAttributeGroup) || [];
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
@@ -868,7 +942,7 @@ async function loadData() {
   const scenarioPayload = await scenarioResponse.json();
   const knowledgePayload = await knowledgeResponse.json();
   state.scenarios = scenarioPayload.scenarios || [];
-  state.knowledgeCards = knowledgePayload.knowledge_cards || [];
+  state.knowledgeCards = (knowledgePayload.knowledge_cards || []).filter(isFrontVisibleCard);
 }
 
 async function probeApi() {

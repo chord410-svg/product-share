@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260617-summary-compare-v4';
+  const CACHE_VERSION = '20260617-profile-compare-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];
@@ -144,63 +144,93 @@
     return '';
   }
 
-  function cardSystemSide(card) {
-    const explicit = normalizeSystemSide(card?.comparison_digest?.system_side || card?.system_side || card?.side);
-    if (explicit) return explicit;
-    const scopes = asList(card?.system_scope).map((item) => String(item));
-    const hasLtc = scopes.some((item) => item.includes('長照'));
-    const hasDisability = scopes.some((item) => item.includes('身障'));
-    if (hasLtc && !hasDisability) return 'ltc';
-    if (hasDisability && !hasLtc) return 'disability';
-    return 'unknown';
+  const COMPARISON_FACT_LABELS = [
+    '制度狀態',
+    '適用對象',
+    '給付／額度',
+    '取得方式',
+    '品項／範圍',
+    '評估／文件',
+    '申請／查證窗口',
+    '限制／注意',
+  ];
+
+  function sourceKey(ref) {
+    return String(ref?.source_id || ref?.url || ref?.title || '').trim();
   }
 
-  function comparisonDigest(card) {
-    const side = cardSystemSide(card);
-    const digest = card.comparison_digest || {};
-    const summary = card.knowledge_brief || card.summary || card.family_safe_summary || card.integrated_content || '';
-    if (digest.boundary || digest.action) {
-      return {
-        card_id: cardId(card),
-        group: digest.comparison_group || card.comparison_group || '',
-        label: comparisonGroupLabel(digest.comparison_group || card.comparison_group, digest.group_label || card.comparison_group_label || card.title || cardId(card)),
-        side,
-        card_title: card.title || cardId(card),
-        summary,
-        boundary: {
-          ltc: digest.boundary?.ltc || '',
-          disability: digest.boundary?.disability || '',
-          shared: digest.boundary?.shared || '未經官方確認前，不判定資格、不承諾補助金額。',
-        },
-        action: {
-          ltc: digest.action?.ltc || '',
-          disability: digest.action?.disability || '',
-          reminders: asList(digest.action?.reminders),
-        },
-        family: digest.family_wording || card.family_safe_summary || '請先查證官方路徑，再提供家屬保守說明。',
-      };
+  function normalizeSourceRef(ref) {
+    if (!ref) return null;
+    if (typeof ref === 'string') {
+      const value = ref.trim();
+      return value ? { source_id: value, title: value, source_level: '待確認' } : null;
     }
-    const comparison = card.comparison || {};
-    const group = card.comparison_group || comparison.comparison_group || '';
-    if (!group && !comparison.ltc_side && !comparison.disability_side) return null;
+    if (typeof ref !== 'object') return null;
+    const sourceId = String(ref.source_id || ref.id || '').trim();
+    const title = String(ref.title || ref.source_title || sourceId || '來源').trim();
+    return {
+      source_id: sourceId,
+      title,
+      source_level: ref.source_level || ref.level || '待確認',
+      url: ref.url || ref.source_url || '',
+      last_checked_at: ref.last_checked_at || ref.updated_at || '待確認',
+      public_allowed: ref.public_allowed,
+    };
+  }
+
+  function resolveProfileSources(card, profile) {
+    const cardRefs = (Array.isArray(card?.source_refs) ? card.source_refs : [])
+      .map(normalizeSourceRef)
+      .filter(Boolean);
+    const byId = new Map(cardRefs.map((ref) => [ref.source_id, ref]));
+    const rawRefs = Array.isArray(profile?.source_refs) && profile.source_refs.length
+      ? profile.source_refs
+      : cardRefs;
+    const resolved = rawRefs.map((ref) => {
+      if (typeof ref === 'string') {
+        return byId.get(ref) || normalizeSourceRef(ref);
+      }
+      const normalized = normalizeSourceRef(ref);
+      if (normalized?.source_id && byId.has(normalized.source_id)) return byId.get(normalized.source_id);
+      return normalized;
+    }).filter(Boolean);
+    const seen = new Set();
+    return resolved.filter((ref) => {
+      const key = sourceKey(ref);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function normalizeComparisonFacts(facts) {
+    if (!Array.isArray(facts)) return [];
+    return facts.map((fact) => {
+      if (!fact || typeof fact !== 'object') return null;
+      const label = String(fact.label || fact.name || fact.field || '').trim();
+      const value = String(fact.value || fact.text || fact.content || '').trim();
+      if (!label || !value) return null;
+      return { label, value };
+    }).filter(Boolean);
+  }
+
+  function comparisonProfile(card) {
+    const profile = card?.comparison_profile;
+    if (!profile || typeof profile !== 'object') return null;
+    const group = String(profile.comparison_group || card?.comparison_group || '').trim();
+    const side = normalizeSystemSide(profile.system_side || card?.system_side || card?.side);
+    if (!group || !['ltc', 'disability'].includes(side)) return null;
+    const facts = normalizeComparisonFacts(profile.facts);
+    if (!facts.length) return null;
     return {
       card_id: cardId(card),
       group,
-      label: comparisonGroupLabel(group, comparison.group_label || card.comparison_group_label || card.title || cardId(card)),
+      label: comparisonGroupLabel(group, profile.group_label || card?.comparison_group_label || profile.title || card?.title || cardId(card)),
       side,
-      card_title: card.title || cardId(card),
-      summary,
-      boundary: {
-        ltc: comparison.ltc_side || '',
-        disability: comparison.disability_side || '',
-        shared: comparison.shared_boundary || '未經官方確認前，不判定資格、不承諾補助金額。',
-      },
-      action: {
-        ltc: comparison.ltc_action || '',
-        disability: comparison.disability_action || '',
-        reminders: asList(comparison.shared_risks || card.care_manager_notes),
-      },
-      family: comparison.family_wording || card.family_safe_summary || '請先查證官方路徑，再提供家屬保守說明。',
+      card_title: card?.title || profile.title || cardId(card),
+      profile_title: profile.title || card?.title || cardId(card),
+      facts,
+      source_refs: resolveProfileSources(card, profile),
     };
   }
 
@@ -208,29 +238,23 @@
     const groups = new Map();
     const skipped = [];
     cards.forEach((card) => {
-      const digest = comparisonDigest(card);
-      if (!digest || !digest.group) {
+      const profile = comparisonProfile(card);
+      if (!profile) {
         skipped.push(card);
         return;
       }
-      if (!groups.has(digest.group)) {
-        groups.set(digest.group, {
-          label: digest.label,
-          rows: [],
-          cards: [],
-          ltcRows: [],
-          disabilityRows: [],
-          sharedRows: [],
-          unknownRows: [],
+      if (!groups.has(profile.group)) {
+        groups.set(profile.group, {
+          label: profile.label,
+          profiles: [],
+          ltcProfiles: [],
+          disabilityProfiles: [],
         });
       }
-      const group = groups.get(digest.group);
-      group.rows.push(digest);
-      group.cards.push(card);
-      if (digest.side === 'ltc') group.ltcRows.push(digest);
-      else if (digest.side === 'disability') group.disabilityRows.push(digest);
-      else if (digest.side === 'shared') group.sharedRows.push(digest);
-      else group.unknownRows.push(digest);
+      const group = groups.get(profile.group);
+      group.profiles.push(profile);
+      if (profile.side === 'ltc') group.ltcProfiles.push(profile);
+      if (profile.side === 'disability') group.disabilityProfiles.push(profile);
     });
     return { groups: [...groups.values()], skipped };
   }
@@ -256,29 +280,61 @@
     ].join('\n')).join('\n\n') || '尚未加入知識卡。';
   }
 
-  function conciseSummary(row) {
-    const value = String(row?.summary || '').replace(/\s+/g, ' ').trim()
-      || '這張卡尚未補齊摘要，請先查看知識卡完整內容。';
-    return value.length > 120 ? `${value.slice(0, 119).trim()}…` : value;
+  function profileFactsByLabel(profiles) {
+    const map = new Map();
+    profiles.forEach((profile) => {
+      profile.facts.forEach((fact) => {
+        if (!map.has(fact.label)) map.set(fact.label, []);
+        map.get(fact.label).push({
+          value: fact.value,
+          card_id: profile.card_id,
+          card_title: profile.card_title,
+        });
+      });
+    });
+    return map;
+  }
+
+  function renderFactCell(entries, sideHasProfile) {
+    if (!entries?.length) {
+      const message = sideHasProfile ? '從缺：此側卡片尚未整理此項資料。' : '從缺：尚未加入同屬性知識卡。';
+      return `<div class="compare-missing">${escapeHtml(message)}</div>`;
+    }
+    return entries.map((entry) => `
+      <div class="compare-fact">
+        <p>${escapeHtml(entry.value)}</p>
+        <a class="compare-card-link" href="${escapeHtml(knowledgeCardHref(entry.card_id))}">查看此知識卡</a>
+      </div>
+    `).join('');
+  }
+
+  function renderSourceList(profiles, emptyText) {
+    const refs = [];
+    const seen = new Set();
+    profiles.forEach((profile) => {
+      profile.source_refs.forEach((ref) => {
+        const key = sourceKey(ref);
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        refs.push(ref);
+      });
+    });
+    if (!refs.length) return `<div class="compare-missing">${escapeHtml(emptyText)}</div>`;
+    return `<ul class="compare-source-list">${refs.map((ref) => {
+      const title = ref.title || ref.source_id || '來源';
+      const level = ref.source_level || ref.level || '待確認';
+      const checked = ref.last_checked_at || '待確認';
+      const titleHtml = ref.url
+        ? `<a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
+        : escapeHtml(title);
+      return `<li>${titleHtml}<span>${escapeHtml(level)}｜最後確認：${escapeHtml(checked)}</span></li>`;
+    }).join('')}</ul>`;
   }
 
   function knowledgeCardHref(cardIdValue) {
     const params = new URLSearchParams({ v: CACHE_VERSION });
     if (cardIdValue) params.set('focus_card', cardIdValue);
     return `./disability-resource.html?${params.toString()}`;
-  }
-
-  function renderSummaryCards(rows, emptyText) {
-    if (!rows.length) {
-      return `<div class="empty-state">${escapeHtml(emptyText)}</div>`;
-    }
-    return rows.map((row) => `
-      <article class="compare-summary-card">
-        <h5>${escapeHtml(row.card_title || row.card_id || '未命名知識卡')}</h5>
-        <p>${escapeHtml(conciseSummary(row))}</p>
-        <a class="compare-card-link" href="${escapeHtml(knowledgeCardHref(row.card_id))}">查看此知識卡</a>
-      </article>
-    `).join('');
   }
 
   function renderComparison() {
@@ -289,26 +345,43 @@
       return;
     }
     container.innerHTML = groups.map((group) => {
-      const unknownNote = group.unknownRows.length
-        ? `<div class="empty-state">${escapeHtml(group.unknownRows.map((row) => row.card_title).join('、'))} 缺 system_side，已列入此比較群組但未放入長照/身障任一側。</div>`
-        : '';
+      const ltcFacts = profileFactsByLabel(group.ltcProfiles);
+      const disabilityFacts = profileFactsByLabel(group.disabilityProfiles);
+      const labels = COMPARISON_FACT_LABELS.filter((label) => ltcFacts.has(label) || disabilityFacts.has(label));
+      const rows = labels.map((label) => `
+        <div class="compare-profile-row" role="row">
+          <div class="compare-profile-label" role="rowheader">${escapeHtml(label)}</div>
+          <div role="cell">${renderFactCell(ltcFacts.get(label), group.ltcProfiles.length > 0)}</div>
+          <div role="cell">${renderFactCell(disabilityFacts.get(label), group.disabilityProfiles.length > 0)}</div>
+        </div>
+      `).join('') || '<div class="empty-state">此比較群組尚未整理可對照欄位。</div>';
       return `
-        <article class="compare-summary-table">
-          <h4>${escapeHtml(group.label)} <span>${group.cards.length} 張知識卡｜長照 ${group.ltcRows.length}｜身障 ${group.disabilityRows.length}</span></h4>
-          <div class="compare-summary-columns">
+        <article class="compare-profile-table">
+          <div class="comparison-group-title">
+            <h4>${escapeHtml(group.label)}</h4>
+            <span class="tag compare-tag">${group.profiles.length} 張知識卡｜長照 ${group.ltcProfiles.length}｜身障 ${group.disabilityProfiles.length}</span>
+          </div>
+          <div class="compare-profile-grid" role="table" aria-label="${escapeHtml(group.label)}同屬性比較">
+            <div class="compare-profile-row compare-profile-head" role="row">
+              <div role="columnheader">項目</div>
+              <div role="columnheader">長照側</div>
+              <div role="columnheader">身障側</div>
+            </div>
+            ${rows}
+          </div>
+          <div class="compare-profile-sources">
             <section>
-              <h5>長照側摘要</h5>
-              ${renderSummaryCards(group.ltcRows, '尚未加入同屬性的長照側知識卡。')}
+              <h5>長照側來源</h5>
+              ${renderSourceList(group.ltcProfiles, '從缺：尚未加入長照側來源。')}
             </section>
             <section>
-              <h5>身障側摘要</h5>
-              ${renderSummaryCards(group.disabilityRows, '尚未加入同屬性的身障側知識卡。')}
+              <h5>身障側來源</h5>
+              ${renderSourceList(group.disabilityProfiles, '從缺：尚未加入身障側來源。')}
             </section>
           </div>
-          ${unknownNote}
         </article>
       `;
-    }).join('') + (skipped.length ? `<div class="empty-state">以下知識卡不適用比較：${skipped.map((card) => escapeHtml(card.title || cardId(card))).join('、')}</div>` : '');
+    }).join('') + (skipped.length ? `<div class="empty-state">以下知識卡沒有 comparison_profile，不列入同屬性比較：${skipped.map((card) => escapeHtml(card.title || cardId(card))).join('、')}</div>` : '');
   }
 
   function renderFullData() {

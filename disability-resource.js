@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-result-labels-v3';
+const CACHE_VERSION = '20260617-summary-compare-v4';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -525,9 +525,12 @@ function comparisonDigest(card) {
   ]);
 
   return {
+    card_id: cardId(card),
     group,
     label: explicit?.group_label || comparisonGroupLabel(group, card),
     title: explicit?.compare_title || card?.title || cardId(card),
+    summary: card?.knowledge_brief || card?.summary || card?.family_safe_summary || card?.integrated_content || '',
+    side: cardSystemSide(card),
     boundary: {
       ltc: firstCompareText([boundary.ltc, ltc.boundary, ltc.risk, ltc.path], '長照側需先確認是否有對應服務、品項、評估或地方承辦流程。'),
       disability: firstCompareText([boundary.disability, disability.boundary, disability.risk, disability.path], '身障側需查地方身障福利、輔具資源中心或社會局窗口，不能以商品名稱直接判定。'),
@@ -884,6 +887,16 @@ function privacyMessage() {
 
 function params() {
   return new URLSearchParams(window.location.search);
+}
+
+function focusCardFromUrl() {
+  return params().get('focus_card') || params().get('knowledge_id') || '';
+}
+
+function cssEscape(value) {
+  const text = String(value || '');
+  if (window.CSS && typeof window.CSS.escape === 'function') return window.CSS.escape(text);
+  return text.replace(/["\\]/g, '\\$&');
 }
 
 function selectedRegions() {
@@ -1336,7 +1349,7 @@ function singleCardComparisonHtml(card) {
     : side === 'disability'
       ? '身障側'
       : side === 'shared'
-        ? '共同提醒'
+        ? '共通資料'
         : '未指定側別';
   const sideBoundary = side === 'ltc'
     ? digest.boundary.ltc
@@ -1540,6 +1553,23 @@ function renderKnowledgeCards(cards = [], options = {}) {
   });
 }
 
+function focusKnowledgeCardFromUrl() {
+  const id = focusCardFromUrl();
+  if (!id) return;
+  const card = cardById(id);
+  if (!card) return;
+  const visible = (state.currentKnowledgeCards || []).some((row) => cardId(row) === id);
+  if (!visible) {
+    renderKnowledgeCards([card], { resetAttributes: true });
+  }
+  setupTabs('knowledgeNav');
+  window.setTimeout(() => {
+    const node = document.querySelector(`.knowledge-card[data-card-id="${cssEscape(id)}"]`);
+    if (node) node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    openCardDetail(card);
+  }, 80);
+}
+
 function comparisonGroups(cards) {
   const groups = new Map();
   const notComparable = [];
@@ -1555,16 +1585,48 @@ function comparisonGroups(cards) {
         group,
         label: digest.label,
         cards: [],
+        ltcRows: [],
+        disabilityRows: [],
+        sharedRows: [],
+        unknownRows: [],
       });
     }
-    groups.get(group).cards.push({
+    const row = {
+      card_id: digest.card_id || cardId(card),
       title: digest.title,
-      boundary: digest.boundary,
-      action: digest.action,
-      family: digest.family_wording,
-    });
+      summary: digest.summary || '',
+      side: digest.side || cardSystemSide(card),
+    };
+    const bucket = groups.get(group);
+    bucket.cards.push(row);
+    if (row.side === 'ltc') bucket.ltcRows.push(row);
+    else if (row.side === 'disability') bucket.disabilityRows.push(row);
+    else if (row.side === 'shared') bucket.sharedRows.push(row);
+    else bucket.unknownRows.push(row);
   }
   return { groups: [...groups.values()], notComparable };
+}
+
+function comparisonSummaryText(row) {
+  const value = String(row?.summary || '').replace(/\s+/g, ' ').trim() || '這張卡尚未補齊摘要，請先查看知識卡完整內容。';
+  return value.length > 120 ? `${value.slice(0, 119).trim()}…` : value;
+}
+
+function comparisonCardLink(id) {
+  const urlParams = new URLSearchParams({ v: CACHE_VERSION });
+  if (id) urlParams.set('focus_card', id);
+  return `./disability-resource.html?${urlParams.toString()}`;
+}
+
+function inlineSummaryCards(rows, emptyText) {
+  if (!rows.length) return `<div class="empty-state">${escapeHtml(emptyText)}</div>`;
+  return rows.map((row) => `
+    <article class="compare-summary-card">
+      <h5>${escapeHtml(row.title || row.card_id || '未命名知識卡')}</h5>
+      <p>${escapeHtml(comparisonSummaryText(row))}</p>
+      <a class="compare-card-link" href="${escapeHtml(comparisonCardLink(row.card_id))}">查看此知識卡</a>
+    </article>
+  `).join('');
 }
 
 function renderComparison(cards) {
@@ -1582,44 +1644,25 @@ function renderComparison(cards) {
     return;
   }
   const groupHtml = groups.map((group) => `
-    <article class="comparison-card">
+    <article class="compare-summary-table">
       <div class="comparison-group-title">
         <div>
           <p class="eyebrow">同屬性比較</p>
           <h3>${escapeHtml(group.label)}</h3>
         </div>
-        <span class="tag compare-tag">${escapeHtml(group.group)}</span>
+        <span class="tag compare-tag">${group.cards.length} 張知識卡｜長照 ${group.ltcRows.length}｜身障 ${group.disabilityRows.length}</span>
       </div>
-      <p class="comparison-group-note">只合併 comparison_group 相同的知識卡；不同屬性的知識卡會分開顯示，避免把制度流程硬湊成一張表。</p>
-      ${group.cards.map((row) => `
-        <section class="comparison-item">
-          <h4>${escapeHtml(row.title)}</h4>
-          <div class="compare-table" role="table" aria-label="${escapeHtml(row.title)}長照與身障比較">
-            <div class="compare-row compare-head" role="row">
-              <strong role="columnheader">面向</strong>
-              <strong role="columnheader">長照側</strong>
-              <strong role="columnheader">身障側</strong>
-              <strong role="columnheader">共同提醒</strong>
-            </div>
-            <div class="compare-row" role="row">
-              <span role="cell">判斷邊界</span>
-              <p role="cell">${escapeHtml(row.boundary.ltc)}</p>
-              <p role="cell">${escapeHtml(row.boundary.disability)}</p>
-              <p role="cell">${escapeHtml(row.boundary.shared)}</p>
-            </div>
-            <div class="compare-row" role="row">
-              <span role="cell">查證與提醒</span>
-              <p role="cell">${escapeHtml(row.action.ltc)}</p>
-              <p role="cell">${escapeHtml(row.action.disability)}</p>
-              <p role="cell">${escapeHtml(row.action.reminders.length ? row.action.reminders.join('、') : '需官方確認。')}</p>
-            </div>
-            <div class="compare-row" role="row">
-              <span role="cell">家屬保守說法</span>
-              <p role="cell" class="compare-family">${escapeHtml(row.family)}</p>
-            </div>
-          </div>
+      <p class="comparison-group-note">只合併同屬性的知識卡；結果頁以摘要協助快速看出長照側與身障側各有哪些資料。</p>
+      <div class="compare-summary-columns">
+        <section>
+          <h5>長照側摘要</h5>
+          ${inlineSummaryCards(group.ltcRows, '尚未加入同屬性的長照側知識卡。')}
         </section>
-      `).join('')}
+        <section>
+          <h5>身障側摘要</h5>
+          ${inlineSummaryCards(group.disabilityRows, '尚未加入同屬性的身障側知識卡。')}
+        </section>
+      </div>
     </article>
   `).join('');
   const skippedHtml = notComparable.length
@@ -2516,6 +2559,7 @@ async function init() {
   renderOutputs();
   renderDraftContext();
   await loadSavedPackages({ quiet: true });
+  focusKnowledgeCardFromUrl();
   questionText.addEventListener('input', privacyMessage);
   qs('#routeButton').addEventListener('click', routeQuestion);
   qs('#closeCardDetailButton').addEventListener('click', closeCardDetail);

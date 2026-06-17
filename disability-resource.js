@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-detail-click-v1';
+const CACHE_VERSION = '20260617-detail-side-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -111,6 +111,20 @@ function sideDisplayLabel(side) {
   if (value === 'disability') return '身障側';
   if (value === 'shared') return '共同資料';
   return '未指定側別';
+}
+
+function cardSystemSide(card) {
+  const raw = String(
+    card?.system_side ||
+    card?.side ||
+    card?.comparison_profile?.system_side ||
+    card?.comparison_digest?.system_side ||
+    ''
+  ).trim();
+  if (raw === 'ltc' || raw === '長照' || raw === '長照側') return 'ltc';
+  if (raw === 'disability' || raw === '身障' || raw === '身障側') return 'disability';
+  if (raw === 'shared' || raw === '共通' || raw === '共同資料') return 'shared';
+  return '';
 }
 
 const LABELS = {

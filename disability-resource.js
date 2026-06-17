@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-direction-labels-v2';
+const CACHE_VERSION = '20260617-result-labels-v3';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -140,6 +140,24 @@ const COMPARISON_GROUP_LABELS = {
   family_support: '家庭照顧者支持',
   official_window: '官方窗口與電話確認',
   output_wording: '家屬版說法與輸出邊界',
+  mobility_stair_device: '爬梯機／上下樓設備',
+  mobility_wheelchair_device: '輪椅與移動輔具',
+  mobility_transfer_lifting: '移位與移乘安全',
+  mobility_transport_access: '交通服務與外出支持',
+  mobility_home_route: '室內通行與門檻改善',
+  home_accessibility_service_scope: '居家無障礙服務範圍',
+  home_accessibility_site_assessment: '現場評估與動線改善',
+  home_accessibility_documents: '居家無障礙文件需求',
+  home_accessibility_preapproval: '事前核定與先購買風險',
+  home_accessibility_completion_followup: '完工確認與後續責任',
+  smart_assistive_policy_timeline: '智慧科技輔具政策時程',
+  smart_assistive_item_scope: '智慧輔具品項範圍',
+  smart_assistive_dual_track: '智慧輔具租賃與一般輔具購置',
+  smart_assistive_assessment_document: '智慧輔具評估文件',
+  smart_assistive_operation_readiness: '智慧輔具操作準備',
+  smart_assistive_rental_maintenance: '智慧輔具租賃維護',
+  smart_assistive_product_leads: '智慧輔具產品線索',
+  smart_assistive_legacy_alias: '智慧輔具舊方向參考',
 };
 
 const DOMAIN_LABELS = {
@@ -1866,11 +1884,9 @@ function renderSavedPackages() {
           <button class="primary-action" type="button" data-action="view" data-package-id="${escapeHtml(record.package_id)}">查看結果</button>
           <button class="copy-action" type="button" data-action="duplicate" data-package-id="${escapeHtml(record.package_id)}">複製此副本</button>
           <button class="danger-action" type="button" data-action="delete" data-package-id="${escapeHtml(record.package_id)}"${(!isLocalPackageRecord(record) && !state.sessionToken) ? ' disabled title="請從 Discord 入口重新開啟後再刪除後端知識組合。"' : ''}>刪除</button>
-          ${readyOutput ? `
-            <button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}">複製連結</button>
-            <button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}"${shareUrl ? '' : ' data-degraded="1" title="正式分享 URL 尚未建立；目前保留本機結果頁與列印。"' }>查看 QR CODE</button>
-            <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
-          ` : ''}
+          <button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}" title="複製這份知識組合的結果頁連結">複製連結</button>
+          <button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}"${shareUrl ? '' : ' data-degraded="1" title="正式分享 URL 尚未建立；目前保留本機結果頁與列印。"' }>查看 QR CODE</button>
+          <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
         </div>
         <div class="workbench-expanded" ${expanded ? '' : 'hidden'}>
           <h4>已選知識卡</h4>

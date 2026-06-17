@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>身障／長照知識導航</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260617-direction-labels-v2" />
-  <link rel="preload" href="disability-resource-scenarios.json?v=20260617-direction-labels-v2" as="fetch" crossorigin="anonymous" />
-  <link rel="preload" href="disability-knowledge-cards.json?v=20260617-direction-labels-v2" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260617-result-labels-v3" />
+  <link rel="preload" href="disability-resource-scenarios.json?v=20260617-result-labels-v3" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="disability-knowledge-cards.json?v=20260617-result-labels-v3" as="fetch" crossorigin="anonymous" />
 </head>
 <body>
   <header class="hero">
     <div class="brand-block">
-      <p class="eyebrow">NEW TAIPEI KNOWLEDGE NAVIGATOR</p>
+      <p class="eyebrow">身障／長照知識導航</p>
       <h1>身障／長照知識導航</h1>
     </div>
     <span id="loginBadge" class="tool-badge">檢查 Discord 連結中</span>
@@ -85,7 +85,7 @@
   <section class="workbench-shell tab-panel" id="knowledgePackView" role="tabpanel" aria-labelledby="knowledgePackTabButton" hidden>
     <div class="workbench-head">
       <div>
-        <p class="eyebrow">My Knowledge Packs</p>
+        <p class="eyebrow">我的知識組合</p>
         <h2>我的知識組合</h2>
         <p class="muted-text" id="workbenchStatus">請從 Discord 入口連結身份後查看自己的知識組合。</p>
       </div>
@@ -95,7 +95,7 @@
     <section class="current-pack-panel panel" aria-label="目前編輯中的知識組合">
       <div class="package-head">
         <div>
-          <p class="eyebrow">Current Knowledge Pack</p>
+          <p class="eyebrow">目前知識組合</p>
           <h2 id="package-title">目前編輯中的知識組合</h2>
           <p class="muted-text compact-helper" id="loginStatus">從 Discord 入口開啟後可同步儲存。</p>
         </div>
@@ -131,7 +131,7 @@
   <section class="exchange-shell tab-panel" id="knowledgeExchangeView" role="tabpanel" aria-labelledby="knowledgeExchangeTabButton" hidden>
     <div class="workbench-head">
       <div>
-        <p class="eyebrow">Knowledge Pack Exchange</p>
+        <p class="eyebrow">知識副本交換</p>
         <h2>知識副本</h2>
         <p class="muted-text" id="knowledgeExchangeStatus">匯入或匯出知識副本封包，方便交接、備份、跨裝置重建草稿。</p>
       </div>
@@ -139,7 +139,7 @@
     <section class="import-pack-panel panel" aria-label="匯入知識副本">
       <div class="import-pack-head">
         <div>
-          <p class="eyebrow">Import Knowledge Pack</p>
+          <p class="eyebrow">匯入知識副本</p>
           <h2>匯入知識副本</h2>
           <p class="muted-text">支援 .knowledgepack.json、含封包區塊的 Markdown，匯入後會建立新的草稿，不覆蓋原本紀錄。</p>
         </div>
@@ -163,7 +163,7 @@
     <section class="exchange-export-panel panel" aria-label="匯出知識副本">
       <div class="import-pack-head">
         <div>
-          <p class="eyebrow">Export Knowledge Packs</p>
+          <p class="eyebrow">匯出知識副本</p>
           <h2>匯出既有知識組合</h2>
           <p class="muted-text">選擇自己的知識組合，匯出可再匯入的 JSON 封包，或可閱讀的 Markdown 備份。</p>
         </div>
@@ -190,6 +190,6 @@
     </article>
   </div>
 
-  <script src="disability-resource.js?v=20260617-direction-labels-v2"></script>
+  <script src="disability-resource.js?v=20260617-result-labels-v3"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-detail-fix-v4';
+const CACHE_VERSION = '20260617-detail-click-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1477,12 +1477,34 @@ function bindDetailTabs(container) {
   });
 }
 
-function openCardDetail(card) {
-  if (!card) return;
-  state.activeDetailCardId = cardId(card);
+function resolveKnowledgeCard(id, fallbackCards = []) {
+  if (!id) return null;
+  return (
+    fallbackCards.find((row) => cardId(row) === id) ||
+    (state.currentKnowledgeCards || []).find((row) => cardId(row) === id) ||
+    (state.knowledgeCards || []).find((row) => cardId(row) === id) ||
+    cardById(id)
+  );
+}
+
+function openCardDetail(card, fallbackId = '') {
   const overlay = qs('#cardDetailOverlay');
   const title = qs('#cardDetailTitle');
   const body = qs('#cardDetailContent');
+  if (!overlay || !title || !body) return;
+  if (!card) {
+    state.activeDetailCardId = '';
+    title.innerHTML = '<span>找不到知識卡資訊</span>';
+    body.innerHTML = `
+      <section class="detail-section">
+        <h3>無法開啟詳細卡片</h3>
+        <p>目前找不到這張知識卡${fallbackId ? `（${escapeHtml(fallbackId)}）` : ''}，請重新整理頁面或重新從 Discord 入口開啟。</p>
+      </section>
+    `;
+    overlay.hidden = false;
+    return;
+  }
+  state.activeDetailCardId = cardId(card);
   title.innerHTML = `
     <span>${escapeHtml(card.title || cardId(card) || '知識卡資訊')}</span>
     <span class="detail-title-tags">${detailHeaderTags(card)}</span>
@@ -1510,6 +1532,47 @@ function toggleKnowledgeCard(id, card) {
   }
   renderKnowledgeCards(state.currentKnowledgeCards || []);
   renderOutputs();
+}
+
+function handleKnowledgeCardsClick(event) {
+  const container = qs('#knowledgeCards');
+  if (!container) return;
+  const detailButton = event.target.closest('.detail-card-button');
+  if (detailButton && container.contains(detailButton)) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+    const cardNode = detailButton.closest('.knowledge-card[data-card-id]');
+    const id = detailButton.dataset.cardId || (cardNode ? cardNode.dataset.cardId : '');
+    openCardDetail(resolveKnowledgeCard(id), id);
+    return;
+  }
+
+  const cardNode = event.target.closest('.knowledge-card[data-card-id]');
+  if (!cardNode || !container.contains(cardNode)) return;
+  if (event.target.closest('button, a, summary, details, input, select, textarea')) return;
+  const id = cardNode.dataset.cardId || '';
+  toggleKnowledgeCard(id, resolveKnowledgeCard(id));
+}
+
+function handleKnowledgeCardsKeydown(event) {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  const container = qs('#knowledgeCards');
+  if (!container) return;
+  const cardNode = event.target.closest('.knowledge-card[data-card-id]');
+  if (!cardNode || !container.contains(cardNode)) return;
+  if (event.target.closest('button, a, summary, details, input, select, textarea')) return;
+  event.preventDefault();
+  const id = cardNode.dataset.cardId || '';
+  toggleKnowledgeCard(id, resolveKnowledgeCard(id));
+}
+
+function bindKnowledgeCardInteractions() {
+  const container = qs('#knowledgeCards');
+  if (!container || container.dataset.interactionsBound === '1') return;
+  container.addEventListener('click', handleKnowledgeCardsClick);
+  container.addEventListener('keydown', handleKnowledgeCardsKeydown);
+  container.dataset.interactionsBound = '1';
 }
 
 function renderKnowledgeCards(cards = [], options = {}) {
@@ -1548,27 +1611,6 @@ function renderKnowledgeCards(cards = [], options = {}) {
       </article>
     `;
   }).join('');
-  container.querySelectorAll('.knowledge-card').forEach((node) => {
-    const id = node.dataset.cardId || '';
-    const card = visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id) || cardById(id);
-    node.addEventListener('click', (event) => {
-      if (event.target.closest('button, a, summary, details, input, select, textarea')) return;
-      toggleKnowledgeCard(id, card);
-    });
-    node.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-      event.preventDefault();
-      toggleKnowledgeCard(id, card);
-    });
-  });
-  container.querySelectorAll('.detail-card-button').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.stopPropagation();
-      event.preventDefault();
-      const id = button.dataset.cardId || '';
-      openCardDetail(visibleCards.find((row) => cardId(row) === id) || cards.find((row) => cardId(row) === id) || cardById(id));
-    });
-  });
 }
 
 function focusKnowledgeCardFromUrl() {
@@ -2573,6 +2615,7 @@ async function init() {
   setupRegionSelector();
   renderDirections([]);
   renderKnowledgeCards(state.knowledgeCards.slice(0, 8), { resetAttributes: true });
+  bindKnowledgeCardInteractions();
   renderGenerationHistory();
   renderOutputs();
   renderDraftContext();
@@ -2581,8 +2624,9 @@ async function init() {
   questionText.addEventListener('input', privacyMessage);
   qs('#routeButton').addEventListener('click', routeQuestion);
   qs('#closeCardDetailButton').addEventListener('click', closeCardDetail);
+  qs('.detail-drawer').addEventListener('click', (event) => event.stopPropagation());
   qs('#cardDetailOverlay').addEventListener('click', (event) => {
-    if (event.target === qs('#cardDetailOverlay')) closeCardDetail();
+    if (event.target === event.currentTarget) closeCardDetail();
   });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeCardDetail();

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-copy-labels-v1';
+const CACHE_VERSION = '20260617-direction-labels-v2';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -167,10 +167,14 @@ const DIRECTION_LABELS = {
   smart_assistive: '智慧輔具',
   smart_assistive_policy: '智慧輔具政策',
   smart_assistive_item_scope: '智慧輔具品項範圍',
+  smart_assistive_dual_track: '租賃／購置分流',
   smart_assistive_assessment: '智慧輔具評估',
   smart_assistive_operation: '操作準備',
   smart_assistive_rental: '租賃維護',
   smart_assistive_product_leads: '產品線索',
+  smart_assistive_product_lead: '產品線索',
+  assistive_device_rental_service: '輔具租賃服務',
+  ltc_assistive_service_question: '長照輔具服務',
   home_accessibility: '居家無障礙',
   transport_access: '交通接送',
   family_support: '家庭支持',
@@ -802,7 +806,7 @@ function generationDirections(record) {
   const ids = Array.isArray(record?.directionIds) ? record.directionIds : [];
   return ids.map((id) => ({
     direction_id: id,
-    short_label: scenarioById(id)?.short_label || id,
+    short_label: directionLabel(id),
     reason: '此方向來自先前生成紀錄。',
   }));
 }
@@ -1037,12 +1041,14 @@ function renderDirections(directions = []) {
   }
   if (status) status.textContent = `已找到 ${directions.length} 個方向，請從下方候選知識卡挑選。`;
   container.innerHTML = directions.map((row) => {
-    const id = row.direction_id || row.scenario_id;
+    const id = row.direction_id || row.scenario_id || row.id || '';
     const scenario = scenarioById(id) || {};
+    const title = id ? directionLabel(id) : (row.title || row.short_label || scenario.title || scenario.short_label || '未命名方向');
+    const description = row.reason || scenario.care_manager_goal || '依問題方向分流，需再由知識卡與官方來源查證。';
     return `
       <article class="direction-card">
-        <div class="card-title">${escapeHtml(row.short_label || scenario.short_label || row.title || scenario.title || id)}</div>
-        <div class="card-desc">${escapeHtml(row.reason || scenario.care_manager_goal || '依問題方向分流，需再由知識卡與官方來源查證。')}</div>
+        <div class="card-title">${escapeHtml(title)}</div>
+        <div class="card-desc">${escapeHtml(description)}</div>
         <div class="card-tags">${asArray(scenario.risk_flags || row.risk_flags).slice(0, 3).map((tag) => `<span class="tag">${escapeHtml(labelText(tag))}</span>`).join('')}</div>
       </article>
     `;
@@ -1952,7 +1958,7 @@ function applySavedPackage(packageId) {
     direction_ids: asArray(normalized.direction_ids),
     directions: asArray(normalized.direction_ids).map((id) => ({
       direction_id: id,
-      short_label: scenarioById(id)?.short_label || id,
+      short_label: directionLabel(id),
       reason: '此方向來自已儲存的知識組合。',
     })),
     knowledge_cards: snapshots,

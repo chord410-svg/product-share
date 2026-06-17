@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260617-summary-compare-v4';
+const CACHE_VERSION = '20260617-profile-compare-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';

@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260617-result-labels-v3';
+  const CACHE_VERSION = '20260617-summary-compare-v4';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];
@@ -158,12 +158,15 @@
   function comparisonDigest(card) {
     const side = cardSystemSide(card);
     const digest = card.comparison_digest || {};
+    const summary = card.knowledge_brief || card.summary || card.family_safe_summary || card.integrated_content || '';
     if (digest.boundary || digest.action) {
       return {
+        card_id: cardId(card),
         group: digest.comparison_group || card.comparison_group || '',
         label: comparisonGroupLabel(digest.comparison_group || card.comparison_group, digest.group_label || card.comparison_group_label || card.title || cardId(card)),
         side,
         card_title: card.title || cardId(card),
+        summary,
         boundary: {
           ltc: digest.boundary?.ltc || '',
           disability: digest.boundary?.disability || '',
@@ -181,10 +184,12 @@
     const group = card.comparison_group || comparison.comparison_group || '';
     if (!group && !comparison.ltc_side && !comparison.disability_side) return null;
     return {
+      card_id: cardId(card),
       group,
       label: comparisonGroupLabel(group, comparison.group_label || card.comparison_group_label || card.title || cardId(card)),
       side,
       card_title: card.title || cardId(card),
+      summary,
       boundary: {
         ltc: comparison.ltc_side || '',
         disability: comparison.disability_side || '',
@@ -251,17 +256,29 @@
     ].join('\n')).join('\n\n') || '尚未加入知識卡。';
   }
 
-  function joinedCell(items, fallback) {
-    const rows = unique(items);
-    return rows.length ? rows.join('；') : fallback;
+  function conciseSummary(row) {
+    const value = String(row?.summary || '').replace(/\s+/g, ' ').trim()
+      || '這張卡尚未補齊摘要，請先查看知識卡完整內容。';
+    return value.length > 120 ? `${value.slice(0, 119).trim()}…` : value;
   }
 
-  function sideBoundary(rows, side, fallback) {
-    return joinedCell(rows.map((row) => row.boundary?.[side]), fallback);
+  function knowledgeCardHref(cardIdValue) {
+    const params = new URLSearchParams({ v: CACHE_VERSION });
+    if (cardIdValue) params.set('focus_card', cardIdValue);
+    return `./disability-resource.html?${params.toString()}`;
   }
 
-  function sideAction(rows, side, fallback) {
-    return joinedCell(rows.map((row) => row.action?.[side]), fallback);
+  function renderSummaryCards(rows, emptyText) {
+    if (!rows.length) {
+      return `<div class="empty-state">${escapeHtml(emptyText)}</div>`;
+    }
+    return rows.map((row) => `
+      <article class="compare-summary-card">
+        <h5>${escapeHtml(row.card_title || row.card_id || '未命名知識卡')}</h5>
+        <p>${escapeHtml(conciseSummary(row))}</p>
+        <a class="compare-card-link" href="${escapeHtml(knowledgeCardHref(row.card_id))}">查看此知識卡</a>
+      </article>
+    `).join('');
   }
 
   function renderComparison() {
@@ -272,40 +289,21 @@
       return;
     }
     container.innerHTML = groups.map((group) => {
-      const boundaryLtc = sideBoundary(group.ltcRows, 'ltc', '尚未加入同屬性的長照側知識卡；請回知識導航加入長照側資料，或標示目前未收錄。');
-      const boundaryDisability = sideBoundary(group.disabilityRows, 'disability', '尚未加入同屬性的身障側知識卡；請回知識導航加入身障側資料，或標示目前未收錄。');
-      const boundaryShared = joinedCell(group.rows.map((row) => row.boundary.shared), '未經官方確認前，不判定資格、不承諾補助金額。');
-      const actionLtc = sideAction(group.ltcRows, 'ltc', '尚未加入長照側查證行動；不得代替長照側推論。');
-      const actionDisability = sideAction(group.disabilityRows, 'disability', '尚未加入身障側查證行動；不得代替身障側推論。');
-      const reminders = unique(group.rows.flatMap((row) => row.action.reminders));
-      const family = unique(group.rows.map((row) => row.family));
       const unknownNote = group.unknownRows.length
         ? `<div class="empty-state">${escapeHtml(group.unknownRows.map((row) => row.card_title).join('、'))} 缺 system_side，已列入此比較群組但未放入長照/身障任一側。</div>`
         : '';
       return `
-        <article class="compare-table">
+        <article class="compare-summary-table">
           <h4>${escapeHtml(group.label)} <span>${group.cards.length} 張知識卡｜長照 ${group.ltcRows.length}｜身障 ${group.disabilityRows.length}</span></h4>
-          <div class="compare-row compare-head" role="row">
-            <span role="columnheader">面向</span>
-            <span role="columnheader">長照側</span>
-            <span role="columnheader">身障側</span>
-            <span role="columnheader">共同提醒</span>
-          </div>
-          <div class="compare-row" role="row">
-            <span role="cell">判斷邊界</span>
-            <p role="cell">${escapeHtml(boundaryLtc)}</p>
-            <p role="cell">${escapeHtml(boundaryDisability)}</p>
-            <p role="cell">${escapeHtml(boundaryShared)}</p>
-          </div>
-          <div class="compare-row" role="row">
-            <span role="cell">查證與提醒</span>
-            <p role="cell">${escapeHtml(actionLtc)}</p>
-            <p role="cell">${escapeHtml(actionDisability)}</p>
-            <p role="cell">${escapeHtml(reminders.length ? reminders.join('、') : '需官方確認。')}</p>
-          </div>
-          <div class="compare-row" role="row">
-            <span role="cell">家屬保守說法</span>
-            <p role="cell" class="compare-family">${escapeHtml(family.join('；') || '請先查證官方路徑，再提供家屬保守說明。')}</p>
+          <div class="compare-summary-columns">
+            <section>
+              <h5>長照側摘要</h5>
+              ${renderSummaryCards(group.ltcRows, '尚未加入同屬性的長照側知識卡。')}
+            </section>
+            <section>
+              <h5>身障側摘要</h5>
+              ${renderSummaryCards(group.disabilityRows, '尚未加入同屬性的身障側知識卡。')}
+            </section>
           </div>
           ${unknownNote}
         </article>

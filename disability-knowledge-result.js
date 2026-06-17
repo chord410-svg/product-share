@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260617-direction-labels-v2';
+  const CACHE_VERSION = '20260617-result-labels-v3';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   let activePackage = null;
   let cards = [];
@@ -24,6 +24,55 @@
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#39;');
+  }
+
+  const COMPARISON_GROUP_LABELS = {
+    assistive_stair_climber: '爬梯機／上下樓設備',
+    assistive_wheelchair: '輪椅與移動輔具',
+    home_accessibility_handrail: '居家扶手',
+    home_accessibility_bathroom: '浴室改造',
+    home_accessibility_ramp: '門檻／斜坡／動線改善',
+    special_assistive_device: '智能／特殊輔具',
+    process_preapproval: '事前核定與先購買風險',
+    system_eligibility_difference: '身障證明／長照資格／CMS 差異',
+    care_support_respite: '短期照顧與喘息支持',
+    transport_access: '交通服務與復康巴士',
+    family_support: '家庭照顧者支持',
+    official_window: '官方窗口與電話確認',
+    output_wording: '家屬版說法與輸出邊界',
+    mobility_stair_device: '爬梯機／上下樓設備',
+    mobility_wheelchair_device: '輪椅與移動輔具',
+    mobility_transfer_lifting: '移位與移乘安全',
+    mobility_transport_access: '交通服務與外出支持',
+    mobility_home_route: '室內通行與門檻改善',
+    home_accessibility_service_scope: '居家無障礙服務範圍',
+    home_accessibility_site_assessment: '現場評估與動線改善',
+    home_accessibility_documents: '居家無障礙文件需求',
+    home_accessibility_preapproval: '事前核定與先購買風險',
+    home_accessibility_completion_followup: '完工確認與後續責任',
+    smart_assistive_policy_timeline: '智慧科技輔具政策時程',
+    smart_assistive_item_scope: '智慧輔具品項範圍',
+    smart_assistive_dual_track: '智慧輔具租賃與一般輔具購置',
+    smart_assistive_assessment_document: '智慧輔具評估文件',
+    smart_assistive_operation_readiness: '智慧輔具操作準備',
+    smart_assistive_rental_maintenance: '智慧輔具租賃維護',
+    smart_assistive_product_leads: '智慧輔具產品線索',
+    smart_assistive_legacy_alias: '智慧輔具舊方向參考',
+  };
+
+  function labelText(value) {
+    const raw = String(value ?? '').trim();
+    if (!raw) return '';
+    if (/^[a-z0-9_:-]+$/.test(raw)) return raw.replaceAll('_', '／');
+    return raw;
+  }
+
+  function comparisonGroupLabel(group, fallback = '') {
+    const raw = String(group || '').trim();
+    const fallbackText = String(fallback || '').trim();
+    if (COMPARISON_GROUP_LABELS[raw]) return COMPARISON_GROUP_LABELS[raw];
+    if (fallbackText && !/^[a-z0-9_:-]+$/.test(fallbackText)) return fallbackText;
+    return labelText(raw || fallbackText) || '未指定比較屬性';
   }
 
   function packageIdFromUrl() {
@@ -112,7 +161,7 @@
     if (digest.boundary || digest.action) {
       return {
         group: digest.comparison_group || card.comparison_group || '',
-        label: digest.group_label || card.comparison_group_label || card.title || cardId(card),
+        label: comparisonGroupLabel(digest.comparison_group || card.comparison_group, digest.group_label || card.comparison_group_label || card.title || cardId(card)),
         side,
         card_title: card.title || cardId(card),
         boundary: {
@@ -133,7 +182,7 @@
     if (!group && !comparison.ltc_side && !comparison.disability_side) return null;
     return {
       group,
-      label: comparison.group_label || card.comparison_group_label || card.title || cardId(card),
+      label: comparisonGroupLabel(group, comparison.group_label || card.comparison_group_label || card.title || cardId(card)),
       side,
       card_title: card.title || cardId(card),
       boundary: {

@@ -1348,50 +1348,28 @@ function actionDetailHtml(card) {
   `;
 }
 
+function comparisonSummaryItems(card, profile = null) {
+  const raw = card?.comparison_summary || profile?.comparison_summary || profile?.summary || [];
+  return asArray(raw).map(compactSentence).filter(Boolean);
+}
+
 function singleCardComparisonHtml(card) {
   const profile = card?.comparison_profile && typeof card.comparison_profile === 'object' ? card.comparison_profile : null;
-  const digest = comparisonDigest(card);
-  if (!profile && !digest) {
-    return '<div class="empty-state">此卡尚未設定同屬性比較資料；可先用「知識整理與解釋」與「查證行動」。</div>';
+  const group = String(profile?.comparison_group || comparisonGroup(card) || '').trim();
+  const items = comparisonSummaryItems(card, profile);
+  const side = String(profile?.system_side || card.system_side || card.side || '').trim();
+  const sideLabel = sideDisplayLabel(side) || '未指定側別';
+  if (!group && !items.length) {
+    return '<div class="empty-state">此卡尚未整理精簡比較資料。</div>';
   }
-  if (profile) {
-    const facts = asArray(profile.facts).filter((row) => row && typeof row === 'object');
-    return `
-      <div class="detail-grid">
-        <div class="detail-field"><strong>同屬性</strong>${escapeHtml(comparisonGroupLabel(profile.comparison_group || comparisonGroup(card), card))}</div>
-        <div class="detail-field"><strong>本卡側別</strong>${escapeHtml(sideDisplayLabel(profile.system_side || card.system_side || ''))}</div>
-        <div class="detail-field detail-field-wide">
-          <strong>本卡比較重點</strong>
-          ${facts.length ? `<ul class="detail-list">${facts.map((fact) => `<li><strong>${escapeHtml(fact.label || '項目')}：</strong>${escapeHtml(fact.value || '待補')}</li>`).join('')}</ul>` : '<p>此卡尚未整理比較重點。</p>'}
-        </div>
-      </div>
-    `;
-  }
-  const side = String(card.system_side || card.side || '').trim();
-  const sideLabel = side === 'ltc'
-    ? '長照側'
-    : side === 'disability'
-      ? '身障側'
-      : side === 'shared'
-        ? '共通資料'
-        : '未指定側別';
-  const sideBoundary = side === 'ltc'
-    ? digest.boundary.ltc
-    : side === 'disability'
-      ? digest.boundary.disability
-      : digest.boundary.shared;
-  const sideAction = side === 'ltc'
-    ? digest.action.ltc
-    : side === 'disability'
-      ? digest.action.disability
-      : digest.action.reminders.join('、');
   return `
     <div class="detail-grid">
-      <div class="detail-field"><strong>同屬性</strong>${escapeHtml(digest.label || digest.group)}</div>
+      <div class="detail-field"><strong>同屬性</strong>${escapeHtml(comparisonGroupLabel(group, card))}</div>
       <div class="detail-field"><strong>本卡側別</strong>${escapeHtml(sideLabel)}</div>
-      <div class="detail-field detail-field-wide"><strong>本卡比較摘要</strong>${valueHtml(sideBoundary, '此卡尚未整理本側比較摘要。')}</div>
-      <div class="detail-field detail-field-wide"><strong>本卡查證摘要</strong>${valueHtml(sideAction, '此卡尚未整理本側查證摘要。')}</div>
-      <div class="detail-field detail-field-wide"><strong>完整比較位置</strong><p>完整左右比較請到「我的知識組合」選好同屬性卡片後，按「查看結果」。若只加入一側，另一側會顯示待補或未收錄，不會由系統推論。</p></div>
+      <div class="detail-field detail-field-wide">
+        <strong>本卡比較重點</strong>
+        ${items.length ? `<ul class="detail-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : '<p>此卡目前沒有可放入比較區的已確認資料。</p>'}
+      </div>
     </div>
   `;
 }

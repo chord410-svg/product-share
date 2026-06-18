@@ -279,25 +279,18 @@
     });
   }
 
-  function normalizeComparisonFacts(facts) {
-    if (!Array.isArray(facts)) return [];
-    return facts.map((fact) => {
-      if (!fact || typeof fact !== 'object') return null;
-      const label = String(fact.label || fact.name || fact.field || '').trim();
-      const value = String(fact.value || fact.text || fact.content || '').trim();
-      if (!label || !value) return null;
-      return { label, value };
-    }).filter(Boolean);
+  function comparisonSummaryItems(card, profile = null) {
+    const raw = card?.comparison_summary || profile?.comparison_summary || profile?.summary || [];
+    return asList(raw).map(compactText).filter(Boolean);
   }
 
   function comparisonProfile(card) {
-    const profile = card?.comparison_profile;
-    if (!profile || typeof profile !== 'object') return null;
+    const profile = card?.comparison_profile && typeof card.comparison_profile === 'object' ? card.comparison_profile : {};
     const group = String(profile.comparison_group || card?.comparison_group || '').trim();
     const side = normalizeSystemSide(profile.system_side || card?.system_side || card?.side);
     if (!group || !['ltc', 'disability'].includes(side)) return null;
-    const facts = normalizeComparisonFacts(profile.facts);
-    if (!facts.length) return null;
+    const summary = comparisonSummaryItems(card, profile);
+    if (!summary.length) return null;
     return {
       card_id: cardId(card),
       group,
@@ -305,7 +298,7 @@
       side,
       card_title: card?.title || profile.title || cardId(card),
       profile_title: profile.title || card?.title || cardId(card),
-      facts,
+      summary,
       source_refs: resolveProfileSources(card, profile),
     };
   }
@@ -369,34 +362,6 @@
     }).join('');
   }
 
-  function profileFactsByLabel(profiles) {
-    const map = new Map();
-    profiles.forEach((profile) => {
-      profile.facts.forEach((fact) => {
-        if (!map.has(fact.label)) map.set(fact.label, []);
-        map.get(fact.label).push({
-          value: fact.value,
-          card_id: profile.card_id,
-          card_title: profile.card_title,
-        });
-      });
-    });
-    return map;
-  }
-
-  function renderFactCell(entries, sideHasProfile) {
-    if (!entries?.length) {
-      const message = sideHasProfile ? '從缺：此側卡片尚未整理此項資料。' : '從缺：尚未加入同屬性知識卡。';
-      return `<div class="compare-missing">${escapeHtml(message)}</div>`;
-    }
-    return entries.map((entry) => `
-      <div class="compare-fact">
-        <p>${escapeHtml(entry.value)}</p>
-        <a class="compare-card-link" href="${escapeHtml(knowledgeCardHref(entry.card_id))}">查看此知識卡</a>
-      </div>
-    `).join('');
-  }
-
   function renderSourceList(profiles, emptyText) {
     const refs = [];
     const seen = new Set();
@@ -426,6 +391,17 @@
     return `./disability-resource.html?${params.toString()}`;
   }
 
+  function renderProfileCards(profiles, emptyText) {
+    if (!profiles.length) return `<div class="compare-missing">${escapeHtml(emptyText)}</div>`;
+    return profiles.map((profile) => `
+      <article class="compare-summary-card">
+        <h5>${escapeHtml(profile.profile_title || profile.card_title)}</h5>
+        <ul>${profile.summary.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <a class="compare-card-link" href="${escapeHtml(knowledgeCardHref(profile.card_id))}">查看此知識卡</a>
+      </article>
+    `).join('');
+  }
+
   function renderComparison() {
     const container = $('comparisonOutput');
     const { groups, skipped } = groupedComparisons();
@@ -433,44 +409,34 @@
       container.innerHTML = '<div class="empty-state">目前選取的知識卡沒有可比較的同屬性資料。</div>';
       return;
     }
-    container.innerHTML = groups.map((group) => {
-      const ltcFacts = profileFactsByLabel(group.ltcProfiles);
-      const disabilityFacts = profileFactsByLabel(group.disabilityProfiles);
-      const labels = COMPARISON_FACT_LABELS.filter((label) => ltcFacts.has(label) || disabilityFacts.has(label));
-      const rows = labels.map((label) => `
-        <div class="compare-profile-row" role="row">
-          <div class="compare-profile-label" role="rowheader">${escapeHtml(label)}</div>
-          <div role="cell">${renderFactCell(ltcFacts.get(label), group.ltcProfiles.length > 0)}</div>
-          <div role="cell">${renderFactCell(disabilityFacts.get(label), group.disabilityProfiles.length > 0)}</div>
+    container.innerHTML = groups.map((group) => `
+      <article class="compare-profile-table compare-summary-table">
+        <div class="comparison-group-title">
+          <h4>${escapeHtml(group.label)}</h4>
+          <span class="tag compare-tag">${group.profiles.length} 張知識卡｜長照 ${group.ltcProfiles.length}｜身障 ${group.disabilityProfiles.length}</span>
         </div>
-      `).join('') || '<div class="empty-state">此比較群組尚未整理可對照欄位。</div>';
-      return `
-        <article class="compare-profile-table">
-          <div class="comparison-group-title">
-            <h4>${escapeHtml(group.label)}</h4>
-            <span class="tag compare-tag">${group.profiles.length} 張知識卡｜長照 ${group.ltcProfiles.length}｜身障 ${group.disabilityProfiles.length}</span>
-          </div>
-          <div class="compare-profile-grid" role="table" aria-label="${escapeHtml(group.label)}同屬性比較">
-            <div class="compare-profile-row compare-profile-head" role="row">
-              <div role="columnheader">項目</div>
-              <div role="columnheader">長照側</div>
-              <div role="columnheader">身障側</div>
-            </div>
-            ${rows}
-          </div>
-          <div class="compare-profile-sources">
-            <section>
-              <h5>長照側來源</h5>
-              ${renderSourceList(group.ltcProfiles, '從缺：尚未加入長照側來源。')}
-            </section>
-            <section>
-              <h5>身障側來源</h5>
-              ${renderSourceList(group.disabilityProfiles, '從缺：尚未加入身障側來源。')}
-            </section>
-          </div>
-        </article>
-      `;
-    }).join('') + (skipped.length ? `<div class="empty-state">以下知識卡沒有 comparison_profile，不列入同屬性比較：${skipped.map((card) => escapeHtml(card.title || cardId(card))).join('、')}</div>` : '');
+        <div class="compare-two-column">
+          <section>
+            <h5>長照側</h5>
+            ${renderProfileCards(group.ltcProfiles, '從缺：尚未加入同屬性的長照側知識卡。')}
+          </section>
+          <section>
+            <h5>身障側</h5>
+            ${renderProfileCards(group.disabilityProfiles, '從缺：尚未加入同屬性的身障側知識卡。')}
+          </section>
+        </div>
+        <div class="compare-profile-sources">
+          <section>
+            <h5>長照側來源</h5>
+            ${renderSourceList(group.ltcProfiles, '從缺：尚未加入長照側來源。')}
+          </section>
+          <section>
+            <h5>身障側來源</h5>
+            ${renderSourceList(group.disabilityProfiles, '從缺：尚未加入身障側來源。')}
+          </section>
+        </div>
+      </article>
+    `).join('') + (skipped.length ? `<div class="empty-state">以下知識卡沒有精簡比較資料，不列入同屬性比較：${skipped.map((card) => escapeHtml(card.title || cardId(card))).join('、')}</div>` : '');
   }
 
   function renderFullData() {

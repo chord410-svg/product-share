@@ -142,14 +142,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "2ab13fc23f4ff48915275a63f1153290b7c68c522f06a90afe1d27c704da1032",
-      "knowledge_version": "2026-06-12-2ab13fc2",
-      "embedding_text": "輔具評估、醫師文件與地方窗口 disability_assistive_subsidy_question home_accessibility 身障 申請路徑 電話確認 地方窗口 文件需求 事前核定 official_window 中央共通 新北市 要不要醫師證明 輔具評估要去哪裡做 申請輔具需要哪些文件 輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。 [] # 輔具評估、醫師文件與地方窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "30cef806e68687ebfcb10aaf05d3f0d2f42b3bae689a225865ef9dda5a89ee80",
+      "knowledge_version": "2026-06-12-30cef806",
+      "embedding_text": "輔具評估、醫師文件與地方窗口 disability_assistive_subsidy_question home_accessibility 身障 申請路徑 電話確認 地方窗口 文件需求 事前核定 official_window 中央共通 新北市 要不要醫師證明 輔具評估要去哪裡做 申請輔具需要哪些文件 輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。 [] [] # 輔具評估、醫師文件與地方窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "assistive_resource_center_verification",
@@ -293,14 +294,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "1c405ae2d0bd4d3bd896d5c5fca67d52828efde2f20a77c7b535d44779024de5",
-      "knowledge_version": "2026-06-12-1c405ae2",
-      "embedding_text": "輔具資源中心如何協助查證 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 official_window 中央共通 新北市 輔具中心可以問什麼 不確定品項要問誰 特殊輔具誰能評估 遇到特殊或不確定的輔具需求時，可先請輔具資源中心協助評估與查證。中心意見仍需配合地方承辦規定確認。 [] # 輔具資源中心如何協助查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "78fde245a202700a854832a15a44f1396a1d74c82de4bb41578bcecbb633aa99",
+      "knowledge_version": "2026-06-12-78fde245",
+      "embedding_text": "輔具資源中心如何協助查證 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 official_window 中央共通 新北市 輔具中心可以問什麼 不確定品項要問誰 特殊輔具誰能評估 遇到特殊或不確定的輔具需求時，可先請輔具資源中心協助評估與查證。中心意見仍需配合地方承辦規定確認。 [] [] # 輔具資源中心如何協助查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "bathroom_renovation_preapproval_risk",
@@ -434,14 +436,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "d17723dd3e2485772b059f94d510deccd541e3ed9d2fd66935fc039aff227c53",
-      "knowledge_version": "2026-06-12-d17723dd",
-      "embedding_text": "浴室改造與施工前核定風險 home_accessibility 長照身障交界 申請路徑 電話確認 事前核定 地方窗口 home_accessibility_bathroom 中央共通 新北市 浴室改造可以補助嗎 浴室施工前要先核定嗎 防滑或門檻改善能不能申請 浴室改造多半要先確認是否屬於可申請項目，且常有施工前評估與核定要求。建議先暫緩施工，等官方流程確認後再處理。 [] # 浴室改造與施工前核定風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "86b09ab3ac1c65fa1c6309a31d12e6293533621088f6baa93d011b84e1946e52",
+      "knowledge_version": "2026-06-12-86b09ab3",
+      "embedding_text": "浴室改造與施工前核定風險 home_accessibility 長照身障交界 申請路徑 電話確認 事前核定 地方窗口 home_accessibility_bathroom 中央共通 新北市 浴室改造可以補助嗎 浴室施工前要先核定嗎 防滑或門檻改善能不能申請 浴室改造多半要先確認是否屬於可申請項目，且常有施工前評估與核定要求。建議先暫緩施工，等官方流程確認後再處理。 [] [] # 浴室改造與施工前核定風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "care_manager_phone_check_template",
@@ -598,14 +601,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "3a6dc33d6ef3b6ae2f143db9c27011e68f2bfc92d51c93e924a16d0266d6f45d",
-      "knowledge_version": "2026-06-12-3a6dc33d",
-      "embedding_text": "個管師電話確認清單模板 disability_welfare_navigation disability_assistive_subsidy_question home_accessibility smart_or_special_device longtermcare_budget_gap 身障 申請路徑 電話確認 事前核定 地方窗口 official_window 中央共通 新北市 電話確認要問什麼 身障資源查證電話清單 個管師確認補助窗口問題 電話確認時可先整理需求，再向官方窗口確認制度、文件、核定順序與轉介單位。回覆家屬時應保留「需官方確認」的語氣。 [] # 個管師電話確認清單模板\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "4fba1c068caa279841dc9b887ebfd5175bfaab6276aca7771688a1b39fcf6c7b",
+      "knowledge_version": "2026-06-12-4fba1c06",
+      "embedding_text": "個管師電話確認清單模板 disability_welfare_navigation disability_assistive_subsidy_question home_accessibility smart_or_special_device longtermcare_budget_gap 身障 申請路徑 電話確認 事前核定 地方窗口 official_window 中央共通 新北市 電話確認要問什麼 身障資源查證電話清單 個管師確認補助窗口問題 電話確認時可先整理需求，再向官方窗口確認制度、文件、核定順序與轉介單位。回覆家屬時應保留「需官方確認」的語氣。 [] [] # 個管師電話確認清單模板\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "disability_certificate_ltc_cms_difference",
@@ -747,14 +751,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "9c5029205d28d01027eca457fc8c705ec235bc0b4d61e6ffe9b452fe5c5254db",
-      "knowledge_version": "2026-06-12-9c502920",
-      "embedding_text": "身障證明、長照資格、CMS 失能等級差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 system_eligibility_difference 中央共通 新北市 有身障證明就有長照嗎 CMS 等級和身障等級差在哪 長照資格和身障福利能不能互通 身心障礙證明、長照資格與 CMS 失能等級是不同制度，不能互相直接推論。建議依需求分別向長照或身障窗口確認。 [] # 身障證明、長照資格、CMS 失能等級差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "4fd7de78902a5c074ed5a36b5237555999d3a24d627c19281bbd112bdf1fd46e",
+      "knowledge_version": "2026-06-12-4fd7de78",
+      "embedding_text": "身障證明、長照資格、CMS 失能等級差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 system_eligibility_difference 中央共通 新北市 有身障證明就有長照嗎 CMS 等級和身障等級差在哪 長照資格和身障福利能不能互通 身心障礙證明、長照資格與 CMS 失能等級是不同制度，不能互相直接推論。建議依需求分別向長照或身障窗口確認。 [] [] # 身障證明、長照資格、CMS 失能等級差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "disability_family_caregiver_support",
@@ -895,14 +900,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "10bf4030036a1d5d3fdcd39b0038da4d96afb8ab59e6bec54dd339ecfeb5f352",
-      "knowledge_version": "2026-06-12-10bf4030",
-      "embedding_text": "身障家庭照顧者支持 disability_welfare_navigation mental_disability_family_support 身障 申請路徑 電話確認 family_support 中央共通 新北市 身障家庭照顧者可以找什麼支持 照顧者壓力很大但不是長照個案 家屬需要支持資源 身障家庭照顧者若有壓力或支持需求，可先查地方身障福利與家庭支持資源；若也符合長照需求，再同步確認長照服務。 [] # 身障家庭照顧者支持\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "92e3a7eb440861054fdf60355bbc86bccadf7ce2babe59d120b8d29e5533b263",
+      "knowledge_version": "2026-06-12-92e3a7eb",
+      "embedding_text": "身障家庭照顧者支持 disability_welfare_navigation mental_disability_family_support 身障 申請路徑 電話確認 family_support 中央共通 新北市 身障家庭照顧者可以找什麼支持 照顧者壓力很大但不是長照個案 家屬需要支持資源 身障家庭照顧者若有壓力或支持需求，可先查地方身障福利與家庭支持資源；若也符合長照需求，再同步確認長照服務。 [] [] # 身障家庭照顧者支持\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "disability_short_term_care_vs_ltc_respite",
@@ -1044,14 +1050,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "893803a3b3b6e1e6461a9a6b7482713509cb4aace660445784e995b235f22a56",
-      "knowledge_version": "2026-06-12-893803a3",
-      "embedding_text": "身障臨時／短期照顧與長照喘息差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 care_support_respite 中央共通 新北市 身障短期照顧和長照喘息差在哪 家屬臨時照顧壓力怎麼找資源 身障臨托可以用嗎 短期照顧、臨托與長照喘息屬於不同資源路徑，是否可用要看資格、需求與地方規定。建議先由個管師協助分別查證。 [] # 身障臨時／短期照顧與長照喘息差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "8dabbadf4a80c61570d1be29e8651c6003af386abb513d311872ef3d0ad94310",
+      "knowledge_version": "2026-06-12-8dabbadf",
+      "embedding_text": "身障臨時／短期照顧與長照喘息差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 care_support_respite 中央共通 新北市 身障短期照顧和長照喘息差在哪 家屬臨時照顧壓力怎麼找資源 身障臨托可以用嗎 短期照顧、臨托與長照喘息屬於不同資源路徑，是否可用要看資格、需求與地方規定。建議先由個管師協助分別查證。 [] [] # 身障臨時／短期照顧與長照喘息差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "electric_wheelchair_ltc_disability_check",
@@ -1194,14 +1201,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "90535fbecb641e472a75756d351f230c0927f93bf0e7a8965a1f41f7f779a603",
-      "knowledge_version": "2026-06-12-90535fbe",
-      "embedding_text": "電動輪椅：長照、身障與自費查證差異 disability_assistive_subsidy_question smart_or_special_device 長照身障交界 申請路徑 電話確認 制度差異 assistive_wheelchair 中央共通 新北市 電動輪椅可以補助嗎 長照有電動輪椅嗎 身障電動代步車或電動輪椅怎麼查 電動輪椅或電動代步車是否能補助，需要先查地方身障輔具規定與評估要求。長照與身障的路徑不同，建議先查證再採購。 [] # 電動輪椅：長照、身障與自費查證差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "2c69a2a001fc4527c9482e0b0c48e5c3395b26f6e79d55222685d1088bb27f7a",
+      "knowledge_version": "2026-06-12-2c69a2a0",
+      "embedding_text": "電動輪椅：長照、身障與自費查證差異 disability_assistive_subsidy_question smart_or_special_device 長照身障交界 申請路徑 電話確認 制度差異 assistive_wheelchair 中央共通 新北市 電動輪椅可以補助嗎 長照有電動輪椅嗎 身障電動代步車或電動輪椅怎麼查 電動輪椅或電動代步車是否能補助，需要先查地方身障輔具規定與評估要求。長照與身障的路徑不同，建議先查證再採購。 [] [] # 電動輪椅：長照、身障與自費查證差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "family_safe_reply_rules",
@@ -1348,14 +1356,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "d5d4d8070857c1dfbdc779bf2200711f60774f854632c62830429f0709364b8f",
-      "knowledge_version": "2026-06-12-d5d4d807",
-      "embedding_text": "家屬版保守說明規則 disability_welfare_navigation disability_assistive_subsidy_question home_accessibility smart_or_special_device 身障 申請路徑 電話確認 家屬版說明 事前核定 地方窗口 output_wording 中央共通 新北市 怎麼跟家屬說才安全 家屬版不能寫什麼 不確定補助時怎麼回覆 家屬版應使用保守語氣：目前需先查證官方規定與地方窗口，個管師可協助整理需求與下一步，不承諾資格、金額或核定結果。 [] # 家屬版保守說明規則\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "ca73595b1b906852c87b0d922fc71df315ff990dd25c365d79768111a885ef77",
+      "knowledge_version": "2026-06-12-ca73595b",
+      "embedding_text": "家屬版保守說明規則 disability_welfare_navigation disability_assistive_subsidy_question home_accessibility smart_or_special_device 身障 申請路徑 電話確認 家屬版說明 事前核定 地方窗口 output_wording 中央共通 新北市 怎麼跟家屬說才安全 家屬版不能寫什麼 不確定補助時怎麼回覆 家屬版應使用保守語氣：目前需先查證官方規定與地方窗口，個管師可協助整理需求與下一步，不承諾資格、金額或核定結果。 [] [] # 家屬版保守說明規則\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "home_accessibility_disability_completion_followup",
@@ -1479,6 +1488,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府社會局",
@@ -1542,9 +1552,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "875f9b3043f863db19aaf776fcb459fa6e93db7252423890e0790baef3ebdc21",
-      "knowledge_version": "2026-06-17-875f9b30",
-      "embedding_text": "身障居家改善完工與後續追蹤 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 查證流程 home_accessibility_completion_followup 中央共通 新北市 身障側改善或輔具已完成，需要確認後續責任 身障居家改善完工與後續追蹤 完工確認與後續責任 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 居家無障礙 disability 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。\n\n身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "8a1b181f1f9f4655989f4ea8aad6f995510050258a9f1dd04c14adbfaa925686",
+      "knowledge_version": "2026-06-17-8a1b181f",
+      "embedding_text": "身障居家改善完工與後續追蹤 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 查證流程 home_accessibility_completion_followup 中央共通 新北市 身障側改善或輔具已完成，需要確認後續責任 身障居家改善完工與後續追蹤 完工確認與後續責任 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 居家無障礙 disability 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。\n\n身障側完工或取得輔具後，要確認補件、維修、保固與後續使用責任，避免只完成申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_disability_documents",
@@ -1669,6 +1679,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府社會局",
@@ -1726,9 +1737,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "ab4d10ba155961022a4c6e6ef7171ac015b13d9df87fcaef586c16f6ab2d5322",
-      "knowledge_version": "2026-06-17-ab4d10ba",
-      "embedding_text": "身障居家無障礙文件需求 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 文件需求 事前核定 home_accessibility_documents 中央共通 新北市 家屬要走身障側居家改善或輔具路徑 身障居家無障礙文件需求 居家無障礙文件需求 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 居家無障礙 disability 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。\n\n身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "d62f0303482a5210c72eda5d5b8653a4875599fbcd1a61e78bc1ca47f93fe493",
+      "knowledge_version": "2026-06-17-d62f0303",
+      "embedding_text": "身障居家無障礙文件需求 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 文件需求 事前核定 home_accessibility_documents 中央共通 新北市 家屬要走身障側居家改善或輔具路徑 身障居家無障礙文件需求 居家無障礙文件需求 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 居家無障礙 disability 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。\n\n身障側文件可能牽涉身障資格、房屋同意、估價與評估，需依地方社政或輔具中心規定確認。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_disability_preapproval_risk",
@@ -1853,6 +1864,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府社會局",
@@ -1910,9 +1922,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "1711289ee11eb48f1f45866beb735e0b5e3f0e85dfade8c8a6c30f2edd8720a9",
-      "knowledge_version": "2026-06-17-1711289e",
-      "embedding_text": "身障居家改善事前核定風險 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 文件需求 事前核定 home_accessibility_preapproval 中央共通 新北市 家屬問身障補助能否補已做好的改善 身障居家改善事前核定風險 事前核定與先購買風險 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 居家無障礙 disability 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。\n\n身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "8f5cec78e15b37400debd004908bf5024c9cf08a3a5806a8eec292f69e98742d",
+      "knowledge_version": "2026-06-17-8f5cec78",
+      "embedding_text": "身障居家改善事前核定風險 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 文件需求 事前核定 home_accessibility_preapproval 中央共通 新北市 家屬問身障補助能否補已做好的改善 身障居家改善事前核定風險 事前核定與先購買風險 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 居家無障礙 disability 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。\n\n身障側同樣要確認地方補助是否要求事前申請、評估或核定，不能只看家屬已完成施工。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_disability_scope_check",
@@ -2037,6 +2049,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府社會局",
@@ -2094,9 +2107,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "58ace647ece931f7bf08541ea0acc14deef2425fef90e3d4979eeadb150a34b2",
-      "knowledge_version": "2026-06-17-58ace647",
-      "embedding_text": "居家無障礙身障側服務範圍查證 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 查證流程 地方窗口 home_accessibility_service_scope 中央共通 新北市 家屬有身障資格或長照未列項，想查另一側路徑 居家無障礙身障側服務範圍查證 居家無障礙服務範圍 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 居家無障礙 disability 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。\n\n身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "3573d796f8a0ae45f6ebb17ae6225ef6b00ee4874132ec1b0e67e3a758ebc496",
+      "knowledge_version": "2026-06-17-3573d796",
+      "embedding_text": "居家無障礙身障側服務範圍查證 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 查證流程 地方窗口 home_accessibility_service_scope 中央共通 新北市 家屬有身障資格或長照未列項，想查另一側路徑 居家無障礙身障側服務範圍查證 居家無障礙服務範圍 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 居家無障礙 disability 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。\n\n身障側需向社會局或輔具中心確認居家無障礙、生活輔具或地方福利服務是否可協助。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_disability_site_assessment",
@@ -2211,6 +2224,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -2252,9 +2266,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "660222e32e21bf57ef8d8dd963510d6459d15fa6cefd7063fc2963807bc34745",
-      "knowledge_version": "2026-06-17-660222e3",
-      "embedding_text": "身障居家動線與輔具中心評估 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 查證流程 home_accessibility_site_assessment 中央共通 新北市 家屬問是否一定要施工，或能否用輔具替代 身障居家動線與輔具中心評估 現場評估與動線改善 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 居家無障礙 disability 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。\n\n身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "b4048159cdaafe2cbc4d03ef49c37fd7080f01ec2f51be6e03123c0c74f66fe8",
+      "knowledge_version": "2026-06-17-b4048159",
+      "embedding_text": "身障居家動線與輔具中心評估 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 身障 長照身障交界 查證流程 home_accessibility_site_assessment 中央共通 新北市 家屬問是否一定要施工，或能否用輔具替代 身障居家動線與輔具中心評估 現場評估與動線改善 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 居家無障礙 disability 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。\n\n身障側可由輔具中心協助看動線、輔具適配與替代方案，不一定只有施工改造。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_ltc_completion_followup",
@@ -2368,6 +2382,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -2415,9 +2430,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "1567e6d2510d05ef196d708ab3e67255a855ccda8971dc132079321e8ff3a384",
-      "knowledge_version": "2026-06-17-1567e6d2",
-      "embedding_text": "長照居家改善完工與後續追蹤 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 查證流程 home_accessibility_completion_followup 中央共通 新北市 工程完成後要確認能否報支或交接 長照居家改善完工與後續追蹤 完工確認與後續責任 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 居家無障礙 ltc 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。\n\n長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "f4aeef05bf5e6fa0a1c48f613f820948b2920bc53ff9deb330d2fde11bbb75c1",
+      "knowledge_version": "2026-06-17-f4aeef05",
+      "embedding_text": "長照居家改善完工與後續追蹤 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 查證流程 home_accessibility_completion_followup 中央共通 新北市 工程完成後要確認能否報支或交接 長照居家改善完工與後續追蹤 完工確認與後續責任 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 居家無障礙 ltc 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。\n\n長照側完工後仍要確認是否符合核定內容、是否保留文件，以及後續維修責任。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 完工確認與後續責任 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_ltc_documents",
@@ -2532,6 +2547,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -2573,9 +2589,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "bcc5c45406db3cb96ff942912ee5db9b35480d90bfa3e4096a666b8ce2356a0b",
-      "knowledge_version": "2026-06-17-bcc5c454",
-      "embedding_text": "長照居家無障礙文件需求 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 文件需求 事前核定 home_accessibility_documents 中央共通 新北市 需要幫家屬準備長照居家改善文件 長照居家無障礙文件需求 居家無障礙文件需求 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 居家無障礙 ltc 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。\n\n長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "638ccfa2776d2a91d5bf9f8aa0c46dd32a4e10afbefd36ec73446494cf5ace68",
+      "knowledge_version": "2026-06-17-638ccfa2",
+      "embedding_text": "長照居家無障礙文件需求 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 文件需求 事前核定 home_accessibility_documents 中央共通 新北市 需要幫家屬準備長照居家改善文件 長照居家無障礙文件需求 居家無障礙文件需求 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 居家無障礙 ltc 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。\n\n長照側文件通常要圍繞評估、照片、估價、施工或購置紀錄，實際格式依地方承辦。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙文件需求 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_ltc_preapproval_risk",
@@ -2690,6 +2706,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -2731,9 +2748,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "d3842af306166cb8e8d40e0cfdf9b6c54d4f8907ab747b34a3848ab53dd3d479",
-      "knowledge_version": "2026-06-17-d3842af3",
-      "embedding_text": "長照居家改善事前核定風險 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 文件需求 事前核定 home_accessibility_preapproval 中央共通 新北市 家屬已想先裝扶手或改浴室 長照居家改善事前核定風險 事前核定與先購買風險 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 居家無障礙 ltc 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。\n\n長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "338f6f35b8d5aa9107ddccf42d1f53edb5c2d2e23146278ad19796023bf385d8",
+      "knowledge_version": "2026-06-17-338f6f35",
+      "embedding_text": "長照居家改善事前核定風險 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 文件需求 事前核定 home_accessibility_preapproval 中央共通 新北市 家屬已想先裝扶手或改浴室 長照居家改善事前核定風險 事前核定與先購買風險 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 居家無障礙 ltc 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。\n\n長照側遇到施工、購置或改造時，應先確認是否需要事前核定，避免先施工影響申請。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 事前核定與先購買風險 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_ltc_scope_check",
@@ -2848,6 +2865,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -2889,9 +2907,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "19268418df3f7056413dc914450ea2b5e096a22741d3bdb0e4d91a662a58d123",
-      "knowledge_version": "2026-06-17-19268418",
-      "embedding_text": "居家無障礙長照側服務範圍查證 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 查證流程 地方窗口 home_accessibility_service_scope 中央共通 新北市 家屬問扶手、浴室、門檻或斜坡是否能走長照 居家無障礙長照側服務範圍查證 居家無障礙服務範圍 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 居家無障礙 ltc 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。\n\n長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "4a99a859cfb8a80eb09cbf73aea536e38da492409a603f678bb8a0bf4a1a542f",
+      "knowledge_version": "2026-06-17-4a99a859",
+      "embedding_text": "居家無障礙長照側服務範圍查證 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 查證流程 地方窗口 home_accessibility_service_scope 中央共通 新北市 家屬問扶手、浴室、門檻或斜坡是否能走長照 居家無障礙長照側服務範圍查證 居家無障礙服務範圍 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 居家無障礙 ltc 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。\n\n長照側需確認是否屬長照輔具及居家無障礙服務項目，包含評估、核定與施工前流程。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 居家無障礙服務範圍 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_accessibility_ltc_site_assessment",
@@ -3005,6 +3023,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -3046,9 +3065,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "9c7536bdc2bb0d7af03a28f201c909db4c4a5fff18c410795828535fe3b0cbce",
-      "knowledge_version": "2026-06-17-9c7536bd",
-      "embedding_text": "長照居家動線現場評估 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 查證流程 home_accessibility_site_assessment 中央共通 新北市 個案家中動線不安全，需要長照側評估改善 長照居家動線現場評估 現場評估與動線改善 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 居家無障礙 ltc 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。\n\n長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
+      "content_hash": "9c505d0b9db608f5b7ecc821ab20927a08805822a52bf0afe8bb4f48565d24f7",
+      "knowledge_version": "2026-06-17-9c505d0b",
+      "embedding_text": "長照居家動線現場評估 居家無障礙 扶手 浴室改造 門檻斜坡 新北市 長照 查證流程 home_accessibility_site_assessment 中央共通 新北市 個案家中動線不安全，需要長照側評估改善 長照居家動線現場評估 現場評估與動線改善 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 居家無障礙 ltc 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。\n\n長照側居家改善應回到實際照顧動線，確認浴室、門檻、斜坡、床邊與移位路徑。 個管師處理時要先把制度側分清楚，再依官方窗口確認文件、核定、施工或後續維護責任。這張卡把 現場評估與動線改善 的查證重點集中在同一張卡，避免把相近問題拆成零散提醒。"
     },
     {
       "id": "home_handrail_ltc_disability_check",
@@ -3193,14 +3212,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "21fa0060944e85ee03ccf9defafd35f75e67f355149f55e2164d6c1a74dac76d",
-      "knowledge_version": "2026-06-12-21fa0060",
-      "embedding_text": "居家扶手：長照無障礙與身障服務差異 home_accessibility longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 事前核定 地方窗口 home_accessibility_handrail 中央共通 新北市 居家扶手可以補助嗎 扶手走長照還是身障 樓梯扶手或浴室扶手怎麼查 居家扶手可能屬於長照居家無障礙改善，也可能需要依地方身障服務查證。施工前建議先確認評估、報價與核定流程。 [] # 居家扶手：長照無障礙與身障服務差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "714ea1f32d85b48d60ad77be9058b827b0620072f4ac7c008524dde739572af1",
+      "knowledge_version": "2026-06-12-714ea1f3",
+      "embedding_text": "居家扶手：長照無障礙與身障服務差異 home_accessibility longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 事前核定 地方窗口 home_accessibility_handrail 中央共通 新北市 居家扶手可以補助嗎 扶手走長照還是身障 樓梯扶手或浴室扶手怎麼查 居家扶手可能屬於長照居家無障礙改善，也可能需要依地方身障服務查證。施工前建議先確認評估、報價與核定流程。 [] [] # 居家扶手：長照無障礙與身障服務差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "local_social_affairs_disability_window",
@@ -3332,14 +3352,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "097018cfbb6f006e81f47992ac8c3ad09b8e5582091cd19f5577b62f5fde13a2",
-      "knowledge_version": "2026-06-12-097018cf",
-      "embedding_text": "地方社會局身障福利窗口 disability_welfare_navigation 身障 申請路徑 電話確認 地方窗口 official_window 中央共通 新北市 身障福利要問哪裡 社會局身障窗口可以查什麼 地方政府身障資源入口 身障福利多由地方社會局或相關受託單位承辦。建議先依所在縣市與需求類型查官方窗口，再確認文件與流程。 [] # 地方社會局身障福利窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "c4f587d8ffc68959e5fd4d682ce8e72d9fb516fcef3ceebb2abe86aae0530050",
+      "knowledge_version": "2026-06-12-c4f587d8",
+      "embedding_text": "地方社會局身障福利窗口 disability_welfare_navigation 身障 申請路徑 電話確認 地方窗口 official_window 中央共通 新北市 身障福利要問哪裡 社會局身障窗口可以查什麼 地方政府身障資源入口 身障福利多由地方社會局或相關受託單位承辦。建議先依所在縣市與需求類型查官方窗口，再確認文件與流程。 [] [] # 地方社會局身障福利窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "ltc_item_absent_check_disability_path",
@@ -3490,14 +3511,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "b6be4d3580c9fbeba38439adf4f37663f838c0a8206651a22e180450a2f2bd93",
-      "knowledge_version": "2026-06-12-b6be4d35",
-      "embedding_text": "長照沒有列入品項時如何查身障路徑 longtermcare_budget_gap disability_assistive_subsidy_question 長照身障交界 申請路徑 電話確認 system_eligibility_difference 中央共通 新北市 長照沒有這個品項怎麼辦 長照找不到可以走身障嗎 身障和長照補助怎麼接 長照清單沒有某個品項時，不代表完全沒有資源，也不代表身障一定能補助。建議先整理功能需求，再由個管師協助查其他官方窗口。 [] # 長照沒有列入品項時如何查身障路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "054ae85d400d7ed5b22da69fe1176fbbf4c3bdd8c5170554d4f3087da9fbe45f",
+      "knowledge_version": "2026-06-12-054ae85d",
+      "embedding_text": "長照沒有列入品項時如何查身障路徑 longtermcare_budget_gap disability_assistive_subsidy_question 長照身障交界 申請路徑 電話確認 system_eligibility_difference 中央共通 新北市 長照沒有這個品項怎麼辦 長照找不到可以走身障嗎 身障和長照補助怎麼接 長照清單沒有某個品項時，不代表完全沒有資源，也不代表身障一定能補助。建議先整理功能需求，再由個管師協助查其他官方窗口。 [] [] # 長照沒有列入品項時如何查身障路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "manual_wheelchair_mobility_aid_check",
@@ -3639,14 +3661,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "c011291ae840d722f8119f8e24d47edd5458f1f640d765adaa67800fb23fb2e0",
-      "knowledge_version": "2026-06-12-c011291a",
-      "embedding_text": "一般輪椅與移動輔具查證路徑 disability_assistive_subsidy_question longtermcare_budget_gap 身障 申請路徑 電話確認 assistive_wheelchair 中央共通 新北市 一般輪椅可以補助嗎 移位或移動輔具走長照還是身障 輪椅租借或購買怎麼查 一般輪椅與移動輔具可能有長照、身障或租借等不同路徑。建議先確認使用期間、用途與官方窗口要求，再決定申請方式。 [] # 一般輪椅與移動輔具查證路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "a1f45dcb5f43ff49169fed0ba8b652fc859c589eb1490c7094ec7d8e24f8837a",
+      "knowledge_version": "2026-06-12-a1f45dcb",
+      "embedding_text": "一般輪椅與移動輔具查證路徑 disability_assistive_subsidy_question longtermcare_budget_gap 身障 申請路徑 電話確認 assistive_wheelchair 中央共通 新北市 一般輪椅可以補助嗎 移位或移動輔具走長照還是身障 輪椅租借或購買怎麼查 一般輪椅與移動輔具可能有長照、身障或租借等不同路徑。建議先確認使用期間、用途與官方窗口要求，再決定申請方式。 [] [] # 一般輪椅與移動輔具查證路徑\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "mental_disability_family_support_boundary",
@@ -3787,14 +3810,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "d9a479049cc29b0080dfd65b228b7abfbec93ede190e1c49b4cfb3e1dfbabced",
-      "knowledge_version": "2026-06-12-d9a47904",
-      "embedding_text": "精神障礙家庭支持與長照邊界 mental_disability_family_support disability_welfare_navigation 長照身障交界 申請路徑 電話確認 family_support 中央共通 新北市 精神障礙家屬可以找什麼資源 精神障礙和長照有關嗎 家庭照顧壓力和安全風險怎麼分流 精神障礙家庭支持需要先確認安全風險與需求類型；可查身障、衛政或長照相關窗口，但不宜直接以長照服務概括所有問題。 [] # 精神障礙家庭支持與長照邊界\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "91967917088a0600f9061041fc633b640d99fbb81c93e053819b939e7d1d8d67",
+      "knowledge_version": "2026-06-12-91967917",
+      "embedding_text": "精神障礙家庭支持與長照邊界 mental_disability_family_support disability_welfare_navigation 長照身障交界 申請路徑 電話確認 family_support 中央共通 新北市 精神障礙家屬可以找什麼資源 精神障礙和長照有關嗎 家庭照顧壓力和安全風險怎麼分流 精神障礙家庭支持需要先確認安全風險與需求類型；可查身障、衛政或長照相關窗口，但不宜直接以長照服務概括所有問題。 [] [] # 精神障礙家庭支持與長照邊界\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "mobility_disability_home_route_assistive",
@@ -3910,6 +3934,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -3951,9 +3976,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "cf84e6f7d7e368166b92d836ae2c16ed33b87f4eb0bb6de82358af441da41d1d",
-      "knowledge_version": "2026-06-17-cf84e6f7",
-      "embedding_text": "身障室內動線與輔具替代方案查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_home_route 中央共通 新北市 身障者家中動線不方便，想找輔具或改善 身障室內動線與輔具替代方案查證 室內通行與門檻改善 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 移動與上下樓 disability 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。\n\n身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "561a98ca67b1e422c843f7862075529d57a42181420a146d5a6bc49bc876733d",
+      "knowledge_version": "2026-06-17-561a98ca",
+      "embedding_text": "身障室內動線與輔具替代方案查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_home_route 中央共通 新北市 身障者家中動線不方便，想找輔具或改善 身障室內動線與輔具替代方案查證 室內通行與門檻改善 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 移動與上下樓 disability 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。\n\n身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_disability_stair_device_consult",
@@ -4078,6 +4103,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -4135,9 +4161,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "4ca1cc3b0b5fbc3b424e277581d6b070f26fc1f1a0376a8bd20672b5352c6102",
-      "knowledge_version": "2026-06-17-4ca1cc3b",
-      "embedding_text": "身障上下樓設備與輔具中心查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_stair_device 中央共通 新北市 身障側爬梯機或上下樓設備怎麼問 身障上下樓設備與輔具中心查證 爬梯機／上下樓設備 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 移動與上下樓 disability 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。\n\n身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "5059563016d929c9074076574fb48164e3872e72cec646870d9913153b881291",
+      "knowledge_version": "2026-06-17-50595630",
+      "embedding_text": "身障上下樓設備與輔具中心查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_stair_device 中央共通 新北市 身障側爬梯機或上下樓設備怎麼問 身障上下樓設備與輔具中心查證 爬梯機／上下樓設備 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 移動與上下樓 disability 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。\n\n身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_disability_transfer_lifting_fit",
@@ -4253,6 +4279,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -4294,9 +4321,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "29e924c1b46bfa46d357e9bd9d3f0e0bb5547a33dfefc6e646766868334116a2",
-      "knowledge_version": "2026-06-17-29e924c1",
-      "embedding_text": "身障移位輔具適配與訓練查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_transfer_lifting 中央共通 新北市 身障者需要移位輔具或照顧者搬扶協助 身障移位輔具適配與訓練查證 移位與移乘安全 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 移動與上下樓 disability 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。\n\n身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "62d5d6bcfacedacc9fc0e71b981a31eb6bb838b4e4a6440e4acd2239183f1cbd",
+      "knowledge_version": "2026-06-17-62d5d6bc",
+      "embedding_text": "身障移位輔具適配與訓練查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_transfer_lifting 中央共通 新北市 身障者需要移位輔具或照顧者搬扶協助 身障移位輔具適配與訓練查證 移位與移乘安全 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 移動與上下樓 disability 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。\n\n身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_disability_transport_scope",
@@ -4421,6 +4448,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府社會局",
@@ -4478,9 +4506,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "c100ddf1549544f93a37e7675d2c7690dd5353b597af00e3065e3c2de5ae78e1",
-      "knowledge_version": "2026-06-17-c100ddf1",
-      "embedding_text": "身障復康巴士與交通服務查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_transport_access 中央共通 新北市 身障者要外出就醫或辦事，想查復康巴士 身障復康巴士與交通服務查證 交通服務與外出支持 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 移動與上下樓 disability 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府\", \"content\": \"交通接送、復康巴士或無障礙交通服務可能分屬長照、身障或交通主管單位；個管師需分清服務目的、資格與申請窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_transport\", \"source_level\": \"A\", \"source_title\": \"新北市交通接送與無障礙交通相關服務\", \"source_url\": \"https://www.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。\n\n身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "55b3968cf06927460f762b2183e01c250ebd93e74c0190583ce6e69eda681bce",
+      "knowledge_version": "2026-06-17-55b3968c",
+      "embedding_text": "身障復康巴士與交通服務查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_transport_access 中央共通 新北市 身障者要外出就醫或辦事，想查復康巴士 身障復康巴士與交通服務查證 交通服務與外出支持 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 移動與上下樓 disability 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府\", \"content\": \"交通接送、復康巴士或無障礙交通服務可能分屬長照、身障或交通主管單位；個管師需分清服務目的、資格與申請窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_transport\", \"source_level\": \"A\", \"source_title\": \"新北市交通接送與無障礙交通相關服務\", \"source_url\": \"https://www.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。\n\n身障側交通服務常涉及復康巴士、通用計程車或地方交通福利，需確認資格與預約規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_disability_wheelchair_assessment",
@@ -4605,6 +4633,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -4662,9 +4691,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "4427e128588e08bcfec0728ad1e3d705b39c7002e90ecfe4a8750ec605207ba6",
-      "knowledge_version": "2026-06-17-4427e128",
-      "embedding_text": "身障輪椅評估與文件查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_wheelchair_device 中央共通 新北市 身障要申請輪椅或電動輪椅 身障輪椅評估與文件查證 輪椅與移動輔具 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 移動與上下樓 disability 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源服務系統\", \"content\": \"新北輔具線上申請系統可作為身障輔具或地方輔具服務申請入口之一；正式使用前仍需確認身分、項目、文件與承辦規則。\", \"created_at\": \"\", \"source_id\": \"ntpc_easygo\", \"source_level\": \"A\", \"source_title\": \"新北輔具 Easy Go 線上申請系統\", \"source_url\": \"https://atrc.easygo.ntpc.gov.tw/login\", \"updated_at\": \"2026-06-17\"}] 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。\n\n身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "a3aac614c8b08b7e11fd06e980017b328871ff1f059919a94931f2c85fb855c4",
+      "knowledge_version": "2026-06-17-a3aac614",
+      "embedding_text": "身障輪椅評估與文件查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_wheelchair_device 中央共通 新北市 身障要申請輪椅或電動輪椅 身障輪椅評估與文件查證 輪椅與移動輔具 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 移動與上下樓 disability 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源服務系統\", \"content\": \"新北輔具線上申請系統可作為身障輔具或地方輔具服務申請入口之一；正式使用前仍需確認身分、項目、文件與承辦規則。\", \"created_at\": \"\", \"source_id\": \"ntpc_easygo\", \"source_level\": \"A\", \"source_title\": \"新北輔具 Easy Go 線上申請系統\", \"source_url\": \"https://atrc.easygo.ntpc.gov.tw/login\", \"updated_at\": \"2026-06-17\"}] 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。\n\n身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_ltc_home_route_threshold",
@@ -4779,6 +4808,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -4820,9 +4850,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "70c35b6adefab1f806d7fbaa6f92e5caf5a7818b8c862a58749e79647de7af2e",
-      "knowledge_version": "2026-06-17-70c35b6a",
-      "embedding_text": "長照室內動線與門檻通行查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_home_route 中央共通 新北市 家裡門檻、斜坡、輪椅進出不方便 長照室內動線與門檻通行查證 室內通行與門檻改善 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 移動與上下樓 ltc 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。\n\n長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "0f8d9c7736c5c2964719f1487cdb89ea2e2d9bd5633d935a2d5db64000ad75a3",
+      "knowledge_version": "2026-06-17-0f8d9c77",
+      "embedding_text": "長照室內動線與門檻通行查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_home_route 中央共通 新北市 家裡門檻、斜坡、輪椅進出不方便 長照室內動線與門檻通行查證 室內通行與門檻改善 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 移動與上下樓 ltc 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。\n\n長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_ltc_stair_environment_check",
@@ -4937,6 +4967,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -4984,9 +5015,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "dbe5b53689a50814988d60959ebb192726b78eb7965c6c5998b832fd25ec98a3",
-      "knowledge_version": "2026-06-17-dbe5b536",
-      "embedding_text": "長照上下樓與爬梯設備環境查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_stair_device 中央共通 新北市 家屬問爬梯機能不能申請長照 長照上下樓與爬梯設備環境查證 爬梯機／上下樓設備 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 移動與上下樓 ltc 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。\n\n長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "268516263798eb47d49d5516cc9f116b084f391759f8b08be06efea300ab1835",
+      "knowledge_version": "2026-06-17-26851626",
+      "embedding_text": "長照上下樓與爬梯設備環境查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_stair_device 中央共通 新北市 家屬問爬梯機能不能申請長照 長照上下樓與爬梯設備環境查證 爬梯機／上下樓設備 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 移動與上下樓 ltc 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。\n\n長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_ltc_transfer_lifting_safety",
@@ -5101,6 +5132,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -5148,9 +5180,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "ce3ed3d0ceec3925f23fadddf9f4c08ae254b40aaf032c240ae2bd2f1325632f",
-      "knowledge_version": "2026-06-17-ce3ed3d0",
-      "embedding_text": "長照移位與移乘輔具安全查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_transfer_lifting 中央共通 新北市 家屬問移位機、移位帶或移乘設備 長照移位與移乘輔具安全查證 移位與移乘安全 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 移動與上下樓 ltc 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。\n\n長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "e8c819a9ec766f532ab65a727ce4b09cb5a7b8d8800b37a7a37ffd56556c8811",
+      "knowledge_version": "2026-06-17-e8c819a9",
+      "embedding_text": "長照移位與移乘輔具安全查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_transfer_lifting 中央共通 新北市 家屬問移位機、移位帶或移乘設備 長照移位與移乘輔具安全查證 移位與移乘安全 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 移動與上下樓 ltc 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。\n\n長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_ltc_transport_bd03_scope",
@@ -5274,6 +5306,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -5331,9 +5364,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "822cd8ce329232c1836f2c712569d36decc569199deecf349bbfc87e96c2df30",
-      "knowledge_version": "2026-06-17-822cd8ce",
-      "embedding_text": "長照交通接送服務範圍查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_transport_access 中央共通 新北市 家屬問長照交通接送能不能去醫院或復健 長照交通接送服務範圍查證 交通服務與外出支持 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 移動與上下樓 ltc 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府\", \"content\": \"交通接送、復康巴士或無障礙交通服務可能分屬長照、身障或交通主管單位；個管師需分清服務目的、資格與申請窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_transport\", \"source_level\": \"A\", \"source_title\": \"新北市交通接送與無障礙交通相關服務\", \"source_url\": \"https://www.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。\n\n長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "4d4001c181e672ae028859db974caa66f043b82ea39d32b6be609a5952985889",
+      "knowledge_version": "2026-06-17-4d4001c1",
+      "embedding_text": "長照交通接送服務範圍查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_transport_access 中央共通 新北市 家屬問長照交通接送能不能去醫院或復健 長照交通接送服務範圍查證 交通服務與外出支持 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 移動與上下樓 ltc 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府\", \"content\": \"交通接送、復康巴士或無障礙交通服務可能分屬長照、身障或交通主管單位；個管師需分清服務目的、資格與申請窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_transport\", \"source_level\": \"A\", \"source_title\": \"新北市交通接送與無障礙交通相關服務\", \"source_url\": \"https://www.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。\n\n長照側交通接送應確認是否符合服務目的、給付範圍、預約與陪同規則。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "mobility_ltc_wheelchair_rental_check",
@@ -5448,6 +5481,7 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市政府衛生局／長照相關服務",
@@ -5495,9 +5529,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "37d47078358b21aa77c6591fbaab337043398c49eb3cc2e32296ffe6f965ae4e",
-      "knowledge_version": "2026-06-17-37d47078",
-      "embedding_text": "長照輪椅租賃與移動輔具查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_wheelchair_device 中央共通 新北市 長照有沒有輪椅或移動輔具可用 長照輪椅租賃與移動輔具查證 輪椅與移動輔具 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 移動與上下樓 ltc 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。\n\n長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
+      "content_hash": "1c69cc787893e2a5409db8a1508a229b38afb3fc620efc61dd06df6a4b697623",
+      "knowledge_version": "2026-06-17-1c69cc78",
+      "embedding_text": "長照輪椅租賃與移動輔具查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_wheelchair_device 中央共通 新北市 長照有沒有輪椅或移動輔具可用 長照輪椅租賃與移動輔具查證 輪椅與移動輔具 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 移動與上下樓 ltc 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。\n\n長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
       "id": "purchase_before_approval_risk",
@@ -5643,14 +5677,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "bec0c195f79c53892a4643886dad0d1de92226adfdcfde2a38603c7d7e51fbbc",
-      "knowledge_version": "2026-06-12-bec0c195",
-      "embedding_text": "先購買再申請的風險 disability_assistive_subsidy_question home_accessibility smart_or_special_device 身障 申請路徑 電話確認 事前核定 風險提醒 地方窗口 process_preapproval 中央共通 新北市 已經買了還能補助嗎 先買再申請可以嗎 廠商說買了再補件 許多輔具或居家改善需要先評估或核定，先購買或施工可能影響申請。建議先向官方窗口確認，再決定是否購買。 [] # 先購買再申請的風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "02027852c1eedc4b107b9267d8a462e5b851be25ba3cba20b20ba3e88b36447b",
+      "knowledge_version": "2026-06-12-02027852",
+      "embedding_text": "先購買再申請的風險 disability_assistive_subsidy_question home_accessibility smart_or_special_device 身障 申請路徑 電話確認 事前核定 風險提醒 地方窗口 process_preapproval 中央共通 新北市 已經買了還能補助嗎 先買再申請可以嗎 廠商說買了再補件 許多輔具或居家改善需要先評估或核定，先購買或施工可能影響申請。建議先向官方窗口確認，再決定是否購買。 [] [] # 先購買再申請的風險\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "rehab_bus_accessible_transport_ltc_difference",
@@ -5792,14 +5827,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "a44ad2bb6b40ce53aa6ac9caa838b8c062a36c5f651ee143c0f1cab8d2a8a18d",
-      "knowledge_version": "2026-06-12-a44ad2bb",
-      "embedding_text": "復康巴士、通用計程車、長照交通差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 transport_access 中央共通 新北市 復康巴士和長照交通差在哪 身障交通服務怎麼查 通用計程車可以協助嗎 復康巴士、長照交通與通用計程車是不同資源，適用資格、目的與預約方式不同。建議先確認交通目的與行動需求，再查官方窗口。 [] # 復康巴士、通用計程車、長照交通差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "ed815f2ca8df8689c53130829d58ff5f36afe439aca30879e46a77deb41aadf4",
+      "knowledge_version": "2026-06-12-ed815f2c",
+      "embedding_text": "復康巴士、通用計程車、長照交通差異 disability_welfare_navigation longtermcare_budget_gap 長照身障交界 申請路徑 電話確認 制度差異 transport_access 中央共通 新北市 復康巴士和長照交通差在哪 身障交通服務怎麼查 通用計程車可以協助嗎 復康巴士、長照交通與通用計程車是不同資源，適用資格、目的與預約方式不同。建議先確認交通目的與行動需求，再查官方窗口。 [] [] # 復康巴士、通用計程車、長照交通差異\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "smart_assistive_app_network_operation_check",
@@ -5993,6 +6029,35 @@
       ],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "智慧科技輔具評估報告書列有網路環境欄位。",
+            "評估報告書列有照顧者網路使用經驗、主要照顧者是否能協助操作、通知方式與主要操作者等欄位。",
+            "這些欄位顯示智慧科技輔具資料不只包含設備，也包含家庭端操作與通知承接條件。"
+          ],
+          "title": "家庭端操作條件欄位"
+        },
+        {
+          "body": "",
+          "points": [
+            "附表四之一要求 APP 通過第三方公正單位檢測。",
+            "APP 需符合 L1、L2、L3 行動 APP 規範級別。",
+            "MAS 行動應用資安檢測資料可作為理解 APP 檢測語言的補充來源。"
+          ],
+          "title": "APP 檢測與規範級別"
+        },
+        {
+          "body": "",
+          "points": [
+            "長照輔具租賃服務清潔消毒手冊提到帶有控制器、感應器、偵測器等電子元件的輔具。",
+            "手冊資料顯示帶電子元件的輔具不應浸泡於水中。",
+            "清潔方式可使用濕布擦拭後再以乾布擦乾。"
+          ],
+          "title": "電子元件與租賃維護資料"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "臺中市政府衛生局長期照護科",
@@ -6167,9 +6232,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "faf8b99da2c4f32b1c70589cc01eb91451c0a65303bb3936d35d5f494d6cff14",
-      "knowledge_version": "2026-06-16-faf8b99d",
-      "embedding_text": "智慧輔具 APP／網路／操作準備 smart_assistive smart_assistive_operation smart_mattress_operation 長照 操作準備 照顧者承接 APP／網路 smart_assistive_operation_readiness 中央共通 / 新北市 智慧床墊需要網路嗎 家屬不會用 APP 怎麼辦 智慧輔具通知誰看 智慧床墊或智慧輔具是否可能需要網路或 APP？ 家屬不太會用 APP 時，智慧輔具會遇到哪些操作問題？ 通知、資料回傳或帳號管理在智慧輔具使用上代表什麼？ 智慧科技輔具不只看設備名稱，也會涉及家庭端操作條件。評估報告書附件列有網路環境、照顧者網路使用經驗、主要照顧者是否能協助操作、通知方式與主要操作者等欄位；附表四之一也要求 APP 通過第三方公正單位檢測，並符合 L1、L2、L3 行動 APP 規範級別。 智慧輔具 ltc 智慧科技輔具不只看設備名稱，也會涉及家庭端操作條件。評估報告書附件列有網路環境、照顧者網路使用經驗、主要照顧者是否能協助操作、通知方式與主要操作者等欄位；附表四之一也要求 APP 通過第三方公正單位檢測，並符合 L1、L2、L3 行動 APP 規範級別。 公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為操作準備主卡；合併身障側操作支持薄卡的可用部分。 智慧輔具可能涉及 APP、網路、通知、帳號、資料回傳或照顧者接收資訊。 產品案例可用來理解操作情境，但不能作為補助或制度依據。 [{\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"中華民國職能治療師公會全聯會\", \"content\": \"課程由衛生福利部長期照顧司委託辦理。課程目標包含理解長照及智慧科技相關法規、給付支付辦法修正重點、智慧科技輔具功能分類、實務應用、UI/UX、產品適配度評估、評估報告書撰寫與五大類智慧科技輔具產品實地操作體驗。\", \"created_at\": \"2026-02-13\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"oturoc_smart_assistive_training_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"中華民國職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練\", \"updated_at\": \"2026-02-13\", \"url\": \"https://www.oturoc.org.tw/index.php?action=news_detail&id=338\"}, {\"agency\": \"臺北市物理治療師公會\", \"content\": \"簡章內容為衛生福利部長期照顧司委託辦理之 115 年智慧科技輔具評估教育訓練。受訓對象為具甲類輔具評估人員資格者，課程包含智慧科技輔具法規、功能分類、UI/UX、產品適配度、操作體驗與評估報告書撰寫。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taipeipt_smart_assistive_training_pdf_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"臺北市物理治療師公會：115 年智慧科技輔具評估教育訓練簡章 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.taipeipt.org.tw/upload/course/20260223104616_F3994D4A8967AED/115%E5%B9%B4%E6%99%BA%E6%85%A7%E7%A7%91%E6%8A%80%E8%BC%94%E5%85%B7%E8%A9%95%E4%BC%B0%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%A8%88%E7%95%AB%E7%B0%A1%E7%AB%A0.pdf\"}, {\"agency\": \"行動應用資安聯盟\", \"content\": \"頁面補充 APP 基本資安檢測背景、第三方檢測實驗室、自主管理與 L1/L2/L3/F 分級語言。此來源不是長照智慧輔具制度本體，只補 APP／網路與資安規範背景。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mas_app_security_qa\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"行動應用資安聯盟：App Q&A\", \"updated_at\": \"待確認\", \"url\": \"https://www.mas.org.tw/app/questAndAnswer\"}, {\"agency\": \"行動應用資安聯盟\", \"content\": \"下載頁列出行動應用 App 基本資安自主檢測推動制度 V4.3、基本資安規範 V1.5、基本資安檢測基準 V4.0 等文件，可補 APP 檢測文件脈絡。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mas_app_security_download\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"行動應用資安聯盟：下載專區－App\", \"updated_at\": \"待確認\", \"url\": \"https://uatmas.yocue.com/download/app\"}, {\"agency\": \"衛生福利部／1966 長照專區\", \"content\": \"手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_cleaning_manual_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長照輔具租賃服務清潔消毒指引手冊 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html\"}, {\"agency\": \"維思感創\", \"content\": \"廠商案例可作產品功能與市場語言線索，不支撐制度摘要、補助資格或正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_icue_case\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"維思感創 iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"廠商產品頁可作智慧床墊功能語言線索，不支撐是否可申請補助或是否列入正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_foreaider_mattress\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"輔人科技 ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}] 智慧輔具 APP、網路與操作準備重製卡。"
+      "content_hash": "d4028f70195a1c59b1f6d5c92226513d6c4ddc7993f73c256fb120090e2e7f18",
+      "knowledge_version": "2026-06-16-d4028f70",
+      "embedding_text": "智慧輔具 APP／網路／操作準備 smart_assistive smart_assistive_operation smart_mattress_operation 長照 操作準備 照顧者承接 APP／網路 smart_assistive_operation_readiness 中央共通 / 新北市 智慧床墊需要網路嗎 家屬不會用 APP 怎麼辦 智慧輔具通知誰看 智慧床墊或智慧輔具是否可能需要網路或 APP？ 家屬不太會用 APP 時，智慧輔具會遇到哪些操作問題？ 通知、資料回傳或帳號管理在智慧輔具使用上代表什麼？ 智慧科技輔具不只看設備名稱，也會涉及家庭端操作條件。評估報告書附件列有網路環境、照顧者網路使用經驗、主要照顧者是否能協助操作、通知方式與主要操作者等欄位；附表四之一也要求 APP 通過第三方公正單位檢測，並符合 L1、L2、L3 行動 APP 規範級別。 智慧輔具 ltc 智慧科技輔具不只看設備名稱，也會涉及家庭端操作條件。評估報告書附件列有網路環境、照顧者網路使用經驗、主要照顧者是否能協助操作、通知方式與主要操作者等欄位；附表四之一也要求 APP 通過第三方公正單位檢測，並符合 L1、L2、L3 行動 APP 規範級別。 公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。 [{\"body\": \"\", \"points\": [\"智慧科技輔具評估報告書列有網路環境欄位。\", \"評估報告書列有照顧者網路使用經驗、主要照顧者是否能協助操作、通知方式與主要操作者等欄位。\", \"這些欄位顯示智慧科技輔具資料不只包含設備，也包含家庭端操作與通知承接條件。\"], \"title\": \"家庭端操作條件欄位\"}, {\"body\": \"\", \"points\": [\"附表四之一要求 APP 通過第三方公正單位檢測。\", \"APP 需符合 L1、L2、L3 行動 APP 規範級別。\", \"MAS 行動應用資安檢測資料可作為理解 APP 檢測語言的補充來源。\"], \"title\": \"APP 檢測與規範級別\"}, {\"body\": \"\", \"points\": [\"長照輔具租賃服務清潔消毒手冊提到帶有控制器、感應器、偵測器等電子元件的輔具。\", \"手冊資料顯示帶電子元件的輔具不應浸泡於水中。\", \"清潔方式可使用濕布擦拭後再以乾布擦乾。\"], \"title\": \"電子元件與租賃維護資料\"}] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為操作準備主卡；合併身障側操作支持薄卡的可用部分。 智慧輔具可能涉及 APP、網路、通知、帳號、資料回傳或照顧者接收資訊。 產品案例可用來理解操作情境，但不能作為補助或制度依據。 [{\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"中華民國職能治療師公會全聯會\", \"content\": \"課程由衛生福利部長期照顧司委託辦理。課程目標包含理解長照及智慧科技相關法規、給付支付辦法修正重點、智慧科技輔具功能分類、實務應用、UI/UX、產品適配度評估、評估報告書撰寫與五大類智慧科技輔具產品實地操作體驗。\", \"created_at\": \"2026-02-13\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"oturoc_smart_assistive_training_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"中華民國職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練\", \"updated_at\": \"2026-02-13\", \"url\": \"https://www.oturoc.org.tw/index.php?action=news_detail&id=338\"}, {\"agency\": \"臺北市物理治療師公會\", \"content\": \"簡章內容為衛生福利部長期照顧司委託辦理之 115 年智慧科技輔具評估教育訓練。受訓對象為具甲類輔具評估人員資格者，課程包含智慧科技輔具法規、功能分類、UI/UX、產品適配度、操作體驗與評估報告書撰寫。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taipeipt_smart_assistive_training_pdf_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"臺北市物理治療師公會：115 年智慧科技輔具評估教育訓練簡章 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.taipeipt.org.tw/upload/course/20260223104616_F3994D4A8967AED/115%E5%B9%B4%E6%99%BA%E6%85%A7%E7%A7%91%E6%8A%80%E8%BC%94%E5%85%B7%E8%A9%95%E4%BC%B0%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%A8%88%E7%95%AB%E7%B0%A1%E7%AB%A0.pdf\"}, {\"agency\": \"行動應用資安聯盟\", \"content\": \"頁面補充 APP 基本資安檢測背景、第三方檢測實驗室、自主管理與 L1/L2/L3/F 分級語言。此來源不是長照智慧輔具制度本體，只補 APP／網路與資安規範背景。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mas_app_security_qa\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"行動應用資安聯盟：App Q&A\", \"updated_at\": \"待確認\", \"url\": \"https://www.mas.org.tw/app/questAndAnswer\"}, {\"agency\": \"行動應用資安聯盟\", \"content\": \"下載頁列出行動應用 App 基本資安自主檢測推動制度 V4.3、基本資安規範 V1.5、基本資安檢測基準 V4.0 等文件，可補 APP 檢測文件脈絡。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mas_app_security_download\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"行動應用資安聯盟：下載專區－App\", \"updated_at\": \"待確認\", \"url\": \"https://uatmas.yocue.com/download/app\"}, {\"agency\": \"衛生福利部／1966 長照專區\", \"content\": \"手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_cleaning_manual_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長照輔具租賃服務清潔消毒指引手冊 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html\"}, {\"agency\": \"維思感創\", \"content\": \"廠商案例可作產品功能與市場語言線索，不支撐制度摘要、補助資格或正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_icue_case\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"維思感創 iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"廠商產品頁可作智慧床墊功能語言線索，不支撐是否可申請補助或是否列入正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_foreaider_mattress\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"輔人科技 ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}] 智慧輔具 APP、網路與操作準備重製卡。"
     },
     {
       "id": "smart_assistive_assessment_document_professional_eval",
@@ -6328,6 +6393,35 @@
       "lead_source_ids": [],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "臺中市衛生局公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。",
+            "智慧科技輔具評估報告書格式編號為 27。",
+            "輔具項目名稱為智慧科技輔具。"
+          ],
+          "title": "評估報告書公告"
+        },
+        {
+          "body": "",
+          "points": [
+            "評估報告書欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式與主要操作者。",
+            "欄位也包含五大類別與後續適配服務。",
+            "評估資料與附表四之一共同形成智慧科技輔具給付資料基礎。"
+          ],
+          "title": "評估報告欄位"
+        },
+        {
+          "body": "",
+          "points": [
+            "職能治療師公會全聯會與臺北市物理治療師公會資料列有智慧科技輔具評估教育訓練。",
+            "教育訓練資料屬補充來源，用於理解專業評估訓練與表單脈絡。",
+            "地方公告與訓練資料不等同全國核定結果。"
+          ],
+          "title": "專業評估與教育訓練資料"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "臺中市政府衛生局長期照護科",
@@ -6478,9 +6572,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "9cce1430559b1bd27ef5251ab1639f99d9bcb70c3765699ccd261309b0400e8f",
-      "knowledge_version": "2026-06-16-9cce1430",
-      "embedding_text": "智慧輔具評估文件與專業評估 smart_assistive smart_assistive_assessment assessment_document 長照 文件需求 專業評估 地方流程 smart_assistive_assessment_document 中央共通 / 新北市 智慧輔具要不要評估 智慧床墊需要什麼文件 誰可以評估智慧輔具 智慧科技輔具是否可能需要評估報告書？ 有哪些資料可以看出智慧輔具需要專業評估？ 地方文件與專業教育訓練在智慧輔具制度中代表什麼？ 衛福部已公告智慧科技輔具評估報告書，依據為長期照顧服務申請及給付辦法第九條附表四之一。評估報告格式編號為 27，項目名稱為智慧科技輔具；附件欄位包含基本資料、身心障礙證明欄位、活動需求、人力支持、使用環境、網路環境、通知方式與主要操作者等。 智慧輔具 ltc 衛福部已公告智慧科技輔具評估報告書，依據為長期照顧服務申請及給付辦法第九條附表四之一。評估報告格式編號為 27，項目名稱為智慧科技輔具；附件欄位包含基本資料、身心障礙證明欄位、活動需求、人力支持、使用環境、網路環境、通知方式與主要操作者等。 公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為評估文件主卡；退場身障側文件與評估路徑薄卡。 地方公告顯示智慧科技輔具可能有專用評估報告書。 專業團體已有智慧科技輔具評估教育訓練資訊。 此卡支撐評估文件與專業評估資料面向。 [{\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"中華民國職能治療師公會全聯會\", \"content\": \"課程由衛生福利部長期照顧司委託辦理。課程目標包含理解長照及智慧科技相關法規、給付支付辦法修正重點、智慧科技輔具功能分類、實務應用、UI/UX、產品適配度評估、評估報告書撰寫與五大類智慧科技輔具產品實地操作體驗。\", \"created_at\": \"2026-02-13\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"oturoc_smart_assistive_training_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"中華民國職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練\", \"updated_at\": \"2026-02-13\", \"url\": \"https://www.oturoc.org.tw/index.php?action=news_detail&id=338\"}, {\"agency\": \"臺北市物理治療師公會\", \"content\": \"簡章內容為衛生福利部長期照顧司委託辦理之 115 年智慧科技輔具評估教育訓練。受訓對象為具甲類輔具評估人員資格者，課程包含智慧科技輔具法規、功能分類、UI/UX、產品適配度、操作體驗與評估報告書撰寫。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taipeipt_smart_assistive_training_pdf_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"臺北市物理治療師公會：115 年智慧科技輔具評估教育訓練簡章 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.taipeipt.org.tw/upload/course/20260223104616_F3994D4A8967AED/115%E5%B9%B4%E6%99%BA%E6%85%A7%E7%A7%91%E6%8A%80%E8%BC%94%E5%85%B7%E8%A9%95%E4%BC%B0%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%A8%88%E7%95%AB%E7%B0%A1%E7%AB%A0.pdf\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出身心障礙者輔具費用補助基準表、新北市加碼、長期照顧給付及支付基準附表 3、醫療輔具補助標準、育兒輔具補助試辦計畫及多種評估報告書 PDF/ODT 下載入口；未逐份讀取的附件不支撐摘要。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_forms\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：補助項目及表單下載\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Eform\"}] 智慧輔具評估文件與專業評估重製卡。"
+      "content_hash": "afa646ff464fa103ddc6d178608298974e51b4423f8d3c5d409f832caca4de66",
+      "knowledge_version": "2026-06-16-afa646ff",
+      "embedding_text": "智慧輔具評估文件與專業評估 smart_assistive smart_assistive_assessment assessment_document 長照 文件需求 專業評估 地方流程 smart_assistive_assessment_document 中央共通 / 新北市 智慧輔具要不要評估 智慧床墊需要什麼文件 誰可以評估智慧輔具 智慧科技輔具是否可能需要評估報告書？ 有哪些資料可以看出智慧輔具需要專業評估？ 地方文件與專業教育訓練在智慧輔具制度中代表什麼？ 衛福部已公告智慧科技輔具評估報告書，依據為長期照顧服務申請及給付辦法第九條附表四之一。評估報告格式編號為 27，項目名稱為智慧科技輔具；附件欄位包含基本資料、身心障礙證明欄位、活動需求、人力支持、使用環境、網路環境、通知方式與主要操作者等。 智慧輔具 ltc 衛福部已公告智慧科技輔具評估報告書，依據為長期照顧服務申請及給付辦法第九條附表四之一。評估報告格式編號為 27，項目名稱為智慧科技輔具；附件欄位包含基本資料、身心障礙證明欄位、活動需求、人力支持、使用環境、網路環境、通知方式與主要操作者等。 公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 [{\"body\": \"\", \"points\": [\"臺中市衛生局公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。\", \"智慧科技輔具評估報告書格式編號為 27。\", \"輔具項目名稱為智慧科技輔具。\"], \"title\": \"評估報告書公告\"}, {\"body\": \"\", \"points\": [\"評估報告書欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式與主要操作者。\", \"欄位也包含五大類別與後續適配服務。\", \"評估資料與附表四之一共同形成智慧科技輔具給付資料基礎。\"], \"title\": \"評估報告欄位\"}, {\"body\": \"\", \"points\": [\"職能治療師公會全聯會與臺北市物理治療師公會資料列有智慧科技輔具評估教育訓練。\", \"教育訓練資料屬補充來源，用於理解專業評估訓練與表單脈絡。\", \"地方公告與訓練資料不等同全國核定結果。\"], \"title\": \"專業評估與教育訓練資料\"}] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為評估文件主卡；退場身障側文件與評估路徑薄卡。 地方公告顯示智慧科技輔具可能有專用評估報告書。 專業團體已有智慧科技輔具評估教育訓練資訊。 此卡支撐評估文件與專業評估資料面向。 [{\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"中華民國職能治療師公會全聯會\", \"content\": \"課程由衛生福利部長期照顧司委託辦理。課程目標包含理解長照及智慧科技相關法規、給付支付辦法修正重點、智慧科技輔具功能分類、實務應用、UI/UX、產品適配度評估、評估報告書撰寫與五大類智慧科技輔具產品實地操作體驗。\", \"created_at\": \"2026-02-13\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"oturoc_smart_assistive_training_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"中華民國職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練\", \"updated_at\": \"2026-02-13\", \"url\": \"https://www.oturoc.org.tw/index.php?action=news_detail&id=338\"}, {\"agency\": \"臺北市物理治療師公會\", \"content\": \"簡章內容為衛生福利部長期照顧司委託辦理之 115 年智慧科技輔具評估教育訓練。受訓對象為具甲類輔具評估人員資格者，課程包含智慧科技輔具法規、功能分類、UI/UX、產品適配度、操作體驗與評估報告書撰寫。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taipeipt_smart_assistive_training_pdf_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"臺北市物理治療師公會：115 年智慧科技輔具評估教育訓練簡章 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.taipeipt.org.tw/upload/course/20260223104616_F3994D4A8967AED/115%E5%B9%B4%E6%99%BA%E6%85%A7%E7%A7%91%E6%8A%80%E8%BC%94%E5%85%B7%E8%A9%95%E4%BC%B0%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%A8%88%E7%95%AB%E7%B0%A1%E7%AB%A0.pdf\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出身心障礙者輔具費用補助基準表、新北市加碼、長期照顧給付及支付基準附表 3、醫療輔具補助標準、育兒輔具補助試辦計畫及多種評估報告書 PDF/ODT 下載入口；未逐份讀取的附件不支撐摘要。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_forms\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：補助項目及表單下載\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Eform\"}] 智慧輔具評估文件與專業評估重製卡。"
     },
     {
       "id": "smart_assistive_disability_center_fit_check",
@@ -6657,6 +6751,35 @@
       ],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "全國法規資料庫列有身心障礙者輔具費用補助辦法。",
+            "全國法規資料庫列有身心障礙者輔具費用補助基準表。",
+            "目前來源池支撐的是一般身障輔具制度資料。"
+          ],
+          "title": "已確認的一般身障輔具制度"
+        },
+        {
+          "body": "",
+          "points": [
+            "新北市輔具資源中心提供輔具補助申請相關資料。",
+            "新北市輔具資源中心提供輔具評估、試用、維修、表單與服務流程資訊。",
+            "新北輔具 Easy Go 線上申請系統屬地方輔具服務入口資料。"
+          ],
+          "title": "新北輔具中心服務入口"
+        },
+        {
+          "body": "",
+          "points": [
+            "目前來源池未收錄可將長照 EI01 至 EI05 智慧科技輔具直接列為身障側正式補助品項的 A/B 級資料。",
+            "廠商案例與產品頁僅作功能語言與市場線索。",
+            "身障側卡片目前定位為一般身障輔具制度與輔具中心入口資料。"
+          ],
+          "title": "智慧科技輔具身障側資料狀態"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "資料治理註記",
@@ -6857,9 +6980,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "6ee32b16393d83790e020c6e837ea97910aee53c0355f0a79b0decb1e8763e3d",
-      "knowledge_version": "2026-06-17-6ee32b16",
-      "embedding_text": "智慧輔具身障側適配與輔具中心諮詢 智慧輔具 身障輔具 輔具中心 官方窗口 身障 長照身障交界 申請路徑 地方窗口 smart_assistive_item_scope 中央共通 新北市 智慧床墊身障可以問哪裡 特殊輔具是不是能找輔具中心 智慧輔具身障側怎麼查 身障側遇到智慧或特殊輔具時，目前有哪些已確認的諮詢入口？ 輔具資源中心能支撐哪些資料面向？ 為什麼不能直接把長照智慧輔具資料當成身障補助資料？ 身障側目前可確認的是一般身障輔具制度與地方輔具服務入口。新北市輔具資源中心提供輔具補助申請、輔具評估、試用、維修、表單與服務流程入口；全國法規資料庫則列有身心障礙者輔具費用補助辦法與補助基準表。這些資料支撐回到一般身障輔具制度查詢，不支撐把長照智慧科技輔具直接等同身障補助品項。 智慧輔具 disability 身障側目前可確認的是一般身障輔具制度與地方輔具服務入口。新北市輔具資源中心提供輔具補助申請、輔具評估、試用、維修、表單與服務流程入口；全國法規資料庫則列有身心障礙者輔具費用補助辦法與補助基準表。這些資料支撐回到一般身障輔具制度查詢，不支撐把長照智慧科技輔具直接等同身障補助品項。 身障側目前可確認的是一般身障輔具制度與地方輔具服務入口。新北市輔具資源中心提供輔具補助申請、輔具評估、試用、維修、表單與服務流程入口；全國法規資料庫則列有身心障礙者輔具費用補助辦法與補助基準表。這些資料支撐回到一般身障輔具制度查詢，不支撐把長照智慧科技輔具直接等同身障補助品項。 需依正式公告與地方窗口持續確認 保留為身障側諮詢入口主卡；合併文件路徑與操作支持薄卡後，只保留已確認資料。 身障側已確認有輔具資源中心可作為諮詢、評估、試用、維修與申請方向確認入口。 目前已登錄來源不支撐把長照智慧科技輔具直接等同身障補助品項。 [{\"agency\": \"資料治理註記\", \"content\": \"目前已讀資料只能支撐一般身障輔具制度、輔具中心服務入口與地方表單資料；尚未找到可把長照 EI01-EI05 智慧科技輔具直接轉寫成身障側正式補助品項的 A/B 級來源。\", \"created_at\": \"2026-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"core_gap\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"核心來源不足：尚未收錄身障側智慧科技輔具補助制度正式來源\", \"updated_at\": \"2026-06-19\", \"url\": \"\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"網站提供輔具服務入口，包含輔具補助申請、輔具評估、二手輔具、用電優惠、爬梯機服務、特約廠商查詢等項目。此來源支撐輔具中心作為地方輔具需求的窗口，不支撐智慧科技輔具補助制度已成立。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_resource_center\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出輔具補助核定申請與請款流程。可透過輔具 Easy Go APP 線上申請，或來電蘆洲中心、新店中心由專人服務；頁面列出特約輔具廠商協助請款、民眾自行請款、服務時間、中心電話、傳真與 Email 等資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_subsidy_service\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具補助申請服務介紹\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/1\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出專業評估服務、親至中心、定點服務、到宅服務與遠距評估。到宅評估條件包含極重度身心障礙者或經確認功能已臥床者；服務流程包含申請、服務方式選擇、治療師評估、督導審核或雙重評估。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_assessment_service\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具評估服務介紹\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/2\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出身心障礙者輔具費用補助基準表、新北市加碼、長期照顧給付及支付基準附表 3、醫療輔具補助標準、育兒輔具補助試辦計畫及多種評估報告書 PDF/ODT 下載入口；未逐份讀取的附件不支撐摘要。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_forms\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：補助項目及表單下載\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Eform\"}, {\"agency\": \"全國法規資料庫\", \"content\": \"辦法定義輔具為協助身心障礙者改善或維護身體功能、參與活動，或便利照顧者照顧的裝置、設備、儀器、軟體及其他相關產品；補助類別包含個人行動、溝通及資訊、預防壓瘡、住家家具及改裝組件、個人照顧及保護、居家生活、矯具及義具等。此來源支撐一般身障輔具制度，不支撐智慧科技輔具已納入身障側正式品項。\", \"created_at\": \"111-10-20\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"moj_disability_assistive_subsidy_law\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"全國法規資料庫：身心障礙者輔具費用補助辦法\", \"updated_at\": \"111-10-20\", \"url\": \"https://law.moj.gov.tw/LawClass/LawAll.aspx?PCODE=D0050060\"}, {\"agency\": \"全國法規資料庫\", \"content\": \"附表欄位包含輔具分類、補助項目、最高補助金額、最低使用年限、評估人員與補助相關規定。分類可見個人行動輔具、溝通及資訊輔具、預防壓瘡輔具、住家家具及改裝組件、居家生活相關輔具、矯具及義具等既有品項；此來源不支撐智慧科技輔具已列入身障補助。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"moj_disability_assistive_subsidy_table_pdf\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"身心障礙者輔具費用補助基準表 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000326887&lan=C\"}, {\"agency\": \"維思感創\", \"content\": \"廠商案例可作產品功能與市場語言線索，不支撐制度摘要、補助資格或正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_icue_case\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"維思感創 iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"廠商產品頁可作智慧床墊功能語言線索，不支撐是否可申請補助或是否列入正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_foreaider_mattress\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"輔人科技 ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}] 遇到智慧或特殊輔具需求時，身障側可先請輔具資源中心協助確認是否有可替代設備、評估與地方申請路徑。\n\n身障側不應直接把長照智慧輔具品項視為身障補助項目；較穩妥的做法，是把設備用途、使用限制與個案需求交給輔具資源中心或社會局身障福利窗口查證。若設備未列入正式品項，可先記錄為替代方案或待查線索。"
+      "content_hash": "4f625a45d2f47403e55bf69f47517217113296bb7af55ced08f76af5ccfd19b3",
+      "knowledge_version": "2026-06-17-4f625a45",
+      "embedding_text": "智慧輔具身障側適配與輔具中心諮詢 智慧輔具 身障輔具 輔具中心 官方窗口 身障 長照身障交界 申請路徑 地方窗口 smart_assistive_item_scope 中央共通 新北市 智慧床墊身障可以問哪裡 特殊輔具是不是能找輔具中心 智慧輔具身障側怎麼查 身障側遇到智慧或特殊輔具時，目前有哪些已確認的諮詢入口？ 輔具資源中心能支撐哪些資料面向？ 為什麼不能直接把長照智慧輔具資料當成身障補助資料？ 身障側目前可確認的是一般身障輔具制度與地方輔具服務入口。新北市輔具資源中心提供輔具補助申請、輔具評估、試用、維修、表單與服務流程入口；全國法規資料庫則列有身心障礙者輔具費用補助辦法與補助基準表。這些資料支撐回到一般身障輔具制度查詢，不支撐把長照智慧科技輔具直接等同身障補助品項。 智慧輔具 disability 身障側目前可確認的是一般身障輔具制度與地方輔具服務入口。新北市輔具資源中心提供輔具補助申請、輔具評估、試用、維修、表單與服務流程入口；全國法規資料庫則列有身心障礙者輔具費用補助辦法與補助基準表。這些資料支撐回到一般身障輔具制度查詢，不支撐把長照智慧科技輔具直接等同身障補助品項。 身障側目前可確認的是一般身障輔具制度與地方輔具服務入口。新北市輔具資源中心提供輔具補助申請、輔具評估、試用、維修、表單與服務流程入口；全國法規資料庫則列有身心障礙者輔具費用補助辦法與補助基準表。這些資料支撐回到一般身障輔具制度查詢，不支撐把長照智慧科技輔具直接等同身障補助品項。 [{\"body\": \"\", \"points\": [\"全國法規資料庫列有身心障礙者輔具費用補助辦法。\", \"全國法規資料庫列有身心障礙者輔具費用補助基準表。\", \"目前來源池支撐的是一般身障輔具制度資料。\"], \"title\": \"已確認的一般身障輔具制度\"}, {\"body\": \"\", \"points\": [\"新北市輔具資源中心提供輔具補助申請相關資料。\", \"新北市輔具資源中心提供輔具評估、試用、維修、表單與服務流程資訊。\", \"新北輔具 Easy Go 線上申請系統屬地方輔具服務入口資料。\"], \"title\": \"新北輔具中心服務入口\"}, {\"body\": \"\", \"points\": [\"目前來源池未收錄可將長照 EI01 至 EI05 智慧科技輔具直接列為身障側正式補助品項的 A/B 級資料。\", \"廠商案例與產品頁僅作功能語言與市場線索。\", \"身障側卡片目前定位為一般身障輔具制度與輔具中心入口資料。\"], \"title\": \"智慧科技輔具身障側資料狀態\"}] 需依正式公告與地方窗口持續確認 保留為身障側諮詢入口主卡；合併文件路徑與操作支持薄卡後，只保留已確認資料。 身障側已確認有輔具資源中心可作為諮詢、評估、試用、維修與申請方向確認入口。 目前已登錄來源不支撐把長照智慧科技輔具直接等同身障補助品項。 [{\"agency\": \"資料治理註記\", \"content\": \"目前已讀資料只能支撐一般身障輔具制度、輔具中心服務入口與地方表單資料；尚未找到可把長照 EI01-EI05 智慧科技輔具直接轉寫成身障側正式補助品項的 A/B 級來源。\", \"created_at\": \"2026-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"core_gap\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"核心來源不足：尚未收錄身障側智慧科技輔具補助制度正式來源\", \"updated_at\": \"2026-06-19\", \"url\": \"\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"網站提供輔具服務入口，包含輔具補助申請、輔具評估、二手輔具、用電優惠、爬梯機服務、特約廠商查詢等項目。此來源支撐輔具中心作為地方輔具需求的窗口，不支撐智慧科技輔具補助制度已成立。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_resource_center\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出輔具補助核定申請與請款流程。可透過輔具 Easy Go APP 線上申請，或來電蘆洲中心、新店中心由專人服務；頁面列出特約輔具廠商協助請款、民眾自行請款、服務時間、中心電話、傳真與 Email 等資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_subsidy_service\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具補助申請服務介紹\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/1\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出專業評估服務、親至中心、定點服務、到宅服務與遠距評估。到宅評估條件包含極重度身心障礙者或經確認功能已臥床者；服務流程包含申請、服務方式選擇、治療師評估、督導審核或雙重評估。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_assessment_service\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具評估服務介紹\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/2\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"頁面列出身心障礙者輔具費用補助基準表、新北市加碼、長期照顧給付及支付基準附表 3、醫療輔具補助標準、育兒輔具補助試辦計畫及多種評估報告書 PDF/ODT 下載入口；未逐份讀取的附件不支撐摘要。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ntpc_assistive_forms\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：補助項目及表單下載\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Eform\"}, {\"agency\": \"全國法規資料庫\", \"content\": \"辦法定義輔具為協助身心障礙者改善或維護身體功能、參與活動，或便利照顧者照顧的裝置、設備、儀器、軟體及其他相關產品；補助類別包含個人行動、溝通及資訊、預防壓瘡、住家家具及改裝組件、個人照顧及保護、居家生活、矯具及義具等。此來源支撐一般身障輔具制度，不支撐智慧科技輔具已納入身障側正式品項。\", \"created_at\": \"111-10-20\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"moj_disability_assistive_subsidy_law\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"全國法規資料庫：身心障礙者輔具費用補助辦法\", \"updated_at\": \"111-10-20\", \"url\": \"https://law.moj.gov.tw/LawClass/LawAll.aspx?PCODE=D0050060\"}, {\"agency\": \"全國法規資料庫\", \"content\": \"附表欄位包含輔具分類、補助項目、最高補助金額、最低使用年限、評估人員與補助相關規定。分類可見個人行動輔具、溝通及資訊輔具、預防壓瘡輔具、住家家具及改裝組件、居家生活相關輔具、矯具及義具等既有品項；此來源不支撐智慧科技輔具已列入身障補助。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"moj_disability_assistive_subsidy_table_pdf\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"身心障礙者輔具費用補助基準表 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000326887&lan=C\"}, {\"agency\": \"維思感創\", \"content\": \"廠商案例可作產品功能與市場語言線索，不支撐制度摘要、補助資格或正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_icue_case\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"維思感創 iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"廠商產品頁可作智慧床墊功能語言線索，不支撐是否可申請補助或是否列入正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_foreaider_mattress\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"輔人科技 ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}] 遇到智慧或特殊輔具需求時，身障側可先請輔具資源中心協助確認是否有可替代設備、評估與地方申請路徑。\n\n身障側不應直接把長照智慧輔具品項視為身障補助項目；較穩妥的做法，是把設備用途、使用限制與個案需求交給輔具資源中心或社會局身障福利窗口查證。若設備未列入正式品項，可先記錄為替代方案或待查線索。"
     },
     {
       "id": "smart_assistive_disability_document_eval_path",
@@ -6983,6 +7106,7 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -7040,9 +7164,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "295c8fb05cefe3b73a699d108f440f2829bc1eb7799d1878308ef346efd17658",
-      "knowledge_version": "2026-06-17-295c8fb0",
-      "embedding_text": "智慧輔具身障側文件與評估路徑 智慧輔具 評估文件 身障輔具 地方窗口 身障 長照身障交界 文件需求 地方窗口 smart_assistive_assessment_document 中央共通 新北市 智慧輔具要評估報告嗎 特殊輔具身障要哪些文件 智慧輔具需要醫師證明嗎 身障側遇到智慧或特殊輔具時，重點是先確認是否有地方表單、評估報告、專業意見或醫療文件要求。 智慧輔具 disability 整理智慧或特殊輔具在身障側可能涉及地方表單、評估報告、專業意見、醫療文件或試用紀錄。 智慧輔具常牽涉新型設備、替代方案或跨制度服務。身障側若有地方受理或輔具中心協助，可能會涉及評估報告、醫師文件、試用紀錄、專業意見或承辦單位指定表單；實際文件要求需依地方制度與個別品項而定。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"臺中市政府衛生局\", \"content\": \"地方公告顯示智慧科技輔具可能需要評估報告書、專業評估與文件流程；不同縣市實際使用表單與承辦規則仍需向地方窗口確認。\", \"created_at\": \"\", \"source_id\": \"taichung_smart_eval_form\", \"source_level\": \"A\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"source_url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\", \"updated_at\": \"2026-06-17\"}] 身障側遇到智慧或特殊輔具時，重點是先確認是否有地方表單、評估報告、專業意見或醫療文件要求。\n\n智慧輔具常牽涉新型設備、替代方案或跨制度服務。身障側資料整理重點包括地方身障窗口或輔具中心是否要求評估報告、醫師文件、試用紀錄或承辦單位指定表單。"
+      "content_hash": "8426a4382594d6d74b17dcd9e83223990e16c1cbf9632625f8c64238d8b5ca33",
+      "knowledge_version": "2026-06-17-8426a438",
+      "embedding_text": "智慧輔具身障側文件與評估路徑 智慧輔具 評估文件 身障輔具 地方窗口 身障 長照身障交界 文件需求 地方窗口 smart_assistive_assessment_document 中央共通 新北市 智慧輔具要評估報告嗎 特殊輔具身障要哪些文件 智慧輔具需要醫師證明嗎 身障側遇到智慧或特殊輔具時，重點是先確認是否有地方表單、評估報告、專業意見或醫療文件要求。 智慧輔具 disability 整理智慧或特殊輔具在身障側可能涉及地方表單、評估報告、專業意見、醫療文件或試用紀錄。 智慧輔具常牽涉新型設備、替代方案或跨制度服務。身障側若有地方受理或輔具中心協助，可能會涉及評估報告、醫師文件、試用紀錄、專業意見或承辦單位指定表單；實際文件要求需依地方制度與個別品項而定。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"臺中市政府衛生局\", \"content\": \"地方公告顯示智慧科技輔具可能需要評估報告書、專業評估與文件流程；不同縣市實際使用表單與承辦規則仍需向地方窗口確認。\", \"created_at\": \"\", \"source_id\": \"taichung_smart_eval_form\", \"source_level\": \"A\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"source_url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\", \"updated_at\": \"2026-06-17\"}] 身障側遇到智慧或特殊輔具時，重點是先確認是否有地方表單、評估報告、專業意見或醫療文件要求。\n\n智慧輔具常牽涉新型設備、替代方案或跨制度服務。身障側資料整理重點包括地方身障窗口或輔具中心是否要求評估報告、醫師文件、試用紀錄或承辦單位指定表單。"
     },
     {
       "id": "smart_assistive_disability_operation_support_check",
@@ -7157,6 +7281,7 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "新北市輔具資源中心",
@@ -7204,9 +7329,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "b3f4839533c44c9d9fde9c6a7d101a220467782de64c1162eaa799c22bf44393",
-      "knowledge_version": "2026-06-17-b3f48395",
-      "embedding_text": "智慧輔具身障側操作支持與替代方案 智慧輔具 操作準備 APP 身障輔具 身障 長照身障交界 查證流程 地方窗口 smart_assistive_operation_readiness 中央共通 新北市 家屬不會用APP怎麼辦 智慧床墊需要網路嗎 身障輔具操作誰教 若智慧輔具需要 APP、網路、通知或資料回傳，身障側應確認是否有操作支持、替代設備或輔具中心協助。 智慧輔具 disability 整理智慧輔具在身障側與 APP、網路、通知、資料回傳、操作支持及替代設備的關係。 智慧輔具不只是設備本體，還包括網路、APP、通知、資料回傳與照顧者接收能力。若使用者或照顧者無法穩定操作，身障側資料通常會回到輔具中心、供應端或地方窗口確認設備是否適配、是否有操作支持，以及是否存在替代設備。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 若智慧輔具需要 APP、網路、通知或資料回傳，身障側應確認是否有操作支持、替代設備或輔具中心協助。\n\n智慧輔具不只是設備本體，還包括網路、APP、通知、資料回傳與照顧者接收能力。若家屬或照顧者無法穩定操作，資料整理可回到輔具中心或供應端的設備適配、操作支持與替代方案。"
+      "content_hash": "19bf3ab0377beb42278f5f710a10c0f1d9bdb55f87571b1597618f319b26c5da",
+      "knowledge_version": "2026-06-17-19bf3ab0",
+      "embedding_text": "智慧輔具身障側操作支持與替代方案 智慧輔具 操作準備 APP 身障輔具 身障 長照身障交界 查證流程 地方窗口 smart_assistive_operation_readiness 中央共通 新北市 家屬不會用APP怎麼辦 智慧床墊需要網路嗎 身障輔具操作誰教 若智慧輔具需要 APP、網路、通知或資料回傳，身障側應確認是否有操作支持、替代設備或輔具中心協助。 智慧輔具 disability 整理智慧輔具在身障側與 APP、網路、通知、資料回傳、操作支持及替代設備的關係。 智慧輔具不只是設備本體，還包括網路、APP、通知、資料回傳與照顧者接收能力。若使用者或照顧者無法穩定操作，身障側資料通常會回到輔具中心、供應端或地方窗口確認設備是否適配、是否有操作支持，以及是否存在替代設備。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 若智慧輔具需要 APP、網路、通知或資料回傳，身障側應確認是否有操作支持、替代設備或輔具中心協助。\n\n智慧輔具不只是設備本體，還包括網路、APP、通知、資料回傳與照顧者接收能力。若家屬或照顧者無法穩定操作，資料整理可回到輔具中心或供應端的設備適配、操作支持與替代方案。"
     },
     {
       "id": "smart_assistive_dual_track_rental_purchase",
@@ -7380,6 +7505,35 @@
       ],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "既有長照輔具購置或租賃制度保留。",
+            "既有輔具購置或租賃額度為每 3 年 4 萬元。",
+            "居家無障礙改善服務額度為 2 萬元。"
+          ],
+          "title": "既有長照輔具制度"
+        },
+        {
+          "body": "",
+          "points": [
+            "衛福部資料說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。",
+            "智慧科技租賃輔具額度為每 3 年 6 萬元。",
+            "智慧科技輔具目前在已讀官方資料中以租賃脈絡整理。"
+          ],
+          "title": "新增智慧科技租賃輔具"
+        },
+        {
+          "body": "",
+          "points": [
+            "新增智慧科技租賃輔具與既有購買型輔具並行。",
+            "雙軌資料顯示長照輔具服務同時存在購置、租賃與居家無障礙改善。",
+            "不同額度與服務型態在附表與公告資料中分開呈現。"
+          ],
+          "title": "雙軌制度位置"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "衛生福利部",
@@ -7522,9 +7676,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "228b435d46e03d33fd25929babef1bed175d90f2ecf40181f2c82b086feb2ee7",
-      "knowledge_version": "2026-06-16-228b435d",
-      "embedding_text": "智慧輔具租賃與購置雙軌 smart_assistive smart_assistive_dual_track assistive_purchase_or_rental 長照 制度差異 租賃服務 購置／租賃判斷 smart_assistive_dual_track 中央共通 / 新北市 智慧輔具是用租的還是買的 智慧輔具跟一般輔具有什麼差別 智慧床墊是租賃還是購置 智慧床墊能不能申請長照補助 智慧輔具能不能申請長照補助 智慧輔具可以用購買補助還是租賃服務 智慧輔具是租賃還是購買？ 智慧科技輔具和一般長照輔具購置有什麼差別？ 智慧輔具和居家無障礙改善是不是同一件事？ 長照輔具服務同時存在既有輔具購置或租賃、居家無障礙改善，以及新增智慧科技租賃輔具。已讀資料可整理為：既有輔具購置或租賃每 3 年 4 萬元、智慧科技租賃輔具每 3 年 6 萬元、居家無障礙改善 2 萬元；智慧科技輔具目前以租賃脈絡整理。 智慧輔具 ltc 長照輔具服務同時存在既有輔具購置或租賃、居家無障礙改善，以及新增智慧科技租賃輔具。已讀資料可整理為：既有輔具購置或租賃每 3 年 4 萬元、智慧科技租賃輔具每 3 年 6 萬元、居家無障礙改善 2 萬元；智慧科技輔具目前以租賃脈絡整理。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。 公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為租賃與購置雙軌主卡；不再拆成入口查證與責任確認薄卡。 智慧科技輔具在長照 3.0 資料中以租賃服務脈絡呈現。 智慧科技租賃輔具與一般輔具購置、一般租賃輔具、居家無障礙改善是不同服務路徑。 [{\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"長期照顧司／1966 長照專區\", \"content\": \"公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_rule_amendment\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_comparison_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正對照表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95449-75fc88f3-e168-4c64-a0f5-db53347b780d.html\"}, {\"agency\": \"1966 長照專區\", \"content\": \"公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。\", \"created_at\": \"114-08-28\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_cleaning_notice\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：長照輔具服務再升級，清潔消毒有章可循\", \"updated_at\": \"114-08-28\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-83626-207.html\"}, {\"agency\": \"行政院國家永續發展委員會／衛生福利部\", \"content\": \"政策說明把智慧科技輔具放在長照 3.0、照顧科技與服務創新的脈絡中，補充 107 年起長照輔具及居家無障礙服務、長照第 2 級以上每 3 年最高 4 萬元，以及 115 年 7 月 1 日起新增全租賃智慧科技輔具每 3 年 6 萬元等政策語境。\", \"created_at\": \"2026-02-06\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ncsd_smart_assistive_policy_mirror\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"行政院國家永續發展委員會：結合智慧科技輔具政策說明\", \"updated_at\": \"2026-02-06\", \"url\": \"https://ncsd.ndc.gov.tw/Fore/News_detail/92467eaa-8115-4e77-a88c-5ecd73955129\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"二手政策解析可作資料線索與問題語言，不支撐摘要、家屬版制度說明或同屬性比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"台灣護理之家協會：智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}, {\"agency\": \"Jubo 照護誌\", \"content\": \"二手整理可作問題語言與使用者關心點線索；不能取代官方公告、附表或地方承辦資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"jubo_smart_assistive_quota_article\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"Jubo 照護誌：長照 3.0 智慧科技輔具租賃額度解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.jubo-care.com/posts/JWpHs8AxQ6qHE5BpSMuaWg\"}] 智慧輔具租賃與購置雙軌重製卡。"
+      "content_hash": "588731f5577208499c7030c0f4c6099e0e0a1fb2adfa5cf3ff0224cd473abaf4",
+      "knowledge_version": "2026-06-16-588731f5",
+      "embedding_text": "智慧輔具租賃與購置雙軌 smart_assistive smart_assistive_dual_track assistive_purchase_or_rental 長照 制度差異 租賃服務 購置／租賃判斷 smart_assistive_dual_track 中央共通 / 新北市 智慧輔具是用租的還是買的 智慧輔具跟一般輔具有什麼差別 智慧床墊是租賃還是購置 智慧床墊能不能申請長照補助 智慧輔具能不能申請長照補助 智慧輔具可以用購買補助還是租賃服務 智慧輔具是租賃還是購買？ 智慧科技輔具和一般長照輔具購置有什麼差別？ 智慧輔具和居家無障礙改善是不是同一件事？ 長照輔具服務同時存在既有輔具購置或租賃、居家無障礙改善，以及新增智慧科技租賃輔具。已讀資料可整理為：既有輔具購置或租賃每 3 年 4 萬元、智慧科技租賃輔具每 3 年 6 萬元、居家無障礙改善 2 萬元；智慧科技輔具目前以租賃脈絡整理。 智慧輔具 ltc 長照輔具服務同時存在既有輔具購置或租賃、居家無障礙改善，以及新增智慧科技租賃輔具。已讀資料可整理為：既有輔具購置或租賃每 3 年 4 萬元、智慧科技租賃輔具每 3 年 6 萬元、居家無障礙改善 2 萬元；智慧科技輔具目前以租賃脈絡整理。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。 公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。 [{\"body\": \"\", \"points\": [\"既有長照輔具購置或租賃制度保留。\", \"既有輔具購置或租賃額度為每 3 年 4 萬元。\", \"居家無障礙改善服務額度為 2 萬元。\"], \"title\": \"既有長照輔具制度\"}, {\"body\": \"\", \"points\": [\"衛福部資料說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。\", \"智慧科技租賃輔具額度為每 3 年 6 萬元。\", \"智慧科技輔具目前在已讀官方資料中以租賃脈絡整理。\"], \"title\": \"新增智慧科技租賃輔具\"}, {\"body\": \"\", \"points\": [\"新增智慧科技租賃輔具與既有購買型輔具並行。\", \"雙軌資料顯示長照輔具服務同時存在購置、租賃與居家無障礙改善。\", \"不同額度與服務型態在附表與公告資料中分開呈現。\"], \"title\": \"雙軌制度位置\"}] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為租賃與購置雙軌主卡；不再拆成入口查證與責任確認薄卡。 智慧科技輔具在長照 3.0 資料中以租賃服務脈絡呈現。 智慧科技租賃輔具與一般輔具購置、一般租賃輔具、居家無障礙改善是不同服務路徑。 [{\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"長期照顧司／1966 長照專區\", \"content\": \"公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_rule_amendment\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_comparison_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正對照表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95449-75fc88f3-e168-4c64-a0f5-db53347b780d.html\"}, {\"agency\": \"1966 長照專區\", \"content\": \"公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。\", \"created_at\": \"114-08-28\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_cleaning_notice\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：長照輔具服務再升級，清潔消毒有章可循\", \"updated_at\": \"114-08-28\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-83626-207.html\"}, {\"agency\": \"行政院國家永續發展委員會／衛生福利部\", \"content\": \"政策說明把智慧科技輔具放在長照 3.0、照顧科技與服務創新的脈絡中，補充 107 年起長照輔具及居家無障礙服務、長照第 2 級以上每 3 年最高 4 萬元，以及 115 年 7 月 1 日起新增全租賃智慧科技輔具每 3 年 6 萬元等政策語境。\", \"created_at\": \"2026-02-06\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ncsd_smart_assistive_policy_mirror\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"行政院國家永續發展委員會：結合智慧科技輔具政策說明\", \"updated_at\": \"2026-02-06\", \"url\": \"https://ncsd.ndc.gov.tw/Fore/News_detail/92467eaa-8115-4e77-a88c-5ecd73955129\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"二手政策解析可作資料線索與問題語言，不支撐摘要、家屬版制度說明或同屬性比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"台灣護理之家協會：智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}, {\"agency\": \"Jubo 照護誌\", \"content\": \"二手整理可作問題語言與使用者關心點線索；不能取代官方公告、附表或地方承辦資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"jubo_smart_assistive_quota_article\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"Jubo 照護誌：長照 3.0 智慧科技輔具租賃額度解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.jubo-care.com/posts/JWpHs8AxQ6qHE5BpSMuaWg\"}] 智慧輔具租賃與購置雙軌重製卡。"
     },
     {
       "id": "smart_assistive_five_domains_item_check",
@@ -7718,6 +7872,35 @@
       ],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "附表四之一將智慧科技輔具列為長照給付架構中的新增項目。",
+            "智慧科技輔具以租賃服務為主，並以中央公告的評估報告書與附表項目作為給付資料基礎。",
+            "附表資料使用 EI01 至 EI05 作為智慧科技輔具項目碼別。"
+          ],
+          "title": "附表四之一的制度範圍"
+        },
+        {
+          "body": "",
+          "points": [
+            "五大面向包含移位、移動、沐浴排泄、居家照顧床與安全看視。",
+            "官方資料以功能、規格與安全標準訂定照顧組合內容。",
+            "品項判斷依附表與公告資料，不以品牌、型號、展覽獎項或產品頁作為正式品項。"
+          ],
+          "title": "五大面向"
+        },
+        {
+          "body": "",
+          "points": [
+            "附表四之一將智慧科技輔具描述為可在居家環境中感測、紀錄、傳輸、分析與回饋資料的輔具。",
+            "資料面向包含身體、生活照顧與自主復能訓練相關數據。",
+            "租賃服務組合不只包含設備，也包含與租賃使用相關的服務安排。"
+          ],
+          "title": "智慧科技輔具的功能描述"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "長期照顧司／1966 長照專區",
@@ -7951,9 +8134,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "71ce43ba2aa6b2b6a87dd5d34b1dfd5dbb6e55d18ada4c629bb93af119c47755",
-      "knowledge_version": "2026-06-16-71ce43ba",
-      "embedding_text": "智慧輔具五大面向與品項查證 smart_assistive smart_assistive_item_scope smart_mattress_question 長照 品項查證 功能分類 官方項目 smart_assistive_item_scope 中央共通 / 新北市 智慧床墊可不可以補助 智慧輔具有哪些品項 智慧輔具五大面向是什麼 智慧輔具目前官方資料分成哪些面向？ 智慧床墊或感測設備應該先對應到哪一類官方面向？ 為什麼不能只用品牌或商品名稱判斷智慧輔具品項？ 官方資料將智慧科技輔具整理為五大面向：移位、移動、沐浴排泄、居家照顧床與安全看視。附表四之一並將智慧科技輔具描述為可在居家環境中感測、紀錄、傳輸、分析與回饋身體、生活照顧及自主復能訓練相關數據的輔具。 智慧輔具 ltc 官方資料將智慧科技輔具整理為五大面向：移位、移動、沐浴排泄、居家照顧床與安全看視。附表四之一並將智慧科技輔具描述為可在居家環境中感測、紀錄、傳輸、分析與回饋身體、生活照顧及自主復能訓練相關數據的輔具。 公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。 手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為品項範圍主卡；品牌、展覽與產品案例不獨立成正式知識卡。 長照側以五大面向整理智慧科技租賃輔具。 五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。 品項判斷以官方面向與正式品項為準，不以品牌或商品名稱為準。 [{\"agency\": \"長期照顧司／1966 長照專區\", \"content\": \"公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_rule_amendment\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_comparison_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正對照表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95449-75fc88f3-e168-4c64-a0f5-db53347b780d.html\"}, {\"agency\": \"衛生福利部／1966 長照專區\", \"content\": \"手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_cleaning_manual_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長照輔具租賃服務清潔消毒指引手冊 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html\"}, {\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"中華民國職能治療師公會全聯會\", \"content\": \"課程由衛生福利部長期照顧司委託辦理。課程目標包含理解長照及智慧科技相關法規、給付支付辦法修正重點、智慧科技輔具功能分類、實務應用、UI/UX、產品適配度評估、評估報告書撰寫與五大類智慧科技輔具產品實地操作體驗。\", \"created_at\": \"2026-02-13\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"oturoc_smart_assistive_training_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"中華民國職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練\", \"updated_at\": \"2026-02-13\", \"url\": \"https://www.oturoc.org.tw/index.php?action=news_detail&id=338\"}, {\"agency\": \"臺北市物理治療師公會\", \"content\": \"簡章內容為衛生福利部長期照顧司委託辦理之 115 年智慧科技輔具評估教育訓練。受訓對象為具甲類輔具評估人員資格者，課程包含智慧科技輔具法規、功能分類、UI/UX、產品適配度、操作體驗與評估報告書撰寫。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taipeipt_smart_assistive_training_pdf_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"臺北市物理治療師公會：115 年智慧科技輔具評估教育訓練簡章 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.taipeipt.org.tw/upload/course/20260223104616_F3994D4A8967AED/115%E5%B9%B4%E6%99%BA%E6%85%A7%E7%A7%91%E6%8A%80%E8%BC%94%E5%85%B7%E8%A9%95%E4%BC%B0%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%A8%88%E7%95%AB%E7%B0%A1%E7%AB%A0.pdf\"}, {\"agency\": \"ATLife\", \"content\": \"此來源可提供市場產品與租賃輔具語言線索，但不能支撐正式品項、補助資格、額度或家屬版制度說明。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"atlife_awards_2026\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"ATLife：2026 臺灣租賃輔具精品獎獲獎名單\", \"updated_at\": \"待確認\", \"url\": \"https://www.chanchao.com.tw/atlife/newsDetail.asp?serno=5402\"}, {\"agency\": \"臺灣輔具暨長期照護產業發展協會\", \"content\": \"此來源可作租賃輔具產品與產業活動線索，不進制度摘要與正式比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tatia_rental_award_intro\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"TATISI：臺灣長照租賃輔具精品獎介紹\", \"updated_at\": \"待確認\", \"url\": \"https://www.tatia.org.tw/%E5%8F%B0%E7%81%A3%E9%95%B7%E7%85%A7%E7%A7%9F%E8%B3%83%E8%BC%94%E5%85%B7%E7%B2%BE%E5%93%81%E7%8D%8E/\"}, {\"agency\": \"維思感創\", \"content\": \"廠商案例可作產品功能與市場語言線索，不支撐制度摘要、補助資格或正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_icue_case\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"維思感創 iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"廠商產品頁可作智慧床墊功能語言線索，不支撐是否可申請補助或是否列入正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_foreaider_mattress\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"輔人科技 ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}] 智慧輔具五大面向與品項查證重製卡。"
+      "content_hash": "90d14d9c66fc1134c7013b50606a960f72e569d7620ba552903cddf4aff1617b",
+      "knowledge_version": "2026-06-16-90d14d9c",
+      "embedding_text": "智慧輔具五大面向與品項查證 smart_assistive smart_assistive_item_scope smart_mattress_question 長照 品項查證 功能分類 官方項目 smart_assistive_item_scope 中央共通 / 新北市 智慧床墊可不可以補助 智慧輔具有哪些品項 智慧輔具五大面向是什麼 智慧輔具目前官方資料分成哪些面向？ 智慧床墊或感測設備應該先對應到哪一類官方面向？ 為什麼不能只用品牌或商品名稱判斷智慧輔具品項？ 官方資料將智慧科技輔具整理為五大面向：移位、移動、沐浴排泄、居家照顧床與安全看視。附表四之一並將智慧科技輔具描述為可在居家環境中感測、紀錄、傳輸、分析與回饋身體、生活照顧及自主復能訓練相關數據的輔具。 智慧輔具 ltc 官方資料將智慧科技輔具整理為五大面向：移位、移動、沐浴排泄、居家照顧床與安全看視。附表四之一並將智慧科技輔具描述為可在居家環境中感測、紀錄、傳輸、分析與回饋身體、生活照顧及自主復能訓練相關數據的輔具。 公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。 手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。 [{\"body\": \"\", \"points\": [\"附表四之一將智慧科技輔具列為長照給付架構中的新增項目。\", \"智慧科技輔具以租賃服務為主，並以中央公告的評估報告書與附表項目作為給付資料基礎。\", \"附表資料使用 EI01 至 EI05 作為智慧科技輔具項目碼別。\"], \"title\": \"附表四之一的制度範圍\"}, {\"body\": \"\", \"points\": [\"五大面向包含移位、移動、沐浴排泄、居家照顧床與安全看視。\", \"官方資料以功能、規格與安全標準訂定照顧組合內容。\", \"品項判斷依附表與公告資料，不以品牌、型號、展覽獎項或產品頁作為正式品項。\"], \"title\": \"五大面向\"}, {\"body\": \"\", \"points\": [\"附表四之一將智慧科技輔具描述為可在居家環境中感測、紀錄、傳輸、分析與回饋資料的輔具。\", \"資料面向包含身體、生活照顧與自主復能訓練相關數據。\", \"租賃服務組合不只包含設備，也包含與租賃使用相關的服務安排。\"], \"title\": \"智慧科技輔具的功能描述\"}] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為品項範圍主卡；品牌、展覽與產品案例不獨立成正式知識卡。 長照側以五大面向整理智慧科技租賃輔具。 五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。 品項判斷以官方面向與正式品項為準，不以品牌或商品名稱為準。 [{\"agency\": \"長期照顧司／1966 長照專區\", \"content\": \"公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_rule_amendment\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_comparison_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正對照表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95449-75fc88f3-e168-4c64-a0f5-db53347b780d.html\"}, {\"agency\": \"衛生福利部／1966 長照專區\", \"content\": \"手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_cleaning_manual_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長照輔具租賃服務清潔消毒指引手冊 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html\"}, {\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"中華民國職能治療師公會全聯會\", \"content\": \"課程由衛生福利部長期照顧司委託辦理。課程目標包含理解長照及智慧科技相關法規、給付支付辦法修正重點、智慧科技輔具功能分類、實務應用、UI/UX、產品適配度評估、評估報告書撰寫與五大類智慧科技輔具產品實地操作體驗。\", \"created_at\": \"2026-02-13\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"oturoc_smart_assistive_training_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"中華民國職能治療師公會全聯會：115 年智慧科技輔具評估教育訓練\", \"updated_at\": \"2026-02-13\", \"url\": \"https://www.oturoc.org.tw/index.php?action=news_detail&id=338\"}, {\"agency\": \"臺北市物理治療師公會\", \"content\": \"簡章內容為衛生福利部長期照顧司委託辦理之 115 年智慧科技輔具評估教育訓練。受訓對象為具甲類輔具評估人員資格者，課程包含智慧科技輔具法規、功能分類、UI/UX、產品適配度、操作體驗與評估報告書撰寫。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taipeipt_smart_assistive_training_pdf_2026\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"臺北市物理治療師公會：115 年智慧科技輔具評估教育訓練簡章 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.taipeipt.org.tw/upload/course/20260223104616_F3994D4A8967AED/115%E5%B9%B4%E6%99%BA%E6%85%A7%E7%A7%91%E6%8A%80%E8%BC%94%E5%85%B7%E8%A9%95%E4%BC%B0%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%A8%88%E7%95%AB%E7%B0%A1%E7%AB%A0.pdf\"}, {\"agency\": \"ATLife\", \"content\": \"此來源可提供市場產品與租賃輔具語言線索，但不能支撐正式品項、補助資格、額度或家屬版制度說明。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"atlife_awards_2026\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"ATLife：2026 臺灣租賃輔具精品獎獲獎名單\", \"updated_at\": \"待確認\", \"url\": \"https://www.chanchao.com.tw/atlife/newsDetail.asp?serno=5402\"}, {\"agency\": \"臺灣輔具暨長期照護產業發展協會\", \"content\": \"此來源可作租賃輔具產品與產業活動線索，不進制度摘要與正式比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tatia_rental_award_intro\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"TATISI：臺灣長照租賃輔具精品獎介紹\", \"updated_at\": \"待確認\", \"url\": \"https://www.tatia.org.tw/%E5%8F%B0%E7%81%A3%E9%95%B7%E7%85%A7%E7%A7%9F%E8%B3%83%E8%BC%94%E5%85%B7%E7%B2%BE%E5%93%81%E7%8D%8E/\"}, {\"agency\": \"維思感創\", \"content\": \"廠商案例可作產品功能與市場語言線索，不支撐制度摘要、補助資格或正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_icue_case\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"維思感創 iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"廠商產品頁可作智慧床墊功能語言線索，不支撐是否可申請補助或是否列入正式品項。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_foreaider_mattress\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"輔人科技 ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}] 智慧輔具五大面向與品項查證重製卡。"
     },
     {
       "id": "smart_assistive_ltc_application_entry_check",
@@ -8080,6 +8263,7 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "衛生福利部長照專區",
@@ -8176,9 +8360,9 @@
         "title": "智慧輔具政策與上路狀態"
       },
       "curriculum_reference": {},
-      "content_hash": "67fba58c1c1dc0d857b4aed72b90b9e0afeef3753a247a723007a025134a3c4d",
-      "knowledge_version": "2026-06-17-67fba58c",
-      "embedding_text": "智慧輔具長照側申請入口與上路狀態查證 智慧輔具 長照3.0 上路時程 申請入口 長照 制度差異 申請路徑 smart_assistive_policy_timeline 中央共通 新北市 智慧輔具現在可以申請了嗎 長照3.0智慧輔具什麼時候上路 智慧科技輔具怎麼申請 智慧輔具目前能不能走長照服務申請？ 長照 3.0 智慧科技輔具目前要查哪些上路條件？ 家屬拿政策新聞或產品頁來問時，要回到哪些正式資料確認？ 智慧輔具是長照 3.0 新增服務方向之一；實際使用仍需確認正式上路時程、地方流程、品項與申請入口。 智慧輔具 ltc 長照 3.0 已把智慧科技輔具列為新增服務方向，資料焦點包含上路時程、地方流程、品項範圍、評估文件與申請入口。 長照 3.0 與衛福部公告已將智慧科技輔具列入制度調整方向，重點在於把特定智慧科技設備納入長照輔具租賃服務整備。現階段資料可確認的知識包括：智慧科技輔具屬於長照 3.0 新增服務方向；實際服務會牽涉正式上路時程、地方承辦流程、系統入口、評估文件、品項範圍與供應單位；政策資料本身不能直接等同於個案已可申請，仍需看正式公告與地方承辦是否已開放。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"衛生福利部長照專區\", \"content\": [\"長照 3.0 資料將智慧科技輔具納入新制討論，並以移位、移動、沐浴排泄、居家照顧床、安全看視等面向作為整理方向。\", \"這份資料可用來確認「智慧科技輔具已進入長照 3.0 政策方向」，但不能單獨用來判斷個案是否已可申請。\"], \"created_at\": \"\", \"source_id\": \"ltc1966_smart_3_0\", \"source_level\": \"A\", \"source_title\": \"1966 長照專區：長照 3.0 新制與智慧科技輔具\", \"source_url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"衛生福利部\", \"content\": [\"這篇資料說明長期照顧服務申請及給付辦法配合長照 3.0 進行修正，包含服務對象、服務內容與服務近用性的調整。\", \"修正內容採分階段上路；智慧科技輔具被列為後續新增服務項目，涉及租賃服務、品項範圍、額度、評估與地方執行準備。\", \"這份資料可作為確認智慧科技輔具制度方向的官方來源；地方是否已開放、系統是否可申請、承辦窗口如何處理，仍屬地方承辦與正式公告資料。\"], \"created_at\": \"114-06-19\", \"source_id\": \"mohw_smart_dual_track\", \"source_level\": \"A\", \"source_title\": \"衛福部：長期照顧服務申請及給付辦法預告修正／科技輔具雙軌\", \"source_url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\", \"updated_at\": \"114-11-12\"}] 智慧輔具在長照側需先確認正式上路時程、地方承辦準備、品項與申請入口，不能只看政策新聞就承諾。\n\n長照 3.0 與衛福部公告把智慧科技輔具列為新制度方向；地方是否已開放、是否有承辦流程、系統入口、評估文件與供應單位，是政策資料之外的地方執行資訊。政策存在不等於個案現在可以直接申請。"
+      "content_hash": "d33c81cb5433175d9cc387181baff01295ddfee747cbee9f6ad254d5318373a7",
+      "knowledge_version": "2026-06-17-d33c81cb",
+      "embedding_text": "智慧輔具長照側申請入口與上路狀態查證 智慧輔具 長照3.0 上路時程 申請入口 長照 制度差異 申請路徑 smart_assistive_policy_timeline 中央共通 新北市 智慧輔具現在可以申請了嗎 長照3.0智慧輔具什麼時候上路 智慧科技輔具怎麼申請 智慧輔具目前能不能走長照服務申請？ 長照 3.0 智慧科技輔具目前要查哪些上路條件？ 家屬拿政策新聞或產品頁來問時，要回到哪些正式資料確認？ 智慧輔具是長照 3.0 新增服務方向之一；實際使用仍需確認正式上路時程、地方流程、品項與申請入口。 智慧輔具 ltc 長照 3.0 已把智慧科技輔具列為新增服務方向，資料焦點包含上路時程、地方流程、品項範圍、評估文件與申請入口。 長照 3.0 與衛福部公告已將智慧科技輔具列入制度調整方向，重點在於把特定智慧科技設備納入長照輔具租賃服務整備。現階段資料可確認的知識包括：智慧科技輔具屬於長照 3.0 新增服務方向；實際服務會牽涉正式上路時程、地方承辦流程、系統入口、評估文件、品項範圍與供應單位；政策資料本身不能直接等同於個案已可申請，仍需看正式公告與地方承辦是否已開放。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"衛生福利部長照專區\", \"content\": [\"長照 3.0 資料將智慧科技輔具納入新制討論，並以移位、移動、沐浴排泄、居家照顧床、安全看視等面向作為整理方向。\", \"這份資料可用來確認「智慧科技輔具已進入長照 3.0 政策方向」，但不能單獨用來判斷個案是否已可申請。\"], \"created_at\": \"\", \"source_id\": \"ltc1966_smart_3_0\", \"source_level\": \"A\", \"source_title\": \"1966 長照專區：長照 3.0 新制與智慧科技輔具\", \"source_url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"衛生福利部\", \"content\": [\"這篇資料說明長期照顧服務申請及給付辦法配合長照 3.0 進行修正，包含服務對象、服務內容與服務近用性的調整。\", \"修正內容採分階段上路；智慧科技輔具被列為後續新增服務項目，涉及租賃服務、品項範圍、額度、評估與地方執行準備。\", \"這份資料可作為確認智慧科技輔具制度方向的官方來源；地方是否已開放、系統是否可申請、承辦窗口如何處理，仍屬地方承辦與正式公告資料。\"], \"created_at\": \"114-06-19\", \"source_id\": \"mohw_smart_dual_track\", \"source_level\": \"A\", \"source_title\": \"衛福部：長期照顧服務申請及給付辦法預告修正／科技輔具雙軌\", \"source_url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\", \"updated_at\": \"114-11-12\"}] 智慧輔具在長照側需先確認正式上路時程、地方承辦準備、品項與申請入口，不能只看政策新聞就承諾。\n\n長照 3.0 與衛福部公告把智慧科技輔具列為新制度方向；地方是否已開放、是否有承辦流程、系統入口、評估文件與供應單位，是政策資料之外的地方執行資訊。政策存在不等於個案現在可以直接申請。"
     },
     {
       "id": "smart_assistive_ltc_rental_service_responsibility",
@@ -8305,6 +8489,7 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "衛生福利部長照專區",
@@ -8406,9 +8591,9 @@
         "title": "智慧輔具租賃維護"
       },
       "curriculum_reference": {},
-      "content_hash": "d99729509ffa49ed53ab1e9062cfc75f9f7b8ea80a11868a219b87387b0c5cc4",
-      "knowledge_version": "2026-06-17-d9972950",
-      "embedding_text": "智慧輔具長照租賃服務責任確認 智慧輔具 租賃 維修 清潔消毒 長照 查證流程 電話確認 smart_assistive_rental_maintenance 中央共通 新北市 智慧輔具壞掉誰修 租來的智慧床墊誰清潔 退租怎麼確認 租來的智慧輔具壞掉誰修？ 智慧床墊或感測設備退租時要確認什麼？ 租賃輔具的清潔消毒、維修、換機與退租責任要問誰？ 長照租賃智慧輔具時，除了設備功能，也要確認維修、換機、清潔消毒、退租、回收整備與責任窗口。 智慧輔具 ltc 租賃型智慧輔具不只看設備與租金，還要確認維修、換機、清潔消毒、退租、回收整備、帳號資料與責任窗口。 租賃服務包含的不只是設備取得，還會牽涉交付、安裝、調整、教學、維修、換機、回收、清潔消毒、包裝儲存與退租責任。智慧輔具如果包含感測、通知、APP、床上照顧或貼身照顧情境，還可能涉及故障期間替代品、通知中斷、帳號或資料清除、供應端清潔消毒紀錄與回收整備紀錄。此類內容屬於租賃服務責任的一部分，不只是設備名稱、租金或補助可能性。 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"衛生福利部長照專區\", \"content\": [\"長照輔具租賃服務清潔消毒指引手冊公告，可作為租賃輔具清潔消毒、回收整備、包裝儲存與再出租管理的官方依據之一。\", \"對智慧輔具而言，設備交付後的維修、更換、退租、回收與清潔消毒責任，也是租賃服務資料的一部分。\"], \"created_at\": \"\", \"source_id\": \"ltc1966_rental_disinfection\", \"source_level\": \"A\", \"source_title\": \"1966 長照專區：長照輔具租賃服務清潔消毒指引手冊公告\", \"source_url\": \"https://1966.gov.tw/LTC/cp-6440-83626-207.html\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"衛生福利部長照專區\", \"content\": [\"長照 3.0 將智慧科技輔具納入新制方向，並以移位、移動、沐浴排泄、居家照顧床、安全看視等面向整理。\", \"若智慧科技輔具以租賃方式使用，需同時確認租賃服務管理、供應端責任與地方承辦流程。\"], \"created_at\": \"\", \"source_id\": \"ltc1966_smart_3_0\", \"source_level\": \"A\", \"source_title\": \"1966 長照專區：長照 3.0 新制與智慧科技輔具\", \"source_url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\", \"updated_at\": \"2026-06-17\"}] 長照租賃智慧輔具時，要把維修、換機、清潔消毒、退租、回收整備和責任窗口一起問清楚。\n\n租賃服務不是只提供設備，也牽涉交付、安裝、教學、維修、回收、清潔消毒與退租責任。智慧輔具若含感測、床上照顧或通知功能，更需要確認故障時誰處理、多久可換機、資料或通知是否會中斷。"
+      "content_hash": "c1336448573d517e2776e7e590ca702bc954b68fcaf8694ecac9433fa7c03ddb",
+      "knowledge_version": "2026-06-17-c1336448",
+      "embedding_text": "智慧輔具長照租賃服務責任確認 智慧輔具 租賃 維修 清潔消毒 長照 查證流程 電話確認 smart_assistive_rental_maintenance 中央共通 新北市 智慧輔具壞掉誰修 租來的智慧床墊誰清潔 退租怎麼確認 租來的智慧輔具壞掉誰修？ 智慧床墊或感測設備退租時要確認什麼？ 租賃輔具的清潔消毒、維修、換機與退租責任要問誰？ 長照租賃智慧輔具時，除了設備功能，也要確認維修、換機、清潔消毒、退租、回收整備與責任窗口。 智慧輔具 ltc 租賃型智慧輔具不只看設備與租金，還要確認維修、換機、清潔消毒、退租、回收整備、帳號資料與責任窗口。 租賃服務包含的不只是設備取得，還會牽涉交付、安裝、調整、教學、維修、換機、回收、清潔消毒、包裝儲存與退租責任。智慧輔具如果包含感測、通知、APP、床上照顧或貼身照顧情境，還可能涉及故障期間替代品、通知中斷、帳號或資料清除、供應端清潔消毒紀錄與回收整備紀錄。此類內容屬於租賃服務責任的一部分，不只是設備名稱、租金或補助可能性。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"衛生福利部長照專區\", \"content\": [\"長照輔具租賃服務清潔消毒指引手冊公告，可作為租賃輔具清潔消毒、回收整備、包裝儲存與再出租管理的官方依據之一。\", \"對智慧輔具而言，設備交付後的維修、更換、退租、回收與清潔消毒責任，也是租賃服務資料的一部分。\"], \"created_at\": \"\", \"source_id\": \"ltc1966_rental_disinfection\", \"source_level\": \"A\", \"source_title\": \"1966 長照專區：長照輔具租賃服務清潔消毒指引手冊公告\", \"source_url\": \"https://1966.gov.tw/LTC/cp-6440-83626-207.html\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"衛生福利部長照專區\", \"content\": [\"長照 3.0 將智慧科技輔具納入新制方向，並以移位、移動、沐浴排泄、居家照顧床、安全看視等面向整理。\", \"若智慧科技輔具以租賃方式使用，需同時確認租賃服務管理、供應端責任與地方承辦流程。\"], \"created_at\": \"\", \"source_id\": \"ltc1966_smart_3_0\", \"source_level\": \"A\", \"source_title\": \"1966 長照專區：長照 3.0 新制與智慧科技輔具\", \"source_url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\", \"updated_at\": \"2026-06-17\"}] 長照租賃智慧輔具時，要把維修、換機、清潔消毒、退租、回收整備和責任窗口一起問清楚。\n\n租賃服務不是只提供設備，也牽涉交付、安裝、教學、維修、回收、清潔消毒與退租責任。智慧輔具若含感測、床上照顧或通知功能，更需要確認故障時誰處理、多久可換機、資料或通知是否會中斷。"
     },
     {
       "id": "smart_assistive_policy_overview",
@@ -8590,6 +8775,35 @@
       ],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "《長期照顧服務申請及給付辦法》修正配合長照十年計畫 3.0，調整長照服務對象、服務內容與服務近用性。",
+            "本次修正將智慧科技輔具放入長照給付架構，並以附表四之一列出智慧科技輔具通則與項目。",
+            "修正總說明將新增智慧科技輔具放在失能者新興照顧需求、自主生活能力與照顧負擔調整的制度脈絡中。"
+          ],
+          "title": "制度位置與修正目的"
+        },
+        {
+          "body": "",
+          "points": [
+            "114 年 9 月 1 日起，放寬聘僱外籍看護工家庭使用社區式照顧服務，並調整交通接送、營養照護與居家喘息等服務。",
+            "115 年 1 月 1 日起，擴大長照給付對象，新增全年齡失智且失能者，並納入急性後期整合照護計畫收案對象。",
+            "115 年 7 月 1 日起，新增智慧科技輔具。"
+          ],
+          "title": "分階段上路時程"
+        },
+        {
+          "body": "",
+          "points": [
+            "智慧科技輔具額度為每 3 年 6 萬元。",
+            "用途為租賃五大面向智慧科技租賃輔具。",
+            "五大面向包含移位、移動、沐浴排泄、居家照顧床與安全看視。"
+          ],
+          "title": "智慧科技輔具新增內容"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "長期照顧司／1966 長照專區",
@@ -8751,9 +8965,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "1b70b1e37f3ff962748489f9f5c0c86012f2e99d1d9bafda1524486c9a3ae312",
-      "knowledge_version": "2026-06-16-1b70b1e3",
-      "embedding_text": "智慧科技輔具政策與上路時程 smart_assistive smart_assistive_policy ltc_assistive_service_question 長照 政策說明 上路時程 申請路徑 smart_assistive_policy_timeline 中央共通 / 新北市 智慧輔具什麼時候上路 智慧床墊可不可以申請長照 長照 3.0 智慧科技輔具是什麼 長照 3.0 是否已把智慧科技輔具列入服務方向？ 智慧科技輔具大約從什麼時候納入長照服務？ 官方資料中智慧科技輔具的額度與租賃脈絡是什麼？ 長照 3.0 已將智慧科技輔具列入分階段新增服務。已讀官方資料可確認：115 年 7 月 1 日起新增智慧科技輔具，額度為每 3 年 6 萬元，用於租賃五大面向智慧科技租賃輔具；制度範圍仍以中央公告、附表與地方開辦流程為準。 智慧輔具 ltc 長照 3.0 已將智慧科技輔具列入分階段新增服務。已讀官方資料可確認：115 年 7 月 1 日起新增智慧科技輔具，額度為每 3 年 6 萬元，用於租賃五大面向智慧科技租賃輔具；制度範圍仍以中央公告、附表與地方開辦流程為準。 公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 修正總說明將本次修正放在長照實務運作與輔具補助基準調整脈絡中。資料說明修正涉及長照輔具及居家無障礙給付項目、組合內容與給付價格；新增智慧科技輔具用於處理失能者新興照顧需求、提升自主生活能力及減輕照顧負擔。 修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為智慧輔具政策主卡；合併原長照側申請入口與上路狀態查證卡的重複內容。 長照 3.0 將智慧科技輔具列為新增服務方向。 115 年 7 月 1 日起新增智慧科技輔具，額度為每 3 年 6 萬元。 此卡目前只支撐長照側政策時程與額度脈絡。 [{\"agency\": \"長期照顧司／1966 長照專區\", \"content\": \"公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_rule_amendment\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正總說明將本次修正放在長照實務運作與輔具補助基準調整脈絡中。資料說明修正涉及長照輔具及居家無障礙給付項目、組合內容與給付價格；新增智慧科技輔具用於處理失能者新興照顧需求、提升自主生活能力及減輕照顧負擔。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_summary_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正總說明 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95448-f2edf0ca-d80a-466e-a133-d33dee95b48b.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_comparison_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正對照表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95449-75fc88f3-e168-4c64-a0f5-db53347b780d.html\"}, {\"agency\": \"行政院國家永續發展委員會／衛生福利部\", \"content\": \"政策說明把智慧科技輔具放在長照 3.0、照顧科技與服務創新的脈絡中，補充 107 年起長照輔具及居家無障礙服務、長照第 2 級以上每 3 年最高 4 萬元，以及 115 年 7 月 1 日起新增全租賃智慧科技輔具每 3 年 6 萬元等政策語境。\", \"created_at\": \"2026-02-06\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ncsd_smart_assistive_policy_mirror\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"行政院國家永續發展委員會：結合智慧科技輔具政策說明\", \"updated_at\": \"2026-02-06\", \"url\": \"https://ncsd.ndc.gov.tw/Fore/News_detail/92467eaa-8115-4e77-a88c-5ecd73955129\"}, {\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"二手政策解析可作資料線索與問題語言，不支撐摘要、家屬版制度說明或同屬性比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"台灣護理之家協會：智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}, {\"agency\": \"Jubo 照護誌\", \"content\": \"二手整理可作問題語言與使用者關心點線索；不能取代官方公告、附表或地方承辦資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"jubo_smart_assistive_quota_article\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"Jubo 照護誌：長照 3.0 智慧科技輔具租賃額度解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.jubo-care.com/posts/JWpHs8AxQ6qHE5BpSMuaWg\"}] 智慧科技輔具政策與上路時程重製卡。這張卡把中央政策、1966 說明與行政院政策脈絡合併為制度導讀。"
+      "content_hash": "db35fc947640da326995c2c469b854f54f49a42cea6512546d5b701aaf7bf896",
+      "knowledge_version": "2026-06-16-db35fc94",
+      "embedding_text": "智慧科技輔具政策與上路時程 smart_assistive smart_assistive_policy ltc_assistive_service_question 長照 政策說明 上路時程 申請路徑 smart_assistive_policy_timeline 中央共通 / 新北市 智慧輔具什麼時候上路 智慧床墊可不可以申請長照 長照 3.0 智慧科技輔具是什麼 長照 3.0 是否已把智慧科技輔具列入服務方向？ 智慧科技輔具大約從什麼時候納入長照服務？ 官方資料中智慧科技輔具的額度與租賃脈絡是什麼？ 長照 3.0 已將智慧科技輔具列入分階段新增服務。已讀官方資料可確認：115 年 7 月 1 日起新增智慧科技輔具，額度為每 3 年 6 萬元，用於租賃五大面向智慧科技租賃輔具；制度範圍仍以中央公告、附表與地方開辦流程為準。 智慧輔具 ltc 長照 3.0 已將智慧科技輔具列入分階段新增服務。已讀官方資料可確認：115 年 7 月 1 日起新增智慧科技輔具，額度為每 3 年 6 萬元，用於租賃五大面向智慧科技租賃輔具；制度範圍仍以中央公告、附表與地方開辦流程為準。 公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 修正總說明將本次修正放在長照實務運作與輔具補助基準調整脈絡中。資料說明修正涉及長照輔具及居家無障礙給付項目、組合內容與給付價格；新增智慧科技輔具用於處理失能者新興照顧需求、提升自主生活能力及減輕照顧負擔。 修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。 [{\"body\": \"\", \"points\": [\"《長期照顧服務申請及給付辦法》修正配合長照十年計畫 3.0，調整長照服務對象、服務內容與服務近用性。\", \"本次修正將智慧科技輔具放入長照給付架構，並以附表四之一列出智慧科技輔具通則與項目。\", \"修正總說明將新增智慧科技輔具放在失能者新興照顧需求、自主生活能力與照顧負擔調整的制度脈絡中。\"], \"title\": \"制度位置與修正目的\"}, {\"body\": \"\", \"points\": [\"114 年 9 月 1 日起，放寬聘僱外籍看護工家庭使用社區式照顧服務，並調整交通接送、營養照護與居家喘息等服務。\", \"115 年 1 月 1 日起，擴大長照給付對象，新增全年齡失智且失能者，並納入急性後期整合照護計畫收案對象。\", \"115 年 7 月 1 日起，新增智慧科技輔具。\"], \"title\": \"分階段上路時程\"}, {\"body\": \"\", \"points\": [\"智慧科技輔具額度為每 3 年 6 萬元。\", \"用途為租賃五大面向智慧科技租賃輔具。\", \"五大面向包含移位、移動、沐浴排泄、居家照顧床與安全看視。\"], \"title\": \"智慧科技輔具新增內容\"}] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為智慧輔具政策主卡；合併原長照側申請入口與上路狀態查證卡的重複內容。 長照 3.0 將智慧科技輔具列為新增服務方向。 115 年 7 月 1 日起新增智慧科技輔具，額度為每 3 年 6 萬元。 此卡目前只支撐長照側政策時程與額度脈絡。 [{\"agency\": \"長期照顧司／1966 長照專區\", \"content\": \"公告說明《長期照顧服務申請及給付辦法》配合長照十年計畫 3.0 分階段修正。115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元額度，用於租賃五大面向智慧科技租賃輔具；五大面向包含移位、移動、沐浴排泄、居家照顧床、安全看視。公告頁也提供發布令、總說明、修正對照表、修正條文及附表。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_rule_amendment\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正總說明將本次修正放在長照實務運作與輔具補助基準調整脈絡中。資料說明修正涉及長照輔具及居家無障礙給付項目、組合內容與給付價格；新增智慧科技輔具用於處理失能者新興照顧需求、提升自主生活能力及減輕照顧負擔。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_summary_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正總說明 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95448-f2edf0ca-d80a-466e-a133-d33dee95b48b.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正對照表呈現附表四及附表四之一並列後的給付架構。資料可讀到第二組給付項目包含附表四之一智慧科技輔具碼別 EI01 至 EI05，第二組額度為每三年六萬元，其中居家無障礙環境改善服務給付額度於三年期間以二萬元為限。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amendment_comparison_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長期照顧服務申請及給付辦法部分條文修正對照表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95449-75fc88f3-e168-4c64-a0f5-db53347b780d.html\"}, {\"agency\": \"行政院國家永續發展委員會／衛生福利部\", \"content\": \"政策說明把智慧科技輔具放在長照 3.0、照顧科技與服務創新的脈絡中，補充 107 年起長照輔具及居家無障礙服務、長照第 2 級以上每 3 年最高 4 萬元，以及 115 年 7 月 1 日起新增全租賃智慧科技輔具每 3 年 6 萬元等政策語境。\", \"created_at\": \"2026-02-06\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ncsd_smart_assistive_policy_mirror\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"行政院國家永續發展委員會：結合智慧科技輔具政策說明\", \"updated_at\": \"2026-02-06\", \"url\": \"https://ncsd.ndc.gov.tw/Fore/News_detail/92467eaa-8115-4e77-a88c-5ecd73955129\"}, {\"agency\": \"臺中市政府衛生局長期照護科\", \"content\": \"公告依衛部顧字第 1141963386B 號函，列出智慧科技輔具評估報告書及相關輔具評估報告書。智慧科技輔具評估報告書格式編號為 27，輔具項目名稱為智慧科技輔具；欄位包含基本資料、活動需求、人力支持、使用環境、網路環境、通知方式、主要操作者、五大類別與後續適配服務。\", \"created_at\": \"2026-01-09\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"taichung_health_smart_assistive_assessment_report\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"臺中市衛生局：智慧科技輔具評估報告書公告\", \"updated_at\": \"2026-01-09\", \"url\": \"https://www.health.taichung.gov.tw/26198/1614263/1628194/1628196/1679518/3180287\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"二手政策解析可作資料線索與問題語言，不支撐摘要、家屬版制度說明或同屬性比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"台灣護理之家協會：智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}, {\"agency\": \"Jubo 照護誌\", \"content\": \"二手整理可作問題語言與使用者關心點線索；不能取代官方公告、附表或地方承辦資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"jubo_smart_assistive_quota_article\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"Jubo 照護誌：長照 3.0 智慧科技輔具租賃額度解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.jubo-care.com/posts/JWpHs8AxQ6qHE5BpSMuaWg\"}] 智慧科技輔具政策與上路時程重製卡。這張卡把中央政策、1966 說明與行政院政策脈絡合併為制度導讀。"
     },
     {
       "id": "smart_assistive_product_brand_leads",
@@ -8945,6 +9159,7 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "ATLife",
@@ -9090,9 +9305,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "34378ca1f214cbfd80ce9820a5e0a66ebd16dc73a22372fbcd348d1dba5eb005",
-      "knowledge_version": "2026-06-16-34378ca1",
-      "embedding_text": "智慧輔具產品與品牌待查線索 smart_assistive smart_assistive_product_lead smart_mattress_question 長照 待查線索 產品案例 品牌聲稱 smart_assistive_product_leads 中央共通 / 新北市 智慧床墊有哪些產品 iCue 可以申請嗎 ForeAider 智慧床墊可以補助嗎 展覽得獎產品能不能申請 智慧輔具目前屬於需要依官方公告、地方流程與供應端條件共同確認的服務；在確認前，宜先用保守說明，不承諾是否可補助或核定。 智慧輔具 ltc 整理產品頁、展覽獎項與產業報導的定位：可作線索，不作正式補助、品項或家屬版依據。 智慧輔具產品與品牌資訊可呈現市場上的設備語言，例如智慧床墊、照護幫手、租借服務或展覽獎項。這些資料屬於待查線索，不是正式制度或品項依據。產品功能可被轉換為資料分類問題：所屬官方面向、是否列入地方品項、是否可租賃、是否需要評估、維修與教學責任。廠商頁、展覽獎項、新聞或產業報導不得單獨支撐補助或家屬版結論。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 [{\"agency\": \"ATLife\", \"content\": \"獲獎名單可作為市場趨勢與產品線索，但不等於官方品項或核定依據。\", \"created_at\": \"待確認\", \"source_id\": \"atlife_rental_assistive_award_2026\", \"source_level\": \"C\", \"source_title\": \"2026 臺灣租賃輔具精品獎獲獎名單\", \"updated_at\": \"待確認\", \"url\": \"https://www.chanchao.com.tw/atlife/newsDetail.asp?serno=5402\"}, {\"agency\": \"ATLife\", \"content\": \"活動辦法可協助理解展覽或獎項評選語言，但不得用來替代長照或身障正式申請規則。\", \"created_at\": \"待確認\", \"source_id\": \"atlife_awards_rules\", \"source_level\": \"C\", \"source_title\": \"精品獎活動辦法\", \"updated_at\": \"待確認\", \"url\": \"https://www.chanchao.com.tw/atlife/exhibitorAwards.asp\"}, {\"agency\": \"TATISI\", \"content\": \"協會或產業資料可協助理解租賃輔具產業分類與產品語言，但仍屬待查線索。\", \"created_at\": \"待確認\", \"source_id\": \"tatia_rental_assistive_award_intro\", \"source_level\": \"C\", \"source_title\": \"臺灣長照租賃輔具精品獎介紹\", \"updated_at\": \"待確認\", \"url\": \"https://www.tatia.org.tw/%E5%8F%B0%E7%81%A3%E9%95%B7%E7%85%A7%E7%A7%9F%E8%B3%83%E8%BC%94%E5%85%B7%E7%B2%BE%E5%93%81%E7%8D%8E/\"}, {\"agency\": \"維思感創\", \"content\": \"產品案例可提供智慧照護平台、感測、通知與照顧流程整合等語言，需回到官方品項與地方承辦查證。\", \"created_at\": \"待確認\", \"source_id\": \"humetrics_icue_product_lead\", \"source_level\": \"C\", \"source_title\": \"iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"智慧床墊產品頁可協助拆解功能需求，例如離床、感測、床上照顧或安全看視，但不能直接當作補助依據。\", \"created_at\": \"待確認\", \"source_id\": \"foreaider_smart_mattress_product_lead\", \"source_level\": \"C\", \"source_title\": \"ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}, {\"agency\": \"強生醫療\", \"content\": \"租借服務頁可提供供應端服務項目與租借語言線索，需確認是否為地方正式供應或合作服務。\", \"created_at\": \"待確認\", \"source_id\": \"just4u_rental_service_product_lead\", \"source_level\": \"C\", \"source_title\": \"JUST 4U 輔具租借服務\", \"updated_at\": \"待確認\", \"url\": \"https://www.just4u.tw/\"}, {\"agency\": \"Cares Expo\", \"content\": \"產業媒體報導可觀察政策討論與市場反應，但不可單獨進入家屬版正式說明。\", \"created_at\": \"待確認\", \"source_id\": \"caresexpo_smart_assistive_benefit_article\", \"source_level\": \"C\", \"source_title\": \"長照智慧科技輔具給付專題報導\", \"updated_at\": \"待確認\", \"url\": \"https://www.caresexpo.com/zh-tw/news/detail/1381\"}, {\"agency\": \"Cares Expo\", \"content\": \"產業報導可用來觀察租賃配套議題，如供應端、維修、服務流程，但需官方查證。\", \"created_at\": \"待確認\", \"source_id\": \"caresexpo_smart_assistive_rental_support_article\", \"source_level\": \"C\", \"source_title\": \"智慧輔具租賃上路配套報導\", \"updated_at\": \"待確認\", \"url\": \"https://www.caresexpo.com/zh-tw/news/detail/1418\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"協會或產業文章可作為政策解讀參考，不能取代官方公告與地方承辦流程。\", \"created_at\": \"待確認\", \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_title\": \"智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}, {\"agency\": \"Jubo 照護誌\", \"content\": \"品牌或照護平台文章可用來理解家屬常見問法，但不支撐補助結論。\", \"created_at\": \"待確認\", \"source_id\": \"jubo_smart_assistive_quota_article\", \"source_level\": \"C\", \"source_title\": \"長照 3.0 智慧科技輔具租賃額度解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.jubo-care.com/posts/JWpHs8AxQ6qHE5BpSMuaWg\"}] 智慧輔具產品與品牌待查線索卡。此卡僅供內部查證，不進家屬版。"
+      "content_hash": "104b7c44f186cbe23abb7d71c0aa7ed983248d6a298dd261f7149e90a43ea484",
+      "knowledge_version": "2026-06-16-104b7c44",
+      "embedding_text": "智慧輔具產品與品牌待查線索 smart_assistive smart_assistive_product_lead smart_mattress_question 長照 待查線索 產品案例 品牌聲稱 smart_assistive_product_leads 中央共通 / 新北市 智慧床墊有哪些產品 iCue 可以申請嗎 ForeAider 智慧床墊可以補助嗎 展覽得獎產品能不能申請 智慧輔具目前屬於需要依官方公告、地方流程與供應端條件共同確認的服務；在確認前，宜先用保守說明，不承諾是否可補助或核定。 智慧輔具 ltc 整理產品頁、展覽獎項與產業報導的定位：可作線索，不作正式補助、品項或家屬版依據。 智慧輔具產品與品牌資訊可呈現市場上的設備語言，例如智慧床墊、照護幫手、租借服務或展覽獎項。這些資料屬於待查線索，不是正式制度或品項依據。產品功能可被轉換為資料分類問題：所屬官方面向、是否列入地方品項、是否可租賃、是否需要評估、維修與教學責任。廠商頁、展覽獎項、新聞或產業報導不得單獨支撐補助或家屬版結論。 [] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 [{\"agency\": \"ATLife\", \"content\": \"獲獎名單可作為市場趨勢與產品線索，但不等於官方品項或核定依據。\", \"created_at\": \"待確認\", \"source_id\": \"atlife_rental_assistive_award_2026\", \"source_level\": \"C\", \"source_title\": \"2026 臺灣租賃輔具精品獎獲獎名單\", \"updated_at\": \"待確認\", \"url\": \"https://www.chanchao.com.tw/atlife/newsDetail.asp?serno=5402\"}, {\"agency\": \"ATLife\", \"content\": \"活動辦法可協助理解展覽或獎項評選語言，但不得用來替代長照或身障正式申請規則。\", \"created_at\": \"待確認\", \"source_id\": \"atlife_awards_rules\", \"source_level\": \"C\", \"source_title\": \"精品獎活動辦法\", \"updated_at\": \"待確認\", \"url\": \"https://www.chanchao.com.tw/atlife/exhibitorAwards.asp\"}, {\"agency\": \"TATISI\", \"content\": \"協會或產業資料可協助理解租賃輔具產業分類與產品語言，但仍屬待查線索。\", \"created_at\": \"待確認\", \"source_id\": \"tatia_rental_assistive_award_intro\", \"source_level\": \"C\", \"source_title\": \"臺灣長照租賃輔具精品獎介紹\", \"updated_at\": \"待確認\", \"url\": \"https://www.tatia.org.tw/%E5%8F%B0%E7%81%A3%E9%95%B7%E7%85%A7%E7%A7%9F%E8%B3%83%E8%BC%94%E5%85%B7%E7%B2%BE%E5%93%81%E7%8D%8E/\"}, {\"agency\": \"維思感創\", \"content\": \"產品案例可提供智慧照護平台、感測、通知與照顧流程整合等語言，需回到官方品項與地方承辦查證。\", \"created_at\": \"待確認\", \"source_id\": \"humetrics_icue_product_lead\", \"source_level\": \"C\", \"source_title\": \"iCue 智慧照護幫手\", \"updated_at\": \"待確認\", \"url\": \"https://humetrics.ai/%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/\"}, {\"agency\": \"輔人科技\", \"content\": \"智慧床墊產品頁可協助拆解功能需求，例如離床、感測、床上照顧或安全看視，但不能直接當作補助依據。\", \"created_at\": \"待確認\", \"source_id\": \"foreaider_smart_mattress_product_lead\", \"source_level\": \"C\", \"source_title\": \"ForeAider 智慧床墊\", \"updated_at\": \"待確認\", \"url\": \"https://www.foreaider.com/\"}, {\"agency\": \"強生醫療\", \"content\": \"租借服務頁可提供供應端服務項目與租借語言線索，需確認是否為地方正式供應或合作服務。\", \"created_at\": \"待確認\", \"source_id\": \"just4u_rental_service_product_lead\", \"source_level\": \"C\", \"source_title\": \"JUST 4U 輔具租借服務\", \"updated_at\": \"待確認\", \"url\": \"https://www.just4u.tw/\"}, {\"agency\": \"Cares Expo\", \"content\": \"產業媒體報導可觀察政策討論與市場反應，但不可單獨進入家屬版正式說明。\", \"created_at\": \"待確認\", \"source_id\": \"caresexpo_smart_assistive_benefit_article\", \"source_level\": \"C\", \"source_title\": \"長照智慧科技輔具給付專題報導\", \"updated_at\": \"待確認\", \"url\": \"https://www.caresexpo.com/zh-tw/news/detail/1381\"}, {\"agency\": \"Cares Expo\", \"content\": \"產業報導可用來觀察租賃配套議題，如供應端、維修、服務流程，但需官方查證。\", \"created_at\": \"待確認\", \"source_id\": \"caresexpo_smart_assistive_rental_support_article\", \"source_level\": \"C\", \"source_title\": \"智慧輔具租賃上路配套報導\", \"updated_at\": \"待確認\", \"url\": \"https://www.caresexpo.com/zh-tw/news/detail/1418\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"協會或產業文章可作為政策解讀參考，不能取代官方公告與地方承辦流程。\", \"created_at\": \"待確認\", \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_title\": \"智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}, {\"agency\": \"Jubo 照護誌\", \"content\": \"品牌或照護平台文章可用來理解家屬常見問法，但不支撐補助結論。\", \"created_at\": \"待確認\", \"source_id\": \"jubo_smart_assistive_quota_article\", \"source_level\": \"C\", \"source_title\": \"長照 3.0 智慧科技輔具租賃額度解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.jubo-care.com/posts/JWpHs8AxQ6qHE5BpSMuaWg\"}] 智慧輔具產品與品牌待查線索卡。此卡僅供內部查證，不進家屬版。"
     },
     {
       "id": "smart_assistive_rental_maintenance_disinfection",
@@ -9257,6 +9472,35 @@
       ],
       "front_visible": true,
       "searchable": true,
+      "integrated_sections": [
+        {
+          "body": "",
+          "points": [
+            "長照輔具租賃服務清潔消毒手冊聚焦租賃服務的回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。",
+            "租賃服務不只包含設備交付，也包含回收、清潔消毒與再出租前的整備。",
+            "清潔消毒與檢修流程屬租賃服務品質管理的一部分。"
+          ],
+          "title": "租賃服務鏈"
+        },
+        {
+          "body": "",
+          "points": [
+            "附表四之一把清潔消毒、運送、回收整備、諮詢與定期追蹤列入智慧科技輔具組合內容。",
+            "智慧科技輔具以租賃服務為主，租賃組合內容與供應端服務責任一起呈現。",
+            "資料本體同時保留一般租賃輔具清潔消毒手冊與智慧科技輔具附表資料。"
+          ],
+          "title": "智慧科技輔具組合內容"
+        },
+        {
+          "body": "",
+          "points": [
+            "清潔消毒手冊提到帶有控制器、感應器、偵測器等電子元件的輔具。",
+            "帶電子元件的輔具不應浸泡於水中。",
+            "可使用濕布擦拭後再以乾布擦乾。"
+          ],
+          "title": "電子元件清潔資料"
+        }
+      ],
       "source_extracts": [
         {
           "agency": "1966 長照專區",
@@ -9444,9 +9688,9 @@
           "可引用知識卡"
         ]
       },
-      "content_hash": "44838b725a1bc9028b14e15734c2f220a3a1f2dfa0f73384eef27a73f0dab714",
-      "knowledge_version": "2026-06-16-44838b72",
-      "embedding_text": "智慧輔具租賃維修／退租／清潔消毒 smart_assistive smart_assistive_rental rental_maintenance_disinfection 長照 租賃維護 清潔消毒 退租責任 smart_assistive_rental_maintenance 中央共通 / 新北市 租來的智慧輔具壞掉誰修 智慧輔具退租怎麼辦 租賃輔具清潔消毒怎麼確認 租來的智慧輔具壞掉時，維修或換機責任通常要看什麼資料？ 租賃智慧輔具退租、回收整備與清潔消毒為什麼要一起看？ 長照輔具租賃服務清潔消毒指引能支撐哪些知識？ 長照輔具租賃服務不是只有設備交付，也包含回收、運送、清潔、消毒、維護、儲存、包裝、再出租與品質管理。清潔消毒手冊把回收處理、清潔消毒、檢修、包裝與儲存列為租賃服務的重要環節；附表四之一也把清潔消毒、運送、回收整備、諮詢與定期追蹤列入智慧科技輔具組合內容。 智慧輔具 ltc 長照輔具租賃服務不是只有設備交付，也包含回收、運送、清潔、消毒、維護、儲存、包裝、再出租與品質管理。清潔消毒手冊把回收處理、清潔消毒、檢修、包裝與儲存列為租賃服務的重要環節；附表四之一也把清潔消毒、運送、回收整備、諮詢與定期追蹤列入智慧科技輔具組合內容。 公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為租賃維護主卡；合併長照租賃服務責任確認薄卡。 目前已收錄的直接官方資料可支撐「長照輔具租賃服務有清潔消毒與整備指引」。 維修、換機、退租、智慧設備帳號或資料清除等細節尚待補正式契約、指引或供應端文件。 [{\"agency\": \"1966 長照專區\", \"content\": \"公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。\", \"created_at\": \"114-08-28\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_cleaning_notice\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：長照輔具服務再升級，清潔消毒有章可循\", \"updated_at\": \"114-08-28\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-83626-207.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 長照專區\", \"content\": \"手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_cleaning_manual_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長照輔具租賃服務清潔消毒指引手冊 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"1966 長照專區\", \"content\": \"頁面整理既有長照輔具及居家無障礙服務，包括租賃、購置、居家無障礙改善、代償墊付、特約服務單位與相關附件。此來源補租賃服務與既有長照輔具背景，不取代智慧科技輔具附表資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_assistive_home_accessibility\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"1966 長照專區：輔具及居家無障礙環境改善\", \"updated_at\": \"待確認\", \"url\": \"https://1966.gov.tw/LTC/cp-6453-69940-207.html\"}, {\"agency\": \"臺灣輔具暨長期照護產業發展協會\", \"content\": \"此來源可作租賃輔具產品與產業活動線索，不進制度摘要與正式比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tatia_rental_award_intro\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"TATISI：臺灣長照租賃輔具精品獎介紹\", \"updated_at\": \"待確認\", \"url\": \"https://www.tatia.org.tw/%E5%8F%B0%E7%81%A3%E9%95%B7%E7%85%A7%E7%A7%9F%E8%B3%83%E8%BC%94%E5%85%B7%E7%B2%BE%E5%93%81%E7%8D%8E/\"}, {\"agency\": \"強生醫療\", \"content\": \"供應商租借頁可作租借服務語言線索，不支撐長照租賃制度或正式服務責任。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_just4u_rental\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"強生醫療 JUST 4U 輔具租借服務\", \"updated_at\": \"待確認\", \"url\": \"https://www.just4u.tw/\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"二手政策解析可作資料線索與問題語言，不支撐摘要、家屬版制度說明或同屬性比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"台灣護理之家協會：智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}] 智慧輔具租賃維修、退租與清潔消毒重製卡。"
+      "content_hash": "321c4f9294c487e8896dcc08124f36f4b9f9c3039939c5a3a5fd2183c45b6862",
+      "knowledge_version": "2026-06-16-321c4f92",
+      "embedding_text": "智慧輔具租賃維修／退租／清潔消毒 smart_assistive smart_assistive_rental rental_maintenance_disinfection 長照 租賃維護 清潔消毒 退租責任 smart_assistive_rental_maintenance 中央共通 / 新北市 租來的智慧輔具壞掉誰修 智慧輔具退租怎麼辦 租賃輔具清潔消毒怎麼確認 租來的智慧輔具壞掉時，維修或換機責任通常要看什麼資料？ 租賃智慧輔具退租、回收整備與清潔消毒為什麼要一起看？ 長照輔具租賃服務清潔消毒指引能支撐哪些知識？ 長照輔具租賃服務不是只有設備交付，也包含回收、運送、清潔、消毒、維護、儲存、包裝、再出租與品質管理。清潔消毒手冊把回收處理、清潔消毒、檢修、包裝與儲存列為租賃服務的重要環節；附表四之一也把清潔消毒、運送、回收整備、諮詢與定期追蹤列入智慧科技輔具組合內容。 智慧輔具 ltc 長照輔具租賃服務不是只有設備交付，也包含回收、運送、清潔、消毒、維護、儲存、包裝、再出租與品質管理。清潔消毒手冊把回收處理、清潔消毒、檢修、包裝與儲存列為租賃服務的重要環節；附表四之一也把清潔消毒、運送、回收整備、諮詢與定期追蹤列入智慧科技輔具組合內容。 公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。 修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。 手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。 衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。 [{\"body\": \"\", \"points\": [\"長照輔具租賃服務清潔消毒手冊聚焦租賃服務的回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。\", \"租賃服務不只包含設備交付，也包含回收、清潔消毒與再出租前的整備。\", \"清潔消毒與檢修流程屬租賃服務品質管理的一部分。\"], \"title\": \"租賃服務鏈\"}, {\"body\": \"\", \"points\": [\"附表四之一把清潔消毒、運送、回收整備、諮詢與定期追蹤列入智慧科技輔具組合內容。\", \"智慧科技輔具以租賃服務為主，租賃組合內容與供應端服務責任一起呈現。\", \"資料本體同時保留一般租賃輔具清潔消毒手冊與智慧科技輔具附表資料。\"], \"title\": \"智慧科技輔具組合內容\"}, {\"body\": \"\", \"points\": [\"清潔消毒手冊提到帶有控制器、感應器、偵測器等電子元件的輔具。\", \"帶電子元件的輔具不應浸泡於水中。\", \"可使用濕布擦拭後再以乾布擦乾。\"], \"title\": \"電子元件清潔資料\"}] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 保留為租賃維護主卡；合併長照租賃服務責任確認薄卡。 目前已收錄的直接官方資料可支撐「長照輔具租賃服務有清潔消毒與整備指引」。 維修、換機、退租、智慧設備帳號或資料清除等細節尚待補正式契約、指引或供應端文件。 [{\"agency\": \"1966 長照專區\", \"content\": \"公告聚焦長照輔具租賃服務的清潔消毒與整備指引。資料明確提到清潔、消毒、檢查、維修、包裝、儲存等作業流程，並連結 115 年 7 月 1 日全租賃智慧科技輔具脈絡。\", \"created_at\": \"114-08-28\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_cleaning_notice\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：長照輔具服務再升級，清潔消毒有章可循\", \"updated_at\": \"114-08-28\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-83626-207.html\"}, {\"agency\": \"衛生福利部／1966 公告附件\", \"content\": \"修正條文及附表將智慧科技輔具放在長照給付架構內，並以附表四之一列出智慧科技輔具通則與 EI01 至 EI05 項目。附表資料可讀到智慧科技輔具以租賃服務為主，並以中央公告之評估報告書與附表項目作為給付資料基礎。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_amended_articles_annex_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"修正長期照顧服務申請及給付辦法部分條文及附表 PDF\", \"updated_at\": \"以 1966 公告頁為準\", \"url\": \"https://www.mohw.gov.tw/dl-95450-0fdec091-da73-42eb-9828-b897fac2a165.html\"}, {\"agency\": \"衛生福利部／1966 長照專區\", \"content\": \"手冊整理長照輔具租賃服務的清潔消毒管理制度、回收、靜置、清洗、乾燥、消毒、檢修、包裝與儲存流程。手冊也提到帶有控制器、感應器、偵測器等電子元件的輔具不應浸泡於水中，可使用濕布擦拭後再以乾布擦乾。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_cleaning_manual_pdf\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"長照輔具租賃服務清潔消毒指引手冊 PDF\", \"updated_at\": \"待確認\", \"url\": \"https://www.mohw.gov.tw/dl-96597-e11c0a23-9ed4-46a8-a26b-715f9db2a3ae.html\"}, {\"agency\": \"衛生福利部\", \"content\": \"衛福部說明新增居家智慧科技輔具，參考日本輔具租賃制度，以全租賃方式辦理。既有長照輔具購買制度仍保留，形成租賃型智慧科技輔具與既有購買型輔具並行的雙軌制度。新聞稿也說明智慧科技輔具以功能、規格、安全標準訂定照顧組合內容，而不是因單一產品增加就修訂法規。\", \"created_at\": \"113-10-05\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"mohw_smart_assistive_dual_track\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"衛福部：長照給支付新增科技輔具全租賃，與既有輔具購買制度雙軌並行\", \"updated_at\": \"113-10-05\", \"url\": \"https://www.mohw.gov.tw/cp-2704-80148-1.html\"}, {\"agency\": \"1966 長照專區\", \"content\": \"頁面整理既有長照輔具及居家無障礙服務，包括租賃、購置、居家無障礙改善、代償墊付、特約服務單位與相關附件。此來源補租賃服務與既有長照輔具背景，不取代智慧科技輔具附表資料。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": true, \"source_id\": \"ltc1966_assistive_home_accessibility\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"1966 長照專區：輔具及居家無障礙環境改善\", \"updated_at\": \"待確認\", \"url\": \"https://1966.gov.tw/LTC/cp-6453-69940-207.html\"}, {\"agency\": \"臺灣輔具暨長期照護產業發展協會\", \"content\": \"此來源可作租賃輔具產品與產業活動線索，不進制度摘要與正式比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tatia_rental_award_intro\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"TATISI：臺灣長照租賃輔具精品獎介紹\", \"updated_at\": \"待確認\", \"url\": \"https://www.tatia.org.tw/%E5%8F%B0%E7%81%A3%E9%95%B7%E7%85%A7%E7%A7%9F%E8%B3%83%E8%BC%94%E5%85%B7%E7%B2%BE%E5%93%81%E7%8D%8E/\"}, {\"agency\": \"強生醫療\", \"content\": \"供應商租借頁可作租借服務語言線索，不支撐長照租賃制度或正式服務責任。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"vendor_just4u_rental\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"強生醫療 JUST 4U 輔具租借服務\", \"updated_at\": \"待確認\", \"url\": \"https://www.just4u.tw/\"}, {\"agency\": \"台灣護理之家協會\", \"content\": \"二手政策解析可作資料線索與問題語言，不支撐摘要、家屬版制度說明或同屬性比較。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-19\", \"public_allowed\": false, \"source_id\": \"tnha_smart_assistive_policy_analysis\", \"source_level\": \"C\", \"source_tier\": \"待查來源\", \"source_title\": \"台灣護理之家協會：智慧輔具補助政策解析\", \"updated_at\": \"待確認\", \"url\": \"https://www.tnha.com.tw/11571\"}] 智慧輔具租賃維修、退租與清潔消毒重製卡。"
     },
     {
       "id": "smart_special_assistive_device_classification",
@@ -9557,6 +9801,7 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [
         {
           "agency": "1966 長照專區",
@@ -9597,9 +9842,9 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "a4702a8f350c4ed2262d8ed34e6b18b770799bd7cb27f902d4769fcff48bb868",
-      "knowledge_version": "2026-06-16-a4702a8f",
-      "embedding_text": "智能／特殊輔具舊分類卡（已退場） smart_or_special_device smart_assistive 長照 舊卡 alias 已退場 smart_assistive_legacy_alias 中央共通 / 新北市 智能特殊輔具 特殊輔具是不是智慧輔具 智慧輔具目前屬於需要依官方公告、地方流程與供應端條件共同確認的服務；在確認前，宜先用保守說明，不承諾是否可補助或核定。 智慧輔具 ltc 舊卡保留作 alias，不再作為智慧輔具正式主題分母；請改用智慧輔具六張正式卡。 這張舊卡保留是為了讓過去的方向與搜尋語言能導回新的智慧輔具卡組。目前智慧輔具已改由政策時程、雙軌、五大面向、評估文件、操作準備、租賃維護與產品線索分工。 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 [{\"agency\": \"1966 長照專區\", \"content\": \"舊分類卡只保留 alias，不再作正式主題卡。\", \"created_at\": \"待確認\", \"source_id\": \"ltc1966_smart_assistive_3_0\", \"source_level\": \"A\", \"source_title\": \"長照 3.0 新制與智慧科技輔具\", \"updated_at\": \"待確認\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}] 此卡已退場，僅作方向 alias。"
+      "content_hash": "54162f326337ad1d3c02b7513509e08b326ebdfe89d094708a9e6cdfdcb97437",
+      "knowledge_version": "2026-06-16-54162f32",
+      "embedding_text": "智能／特殊輔具舊分類卡（已退場） smart_or_special_device smart_assistive 長照 舊卡 alias 已退場 smart_assistive_legacy_alias 中央共通 / 新北市 智能特殊輔具 特殊輔具是不是智慧輔具 智慧輔具目前屬於需要依官方公告、地方流程與供應端條件共同確認的服務；在確認前，宜先用保守說明，不承諾是否可補助或核定。 智慧輔具 ltc 舊卡保留作 alias，不再作為智慧輔具正式主題分母；請改用智慧輔具六張正式卡。 這張舊卡保留是為了讓過去的方向與搜尋語言能導回新的智慧輔具卡組。目前智慧輔具已改由政策時程、雙軌、五大面向、評估文件、操作準備、租賃維護與產品線索分工。 [] 智慧輔具資訊變動快，應以中央與地方最新公告及承辦窗口回覆為準。 [{\"agency\": \"1966 長照專區\", \"content\": \"舊分類卡只保留 alias，不再作正式主題卡。\", \"created_at\": \"待確認\", \"source_id\": \"ltc1966_smart_assistive_3_0\", \"source_level\": \"A\", \"source_title\": \"長照 3.0 新制與智慧科技輔具\", \"updated_at\": \"待確認\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}] 此卡已退場，僅作方向 alias。"
     },
     {
       "id": "stair_climber_disability_ltc_check",
@@ -9753,14 +9998,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "add2231390c2153d581197d5fbaa5867902a676e60c41f93159ce4d63846193a",
-      "knowledge_version": "2026-06-12-add22313",
-      "embedding_text": "爬梯機／上下樓設備是否可查身障輔具 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 assistive_stair_climber 中央共通 新北市 爬梯機能不能申請補助 上下樓設備身障可以補助嗎 長照沒有列爬梯機要走哪裡查 爬梯機是否能補助通常要看地方身障輔具規定、輔具中心評估與是否需事前核定。建議先由個管師協助向官方窗口查證，不要先購買。 [] # 爬梯機／上下樓設備是否可查身障輔具\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "72b529e925a6f5089aee0f39ab08ddf2ebd7b748adfea216b2f33c9896b8a8ef",
+      "knowledge_version": "2026-06-12-72b529e9",
+      "embedding_text": "爬梯機／上下樓設備是否可查身障輔具 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 assistive_stair_climber 中央共通 新北市 爬梯機能不能申請補助 上下樓設備身障可以補助嗎 長照沒有列爬梯機要走哪裡查 爬梯機是否能補助通常要看地方身障輔具規定、輔具中心評估與是否需事前核定。建議先由個管師協助向官方窗口查證，不要先購買。 [] [] # 爬梯機／上下樓設備是否可查身障輔具\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "threshold_ramp_home_accessibility_check",
@@ -9902,14 +10148,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "1164b267ca8c287e1170876fd9ae57cc55038c9b42f11787259b0059796dd2a8",
-      "knowledge_version": "2026-06-12-1164b267",
-      "embedding_text": "門檻、斜坡、動線改善查證 home_accessibility 長照身障交界 申請路徑 電話確認 事前核定 地方窗口 home_accessibility_ramp 中央共通 新北市 門檻改善可以補助嗎 斜坡板或坡道能申請嗎 家裡動線改善要走哪個制度 門檻、斜坡與動線改善要先確認位置與服務範圍。家中改善可先查長照居家無障礙，若涉及身障或公共空間則需另問地方窗口。 [] # 門檻、斜坡、動線改善查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "9538cacd0d08f46e63b2122cd6ec433dbcd32e81c637a5211f49051674335fb3",
+      "knowledge_version": "2026-06-12-9538cacd",
+      "embedding_text": "門檻、斜坡、動線改善查證 home_accessibility 長照身障交界 申請路徑 電話確認 事前核定 地方窗口 home_accessibility_ramp 中央共通 新北市 門檻改善可以補助嗎 斜坡板或坡道能申請嗎 家裡動線改善要走哪個制度 門檻、斜坡與動線改善要先確認位置與服務範圍。家中改善可先查長照居家無障礙，若涉及身障或公共空間則需另問地方窗口。 [] [] # 門檻、斜坡、動線改善查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
       "id": "vendor_claim_subsidy_verification",
@@ -10054,14 +10301,15 @@
       "lead_source_ids": [],
       "front_visible": false,
       "searchable": false,
+      "integrated_sections": [],
       "source_extracts": [],
       "suggested_contacts": [],
       "comparison_digest": {},
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "d90f1162b92152993f60fa1580b75e0071602e708ded57f807433315f6addbee",
-      "knowledge_version": "2026-06-12-d90f1162",
-      "embedding_text": "廠商聲稱可補助時如何查證 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 process_preapproval 中央共通 新北市 廠商說這個可以補助是真的嗎 廠商說買了再申請 商城標示可申請補助 廠商說可補助只能當線索，仍要以官方品項、地方窗口與核定流程為準。建議先查證後再購買或施工。 [] # 廠商聲稱可補助時如何查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
+      "content_hash": "478a20f660cf13fdde924d57414974f86fc485847e4973550205d932e1dcf3a6",
+      "knowledge_version": "2026-06-12-478a20f6",
+      "embedding_text": "廠商聲稱可補助時如何查證 disability_assistive_subsidy_question smart_or_special_device home_accessibility 身障 申請路徑 電話確認 事前核定 地方窗口 process_preapproval 中央共通 新北市 廠商說這個可以補助是真的嗎 廠商說買了再申請 商城標示可申請補助 廠商說可補助只能當線索，仍要以官方品項、地方窗口與核定流程為準。建議先查證後再購買或施工。 [] [] # 廠商聲稱可補助時如何查證\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     }
   ]
 }

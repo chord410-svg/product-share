@@ -1134,6 +1134,25 @@ function sourceLevelLabel(level) {
   return SOURCE_LEVEL_LABELS[key] || labelText(level || '未分級來源');
 }
 
+const SOURCE_TIER_LABELS = {
+  core: '核心來源',
+  supplement: '補充來源',
+  lead: '待查來源',
+  pending: '待查來源',
+  official: '核心來源',
+};
+
+function sourceTierLabel(tier) {
+  const raw = String(tier || '').trim();
+  if (!raw) return '未標示資料層級';
+  const normalized = raw.toLowerCase().replace(/\s+/g, '_');
+  if (SOURCE_TIER_LABELS[normalized]) return SOURCE_TIER_LABELS[normalized];
+  if (/核心/.test(raw)) return '核心來源';
+  if (/補充/.test(raw)) return '補充來源';
+  if (/待查|線索|lead|pending/i.test(raw)) return '待查來源';
+  return labelText(raw);
+}
+
 function sourceRank(ref) {
   const key = String(ref?.source_level || '').trim().toUpperCase();
   const base = key === 'A' ? 0 : key === 'B' ? 1 : key === 'C' ? 2 : 3;
@@ -1279,6 +1298,7 @@ function sourceExtractsHtml(card) {
         return `
           <article class="source-extract-card">
             <div class="source-extract-meta">
+              <span>資料層級：${escapeHtml(sourceTierLabel(extract.source_tier || extract.tier))}</span>
               <span>來源屬性：${escapeHtml(sourceLevelLabel(extract.source_level))}</span>
               <span>資料來源：${escapeHtml(extract.agency || '待補')}</span>
               <span>建檔日期：${escapeHtml(extract.created_at || '待確認')}</span>

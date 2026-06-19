@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260619-curriculum-v3';
+const CACHE_VERSION = '20260619-integrated-sections-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1262,6 +1262,27 @@ function knowledgeSummaryHtml(card) {
 }
 
 function knowledgeIntegratedHtml(card) {
+  const sections = Array.isArray(card.integrated_sections)
+    ? card.integrated_sections.filter((section) => section && typeof section === 'object')
+    : [];
+  if (sections.length) {
+    return `
+      <div class="integrated-section-list">
+        ${sections.map((section) => {
+          const title = compactSentence(section.title || '內容段落');
+          const body = compactSentence(section.body || '');
+          const points = asArray(section.points).map(compactSentence).filter(Boolean);
+          return `
+            <article class="integrated-section-card">
+              <h4>${escapeHtml(title)}</h4>
+              ${body ? `<p>${escapeHtml(body)}</p>` : ''}
+              ${points.length ? `<ul>${points.map((point) => `<li>${escapeHtml(point)}</li>`).join('')}</ul>` : ''}
+            </article>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
   const integrated = String(card.integrated_content || '').trim();
   if (!integrated) {
     return '<p>此卡尚待補齊內容整合。</p>';

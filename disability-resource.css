@@ -503,6 +503,20 @@ button:disabled {
   color: #26313d;
 }
 .detail-brief p { margin: 0; }
+
+.curriculum-reference-callout {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border: 1px solid #b9e2dc;
+  border-radius: 8px;
+  background: #f2fbf8;
+  color: #385166;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.curriculum-reference-callout strong { color: var(--teal-dark); }
 .integrated-content {
   display: grid;
   gap: 10px;

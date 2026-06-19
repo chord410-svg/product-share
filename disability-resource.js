@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260619-curriculum-v2';
+const CACHE_VERSION = '20260619-curriculum-v3';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1250,21 +1250,23 @@ function firstText(items, fallback = '') {
   return compactSentence(asArray(items)[0] || fallback);
 }
 
-function knowledgeExplanationHtml(card) {
-  const explicit = compactSentence(card.knowledge_brief || card.public_summary || '');
-  const integrated = String(card.integrated_content || '').trim();
-  if (integrated) {
-    return `
-      ${explicit ? `<p><strong>摘要：</strong>${escapeHtml(explicit)}</p>` : ''}
-      <div class="integrated-content">${paragraphsHtml(integrated)}</div>
-    `;
-  }
-  if (explicit) return `<p>${escapeHtml(explicit)}</p>`;
+function knowledgeSummaryHtml(card) {
+  const summary = compactSentence(
+    card.knowledge_brief
+      || card.public_summary
+      || card.family_safe_summary
+      || ''
+  );
+  if (!summary) return '<p>此卡尚待補齊摘要。</p>';
+  return paragraphsHtml(summary, '此卡尚待補齊摘要。');
+}
 
-  const extracts = sourceExtracts(card);
-  const firstExtract = extracts.length ? compactSentence(asArray(extracts[0].content).join(' ')) : '';
-  if (firstExtract) return `<p>${escapeHtml(firstExtract)}</p>`;
-  return '<p>此卡尚待補齊資料濃縮內容；請先打開「資料本體整理」查看來源。</p>';
+function knowledgeIntegratedHtml(card) {
+  const integrated = String(card.integrated_content || '').trim();
+  if (!integrated) {
+    return '<p>此卡尚待補齊內容整合。</p>';
+  }
+  return `<div class="integrated-content">${paragraphsHtml(integrated, '此卡尚待補齊內容整合。')}</div>`;
 }
 
 function sourceExtracts(card) {
@@ -1278,14 +1280,14 @@ function sourceExtractContentHtml(extract) {
     ? extract.content
     : String(extract.content || '').split(/\n+/);
   const rows = content.map((row) => compactSentence(row)).filter(Boolean);
-  if (!rows.length) return '<p class="muted">此來源尚待補齊資料本體整理。</p>';
+  if (!rows.length) return '<p class="muted">此來源尚待補齊資料本體。</p>';
   return rows.map((row) => `<p>${escapeHtml(row)}</p>`).join('');
 }
 
 function sourceExtractsHtml(card) {
   const extracts = sourceExtracts(card);
   if (!extracts.length) {
-    return '<p class="muted">此卡尚未建立資料本體整理；請先回來源連結人工查閱。</p>';
+    return '<p class="muted">此卡尚未建立資料本體。</p>';
   }
   return `
     <div class="source-extract-list">
@@ -1444,11 +1446,13 @@ function knowledgeSummaryPanelHtml(card) {
   return `
     ${curriculumReferenceHtml(card)}
     <div class="knowledge-mode-switch" role="tablist" aria-label="知識整理顯示模式">
-      ${knowledgeModeButton('integrated', '摘要與內容整合', true)}
-      ${knowledgeModeButton('sources', '資料本體整理')}
+      ${knowledgeModeButton('summary', '摘要')}
+      ${knowledgeModeButton('integrated', '內容整合', true)}
+      ${knowledgeModeButton('sources', '資料本體')}
     </div>
     <div class="knowledge-mode-panels">
-      ${knowledgeModePanel('integrated', `<div class="detail-brief">${knowledgeExplanationHtml(card)}</div>`, true)}
+      ${knowledgeModePanel('summary', `<div class="detail-brief">${knowledgeSummaryHtml(card)}</div>`)}
+      ${knowledgeModePanel('integrated', `<div class="detail-brief">${knowledgeIntegratedHtml(card)}</div>`, true)}
       ${knowledgeModePanel('sources', sourceExtractsHtml(card))}
     </div>
   `;
@@ -1459,7 +1463,7 @@ function detailTabsHtml(card) {
     ['summary', '知識整理與解釋', `
       <section class="detail-section detail-brief-section">
         <p class="eyebrow">知識整理與解釋</p>
-        <h3>摘要與資料濃縮</h3>
+        <h3>資料教材</h3>
         ${knowledgeSummaryPanelHtml(card)}
       </section>
     `],

@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260619-curriculum-v2';
+  const CACHE_VERSION = '20260619-curriculum-v3';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary') activeMode = 'family';
   let activePackage = null;
@@ -334,7 +334,7 @@
 
   function buildFamilyText() {
     return cards.map((card, index) => {
-      const body = familySummaryForCard(card) || '此卡尚待補齊摘要與內容整合。';
+      const body = familySummaryForCard(card) || '此卡尚待補齊摘要。';
       return `${index + 1}. ${card.title || cardId(card)}\n${body}`;
     }).join('\n\n') || '尚未加入知識卡。';
   }

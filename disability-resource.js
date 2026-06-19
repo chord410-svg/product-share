@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260618-data-quality-v1';
+const CACHE_VERSION = '20260618-curriculum-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1400,8 +1400,29 @@ function knowledgeModePanel(id, content, active = false) {
   return `<div class="knowledge-mode-panel" data-knowledge-detail-panel="${escapeHtml(id)}"${active ? '' : ' hidden'}>${content}</div>`;
 }
 
+function curriculumReferenceHtml(card) {
+  const ref = card?.curriculum_reference && typeof card.curriculum_reference === 'object' ? card.curriculum_reference : null;
+  if (!ref) return '';
+  const chapter = compactSentence(ref.chapter || '未指定章節');
+  const documentPath = compactSentence(ref.document || '智慧輔具教材.md');
+  const documentName = documentPath.split('/').filter(Boolean).pop() || documentPath;
+  const sections = asArray(ref.referenced_sections).map(compactSentence).filter(Boolean);
+  const docLabel = /^https?:\/\//.test(documentPath)
+    ? `<a class="source-link" href="${escapeHtml(documentPath)}" target="_blank" rel="noopener noreferrer">${escapeHtml(documentName)}</a>`
+    : escapeHtml(documentName);
+  return `
+    <div class="curriculum-reference-callout">
+      <strong>引用教材</strong>
+      <span>章節：${escapeHtml(chapter)}</span>
+      <span>教材：${docLabel}</span>
+      ${sections.length ? `<span>引用段落：${sections.map((item) => escapeHtml(item)).join('、')}</span>` : ''}
+    </div>
+  `;
+}
+
 function knowledgeSummaryPanelHtml(card) {
   return `
+    ${curriculumReferenceHtml(card)}
     <div class="knowledge-mode-switch" role="tablist" aria-label="知識整理顯示模式">
       ${knowledgeModeButton('integrated', '摘要與內容整合', true)}
       ${knowledgeModeButton('sources', '資料本體整理')}

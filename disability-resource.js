@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260618-curriculum-v1';
+const CACHE_VERSION = '20260619-curriculum-v2';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';

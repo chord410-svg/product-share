@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260620-smart-curriculum-ai-v1';
+  const CACHE_VERSION = '20260621-result-layout-ai-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;
@@ -339,27 +339,42 @@
     }).join('\n\n') || '尚未加入知識卡。';
   }
 
+  function buildFamilyHtml() {
+    if (!cards.length) return '<div class="empty-state">尚未加入知識卡。</div>';
+    return `<div class="result-family-list">${cards.map((card, index) => {
+      const body = familySummaryForCard(card) || '此卡尚待補齊摘要。';
+      return `
+        <article class="result-family-card">
+          <h4>${index + 1}. ${escapeHtml(card.title || cardId(card))}</h4>
+          <p>${escapeHtml(body)}</p>
+        </article>
+      `;
+    }).join('')}</div>`;
+  }
+
   function buildActionHtml() {
     if (!cards.length) return '<div class="empty-state">尚未加入知識卡。</div>';
-    return cards.map((card, index) => {
+    return `<div class="result-action-grid">${cards.map((card, index) => {
       const contacts = cardContacts(card);
       const sources = cardSources(card);
       return `
-        <article class="source-item result-action-item">
-          <strong>${index + 1}. ${escapeHtml(card.title || cardId(card))}</strong>
-          <section>
-            <h4>對應單位／窗口／聯絡方式</h4>
-            ${contacts.length
-              ? `<ul class="result-contact-list">${contacts.map(contactHtml).join('')}</ul>`
-              : '<p class="muted-text">待補明確窗口／聯絡方式。</p>'}
-          </section>
-          <section>
-            <h4>來源連結</h4>
-            ${sourceLinkListHtml(sources)}
-          </section>
+        <article class="result-action-card">
+          <h4>${index + 1}. ${escapeHtml(card.title || cardId(card))}</h4>
+          <div class="result-action-card-body">
+            <section>
+              <h5>對應單位／窗口／聯絡方式</h5>
+              ${contacts.length
+                ? `<ul class="result-contact-list">${contacts.map(contactHtml).join('')}</ul>`
+                : '<p class="muted-text">待補明確窗口／聯絡方式。</p>'}
+            </section>
+            <section>
+              <h5>來源連結</h5>
+              ${sourceLinkListHtml(sources)}
+            </section>
+          </div>
         </article>
       `;
-    }).join('');
+    }).join('')}</div>`;
   }
 
   function integratedTextForCard(card) {
@@ -391,31 +406,64 @@
     ].join('\n');
   }
 
+  const ANALYSIS_COMMON_LIMITS = [
+    '只能使用「已選知識卡資料」中的摘要、內容整合、來源標題與 URL/PDF 連結。',
+    '不可判定資格、不可承諾補助金額、不可寫成核定結果。',
+    '不可把廠商頁、新聞、展覽或案例寫成官方制度結論。',
+    '沒有資料的一側或欄位必須寫「資料從缺」，不能推論補滿。',
+    '每個具體結論後方都要標註來源標題或來源 URL；無來源支撐就放到資料缺口。',
+  ];
+
   const ANALYSIS_ACTIONS = [
     {
       id: 'ltc_disability_compare',
       label: '長照 VS 身障對照',
-      instruction: '請依據資料整理長照側與身障側的差異。只使用已提供的卡片摘要、內容整合與來源連結；沒有資料的一側請寫「資料從缺」，不要推論補滿。',
+      task: '把已選知識卡中可支撐的內容整理成長照側與身障側對照。重點是呈現資料差異，不是替個案判斷走哪一邊。',
+      output: [
+        '一、對照總覽：用 3 到 5 句說明目前資料能比較到什麼、哪一側資料不足。',
+        '二、雙欄對照表：列出「制度位置、適用對象、給付／租賃／購置、品項／範圍、評估／文件、申請／查證窗口、資料缺口」。每格後方標註來源。',
+        '三、不能比較的項目：列出因缺來源或只有單側資料而不能比較的地方。',
+      ],
     },
     {
       id: 'rental_responsibility',
       label: '智慧輔具租賃責任整理',
-      instruction: '請整理租賃、維修、退租、清潔消毒、回收整備與供應端責任相關資料。只使用已提供資料，不加入未列出的廠商承諾。',
+      task: '整理智慧輔具或長照輔具租賃服務中，來源有提到的維修、退租、清潔消毒、回收整備與供應端責任。',
+      output: [
+        '一、租賃責任摘要：用短段落整理目前資料確定說了什麼。',
+        '二、責任項目表：列出「維修、換機、退租、清潔消毒、回收整備、運送／安裝／教學、資料缺口」。每列標註來源。',
+        '三、沒有來源支撐的問題：列出已選資料沒有回答、不能替供應商承諾的項目。',
+      ],
     },
     {
       id: 'app_network_operation',
       label: 'APP／網路操作條件整理',
-      instruction: '請整理 APP、網路、通知方式、照顧者操作條件、使用環境相關資料。只整理資料本身，不做資格或產品推薦。',
+      task: '整理智慧輔具可能涉及的 APP、帳號、網路、通知資料、資料回傳與家屬操作條件。只整理來源有寫到的內容。',
+      output: [
+        '一、操作條件摘要：說明目前資料確定提到哪些 APP／網路／通知相關條件。',
+        '二、條件表：列出「設備或系統、APP／帳號、網路需求、通知或資料回傳、照顧者操作、故障或中斷處理、資料缺口」。每列標註來源。',
+        '三、不可推論事項：列出資料沒有明寫、不能由產品名稱推論的地方。',
+      ],
     },
     {
       id: 'family_draft',
       label: '家屬版說明草稿',
-      instruction: '請把資料改寫成家屬可讀的保守說明。不要承諾補助、資格、金額或核定；不要加入卡片來源之外的資訊。',
+      task: '把已選知識卡改寫成家屬可讀的保守說明。語氣要清楚、直接，但不能超出來源資料。',
+      output: [
+        '一、家屬版說明：用 2 到 4 段白話說明目前資料可確認的內容。',
+        '二、需要保留的限制語：列出不能承諾資格、補助金額或核定的句子。',
+        '三、來源清單：列出支撐說明的來源標題與連結。',
+      ],
     },
     {
       id: 'phone_questions',
       label: '電話確認前問題整理',
-      instruction: '請把資料轉成電話確認前可用的問題清單，並依窗口或資料主題分類。不要新增來源沒有的制度結論。',
+      task: '把已選知識卡中的資料缺口與來源重點，整理成電話或聯絡窗口前可用的問題清單。',
+      output: [
+        '一、依窗口分組問題：依「地方照管或長照承辦、地方輔具中心、社會局身障福利窗口、供應單位或特約單位」分組；沒有資料支撐的窗口不要硬列。',
+        '二、每題對應來源：每個問題後方標註是根據哪一筆來源或哪個資料缺口而來。',
+        '三、暫不適合詢問或不可外推事項：列出資料不足、不能拿去當結論的地方。',
+      ],
     },
   ];
   let activeAnalysisId = ANALYSIS_ACTIONS[0].id;
@@ -424,17 +472,28 @@
     const action = ANALYSIS_ACTIONS.find((item) => item.id === actionId) || ANALYSIS_ACTIONS[0];
     const cardBlocks = cards.map(cardPromptBlock).join('\n\n---\n\n') || '尚未加入知識卡。';
     return [
-      '你是長照與身障資料整理助手。',
-      action.instruction,
-      '限制：只能根據以下知識卡資料與來源連結整理；不可判定資格；不可承諾補助金額；不可把廠商或新聞線索寫成官方結論；資料不足時明確寫資料不足。',
+      '你是長照與身障資料整理助手。請用繁體中文回覆。',
+      '',
+      '# 任務定位',
+      action.task,
+      '',
+      '# 可使用資料',
+      '你只能使用下方「已選知識卡資料」中的內容：卡片標題、側別、同屬性、摘要、內容整合、來源標題、URL 或 PDF 連結。',
+      '可以重新組織、濃縮、對照，但不能新增來源外的制度內容。',
+      '',
+      '# 禁止事項',
+      ANALYSIS_COMMON_LIMITS.map((item, index) => `${index + 1}. ${item}`).join('\n'),
+      '',
+      '# 資料不足處理',
+      '如果資料沒有提到，請明確寫「資料從缺」。',
+      '如果只有長照側或只有身障側資料，另一側不要推論。',
+      '如果只有廠商、新聞、展覽或案例來源，請標示為「只能作線索，不能作正式制度結論」。',
+      '',
+      '# 請輸出',
+      action.output.join('\n'),
       '',
       '# 已選知識卡資料',
       cardBlocks,
-      '',
-      '# 請輸出',
-      '1. 重點整理',
-      '2. 來源依據',
-      '3. 資料不足或從缺處',
     ].join('\n');
   }
 
@@ -570,12 +629,12 @@
       return;
     }
     container.innerHTML = `
-      <article class="source-item">
-        <strong>家屬版</strong>
-        <pre>${escapeHtml(buildFamilyText())}</pre>
+      <article class="result-full-section">
+        <h3>家屬版</h3>
+        ${buildFamilyHtml()}
       </article>
-      <article class="source-item">
-        <strong>查證行動</strong>
+      <article class="result-full-section">
+        <h3>查證行動</h3>
         ${buildActionHtml()}
       </article>
     `;

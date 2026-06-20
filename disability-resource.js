@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260619-integrated-sections-v1';
+const CACHE_VERSION = '20260620-smart-curriculum-ai-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1382,11 +1382,31 @@ function resourceHintHtml(card) {
   return `<p>對應資源卡：${ids.map((id) => `<code>${escapeHtml(id)}</code>`).join('、')}</p>`;
 }
 
+function answerableQuestionsHtml(card) {
+  const questions = asArray(card.answerable_questions || card.phone_check_questions).map(compactSentence).filter(Boolean);
+  return listHtml(questions, '此卡尚待補齊知識對應問題。');
+}
+
+function contactRowsHtml(card) {
+  const explicitContacts = asArray(card.suggested_contacts || card.contact_windows || card.check_contacts);
+  if (!explicitContacts.length) return '<p class="muted">此卡尚待補齊對應單位／窗口／聯絡方式。</p>';
+  return `<ul class="detail-list contact-link-list">${explicitContacts.map((contact) => {
+    if (contact && typeof contact === 'object') {
+      const name = contact.name || contact.title || contact.window || contact.label || '窗口';
+      const purpose = contact.purpose || contact.reason || contact.role || contact.note || '';
+      const phone = contact.phone ? `<a href="tel:${escapeHtml(String(contact.phone).replace(/\s+/g, ''))}">${escapeHtml(contact.phone)}</a>` : '';
+      const url = contact.url && /^https?:\/\//.test(String(contact.url)) ? `<a href="${escapeHtml(contact.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(contact.url)}</a>` : '';
+      return `<li><strong>${escapeHtml(name)}</strong>${purpose ? `<span>${escapeHtml(purpose)}</span>` : ''}${phone || url ? `<small>${[phone, url].filter(Boolean).join('｜')}</small>` : ''}</li>`;
+    }
+    return `<li>${escapeHtml(sanitizeCaseManagerContact(contact))}</li>`;
+  }).join('')}</ul>`;
+}
+
 function actionDetailHtml(card) {
-  const contacts = suggestedContactRows(card);
   return `
     <div class="detail-grid">
-      <div class="detail-field detail-field-wide"><strong>對應單位／窗口／聯絡方式</strong>${listHtml(contacts, '尚未建立明確查證窗口。')}</div>
+      <div class="detail-field detail-field-wide"><strong>知識對應問題</strong>${answerableQuestionsHtml(card)}</div>
+      <div class="detail-field detail-field-wide"><strong>對應單位／窗口／聯絡方式</strong>${contactRowsHtml(card)}</div>
     </div>
   `;
 }

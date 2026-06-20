@@ -1,7 +1,8 @@
-const CACHE_VERSION = '20260620-smart-curriculum-ai-v1';
+const CACHE_VERSION = '20260621-result-layout-ai-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
+const QR_CACHE = new Map();
 
 const state = {
   scenarios: [],
@@ -28,6 +29,7 @@ const state = {
   currentDraftName: '',
   currentQuestionSummary: '',
   expandedPackageIds: new Set(),
+  expandedQrPackageIds: new Set(),
 };
 
 const qs = (selector) => document.querySelector(selector);
@@ -689,6 +691,8 @@ function normalizePackageRecord(record = {}) {
     outputs: asArray(record.outputs),
     status: record.status || 'draft',
     output_mode: record.output_mode || 'family',
+    share_url: record.share_url || record.shareUrl || '',
+    share_page_id: record.share_page_id || record.sharePageId || '',
     created_at: Number(record.created_at || Math.floor(Date.now() / 1000)),
     updated_at: Number(record.updated_at || Math.floor(Date.now() / 1000)),
   };
@@ -1848,9 +1852,21 @@ function packageCount(record) {
   return packageSnapshots(record).length || asArray(record.knowledge_ids).length || 0;
 }
 
+function withPrintParam(url, shouldPrint = false) {
+  if (!shouldPrint) return url;
+  const output = new URL(url, window.location.href);
+  output.searchParams.set('print', '1');
+  return output.href;
+}
+
 function openKnowledgeResult(record, options = {}) {
   const normalized = normalizePackageRecord(record);
   cacheKnowledgePackages([normalized]);
+  const shareUrl = resultShareUrl(normalized);
+  if (shareUrl && normalized.status === 'result_ready' && !options.local) {
+    window.location.href = withPrintParam(shareUrl, Boolean(options.print));
+    return;
+  }
   window.location.href = resultLinkForPackage(normalized, options);
 }
 
@@ -1869,6 +1885,158 @@ function resultLinkForPackage(record, options = {}) {
 
 function resultShareUrl(record) {
   return record.share_url || asArray(record.outputs).find((output) => output.share_url)?.share_url || '';
+}
+
+
+async function copyKnowledgePackageLink(record, button) {
+  const url = resultShareUrl(record);
+  if (!url) {
+    qs('#packageHint').textContent = '正式分享尚未建立，請先查看結果並等待同步完成。';
+    return;
+  }
+  await navigator.clipboard.writeText(url);
+  const original = button.textContent;
+  button.textContent = '已複製';
+  setTimeout(() => { button.textContent = original || '複製連結'; }, 1200);
+}
+
+async function ensureKnowledgePackageQr(record, button) {
+  const packageId = String(record.package_id || record.id || '');
+  if (!packageId) throw new Error('package_id_missing');
+  if (QR_CACHE.has(packageId)) return QR_CACHE.get(packageId);
+  if (!state.sessionToken || !state.apiBase) throw new Error('auth_required');
+  const original = button?.textContent;
+  if (button) {
+    button.disabled = true;
+    button.textContent = '產生 QR 中';
+  }
+  try {
+    const payload = await fetchJson(`${apiPath(`/api/v1/disability-knowledge/packages/${encodeURIComponent(packageId)}/qr`)}?session=${encodeURIComponent(state.sessionToken)}`);
+    const dataUrl = `data:image/png;base64,${payload.qr_png_base64}`;
+    QR_CACHE.set(packageId, dataUrl);
+    return dataUrl;
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = original || '查看 QR CODE';
+    }
+  }
+}
+
+async function toggleKnowledgePackageQr(record, button) {
+  const packageId = String(record.package_id || record.id || '');
+  if (!resultShareUrl(record)) {
+    qs('#packageHint').textContent = '正式分享 URL / QR 尚未建立；可先用「查看結果」或「列印 / 另存 PDF」。';
+    return;
+  }
+  if (state.expandedQrPackageIds.has(packageId)) {
+    state.expandedQrPackageIds.delete(packageId);
+    renderSavedPackages();
+    return;
+  }
+  try {
+    await ensureKnowledgePackageQr(record, button);
+    state.expandedQrPackageIds.add(packageId);
+    renderSavedPackages();
+  } catch (error) {
+    qs('#packageHint').textContent = `QR 暫時無法產生：${error.message || error}。可先使用複製連結。`;
+  }
+}
+
+function upsertSavedPackageRecord(record) {
+  const normalized = normalizePackageRecord(record);
+  state.savedPackages = [
+    normalized,
+    ...state.savedPackages.filter((row) => String(row.package_id || row.id) !== normalized.package_id),
+  ];
+  cacheKnowledgePackages(state.savedPackages);
+  return normalized;
+}
+
+function knowledgeResultPayload(record) {
+  const normalized = normalizePackageRecord(record);
+  const snapshots = packageSnapshots(normalized);
+  const knowledgeIds = snapshots.length
+    ? snapshots.map((card) => cardId(card)).filter(Boolean)
+    : asArray(normalized.knowledge_ids).filter(Boolean);
+  const payload = {
+    name: normalized.name || state.currentDraftName || currentDraftName(),
+    question_summary: normalized.question_summary || state.currentQuestionSummary || maskSensitiveText(questionText.value || ''),
+    direction_ids: asArray(normalized.direction_ids),
+    knowledge_ids: knowledgeIds,
+    output_mode: normalized.output_mode || 'family',
+  };
+  if (normalized.package_id && !isLocalPackageRecord(normalized)) payload.package_id = normalized.package_id;
+  return payload;
+}
+
+function scheduleKnowledgePackageRefresh() {
+  if (!state.sessionToken || !state.apiBase || !state.apiReady) return;
+  [3000, 8000, 15000].forEach((delay) => {
+    window.setTimeout(() => {
+      void loadSavedPackages({ quiet: true });
+    }, delay);
+  });
+}
+
+async function openOrCreateKnowledgeResult(record, button, options = {}) {
+  const normalized = normalizePackageRecord(record);
+  const shareUrl = resultShareUrl(normalized);
+  if (shareUrl && normalized.status === 'result_ready') {
+    openKnowledgeResult(normalized, options);
+    return;
+  }
+  if (normalized.status === 'result_pending' && !shareUrl) {
+    qs('#packageHint').textContent = '正式結果正在發布中，稍後會顯示複製連結與 QR CODE。';
+    scheduleKnowledgePackageRefresh();
+    return;
+  }
+  if (!packageCount(normalized)) {
+    qs('#packageHint').textContent = '請先加入至少一張知識卡，再查看結果。';
+    return;
+  }
+  if (!state.sessionToken || !state.apiBase || !state.apiReady) {
+    qs('#packageHint').textContent = '後端服務未連線，先開啟本機結果頁；不會產生正式分享連結或 QR CODE。';
+    openKnowledgeResult(normalized, { ...options, local: true });
+    return;
+  }
+
+  const original = button?.textContent || '';
+  if (button) {
+    button.disabled = true;
+    button.classList.add('is-busy');
+    button.textContent = options.print ? '正在準備...' : '正在產生...';
+  }
+  try {
+    const payload = knowledgeResultPayload(normalized);
+    const response = await fetchJson(`${apiPath('/api/v1/disability-knowledge/packages')}?session=${encodeURIComponent(state.sessionToken)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const saved = upsertSavedPackageRecord({ ...(response.package || {}), share_url: response.share_url || response.package?.share_url || '' });
+    renderSavedPackages();
+    if (response.share_url) {
+      openKnowledgeResult({ ...saved, share_url: response.share_url, status: 'result_ready' }, options);
+      return;
+    }
+    if (response.share_status === 'pending') {
+      qs('#packageHint').textContent = '正式結果正在背景發布；先開啟本機結果頁，稍後回到此頁可看到複製連結與 QR CODE。';
+      scheduleKnowledgePackageRefresh();
+      openKnowledgeResult(saved, { ...options, local: true });
+      return;
+    }
+    qs('#packageHint').textContent = '知識組合已儲存，但尚未取得正式結果連結。';
+  } catch (error) {
+    qs('#packageHint').textContent = `正式結果建立失敗，先開啟本機結果頁：${error.message || error}`;
+    openKnowledgeResult(normalized, { ...options, local: true });
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.classList.remove('is-busy');
+      button.textContent = original || '查看結果';
+    }
+  }
 }
 
 function hasReadyOutput(record) {
@@ -2058,14 +2226,19 @@ function renderSavedPackages() {
           <button class="primary-action" type="button" data-action="view" data-package-id="${escapeHtml(record.package_id)}">查看結果</button>
           <button class="copy-action" type="button" data-action="duplicate" data-package-id="${escapeHtml(record.package_id)}">複製此副本</button>
           <button class="danger-action" type="button" data-action="delete" data-package-id="${escapeHtml(record.package_id)}"${(!isLocalPackageRecord(record) && !state.sessionToken) ? ' disabled title="請從 Discord 入口重新開啟後再刪除後端知識組合。"' : ''}>刪除</button>
-          <button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}" title="複製這份知識組合的結果頁連結">複製連結</button>
-          <button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}"${shareUrl ? '' : ' data-degraded="1" title="正式分享 URL 尚未建立；目前保留本機結果頁與列印。"' }>查看 QR CODE</button>
+          ${readyOutput && shareUrl ? `<button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}" title="複製這份知識組合的正式結果頁連結">複製連結</button>` : ''}
+          ${readyOutput && shareUrl ? `<button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}">查看 QR CODE</button>` : ''}
           <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
         </div>
         <div class="workbench-expanded" ${expanded ? '' : 'hidden'}>
           <h4>已選知識卡</h4>
           <div class="workbench-resource-list">${itemList}</div>
         </div>
+        ${shareUrl ? `<div class="workbench-qr-panel" ${state.expandedQrPackageIds.has(record.package_id) ? '' : 'hidden'}>
+          <h4>知識組合結果 QR CODE</h4>
+          ${QR_CACHE.get(record.package_id) ? `<img src="${QR_CACHE.get(record.package_id)}" alt="知識組合結果 QR CODE">` : '<p>QR 載入中。</p>'}
+          <a href="${escapeHtml(shareUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(shareUrl)}</a>
+        </div>` : ''}
       </article>
     `;
   }).join('');
@@ -2097,28 +2270,18 @@ function renderSavedPackages() {
         applySavedPackage(packageId);
         setActiveView('knowledgeNav');
       } else if (button.dataset.action === 'view') {
-        openKnowledgeResult(record);
+        await openOrCreateKnowledgeResult(record, button);
       } else if (button.dataset.action === 'duplicate') {
         duplicatePackage(record);
         setActiveView('knowledgeNav');
       } else if (button.dataset.action === 'delete') {
         await deleteKnowledgePackage(record, button);
       } else if (button.dataset.action === 'copy-link') {
-        const url = resultShareUrl(record) || resultLinkForPackage(record);
-        if (url) await navigator.clipboard.writeText(url);
-        button.textContent = '已複製';
-        setTimeout(() => { button.textContent = '複製連結'; }, 1200);
+        await copyKnowledgePackageLink(record, button);
       } else if (button.dataset.action === 'qr') {
-        const url = resultShareUrl(record);
-        if (!url) {
-          qs('#packageHint').textContent = '正式分享 URL / QR 尚未建立；可先用「查看結果」或「列印 / 另存 PDF」。';
-          button.textContent = 'QR 尚未建立';
-          setTimeout(() => { button.textContent = '查看 QR CODE'; }, 1400);
-          return;
-        }
-        qs('#packageHint').textContent = '這份知識組合已有結果連結；QR 服務接上後會在此顯示。';
+        await toggleKnowledgePackageQr(record, button);
       } else if (button.dataset.action === 'print') {
-        openKnowledgeResult(record, { print: true });
+        await openOrCreateKnowledgeResult(record, button, { print: true });
       }
     });
   });
@@ -2487,7 +2650,7 @@ function renderKnowledgeExchange() {
       const action = button.dataset.exchangeAction;
       if (action === 'export-json') await exportKnowledgePackage(record, 'json', button);
       else if (action === 'export-markdown') await exportKnowledgePackage(record, 'markdown', button);
-      else if (action === 'print') openKnowledgeResult(record, { print: true });
+      else if (action === 'print') await openOrCreateKnowledgeResult(record, button, { print: true });
     });
   });
 }
@@ -2704,13 +2867,13 @@ async function init() {
   });
   qs('#saveDraftButton').addEventListener('click', saveDraft);
   qs('#saveDraftInlineButton').addEventListener('click', saveDraft);
-  qs('#viewCurrentResultButton').addEventListener('click', () => {
+  qs('#viewCurrentResultButton').addEventListener('click', (event) => {
     const cards = selectedCards();
     if (!cards.length) {
       qs('#packageHint').textContent = '請先加入至少一張知識卡，再查看結果。';
       return;
     }
-    openKnowledgeResult(currentPackageRecord({ status: state.activePackageId ? 'draft' : 'local_cache' }));
+    void openOrCreateKnowledgeResult(currentPackageRecord({ status: state.activePackageId ? 'draft' : 'local_cache' }), event.currentTarget);
   });
   qs('#clearDraftButton').addEventListener('click', clearCurrentDraft);
   qs('#draftNameInput').addEventListener('input', (event) => {

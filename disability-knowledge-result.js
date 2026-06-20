@@ -1,8 +1,8 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260619-integrated-sections-v1';
+  const CACHE_VERSION = '20260620-smart-curriculum-ai-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
-  if (activeMode === 'boundary') activeMode = 'family';
+  if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;
   let cards = [];
 
@@ -362,6 +362,130 @@
     }).join('');
   }
 
+  function integratedTextForCard(card) {
+    const sections = Array.isArray(card.integrated_sections) ? card.integrated_sections : [];
+    if (sections.length) {
+      return sections.map((section) => {
+        const title = compactText(section.title || '內容段落');
+        const body = compactText(section.body || '');
+        const points = asList(section.points).map(compactText).filter(Boolean).map((point) => `- ${point}`).join('\n');
+        return [title, body, points].filter(Boolean).join('\n');
+      }).join('\n\n');
+    }
+    return compactText(card.integrated_content || '');
+  }
+
+  function cardPromptBlock(card, index) {
+    const sources = cardSources(card);
+    const sourceLines = sources.length
+      ? sources.map((ref, idx) => `${idx + 1}. ${ref.title || ref.source_id || '來源'}｜${ref.source_level || ref.level || '待確認'}｜${ref.url || '無連結'}`).join('\n')
+      : '來源待補。';
+    return [
+      `## ${index + 1}. ${card.title || cardId(card)}`,
+      `側別：${card.system_side || '未標示'}｜同屬性：${card.comparison_group || '未標示'}`,
+      `摘要：${compactText(card.knowledge_brief || card.family_safe_summary || '')}`,
+      '內容整合：',
+      integratedTextForCard(card) || '內容整合待補。',
+      '來源連結：',
+      sourceLines,
+    ].join('\n');
+  }
+
+  const ANALYSIS_ACTIONS = [
+    {
+      id: 'ltc_disability_compare',
+      label: '長照 VS 身障對照',
+      instruction: '請依據資料整理長照側與身障側的差異。只使用已提供的卡片摘要、內容整合與來源連結；沒有資料的一側請寫「資料從缺」，不要推論補滿。',
+    },
+    {
+      id: 'rental_responsibility',
+      label: '智慧輔具租賃責任整理',
+      instruction: '請整理租賃、維修、退租、清潔消毒、回收整備與供應端責任相關資料。只使用已提供資料，不加入未列出的廠商承諾。',
+    },
+    {
+      id: 'app_network_operation',
+      label: 'APP／網路操作條件整理',
+      instruction: '請整理 APP、網路、通知方式、照顧者操作條件、使用環境相關資料。只整理資料本身，不做資格或產品推薦。',
+    },
+    {
+      id: 'family_draft',
+      label: '家屬版說明草稿',
+      instruction: '請把資料改寫成家屬可讀的保守說明。不要承諾補助、資格、金額或核定；不要加入卡片來源之外的資訊。',
+    },
+    {
+      id: 'phone_questions',
+      label: '電話確認前問題整理',
+      instruction: '請把資料轉成電話確認前可用的問題清單，並依窗口或資料主題分類。不要新增來源沒有的制度結論。',
+    },
+  ];
+  let activeAnalysisId = ANALYSIS_ACTIONS[0].id;
+
+  function buildAnalysisPrompt(actionId = activeAnalysisId) {
+    const action = ANALYSIS_ACTIONS.find((item) => item.id === actionId) || ANALYSIS_ACTIONS[0];
+    const cardBlocks = cards.map(cardPromptBlock).join('\n\n---\n\n') || '尚未加入知識卡。';
+    return [
+      '你是長照與身障資料整理助手。',
+      action.instruction,
+      '限制：只能根據以下知識卡資料與來源連結整理；不可判定資格；不可承諾補助金額；不可把廠商或新聞線索寫成官方結論；資料不足時明確寫資料不足。',
+      '',
+      '# 已選知識卡資料',
+      cardBlocks,
+      '',
+      '# 請輸出',
+      '1. 重點整理',
+      '2. 來源依據',
+      '3. 資料不足或從缺處',
+    ].join('\n');
+  }
+
+  function renderAnalysis() {
+    const buttons = $('analysisActionButtons');
+    const output = $('analysisPromptOutput');
+    if (!buttons || !output) return;
+    buttons.innerHTML = ANALYSIS_ACTIONS.map((action) => `<button type="button" class="analysis-action-button${action.id === activeAnalysisId ? ' is-active' : ''}" data-analysis-action="${escapeHtml(action.id)}">${escapeHtml(action.label)}</button>`).join('');
+    output.value = buildAnalysisPrompt(activeAnalysisId);
+    buttons.querySelectorAll('[data-analysis-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        activeAnalysisId = button.dataset.analysisAction || ANALYSIS_ACTIONS[0].id;
+        renderAnalysis();
+      });
+    });
+  }
+
+  function saveAnalysisReturn() {
+    const input = $('analysisReturnText');
+    if (!activePackage || !input) return;
+    activePackage.ai_analysis_note = input.value || '';
+    activePackage.ai_analysis_updated_at = Math.floor(Date.now() / 1000);
+    const records = readPackages();
+    const targetId = String(activePackage.package_id || activePackage.id || '');
+    const next = records.map((record) => String(record.package_id || record.id || '') === targetId ? activePackage : record);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  }
+
+  async function copyAnalysisPrompt() {
+    const output = $('analysisPromptOutput');
+    const text = output?.value || '';
+    if (!text.trim()) return;
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const scratch = $('resultCopyScratch');
+    scratch.value = text;
+    scratch.select();
+    document.execCommand('copy');
+    scratch.value = '';
+  }
+
+  function openGoogleSearchWithPrompt() {
+    const output = $('analysisPromptOutput');
+    const prompt = output?.value || '';
+    const query = encodeURIComponent(prompt.slice(0, 1800));
+    window.open(`https://www.google.com/search?q=${query}`, '_blank', 'noopener,noreferrer');
+  }
+
+
   function renderSourceList(profiles, emptyText) {
     const refs = [];
     const seen = new Set();
@@ -492,7 +616,7 @@
     ].filter(Boolean).join('｜');
     $('familyOutput').textContent = buildFamilyText();
     $('actionOutput').innerHTML = buildActionHtml();
-    renderComparison();
+    renderAnalysis();
     renderFullData();
     setMode(activeMode);
     if (shouldAutoPrint() && typeof window.print === 'function') {
@@ -527,6 +651,12 @@
     });
     const printButton = $('printResultButton');
     if (printButton) printButton.addEventListener('click', () => window.print());
+    const copyAnalysisButton = $('copyAnalysisPromptButton');
+    if (copyAnalysisButton) copyAnalysisButton.addEventListener('click', copyAnalysisPrompt);
+    const openGoogleButton = $('openGoogleSearchButton');
+    if (openGoogleButton) openGoogleButton.addEventListener('click', openGoogleSearchWithPrompt);
+    const saveAnalysisButton = $('saveAnalysisReturnButton');
+    if (saveAnalysisButton) saveAnalysisButton.addEventListener('click', saveAnalysisReturn);
     document.querySelectorAll('a[href^="./disability-resource.html?v="]').forEach((link) => {
       link.href = `./disability-resource.html?v=${encodeURIComponent(CACHE_VERSION)}`;
     });

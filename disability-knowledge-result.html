@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>知識組合結果</title>
-  <link rel="stylesheet" href="disability-resource.css?v=20260620-smart-curriculum-ai-v1" />
+  <link rel="stylesheet" href="disability-resource.css?v=20260621-result-layout-ai-v1" />
 </head>
 <body>
   <header class="hero result-hero">
@@ -13,25 +13,19 @@
       <h1>知識組合結果</h1>
     </div>
     <div class="action-row compact-actions">
-      <a class="nav-link-pill" href="./disability-resource.html?v=20260620-smart-curriculum-ai-v1">返回知識導航</a>
+      <a class="nav-link-pill" href="./disability-resource.html?v=20260621-result-layout-ai-v1">返回知識導航</a>
       <button type="button" class="nav-link-pill result-print-pill" id="printResultButton">列印 / 另存 PDF</button>
     </div>
   </header>
 
   <main class="result-page-layout">
     <section class="panel result-summary-card">
-      <p class="eyebrow">知識組合</p>
       <h2 id="resultPackageTitle">正在載入知識組合</h2>
       <p id="resultPackageMeta" class="muted-text">請稍候。</p>
-      <p class="small-note">此頁使用建立當下保存的知識卡副本；不做資格核定、不承諾補助金額。</p>
     </section>
 
     <section class="panel result-output-switcher">
-      <div>
-        <p class="eyebrow">輸出格式</p>
-        <h2>選擇這份知識組合要怎麼使用</h2>
-        <p class="small-note">AI 延伸分析會使用已選卡片摘要、內容整合與來源連結產生提示詞；系統不自動抓取 Google AI 回答。</p>
-      </div>
+      <strong>輸出格式</strong>
       <div class="result-mode-tabs" role="tablist" aria-label="知識組合輸出格式">
         <button type="button" data-output-mode="family" class="is-active" role="tab">家屬版</button>
         <button type="button" data-output-mode="action" role="tab">查證行動</button>
@@ -93,6 +87,6 @@
   </main>
 
   <textarea id="resultCopyScratch" class="sr-only" aria-hidden="true"></textarea>
-  <script src="./disability-knowledge-result.js?v=20260620-smart-curriculum-ai-v1"></script>
+  <script src="./disability-knowledge-result.js?v=20260621-result-layout-ai-v1"></script>
 </body>
 </html>

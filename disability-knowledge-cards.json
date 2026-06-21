@@ -153,6 +153,1044 @@
       "embedding_text": "輔具評估、醫師文件與地方窗口 disability_assistive_subsidy_question home_accessibility 身障 申請路徑 電話確認 地方窗口 文件需求 事前核定 official_window 中央共通 新北市 要不要醫師證明 輔具評估要去哪裡做 申請輔具需要哪些文件 輔具或居家改善申請常需要評估或相關文件，但要求會依制度、縣市與品項不同。建議先向承辦窗口確認文件清單。 [] [] # 輔具評估、醫師文件與地方窗口\n\n此卡用於身障與長照交界問題的查證導航。它整理可問窗口、電話確認問題與家屬版保守說明，不做資格判定，也不承諾補助結果。"
     },
     {
+      "id": "assistive_benefit_assessment_documents_difference",
+      "knowledge_id": "assistive_benefit_assessment_documents_difference",
+      "title": "輔具評估文件與核定流程差異",
+      "directions": [
+        "評估文件",
+        "核定流程",
+        "地方窗口",
+        "輔具評估"
+      ],
+      "system_scope": [
+        "長照",
+        "身障"
+      ],
+      "knowledge_type": [
+        "文件需求",
+        "評估文件",
+        "地方窗口"
+      ],
+      "comparison_group": "assistive_benefit_assessment_documents",
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "長照輔具要什麼評估文件",
+        "身障輔具要診斷證明還是評估報告",
+        "新北輔具評估怎麼辦",
+        "輔具核定流程差在哪"
+      ],
+      "applies_when": [
+        "詢問長照或身障輔具需要評估報告、診斷證明或核定文件",
+        "需要理解中央制度與新北地方 overlay 的文件差異"
+      ],
+      "not_applies_when": [
+        "詢問單一品項是否可補助或完整給付上限",
+        "詢問交通、喘息或家庭支持等非輔具文件"
+      ],
+      "verification_steps": [
+        "對應長照側輔具評估報告書與特約服務流程。",
+        "對應身障側診斷證明書、輔具評估報告書與地方核定流程。"
+      ],
+      "phone_check_questions": [
+        "此需求在長照側是否需要輔具評估報告書？",
+        "此需求在身障側是否需要診斷證明書、輔具評估報告書或其他文件？",
+        "新北地方流程是否屬免評估電話處理，或需中心安排評估？"
+      ],
+      "family_safe_summary": "長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同。長照側以照專評估、專業輔具服務單位與輔具評估報告書銜接特約輔具服務；身障側向戶籍所在地地方主管機關申請，文件包含身分證明、診斷證明書或輔具評估報告書及其他必要證明。",
+      "care_manager_notes": [
+        "此卡整理文件與評估流程差異，不取代各品項專用表單。",
+        "附件尚未逐檔讀取的內容不寫入正式摘要。"
+      ],
+      "comparison": {
+        "ltc_side": "長照側以照專評估、專業輔具服務單位與輔具評估報告書銜接特約輔具服務。",
+        "disability_side": "身障側向戶籍所在地地方主管機關申請，文件包含身分證明、診斷證明書或輔具評估報告書及其他必要證明。",
+        "shared_risks": [],
+        "family_wording": "長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同。新北地方資料顯示免評估一般輔具可電話處理，需評估輔具由中心安排評估。"
+      },
+      "source_ids": [
+        "LTC-CORE-01",
+        "DIS-CORE-01",
+        "NTP-SUP-02",
+        "NTP-SUP-03"
+      ],
+      "source_refs": [
+        {
+          "source_id": "LTC-CORE-01",
+          "source_level": "A",
+          "title": "1966 長照專區：輔具及居家無障礙環境改善",
+          "url": "https://1966.gov.tw/LTC/cp-6453-69940-207.html",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "DIS-CORE-01",
+          "source_level": "A",
+          "title": "全國法規資料庫：身心障礙者輔具費用補助辦法",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "NTP-SUP-02",
+          "source_level": "B",
+          "title": "新北市輔具資源中心：輔具補助申請",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/1",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "NTP-SUP-03",
+          "source_level": "B",
+          "title": "新北市輔具資源中心：輔具評估",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/2",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_source_required",
+        "local_overlay",
+        "forms_pending"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "身障／長照知識導航"
+      ],
+      "last_checked_at": "2026-06-21",
+      "next_review_at": "",
+      "status": "active",
+      "confidence": "待確認",
+      "body": "長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同。",
+      "domain": "輔具給付總論",
+      "knowledge_brief": "長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同；新北地方資料顯示免評估一般輔具可電話處理，需評估輔具由中心安排評估。",
+      "integrated_content": "長照側文件流程：符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書，再依評估報告書至特約單位購置或租賃輔具、辦理居家無障礙改善。\\n\\n身障側文件流程：申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。地方主管機關可自辦或委託辦理評估。\\n\\n新北地方 overlay：新北身障輔具申請可透過輔具 Easy GO APP 線上申請，也可聯絡蘆洲中心或新店中心。免評估的一般輔具可透過電話完成；需要評估的輔具由中心安排評估。",
+      "policy_status": "第一輪已讀中央制度與新北網頁；各附件表單尚未逐檔納入。",
+      "public_allowed_reason": "",
+      "card_merge_note": "由第一輪教材長照側、身障側與新北地方 overlay 合併成文件/評估 shared 卡。",
+      "system_side": "shared",
+      "alias_to": "",
+      "replaced_by": "",
+      "retire_reason": "",
+      "answerable_questions": [
+        "長照輔具和身障輔具各需要哪些評估文件？",
+        "新北輔具評估流程有哪些？",
+        "長照與身障輔具核定流程差在哪？"
+      ],
+      "comparison_summary": [],
+      "source_update_watch": [
+        "新北地方表單附件與加碼內容",
+        "兩側品項專用評估文件"
+      ],
+      "resource_package_candidates": [],
+      "knowledge_package_outputs": [
+        "家屬版",
+        "查證行動",
+        "AI 延伸分析",
+        "完整資料"
+      ],
+      "core_source_ids": [
+        "LTC-CORE-01",
+        "DIS-CORE-01"
+      ],
+      "supplement_source_ids": [
+        "NTP-SUP-02",
+        "NTP-SUP-03"
+      ],
+      "lead_source_ids": [],
+      "front_visible": true,
+      "searchable": true,
+      "integrated_sections": [
+        {
+          "title": "長照側文件流程",
+          "body": "符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書。",
+          "points": [
+            "民眾依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。"
+          ]
+        },
+        {
+          "title": "身障側文件流程",
+          "body": "申請向戶籍所在地地方主管機關提出。",
+          "points": [
+            "文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。",
+            "地方主管機關可自辦或委託辦理評估。"
+          ]
+        },
+        {
+          "title": "新北地方 overlay",
+          "body": "新北身障輔具申請可透過輔具 Easy GO APP 線上申請，也可聯絡蘆洲中心或新店中心。",
+          "points": [
+            "免評估的一般輔具可透過電話完成。",
+            "需要評估的輔具由中心安排評估。",
+            "新北輔具中心提供親至中心、到宅評估、定點評估與遠距評估。"
+          ]
+        }
+      ],
+      "source_extracts": [
+        {
+          "agency": "長期照顧司",
+          "content": "符合長照服務請領資格且經照專評估有輔具需求者，經轉介至專業輔具服務單位完成輔具評估報告書，再依評估報告書購置或租賃輔具、辦理居家無障礙改善。",
+          "created_at": "111-06-10",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "LTC-CORE-01",
+          "source_level": "A",
+          "source_tier": "核心來源",
+          "source_title": "1966 長照專區：輔具及居家無障礙環境改善",
+          "updated_at": "115-01-26",
+          "url": "https://1966.gov.tw/LTC/cp-6453-69940-207.html"
+        },
+        {
+          "agency": "全國法規資料庫",
+          "content": "申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。地方主管機關可自辦或委託辦理評估。",
+          "created_at": "111-10-20",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "DIS-CORE-01",
+          "source_level": "A",
+          "source_tier": "核心來源",
+          "source_title": "全國法規資料庫：身心障礙者輔具費用補助辦法",
+          "updated_at": "111-10-20",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060"
+        },
+        {
+          "agency": "新北市輔具資源中心",
+          "content": "新北身障輔具申請可透過輔具 Easy GO APP 線上申請，或聯絡蘆洲中心、新店中心。免評估的一般輔具可透過電話完成；需要評估的輔具由中心安排評估。",
+          "created_at": "待確認",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "NTP-SUP-02",
+          "source_level": "B",
+          "source_tier": "補充來源",
+          "source_title": "新北市輔具資源中心：輔具補助申請",
+          "updated_at": "待確認",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/1"
+        },
+        {
+          "agency": "新北市輔具資源中心",
+          "content": "新北輔具中心提供免費專業評估服務，可電話預約或透過 APP 線上申請。服務方式包含親至中心、到宅評估、定點評估與遠距評估。",
+          "created_at": "待確認",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "NTP-SUP-03",
+          "source_level": "B",
+          "source_tier": "補充來源",
+          "source_title": "新北市輔具資源中心：輔具評估",
+          "updated_at": "待確認",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/2"
+        }
+      ],
+      "suggested_contacts": [
+        {
+          "label": "地方長照管理中心或長照輔具承辦窗口",
+          "contact_type": "official_window",
+          "confidence": "suggested",
+          "purpose": "確認長照側輔具評估報告書與特約服務流程。"
+        },
+        {
+          "label": "戶籍所在地地方主管機關身障福利承辦窗口",
+          "contact_type": "official_window",
+          "confidence": "suggested",
+          "purpose": "確認身障側申請、診斷證明、輔具評估報告書與核定流程。"
+        },
+        {
+          "label": "新北市輔具資源中心",
+          "contact_type": "assistive_resource_center",
+          "confidence": "suggested",
+          "purpose": "確認新北地方輔具評估、免評估電話處理、到宅或遠距評估流程。"
+        }
+      ],
+      "comparison_digest": {},
+      "comparison_profile": {
+        "comparison_group": "assistive_benefit_assessment_documents",
+        "system_side": "shared",
+        "title": "輔具評估文件與核定流程差異",
+        "summary": [
+          "長照側以照專評估、專業輔具服務單位與輔具評估報告書銜接特約輔具服務；身障側向戶籍所在地地方主管機關申請，文件包含身分證明、診斷證明書或輔具評估報告書。"
+        ],
+        "source_refs": [
+          "LTC-CORE-01",
+          "DIS-CORE-01",
+          "NTP-SUP-02",
+          "NTP-SUP-03"
+        ],
+        "facts": [
+          {
+            "label": "長照側",
+            "value": "照專評估、專業輔具服務單位、輔具評估報告書、特約輔具服務單位。"
+          },
+          {
+            "label": "身障側",
+            "value": "戶籍所在地地方主管機關、申請表、身分證明、診斷證明書或輔具評估報告書。"
+          },
+          {
+            "label": "新北地方 overlay",
+            "value": "免評估一般輔具可電話處理，需評估輔具由中心安排評估。"
+          }
+        ]
+      },
+      "curriculum_reference": {
+        "document": "/Users/chord410/Documents/New project/長照身障教材/01_長照輔具給付_vs_身障輔具補助總論/教材.md",
+        "chapter": "評估文件與核定流程差異",
+        "referenced_sections": [
+          "長照側制度材料",
+          "身障側制度材料",
+          "新北地方 overlay"
+        ]
+      },
+      "content_hash": "13e5b844bc3a02eb4bc6b76049434e9f3f15ae9707f13756a89759a2b927fcbb",
+      "knowledge_version": "2026-06-21-13e5b844",
+      "embedding_text": "輔具評估文件與核定流程差異 評估文件 核定流程 地方窗口 輔具評估 長照 身障 文件需求 評估文件 地方窗口 assistive_benefit_assessment_documents 中央共通 新北市 長照輔具要什麼評估文件 身障輔具要診斷證明還是評估報告 新北輔具評估怎麼辦 輔具核定流程差在哪 長照輔具和身障輔具各需要哪些評估文件？ 新北輔具評估流程有哪些？ 長照與身障輔具核定流程差在哪？ 長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同。長照側以照專評估、專業輔具服務單位與輔具評估報告書銜接特約輔具服務；身障側向戶籍所在地地方主管機關申請，文件包含身分證明、診斷證明書或輔具評估報告書及其他必要證明。 輔具給付總論 shared 長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同；新北地方資料顯示免評估一般輔具可電話處理，需評估輔具由中心安排評估。 長照側文件流程：符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書，再依評估報告書至特約單位購置或租賃輔具、辦理居家無障礙改善。\\n\\n身障側文件流程：申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。地方主管機關可自辦或委託辦理評估。\\n\\n新北地方 overlay：新北身障輔具申請可透過輔具 Easy GO APP 線上申請，也可聯絡蘆洲中心或新店中心。免評估的一般輔具可透過電話完成；需要評估的輔具由中心安排評估。 [{\"body\": \"符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書。\", \"points\": [\"民眾依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。\"], \"title\": \"長照側文件流程\"}, {\"body\": \"申請向戶籍所在地地方主管機關提出。\", \"points\": [\"文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。\", \"地方主管機關可自辦或委託辦理評估。\"], \"title\": \"身障側文件流程\"}, {\"body\": \"新北身障輔具申請可透過輔具 Easy GO APP 線上申請，也可聯絡蘆洲中心或新店中心。\", \"points\": [\"免評估的一般輔具可透過電話完成。\", \"需要評估的輔具由中心安排評估。\", \"新北輔具中心提供親至中心、到宅評估、定點評估與遠距評估。\"], \"title\": \"新北地方 overlay\"}] 第一輪已讀中央制度與新北網頁；各附件表單尚未逐檔納入。 由第一輪教材長照側、身障側與新北地方 overlay 合併成文件/評估 shared 卡。 [{\"agency\": \"長期照顧司\", \"content\": \"符合長照服務請領資格且經照專評估有輔具需求者，經轉介至專業輔具服務單位完成輔具評估報告書，再依評估報告書購置或租賃輔具、辦理居家無障礙改善。\", \"created_at\": \"111-06-10\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-CORE-01\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：輔具及居家無障礙環境改善\", \"updated_at\": \"115-01-26\", \"url\": \"https://1966.gov.tw/LTC/cp-6453-69940-207.html\"}, {\"agency\": \"全國法規資料庫\", \"content\": \"申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。地方主管機關可自辦或委託辦理評估。\", \"created_at\": \"111-10-20\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"DIS-CORE-01\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"全國法規資料庫：身心障礙者輔具費用補助辦法\", \"updated_at\": \"111-10-20\", \"url\": \"https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"新北身障輔具申請可透過輔具 Easy GO APP 線上申請，或聯絡蘆洲中心、新店中心。免評估的一般輔具可透過電話完成；需要評估的輔具由中心安排評估。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"NTP-SUP-02\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具補助申請\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/1\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"新北輔具中心提供免費專業評估服務，可電話預約或透過 APP 線上申請。服務方式包含親至中心、到宅評估、定點評估與遠距評估。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"NTP-SUP-03\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具評估\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/2\"}] 長照與身障兩側都可能涉及輔具評估報告，但依據、承辦流程與文件規則不同。"
+    },
+    {
+      "id": "assistive_benefit_cost_logic_difference",
+      "knowledge_id": "assistive_benefit_cost_logic_difference",
+      "title": "長照與身障輔具費用邏輯差異",
+      "directions": [
+        "補助比例",
+        "額度年限",
+        "費用邏輯",
+        "輔具給付差異"
+      ],
+      "system_scope": [
+        "長照",
+        "身障"
+      ],
+      "knowledge_type": [
+        "制度差異",
+        "補助比例",
+        "額度年限"
+      ],
+      "comparison_group": "assistive_benefit_cost_logic",
+      "region_scope": [
+        "中央共通"
+      ],
+      "question_patterns": [
+        "長照和身障輔具費用差在哪",
+        "長照輔具跟身障輔具可以一起申請嗎",
+        "輔具補助年限怎麼看",
+        "輔具補助比例怎麼看"
+      ],
+      "applies_when": [
+        "詢問長照與身障輔具給付、補助、比例、額度、年限差異",
+        "需要知道目前資料可確認與尚未補齊的費用邏輯"
+      ],
+      "not_applies_when": [
+        "詢問單一品項完整上限、最低使用年限或租購狀態",
+        "詢問交通、喘息或家庭支持等非輔具費用制度"
+      ],
+      "verification_steps": [
+        "對應長照側部分負擔、代償墊付、租賃或購置資料。",
+        "對應身障側補助比例、最低使用年限與補助項次資料。"
+      ],
+      "phone_check_questions": [
+        "此品項在長照側的部分負擔、租賃或購置狀態為何？",
+        "此品項在身障側的補助比例、補助上限與最低使用年限為何？",
+        "同一品項是否已有其中一側核定或申請紀錄？"
+      ],
+      "family_safe_summary": "長照與身障輔具費用邏輯不同。長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認低收、中低收、一般戶補助比例，以及每二年度補助項次原則與同一項目使用年限內不得重複補助。跨制度同品項是否能同時申請仍需補讀基準表與地方規則。",
+      "care_manager_notes": [
+        "此卡只整理已讀資料可確認的費用邏輯。",
+        "跨制度同品項是否能同時申請與逐品項上限需補讀附件。"
+      ],
+      "comparison": {
+        "ltc_side": "長照側已讀資料可確認代償墊付與部分負擔，並有購置、租賃、居家無障礙改善服務型態。",
+        "disability_side": "身障側已讀法規可確認低收入戶、中低收入戶、一般戶補助比例、每二年度補助項次原則與同一項目使用年限內不得重複補助。",
+        "shared_risks": [],
+        "family_wording": "長照與身障輔具費用邏輯不同。長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認補助比例與同一項目使用年限內不得重複補助。跨制度同品項是否能同時申請仍是資料缺口。"
+      },
+      "source_ids": [
+        "LTC-CORE-01",
+        "DIS-CORE-01"
+      ],
+      "source_refs": [
+        {
+          "source_id": "LTC-CORE-01",
+          "source_level": "A",
+          "title": "1966 長照專區：輔具及居家無障礙環境改善",
+          "url": "https://1966.gov.tw/LTC/cp-6453-69940-207.html",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "DIS-CORE-01",
+          "source_level": "A",
+          "title": "全國法規資料庫：身心障礙者輔具費用補助辦法",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_source_required",
+        "item_table_pending"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "身障／長照知識導航"
+      ],
+      "last_checked_at": "2026-06-21",
+      "next_review_at": "",
+      "status": "active",
+      "confidence": "待確認",
+      "body": "長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認補助比例與同一項目使用年限內不得重複補助。",
+      "domain": "輔具給付總論",
+      "knowledge_brief": "長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認低收入戶、中低收入戶、一般戶補助比例，以及每二年度補助項次原則與同一項目使用年限內不得重複補助。",
+      "integrated_content": "長照側費用材料：長照輔具服務自 113 年 1 月 1 日起全面實施代償墊付。民眾至特約輔具服務單位購置或租賃輔具時，付款時支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。\\n\\n身障側費用材料：低收入戶最高補助金額全額，中低收入戶 75%，一般戶 50%。每人每二年度以補助四項為原則；同一項目於使用年限內不得重複補助。\\n\\n資料缺口：長照與身障同品項跨制度是否能同時申請、兩側逐品項上限與年限，尚需補讀長照給付基準、身障補助基準表與地方規則。",
+      "policy_status": "跨制度同品項重複申請規則尚待補官方依據。",
+      "public_allowed_reason": "",
+      "card_merge_note": "由第一輪教材「目前可比較的同屬性」轉為 shared 卡；跨制度重複申請保留資料缺口。",
+      "system_side": "shared",
+      "alias_to": "",
+      "replaced_by": "",
+      "retire_reason": "",
+      "answerable_questions": [
+        "長照與身障輔具費用邏輯差在哪？",
+        "長照輔具和身障輔具能不能一起申請？",
+        "輔具補助年限或額度要看哪邊？"
+      ],
+      "comparison_summary": [],
+      "source_update_watch": [
+        "長照與身障同品項跨制度重複申請規則",
+        "兩側逐品項上限與年限"
+      ],
+      "resource_package_candidates": [],
+      "knowledge_package_outputs": [
+        "家屬版",
+        "查證行動",
+        "AI 延伸分析",
+        "完整資料"
+      ],
+      "core_source_ids": [
+        "LTC-CORE-01",
+        "DIS-CORE-01"
+      ],
+      "supplement_source_ids": [],
+      "lead_source_ids": [],
+      "front_visible": true,
+      "searchable": true,
+      "integrated_sections": [
+        {
+          "title": "長照側費用材料",
+          "body": "長照輔具服務自 113 年 1 月 1 日起全面實施代償墊付。",
+          "points": [
+            "民眾至特約輔具服務單位購置或租賃輔具時，付款時支付部分負擔。",
+            "補助費用由特約輔具服務單位向地方政府請款。"
+          ]
+        },
+        {
+          "title": "身障側費用材料",
+          "body": "補助比例依身分別區分。",
+          "points": [
+            "低收入戶最高補助金額全額。",
+            "中低收入戶 75%。",
+            "一般戶 50%。",
+            "每人每二年度以補助四項為原則；同一項目於使用年限內不得重複補助。"
+          ]
+        },
+        {
+          "title": "資料缺口",
+          "body": "跨制度同品項是否能同時申請、兩側逐品項上限與年限尚未由本輪教材證實。",
+          "points": [
+            "長照給付基準 PDF 尚未逐項納入。",
+            "身障補助基準表 PDF 尚未逐項納入。",
+            "新北地方加碼內容尚未逐檔納入。"
+          ]
+        }
+      ],
+      "source_extracts": [
+        {
+          "agency": "長期照顧司",
+          "content": "長照輔具及居家無障礙環境改善資料列明 113 年 1 月 1 日起全面實施代償墊付，民眾支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。",
+          "created_at": "111-06-10",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "LTC-CORE-01",
+          "source_level": "A",
+          "source_tier": "核心來源",
+          "source_title": "1966 長照專區：輔具及居家無障礙環境改善",
+          "updated_at": "115-01-26",
+          "url": "https://1966.gov.tw/LTC/cp-6453-69940-207.html"
+        },
+        {
+          "agency": "全國法規資料庫",
+          "content": "身心障礙者輔具費用補助辦法列明低收入戶最高補助金額全額、中低收入戶 75%、一般戶 50%。每人每二年度以補助四項為原則；同一項目於使用年限內不得重複補助。",
+          "created_at": "111-10-20",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "DIS-CORE-01",
+          "source_level": "A",
+          "source_tier": "核心來源",
+          "source_title": "全國法規資料庫：身心障礙者輔具費用補助辦法",
+          "updated_at": "111-10-20",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060"
+        }
+      ],
+      "suggested_contacts": [
+        {
+          "label": "地方長照管理中心或長照輔具承辦窗口",
+          "contact_type": "official_window",
+          "confidence": "suggested",
+          "purpose": "確認長照側部分負擔、租賃或購置狀態。"
+        },
+        {
+          "label": "戶籍所在地地方主管機關身障福利承辦窗口",
+          "contact_type": "official_window",
+          "confidence": "suggested",
+          "purpose": "確認身障側補助比例、補助上限、最低使用年限與核定流程。"
+        }
+      ],
+      "comparison_digest": {},
+      "comparison_profile": {
+        "comparison_group": "assistive_benefit_cost_logic",
+        "system_side": "shared",
+        "title": "長照與身障輔具費用邏輯差異",
+        "summary": [
+          "長照側已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認補助比例與同一項目使用年限內不得重複補助。"
+        ],
+        "source_refs": [
+          "LTC-CORE-01",
+          "DIS-CORE-01"
+        ],
+        "facts": [
+          {
+            "label": "長照側",
+            "value": "代償墊付與部分負擔；補助費用由特約輔具服務單位向地方政府請款。"
+          },
+          {
+            "label": "身障側",
+            "value": "低收入戶全額、中低收入戶 75%、一般戶 50%；每人每二年度以補助四項為原則。"
+          },
+          {
+            "label": "資料缺口",
+            "value": "跨制度同品項重複申請、兩側逐品項上限與年限仍需補讀基準表。"
+          }
+        ]
+      },
+      "curriculum_reference": {
+        "document": "/Users/chord410/Documents/New project/長照身障教材/01_長照輔具給付_vs_身障輔具補助總論/教材.md",
+        "chapter": "目前可比較的同屬性",
+        "referenced_sections": [
+          "摘要",
+          "內容整合",
+          "資料本體"
+        ]
+      },
+      "content_hash": "290bca31ca4dc5760ccb92ecda8b1b944506c23bc9870e9cd0511099c816b05a",
+      "knowledge_version": "2026-06-21-290bca31",
+      "embedding_text": "長照與身障輔具費用邏輯差異 補助比例 額度年限 費用邏輯 輔具給付差異 長照 身障 制度差異 補助比例 額度年限 assistive_benefit_cost_logic 中央共通 長照和身障輔具費用差在哪 長照輔具跟身障輔具可以一起申請嗎 輔具補助年限怎麼看 輔具補助比例怎麼看 長照與身障輔具費用邏輯差在哪？ 長照輔具和身障輔具能不能一起申請？ 輔具補助年限或額度要看哪邊？ 長照與身障輔具費用邏輯不同。長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認低收、中低收、一般戶補助比例，以及每二年度補助項次原則與同一項目使用年限內不得重複補助。跨制度同品項是否能同時申請仍需補讀基準表與地方規則。 輔具給付總論 shared 長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認低收入戶、中低收入戶、一般戶補助比例，以及每二年度補助項次原則與同一項目使用年限內不得重複補助。 長照側費用材料：長照輔具服務自 113 年 1 月 1 日起全面實施代償墊付。民眾至特約輔具服務單位購置或租賃輔具時，付款時支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。\\n\\n身障側費用材料：低收入戶最高補助金額全額，中低收入戶 75%，一般戶 50%。每人每二年度以補助四項為原則；同一項目於使用年限內不得重複補助。\\n\\n資料缺口：長照與身障同品項跨制度是否能同時申請、兩側逐品項上限與年限，尚需補讀長照給付基準、身障補助基準表與地方規則。 [{\"body\": \"長照輔具服務自 113 年 1 月 1 日起全面實施代償墊付。\", \"points\": [\"民眾至特約輔具服務單位購置或租賃輔具時，付款時支付部分負擔。\", \"補助費用由特約輔具服務單位向地方政府請款。\"], \"title\": \"長照側費用材料\"}, {\"body\": \"補助比例依身分別區分。\", \"points\": [\"低收入戶最高補助金額全額。\", \"中低收入戶 75%。\", \"一般戶 50%。\", \"每人每二年度以補助四項為原則；同一項目於使用年限內不得重複補助。\"], \"title\": \"身障側費用材料\"}, {\"body\": \"跨制度同品項是否能同時申請、兩側逐品項上限與年限尚未由本輪教材證實。\", \"points\": [\"長照給付基準 PDF 尚未逐項納入。\", \"身障補助基準表 PDF 尚未逐項納入。\", \"新北地方加碼內容尚未逐檔納入。\"], \"title\": \"資料缺口\"}] 跨制度同品項重複申請規則尚待補官方依據。 由第一輪教材「目前可比較的同屬性」轉為 shared 卡；跨制度重複申請保留資料缺口。 [{\"agency\": \"長期照顧司\", \"content\": \"長照輔具及居家無障礙環境改善資料列明 113 年 1 月 1 日起全面實施代償墊付，民眾支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。\", \"created_at\": \"111-06-10\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-CORE-01\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：輔具及居家無障礙環境改善\", \"updated_at\": \"115-01-26\", \"url\": \"https://1966.gov.tw/LTC/cp-6453-69940-207.html\"}, {\"agency\": \"全國法規資料庫\", \"content\": \"身心障礙者輔具費用補助辦法列明低收入戶最高補助金額全額、中低收入戶 75%、一般戶 50%。每人每二年度以補助四項為原則；同一項目於使用年限內不得重複補助。\", \"created_at\": \"111-10-20\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"DIS-CORE-01\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"全國法規資料庫：身心障礙者輔具費用補助辦法\", \"updated_at\": \"111-10-20\", \"url\": \"https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060\"}] 長照側目前已讀資料可確認代償墊付與部分負擔；身障側已讀法規可確認補助比例與同一項目使用年限內不得重複補助。"
+    },
+    {
+      "id": "assistive_benefit_disability_overview",
+      "knowledge_id": "assistive_benefit_disability_overview",
+      "title": "身障輔具補助總論",
+      "directions": [
+        "身障輔具",
+        "輔具補助",
+        "補助比例",
+        "先核定後購買"
+      ],
+      "system_scope": [
+        "身障"
+      ],
+      "knowledge_type": [
+        "制度差異",
+        "申請路徑",
+        "補助比例"
+      ],
+      "comparison_group": "assistive_benefit_overview",
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "身障輔具補助比例是多少",
+        "身障輔具可以先買再申請嗎",
+        "身障輔具要找哪個窗口",
+        "身障輔具和長照輔具差在哪"
+      ],
+      "applies_when": [
+        "家屬詢問身障輔具補助、補助比例、評估文件或先買再申請",
+        "需要先理解身障側輔具補助制度與地方申請流程"
+      ],
+      "not_applies_when": [
+        "詢問長照輔具租賃或長照代償墊付流程",
+        "詢問單一品項完整上限與最低使用年限"
+      ],
+      "verification_steps": [
+        "對應身障側補助項目、補助比例、評估文件與核定流程。",
+        "對應地方主管機關身障福利承辦窗口或地方輔具資源中心。"
+      ],
+      "phone_check_questions": [
+        "此需求在身障側是否屬補助基準表項目？",
+        "是否需要診斷證明書、輔具評估報告書或地方指定文件？",
+        "是否已取得核定，或是否存在先購買情形？"
+      ],
+      "family_safe_summary": "身障輔具補助以領有身心障礙證明者為主要對象，依身心障礙者輔具費用補助辦法與補助基準表處理補助類別、補助比例、最低使用年限、評估人員、文件與規格。法規明定未經核定前先購買輔具者不予補助。",
+      "care_manager_notes": [
+        "此卡為身障側制度總論，不包含各品項完整上限與年限。",
+        "新北地方表單與加碼附件尚需另讀。"
+      ],
+      "comparison": {
+        "ltc_side": "長照側以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主。",
+        "disability_side": "身障側以領有身心障礙證明者為補助對象，依身障輔具費用補助辦法與補助基準表處理補助類別、比例、年限、評估人員與文件。",
+        "shared_risks": [],
+        "family_wording": "身障輔具補助以領有身心障礙證明者為主要對象，已讀法規可確認補助類別、低收入戶/中低收入戶/一般戶補助比例、每二年度補助項次原則，以及未經核定前先購買者不予補助。"
+      },
+      "source_ids": [
+        "DIS-CORE-01",
+        "NTP-SUP-02",
+        "NTP-SUP-03"
+      ],
+      "source_refs": [
+        {
+          "source_id": "DIS-CORE-01",
+          "source_level": "A",
+          "title": "全國法規資料庫：身心障礙者輔具費用補助辦法",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "NTP-SUP-02",
+          "source_level": "B",
+          "title": "新北市輔具資源中心：輔具補助申請",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/1",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "NTP-SUP-03",
+          "source_level": "B",
+          "title": "新北市輔具資源中心：輔具評估",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/2",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_source_required",
+        "item_table_pending"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "身障／長照知識導航"
+      ],
+      "last_checked_at": "2026-06-21",
+      "next_review_at": "",
+      "status": "active",
+      "confidence": "待確認",
+      "body": "身障輔具補助以領有身心障礙證明者為主要對象，依身心障礙者輔具費用補助辦法與補助基準表處理補助類別、補助比例、最低使用年限、評估人員、文件與規格。",
+      "domain": "輔具給付總論",
+      "knowledge_brief": "身障輔具補助以領有身心障礙證明者為主要對象，依補助辦法與補助基準表處理補助類別、比例、年限、評估人員與文件；未經核定前先購買者不予補助。",
+      "integrated_content": "制度對象：身障輔具補助以領有身心障礙證明、最近一年居住國內超過 183 日，且符合補助基準表規定者為對象。\\n\\n補助類別與比例：身障輔具補助類別分為 10 類，包含個人行動輔具、溝通及資訊輔具、預防壓瘡輔具、住家家具及改裝組件、個人照顧及保護輔具、居家生活相關輔具、矯具及義具等。補助比例依身分別區分：低收入戶最高補助金額全額，中低收入戶 75%，一般戶 50%。\\n\\n申請與核定：申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。未經核定前先購買輔具者，不予補助。",
+      "policy_status": "第一輪教材已讀核心法規；補助基準表附件尚未逐項納入本卡。",
+      "public_allowed_reason": "",
+      "card_merge_note": "由第一輪教材「長照輔具給付 vs 身障輔具補助總論」轉成身障側總論卡。",
+      "system_side": "disability",
+      "alias_to": "",
+      "replaced_by": "",
+      "retire_reason": "",
+      "answerable_questions": [
+        "身障輔具補助的制度對象是誰？",
+        "身障輔具補助比例是多少？",
+        "身障輔具是否能先買再申請？"
+      ],
+      "comparison_summary": [],
+      "source_update_watch": [
+        "身心障礙者輔具費用補助基準表逐項內容",
+        "新北加碼補助基準與附件"
+      ],
+      "resource_package_candidates": [],
+      "knowledge_package_outputs": [
+        "家屬版",
+        "查證行動",
+        "AI 延伸分析",
+        "完整資料"
+      ],
+      "core_source_ids": [
+        "DIS-CORE-01"
+      ],
+      "supplement_source_ids": [
+        "NTP-SUP-02",
+        "NTP-SUP-03"
+      ],
+      "lead_source_ids": [],
+      "front_visible": true,
+      "searchable": true,
+      "integrated_sections": [
+        {
+          "title": "制度對象",
+          "body": "身障輔具補助以領有身心障礙證明、最近一年居住國內超過 183 日，且符合補助基準表規定者為對象。",
+          "points": [
+            "輔具定義包含協助身心障礙者改善或維護身體功能、參與活動，或便利照顧者照顧的裝置、設備、儀器、軟體及其他產品。"
+          ]
+        },
+        {
+          "title": "補助類別與比例",
+          "body": "身障輔具補助類別分為 10 類，包含個人行動、溝通及資訊、預防壓瘡、住家家具及改裝組件、個人照顧及保護、居家生活、矯具及義具等。",
+          "points": [
+            "低收入戶最高補助金額全額。",
+            "中低收入戶為 75%。",
+            "一般戶為 50%。"
+          ]
+        },
+        {
+          "title": "申請與核定",
+          "body": "申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、診斷證明書或輔具評估報告書及其他必要證明。",
+          "points": [
+            "未經核定前先購買輔具者，不予補助。",
+            "受理、核定與撥付可委辦、委任或委託鄉鎮市區公所或輔具中心辦理。"
+          ]
+        }
+      ],
+      "source_extracts": [
+        {
+          "agency": "全國法規資料庫",
+          "content": "辦法依身心障礙者權益保障法訂定。輔具定義包含協助身心障礙者改善或維護身體功能、參與活動，或便利照顧者照顧的裝置、設備、儀器、軟體及其他產品。補助類別分為 10 類；補助比例依低收入戶、中低收入戶、一般戶區分；未經核定前先購買輔具者不予補助。",
+          "created_at": "111-10-20",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "DIS-CORE-01",
+          "source_level": "A",
+          "source_tier": "核心來源",
+          "source_title": "全國法規資料庫：身心障礙者輔具費用補助辦法",
+          "updated_at": "111-10-20",
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060"
+        },
+        {
+          "agency": "新北市輔具資源中心",
+          "content": "新北身障輔具申請可透過輔具 Easy GO APP 線上申請，或聯絡蘆洲中心、新店中心。免評估的一般輔具可透過電話完成；需要評估的輔具由中心安排評估。等候新北市政府輔具補助核定結果通知書後，再向新北市輔具特約廠商購買。",
+          "created_at": "待確認",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "NTP-SUP-02",
+          "source_level": "B",
+          "source_tier": "補充來源",
+          "source_title": "新北市輔具資源中心：輔具補助申請",
+          "updated_at": "待確認",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/1"
+        },
+        {
+          "agency": "新北市輔具資源中心",
+          "content": "新北輔具中心提供免費專業評估服務，可電話預約或透過 APP 線上申請。服務方式包含親至中心、到宅評估、定點評估與遠距評估。",
+          "created_at": "待確認",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "NTP-SUP-03",
+          "source_level": "B",
+          "source_tier": "補充來源",
+          "source_title": "新北市輔具資源中心：輔具評估",
+          "updated_at": "待確認",
+          "url": "https://atrc.aihsin.ntpc.gov.tw/Service/2"
+        }
+      ],
+      "suggested_contacts": [
+        {
+          "label": "戶籍所在地地方主管機關身障福利承辦窗口",
+          "contact_type": "official_window",
+          "confidence": "suggested",
+          "purpose": "確認身障輔具補助項目、補助比例、文件與核定流程。"
+        },
+        {
+          "label": "地方輔具資源中心",
+          "contact_type": "assistive_resource_center",
+          "confidence": "suggested",
+          "purpose": "確認輔具評估、試用、文件與地方服務流程。"
+        }
+      ],
+      "comparison_digest": {},
+      "comparison_profile": {
+        "comparison_group": "assistive_benefit_overview",
+        "system_side": "disability",
+        "title": "身障輔具補助總論",
+        "summary": [
+          "身障側以領有身心障礙證明者為補助對象，依身心障礙者輔具費用補助辦法及補助基準表處理。"
+        ],
+        "source_refs": [
+          "DIS-CORE-01",
+          "NTP-SUP-02",
+          "NTP-SUP-03"
+        ],
+        "facts": [
+          {
+            "label": "制度對象",
+            "value": "領有身心障礙證明、最近一年居住國內超過 183 日，且符合補助基準表規定者。"
+          },
+          {
+            "label": "補助比例",
+            "value": "低收入戶最高補助金額全額；中低收入戶 75%；一般戶 50%。"
+          },
+          {
+            "label": "核定限制",
+            "value": "未經核定前先購買輔具者，不予補助。"
+          }
+        ]
+      },
+      "curriculum_reference": {
+        "document": "/Users/chord410/Documents/New project/長照身障教材/01_長照輔具給付_vs_身障輔具補助總論/教材.md",
+        "chapter": "身障側制度材料",
+        "referenced_sections": [
+          "摘要",
+          "內容整合",
+          "資料本體"
+        ]
+      },
+      "content_hash": "0c9cb0f19377d879ba373888210463dbc17ea147c99168549a029273285d5027",
+      "knowledge_version": "2026-06-21-0c9cb0f1",
+      "embedding_text": "身障輔具補助總論 身障輔具 輔具補助 補助比例 先核定後購買 身障 制度差異 申請路徑 補助比例 assistive_benefit_overview 中央共通 新北市 身障輔具補助比例是多少 身障輔具可以先買再申請嗎 身障輔具要找哪個窗口 身障輔具和長照輔具差在哪 身障輔具補助的制度對象是誰？ 身障輔具補助比例是多少？ 身障輔具是否能先買再申請？ 身障輔具補助以領有身心障礙證明者為主要對象，依身心障礙者輔具費用補助辦法與補助基準表處理補助類別、補助比例、最低使用年限、評估人員、文件與規格。法規明定未經核定前先購買輔具者不予補助。 輔具給付總論 disability 身障輔具補助以領有身心障礙證明者為主要對象，依補助辦法與補助基準表處理補助類別、比例、年限、評估人員與文件；未經核定前先購買者不予補助。 制度對象：身障輔具補助以領有身心障礙證明、最近一年居住國內超過 183 日，且符合補助基準表規定者為對象。\\n\\n補助類別與比例：身障輔具補助類別分為 10 類，包含個人行動輔具、溝通及資訊輔具、預防壓瘡輔具、住家家具及改裝組件、個人照顧及保護輔具、居家生活相關輔具、矯具及義具等。補助比例依身分別區分：低收入戶最高補助金額全額，中低收入戶 75%，一般戶 50%。\\n\\n申請與核定：申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、三個月內有效診斷證明書或輔具評估報告書，以及地方主管機關要求的必要證明。未經核定前先購買輔具者，不予補助。 [{\"body\": \"身障輔具補助以領有身心障礙證明、最近一年居住國內超過 183 日，且符合補助基準表規定者為對象。\", \"points\": [\"輔具定義包含協助身心障礙者改善或維護身體功能、參與活動，或便利照顧者照顧的裝置、設備、儀器、軟體及其他產品。\"], \"title\": \"制度對象\"}, {\"body\": \"身障輔具補助類別分為 10 類，包含個人行動、溝通及資訊、預防壓瘡、住家家具及改裝組件、個人照顧及保護、居家生活、矯具及義具等。\", \"points\": [\"低收入戶最高補助金額全額。\", \"中低收入戶為 75%。\", \"一般戶為 50%。\"], \"title\": \"補助類別與比例\"}, {\"body\": \"申請向戶籍所在地地方主管機關提出，文件包含申請表、身分證明、診斷證明書或輔具評估報告書及其他必要證明。\", \"points\": [\"未經核定前先購買輔具者，不予補助。\", \"受理、核定與撥付可委辦、委任或委託鄉鎮市區公所或輔具中心辦理。\"], \"title\": \"申請與核定\"}] 第一輪教材已讀核心法規；補助基準表附件尚未逐項納入本卡。 由第一輪教材「長照輔具給付 vs 身障輔具補助總論」轉成身障側總論卡。 [{\"agency\": \"全國法規資料庫\", \"content\": \"辦法依身心障礙者權益保障法訂定。輔具定義包含協助身心障礙者改善或維護身體功能、參與活動，或便利照顧者照顧的裝置、設備、儀器、軟體及其他產品。補助類別分為 10 類；補助比例依低收入戶、中低收入戶、一般戶區分；未經核定前先購買輔具者不予補助。\", \"created_at\": \"111-10-20\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"DIS-CORE-01\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"全國法規資料庫：身心障礙者輔具費用補助辦法\", \"updated_at\": \"111-10-20\", \"url\": \"https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050060\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"新北身障輔具申請可透過輔具 Easy GO APP 線上申請，或聯絡蘆洲中心、新店中心。免評估的一般輔具可透過電話完成；需要評估的輔具由中心安排評估。等候新北市政府輔具補助核定結果通知書後，再向新北市輔具特約廠商購買。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"NTP-SUP-02\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具補助申請\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/1\"}, {\"agency\": \"新北市輔具資源中心\", \"content\": \"新北輔具中心提供免費專業評估服務，可電話預約或透過 APP 線上申請。服務方式包含親至中心、到宅評估、定點評估與遠距評估。\", \"created_at\": \"待確認\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"NTP-SUP-03\", \"source_level\": \"B\", \"source_tier\": \"補充來源\", \"source_title\": \"新北市輔具資源中心：輔具評估\", \"updated_at\": \"待確認\", \"url\": \"https://atrc.aihsin.ntpc.gov.tw/Service/2\"}] 身障輔具補助以領有身心障礙證明者為主要對象，依身心障礙者輔具費用補助辦法與補助基準表處理補助類別、補助比例、最低使用年限、評估人員、文件與規格。"
+    },
+    {
+      "id": "assistive_benefit_ltc_overview",
+      "knowledge_id": "assistive_benefit_ltc_overview",
+      "title": "長照輔具給付總論",
+      "directions": [
+        "長照輔具",
+        "輔具給付",
+        "租賃購置",
+        "居家無障礙"
+      ],
+      "system_scope": [
+        "長照"
+      ],
+      "knowledge_type": [
+        "制度差異",
+        "申請路徑",
+        "租賃服務"
+      ],
+      "comparison_group": "assistive_benefit_overview",
+      "region_scope": [
+        "中央共通",
+        "新北市"
+      ],
+      "question_patterns": [
+        "長照輔具怎麼申請",
+        "長照輔具是租還是買",
+        "長照輔具需要評估報告嗎",
+        "長照輔具和身障輔具差在哪"
+      ],
+      "applies_when": [
+        "家屬詢問長照輔具、租賃、購置、居家無障礙改善",
+        "需要先理解長照側輔具給付制度與服務流程"
+      ],
+      "not_applies_when": [
+        "詢問身障輔具補助比例或先核定後購買規則",
+        "詢問單一品項完整額度、年限或補助上限"
+      ],
+      "verification_steps": [
+        "對應長照側服務項目、評估、租賃或購置流程。",
+        "對應地方長照管理中心、特約輔具服務單位或輔具資源中心窗口。"
+      ],
+      "phone_check_questions": [
+        "此需求在長照側屬購置、租賃、還是居家無障礙改善？",
+        "是否需要輔具評估報告書或其他評估文件？",
+        "目前地區有哪些特約輔具服務單位或租賃流程？"
+      ],
+      "family_safe_summary": "長照輔具給付以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。已讀來源可確認長照側有代償墊付與租賃服務脈絡。",
+      "care_manager_notes": [
+        "此卡為長照側制度總論，不包含逐品項額度與年限。",
+        "個別品項仍需由後續品項教材補足。"
+      ],
+      "comparison": {
+        "ltc_side": "長照側以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。",
+        "disability_side": "身障側以身心障礙證明與身障輔具費用補助辦法、補助基準表處理。",
+        "shared_risks": [],
+        "family_wording": "長照輔具給付與身障輔具補助分屬不同制度，長照側已讀資料可確認購置、租賃、居家無障礙改善、照專評估、輔具評估報告與特約服務單位流程。"
+      },
+      "source_ids": [
+        "LTC-CORE-01",
+        "LTC-SUP-01"
+      ],
+      "source_refs": [
+        {
+          "source_id": "LTC-CORE-01",
+          "source_level": "A",
+          "title": "1966 長照專區：輔具及居家無障礙環境改善",
+          "url": "https://1966.gov.tw/LTC/cp-6453-69940-207.html",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        },
+        {
+          "source_id": "LTC-SUP-01",
+          "source_level": "A",
+          "title": "1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法",
+          "url": "https://1966.gov.tw/LTC/cp-6440-82812-207.html",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true
+        }
+      ],
+      "source_level": "A",
+      "public_allowed": true,
+      "risk_flags": [
+        "official_source_required",
+        "item_table_pending"
+      ],
+      "related_resource_ids": [],
+      "related_tools": [
+        "長照資源導航",
+        "身障／長照知識導航"
+      ],
+      "last_checked_at": "2026-06-21",
+      "next_review_at": "",
+      "status": "active",
+      "confidence": "待確認",
+      "body": "長照輔具給付以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。",
+      "domain": "輔具給付總論",
+      "knowledge_brief": "長照輔具給付以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。",
+      "integrated_content": "制度位置：長照輔具及居家無障礙環境改善服務依長期照顧服務申請及給付辦法辦理。符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書。\\n\\n取得方式：民眾依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。113 年 1 月 1 日起全面實施代償墊付，民眾支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。\\n\\n租賃脈絡：107 年起新增長照輔具租賃服務，租賃較適合病情變化快或臨時性需求。租賃服務材料包含清潔、維修、諮詢、個案管理、核銷等內容。",
+      "policy_status": "第一輪教材已讀核心網頁；逐品項給付基準 PDF 尚未完全納入本卡。",
+      "public_allowed_reason": "",
+      "card_merge_note": "由第一輪教材「長照輔具給付 vs 身障輔具補助總論」轉成長照側總論卡；不拆成來源卡。",
+      "system_side": "ltc",
+      "alias_to": "",
+      "replaced_by": "",
+      "retire_reason": "",
+      "answerable_questions": [
+        "長照輔具給付的制度位置是什麼？",
+        "長照輔具可以租賃或購置嗎？",
+        "長照輔具需要哪些評估或服務單位？"
+      ],
+      "comparison_summary": [],
+      "source_update_watch": [
+        "長照給付及支付基準附件逐項內容",
+        "地方特約輔具服務單位資料"
+      ],
+      "resource_package_candidates": [],
+      "knowledge_package_outputs": [
+        "家屬版",
+        "查證行動",
+        "AI 延伸分析",
+        "完整資料"
+      ],
+      "core_source_ids": [
+        "LTC-CORE-01",
+        "LTC-SUP-01"
+      ],
+      "supplement_source_ids": [
+        "LTC-SUP-01"
+      ],
+      "lead_source_ids": [],
+      "front_visible": true,
+      "searchable": true,
+      "integrated_sections": [
+        {
+          "title": "制度位置",
+          "body": "長照輔具及居家無障礙環境改善服務依長期照顧服務申請及給付辦法辦理。",
+          "points": [
+            "符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書。",
+            "專業輔具服務單位可為地方主管機關自辦或委託輔具資源中心、復健相關醫事機構等。"
+          ]
+        },
+        {
+          "title": "取得方式",
+          "body": "民眾依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。",
+          "points": [
+            "113 年 1 月 1 日起全面實施代償墊付。",
+            "民眾付款時支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。"
+          ]
+        },
+        {
+          "title": "租賃脈絡",
+          "body": "107 年起新增長照輔具租賃服務，租賃較適合病情變化快或臨時性需求。",
+          "points": [
+            "租賃服務材料包含清潔、維修、諮詢、個案管理、核銷等內容。",
+            "已讀網頁列出輪椅、電動輪椅、電動代步車、移位機、氣墊床、居家用照顧床、爬梯機等租賃或購置狀態。"
+          ]
+        }
+      ],
+      "source_extracts": [
+        {
+          "agency": "長期照顧司",
+          "content": "長照輔具及居家無障礙環境改善依長期照顧服務申請及給付辦法辦理。符合長照服務請領資格且經照專評估有輔具需求者，經轉介至專業輔具服務單位完成輔具評估報告書，再依評估報告書購置或租賃輔具、辦理居家無障礙改善。113 年 1 月 1 日起全面實施代償墊付。",
+          "created_at": "111-06-10",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "LTC-CORE-01",
+          "source_level": "A",
+          "source_tier": "核心來源",
+          "source_title": "1966 長照專區：輔具及居家無障礙環境改善",
+          "updated_at": "115-01-26",
+          "url": "https://1966.gov.tw/LTC/cp-6453-69940-207.html"
+        },
+        {
+          "agency": "長期照顧司",
+          "content": "長照 3.0 相關修正分階段上路，115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元，用於租賃 5 大面向智慧科技租賃輔具。此來源作為長照輔具制度背景，不取代一般輔具總論。",
+          "created_at": "114-06-19",
+          "last_checked_at": "2026-06-21",
+          "public_allowed": true,
+          "source_id": "LTC-SUP-01",
+          "source_level": "A",
+          "source_tier": "補充來源",
+          "source_title": "1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法",
+          "updated_at": "114-11-12",
+          "url": "https://1966.gov.tw/LTC/cp-6440-82812-207.html"
+        }
+      ],
+      "suggested_contacts": [
+        {
+          "label": "地方長照管理中心或長照輔具承辦窗口",
+          "contact_type": "official_window",
+          "confidence": "suggested",
+          "purpose": "確認長照側服務項目、評估、核定、租賃或購置流程。"
+        },
+        {
+          "label": "地方政府特約輔具服務單位",
+          "contact_type": "service_provider",
+          "confidence": "suggested",
+          "purpose": "確認購置、租賃、維修、清潔與請款流程。"
+        }
+      ],
+      "comparison_digest": {},
+      "comparison_profile": {
+        "comparison_group": "assistive_benefit_overview",
+        "system_side": "ltc",
+        "title": "長照輔具給付總論",
+        "summary": [
+          "長照側以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主。"
+        ],
+        "source_refs": [
+          "LTC-CORE-01",
+          "LTC-SUP-01"
+        ],
+        "facts": [
+          {
+            "label": "制度位置",
+            "value": "長照輔具及居家無障礙環境改善依長期照顧服務申請及給付辦法辦理。"
+          },
+          {
+            "label": "取得方式",
+            "value": "依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。"
+          },
+          {
+            "label": "租賃脈絡",
+            "value": "已讀來源列出長照輔具租賃服務，租賃服務包含清潔、維修、諮詢、個案管理與核銷等內容。"
+          }
+        ]
+      },
+      "curriculum_reference": {
+        "document": "/Users/chord410/Documents/New project/長照身障教材/01_長照輔具給付_vs_身障輔具補助總論/教材.md",
+        "chapter": "長照側制度材料",
+        "referenced_sections": [
+          "摘要",
+          "內容整合",
+          "資料本體"
+        ]
+      },
+      "content_hash": "119a358ac5cbb46a0185ee82ae01fd7dfb1c3cae450d2c39faf891861d3c8da6",
+      "knowledge_version": "2026-06-21-119a358a",
+      "embedding_text": "長照輔具給付總論 長照輔具 輔具給付 租賃購置 居家無障礙 長照 制度差異 申請路徑 租賃服務 assistive_benefit_overview 中央共通 新北市 長照輔具怎麼申請 長照輔具是租還是買 長照輔具需要評估報告嗎 長照輔具和身障輔具差在哪 長照輔具給付的制度位置是什麼？ 長照輔具可以租賃或購置嗎？ 長照輔具需要哪些評估或服務單位？ 長照輔具給付以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。已讀來源可確認長照側有代償墊付與租賃服務脈絡。 輔具給付總論 ltc 長照輔具給付以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。 制度位置：長照輔具及居家無障礙環境改善服務依長期照顧服務申請及給付辦法辦理。符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書。\\n\\n取得方式：民眾依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。113 年 1 月 1 日起全面實施代償墊付，民眾支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。\\n\\n租賃脈絡：107 年起新增長照輔具租賃服務，租賃較適合病情變化快或臨時性需求。租賃服務材料包含清潔、維修、諮詢、個案管理、核銷等內容。 [{\"body\": \"長照輔具及居家無障礙環境改善服務依長期照顧服務申請及給付辦法辦理。\", \"points\": [\"符合長照服務請領資格且經照專評估有輔具需求者，會轉介至專業輔具服務單位完成輔具評估報告書。\", \"專業輔具服務單位可為地方主管機關自辦或委託輔具資源中心、復健相關醫事機構等。\"], \"title\": \"制度位置\"}, {\"body\": \"民眾依評估報告書至地方政府特約社區藥局及醫療器材行購置或租賃輔具、辦理居家無障礙改善。\", \"points\": [\"113 年 1 月 1 日起全面實施代償墊付。\", \"民眾付款時支付部分負擔，補助費用由特約輔具服務單位向地方政府請款。\"], \"title\": \"取得方式\"}, {\"body\": \"107 年起新增長照輔具租賃服務，租賃較適合病情變化快或臨時性需求。\", \"points\": [\"租賃服務材料包含清潔、維修、諮詢、個案管理、核銷等內容。\", \"已讀網頁列出輪椅、電動輪椅、電動代步車、移位機、氣墊床、居家用照顧床、爬梯機等租賃或購置狀態。\"], \"title\": \"租賃脈絡\"}] 第一輪教材已讀核心網頁；逐品項給付基準 PDF 尚未完全納入本卡。 由第一輪教材「長照輔具給付 vs 身障輔具補助總論」轉成長照側總論卡；不拆成來源卡。 [{\"agency\": \"長期照顧司\", \"content\": \"長照輔具及居家無障礙環境改善依長期照顧服務申請及給付辦法辦理。符合長照服務請領資格且經照專評估有輔具需求者，經轉介至專業輔具服務單位完成輔具評估報告書，再依評估報告書購置或租賃輔具、辦理居家無障礙改善。113 年 1 月 1 日起全面實施代償墊付。\", \"created_at\": \"111-06-10\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-CORE-01\", \"source_level\": \"A\", \"source_tier\": \"核心來源\", \"source_title\": \"1966 長照專區：輔具及居家無障礙環境改善\", \"updated_at\": \"115-01-26\", \"url\": \"https://1966.gov.tw/LTC/cp-6453-69940-207.html\"}, {\"agency\": \"長期照顧司\", \"content\": \"長照 3.0 相關修正分階段上路，115 年 7 月 1 日起新增智慧科技輔具，每 3 年 6 萬元，用於租賃 5 大面向智慧科技租賃輔具。此來源作為長照輔具制度背景，不取代一般輔具總論。\", \"created_at\": \"114-06-19\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-SUP-01\", \"source_level\": \"A\", \"source_tier\": \"補充來源\", \"source_title\": \"1966 長照專區：衛福部修正發布長期照顧服務申請及給付辦法\", \"updated_at\": \"114-11-12\", \"url\": \"https://1966.gov.tw/LTC/cp-6440-82812-207.html\"}] 長照輔具給付以長照服務資格、照專評估、輔具評估報告與特約輔具服務單位為主，服務型態包含購置、租賃與居家無障礙改善。"
+    },
+    {
       "id": "assistive_resource_center_verification",
       "knowledge_id": "assistive_resource_center_verification",
       "title": "輔具資源中心如何協助查證",

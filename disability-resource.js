@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260621-share-placeholder-v1';
+const CACHE_VERSION = '20260621-share-mobile-hint-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -2229,6 +2229,9 @@ function renderSavedPackages() {
     const itemList = packageCardRows(record);
     const regionText = packageRegionText(record);
     const status = String(record.status || 'draft').replaceAll('_', '-');
+    const sharePendingHint = readyOutput && !shareUrl
+      ? '<p class="workbench-share-hint">正式分享連結尚未建立；可先查看結果或列印，QR 會在正式分享頁建立後顯示。</p>'
+      : '';
     return `
       <article class="workbench-card${active ? ' active' : ''}${expanded ? ' is-expanded' : ''}" data-package-card-id="${escapeHtml(record.package_id)}" tabindex="0" role="button" aria-expanded="${expanded ? 'true' : 'false'}">
         <div class="workbench-card-head">
@@ -2249,6 +2252,7 @@ function renderSavedPackages() {
           ${readyOutput && !shareUrl ? '<button class="link-action is-disabled" type="button" disabled title="正式分享連結尚未建立；請從 Discord 入口重新開啟並查看結果後再試。">複製連結</button>' : ''}
           ${readyOutput && shareUrl ? `<button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}">查看 QR CODE</button>` : ''}
           ${readyOutput && !shareUrl ? '<button class="qr-action is-disabled" type="button" disabled title="正式分享連結尚未建立，因此 QR CODE 尚不可用。">查看 QR CODE</button>' : ''}
+          ${sharePendingHint}
           <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
         </div>
         <div class="workbench-expanded" ${expanded ? '' : 'hidden'}>

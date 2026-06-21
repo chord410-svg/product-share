@@ -1,7 +1,8 @@
-const CACHE_VERSION = '20260621-action-compact-v1';
+const CACHE_VERSION = '20260621-result-open-fallback-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
+const RESULT_CREATE_TIMEOUT_MS = 3500;
 const QR_CACHE = new Map();
 
 const state = {
@@ -1012,6 +1013,16 @@ async function fetchJson(path, options = {}) {
   return payload;
 }
 
+function withTimeout(promise, ms, label = 'request') {
+  let timer = null;
+  const timeout = new Promise((_, reject) => {
+    timer = window.setTimeout(() => reject(new Error(`${label}_timeout`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => {
+    if (timer) window.clearTimeout(timer);
+  });
+}
+
 function apiPath(path) {
   return `${state.apiBase}${path}`;
 }
@@ -2009,11 +2020,15 @@ async function openOrCreateKnowledgeResult(record, button, options = {}) {
   }
   try {
     const payload = knowledgeResultPayload(normalized);
-    const response = await fetchJson(`${apiPath('/api/v1/disability-knowledge/packages')}?session=${encodeURIComponent(state.sessionToken)}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    const response = await withTimeout(
+      fetchJson(`${apiPath('/api/v1/disability-knowledge/packages')}?session=${encodeURIComponent(state.sessionToken)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }),
+      RESULT_CREATE_TIMEOUT_MS,
+      'knowledge_result_create',
+    );
     const saved = upsertSavedPackageRecord({ ...(response.package || {}), share_url: response.share_url || response.package?.share_url || '' });
     renderSavedPackages();
     if (response.share_url) {
@@ -2026,9 +2041,13 @@ async function openOrCreateKnowledgeResult(record, button, options = {}) {
       openKnowledgeResult(saved, { ...options, local: true });
       return;
     }
-    qs('#packageHint').textContent = '知識組合已儲存，但尚未取得正式結果連結。';
+    qs('#packageHint').textContent = '知識組合已儲存，但尚未取得正式結果連結；先開啟本機結果頁。';
+    openKnowledgeResult(saved, { ...options, local: true });
   } catch (error) {
-    qs('#packageHint').textContent = `正式結果建立失敗，先開啟本機結果頁：${error.message || error}`;
+    const timedOut = String(error.message || error).includes('knowledge_result_create_timeout');
+    qs('#packageHint').textContent = timedOut
+      ? '正式結果建立回應較慢，先開啟本機結果頁；稍後回到此頁可再刷新正式連結。'
+      : `正式結果建立失敗，先開啟本機結果頁：${error.message || error}`;
     openKnowledgeResult(normalized, { ...options, local: true });
   } finally {
     if (button) {

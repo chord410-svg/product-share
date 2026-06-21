@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260621-result-open-fallback-v1';
+const CACHE_VERSION = '20260621-share-placeholder-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -2246,7 +2246,9 @@ function renderSavedPackages() {
           <button class="copy-action" type="button" data-action="duplicate" data-package-id="${escapeHtml(record.package_id)}">複製此副本</button>
           <button class="danger-action" type="button" data-action="delete" data-package-id="${escapeHtml(record.package_id)}"${(!isLocalPackageRecord(record) && !state.sessionToken) ? ' disabled title="請從 Discord 入口重新開啟後再刪除後端知識組合。"' : ''}>刪除</button>
           ${readyOutput && shareUrl ? `<button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}" title="複製這份知識組合的正式結果頁連結">複製連結</button>` : ''}
+          ${readyOutput && !shareUrl ? '<button class="link-action is-disabled" type="button" disabled title="正式分享連結尚未建立；請從 Discord 入口重新開啟並查看結果後再試。">複製連結</button>' : ''}
           ${readyOutput && shareUrl ? `<button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}">查看 QR CODE</button>` : ''}
+          ${readyOutput && !shareUrl ? '<button class="qr-action is-disabled" type="button" disabled title="正式分享連結尚未建立，因此 QR CODE 尚不可用。">查看 QR CODE</button>' : ''}
           <button class="print-action" type="button" data-action="print" data-package-id="${escapeHtml(record.package_id)}">列印 / 另存 PDF</button>
         </div>
         <div class="workbench-expanded" ${expanded ? '' : 'hidden'}>

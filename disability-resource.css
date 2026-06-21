@@ -397,9 +397,10 @@ button:disabled {
 }
 .result-action-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 440px));
+  gap: 10px;
   align-items: start;
+  justify-content: start;
 }
 .result-action-card,
 .result-family-card,
@@ -407,46 +408,51 @@ button:disabled {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #f8fbfd;
-  padding: 12px;
+  padding: 10px;
   min-width: 0;
 }
 .result-action-card h4,
 .result-family-card h4,
 .result-full-section h3 {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   color: var(--ink);
+  font-size: 15px;
+  line-height: 1.35;
 }
 .result-action-card-body {
   display: grid;
-  gap: 12px;
+  gap: 9px;
 }
 .result-action-card h5 {
   margin: 0 0 6px;
   color: var(--teal-dark);
   font-size: 13px;
 }
-.result-contact-list,
-.result-link-list {
-  margin: 0;
-  padding-left: 18px;
+.result-info-stack {
   display: grid;
-  gap: 8px;
-}
-.result-contact-list li,
-.result-link-list li {
-  line-height: 1.5;
+  gap: 6px;
   min-width: 0;
 }
-.result-contact-list span,
-.result-contact-list small,
-.result-link-list span {
+.result-info-row {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  border: 1px solid #d8e5ef;
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 9px;
+  line-height: 1.45;
+}
+.result-info-row strong {
+  color: var(--ink);
+}
+.result-info-row span,
+.result-info-row small {
   display: block;
   color: var(--muted);
   font-size: 12px;
-  margin-top: 2px;
 }
-.result-contact-list a,
-.result-link-list a {
+.result-info-row a {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
@@ -464,7 +470,7 @@ button:disabled {
   background: #fff;
 }
 .result-full-section .result-action-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 440px));
 }
 
 .generation-history-panel {
@@ -774,7 +780,7 @@ button:disabled {
 @media (max-width: 720px) {
   .result-action-grid,
   .result-full-section .result-action-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .result-output-switcher {
     align-items: stretch;

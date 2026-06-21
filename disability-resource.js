@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260621-share-mobile-hint-v1';
+const CACHE_VERSION = '20260621-topic3-mobility-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';

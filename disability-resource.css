@@ -1478,6 +1478,18 @@ button:active {
   grid-column: 1 / -1;
 }
 
+.workbench-share-hint {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 7px 8px;
+  border: 1px dashed var(--line);
+  border-radius: 7px;
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .workbench-actions .primary-action {
   border-color: #a9dfb7;
   background: #edfff2;

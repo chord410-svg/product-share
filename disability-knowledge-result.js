@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260621-result-layout-ai-v1';
+  const CACHE_VERSION = '20260621-action-compact-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;
@@ -191,25 +191,25 @@
       ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`
       : '';
     return `
-      <li>
+      <div class="result-info-row">
         <strong>${escapeHtml(contact.label)}</strong>
         ${contact.role ? `<span>${escapeHtml(contact.role)}</span>` : ''}
         ${phoneHtml || urlHtml ? `<small>${[phoneHtml, urlHtml].filter(Boolean).join('｜')}</small>` : ''}
-      </li>
+      </div>
     `;
   }
 
   function sourceLinkListHtml(sources) {
     if (!sources.length) return '<p class="muted-text">來源連結待補。</p>';
-    return `<ul class="result-link-list">${sources.map((ref) => {
+    return `<div class="result-info-stack">${sources.map((ref) => {
       const title = ref.title || ref.source_id || '來源';
       const level = ref.source_level || ref.level || '待確認';
       const checked = ref.last_checked_at || '待確認';
       const titleHtml = ref.url
         ? `<a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
         : escapeHtml(title);
-      return `<li>${titleHtml}<span>${escapeHtml(level)}｜最後確認：${escapeHtml(checked)}</span></li>`;
-    }).join('')}</ul>`;
+      return `<div class="result-info-row result-source-row">${titleHtml}<span>${escapeHtml(level)}｜最後確認：${escapeHtml(checked)}</span></div>`;
+    }).join('')}</div>`;
   }
 
   function normalizeSystemSide(value) {
@@ -364,7 +364,7 @@
             <section>
               <h5>對應單位／窗口／聯絡方式</h5>
               ${contacts.length
-                ? `<ul class="result-contact-list">${contacts.map(contactHtml).join('')}</ul>`
+                ? `<div class="result-info-stack">${contacts.map(contactHtml).join('')}</div>`
                 : '<p class="muted-text">待補明確窗口／聯絡方式。</p>'}
             </section>
             <section>

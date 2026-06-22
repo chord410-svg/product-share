@@ -7753,27 +7753,27 @@
           "public_allowed": true,
           "source_id": "LTC-TR-CORE-01",
           "source_level": "A",
-          "title": "114 年長照計算器 D 系交通接送服務資料",
-          "url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-service-codes-d.json",
-          "source_link_status": "public_download"
+          "title": "114 年長照交通接送 DA01 / B2 服務資料整理",
+          "url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-da01-b2-source.html",
+          "source_link_status": "public_readable"
         },
         {
           "last_checked_at": "2026-06-21",
           "public_allowed": true,
           "source_id": "LTC-TR-CORE-02",
           "source_level": "A",
-          "title": "114 年長照四包錢額度表",
-          "url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-subsidy-rates.json",
-          "source_link_status": "public_download"
+          "title": "114 年長照 B2 交通接送額度資料整理",
+          "url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-b2-rate-source.html",
+          "source_link_status": "public_readable"
         },
         {
           "last_checked_at": "2026-06-21",
           "public_allowed": true,
           "source_id": "LTC-TR-CORE-03",
           "source_level": "B",
-          "title": "114 年 22 縣市城鄉分類",
-          "url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-city-zones.json",
-          "source_link_status": "public_download"
+          "title": "長照 B2 交通接送城鄉分區資料整理",
+          "url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-zone-source.html",
+          "source_link_status": "public_readable"
         },
         {
           "last_checked_at": "2026-06-21",
@@ -7886,10 +7886,10 @@
           "source_id": "LTC-TR-CORE-01",
           "source_level": "A",
           "source_tier": "核心來源",
-          "source_link_status": "public_download",
-          "source_title": "114 年長照計算器 D 系交通接送服務資料",
-          "source_url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-service-codes-d.json",
-          "url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-service-codes-d.json"
+          "source_link_status": "public_readable",
+          "source_title": "114 年長照交通接送 DA01 / B2 服務資料整理",
+          "source_url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-da01-b2-source.html",
+          "url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-da01-b2-source.html"
         },
         {
           "agency": "新北市高齡及長期照顧處",
@@ -7955,9 +7955,9 @@
           "資料本體"
         ]
       },
-      "content_hash": "96aa35f72aed2af8bd5e3955ac6032dae6150874f68e3c2f4a761c7a34d959ee",
-      "knowledge_version": "2026-06-21-96aa35f7",
-      "embedding_text": "長照交通接送 DA01 / B2 服務範圍 交通接送 長照服務 DA01 B2交通接送 復康巴士 長照 制度資料 交通接送 服務範圍 transport_access_scope 中央共通 新北市 長照交通接送可以去醫院嗎 DA01 是什麼 CMS 幾級可以用交通接送 新北長照交通接送服務範圍是什麼 長照交通接送和復康巴士差在哪 長照交通接送可以去醫院嗎 DA01 是什麼 CMS 幾級可以用交通接送 新北長照交通接送服務範圍是什麼 長照交通接送和復康巴士差在哪 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。 交通接送 ltc 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。 長照 DA01 / B2 制度位置\n本地長照給付資料將 D 系交通接送歸為 B2 包對應碼別，DA01 名稱為「交通接送服務（單趟車資由個案輸入）」。\n- DA01 描述聚焦往返居家至醫療院所就醫、定期式復健或透析治療。\n- 基於就醫、復健或透析目的，必要交通路程中的轉乘或接駁，經地方主管機關核認時，起迄任有一端不限於居家或醫療院所。\n\nB2 額度與 CMS 門檻\n本地額度資料將 B2 定位為每月額度與分區自付比例。\n- 第一、二類一般地區需 CMS >= 4；第三、四類偏遠或高度偏遠需 CMS >= 2。\n- 四類地區月額分別為 1,680 元、1,840 元、2,000 元、2,400 元；city_zones 只支撐四類分區概念，不用於個別行政區官方分區判定。\n\n新北 DA01 使用須知\n本輪深讀的新北 DA01 PDF 顯示，服務需於乘車前 3-14 日提前預約，服務時間為週一至週五 08:30-17:30。\n- 服務對象為實際居住新北市，且符合新北市第二類第 2 級（含）以上或第四類第 2 級（含）以上者。\n- 用途限定往返居家至醫療院所之就醫或復健（洗腎），服務區域以北北基桃為限。\n- 陪同者以 1 名為原則；無障礙車款採 1.2 倍計程車費率收費。 [{\"body\": \"本地長照給付資料將 D 系交通接送歸為 B2 包對應碼別，DA01 名稱為「交通接送服務（單趟車資由個案輸入）」。\", \"points\": [\"DA01 描述聚焦往返居家至醫療院所就醫、定期式復健或透析治療。\", \"基於就醫、復健或透析目的，必要交通路程中的轉乘或接駁，經地方主管機關核認時，起迄任有一端不限於居家或醫療院所。\"], \"title\": \"長照 DA01 / B2 制度位置\"}, {\"body\": \"本地額度資料將 B2 定位為每月額度與分區自付比例。\", \"points\": [\"第一、二類一般地區需 CMS >= 4；第三、四類偏遠或高度偏遠需 CMS >= 2。\", \"四類地區月額分別為 1,680 元、1,840 元、2,000 元、2,400 元；city_zones 只支撐四類分區概念，不用於個別行政區官方分區判定。\"], \"title\": \"B2 額度與 CMS 門檻\"}, {\"body\": \"本輪深讀的新北 DA01 PDF 顯示，服務需於乘車前 3-14 日提前預約，服務時間為週一至週五 08:30-17:30。\", \"points\": [\"服務對象為實際居住新北市，且符合新北市第二類第 2 級（含）以上或第四類第 2 級（含）以上者。\", \"用途限定往返居家至醫療院所之就醫或復健（洗腎），服務區域以北北基桃為限。\", \"陪同者以 1 名為原則；無障礙車款採 1.2 倍計程車費率收費。\"], \"title\": \"新北 DA01 使用須知\"}] 本卡依本輪已讀本地長照資料與新北 DA01 使用須知 PDF 整理；不承諾個案資格、金額或派車結果。 長照側 DA01 / B2 交通接送保留為獨立卡，與身障復康巴士透過 comparison_group 串接。 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。 [{\"agency\": \"長照給付及支付基準/本地長照計算資料\", \"content\": \"DA01 為交通接送服務，描述聚焦往返居家至醫療院所就醫、定期式復健或透析治療；B2 依四類分區與 CMS 門檻整理額度結構，city_zones 不作個別行政區官方分區判定。\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-TR-CORE-01\", \"source_level\": \"A\", \"source_link_status\": \"public_download\", \"source_tier\": \"核心來源\", \"source_title\": \"114 年長照計算器 D 系交通接送服務資料\", \"source_url\": \"https://chord410-svg.github.io/product-share/disability-sources/calculator-114-service-codes-d.json\", \"url\": \"https://chord410-svg.github.io/product-share/disability-sources/calculator-114-service-codes-d.json\"}, {\"agency\": \"新北市高齡及長期照顧處\", \"content\": \"DA01 使用須知列出乘車前 3-14 日預約、服務時間、服務對象、用途、北北基桃服務區域、陪同與車款費率資料。\", \"evidence_lines\": [{\"3-8\": \"乘車前 3-14 日、服務時間、服務對象、就醫或復健洗腎用途、北北基桃服務區域與陪同者加收規則。\"}, {\"9-15\": \"訂車資料、特殊需求、陪同者、輪椅與一般/無障礙車款；無障礙車款採 1.2 倍計程車費率。\"}, {\"16-30\": \"第二區/第四區月額、補助與自付比例、第四類偏遠地區、額度扣除、共乘折扣與陪同者費用範例。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-TR-CORE-04\", \"source_level\": \"A\", \"source_link_status\": \"public_url\", \"source_tier\": \"核心來源\", \"source_title\": \"新北市特約長照交通接送 DA01 服務使用須知\", \"source_url\": \"https://www.careyou.ntpc.gov.tw/w/agecare/ltcts\", \"url\": \"https://www.careyou.ntpc.gov.tw/w/agecare/ltcts\"}] 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。\n\n長照 DA01 / B2 制度位置\n本地長照給付資料將 D 系交通接送歸為 B2 包對應碼別，DA01 名稱為「交通接送服務（單趟車資由個案輸入）」。\n\nB2 額度與 CMS 門檻\n本地額度資料將 B2 定位為每月額度與分區自付比例。\n\n新北 DA01 使用須知\n本輪深讀的新北 DA01 PDF 顯示，服務需於乘車前 3-14 日提前預約，服務時間為週一至週五 08:30-17:30。"
+      "content_hash": "b57da3e58c4495720906c6fda29b85701780dd408cff3a0e1978db25ecc8003a",
+      "knowledge_version": "2026-06-21-b57da3e5",
+      "embedding_text": "長照交通接送 DA01 / B2 服務範圍 交通接送 長照服務 DA01 B2交通接送 復康巴士 長照 制度資料 交通接送 服務範圍 transport_access_scope 中央共通 新北市 長照交通接送可以去醫院嗎 DA01 是什麼 CMS 幾級可以用交通接送 新北長照交通接送服務範圍是什麼 長照交通接送和復康巴士差在哪 長照交通接送可以去醫院嗎 DA01 是什麼 CMS 幾級可以用交通接送 新北長照交通接送服務範圍是什麼 長照交通接送和復康巴士差在哪 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。 交通接送 ltc 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。 長照 DA01 / B2 制度位置\n本地長照給付資料將 D 系交通接送歸為 B2 包對應碼別，DA01 名稱為「交通接送服務（單趟車資由個案輸入）」。\n- DA01 描述聚焦往返居家至醫療院所就醫、定期式復健或透析治療。\n- 基於就醫、復健或透析目的，必要交通路程中的轉乘或接駁，經地方主管機關核認時，起迄任有一端不限於居家或醫療院所。\n\nB2 額度與 CMS 門檻\n本地額度資料將 B2 定位為每月額度與分區自付比例。\n- 第一、二類一般地區需 CMS >= 4；第三、四類偏遠或高度偏遠需 CMS >= 2。\n- 四類地區月額分別為 1,680 元、1,840 元、2,000 元、2,400 元；city_zones 只支撐四類分區概念，不用於個別行政區官方分區判定。\n\n新北 DA01 使用須知\n本輪深讀的新北 DA01 PDF 顯示，服務需於乘車前 3-14 日提前預約，服務時間為週一至週五 08:30-17:30。\n- 服務對象為實際居住新北市，且符合新北市第二類第 2 級（含）以上或第四類第 2 級（含）以上者。\n- 用途限定往返居家至醫療院所之就醫或復健（洗腎），服務區域以北北基桃為限。\n- 陪同者以 1 名為原則；無障礙車款採 1.2 倍計程車費率收費。 [{\"body\": \"本地長照給付資料將 D 系交通接送歸為 B2 包對應碼別，DA01 名稱為「交通接送服務（單趟車資由個案輸入）」。\", \"points\": [\"DA01 描述聚焦往返居家至醫療院所就醫、定期式復健或透析治療。\", \"基於就醫、復健或透析目的，必要交通路程中的轉乘或接駁，經地方主管機關核認時，起迄任有一端不限於居家或醫療院所。\"], \"title\": \"長照 DA01 / B2 制度位置\"}, {\"body\": \"本地額度資料將 B2 定位為每月額度與分區自付比例。\", \"points\": [\"第一、二類一般地區需 CMS >= 4；第三、四類偏遠或高度偏遠需 CMS >= 2。\", \"四類地區月額分別為 1,680 元、1,840 元、2,000 元、2,400 元；city_zones 只支撐四類分區概念，不用於個別行政區官方分區判定。\"], \"title\": \"B2 額度與 CMS 門檻\"}, {\"body\": \"本輪深讀的新北 DA01 PDF 顯示，服務需於乘車前 3-14 日提前預約，服務時間為週一至週五 08:30-17:30。\", \"points\": [\"服務對象為實際居住新北市，且符合新北市第二類第 2 級（含）以上或第四類第 2 級（含）以上者。\", \"用途限定往返居家至醫療院所之就醫或復健（洗腎），服務區域以北北基桃為限。\", \"陪同者以 1 名為原則；無障礙車款採 1.2 倍計程車費率收費。\"], \"title\": \"新北 DA01 使用須知\"}] 本卡依本輪已讀本地長照資料與新北 DA01 使用須知 PDF 整理；不承諾個案資格、金額或派車結果。 長照側 DA01 / B2 交通接送保留為獨立卡，與身障復康巴士透過 comparison_group 串接。 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。 [{\"agency\": \"長照給付及支付基準/本地長照計算資料\", \"content\": \"DA01 為交通接送服務，描述聚焦往返居家至醫療院所就醫、定期式復健或透析治療；B2 依四類分區與 CMS 門檻整理額度結構，city_zones 不作個別行政區官方分區判定。\", \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-TR-CORE-01\", \"source_level\": \"A\", \"source_link_status\": \"public_readable\", \"source_tier\": \"核心來源\", \"source_title\": \"114 年長照交通接送 DA01 / B2 服務資料整理\", \"source_url\": \"https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-da01-b2-source.html\", \"url\": \"https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-da01-b2-source.html\"}, {\"agency\": \"新北市高齡及長期照顧處\", \"content\": \"DA01 使用須知列出乘車前 3-14 日預約、服務時間、服務對象、用途、北北基桃服務區域、陪同與車款費率資料。\", \"evidence_lines\": [{\"3-8\": \"乘車前 3-14 日、服務時間、服務對象、就醫或復健洗腎用途、北北基桃服務區域與陪同者加收規則。\"}, {\"9-15\": \"訂車資料、特殊需求、陪同者、輪椅與一般/無障礙車款；無障礙車款採 1.2 倍計程車費率。\"}, {\"16-30\": \"第二區/第四區月額、補助與自付比例、第四類偏遠地區、額度扣除、共乘折扣與陪同者費用範例。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-TR-CORE-04\", \"source_level\": \"A\", \"source_link_status\": \"public_url\", \"source_tier\": \"核心來源\", \"source_title\": \"新北市特約長照交通接送 DA01 服務使用須知\", \"source_url\": \"https://www.careyou.ntpc.gov.tw/w/agecare/ltcts\", \"url\": \"https://www.careyou.ntpc.gov.tw/w/agecare/ltcts\"}] 長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務，資料重點包含 CMS 門檻、B2 額度、城鄉分區、自付比例、就醫或復健洗腎目的、新北預約天數、服務區域、陪同與車款規則。\n\n長照 DA01 / B2 制度位置\n本地長照給付資料將 D 系交通接送歸為 B2 包對應碼別，DA01 名稱為「交通接送服務（單趟車資由個案輸入）」。\n\nB2 額度與 CMS 門檻\n本地額度資料將 B2 定位為每月額度與分區自付比例。\n\n新北 DA01 使用須知\n本輪深讀的新北 DA01 PDF 顯示，服務需於乘車前 3-14 日提前預約，服務時間為週一至週五 08:30-17:30。"
     },
     {
       "id": "manual_wheelchair_disability_item",
@@ -17060,18 +17060,18 @@
           "public_allowed": true,
           "source_id": "LTC-TR-CORE-01",
           "source_level": "A",
-          "title": "114 年長照計算器 D 系交通接送服務資料",
-          "url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-service-codes-d.json",
-          "source_link_status": "public_download"
+          "title": "114 年長照交通接送 DA01 / B2 服務資料整理",
+          "url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-da01-b2-source.html",
+          "source_link_status": "public_readable"
         },
         {
           "last_checked_at": "2026-06-21",
           "public_allowed": true,
           "source_id": "LTC-TR-CORE-02",
           "source_level": "A",
-          "title": "114 年長照四包錢額度表",
-          "url": "https://chord410-svg.github.io/product-share/disability-sources/calculator-114-subsidy-rates.json",
-          "source_link_status": "public_download"
+          "title": "114 年長照 B2 交通接送額度資料整理",
+          "url": "https://chord410-svg.github.io/product-share/disability-sources/ltc-transport-b2-rate-source.html",
+          "source_link_status": "public_readable"
         },
         {
           "last_checked_at": "2026-06-21",
@@ -17329,8 +17329,8 @@
           "資料本體"
         ]
       },
-      "content_hash": "1e38189d07197c4446223745523d0f4608103e737a8dbd015c1d398b03e450aa",
-      "knowledge_version": "2026-06-21-1e38189d",
+      "content_hash": "49e474ce9be7d19501d89068b41bc51e7b2945df3f3f449e5d0f80220aa3948f",
+      "knowledge_version": "2026-06-21-49e474ce",
       "embedding_text": "DA01、復康巴士與通用無障礙計程車差異 交通接送 長照身障比較 交通備案 DA01 復康巴士 通用無障礙計程車 長照 身障 長照身障交界 制度差異 交通備案 長照身障比較 transport_service_type_difference 新北市 復康巴士和長照交通差在哪 通用無障礙計程車是不是復康巴士 長照交通和身障交通可以選哪個 復康巴士和長照交通差在哪 通用無障礙計程車是不是復康巴士 長照交通和身障交通可以選哪個 DA01 是長照給付與照顧計畫脈絡下的交通接送；復康巴士是身心障礙者交通服務；通用無障礙計程車是彈性交通備案，也可能在復康巴士額滿候補無車時被轉介，但不等於長照交通給付或復康巴士資格本身。 交通接送 shared DA01、復康巴士與通用無障礙計程車分屬不同交通資源類型；前兩者可作制度邊界比較，通用無障礙計程車作交通備案與資源入口。 DA01\n長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務。\n- 核心比較點包含 CMS 門檻、B2 額度、分區、自付比例、目的地與地方主管機關核認。\n\n復康巴士\n復康巴士是身心障礙者交通服務。\n- 核心比較點包含身心障礙證明、建檔、服務對象等級、預約規則、服務範圍、陪同與取消規則。\n\n通用無障礙計程車\n通用無障礙計程車是交通備案與資源入口。\n- 核心比較點是是否能派車、車型是否能承載輪椅、費用與候車或取消規則。\n- 復康巴士 PDF 的額滿候補無車時轉介無障礙計程車，可支撐備案定位，但不可推論所有個案都能使用同一套規則。 [{\"body\": \"長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務。\", \"points\": [\"核心比較點包含 CMS 門檻、B2 額度、分區、自付比例、目的地與地方主管機關核認。\"], \"title\": \"DA01\"}, {\"body\": \"復康巴士是身心障礙者交通服務。\", \"points\": [\"核心比較點包含身心障礙證明、建檔、服務對象等級、預約規則、服務範圍、陪同與取消規則。\"], \"title\": \"復康巴士\"}, {\"body\": \"通用無障礙計程車是交通備案與資源入口。\", \"points\": [\"核心比較點是是否能派車、車型是否能承載輪椅、費用與候車或取消規則。\", \"復康巴士 PDF 的額滿候補無車時轉介無障礙計程車，可支撐備案定位，但不可推論所有個案都能使用同一套規則。\"], \"title\": \"通用無障礙計程車\"}] 本卡依本輪已讀 DA01 使用須知、復康巴士服務須知與通用無障礙計程車資源卡整理；不做資格判定。 三類交通資源差異合併成 shared 卡，不把通用無障礙計程車獨立成制度補助卡。 DA01 是長照給付與照顧計畫脈絡下的交通接送；復康巴士是身心障礙者交通服務；通用無障礙計程車是彈性交通備案，也可能在復康巴士額滿候補無車時被轉介，但不等於長照交通給付或復康巴士資格本身。 [{\"agency\": \"新北市高齡及長期照顧處\", \"content\": \"DA01 使用須知列出長照交通接送的服務對象、用途、區域、陪同、車款與額度/自付資料，可支撐 DA01 與復康巴士的制度邊界比較。\", \"evidence_lines\": [{\"3-8\": \"DA01 乘車前 3-14 日、服務時間、服務對象、用途、服務區域與陪同者規則。\"}, {\"9-15\": \"訂車資料、輪椅與一般/無障礙車款。\"}, {\"16-30\": \"第二區/第四區月額、補助與自付比例、共乘折扣與陪同費範例。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"LTC-TR-CORE-04\", \"source_level\": \"A\", \"source_link_status\": \"public_url\", \"source_tier\": \"核心來源\", \"source_title\": \"新北市特約長照交通接送 DA01 服務使用須知\", \"source_url\": \"https://www.careyou.ntpc.gov.tw/w/agecare/ltcts\", \"url\": \"https://www.careyou.ntpc.gov.tw/w/agecare/ltcts\"}, {\"agency\": \"新北市政府交通局\", \"content\": \"復康巴士服務須知列出身障交通服務範圍、費率、服務對象、建檔與預約資料；額滿候補無車時可轉介無障礙計程車，支撐通用無障礙計程車作備案定位。\", \"evidence_lines\": [{\"13-27\": \"復康巴士服務範圍、設籍/非設籍起訖限制、一般費率、共乘費率與低收入戶免費趟次。\"}, {\"32-83\": \"服務時間、服務對象、服務項目、建檔、會員帳號、等級預約與臨時訂車。\"}, {\"136-140\": \"額滿候補無車時可轉介無障礙計程車，媒合成功後按核定計程車費率三分之一計價。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"DIS-TR-CORE-02\", \"source_level\": \"A\", \"source_link_status\": \"public_url\", \"source_tier\": \"核心來源\", \"source_title\": \"新北市復康巴士服務須知\", \"source_url\": \"https://www.traffic.ntpc.gov.tw/userfiles/1130901/files/%E6%96%B0%E5%8C%97%E5%B8%82%E6%94%BF%E5%BA%9C%E4%BA%A4%E9%80%9A%E5%B1%80%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E8%80%85%E5%B0%8F%E5%9E%8B%E5%BE%A9%E5%BA%B7%E5%B7%B4%E5%A3%AB%E6%9C%8D%E5%8B%99%E9%A0%88%E7%9F%A5.pdf\", \"url\": \"https://www.traffic.ntpc.gov.tw/userfiles/1130901/files/%E6%96%B0%E5%8C%97%E5%B8%82%E6%94%BF%E5%BA%9C%E4%BA%A4%E9%80%9A%E5%B1%80%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E8%80%85%E5%B0%8F%E5%9E%8B%E5%BE%A9%E5%BA%B7%E5%B7%B4%E5%A3%AB%E6%9C%8D%E5%8B%99%E9%A0%88%E7%9F%A5.pdf\"}, {\"agency\": \"第五輪教材\", \"content\": \"DA01、復康巴士與通用無障礙計程車分屬不同交通資源類型；通用無障礙計程車作交通備案，不等於 DA01 或復康巴士資格。\", \"evidence_lines\": [{\"da01_service_notice_1150417.txt 3-30\": \"DA01 的服務對象、用途、區域、陪同、車款與額度/自付資料。\"}, {\"ntpc_rehab_bus_service_notice.txt 13-27\": \"復康巴士服務範圍與費率資料。\"}, {\"ntpc_rehab_bus_service_notice.txt 32-83\": \"復康巴士服務對象、建檔與預約資料。\"}, {\"ntpc_rehab_bus_service_notice.txt 136-140\": \"復康巴士額滿候補無車時可轉介無障礙計程車，支撐交通備案定位。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"DIS-TR-CORE-03\", \"source_level\": \"A\", \"source_link_status\": \"public_url\", \"source_tier\": \"核心來源\", \"source_title\": \"新北市通用無障礙計程車\", \"source_url\": \"https://lkk.ntpc.gov.tw/home.jsp?id=74&parentpath=0%2C60\", \"url\": \"https://lkk.ntpc.gov.tw/home.jsp?id=74&parentpath=0%2C60\"}] DA01 是長照給付與照顧計畫脈絡下的交通接送；復康巴士是身心障礙者交通服務；通用無障礙計程車是彈性交通備案，也可能在復康巴士額滿候補無車時被轉介，但不等於長照交通給付或復康巴士資格本身。\n\nDA01\n長照 DA01 / B2 交通接送是長照給付與照顧計畫脈絡下的交通服務。\n\n復康巴士\n復康巴士是身心障礙者交通服務。\n\n通用無障礙計程車\n通用無障礙計程車是交通備案與資源入口。"
     },
     {
@@ -17404,9 +17404,9 @@
           "public_allowed": true,
           "source_id": "RES-TR-SUP-01",
           "source_level": "A",
-          "title": "現有 resource_nav 交通資源卡資料",
-          "url": "https://chord410-svg.github.io/product-share/resource-nav-resources.json",
-          "source_link_status": "public_download"
+          "title": "長照資源導航：交通資源卡資料",
+          "url": "https://chord410-svg.github.io/product-share/resource-nav.html",
+          "source_link_status": "public_readable"
         },
         {
           "last_checked_at": "2026-06-21",
@@ -17547,10 +17547,10 @@
           "source_id": "RES-TR-SUP-01",
           "source_level": "A",
           "source_tier": "補充來源",
-          "source_link_status": "public_download",
-          "source_title": "現有 resource_nav 交通資源卡資料",
-          "source_url": "https://chord410-svg.github.io/product-share/resource-nav-resources.json",
-          "url": "https://chord410-svg.github.io/product-share/resource-nav-resources.json"
+          "source_link_status": "public_readable",
+          "source_title": "長照資源導航：交通資源卡資料",
+          "source_url": "https://chord410-svg.github.io/product-share/resource-nav.html",
+          "url": "https://chord410-svg.github.io/product-share/resource-nav.html"
         }
       ],
       "suggested_contacts": [
@@ -17586,9 +17586,9 @@
           "資料本體"
         ]
       },
-      "content_hash": "2578eef09258962686604aa89a879bd9d7005272417ab5c5a27ca400689ef1a0",
-      "knowledge_version": "2026-06-21-2578eef0",
-      "embedding_text": "交通服務資源卡引用邊界 交通接送 資源卡邊界 查證行動 DA01 復康巴士 通用無障礙計程車 長照身障交界 資源卡邊界 查證行動 長照身障比較 transport_resource_boundary 新北市 交通接送資料要做知識卡還是資源卡 復康巴士電話要放在哪 通用無障礙計程車要不要做制度卡 交通接送資料要做知識卡還是資源卡 復康巴士電話要放在哪 通用無障礙計程車要不要做制度卡 交通服務的入口、電話、營運中心、車隊與服務單位清單屬資源卡；知識卡只保留 DA01、復康巴士與通用無障礙計程車的制度邊界、比較關係與來源追溯。 交通接送 shared DA01 平台、復康巴士營運中心、通用無障礙計程車車隊與服務清單屬資源卡；知識卡只整理制度邊界與比較關係。 知識卡範圍\n知識卡整理制度邊界、比較關係、來源摘要與資料限制。\n- DA01 與復康巴士可成為制度卡或比較卡。\n- 通用無障礙計程車在本題作交通備案定位與資源入口。\n\n資源卡範圍\nDA01 平台、復康巴士營運中心、通用無障礙計程車車隊、各區服務清單與電話窗口屬資源卡。\n- 這些資料可用 related_resource_ids 連到正式資源卡。\n- 服務單位清單、車隊電話與營運中心異動不作制度結論來源。 [{\"body\": \"知識卡整理制度邊界、比較關係、來源摘要與資料限制。\", \"points\": [\"DA01 與復康巴士可成為制度卡或比較卡。\", \"通用無障礙計程車在本題作交通備案定位與資源入口。\"], \"title\": \"知識卡範圍\"}, {\"body\": \"DA01 平台、復康巴士營運中心、通用無障礙計程車車隊、各區服務清單與電話窗口屬資源卡。\", \"points\": [\"這些資料可用 related_resource_ids 連到正式資源卡。\", \"服務單位清單、車隊電話與營運中心異動不作制度結論來源。\"], \"title\": \"資源卡範圍\"}] 本卡依第 5 題教材與既有資源卡盤點整理，作知識卡與資源卡分流依據。 交通入口、電話、車隊與服務單位清單合併為資源卡邊界卡，不拆薄卡。 交通服務的入口、電話、營運中心、車隊與服務單位清單屬資源卡；知識卡只保留 DA01、復康巴士與通用無障礙計程車的制度邊界、比較關係與來源追溯。 [{\"agency\": \"resource_nav\", \"content\": \"既有 resource_nav 已有 DA01 平台、復康巴士、復康巴士法規/須知與通用無障礙計程車相關資源卡；入口、電話與服務清單應由資源卡維護。\", \"evidence_lines\": [{\"da01_service_notice_1150417.txt 35-46\": \"DA01 長照交通平台、Line 綁定、網站預約、預設帳密與系統廠商服務時間，屬入口與查證資料。\"}, {\"da01_service_notice_1150417.txt 54-446\": \"DA01 第 4 節服務提供單位清單，包含服務項目、通知時間、司機服務時間、預約電話與服務區域；歸資源卡或特約單位清單。\"}, {\"ntpc_rehab_bus_service_notice.txt 68-73\": \"復康巴士電話或網路訂車與營運中心聯繫方式，屬資源卡入口與查證資料。\"}, {\"ntpc_rehab_bus_service_notice.txt 136-140\": \"額滿候補無車時轉介無障礙計程車，支撐通用無障礙計程車作備案入口，不支撐其成為制度補助卡。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"RES-TR-SUP-01\", \"source_level\": \"A\", \"source_link_status\": \"public_download\", \"source_tier\": \"補充來源\", \"source_title\": \"現有 resource_nav 交通資源卡資料\", \"source_url\": \"https://chord410-svg.github.io/product-share/resource-nav-resources.json\", \"url\": \"https://chord410-svg.github.io/product-share/resource-nav-resources.json\"}] 交通服務的入口、電話、營運中心、車隊與服務單位清單屬資源卡；知識卡只保留 DA01、復康巴士與通用無障礙計程車的制度邊界、比較關係與來源追溯。\n\n知識卡範圍\n知識卡整理制度邊界、比較關係、來源摘要與資料限制。\n\n資源卡範圍\nDA01 平台、復康巴士營運中心、通用無障礙計程車車隊、各區服務清單與電話窗口屬資源卡。"
+      "content_hash": "46596c456f88f5e568375a9cc89e180b98129ab8ba7d8fc399a5950926cb53fa",
+      "knowledge_version": "2026-06-21-46596c45",
+      "embedding_text": "交通服務資源卡引用邊界 交通接送 資源卡邊界 查證行動 DA01 復康巴士 通用無障礙計程車 長照身障交界 資源卡邊界 查證行動 長照身障比較 transport_resource_boundary 新北市 交通接送資料要做知識卡還是資源卡 復康巴士電話要放在哪 通用無障礙計程車要不要做制度卡 交通接送資料要做知識卡還是資源卡 復康巴士電話要放在哪 通用無障礙計程車要不要做制度卡 交通服務的入口、電話、營運中心、車隊與服務單位清單屬資源卡；知識卡只保留 DA01、復康巴士與通用無障礙計程車的制度邊界、比較關係與來源追溯。 交通接送 shared DA01 平台、復康巴士營運中心、通用無障礙計程車車隊與服務清單屬資源卡；知識卡只整理制度邊界與比較關係。 知識卡範圍\n知識卡整理制度邊界、比較關係、來源摘要與資料限制。\n- DA01 與復康巴士可成為制度卡或比較卡。\n- 通用無障礙計程車在本題作交通備案定位與資源入口。\n\n資源卡範圍\nDA01 平台、復康巴士營運中心、通用無障礙計程車車隊、各區服務清單與電話窗口屬資源卡。\n- 這些資料可用 related_resource_ids 連到正式資源卡。\n- 服務單位清單、車隊電話與營運中心異動不作制度結論來源。 [{\"body\": \"知識卡整理制度邊界、比較關係、來源摘要與資料限制。\", \"points\": [\"DA01 與復康巴士可成為制度卡或比較卡。\", \"通用無障礙計程車在本題作交通備案定位與資源入口。\"], \"title\": \"知識卡範圍\"}, {\"body\": \"DA01 平台、復康巴士營運中心、通用無障礙計程車車隊、各區服務清單與電話窗口屬資源卡。\", \"points\": [\"這些資料可用 related_resource_ids 連到正式資源卡。\", \"服務單位清單、車隊電話與營運中心異動不作制度結論來源。\"], \"title\": \"資源卡範圍\"}] 本卡依第 5 題教材與既有資源卡盤點整理，作知識卡與資源卡分流依據。 交通入口、電話、車隊與服務單位清單合併為資源卡邊界卡，不拆薄卡。 交通服務的入口、電話、營運中心、車隊與服務單位清單屬資源卡；知識卡只保留 DA01、復康巴士與通用無障礙計程車的制度邊界、比較關係與來源追溯。 [{\"agency\": \"resource_nav\", \"content\": \"既有 resource_nav 已有 DA01 平台、復康巴士、復康巴士法規/須知與通用無障礙計程車相關資源卡；入口、電話與服務清單應由資源卡維護。\", \"evidence_lines\": [{\"da01_service_notice_1150417.txt 35-46\": \"DA01 長照交通平台、Line 綁定、網站預約、預設帳密與系統廠商服務時間，屬入口與查證資料。\"}, {\"da01_service_notice_1150417.txt 54-446\": \"DA01 第 4 節服務提供單位清單，包含服務項目、通知時間、司機服務時間、預約電話與服務區域；歸資源卡或特約單位清單。\"}, {\"ntpc_rehab_bus_service_notice.txt 68-73\": \"復康巴士電話或網路訂車與營運中心聯繫方式，屬資源卡入口與查證資料。\"}, {\"ntpc_rehab_bus_service_notice.txt 136-140\": \"額滿候補無車時轉介無障礙計程車，支撐通用無障礙計程車作備案入口，不支撐其成為制度補助卡。\"}], \"last_checked_at\": \"2026-06-21\", \"public_allowed\": true, \"source_id\": \"RES-TR-SUP-01\", \"source_level\": \"A\", \"source_link_status\": \"public_readable\", \"source_tier\": \"補充來源\", \"source_title\": \"長照資源導航：交通資源卡資料\", \"source_url\": \"https://chord410-svg.github.io/product-share/resource-nav.html\", \"url\": \"https://chord410-svg.github.io/product-share/resource-nav.html\"}] 交通服務的入口、電話、營運中心、車隊與服務單位清單屬資源卡；知識卡只保留 DA01、復康巴士與通用無障礙計程車的制度邊界、比較關係與來源追溯。\n\n知識卡範圍\n知識卡整理制度邊界、比較關係、來源摘要與資料限制。\n\n資源卡範圍\nDA01 平台、復康巴士營運中心、通用無障礙計程車車隊、各區服務清單與電話窗口屬資源卡。"
     },
     {
       "id": "vendor_claim_subsidy_verification",

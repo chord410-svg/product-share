@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260622-source-extract-links-v1';
+  const CACHE_VERSION = '20260622-source-public-url-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;

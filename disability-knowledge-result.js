@@ -37,7 +37,12 @@
     process_preapproval: '事前核定與先購買風險',
     system_eligibility_difference: '身障證明／長照資格／CMS 差異',
     care_support_respite: '短期照顧與喘息支持',
+    family_caregiver_support: '家庭照顧者支持服務',
+    foreign_caregiver_care_gap: '外籍看護短期空窗照顧',
     transport_access: '交通服務與復康巴士',
+    transport_access_scope: '交通接送服務範圍',
+    transport_service_type_difference: '交通服務類型差異',
+    transport_resource_boundary: '交通服務資源卡邊界',
     family_support: '家庭照顧者支持',
     official_window: '官方窗口與電話確認',
     output_wording: '家屬版說法與輸出邊界',
@@ -57,6 +62,7 @@
     smart_assistive_assessment_document: '智慧輔具評估文件',
     smart_assistive_operation_readiness: '智慧輔具操作準備',
     smart_assistive_rental_maintenance: '智慧輔具租賃維護',
+    disability_assistive_system_entry: '身障輔具制度與輔具中心入口',
     smart_assistive_product_leads: '智慧輔具產品線索',
     smart_assistive_legacy_alias: '智慧輔具舊方向參考',
   };
@@ -392,12 +398,16 @@
 
   function cardPromptBlock(card, index) {
     const sources = cardSources(card);
+    const comparisonLabel = comparisonGroupLabel(
+      card.comparison_group,
+      card.comparison_group_label || card?.comparison_profile?.group_label || card?.comparison_profile?.title || card?.title || cardId(card),
+    );
     const sourceLines = sources.length
       ? sources.map((ref, idx) => `${idx + 1}. ${ref.title || ref.source_id || '來源'}｜${ref.source_level || ref.level || '待確認'}｜${ref.url || '無連結'}`).join('\n')
       : '來源待補。';
     return [
       `## ${index + 1}. ${card.title || cardId(card)}`,
-      `側別：${card.system_side || '未標示'}｜同屬性：${card.comparison_group || '未標示'}`,
+      `側別：${card.system_side || '未標示'}｜同屬性：${comparisonLabel}`,
       `摘要：${compactText(card.knowledge_brief || card.family_safe_summary || '')}`,
       '內容整合：',
       integratedTextForCard(card) || '內容整合待補。',

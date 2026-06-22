@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260622-legacy-retire-v1';
+const CACHE_VERSION = '20260622-legacy-retire-v2';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1415,7 +1415,7 @@ function answerableQuestionsHtml(card) {
 
 function contactRowsHtml(card) {
   const explicitContacts = asArray(card.suggested_contacts || card.contact_windows || card.check_contacts);
-  if (!explicitContacts.length) return '<p class="muted">此卡尚待補齊對應單位／窗口／聯絡方式。</p>';
+  if (!explicitContacts.length) return '<p class="muted">此卡尚待補齊查證窗口或資源卡連結。</p>';
   return `<ul class="detail-list contact-link-list">${explicitContacts.map((contact) => {
     if (contact && typeof contact === 'object') {
       const name = contact.name || contact.title || contact.window || contact.label || '窗口';

@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260622-source-public-url-v1';
+  const CACHE_VERSION = '20260622-source-public-assets-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;
@@ -137,13 +137,16 @@
 
   function sourceLinkStatus(url, sourceId = '', title = '') {
     const normalizedUrl = String(url || '').trim();
-    if (/^https?:\/\//i.test(normalizedUrl)) return 'public_url';
+    if (/^https?:\/\//i.test(normalizedUrl)) {
+      return /\/disability-sources\//i.test(normalizedUrl) ? 'public_download' : 'public_url';
+    }
     if (/^file:\/\//i.test(normalizedUrl) || normalizedUrl.startsWith('/')) return 'local_file';
     if (/gap|缺口/i.test(String(sourceId || '')) || /缺口/.test(String(title || ''))) return 'source_gap';
     return 'missing_public_url';
   }
 
   function sourceLinkStatusLabel(status) {
+    if (status === 'public_download') return '公開附件下載／閱覽';
     if (status === 'local_file') return '本機已讀附件，公開連結待補';
     if (status === 'source_gap') return '無公開來源連結：制度缺口說明';
     if (status === 'missing_public_url') return '公開連結待補';
@@ -169,7 +172,7 @@
     const linkText = /^https?:\/\//i.test(String(ref.url || ''))
       ? ref.url
       : (statusLabel || '無公開連結');
-    return `${index + 1}. ${title}｜${level}｜最後確認：${checked}｜${linkText}`;
+    return `${index + 1}. ${title}｜${level}｜最後確認：${checked}｜${linkText}${statusLabel ? `｜${statusLabel}` : ''}`;
   }
 
   function sourceText(card) {

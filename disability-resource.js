@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260622-source-public-assets-v1';
+const CACHE_VERSION = '20260622-source-readable-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1191,6 +1191,8 @@ function sourceTierLabel(tier) {
 function sourceLinkStatus(url, sourceId = '', title = '') {
   const normalizedUrl = String(url || '').trim();
   if (/^https?:\/\//i.test(normalizedUrl)) {
+    if (/\/disability-sources\/[^?#]+\.html(?:[?#].*)?$/i.test(normalizedUrl)) return 'public_readable';
+    if (/\/disability-sources\/[^?#]+\.json(?:[?#].*)?$/i.test(normalizedUrl)) return 'machine_snapshot';
     return /\/disability-sources\//i.test(normalizedUrl) ? 'public_download' : 'public_url';
   }
   if (/^file:\/\//i.test(normalizedUrl) || normalizedUrl.startsWith('/')) return 'local_file';
@@ -1199,7 +1201,9 @@ function sourceLinkStatus(url, sourceId = '', title = '') {
 }
 
 function sourceLinkStatusLabel(status) {
+  if (status === 'public_readable') return '來源整理頁';
   if (status === 'public_download') return '公開附件下載／閱覽';
+  if (status === 'machine_snapshot') return '機器資料快照（內部備查）';
   if (status === 'local_file') return '本機已讀附件，公開連結待補';
   if (status === 'source_gap') return '無公開來源連結：制度缺口說明';
   if (status === 'missing_public_url') return '公開連結待補';

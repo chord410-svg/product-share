@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260622-legacy-retire-v2';
+  const CACHE_VERSION = '20260622-source-extract-links-v1';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;
@@ -135,26 +135,59 @@
     return asList(card.source_refs || card.sources || []).map((ref) => typeof ref === 'string' ? { title: ref } : ref);
   }
 
+  function sourceLinkStatus(url, sourceId = '', title = '') {
+    const normalizedUrl = String(url || '').trim();
+    if (/^https?:\/\//i.test(normalizedUrl)) return 'public_url';
+    if (/^file:\/\//i.test(normalizedUrl) || normalizedUrl.startsWith('/')) return 'local_file';
+    if (/gap|缺口/i.test(String(sourceId || '')) || /缺口/.test(String(title || ''))) return 'source_gap';
+    return 'missing_public_url';
+  }
+
+  function sourceLinkStatusLabel(status) {
+    if (status === 'local_file') return '本機已讀附件，公開連結待補';
+    if (status === 'source_gap') return '無公開來源連結：制度缺口說明';
+    if (status === 'missing_public_url') return '公開連結待補';
+    return '';
+  }
+
+  function sourceRefMap(card) {
+    const map = new Map();
+    sourceRefs(card).forEach((ref) => {
+      if (!ref || typeof ref !== 'object') return;
+      const id = String(ref.source_id || '').trim();
+      if (id) map.set(id, ref);
+    });
+    return map;
+  }
+
+  function sourceLineText(ref, index) {
+    const title = ref.title || ref.source_id || '來源';
+    const level = ref.source_level || ref.level || '待確認';
+    const checked = ref.last_checked_at || '待確認';
+    const status = ref.source_link_status || sourceLinkStatus(ref.url, ref.source_id, title);
+    const statusLabel = sourceLinkStatusLabel(status);
+    const linkText = /^https?:\/\//i.test(String(ref.url || ''))
+      ? ref.url
+      : (statusLabel || '無公開連結');
+    return `${index + 1}. ${title}｜${level}｜最後確認：${checked}｜${linkText}`;
+  }
+
   function sourceText(card) {
     const refs = sourceRefs(card);
     if (!refs.length) return '來源待補官方資料。';
-    return refs.map((ref, index) => {
-      const title = ref.title || ref.source_id || '來源';
-      const level = ref.source_level || ref.level || '未分級';
-      const checked = ref.last_checked_at || '待確認';
-      const url = ref.url || '';
-      return `${index + 1}. ${title}｜${level}｜最後確認：${checked}${url ? `｜${url}` : ''}`;
-    }).join('\n');
+    return refs.map((ref, index) => sourceLineText(normalizeSourceRef(ref), index)).join('\n');
   }
 
   function sourceExtractRefs(card) {
     const extracts = Array.isArray(card?.source_extracts) ? card.source_extracts : [];
+    const refsById = sourceRefMap(card);
     return extracts.map((extract) => ({
       source_id: extract.source_id || '',
-      title: extract.source_title || extract.title || extract.source_id || '來源',
+      title: extract.source_title || extract.title || refsById.get(extract.source_id)?.title || extract.source_id || '來源',
       source_level: extract.source_level || '待確認',
-      url: extract.url || extract.source_url || '',
+      url: extract.source_url || extract.url || refsById.get(extract.source_id)?.url || '',
       last_checked_at: extract.updated_at || extract.last_checked_at || '待確認',
+      source_link_status: extract.source_link_status,
     }));
   }
 
@@ -211,10 +244,13 @@
       const title = ref.title || ref.source_id || '來源';
       const level = ref.source_level || ref.level || '待確認';
       const checked = ref.last_checked_at || '待確認';
-      const titleHtml = ref.url
+      const status = ref.source_link_status || sourceLinkStatus(ref.url, ref.source_id, title);
+      const statusLabel = sourceLinkStatusLabel(status);
+      const titleHtml = /^https?:\/\//i.test(String(ref.url || ''))
         ? `<a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
         : escapeHtml(title);
-      return `<div class="result-info-row result-source-row">${titleHtml}<span>${escapeHtml(level)}｜最後確認：${escapeHtml(checked)}</span></div>`;
+      const statusText = statusLabel ? `｜${statusLabel}` : '';
+      return `<div class="result-info-row result-source-row">${titleHtml}<span>${escapeHtml(level)}｜最後確認：${escapeHtml(checked)}${escapeHtml(statusText)}</span></div>`;
     }).join('')}</div>`;
   }
 
@@ -250,13 +286,15 @@
     if (typeof ref !== 'object') return null;
     const sourceId = String(ref.source_id || ref.id || '').trim();
     const title = String(ref.title || ref.source_title || sourceId || '來源').trim();
+    const url = ref.url || ref.source_url || '';
     return {
       source_id: sourceId,
       title,
       source_level: ref.source_level || ref.level || '待確認',
-      url: ref.url || ref.source_url || '',
+      url,
       last_checked_at: ref.last_checked_at || ref.updated_at || '待確認',
       public_allowed: ref.public_allowed,
+      source_link_status: ref.source_link_status || sourceLinkStatus(url, sourceId, title),
     };
   }
 
@@ -403,7 +441,7 @@
       card.comparison_group_label || card?.comparison_profile?.group_label || card?.comparison_profile?.title || card?.title || cardId(card),
     );
     const sourceLines = sources.length
-      ? sources.map((ref, idx) => `${idx + 1}. ${ref.title || ref.source_id || '來源'}｜${ref.source_level || ref.level || '待確認'}｜${ref.url || '無連結'}`).join('\n')
+      ? sources.map((ref, idx) => sourceLineText(ref, idx)).join('\n')
       : '來源待補。';
     return [
       `## ${index + 1}. ${card.title || cardId(card)}`,

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260622-knowledge-publish-v1';
+const CACHE_VERSION = '20260622-legacy-retire-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1431,8 +1431,8 @@ function contactRowsHtml(card) {
 function actionDetailHtml(card) {
   return `
     <div class="detail-grid">
-      <div class="detail-field detail-field-wide"><strong>知識對應問題</strong>${answerableQuestionsHtml(card)}</div>
-      <div class="detail-field detail-field-wide"><strong>對應單位／窗口／聯絡方式</strong>${contactRowsHtml(card)}</div>
+      <div class="detail-field detail-field-wide"><strong>卡片可回答問題</strong>${answerableQuestionsHtml(card)}</div>
+      <div class="detail-field detail-field-wide"><strong>查證窗口／資源卡</strong>${contactRowsHtml(card)}${resourceHintHtml(card)}</div>
     </div>
   `;
 }
@@ -1527,10 +1527,10 @@ function knowledgeSummaryPanelHtml(card) {
 
 function detailTabsHtml(card) {
   const tabs = [
-    ['summary', '知識整理與解釋', `
+    ['summary', '教材內容', `
       <section class="detail-section detail-brief-section">
-        <p class="eyebrow">知識整理與解釋</p>
-        <h3>資料教材</h3>
+        <p class="eyebrow">教材內容</p>
+        <h3>摘要、內容整合與資料本體</h3>
         ${knowledgeSummaryPanelHtml(card)}
       </section>
     `],

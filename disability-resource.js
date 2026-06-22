@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260622-source-readable-v1';
+const CACHE_VERSION = '20260622-attribute-collapse-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -23,6 +23,7 @@ const state = {
   activeAttributeFilter: '',
   activeAttributeGroup: 'domain',
   activeAttributeSelections: {},
+  expandedAttributeGroups: {},
   currentKnowledgeCards: [],
   generationHistory: [],
   activeGenerationId: '',
@@ -415,6 +416,7 @@ function resetAttributeSelections(cards = []) {
   const hits = attributeHitMap(cards);
   const catalog = groupAttributeFilters(attributeCatalog());
   state.activeAttributeSelections = {};
+  state.expandedAttributeGroups = {};
   for (const [type, attrs] of catalog.entries()) {
     const selected = new Set(attrs.filter((attr) => hits.has(attr.key)).map((attr) => attr.key));
     if (selected.size) state.activeAttributeSelections[type] = selected;
@@ -458,7 +460,12 @@ function renderAttributeFilters(cards = []) {
     return;
   }
   const selectedCounts = selectedAttributeCountMap();
-  const grouped = groupAttributeFilters(catalog.map((attr) => ({ ...attr, selectedCount: selectedCounts.get(attr.key) || 0 })));
+  const hitCounts = attributeHitMap(cards);
+  const grouped = groupAttributeFilters(catalog.map((attr) => ({
+    ...attr,
+    selectedCount: selectedCounts.get(attr.key) || 0,
+    hitCount: hitCounts.get(attr.key) || 0,
+  })));
   if (!grouped.has(state.activeAttributeGroup)) {
     state.activeAttributeGroup = grouped.has('domain') ? 'domain' : (grouped.has('system_scope') ? 'system_scope' : catalog[0].type);
   }
@@ -467,44 +474,65 @@ function renderAttributeFilters(cards = []) {
   const activeLabel = ATTRIBUTE_TYPE_LABELS[state.activeAttributeGroup] || '屬性';
   const selected = selectedAttributeSet(state.activeAttributeGroup);
   const selectedSubCount = activeSubs.filter((attr) => attr.selectedCount).length;
+  const hitSubCount = activeSubs.filter((attr) => attr.hitCount).length;
   const sortedActiveSubs = [...activeSubs];
+  const expanded = Boolean(state.expandedAttributeGroups[state.activeAttributeGroup]);
+  const primarySubs = sortedActiveSubs.filter((attr) => attr.selectedCount || attr.hitCount || selected.has(attr.key));
+  const collapsedSubs = primarySubs.length ? primarySubs : sortedActiveSubs.slice(0, 4);
+  const visibleActiveSubs = expanded ? sortedActiveSubs : collapsedSubs;
+  const hiddenSubCount = Math.max(0, sortedActiveSubs.length - collapsedSubs.length);
   container.innerHTML = `
     <div class="attribute-filter-head">
       <span class="attribute-filter-label">屬性分類</span>
-      <span class="small-note">${escapeHtml(activeLabel)}：目前副本已加入 ${selectedSubCount}/${activeSubs.length} 子屬性。點屬性篩選卡片；點卡片加入或移出目前副本。</span>
+      <span class="small-note">${escapeHtml(activeLabel)}：目前副本已加入 ${selectedSubCount}/${activeSubs.length} 子屬性，命中 ${hitSubCount}/${activeSubs.length}。點屬性篩選卡片；點卡片加入或移出目前副本。</span>
     </div>
     <div class="attribute-main-tabs" data-count="${typeOrder.length}" aria-label="主屬性分類">
       ${typeOrder.map((type) => {
         const attrs = grouped.get(type) || [];
         const typeSelectedCount = attrs.filter((attr) => attr.selectedCount).length;
+        const typeHitCount = attrs.filter((attr) => attr.hitCount).length;
         const isActive = state.activeAttributeGroup === type;
+        const countText = typeSelectedCount ? `${typeSelectedCount}/${attrs.length} 已選` : (typeHitCount ? `${typeHitCount}/${attrs.length} 命中` : `0/${attrs.length} 已選`);
         return `
-          <button type="button" class="attribute-main-button${isActive ? ' is-active' : ''}${typeSelectedCount ? ' has-selected-cards' : ''}" data-attribute-type="${escapeHtml(type)}">
+          <button type="button" class="attribute-main-button${isActive ? ' is-active' : ''}${typeHitCount ? ' has-hit-cards' : ''}${typeSelectedCount ? ' has-selected-cards' : ''}" data-attribute-type="${escapeHtml(type)}">
             <strong>${escapeHtml(ATTRIBUTE_TYPE_LABELS[type] || type)}</strong>
-            <span>${typeSelectedCount}/${attrs.length} 已選</span>
+            <span>${escapeHtml(countText)}</span>
           </button>
         `;
       }).join('')}
     </div>
     <div class="attribute-subchips" aria-label="${escapeHtml(activeLabel)}子屬性">
-      ${sortedActiveSubs.map((attr) => {
+      ${visibleActiveSubs.map((attr) => {
         const isFilterActive = selected.has(attr.key);
         const selectedCount = Number(attr.selectedCount || 0);
+        const hitCount = Number(attr.hitCount || 0);
         const totalCount = Math.max(Number(attr.totalCount || 0), selectedCount);
-        const countText = `${selectedCount}/${totalCount}`;
+        const countText = selectedCount ? `${selectedCount}/${totalCount}` : (hitCount ? `命中 ${hitCount}` : `0/${totalCount}`);
         return `
-          <button type="button" class="attribute-chip${isFilterActive ? ' is-filter-active' : ''}${selectedCount ? ' has-selected-cards' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isFilterActive ? 'true' : 'false'}">
+          <button type="button" class="attribute-chip${isFilterActive ? ' is-filter-active' : ''}${hitCount ? ' has-hit-cards' : ''}${selectedCount ? ' has-selected-cards' : ''}" data-attribute-key="${escapeHtml(attr.key)}" aria-pressed="${isFilterActive ? 'true' : 'false'}">
             <strong>${escapeHtml(attr.label)}</strong>
             <span>${escapeHtml(countText)}</span>
           </button>
         `;
       }).join('')}
     </div>
+    ${hiddenSubCount ? `
+      <button type="button" class="attribute-subchip-toggle" data-attribute-toggle-type="${escapeHtml(state.activeAttributeGroup)}" aria-expanded="${expanded ? 'true' : 'false'}">
+        ${expanded ? '收合其他未選子屬性' : `顯示其他未選子屬性 ${hiddenSubCount}`}
+      </button>
+    ` : ''}
   `;
   container.querySelectorAll('[data-attribute-type]').forEach((button) => {
     button.addEventListener('click', () => {
       state.activeAttributeGroup = button.dataset.attributeType || state.activeAttributeGroup;
       renderKnowledgeCards(state.currentKnowledgeCards || cards);
+    });
+  });
+  container.querySelectorAll('[data-attribute-toggle-type]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const type = button.dataset.attributeToggleType || state.activeAttributeGroup;
+      state.expandedAttributeGroups[type] = !state.expandedAttributeGroups[type];
+      renderAttributeFilters(state.currentKnowledgeCards || cards);
     });
   });
   container.querySelectorAll('[data-attribute-key]').forEach((button) => {

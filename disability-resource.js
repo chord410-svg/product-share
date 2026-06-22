@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260622-source-public-url-v1';
+const CACHE_VERSION = '20260622-source-public-assets-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1190,13 +1190,16 @@ function sourceTierLabel(tier) {
 
 function sourceLinkStatus(url, sourceId = '', title = '') {
   const normalizedUrl = String(url || '').trim();
-  if (/^https?:\/\//i.test(normalizedUrl)) return 'public_url';
+  if (/^https?:\/\//i.test(normalizedUrl)) {
+    return /\/disability-sources\//i.test(normalizedUrl) ? 'public_download' : 'public_url';
+  }
   if (/^file:\/\//i.test(normalizedUrl) || normalizedUrl.startsWith('/')) return 'local_file';
   if (/gap|缺口/i.test(String(sourceId || '')) || /缺口/.test(String(title || ''))) return 'source_gap';
   return 'missing_public_url';
 }
 
 function sourceLinkStatusLabel(status) {
+  if (status === 'public_download') return '公開附件下載／閱覽';
   if (status === 'local_file') return '本機已讀附件，公開連結待補';
   if (status === 'source_gap') return '無公開來源連結：制度缺口說明';
   if (status === 'missing_public_url') return '公開連結待補';
@@ -1268,6 +1271,8 @@ function sourceDetailHtml(card) {
   if (!refs.length) return '<p class="muted">此卡尚未登錄來源；請依官方窗口補查。</p>';
   return refs.map((ref, index) => {
     const url = String(ref.url || '');
+    const status = ref.source_link_status || sourceLinkStatus(url, ref.source_id, ref.title || '');
+    const statusLabel = sourceLinkStatusLabel(status);
     const link = /^https?:\/\//.test(url)
       ? `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`
       : '<span class="muted">未提供可開啟網址</span>';
@@ -1275,6 +1280,7 @@ function sourceDetailHtml(card) {
       <div class="detail-field detail-source">
         <strong>${index + 1}. ${escapeHtml(ref.title || ref.source_id || '來源')}</strong>
         <span>來源等級：${escapeHtml(sourceLevelLabel(ref.source_level))}｜確認日：${escapeHtml(ref.last_checked_at || '待確認')}</span>
+        ${statusLabel ? `<span>${escapeHtml(statusLabel)}</span>` : ''}
         ${link}
       </div>
     `;

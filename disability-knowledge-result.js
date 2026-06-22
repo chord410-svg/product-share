@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'disability_knowledge_packages_v1';
-  const CACHE_VERSION = '20260622-legacy-retire-v1';
+  const CACHE_VERSION = '20260622-legacy-retire-v2';
   let activeMode = new URLSearchParams(window.location.search).get('output') || localStorage.getItem('disability_knowledge_result_mode_v1') || 'family';
   if (activeMode === 'boundary' || activeMode === 'comparison') activeMode = 'analysis';
   let activePackage = null;
@@ -368,10 +368,10 @@
           <h4>${index + 1}. ${escapeHtml(card.title || cardId(card))}</h4>
           <div class="result-action-card-body">
             <section>
-              <h5>對應單位／窗口／聯絡方式</h5>
+              <h5>查證窗口／資源卡</h5>
               ${contacts.length
                 ? `<div class="result-info-stack">${contacts.map(contactHtml).join('')}</div>`
-                : '<p class="muted-text">待補明確窗口／聯絡方式。</p>'}
+                : '<p class="muted-text">待補明確查證窗口或資源卡連結。</p>'}
             </section>
             <section>
               <h5>來源連結</h5>

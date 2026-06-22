@@ -8637,7 +8637,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。\n\n身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -8649,7 +8649,7 @@
       "system_side": "disability",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡與第四題居家無障礙正式卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -8666,8 +8666,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -8710,8 +8710,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "561a98ca67b1e422c843f7862075529d57a42181420a146d5a6bc49bc876733d",
-      "knowledge_version": "2026-06-17-561a98ca",
+      "content_hash": "450f235e86f076ccdfff9b6c4f9be31e754e1257a1c55d16aaee803ce487770f",
+      "knowledge_version": "2026-06-17-450f235e",
       "embedding_text": "身障室內動線與輔具替代方案查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_home_route 中央共通 新北市 身障者家中動線不方便，想找輔具或改善 身障室內動線與輔具替代方案查證 室內通行與門檻改善 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 移動與上下樓 disability 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。\n\n身障側室內通行問題可請輔具中心評估輪椅、坡道、移動輔具或替代配置。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -8806,7 +8806,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。\n\n身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -8818,7 +8818,7 @@
       "system_side": "disability",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -8835,8 +8835,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -8895,8 +8895,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "5059563016d929c9074076574fb48164e3872e72cec646870d9913153b881291",
-      "knowledge_version": "2026-06-17-50595630",
+      "content_hash": "8eac8882a69401f6d324627f26db5b0d6e1fd8c2ab4feddd444bc19119b4598a",
+      "knowledge_version": "2026-06-17-8eac8882",
       "embedding_text": "身障上下樓設備與輔具中心查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_stair_device 中央共通 新北市 身障側爬梯機或上下樓設備怎麼問 身障上下樓設備與輔具中心查證 爬梯機／上下樓設備 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 移動與上下樓 disability 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市政府社會局\", \"content\": \"身心障礙福利服務涉及地方政府社政窗口、身障資格、輔具或生活支持等服務；實際補助或文件應依地方公告與承辦窗口確認。\", \"created_at\": \"\", \"source_id\": \"ntpc_social_disability\", \"source_level\": \"A\", \"source_title\": \"新北市政府社會局：身心障礙福利服務\", \"source_url\": \"https://www.sw.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。\n\n身障側若遇到爬梯機或上下樓設備，應請輔具中心或社會局確認是否有品項、評估與安全限制。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -8982,7 +8982,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。\n\n身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -8994,7 +8994,7 @@
       "system_side": "disability",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -9011,8 +9011,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -9055,8 +9055,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "62d5d6bcfacedacc9fc0e71b981a31eb6bb838b4e4a6440e4acd2239183f1cbd",
-      "knowledge_version": "2026-06-17-62d5d6bc",
+      "content_hash": "9c35b1e0742a441bdfff1dcf3ac71525fd5981d0e7e8afa4ad54ef50c6e5ee87",
+      "knowledge_version": "2026-06-17-9c35b1e0",
       "embedding_text": "身障移位輔具適配與訓練查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_transfer_lifting 中央共通 新北市 身障者需要移位輔具或照顧者搬扶協助 身障移位輔具適配與訓練查證 移位與移乘安全 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 移動與上下樓 disability 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}] 身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。\n\n身障側移位輔具可先由輔具中心確認適配、訓練與替代方案，避免設備不合用。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -9336,7 +9336,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。\n\n身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -9348,7 +9348,7 @@
       "system_side": "disability",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -9365,8 +9365,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -9425,8 +9425,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "a3aac614c8b08b7e11fd06e980017b328871ff1f059919a94931f2c85fb855c4",
-      "knowledge_version": "2026-06-17-a3aac614",
+      "content_hash": "69f1f9ff563a5422041348602e032f6ffb4322f920ead5ff77d9f91c2c00a743",
+      "knowledge_version": "2026-06-17-69f1f9ff",
       "embedding_text": "身障輪椅評估與文件查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 身障 長照身障交界 查證流程 地方窗口 mobility_wheelchair_device 中央共通 新北市 身障要申請輪椅或電動輪椅 身障輪椅評估與文件查證 輪椅與移動輔具 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 移動與上下樓 disability 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市輔具資源中心\", \"content\": \"輔具資源中心可協助輔具諮詢、評估、試用、維修或相關申請方向確認；遇到特殊或不確定輔具需求時可作為查證窗口。\", \"created_at\": \"\", \"source_id\": \"ntpc_assistive_center\", \"source_level\": \"A\", \"source_title\": \"新北市輔具資源中心\", \"source_url\": \"https://atrc.aihsin.ntpc.gov.tw/\", \"updated_at\": \"2026-06-17\"}, {\"agency\": \"新北市輔具資源服務系統\", \"content\": \"新北輔具線上申請系統可作為身障輔具或地方輔具服務申請入口之一；正式使用前仍需確認身分、項目、文件與承辦規則。\", \"created_at\": \"\", \"source_id\": \"ntpc_easygo\", \"source_level\": \"A\", \"source_title\": \"新北輔具 Easy Go 線上申請系統\", \"source_url\": \"https://atrc.easygo.ntpc.gov.tw/login\", \"updated_at\": \"2026-06-17\"}] 身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。\n\n身障側輪椅需確認輔具中心評估、醫療文件、補助項目與地方申請路徑。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -9511,7 +9511,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。\n\n長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -9523,7 +9523,7 @@
       "system_side": "ltc",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡與第四題居家無障礙正式卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -9540,8 +9540,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -9584,8 +9584,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "0f8d9c7736c5c2964719f1487cdb89ea2e2d9bd5633d935a2d5db64000ad75a3",
-      "knowledge_version": "2026-06-17-0f8d9c77",
+      "content_hash": "9a41dc8d0baf89e4afa5b65d6adf962544c57b13993793498ce5c57a332c7baf",
+      "knowledge_version": "2026-06-17-9a41dc8d",
       "embedding_text": "長照室內動線與門檻通行查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_home_route 中央共通 新北市 家裡門檻、斜坡、輪椅進出不方便 長照室內動線與門檻通行查證 室內通行與門檻改善 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 移動與上下樓 ltc 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。\n\n長照側室內動線問題可能落在居家無障礙或移動輔具，需確認實際照顧動線。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -9670,7 +9670,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。\n\n長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -9682,7 +9682,7 @@
       "system_side": "ltc",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -9699,8 +9699,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -9749,8 +9749,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "268516263798eb47d49d5516cc9f116b084f391759f8b08be06efea300ab1835",
-      "knowledge_version": "2026-06-17-26851626",
+      "content_hash": "500e19f6a2edce3c7e30533854b0335c70da71b41b188110c245e30ebc668a07",
+      "knowledge_version": "2026-06-17-500e19f6",
       "embedding_text": "長照上下樓與爬梯設備環境查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_stair_device 中央共通 新北市 家屬問爬梯機能不能申請長照 長照上下樓與爬梯設備環境查證 爬梯機／上下樓設備 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 移動與上下樓 ltc 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。\n\n長照側遇到爬梯或上下樓設備時，先確認長照是否有相近服務、居家環境限制與安全責任。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -9835,7 +9835,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。\n\n長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -9847,7 +9847,7 @@
       "system_side": "ltc",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -9864,8 +9864,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -9914,8 +9914,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "e8c819a9ec766f532ab65a727ce4b09cb5a7b8d8800b37a7a37ffd56556c8811",
-      "knowledge_version": "2026-06-17-e8c819a9",
+      "content_hash": "fa3fe1bc5ecf4770f2f3816dc632ceb1b612d0d6040ed558ad26c5acee5a9b50",
+      "knowledge_version": "2026-06-17-fa3fe1bc",
       "embedding_text": "長照移位與移乘輔具安全查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_transfer_lifting 中央共通 新北市 家屬問移位機、移位帶或移乘設備 長照移位與移乘輔具安全查證 移位與移乘安全 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 移動與上下樓 ltc 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。\n\n長照側移位移乘需確認照顧情境、照顧者能力、租賃維護與安全教學。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {
@@ -10184,7 +10184,7 @@
       ],
       "last_checked_at": "2026-06-17",
       "next_review_at": "2026-12-17",
-      "status": "active",
+      "status": "deprecated",
       "confidence": "待確認",
       "body": "長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。\n\n長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。",
       "domain": "移動與上下樓",
@@ -10196,7 +10196,7 @@
       "system_side": "ltc",
       "alias_to": "",
       "replaced_by": "",
-      "retire_reason": "",
+      "retire_reason": "已由第三題輪椅、電動輪椅、移位機、爬梯機正式品項卡取代；保留舊副本可讀性。",
       "answerable_questions": [],
       "comparison_summary": [],
       "source_update_watch": [
@@ -10213,8 +10213,8 @@
       "core_source_ids": [],
       "supplement_source_ids": [],
       "lead_source_ids": [],
-      "front_visible": true,
-      "searchable": true,
+      "front_visible": false,
+      "searchable": false,
       "integrated_sections": [],
       "source_extracts": [
         {
@@ -10263,8 +10263,8 @@
       },
       "comparison_profile": {},
       "curriculum_reference": {},
-      "content_hash": "1c69cc787893e2a5409db8a1508a229b38afb3fc620efc61dd06df6a4b697623",
-      "knowledge_version": "2026-06-17-1c69cc78",
+      "content_hash": "bbbcb7d4703a288a478ec95d71b5690e0305d92b00782df149086e803c329f71",
+      "knowledge_version": "2026-06-17-bbbcb7d4",
       "embedding_text": "長照輪椅租賃與移動輔具查證 移動與上下樓 輪椅 交通接送 爬梯機 移位 長照 查證流程 地方窗口 mobility_wheelchair_device 中央共通 新北市 長照有沒有輪椅或移動輔具可用 長照輪椅租賃與移動輔具查證 輪椅與移動輔具 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 移動與上下樓 ltc 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。 [] 需依正式公告與地方窗口持續確認 同一概念下的相近政策、窗口與查證問題合併為一張卡；不同制度側以 system_side 和 comparison_group 串聯比較。 [{\"agency\": \"新北市政府衛生局／長照相關服務\", \"content\": \"新北市長照服務包含輔具及居家無障礙相關申請路徑，個管師應確認服務項目、評估、核定、施工或購置前後的流程。\", \"created_at\": \"\", \"source_id\": \"ntpc_ltc_assistive\", \"source_level\": \"A\", \"source_title\": \"新北市長照輔具及居家無障礙服務\", \"source_url\": \"https://www.health.ntpc.gov.tw/basic/?node=204743\", \"updated_at\": \"2026-06-17\"}] 長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。\n\n長照側輪椅或移動輔具要確認租賃、購置、維修、尺寸與使用環境。 這類問題不能只用設備名稱判斷，還要看外出目的、家中環境、照顧者能力、是否需要評估，以及長照或身障哪一側有正式入口。"
     },
     {

@@ -116,8 +116,6 @@ button { border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; font-
 .attribute-subchips { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 8px; }
 .attribute-chip { display: flex; align-items: center; justify-content: space-between; gap: 6px; background: #eef5fb; color: #17324d; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; text-align: left; }
 .attribute-chip strong { font-size: 13px; line-height: 1.35; }
-.attribute-main-button.has-hit-cards:not(.has-selected-cards), .attribute-chip.has-hit-cards:not(.has-selected-cards) { border-color: #b9d8f0; background: #f0f7fd; box-shadow: inset 4px 0 0 rgba(61, 125, 178, 0.24); }
-.attribute-chip.has-hit-cards:not(.has-selected-cards) span { border-color: #c8def0; color: #225378; }
 .attribute-chip.has-selected-cards { border-color: #9bd4ca; background: #eefbf8; color: var(--teal-dark); box-shadow: inset 4px 0 0 rgba(15, 118, 110, 0.32); }
 .attribute-chip.is-filter-active { background: #087f7a; color: #fff; border-color: #06615c; box-shadow: inset 4px 0 0 rgba(3, 77, 73, 0.72), 0 0 0 2px rgba(8, 127, 122, 0.14); }
 .attribute-chip.is-filter-active.has-selected-cards { border-color: #034d49; background: #06615c; color: #fff; box-shadow: inset 4px 0 0 rgba(3, 77, 73, .82), 0 0 0 2px rgba(8, 127, 122, .18); }
@@ -1063,12 +1061,6 @@ button:active {
   box-shadow: inset 4px 0 0 rgba(8, 127, 122, .25);
 }
 
-.attribute-main-button.has-hit-cards:not(.has-selected-cards) {
-  border-color: #b9d8f0;
-  background: #f0f7fd;
-  box-shadow: inset 4px 0 0 rgba(61, 125, 178, .22);
-}
-
 .attribute-main-button.is-active {
   border-color: #06615c;
   background: #087f7a;
@@ -1088,13 +1080,6 @@ button:active {
   background: #eefbf8;
   color: var(--teal-dark);
   box-shadow: inset 4px 0 0 rgba(8, 127, 122, .28);
-}
-
-.attribute-chip.has-hit-cards:not(.has-selected-cards) {
-  border-color: #b9d8f0;
-  background: #f0f7fd;
-  color: #17324d;
-  box-shadow: inset 4px 0 0 rgba(61, 125, 178, .22);
 }
 
 .attribute-chip.is-filter-active {
@@ -1127,12 +1112,6 @@ button:active {
   border-color: #99d7cd;
   background: #fff;
   color: var(--teal-dark);
-}
-
-.attribute-chip.has-hit-cards:not(.has-selected-cards) span {
-  border-color: #c8def0;
-  background: #fff;
-  color: #225378;
 }
 
 .attribute-subchip-toggle {

@@ -1,4 +1,4 @@
-const CACHE_VERSION = '20260622-legacy-retire-v2';
+const CACHE_VERSION = '20260622-source-extract-links-v1';
 const PACKAGE_STORAGE_KEY = 'disability_knowledge_packages_v1';
 const KNOWLEDGE_PACK_SCHEMA_VERSION = 'knowledgepack.v1';
 const KNOWLEDGE_PACK_MANIFEST_MARKER = 'KNOWLEDGE_PACK_MANIFEST';
@@ -1149,6 +1149,15 @@ function sourceRefs(card) {
   return Array.isArray(card?.source_refs) ? card.source_refs.filter((ref) => ref && typeof ref === 'object') : [];
 }
 
+function sourceRefMap(card) {
+  const map = new Map();
+  sourceRefs(card).forEach((ref) => {
+    const id = String(ref.source_id || '').trim();
+    if (id) map.set(id, ref);
+  });
+  return map;
+}
+
 const SOURCE_LEVEL_LABELS = {
   A: 'A級官方來源',
   B: 'B級機構來源',
@@ -1177,6 +1186,21 @@ function sourceTierLabel(tier) {
   if (/補充/.test(raw)) return '補充來源';
   if (/待查|線索|lead|pending/i.test(raw)) return '待查來源';
   return labelText(raw);
+}
+
+function sourceLinkStatus(url, sourceId = '', title = '') {
+  const normalizedUrl = String(url || '').trim();
+  if (/^https?:\/\//i.test(normalizedUrl)) return 'public_url';
+  if (/^file:\/\//i.test(normalizedUrl) || normalizedUrl.startsWith('/')) return 'local_file';
+  if (/gap|缺口/i.test(String(sourceId || '')) || /缺口/.test(String(title || ''))) return 'source_gap';
+  return 'missing_public_url';
+}
+
+function sourceLinkStatusLabel(status) {
+  if (status === 'local_file') return '本機已讀附件，公開連結待補';
+  if (status === 'source_gap') return '無公開來源連結：制度缺口說明';
+  if (status === 'missing_public_url') return '公開連結待補';
+  return '';
 }
 
 function sourceRank(ref) {
@@ -1317,8 +1341,22 @@ function knowledgeIntegratedHtml(card) {
 }
 
 function sourceExtracts(card) {
+  const refsById = sourceRefMap(card);
   return Array.isArray(card?.source_extracts)
-    ? card.source_extracts.filter((row) => row && typeof row === 'object')
+    ? card.source_extracts
+      .filter((row) => row && typeof row === 'object')
+      .map((row, index) => {
+        const sourceId = String(row.source_id || '').trim();
+        const ref = refsById.get(sourceId) || {};
+        const title = row.source_title || row.title || ref.title || sourceId || `來源 ${index + 1}`;
+        const url = row.source_url || row.url || ref.url || '';
+        return {
+          ...row,
+          source_title: title,
+          source_url: url,
+          source_link_status: row.source_link_status || sourceLinkStatus(url, sourceId, title),
+        };
+      })
     : [];
 }
 
@@ -1339,8 +1377,10 @@ function sourceExtractsHtml(card) {
   return `
     <div class="source-extract-list">
       ${extracts.map((extract, index) => {
-        const url = String(extract.url || extract.source_url || '');
+        const url = String(extract.source_url || extract.url || '');
         const title = extract.source_title || extract.title || extract.source_id || `來源 ${index + 1}`;
+        const status = extract.source_link_status || sourceLinkStatus(url, extract.source_id, title);
+        const statusLabel = sourceLinkStatusLabel(status);
         const sourceLink = /^https?:\/\//.test(url)
           ? `<a class="source-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
           : escapeHtml(title);
@@ -1354,6 +1394,7 @@ function sourceExtractsHtml(card) {
               <span>更新時間：${escapeHtml(extract.updated_at || extract.last_checked_at || '待確認')}</span>
             </div>
             <h4>${sourceLink}</h4>
+            ${statusLabel ? `<p class="muted source-link-status">${escapeHtml(statusLabel)}</p>` : ''}
             <div class="source-extract-content">${sourceExtractContentHtml(extract)}</div>
           </article>
         `;

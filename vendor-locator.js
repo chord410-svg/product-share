@@ -444,13 +444,13 @@
   }
 
   function renderLoadError(err) {
-    let message = "載入地圖資料失敗，請回 Discord 重新查詢一次。";
+    let message = "載入地圖資料失敗，請回 OB 工作站重新查詢一次。";
     if (err.message === "share_not_found_or_expired" || err.status === 404) {
       message = "連結已失效或找不到資料，請重新查詢一次。";
     } else if (err.message === "missing_api_base") {
       message = "目前沒有可用的 API 連線資訊，請重新查詢產生新的地圖連結。";
     } else if (err.message === "static_share_unavailable" || err.message === "static_share_connection_failed") {
-      message = "靜態分享資料讀取失敗，請回 Discord 重新查詢一次。";
+      message = "靜態分享資料讀取失敗，請回 OB 工作站重新查詢一次。";
     } else if (err.message === "api_connection_failed") {
       message = "API 連線失敗，可能是 Cloudflare tunnel 已更換；請重新查詢或重啟 tunnel。";
     } else if (err.message === "invalid_share_payload") {

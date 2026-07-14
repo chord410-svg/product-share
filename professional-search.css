@@ -1,0 +1,9 @@
+.ps-layout { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 28px; margin-top: 24px; align-items: start; }
+.ps-form { padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.ps-form .field + .field, .ps-form .notice { margin-top: 14px; }
+.ps-result { min-width: 0; }
+.ps-result__body { min-height: 190px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.ps-prompt { min-height: 190px; margin: 0; padding: 18px; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink-soft); font: 13px/1.75 ui-monospace, monospace; }
+.ps-history { margin-top: 34px; }
+.ps-history-row { width: 100%; border: 0; border-bottom: 1px solid var(--line); background: var(--surface); text-align: left; cursor: pointer; }
+@media (max-width: 800px) { .ps-layout { grid-template-columns: 1fr; } }

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OB 工作站</title>
+  <meta name="description" content="OB 長照專業工具工作站" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="/static/workspace.css?v=20260711-2" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar__inner">
+      <a class="brand" href="/" aria-label="OB 工作站首頁">
+        <span class="brand__mark" aria-hidden="true"><i class="ph ph-briefcase"></i></span>
+        <span><strong>OB 工作站</strong><small>長照專業工具</small></span>
+      </a>
+      <nav class="topnav" aria-label="主要導覽">
+        <a class="results-link" href="/launch/results"><i class="ph ph-tray" aria-hidden="true"></i><span>我的結果</span></a>
+        <div class="account-menu-wrap">
+          <button class="account-trigger" id="accountMenuButton" type="button" aria-expanded="false" aria-controls="accountMenu">
+            <span class="account-trigger__icon" aria-hidden="true"><i class="ph ph-user"></i></span>
+            <span class="account-trigger__text"><strong id="accountMenuName">帳號</strong><small id="accountMenuUnit">載入中</small></span>
+            <i class="ph ph-caret-down account-trigger__caret" aria-hidden="true"></i>
+          </button>
+          <div class="account-menu" id="accountMenu" hidden>
+            <a href="/launch/account"><i class="ph ph-identification-card" aria-hidden="true"></i><span>帳號與單位</span></a>
+            <a href="/launch/results"><i class="ph ph-tray" aria-hidden="true"></i><span>我的結果</span></a>
+            <a href="/launch/admin" id="adminMenuLink" hidden><i class="ph ph-gear-six" aria-hidden="true"></i><span>管理</span></a>
+            <button type="button" id="logoutButton"><i class="ph ph-sign-out" aria-hidden="true"></i><span>登出</span></button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell workspace">
+    <section class="workspace-welcome" aria-labelledby="workspaceTitle">
+      <div>
+        <h1 id="workspaceTitle"><span id="userName">正在確認身份</span>，今天要處理哪一件事？</h1>
+        <p class="workspace-welcome__meta"><span id="unitName">尚未載入單位</span><span aria-hidden="true">/</span><span id="environmentName">DEV</span></p>
+      </div>
+      <div class="service-state" aria-live="polite">
+        <span class="status-dot" id="serviceDot"></span>
+        <span><strong id="serviceTitle">服務檢查中</strong><small id="serviceDetail">正在讀取功能狀態</small></span>
+      </div>
+    </section>
+
+    <div class="workspace-layout">
+      <section class="tool-section" aria-labelledby="toolsTitle">
+        <div class="section-heading section-heading--tools">
+          <div><h2 id="toolsTitle">工作工具</h2><p><i class="ph ph-lock-key" aria-hidden="true"></i>工具產生的工作結果預設只有你能查看</p></div>
+        </div>
+
+        <div class="tool-grid">
+          <a class="tool-card tool-card--subsidy" href="/launch/subsidy">
+            <span class="tool-card__icon"><i class="ph ph-calculator"></i></span>
+            <span class="tool-card__body"><strong>補助計算</strong><span>計算長照補助額度、部分負擔與服務組合。</span></span>
+            <i class="ph ph-arrow-up-right tool-card__arrow" aria-hidden="true"></i>
+          </a>
+
+          <a class="tool-card tool-card--assistive" href="/launch/assistive">
+            <span class="tool-card__icon"><i class="ph ph-magnifying-glass"></i></span>
+            <span class="tool-card__body"><strong>輔具查詢</strong><span>依個案情境查找智慧輔具與適用條件。</span></span>
+            <i class="ph ph-arrow-up-right tool-card__arrow" aria-hidden="true"></i>
+          </a>
+
+          <a class="tool-card tool-card--vendor" href="/launch/vendor-map">
+            <span class="tool-card__icon"><i class="ph ph-map-trifold"></i></span>
+            <span class="tool-card__body"><strong>特約輔具地圖</strong><span>依地址與服務類型查詢附近特約廠商。</span></span>
+            <i class="ph ph-arrow-up-right tool-card__arrow" aria-hidden="true"></i>
+          </a>
+
+          <a class="tool-card tool-card--resource" href="/launch/resource-nav">
+            <span class="tool-card__icon"><i class="ph ph-compass"></i></span>
+            <span class="tool-card__body"><strong>長照資源導航</strong><span>按行政區與需求整理可交接的資源組合。</span></span>
+            <i class="ph ph-arrow-up-right tool-card__arrow" aria-hidden="true"></i>
+          </a>
+
+          <a class="tool-card tool-card--professional tool-card--wide" href="/launch/professional-search">
+            <span class="tool-card__icon"><i class="ph ph-file-magnifying-glass"></i></span>
+            <span class="tool-card__body"><strong>專業報告搜尋</strong><span>把口語需求整理為可用的專業搜尋提問，並保存任務結果。</span></span>
+            <i class="ph ph-arrow-up-right tool-card__arrow" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      <aside class="recent-panel" aria-labelledby="recentTitle">
+        <div class="recent-panel__head">
+          <div><h2 id="recentTitle">最近處理</h2><p>回到剛完成的工作結果</p></div>
+          <a class="icon-link" href="/launch/results" aria-label="查看全部結果" title="查看全部結果"><i class="ph ph-arrow-right"></i></a>
+        </div>
+        <div class="result-list" id="recentResults" aria-live="polite">
+          <p class="empty-state">正在載入最近處理</p>
+        </div>
+        <a class="recent-panel__all" href="/launch/results">查看全部結果<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="app-footer"><div class="shell"><span>OB 工作站</span><span>Google 登入與 A 單位名額管理</span></div></footer>
+  <script src="/static/portal-bridge.js?v=20260710-1"></script>
+  <script src="/static/index.js?v=20260711-1"></script>
+</body>
+</html>

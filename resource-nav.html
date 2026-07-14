@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260531-print-output">
+  <link rel="stylesheet" href="./resource-nav-v4.css?v=20260713-resource-nav-v4">
 </head>
 <body>
   <header class="topbar">
     <div>
       <p class="eyebrow">New Taipei Resource Navigator</p>
-      <h1>長照資源導航站</h1>
+      <h1>長照資源導航</h1>
     </div>
     <div class="identity-actions">
       <div class="status-pill" id="sourceStatus">等待身份確認</div>
@@ -107,11 +107,18 @@
           <h2 id="currentScope">資源查詢</h2>
           <p id="scopeMeta">正在載入資料...</p>
         </div>
-        <div class="card-size-control" role="group" aria-label="資源卡片大小">
-          <span>卡片大小</span>
-          <button type="button" data-card-size="small">小</button>
-          <button type="button" data-card-size="medium">中</button>
-          <button type="button" data-card-size="large">大</button>
+        <div class="summary-actions">
+          <div class="admin-catalog-control" id="adminCatalogControl" role="group" aria-label="資源上下線檢視" hidden>
+            <span>管理檢視</span>
+            <button type="button" id="showOnlineResources" class="is-active">上線中</button>
+            <button type="button" id="showOfflineResources">已下線</button>
+          </div>
+          <div class="card-size-control" role="group" aria-label="資源卡片大小">
+            <span>顯示方式</span>
+            <button type="button" data-card-size="small">掃描</button>
+            <button type="button" data-card-size="medium">閱讀</button>
+            <button type="button" data-card-size="large">完整</button>
+          </div>
         </div>
       </section>
 
@@ -127,7 +134,7 @@
       <div>
         <p class="eyebrow">My Resource Packs</p>
         <h2>我的資源組合</h2>
-        <p class="muted-text" id="workbenchStatus">請從 Discord 入口連結身份後查看自己的資源組合。</p>
+        <p class="muted-text" id="workbenchStatus">請從 OB 網站 入口連結身份後查看自己的資源組合。</p>
       </div>
       <button type="button" id="refreshWorkbench">刷新紀錄</button>
     </div>
@@ -136,7 +143,7 @@
         <div>
           <p class="eyebrow">Current Resource Pack</p>
           <h2>目前編輯中的資源組合</h2>
-          <p class="muted-text" id="loginStatus">請從 Discord 資源導航按鈕開啟，才能儲存並建立資源包結果。</p>
+          <p class="muted-text" id="loginStatus">請從 OB 網站 資源導航按鈕開啟，才能儲存並建立資源包結果。</p>
         </div>
         <p class="package-count" id="packageCount">0 筆</p>
       </div>
@@ -159,7 +166,7 @@
           <p class="muted-text" id="packageStatus">尚未加入資源。</p>
         </div>
         <div class="current-package-actions">
-          <p class="muted-text output-moved-note">輸出格式已移到 Web B 結果頁，可在結果頁切換家屬版、電話確認、行政清單、交接摘要與完整資料。</p>
+          <p class="muted-text output-moved-note">輸出格式已移到登入保護的 Web B 結果頁，可在結果頁切換電話確認、行政清單、交接摘要與完整資料。</p>
           <button type="button" id="saveDraftButton">更新儲存</button>
         </div>
       </div>
@@ -203,7 +210,7 @@
       <div class="import-pack-actions">
         <button type="button" id="importResourcePackButton">匯入資源副本</button>
         <button type="button" id="clearImportResourcePackButton">清除匯入內容</button>
-        <p class="muted-text" id="importResourcePackStatus" aria-live="polite">匯入會歸到目前 Discord 使用者底下。</p>
+        <p class="muted-text" id="importResourcePackStatus" aria-live="polite">匯入會歸到目前 OB 網站 使用者底下。</p>
       </div>
     </section>
     <section class="exchange-export-panel panel" aria-label="匯出資源副本">
@@ -229,12 +236,18 @@
           </div>
           <h3></h3>
         </div>
-        <div class="card-badges">
-          <span class="scope-badge"></span>
-          <span class="smart-hit" hidden>智慧查詢命中</span>
-          <span class="confidence"></span>
+        <div class="card-side">
+          <button type="button" class="publication-action" hidden></button>
+          <div class="card-badges">
+            <span class="scope-badge"></span>
+            <span class="smart-hit" hidden>智慧查詢命中</span>
+            <span class="confidence"></span>
+            <span class="verification-status"></span>
+          </div>
         </div>
       </div>
+      <p class="verification-note" hidden></p>
+      <p class="trust-summary" aria-label="來源可信度摘要"></p>
       <p class="summary"></p>
       <div class="resource-tags">
         <span class="tag-strip eligibility"></span>
@@ -243,6 +256,11 @@
       <dl>
         <div><dt>下一步</dt><dd class="next-step"></dd></div>
       </dl>
+      <details class="verification-details">
+        <summary>查證方式</summary>
+        <p class="verification-method"></p>
+        <a class="verification-source-link" target="_blank" rel="noopener noreferrer">開啟原始來源</a>
+      </details>
       <details class="internal-details">
         <summary>查看內部註記</summary>
         <dl class="internal-detail-grid">
@@ -253,6 +271,10 @@
           <div><dt>風險提醒</dt><dd><ul class="risk-flags"></ul></dd></div>
         </dl>
       </details>
+      <div class="resource-card-actions">
+        <a class="source-action" target="_blank" rel="noopener noreferrer">開啟來源</a>
+        <button class="toggle-resource-action" type="button">加入組合</button>
+      </div>
     </article>
   </template>
 
@@ -266,6 +288,7 @@
     </section>
   </div>
 
-  <script src="./resource-nav.js?v=20260531-print-output"></script>
+  <script src="/static/portal-bridge.js?v=20260710-1"></script>
+  <script src="./resource-nav-v4.js?v=20260713-resource-nav-v4"></script>
 </body>
 </html>

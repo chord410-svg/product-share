@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>資源包結果｜長照資源導航站</title>
-  <link rel="stylesheet" href="./resource-nav.css?v=20260531-print-output">
+  <link rel="stylesheet" href="./resource-nav-v4.css?v=20260713-resource-nav-v4">
 </head>
 <body>
   <header class="topbar">
@@ -15,7 +15,7 @@
     <div class="result-top-actions">
       <button type="button" class="nav-link-pill result-print-pill" id="printResultButton">列印 / 另存 PDF</button>
       <a class="nav-link-pill nav-main-pill" id="backLink" href="./resource-nav.html">返回長照資源導航站主頁</a>
-      <a class="nav-link-pill nav-discord-pill" id="discordResultLink" href="#" hidden>返回 Discord 資源結果頻道</a>
+      <a class="nav-link-pill nav-discord-pill" id="discordResultLink" hidden aria-hidden="true" tabindex="-1"></a>
     </div>
   </header>
 
@@ -30,7 +30,7 @@
     <section id="localPreviewBanner" class="panel local-preview-banner" hidden>
       <p class="eyebrow">本機預覽結果</p>
       <h2>此結果未寫入後端</h2>
-      <p class="muted-text">這代表剛剛沒有成功完成 Discord session 後端驗證，可能是 session 過期、缺少 api_base，或 Bot API 尚未更新。此結果未寫入後端，換裝置或清除瀏覽器資料後可能看不到。若要產生正式連結與 QR，請回 Discord 重新點資源導航入口。</p>
+      <p class="muted-text">這代表剛剛沒有成功完成 OB 網站 session 後端驗證，可能是 session 過期、缺少 api_base，或 網站 API 尚未更新。此結果未寫入後端，換裝置或清除瀏覽器資料後可能看不到。若要產生正式連結與 QR，請回 OB 網站 重新點資源導航入口。</p>
     </section>
 
     <section id="resultContent" class="result-panel" hidden>
@@ -50,7 +50,6 @@
           <p class="muted-text print-help">列印會使用目前選取的輸出格式；若要存檔，請在瀏覽器列印視窗選擇「另存為 PDF」。</p>
         </div>
         <div class="result-mode-tabs" role="tablist" aria-label="資源包輸出格式">
-          <button type="button" data-result-mode="family" role="tab">家屬版</button>
           <button type="button" data-result-mode="phone" role="tab">電話確認</button>
           <button type="button" data-result-mode="admin" role="tab">行政清單</button>
           <button type="button" data-result-mode="handoff" role="tab">交接摘要</button>
@@ -70,7 +69,7 @@
             <button type="button" id="copyPhone">複製電話確認</button>
           </div>
         </article>
-        <article data-output-section="full family">
+        <article data-output-section="family" hidden aria-hidden="true">
           <h3>可傳給家屬的短訊</h3>
           <pre id="familyMessage" class="output-preview"></pre>
           <div class="panel-actions">
@@ -114,6 +113,7 @@
   </main>
 
   <textarea id="resultCopyScratch" class="copy-scratch" aria-hidden="true"></textarea>
-  <script src="./resource-package-result.js?v=20260531-print-output"></script>
+  <script src="/static/portal-bridge.js?v=20260710-1"></script>
+  <script src="./resource-package-result-v4.js?v=20260713-resource-nav-v4"></script>
 </body>
 </html>

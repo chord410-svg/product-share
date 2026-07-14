@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>專業報告搜尋｜OB 工作站</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="/static/workspace.css?v=20260710-1" />
+  <link rel="stylesheet" href="/static/professional-search.css?v=20260710-web" />
+</head>
+<body>
+  <header class="topbar"><div class="shell topbar__inner"><a class="brand" href="/"><span class="brand__mark"><i class="ph ph-briefcase"></i></span><span><strong>OB 工作站</strong><small>專業報告搜尋</small></span></a><nav class="topnav"><a href="/"><i class="ph ph-house"></i><span>首頁</span></a><a href="/launch/results"><i class="ph ph-tray"></i><span>我的結果</span></a></nav></div></header>
+  <main class="shell workspace">
+    <header class="page-head"><div><p class="section-kicker">非同步專業搜尋</p><h1>專業報告搜尋</h1><p>將口語需求整理為適合 Google 與 AI 搜尋的專業提問。</p></div><a class="button button--secondary" href="/"><i class="ph ph-arrow-left"></i>回工具站</a></header>
+    <div class="ps-layout">
+      <form class="ps-form" id="searchForm">
+        <div class="field"><label for="professionInput">專業類型</label><select id="professionInput"><option value="care_manager|長照個管師">長照個管師</option><option value="physical_therapist|物理治療師">物理治療師</option><option value="occupational_therapist|職能治療師">職能治療師</option><option value="speech_therapist|語言治療師">語言治療師</option><option value="nurse|護理師">護理師</option><option value="social_worker|社會工作師">社會工作師</option><option value="nutritionist|營養師">營養師</option></select></div>
+        <div class="field"><label for="needInput">口語需求描述</label><textarea id="needInput" maxlength="300" required placeholder="例如：長輩中風後在家做被動關節運動，想找有實證、可以給家屬看的衛教資料。"></textarea><small class="form-status" id="counterNum">0 / 300</small></div>
+        <div class="notice"><i class="ph ph-shield-check"></i> 請勿填寫姓名、電話、身分證或完整地址。</div>
+        <div class="button-row"><button class="button" type="submit" id="generateBtn" disabled><i class="ph ph-file-magnifying-glass"></i>建立搜尋任務</button></div>
+        <p class="form-status" id="jobStatus" aria-live="polite"></p>
+      </form>
+
+      <section class="ps-result" id="resultPanel" aria-live="polite">
+        <div class="section-heading"><div><p class="section-kicker">任務結果</p><h2 id="resultMeta">尚未建立任務</h2></div><button class="button button--secondary" type="button" id="copyBtn" hidden><i class="ph ph-copy"></i>複製提問</button></div>
+        <div class="ps-result__body" id="resultBody"><p class="empty-state">建立任務後，處理進度與結果會顯示在這裡。</p></div>
+        <div class="button-row" id="searchActions" hidden><a class="button" id="aiSearchLink" target="_blank" rel="noopener"><i class="ph ph-sparkle"></i>Google AI 搜尋</a><a class="button button--secondary" id="googleSearchLink" target="_blank" rel="noopener"><i class="ph ph-google-logo"></i>一般 Google 搜尋</a></div>
+      </section>
+    </div>
+    <section class="plain-section ps-history"><h2>最近任務</h2><div id="jobHistory" class="result-list"><p class="empty-state">正在載入</p></div></section>
+  </main>
+  <script src="/static/portal-bridge.js?v=20260710-1"></script>
+  <script src="/static/professional-search.js?v=20260710-web"></script>
+</body>
+</html>

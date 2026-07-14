@@ -253,7 +253,7 @@ async function init() {
     renderOutputs();
   } catch (error) {
     qs('#resultTitle').textContent = '資料載入失敗';
-    qs('#summaryOutput').textContent = '無法載入智慧輔具情境資料，請稍後再試或回 Discord 回報。';
+    qs('#summaryOutput').textContent = '無法載入智慧輔具情境資料，請稍後再試或回 OB 工作站回報。';
   }
 }
 

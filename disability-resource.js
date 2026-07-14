@@ -1002,23 +1002,23 @@ async function probeSession() {
   const badge = qs('#loginBadge');
   if (!badge) return;
   if (!state.sessionToken) {
-    badge.textContent = '未透過 Discord 入口開啟';
+    badge.textContent = '未透過 OB 網站 入口開啟';
     return;
   }
   if (!state.apiBase) {
-    badge.textContent = 'Discord 連結待驗證';
+    badge.textContent = 'OB 網站 連結待驗證';
     return;
   }
   try {
     const payload = await fetchJson(apiPath(`/api/v1/resource/session?token=${encodeURIComponent(state.sessionToken)}`), { cache: 'no-store' });
     const user = payload.user || {};
-    const userName = user.name || user.user_name || user.username || 'Discord 使用者';
+    const userName = user.name || user.user_name || user.username || 'OB 網站 使用者';
     const userId = user.id || user.user_id || '';
     state.sessionUser = { name: userName, id: String(userId || '') };
-    badge.textContent = `已連結 Discord：${userName}${userId ? ` / ${userId}` : ''}`;
+    badge.textContent = `已連結 OB 網站：${userName}${userId ? ` / ${userId}` : ''}`;
   } catch (error) {
     state.sessionUser = null;
-    badge.textContent = 'Discord 連結待重新驗證';
+    badge.textContent = 'OB 網站 連結待重新驗證';
   }
 }
 
@@ -1671,7 +1671,7 @@ function openCardDetail(card, fallbackId = '') {
     body.innerHTML = `
       <section class="detail-section">
         <h3>無法開啟詳細卡片</h3>
-        <p>目前找不到這張知識卡${fallbackId ? `（${escapeHtml(fallbackId)}）` : ''}，請重新整理頁面或重新從 Discord 入口開啟。</p>
+        <p>目前找不到這張知識卡${fallbackId ? `（${escapeHtml(fallbackId)}）` : ''}，請重新整理頁面或重新從 OB 網站 入口開啟。</p>
       </section>
     `;
     overlay.hidden = false;
@@ -1917,19 +1917,19 @@ function renderPackage(cards) {
   }
   if (loginStatus) {
     if (state.sessionUser) {
-      const user = state.sessionUser.username || state.sessionUser.name || 'Discord 使用者';
-      const id = state.sessionUser.discord_id || state.sessionUser.id || '';
-      loginStatus.textContent = `已連結 Discord：${user}${id ? ` / ${id}` : ''}。草稿與結果會保存到你的知識組合工作台。`;
+      const user = state.sessionUser.username || state.sessionUser.name || 'OB 網站 使用者';
+      const id = state.sessionUser.id || '';
+      loginStatus.textContent = `已連結 OB 網站：${user}${id ? ` / ${id}` : ''}。草稿與結果會保存到你的知識組合工作台。`;
     } else if (state.sessionToken) {
-      loginStatus.textContent = '已透過 Discord 入口開啟，正在確認身份與後端同步狀態。';
+      loginStatus.textContent = '已透過 OB 網站 入口開啟，正在確認身份與後端同步狀態。';
     } else {
-      loginStatus.textContent = '請從 Discord 身障／長照知識導航按鈕開啟，才能儲存並建立知識組合結果。';
+      loginStatus.textContent = '請從 OB 網站 身障／長照知識導航按鈕開啟，才能儲存並建立知識組合結果。';
     }
   }
   if (packageStatus) {
     const saveHint = state.sessionToken && state.apiReady
       ? '草稿會保存到我的知識組合。'
-      : '目前只能使用本機暫存；請從 Discord 入口開啟並確認後端可用後再同步。';
+      : '目前只能使用本機暫存；請從 OB 網站 入口開啟並確認後端可用後再同步。';
     packageStatus.textContent = cards.length
       ? `已加入 ${cards.length} 張知識卡，可在下方知識組合卡片展開查看。 ${saveHint}`
       : `尚未加入知識卡。 ${saveHint}`;
@@ -2080,12 +2080,12 @@ function scheduleKnowledgePackageRefresh() {
 async function openOrCreateKnowledgeResult(record, button, options = {}) {
   const normalized = normalizePackageRecord(record);
   const shareUrl = resultShareUrl(normalized);
-  if (shareUrl && normalized.status === 'result_ready') {
-    openKnowledgeResult(normalized, options);
+  if (normalized.status === 'result_ready') {
+    openKnowledgeResult(normalized, shareUrl ? options : { ...options, local: true });
     return;
   }
   if (normalized.status === 'result_pending' && !shareUrl) {
-    qs('#packageHint').textContent = '正式結果正在發布中，稍後會顯示複製連結與 QR CODE。';
+    qs('#packageHint').textContent = '私密結果正在建立中；有可用的分享連結時會一併顯示。';
     scheduleKnowledgePackageRefresh();
     return;
   }
@@ -2123,12 +2123,12 @@ async function openOrCreateKnowledgeResult(record, button, options = {}) {
       return;
     }
     if (response.share_status === 'pending') {
-      qs('#packageHint').textContent = '正式結果正在背景發布；先開啟本機結果頁，稍後回到此頁可看到複製連結與 QR CODE。';
+      qs('#packageHint').textContent = '私密結果正在背景建立；先開啟網站結果頁，稍後可回來查看分享狀態。';
       scheduleKnowledgePackageRefresh();
       openKnowledgeResult(saved, { ...options, local: true });
       return;
     }
-    qs('#packageHint').textContent = '知識組合已儲存，但尚未取得正式結果連結；先開啟本機結果頁。';
+    qs('#packageHint').textContent = '知識組合已儲存為私密結果，目前沒有對外分享連結。';
     openKnowledgeResult(saved, { ...options, local: true });
   } catch (error) {
     const timedOut = String(error.message || error).includes('knowledge_result_create_timeout');
@@ -2208,7 +2208,7 @@ async function deleteKnowledgePackage(record, button) {
     }
 
     if (!state.sessionToken) {
-      throw new Error('請從 Discord 入口重新開啟後再刪除後端知識組合。');
+      throw new Error('請從 OB 網站 入口重新開啟後再刪除後端知識組合。');
     }
 
     const payload = await fetchJson(`${apiPath(`/api/v1/disability-knowledge/packages/${encodeURIComponent(packageId)}`)}?session=${encodeURIComponent(state.sessionToken)}`, {
@@ -2283,15 +2283,15 @@ function renderSavedPackages() {
   const records = [...merged.values()].sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0));
   if (status) {
     if (state.sessionUser) {
-      const user = state.sessionUser.username || state.sessionUser.name || 'Discord 使用者';
-      const id = state.sessionUser.discord_id || state.sessionUser.id || '';
+      const user = state.sessionUser.username || state.sessionUser.name || 'OB 網站 使用者';
+      const id = state.sessionUser.id || '';
       status.textContent = `目前查看 ${user}${id ? ` / ${id}` : ''} 的知識組合。`;
     } else if (state.sessionToken) {
-      status.textContent = '已透過 Discord 入口開啟；若後端同步失敗，會先顯示本機暫存。';
+      status.textContent = '已透過 OB 網站 入口開啟；若後端同步失敗，會先顯示本機暫存。';
     } else {
       status.textContent = records.length
-        ? '目前顯示本機暫存；請從 Discord 入口重新開啟，才能讀取個人知識組合。'
-        : '未連結 Discord，請回 Discord 重新開啟入口。';
+        ? '目前顯示本機暫存；請從 OB 網站 入口重新開啟，才能讀取個人知識組合。'
+        : '未連結 OB 網站，請回 OB 網站 重新開啟入口。';
     }
   }
   if (empty) {
@@ -2303,7 +2303,7 @@ function renderSavedPackages() {
   if (!records.length) {
     const reason = state.sessionToken
       ? '目前尚未儲存知識組合。選卡後可按「儲存草稿」。'
-      : '從 Discord 面板開啟後，這裡會顯示你的草稿與已產生結果；目前只能使用本機暫存。';
+      : '從 OB 網站 面板開啟後，這裡會顯示你的草稿與已產生結果；目前只能使用本機暫存。';
     container.innerHTML = `<div class="empty-state">${escapeHtml(reason)}</div>`;
     return;
   }
@@ -2334,9 +2334,9 @@ function renderSavedPackages() {
           <button class="edit-action" type="button" data-action="edit" data-package-id="${escapeHtml(record.package_id)}">繼續編輯</button>
           <button class="primary-action" type="button" data-action="view" data-package-id="${escapeHtml(record.package_id)}">查看結果</button>
           <button class="copy-action" type="button" data-action="duplicate" data-package-id="${escapeHtml(record.package_id)}">複製此副本</button>
-          <button class="danger-action" type="button" data-action="delete" data-package-id="${escapeHtml(record.package_id)}"${(!isLocalPackageRecord(record) && !state.sessionToken) ? ' disabled title="請從 Discord 入口重新開啟後再刪除後端知識組合。"' : ''}>刪除</button>
+          <button class="danger-action" type="button" data-action="delete" data-package-id="${escapeHtml(record.package_id)}"${(!isLocalPackageRecord(record) && !state.sessionToken) ? ' disabled title="請從 OB 網站 入口重新開啟後再刪除後端知識組合。"' : ''}>刪除</button>
           ${readyOutput && shareUrl ? `<button class="link-action" type="button" data-action="copy-link" data-package-id="${escapeHtml(record.package_id)}" title="複製這份知識組合的正式結果頁連結">複製連結</button>` : ''}
-          ${readyOutput && !shareUrl ? '<button class="link-action is-disabled" type="button" disabled title="正式分享連結尚未建立；請從 Discord 入口重新開啟並查看結果後再試。">複製連結</button>' : ''}
+          ${readyOutput && !shareUrl ? '<button class="link-action is-disabled" type="button" disabled title="正式分享連結尚未建立；請從 OB 網站 入口重新開啟並查看結果後再試。">複製連結</button>' : ''}
           ${readyOutput && shareUrl ? `<button class="qr-action" type="button" data-action="qr" data-package-id="${escapeHtml(record.package_id)}">查看 QR CODE</button>` : ''}
           ${readyOutput && !shareUrl ? '<button class="qr-action is-disabled" type="button" disabled title="正式分享連結尚未建立，因此 QR CODE 尚不可用。">查看 QR CODE</button>' : ''}
           ${sharePendingHint}
@@ -2486,8 +2486,8 @@ async function buildLocalKnowledgePack(record) {
       created_at: normalized.created_at || Math.floor(Date.now() / 1000),
       updated_at: normalized.updated_at || Math.floor(Date.now() / 1000),
       created_by: {
-        discord_user_id: state.sessionUser?.id || state.sessionUser?.discord_id || '',
-        discord_user_name: state.sessionUser?.name || state.sessionUser?.username || '',
+        web_user_id: state.sessionUser?.id || '',
+        web_user_name: state.sessionUser?.name || state.sessionUser?.username || '',
       },
     },
     knowledge_snapshots: snapshots,
@@ -2656,7 +2656,7 @@ async function importKnowledgePackPayload(payload, button = null) {
       });
       const body = await response.json().catch(() => ({}));
       if (response.status === 409 && body.error === 'personal_data_warning') {
-        const allow = window.confirm(`匯入內容可能包含敏感資訊：${asArray(body.warnings).join('、') || '未列出'}。\n\n仍要以目前 Discord 使用者建立草稿嗎？`);
+        const allow = window.confirm(`匯入內容可能包含敏感資訊：${asArray(body.warnings).join('、') || '未列出'}。\n\n仍要以目前 OB 網站 使用者建立草稿嗎？`);
         if (!allow) throw new Error('已取消匯入。');
         const retry = await fetch(`${apiPath('/api/v1/disability-knowledge/packages/import')}?session=${encodeURIComponent(state.sessionToken)}`, {
           method: 'POST',
@@ -2718,10 +2718,10 @@ function renderKnowledgeExchange() {
   const records = exchangeRecordRows();
   if (status) {
     if (state.sessionUser) {
-      const user = state.sessionUser.username || state.sessionUser.name || 'Discord 使用者';
+      const user = state.sessionUser.username || state.sessionUser.name || 'OB 網站 使用者';
       status.textContent = `目前可匯入／匯出 ${user} 的知識組合；後端不可用時仍可匯出本機暫存封包。`;
     } else {
-      status.textContent = '未連結 Discord 時可處理本機暫存副本；後端草稿需從 Discord 入口重新開啟後同步。';
+      status.textContent = '未連結 OB 網站 時可處理本機暫存副本；後端草稿需從 OB 網站 入口重新開啟後同步。';
     }
   }
   if (empty) empty.hidden = records.length > 0;
@@ -2835,8 +2835,8 @@ function renderOutputs() {
   const cards = selectedCards();
   renderPackage(cards);
   const hint = state.sessionToken
-    ? '已從 Discord 入口取得身份連結，可儲存草稿；輸出內容請按「查看目前結果」。'
-    : '目前沒有 Discord 身份連結，只能使用本頁暫存；請從 Discord 入口重新開啟才能同步到個人工作台。';
+    ? '已從 OB 網站 入口取得身份連結，可儲存草稿；輸出內容請按「查看目前結果」。'
+    : '目前沒有 OB 網站 身份連結，只能使用本頁暫存；請從 OB 網站 入口重新開啟才能同步到個人工作台。';
   qs('#packageHint').textContent = cards.length
     ? `${hint} 目前副本含 ${cards.length} 張知識卡。`
     : '尚未加入知識卡。請回到知識導航輸入問題或點選候選卡。';
@@ -2893,7 +2893,7 @@ async function saveDraft(options = {}) {
     if (!quiet) qs('#packageHint').textContent = message;
   };
   if (!state.sessionToken) {
-    setDraftMessage('沒有 Discord 身份連結，無法儲存；請從 Discord 入口重新開啟。');
+    setDraftMessage('沒有 OB 網站 身份連結，無法儲存；請從 OB 網站 入口重新開啟。');
     return;
   }
   if (!state.apiBase || !state.apiReady) {
@@ -2922,7 +2922,7 @@ async function saveDraft(options = {}) {
     state.activePackageId = saved.package?.package_id || state.activePackageId;
     state.currentLocalPackageId = '';
     state.currentDraftName = saved.package?.name || state.currentDraftName;
-    setDraftMessage(`${auto ? '已自動儲存' : '已儲存'}草稿：${saved.package?.name || saved.package?.package_id || '知識組合'}。下次從 Discord 入口進來會看得到。`);
+    setDraftMessage(`${auto ? '已自動儲存' : '已儲存'}草稿：${saved.package?.name || saved.package?.package_id || '知識組合'}。下次從 OB 網站 入口進來會看得到。`);
     await loadSavedPackages({ quiet: true });
   } catch (error) {
     setDraftMessage(`儲存失敗：${error.message || error}`);

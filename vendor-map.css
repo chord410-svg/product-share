@@ -1,0 +1,245 @@
+/* vendor-map.css - 特約輔具地圖（查附近）框架頁版面 */
+
+.page-head {
+  padding: var(--space-6) 0 var(--space-5);
+  background:
+    radial-gradient(120% 140% at 90% -10%, var(--accent-soft) 0%, transparent 55%),
+    var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.page-head h1 {
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-weight: var(--fw-black);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+.page-head__lead {
+  margin-top: var(--space-3);
+  max-width: 56ch;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+.page-head__badge { margin-top: var(--space-4); }
+
+/* ---------- 兩欄主版面 ---------- */
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+  gap: var(--space-5);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-8);
+  align-items: start;
+}
+
+.map-aside {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+/* ---------- 查詢面板 ---------- */
+.query-panel {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.query-panel__head h2 { font-size: 18px; font-weight: var(--fw-bold); }
+.query-panel__head p { margin-top: 4px; color: var(--muted); font-size: 14px; }
+
+.query-panel__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.query-panel__hint {
+  margin: 0;
+  color: var(--warn);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+}
+
+/* 服務類型分段控制 */
+.service-field { border: 0; margin: 0; padding: 0; }
+.service-field legend { padding: 0; }
+
+.seg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-ctrl);
+  background: var(--surface-3);
+}
+
+.seg__item { position: relative; }
+.seg__item input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+.seg__item span {
+  display: grid;
+  place-items: center;
+  min-height: 38px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+  color: var(--ink-soft);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.seg__item input:checked + span {
+  background: var(--surface);
+  color: var(--accent-strong);
+  box-shadow: var(--shadow-sm);
+}
+.seg__item input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- 結果清單 ---------- */
+.result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.result-head__count { font-family: var(--font-mono); font-size: 14px; font-weight: var(--fw-bold); color: var(--ink-soft); }
+
+.result-list { display: grid; gap: var(--space-3); }
+
+.vendor-card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.vendor-card:hover {
+  border-color: var(--accent-soft-2);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.vendor-card__top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-3);
+}
+
+.vendor-card__rank {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--fw-black);
+}
+
+.vendor-card__title { font-size: 16px; font-weight: var(--fw-bold); line-height: 1.35; }
+.vendor-card__addr { margin-top: 2px; color: var(--muted); font-size: 13px; }
+
+.vendor-card__dist {
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+
+.vendor-card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.vendor-card__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.vendor-card__actions .btn { min-height: 40px; font-size: 14px; }
+
+/* ---------- 地圖 ---------- */
+.map-wrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--bg-tint);
+  min-height: 540px;
+  position: sticky;
+  top: 84px;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  background:
+    linear-gradient(180deg, #e6eeec 0%, #dde8e6 100%);
+}
+
+.leaflet-container { font-family: inherit; }
+
+.map-marker {
+  display: grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 7px;
+  border: 2px solid #fff;
+  border-radius: var(--r-pill);
+  box-shadow: 0 2px 8px rgba(20, 33, 42, .28);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: var(--fw-black);
+  font-size: 12px;
+  line-height: 1;
+  background: var(--accent);
+}
+.map-marker--home { background: var(--danger); }
+
+.map-fallback {
+  position: absolute;
+  inset: var(--space-4);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-6);
+}
+.map-fallback[hidden] { display: none; }
+.map-fallback__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-pill);
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 28px;
+}
+.map-fallback h3 { font-size: 18px; font-weight: var(--fw-bold); }
+.map-fallback p { max-width: 44ch; color: var(--muted); font-size: 14px; }
+
+/* ---------- 響應式 ---------- */
+@media (max-width: 920px) {
+  .map-layout { grid-template-columns: 1fr; }
+  .map-wrap { position: static; min-height: 380px; order: -1; }
+  .map, .map-wrap { min-height: 360px; }
+}
+
+@media (max-width: 480px) {
+  .query-panel__row { grid-template-columns: 1fr; }
+}

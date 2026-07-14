@@ -1,0 +1,339 @@
+/* index.css - 首頁專屬版面（hero / 工具卡片 / 存取說明 / 對話框） */
+
+/* ---------- Hero：左文右圖、不對稱 ---------- */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(120% 120% at 85% 0%, var(--accent-soft) 0%, transparent 55%),
+    var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-7);
+  padding-top: clamp(40px, 6vw, 88px);
+  padding-bottom: clamp(40px, 6vw, 88px);
+}
+
+.hero__title {
+  font-size: clamp(34px, 5.4vw, 58px);
+  font-weight: var(--fw-black);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+
+.hero__lead {
+  margin-top: var(--space-4);
+  max-width: 42ch;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.4vw, 19px);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.hero__visual {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 3 / 2;
+  background: var(--accent-soft);
+}
+
+.hero__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- 旗艦工具：整列橫向卡片 ---------- */
+.tool-feature {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background:
+    linear-gradient(120deg, var(--accent-soft) 0%, var(--surface) 60%);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease), border-color var(--t-mid) var(--ease);
+}
+
+.tool-feature:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-soft-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.tool-feature__icon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: linear-gradient(150deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  font-size: 30px;
+  box-shadow: 0 10px 22px rgba(15, 118, 110, .25);
+}
+
+.tool-feature__body { display: grid; gap: 6px; min-width: 0; }
+
+.tool-feature__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.tool-feature__title { font-size: 21px; font-weight: var(--fw-bold); letter-spacing: -.01em; }
+.tool-feature__desc { color: var(--muted); font-size: 15px; }
+
+.tool-feature__go {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--accent-strong);
+  font-size: 20px;
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.tool-feature:hover .tool-feature__go {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+/* ---------- 工具分組標籤：用來拉開「已可用」與「預覽中」的視覺輕重 ---------- */
+.tool-group-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: var(--space-6) 0 var(--space-3);
+  color: var(--ok);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.tool-group-label:first-of-type { margin-top: var(--space-4); }
+.tool-group-label .ph { font-size: 15px; }
+.tool-group-label--muted { color: var(--muted-2); }
+
+/* ---------- 工具網格 ---------- */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+/* 每張卡一個顏色（見 portal.css 的 --tint-* 色票）。
+   預設值＝中性白，未指定 --card-tint-* 的卡片會維持原本的樣子。 */
+.tool-card {
+  --card-tint-bg: var(--surface);
+  --card-tint-line: var(--line);
+  --card-tint-mid: var(--accent);
+  --card-tint-strong: var(--accent-strong);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--card-tint-line);
+  border-radius: var(--r-card);
+  background: var(--card-tint-bg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease), border-color var(--t-mid) var(--ease);
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--card-tint-strong);
+  box-shadow: var(--shadow);
+}
+
+/* 圖示直接用卡片自己的實色填底（不是白底細框），一眼就看得出這張卡的顏色 */
+.tool-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  border: none;
+  background: var(--card-tint-mid);
+  color: #fff;
+  font-size: 22px;
+  box-shadow: 0 6px 14px -6px rgba(20, 33, 42, .35);
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+
+.tool-card:hover .tool-card__icon {
+  transform: scale(1.06);
+  box-shadow: 0 8px 18px -6px rgba(20, 33, 42, .42);
+}
+
+.tool-card__title {
+  font-size: 17px;
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  letter-spacing: -.005em;
+}
+
+.tool-card__desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tool-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.tool-card__go {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-pill);
+  color: var(--muted-2);
+  font-size: 17px;
+  transition: transform var(--t-fast) var(--ease), color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+
+.tool-card:hover .tool-card__go {
+  color: #fff;
+  background: var(--card-tint-strong);
+  transform: translateX(2px);
+}
+
+.tool-card--button { width: 100%; }
+
+/* 暫停或預覽分組：邊框改虛線、去掉陰影，主動示意「尚未開放」；
+   色調保留（呼應整體配色），只是不用實線陰影搶視覺重量 */
+.tool-card--preview {
+  border-style: dashed;
+  box-shadow: none;
+}
+.tool-card--preview:hover {
+  border-style: solid;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- 對話框 ---------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgba(20, 33, 42, .42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.modal-backdrop[hidden] { display: none; }
+
+.modal {
+  width: min(520px, 100%);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .modal { animation: portal-rise .32s var(--ease); }
+}
+
+.modal__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.modal__head h2 { font-size: 19px; font-weight: var(--fw-bold); }
+
+.modal__close {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 17px;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.modal__close:hover { background: var(--surface-3); color: var(--ink); }
+
+.modal__body p { color: var(--ink-soft); font-size: 15px; }
+.modal__body p + p { margin-top: var(--space-3); }
+
+.modal__steps-label {
+  margin-top: var(--space-4) !important;
+  color: var(--accent-strong);
+  font-weight: var(--fw-bold);
+  font-size: 14px !important;
+}
+
+.modal__steps {
+  margin: var(--space-2) 0 0;
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+.modal__steps li { margin-bottom: 6px; }
+
+.modal__note {
+  margin-top: var(--space-4) !important;
+  padding: var(--space-3);
+  border-radius: var(--r-ctrl);
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 13px !important;
+}
+
+/* ---------- 響應式 ---------- */
+@media (max-width: 920px) {
+  .hero__inner { grid-template-columns: 1fr; gap: var(--space-5); }
+  .hero__visual { order: -1; aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 560px) {
+  .tool-feature { grid-template-columns: auto minmax(0, 1fr); }
+  .tool-feature__go { display: none; }
+  .tool-feature__icon { width: 52px; height: 52px; font-size: 26px; }
+  .hero__actions .btn { width: 100%; }
+}

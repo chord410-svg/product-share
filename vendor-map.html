@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>特約輔具地圖（查附近）</title>
+  <meta name="description" content="輸入地址查詢鄰近特約輔具廠商，於地圖與清單檢視距離與聯絡方式。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" />
+  <link rel="stylesheet" href="./portal.css?v=20260627-homepage-v5" />
+  <link rel="stylesheet" href="./vendor-map.css?v=20260627-homepage-v5" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <!-- Leaflet（CDN）。無網路時不載入，頁面會顯示替代說明，清單仍可使用。 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <header class="portal-nav">
+    <div class="shell portal-nav__inner">
+      <a class="brand" href="/" aria-label="OB 工作站首頁">
+        <span class="brand__mark" aria-hidden="true"><i class="ph ph-compass"></i></span>
+        <span>
+          <span class="brand__name">OB 工作站</span>
+          <span class="brand__sub">長照專業工具</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="主要導覽">
+        <a class="nav-link" href="/" aria-label="返回首頁"><i class="ph ph-house" aria-hidden="true"></i><span class="nav-text">返回首頁</span></a>
+        <a class="btn btn--ghost" href="/launch/results"><i class="ph ph-tray" aria-hidden="true"></i>我的結果</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-head">
+    <div class="shell">
+      <p class="eyebrow">特約輔具地圖</p>
+      <h1>查附近的特約輔具廠商</h1>
+      <p class="page-head__lead">輸入地址，依服務類型篩選並查看最近的正式特約輔具廠商資料。</p>
+      <span class="badge badge--ok page-head__badge"><i class="ph ph-database" aria-hidden="true"></i>正式資料查詢</span>
+    </div>
+  </section>
+
+  <main class="shell map-layout">
+    <!-- 左欄：查詢條件 + 結果清單 -->
+    <aside class="map-aside">
+      <form class="panel query-panel" id="queryForm">
+        <div class="query-panel__head">
+          <h2>查詢條件</h2>
+          <p>填寫地址後按查詢，系統會以距離排序鄰近廠商。</p>
+        </div>
+
+        <div class="field">
+          <span class="label">縣市</span>
+          <select class="select" id="cityInput">
+            <option value="新北市">新北市</option>
+            <option value="臺北市">臺北市</option>
+            <option value="基隆市">基隆市</option>
+            <option value="桃園市">桃園市</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="label">行政區</span>
+          <input class="input" id="districtInput" type="text" list="districtList" placeholder="例如：板橋區" />
+          <datalist id="districtList">
+            <option value="板橋區"></option>
+            <option value="中和區"></option>
+            <option value="永和區"></option>
+            <option value="新莊區"></option>
+            <option value="三重區"></option>
+            <option value="新店區"></option>
+          </datalist>
+        </div>
+
+        <div class="query-panel__row">
+          <div class="field">
+            <span class="label">路名</span>
+            <input class="input" id="roadInput" type="text" placeholder="例如：文化路一段" />
+          </div>
+          <div class="field">
+            <span class="label">門牌</span>
+            <input class="input" id="numberInput" type="text" inputmode="numeric" placeholder="例如：123 號" />
+          </div>
+        </div>
+
+        <fieldset class="field service-field">
+          <legend class="label">服務類型</legend>
+          <div class="seg" role="radiogroup" aria-label="服務類型">
+            <label class="seg__item">
+              <input type="radio" name="service" value="" checked />
+              <span>不指定</span>
+            </label>
+            <label class="seg__item">
+              <input type="radio" name="service" value="購置" />
+              <span>購置</span>
+            </label>
+            <label class="seg__item">
+              <input type="radio" name="service" value="租賃" />
+              <span>租賃</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <span class="label">顯示家數</span>
+          <select class="select" id="limitInput">
+            <option value="3">最近 3 家</option>
+            <option value="5" selected>最近 5 家</option>
+            <option value="10">最近 10 家</option>
+          </select>
+        </div>
+
+        <button class="btn btn--primary btn--block" type="submit">
+          <i class="ph ph-magnifying-glass" aria-hidden="true"></i>查詢附近廠商
+        </button>
+        <p class="query-panel__hint">請勿填寫個案姓名、電話或身分證字號。</p>
+      </form>
+
+      <div class="result-head" id="resultHead">
+        <span class="result-head__count" id="resultCount">尚未查詢</span>
+        <button class="btn btn--ghost" type="button" id="saveMapResult" hidden><i class="ph ph-bookmark-simple"></i>儲存結果</button>
+      </div>
+      <div class="result-list" id="resultList" aria-live="polite"></div>
+    </aside>
+
+    <!-- 右欄：地圖 -->
+    <section class="map-wrap" aria-label="特約輔具廠商地圖">
+      <div id="map" class="map"></div>
+      <div id="mapFallback" class="map-fallback panel" hidden>
+        <span class="map-fallback__icon" aria-hidden="true"><i class="ph ph-wifi-slash"></i></span>
+        <h3>地圖暫時無法載入</h3>
+        <p>目前無法連到地圖服務（可能是離線或 CDN 受限）。右側清單仍可正常瀏覽示意結果。</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 結果卡片樣板 -->
+  <template id="vendorCardTemplate">
+    <article class="vendor-card">
+      <div class="vendor-card__top">
+        <span class="vendor-card__rank"></span>
+        <div class="vendor-card__title-wrap">
+          <h3 class="vendor-card__title"></h3>
+          <p class="vendor-card__addr"></p>
+        </div>
+        <span class="vendor-card__dist"></span>
+      </div>
+      <div class="vendor-card__tags"></div>
+      <div class="vendor-card__actions">
+        <a class="btn btn--soft vendor-card__nav" href="#" target="_blank" rel="noopener">
+          <i class="ph ph-navigation-arrow" aria-hidden="true"></i>導航
+        </a>
+        <a class="btn btn--ghost vendor-card__tel" href="#">
+          <i class="ph ph-phone" aria-hidden="true"></i><span class="vendor-card__tel-text"></span>
+        </a>
+      </div>
+    </article>
+  </template>
+
+  <footer class="portal-footer">
+    <div class="shell portal-footer__inner">
+      <span>OB 工作站｜特約輔具地圖</span>
+      <nav class="portal-footer__links" aria-label="頁尾連結">
+        <a href="/">返回首頁</a>
+        <a href="./vendor-directory.html">廠商完整名冊</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/portal-bridge.js?v=20260710-1"></script>
+  <script src="/static/vendor-map.js?v=20260710-1"></script>
+</body>
+</html>
